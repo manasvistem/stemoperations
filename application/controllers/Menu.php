@@ -2,7 +2,6 @@
 date_default_timezone_set("Asia/Calcutta");
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Menu extends CI_Controller {
-
     public function __construct() {
         parent::__construct();
         $this->load->library('form_validation'); // Load form validation library
@@ -11020,10 +11019,8 @@ public function BDRequestAssignToProcess(){
     $fwd_date           = date("Y-m-d H:i:s");
 
     if (is_array($assignto)) {
-      
         $i = 0;
         $j = 0; // Initialize school index outside loop
-        
         foreach ($assignto as $assignto_uid) {
             $assign_number_of_school_count = $assign_number_of_school[$i];
         
@@ -11035,7 +11032,6 @@ public function BDRequestAssignToProcess(){
                     $rsid = $school_id[$j];
                     $taskDatas      = $this->Menu_model->GetTaskSequenceByBDRequestANDRSID($reqID,$rsid);
                     foreach($taskDatas as $taskData){
-
                         $task_id = $taskData->task_id;
                         $data = [
                             'user_id'               => $assignto_uid,

@@ -204,128 +204,86 @@
               </li>
               <?php endif; ?>
             <!-- Misc -->
-            <?php if($dep_id == 4): ?>
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
             <li class="menu-item">
-              <a href="Dashboard" target="_blank" class="menu-link">
+              <a href="Dashboard"
+                target="_blank"
+                class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="CompetitionReport" target="_blank" class="menu-link">
+              <a href="DayManagement" target="_blank" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Support">NSP Report</div>
+                <div class="text-truncate" data-i18n="Dashboard">Day Management</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="Handovertoinsr/594" target="_blank" class="menu-link">
+              <a href="TransitProcess"
+                target="_blank"
+                class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Support">Live Handover</div>
+                <div class="text-truncate" data-i18n="Dashboard">Transit Process</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="CreateJoinCallHI" target="_blank" class="menu-link">
+              <a href="CreateJoinCallHI"
+                target="_blank"
+                class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Support">Handover Time Line</div>
+                <div class="text-truncate" data-i18n="Dashboard">Day Management Detail</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="ProgramTimeLine" target="_blank" class="menu-link">
+              <a href="ProgramTimeLine"
+                target="_blank"
+                class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Support">Program Time Line</div>
+                <div class="text-truncate" data-i18n="Dashboard">Next Day Plan</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="BDRequestBox" target="_blank" class="menu-link">
+              <a href="BDRequestBox"
+                target="_blank"
+                class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Support">BD Requests</div>
+                <div class="text-truncate" data-i18n="Dashboard">Create Task</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="MeetingRequest" target="_blank" class="menu-link">
+              <a href="MeetingRequest"
+                target="_blank"
+                class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Support">Meeting Request</div>
+                <div class="text-truncate" data-i18n="Dashboard">Request Amount</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="ParticalBPApr" target="_blank" class="menu-link">
+              <a href="ParticalBPApr"
+                target="_blank"
+                class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Support">Partical Board Apr</div>
+                <div class="text-truncate" data-i18n="Dashboard">Maintenance Bag</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="PaymentApr" target="_blank" class="menu-link">
+              <a href="PaymentApr"
+                target="_blank"
+                class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Support">Payment Apr</div>
+                <div class="text-truncate" data-i18n="Dashboard">Edit Profile</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="Mytarget" target="_blank" class="menu-link">
+              <a href="Logout"
+                target="_blank"
+                class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Support">My Target</div>
+                <div class="text-truncate" data-i18n="Logout">Logout</div>
               </a>
             </li>
-            <li class="menu-item">
-              <a href="LiveVisitPIA" target="_blank" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Support">Live Visit PIA</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a href="LiveVisitIMP" target="_blank" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Support">Report Visit IMP</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a href="LiveVisitIMP" target="_blank" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Support">Live Visit IMP</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a href="LiveVisitIMP" target="_blank" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Support">Live Visit IMP</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a href="LiveVisitIMP" target="_blank" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Support">Live Visit IMP</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a href="LiveVisitIMP" target="_blank" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Support">Live Visit IMP</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a href="LiveVisitIMP" target="_blank" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Support">Live Visit IMP</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a href="LiveVisitIMP" target="_blank" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Support">Live Visit IMP</div>
-              </a>
-            </li>
-             <li class="menu-item">
-              <a href="LiveVisitIMP" target="_blank" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Support">Live Visit IMP</div>
-              </a>
-            </li>
-            
            
-            <?php endif; ?>
-
-
-
 
 
 

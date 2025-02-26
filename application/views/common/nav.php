@@ -86,44 +86,43 @@
           </li>-->
           
           <li class="nav-item">
-            <a href="<?=base_url();?>Menu/CompetitionReport" class="nav-link">
+            <a href="<?=base_url();?>Menu/DayManagement" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
-              <p>NSP Report</p>
+              <p>Day Management</p>
             </a>
           </li>
           
           <li class="nav-item">
-            <a href="<?=base_url();?>Menu/Handovertoinsr/594" class="nav-link">
+            <a href="<?=base_url();?>Menu/TransitProcess" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
-              <p>Live Handover</p>
+              <p>Transit Process</p>
             </a>
           </li>
-          
           
           <li class="nav-item">
             <a href="<?=base_url();?>Menu/CreateJoinCallHI" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
-              <p>Handover Time Line</p>
+              <p>Day Management Detail</p>
             </a>
           </li>
           
           <li class="nav-item">
             <a href="<?=base_url();?>Menu/ProgramTimeLine" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
-              <p>Program Time Line</p>
+              <p>Next Day Plan</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="<?=base_url();?>Menu/BDRequestBox" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
-              <p>BD Requests</p>
+              <p>Create Task</p>
             </a>
           </li>
           
           <li class="nav-item menu-open">
             <a href="<?=base_url();?>Menu/MeetingRequest" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>Meeting Request</p>
+              <p>Request Amount</p>
             </a>
           </li>
           
@@ -131,404 +130,19 @@
           <li class="nav-item">
             <a href="<?=base_url();?>Menu/ParticalBPApr" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
-              <p>Partical Board Apr</p>
+              <p>Maintenance Bag</p>
             </a>
           </li>
           
           <li class="nav-item">
             <a href="<?=base_url();?>Menu/PaymentApr" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
-              <p>Payment Apr</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/Mytarget" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>My Target</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/LiveVisitPIA" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Live Visit PIA</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/LiveVisitIMP" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Live Visit IMP</p>
-            </a>
-          </li>
-          
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/ReportVisitPIA" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Report Visit PIA</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/ReportVisitIMP" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Report Visit IMP</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/NextDayPlan" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Next Day Plan</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/SchoolReviewDetail" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>All School Review by PIA</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/ProgramReviewDetail" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>All Program Review by PIA</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/ShowAcademicCalendar" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Academic Calendar</p>
-            </a>
-          </li>
-          
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/TeamDailyReport/<?=date('Y-m-d')?>" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Team Daily Report</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/DayStartCheck" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Day Start Check</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/DayCloseCheck" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Day Close Check</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/AllReviewPlaing" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>All Review</p>
-            </a>
-          </li>
-          
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/reviewreport" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Review Report</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/PIAwiseSchoolDetail" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>PIA Wise Pending Detail</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/inspending" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Installation Pending</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/insreportpending" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Installation Report Pending</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/fttppending" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>FTTP Pending</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/fttpreportpending" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>FTTP Report Pending</p>
-            </a>
-          </li>
-          
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/utilisationpending" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Utilisation Pending</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/createtask" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Create Task</p>
-            </a>
-          </li>
-          
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/PIAwiseProgram" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>PIA wise Program</p>
-            </a>
-          </li>
-          
-          
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/CreateARTask" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Create Annual Review</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/CuriculumAssign" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Curiculum Assign</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/CuriculumAssignData" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Curiculum Assign Data</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/SchoolData" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>School Review</p>
-            </a>
-          </li>
-          
-          <!--<li class="nav-item">
-            <a href="<?=base_url();?>Menu/SchoolData" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>School Report</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/validateOldSPD" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Validate School</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/CreateTask" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Create Task</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/handoverDetail" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Handover Detail</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/SchoolWithPC" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Add School</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/dispatched" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Dispatched</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/Report" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Report</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>
-                Approval
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-           </li>
-              <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="<?=base_url();?>Menu/backdrop" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Backdrop</p>
-                </a>
-              </li>
-              </ul>
-          </li>-->
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/Total_Handover" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Handover Detail</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/programs" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Programs Detail</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/UserTaskDetail" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>User Task Detail</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/UserPendingTask" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>User Pending Task</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/handoverDetail" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Handover Process</p>
-            </a>
-          </li>
-          <!--<li class="nav-item">
-            <a href="<?=base_url();?>Menu/changeinsp" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Change Ins Person</p>
-            </a>
-          </li>-->
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/backdrop" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Artwork</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/MaintenanceReport" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Ins-Main Request</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/MBagR" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Bag Request</p>
-            </a>
-          </li>
-          
-          
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/BDRequestCBox" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>BDR Complete Box</p>
-            </a>
-          </li>
-          
-           <li class="nav-item">
-            <a href="<?=base_url();?>Menu/BDRequestPBox" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>BDR Pending Box</p>
-            </a>
-          </li>
-          
-          
-          
-          
-          
-           <li class="nav-item">
-            <a href="<?=base_url();?>Menu/AcademicCalenderApprove" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Academic Calender Approve</p>
-            </a>
-          </li>
-           <li class="nav-item">
-            <a href="<?=base_url();?>Menu/ShowPIAStatusWithAcadeCal" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>PIA Status With Academic Calender</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/StartProgrramReview" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Start Progrram Review</p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/AnnualProgramReviewReport" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Annual Program Review Report</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/ProgramReviewWithPIADetails" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>School Review By PIA</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/AnnualReviewMeetingList" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Annual Program Review Meeting List</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/CheckProgramTimelineData" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Program Timeline Data</p>
-            </a>
-          </li>
-          
-          
-          
-          
-          
-          
-          
-           <li class="nav-item">
-            <a href="<?=base_url();?>Menu/editProfile" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
               <p>Edit Profile</p>
             </a>
           </li>
           
           <li class="nav-item">
-            <a href="<?=base_url();?>Menu/logout" class="nav-link">
+            <a href="<?=base_url();?>Menu/Mytarget" class="nav-link">
               <i class="far fa-circle nav-icon"></i>
               <p>Logout</p>
             </a>

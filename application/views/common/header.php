@@ -34,9 +34,4 @@
     overflow-x: auto;
 }
   </style>
-<<<<<<< HEAD
 </head>
-=======
-  
-</head>
->>>>>>> 214c7549dfa85f67fd36b0cfe9efefeb6b10b0d7
