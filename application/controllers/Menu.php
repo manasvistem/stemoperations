@@ -2,6 +2,13 @@
 date_default_timezone_set("Asia/Calcutta");
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Menu extends CI_Controller {
+
+    public function __construct() {
+        parent::__construct();
+        $this->load->library('form_validation'); // Load form validation library
+        $this->load->model('Menu_model');
+        $this->load->helper('common_helper');
+    }
     public function get_users(){
         $this->load->model('Menu_model');
         $dt=$this->Menu_model->get_data();
@@ -3293,23 +3300,28 @@ class Menu extends CI_Controller {
         }
     }
     public function Notification(){
-        $user = $this->session->userdata('user');
-        $data['user'] = $user;$uid= $user['id'];
-        $id =  $user['dep_id'];
+        $user           = $this->session->userdata('user');
+        $data['user']   = $user;
+        $uid            = $user['id'];
+        $id             =  $user['dep_id'];
+
         $this->load->model('Menu_model');
-        $notify=$this->Menu_model->get_notifybyid($uid);
-        $dt=$this->Menu_model->get_depatment_byid($id);
-        $dep_name = $dt[0]->dep_name;
+
+        $notify     =   $this->Menu_model->get_notifybyid($uid);
+        $dt         =   $this->Menu_model->get_depatment_byid($id);
+        $dep_name   =   $dt[0]->dep_name;
+
         if(!empty($user)){
             $this->load->view($dep_name.'/Notification', ['notify'=>$notify, 'user'=>$user]);
         }else{
             redirect('Menu/main');
         }
     }
+
     public function readnotify(){
-        $id = $_POST['id'];
+        $id             = $_POST['id'];
         $this->load->model('Menu_model');
-        $mdata = $this->Menu_model->read_notify($id);
+        $mdata          = $this->Menu_model->read_notify($id);
     }
     public function getReport($sid){
         $user = $this->session->userdata('user');
@@ -3327,11 +3339,11 @@ class Menu extends CI_Controller {
         }
     }
     public function getMedia($sid){
-        $user = $this->session->userdata('user');
+        $user         = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
-        $id =  $user['dep_id'];
+        $id           =  $user['dep_id'];
         $this->load->model('Menu_model');
-        $notify=$this->Menu_model->get_notifybyid($uid);
+        $notify     =$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
         $media=$this->Menu_model->get_media($sid);
@@ -6535,29 +6547,30 @@ class Menu extends CI_Controller {
         $sid = $plan[0]->spd_id;
         $tid = $plan[0]->taskid;
         $spd=$this->Menu_model->get_school_detailbyid($sid);
-   
         $task=$this->Menu_model->get_taskassign_byid($tid);
         $model=$this->Menu_model->get_model();
         $this->load->view($dep_name.'/callclist', ['pagename'=>$pagename,'notify'=>$notify,'pagedata'=>$dt, 'spd'=>$spd, 'user'=>$user,'page'=>$page, 'plan'=>$plan, 'task'=>$task,'tid'=>$tid,'model'=>$model,'mid'=>$id]);
     }
     public function visitlist($page,$id){
-        $user = $this->session->userdata('user');
-        $data['user'] = $user;$uid= $user['id'];
-        $did =  $user['dep_id'];
+        $user         = $this->session->userdata('user');
+        $data['user'] = $user;$uid = $user['id'];
+        $did          =  $user['dep_id'];
+
         $this->load->model('Menu_model');
-        $notify=$this->Menu_model->get_notifybyid($uid);
-        $dd=$this->Menu_model->get_depatment_byid($did);
+
+        $notify   = $this->Menu_model->get_notifybyid($uid);
+        $dd       = $this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
-        $dt=$this->Menu_model->get_pagedata($page);
-        $pagename=$this->Menu_model->get_pagename($page);
-        $vsitist=$this->Menu_model->get_visitst($page);
+        $dt       = $this->Menu_model->get_pagedata($page);
+        $pagename = $this->Menu_model->get_pagename($page);
+        $vsitist  = $this->Menu_model->get_visitst($page);
         $pagename = $pagename[0]->tname;
-        $plan=$this->Menu_model->get_plantaskbyid($id);
-        $sid = $plan[0]->spd_id;
-        $tid = $plan[0]->taskid;
-        $spd=$this->Menu_model->get_school_detailbyid($sid);
-        $task=$this->Menu_model->get_taskassign_byid($tid);
-        $vstupdate=$this->Menu_model->get_vstupdate($sid,$tid);
+        $plan     = $this->Menu_model->get_plantaskbyid($id);
+        $sid      = $plan[0]->spd_id;
+        $tid      = $plan[0]->taskid;
+        $spd      =$this->Menu_model->get_school_detailbyid($sid);
+        $task     =$this->Menu_model->get_taskassign_byid($tid);
+        $vstupdate =$this->Menu_model->get_vstupdate($sid,$tid);
         $model=$this->Menu_model->get_model();
         $this->load->view($dep_name.'/visitlist', ['sid'=>$sid,'vstupdate'=>$vstupdate,'vsitist'=>$vsitist,'pagename'=>$pagename,'notify'=>$notify,'pagedata'=>$dt, 'spd'=>$spd, 'user'=>$user,'page'=>$page, 'plan'=>$plan, 'task'=>$task,'tid'=>$tid,'model'=>$model,'mid'=>$id]);
     }
@@ -6821,44 +6834,68 @@ class Menu extends CI_Controller {
         }
     }
     public function Dashboard(){
-
-        // echo "<pre>";
-        // print_r(phpinfo());
-        // die;
-
-
         date_default_timezone_set('Asia/Kolkata');
         if (isset($_POST['submit'])) {
             $tdate = $_POST['filterdate'];
         }else{
            $tdate = date("Y-m-d");
         }
-        $user = $this->session->userdata('user');
-        $data['user'] = $user;$uid= $user['id'];
-        $uid= $user['id'];
-        $id =  $user['dep_id'];
+        $user           = $this->session->userdata('user');
+        $data['user']   = $user;
+        $uid            = $user['id'];
+        $id             = $user['dep_id'];
         $this->load->model('Menu_model');
-        $notify=$this->Menu_model->get_notifybyid($uid);
-        $dt=$this->Menu_model->get_depatment_byid($id);
-        $spd=$this->Menu_model->get_mspd();
-        $status=$this->Menu_model->get_spdsbypi($uid);
-        $zhspd=$this->Menu_model->get_spdsbyzh($uid);
-        $pmspd=$this->Menu_model->get_spdsbypm();
-        $td=$this->Menu_model->get_tdetail($uid,$tdate);
-        $program=$this->Menu_model->get_handover();
-        $bdr=$this->Menu_model->get_bdreqest($uid);
-        $bdrzh=$this->Menu_model->get_bdreqestzh($uid);
-        $dep_name = $dt[0]->dep_name;
+
+        $data['uid']        = $uid;       
+        $notify             = $this->Menu_model->get_notifybyid($uid);
+        $data['dt']         = $this->Menu_model->get_depatment_byid($id);
+      // $data['spd']       = $this->Menu_model->get_mspd();
+        $data['status']     = $this->Menu_model->get_spdsbypi($uid);
+        $data['zhspd']      = $this->Menu_model->get_spdsbyzh($uid);
+        $data['pmspd']      = $this->Menu_model->get_spdsbypm();
+        $data['td']         = $this->Menu_model->get_tdetail($uid,$tdate);
+     //   $data['program']    = $this->Menu_model->get_handover();
+        $data['bdr']        = $this->Menu_model->get_bdreqest($uid);
+        $data['bdrzh']      = $this->Menu_model->get_bdreqestzh($uid);
+        $data['dep_name']   = $data['dt'][0]->dep_name;
+        if($data['dep_name'] == "Program-Manager"){
+            $data['bdrequest']  =  $this->load->view('bdrequest_data');
+           // $data['bdrequest']  =  $this->load->view();
+        }
+        $data['utype'] =  $data['dt'][0]->id;
+
         if(!empty($user)){
-            $this->load->view($dep_name.'/index', ['pmspd'=>$pmspd,'zhspd'=>$zhspd,'bdrzh'=>$bdrzh,'spd'=>$spd, 'user'=>$user,'notify'=>$notify,'program'=>$program,'status'=>$status,'td'=>$td,'tdate'=>$tdate,'bdr'=>$bdr,'uid'=>$uid]);
+            $this->display('common/index',$data);
         }else{
             redirect('Menu/main');
         }
     }
+    
+    public function taskExecution(){
+            $this->load->model('Menu_model');
+            $taskId                    = $_POST['taskId'];
+            $taskType                  = $_POST['tasktype'];
+            $tasktypeid                = $_POST['tasktype_id'];
+            $taskDetails               = $this->Menu_model->getTaskDetails($taskId,$tasktypeid);
+            $user                      = $_SESSION['user']['user_name'];
+            $user_id                   = $_SESSION['user']['id'];
+            $dept                      = $_SESSION['user']['dep_id'];
+            $data['taskType']          = $taskType;
+            $data['taskDetails']       = $taskDetails;
+            $data['taskstatus']        = "Initiate";
+            $viewname                  = $taskType."View";
+            $data['taskId']            = $taskId;
+            $data['taskType']          = $taskType;
+            $data['tasktypeid']        = $tasktypeid;
+            $data['formdata']          = $this->Menu_model->getViewFormData($tasktypeid,$dept);
+            // echo $viewname;exit;
+            // echo $this->db->last_query();exit;  
+            // dd($data);
+            // $viewname = "PreInaugurationVisit";
+            $this->load->view("common/".$viewname,$data);
+    }
+
     public function Dashboard1(){
-
-   
-
         date_default_timezone_set('Asia/Kolkata');
         if (isset($_POST['submit'])) {
             $tdate = $_POST['filterdate'];
@@ -6870,8 +6907,8 @@ class Menu extends CI_Controller {
         $uid= $user['id'];
         $id =  $user['dep_id'];
         $this->load->model('Menu_model');
-        $notify=$this->Menu_model->get_notifybyid($uid);
-        $dt=$this->Menu_model->get_depatment_byid($id);
+        $notify    =   $this->Menu_model->get_notifybyid($uid);
+        $dt        =   $this->Menu_model->get_depatment_byid($id);
         $spd=$this->Menu_model->get_mspd();
         $status=$this->Menu_model->get_spdsbypi($uid);
         $zhspd=$this->Menu_model->get_spdsbyzh($uid);
@@ -6887,6 +6924,109 @@ class Menu extends CI_Controller {
             redirect('Menu/main');
         }
     }
+    
+public function updateTask($tasktypeid=''){
+    $post_data          = $_POST;
+    $taskname           = $_POST['taskType'];
+    $tasktypeid         = $_POST['tasktypeid'];
+    $taskid             = $_POST['taskId'];
+   
+    // to get the task type & accordingly update the task 
+    //to set the pattern for all tables, tblcallevents , task_execution_details , 
+      if($taskname == "PreInaugurationVisit"){
+          $taskData                  = '';
+         // $updateQuery             = $this->Menu_model->updateTasksById($taskid,$post_data);
+          $this->Menu_model->insertIntoInauguration($taskid,$post_data);
+      }
+     else if($tasktypeid == "22"){
+        $taskid                                   = $this->input->post("taskId"); 
+        $tblcalleventsdata['task_status']         = $this->input->post("status"); 
+        $tblcalleventsdata['updated_datetime']    = date("Y-m-d h:i:s");
+        $this->Menu_model->updateTasksById($taskid,$tblcalleventsdata);
+
+        $taskexecutionDetails   =   [];
+        $taskInsertArr          =   []; // Initialize an empty array
+
+        foreach ($post_data as $key => $val) {      
+            if (strpos($key, "taskexe") !== false) {
+                foreach ($val as $k => $v) {
+                $taskexecutionDetails = [    // Initialize the array inside the loop
+                    'main_task_id'      => $v,
+                    'task_response'     => '1',
+                    'performed_by'      => $_SESSION['user']['id'],
+                    'updated_at'        => date("Y-m-d H:i:s") // Correct time format to 24-hour format
+                ];
+            $taskInsertArr[] = $taskexecutionDetails; // Add each entry separately
+                    }
+                }
+            }       
+
+        // If batch insert is supported
+        if (!empty($taskInsertArr)) {
+            $this->Menu_model->batch_insert_task_execution($taskInsertArr);
+            echo json_encode(["status" => "success"]);
+
+        }
+    }
+  
+    // if(array_key_exists('task_id',$post_data)){
+    //     $taskid                                 = $post_data['task_id'];
+    //     unset($post_data['task_id']);
+    //     unset($post_data['taskname']);
+    //     $updateQuery                            = $this->Menu_model->updateTasksById($taskid,$post_data);
+    //     if(isset($_FILES)){
+    //           $uploadPath                       = "uploads/Visit/";
+    //           $post_data['attachment_link']     = $this->uploadFile($_FILES[$taskname],$uploadPath);
+    //           // $updateQuery                   = $this->Menu_model->updateTasksById($taskid,$post_data); 
+    //           $post_data['task_id']             = $taskid;
+    //           $updateWithAttachemnts            = $this->Menu_model->insertTasksWithAttachements($post_data);
+    //       }
+    //   }
+  }
+  
+  public function uploadFile($data,$uploadPath){
+        $_FILES['file']['name']      = $data['name'];
+        $_FILES['file']['type']      = $data['type'];
+        $_FILES['file']['tmp_name']  = $data['tmp_name'];
+        $_FILES['file']['error']     = $data['error'];
+        $_FILES['file']['size']      = $data['size'];
+      
+        // Generate a unique file name using the current timestamp and original file extension
+        $extension                = pathinfo($data['name'], PATHINFO_EXTENSION); // Get file extension
+        $uniqueFileName           = date("Y-m-d").time() . '_' . uniqid() . '.' . $extension; // Generate unique name
+        $uploadPath               = 'uploads/Visit/';
+  
+        $config['upload_path']    = $uploadPath;
+        $config['allowed_types']  = '*';
+        $config['file_name']      = $uniqueFileName;
+  
+        // Load the upload library and perform the upload
+        $this->load->library('upload', $config);
+        if ($this->upload->do_upload('file')){
+            $uploadData = $this->upload->data(); // Uploaded file data
+            $filename   = $uploadData['file_name'];
+            $fpn        = $uploadPath . $filename; // Return the full path of the uploaded file
+            return $fpn;
+        } else {
+            $error      = array('error' => $this->upload->display_errors());
+            $cuser      = $this->session->userdata('user');
+            $cuid       = $cuser['user_id'];
+            return $fpn = $uploadPath;
+        }
+  }
+  
+  public function loadTaskViewPage($viewname,$data){
+     $viewData = $this->load->view($viewname,$data);
+     return $viewData;
+  }
+  
+  public function display($viewname,$data){
+      $this->load->view('common/header');
+    //  $this->load->view('common/nav',$data);
+      $this->load->view($viewname,$data);
+      $this->load->view('common/footer');
+  }
+  
     public function TeamDailyReport($date){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
@@ -10877,8 +11017,6 @@ public function BDRequestAssignToProcess(){
     $exdate             = $this->input->post('exdate');
     $remark             = $this->input->post('remark');
     $zmapr              = $this->input->post('zmapr');
-
-
     $fwd_date           = date("Y-m-d H:i:s");
 
     if (is_array($assignto)) {
@@ -10955,13 +11093,10 @@ public function BDRequestAssignToProcess(){
         $this->db->where('id', $school_id);
         $this->db->update('spd_request', $data1);
     }
-
-
     $this->load->library('session');
     $id       = $this->Menu_model->bdr_assignto($uid,$tid,$assignto,$remark,$exdate);
     $this->session->set_flashdata('success_message',' School & Task Assigned Successfully !!');
     redirect('Menu/TheAssigningProcess/'.$request_code.'/'.$reqID.'/');
- 
   
 }
 

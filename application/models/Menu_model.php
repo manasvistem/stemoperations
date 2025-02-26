@@ -6112,5 +6112,91 @@ SELECT task_id, task_action_id, taskname, sname,task_status FROM TaskHierarchy")
 }
 
 
+public function GetTodaysAllTaskCountByUid($uid,$tdate,$perform){
+   
+    $query = $this->db->query("SELECT `task_action`.`tasktype`, COUNT(`tblcallevents`.`id`) AS task_count FROM `task_action` LEFT JOIN `tblcallevents` ON `tblcallevents`.`task_action` = `task_action`.`id` AND DATE(`tblcallevents`.`appointment_datetime`) = '$tdate' AND `tblcallevents`.`task_status` = 0 AND `tblcallevents`.`user_id` = '$uid' WHERE `task_action`.`perform_by` = '$perform' 
+     GROUP BY `task_action`.`tasktype` ORDER BY `task_action`.`tasktype` ASC");
+    return $query->result();
+}
+public function GetTodaysAllTaskByUid($uid,$tdate){
+    $query=$this->db->query("SELECT tblcallevents.id as task_id, spdr.sname, tblcallevents.task_action,tblcallevents.fwd_date, ta.tasktype,
+                             ta.taskname, tblcallevents.task_status, tblcallevents.appointment_datetime, tblcallevents.initiate_datetime, 
+                             tblcallevents.updated_datetime, tblcallevents.assigned_by, tblcallevents.bdrid, tblcallevents.comments,
+                             tblcallevents.project_code, tblcallevents.actontaken, tblcallevents.purpose_achieved, tblcallevents.cid_id, 
+                             tblcallevents.sales_cid, tblcallevents.sid, tblcallevents.bd_idetype, tblcallevents.target_date, 
+                             tblcallevents.exdate as expected_date 
+        FROM `tblcallevents` 
+        LEFT JOIN spd_request spdr ON spdr.id = tblcallevents.rsid 
+        LEFT JOIN task_action ta ON ta.id = tblcallevents.task_action 
+        WHERE CAST(appointment_datetime AS DATE) = '$tdate' AND user_id = '$uid' AND tblcallevents.task_status !=1");
+    return $query->result();
+}
+
+
+public function getTaskDetails($taskId,$taskactionId){
+    $query =  $this->db->query("SELECT tbe.*,spd.*,spdc.* 
+                                 FROM tblcallevents tbe LEFT JOIN spd ON spd.id = tbe.sid 
+                                 LEFT JOIN spd_contact spdc ON spdc.sid= spd.id 
+                                 WHERE tbe.id = '".$taskId."' AND tbe.task_action= '".$taskactionId."' ");
+     $resultArr =  $query->result_array();
+     return $resultArr;
+ }
+
+ public function getTasktypeName($taskTypeId){
+     $query  =  $this->db->query("SELECT tasktype,taskname FROM task_action WHERE id =  '".$taskTypeId."'");
+     $result = $query->row_array();
+     return $result;
+ }
+
+ public function updateTasksById($taskid,$data){    
+     $updateQuery = " UPDATE tblcallevents SET ";
+     foreach($data as $key => $val){
+        $updateQuery .= " `".strtolower($key)."` = '".$val."' ,";
+     }
+     $updateQuery    = substr($updateQuery,0,'-1');
+     $updateQuery  .= " WHERE `id` = '".$taskid."' ";
+          $this->db->query($updateQuery);
+     //echo $this->db->last_query();exit;
+     return true;
+ }
+
+ public function insertTasksWithAttachements($data){
+   $data['status']       = 1;
+   $data['created_date'] = date('Y-m-d');
+  // dd($data);
+   $insertQuery          = " INSERT INTO tblcallevents_attachments (task_id,attachment_link,remark,user_id,created_at) VALUES ( ";
+
+           foreach($data as $key=>$val){
+                $key         =  strtolower($key);
+                $insertQuery .=   " `".$val."`,";
+            }
+
+    $insertQuery          =  substr($insertQuery,0,-1);
+
+    $insertQuery .= ")";
+    echo $insertQuery;exit;
+     return true;
+ }
+ public function batch_insert_task_execution($data) {
+    $this->db->insert_batch('task_execution_details', $data);
+}
+//  public function task_execution_details($data){
+//      $insertQuery =   $this->db->query("INSERT INTO task_execution_details(main_task_id,task_response,tbe_attachment_id,remark,tbe_id,performed_by,updated_at,status) 
+//                  VALUES(".$data['task_id'].",".$data['user_role'].",".$data['user_id'].",".$data['question_id'].",
+//                  ".$data['question_val'].",".$data['created_date'].",".$data['update_date'].")");
+    
+//  }
+
+ public function getViewFormData($tasktypeId,$dept){
+      $query =   $this->db->query(" SELECT * FROM main_task WHERE tasktype = '".$tasktypeId."' AND taskperformedby = '".$dept."' ");
+      $query_result = $query->result_array();
+
+    //   foreach($query_result as $key=>$val){
+    //     $query_result_Array[$val['taskname']][$key] = $val;
+    //   }
+     
+      return $query_result;
+ }
+
 
 }

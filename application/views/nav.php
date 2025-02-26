@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="<?= base_url() ?>assets/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="<?= base_url() ?>assets/assets/vendor/libs/apex-charts/apex-charts.css" />
     <link rel="stylesheet" href="<?= base_url() ?>assets/assets/vendor/libs/apex-charts/apex-charts.css" />
-
+    
   
 
     <!-- Page CSS -->
@@ -58,7 +58,54 @@
   .table:not(.table-borderless):not(.table-dark) > :not(caption) > *:not(.table-dark) > * {
     font-weight: 700;
 }
+.on-time { color: #28a745; /* Green text */ } .late { color: #dc3545; /* Red text */ }
 </style>
+<script>
+    function checkCountDownTime(first_date, givenid) {
+    var targetDate = new Date(first_date).getTime();
+
+    function updateTimer() {
+        var now = new Date().getTime();
+        var diff = targetDate - now;
+        var isPast = diff < 0; // Check if the date is in the past
+        diff = Math.abs(diff); // Always take absolute value for calculations
+
+        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        var countdownText = [];
+        if (days > 0) countdownText.push(days + " days");
+        if (hours > 0) countdownText.push(hours + " hours");
+        if (minutes > 0) countdownText.push(minutes + " minutes");
+        if (seconds > 0) countdownText.push(seconds + " seconds");
+
+        var countdownElement = document.getElementById("countdown" + givenid);
+        var statusElement = document.getElementById("status" + givenid);
+
+        if (isPast) {
+            countdownElement.textContent = countdownText.join(", ");
+            countdownElement.classList.add("late");
+            statusElement.textContent = "Late";
+            statusElement.classList.remove("on-time");
+            statusElement.classList.add("late");
+        } else {
+            countdownElement.textContent = countdownText.join(", ");
+            countdownElement.classList.add("on-time");
+            statusElement.textContent = "On Time";
+            statusElement.classList.remove("late");
+            statusElement.classList.add("on-time");
+        }
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+}
+
+        // Start the countdown/countup
+        // checkCountDownTime("2025-02-12 12:57:07",1);
+    </script>
   </head>
 
   <body>
@@ -137,8 +184,6 @@
                 </ul>
               </li> -->
 
-
-
               <?php if($dep_id == 2): ?>
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Request</span></li>
               <li class="menu-item">
@@ -146,12 +191,8 @@
                   <i class="menu-icon tf-icons bx bx-crown"></i>
                   <div class="text-truncate" data-i18n="Boxicons">REQUEST</div>
                 </a>
-              </li>
+            </li>
               <?php endif; ?>
-
-
-
-
 
           <?php if($dep_id == 12): ?>
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Request</span></li>
@@ -163,16 +204,125 @@
               </li>
               <?php endif; ?>
             <!-- Misc -->
+            <?php if($dep_id == 4): ?>
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
             <li class="menu-item">
-              <a
-                href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
-                target="_blank"
-                class="menu-link">
+              <a href="Dashboard" target="_blank" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Support">Support</div>
+                <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
               </a>
             </li>
+            <li class="menu-item">
+              <a href="CompetitionReport" target="_blank" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Support">NSP Report</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="Handovertoinsr/594" target="_blank" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Support">Live Handover</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="CreateJoinCallHI" target="_blank" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Support">Handover Time Line</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="ProgramTimeLine" target="_blank" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Support">Program Time Line</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="BDRequestBox" target="_blank" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Support">BD Requests</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="MeetingRequest" target="_blank" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Support">Meeting Request</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="ParticalBPApr" target="_blank" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Support">Partical Board Apr</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="PaymentApr" target="_blank" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Support">Payment Apr</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="Mytarget" target="_blank" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Support">My Target</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="LiveVisitPIA" target="_blank" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Support">Live Visit PIA</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="LiveVisitIMP" target="_blank" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Support">Report Visit IMP</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="LiveVisitIMP" target="_blank" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Support">Live Visit IMP</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="LiveVisitIMP" target="_blank" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Support">Live Visit IMP</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="LiveVisitIMP" target="_blank" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Support">Live Visit IMP</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="LiveVisitIMP" target="_blank" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Support">Live Visit IMP</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="LiveVisitIMP" target="_blank" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Support">Live Visit IMP</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="LiveVisitIMP" target="_blank" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Support">Live Visit IMP</div>
+              </a>
+            </li>
+             <li class="menu-item">
+              <a href="LiveVisitIMP" target="_blank" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Support">Live Visit IMP</div>
+              </a>
+            </li>
+            
+           
+            <?php endif; ?>
 
 
 

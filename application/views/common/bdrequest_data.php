@@ -26,7 +26,12 @@
                 }
                 ?>
                     </div>
-    <hr>     <div class="table-responsive">
+    <hr>
+             
+              
+
+
+                                <div class="table-responsive">
                                   <?php if($rtype=="Demo"){?>
                                   <table id="example1" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead class="thead-dark">

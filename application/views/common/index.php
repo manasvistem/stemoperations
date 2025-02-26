@@ -1,4 +1,4 @@
-<?php $this->load->view('nav'); ?>
+<?php  $this->load->view('nav'); ?>
 <!-- Content wrapper -->
 <div class="content-wrapper">
   <!-- Content -->
@@ -24,9 +24,11 @@
           <div class="nav-align-top mb-6">
             <ul class="nav nav-pills mb-4 nav-fill" role="tablist">
               <?php  
-                $getTodaysTaskCounts = $this->Menu_model->GetTodaysAllTaskCountByUid($uid, date("Y-m-d"), 'PIA');
+                $getTodaysTaskCounts = $this->Menu_model->GetTodaysAllTaskCountByUid($uid, date("Y-m-d"), $utype);
+
+               // dd($getTodaysTaskCounts);
                 $firstTab = true; // Track first tab
-                
+              
                 foreach ($getTodaysTaskCounts as $getTodaysTaskCount):
                     $formatted_string = preg_replace("/[ \/'-]+/", "_", $getTodaysTaskCount->tasktype);
                 ?>
@@ -71,9 +73,10 @@
               <?php 
                 $getTodaysTasks = $this->Menu_model->GetTodaysAllTaskByUid($uid, date('Y-m-d'));
                 $firstPane = true; // Track first tab content
-                
+              //  dd($getTodaysTasks);
                 foreach ($getTodaysTaskCounts as $getTodaysTaskCount):
                     $slct_type_of_task = $getTodaysTaskCount->tasktype;
+                  //  dd($slct_type_of_task)
                     $formatted_string = preg_replace("/[ \/'-]+/", "_", $getTodaysTaskCount->tasktype);
                 ?>
               <div class="tab-pane fade <?= $firstPane ? 'show active' : '' ?>" 
@@ -87,11 +90,12 @@
                         <?php 
                           $i=1;
                           foreach($getTodaysTasks as $sctasklist){
+                          // dd($sctasklist);
                             $task_id              = $sctasklist->task_id;
-                            $type_of_task         = $sctasklist->tasktype;
                             $appointment_datetime = $sctasklist->appointment_datetime;
                             $sname                = $sctasklist->sname;
                             $tasktype             = $sctasklist->tasktype;
+                            $task_action          = $sctasklist->task_action;
                             $taskname             = $sctasklist->taskname;
                             $comments             = $sctasklist->comments;
                             $bd_idetype           = $sctasklist->bd_idetype;
@@ -99,21 +103,24 @@
                             $expected_date        = $sctasklist->expected_date;
                             $fwd_date             = $sctasklist->fwd_date;
 
-                          if($slct_type_of_task == $type_of_task){ ?>
-                        <a data-task_id="<?=$task_id;?>" href="javascript:void(0);" class="list-group-item list-group-item-action flex-column align-items-start active mb-1 taskperformaction" >
-                          <div class="d-flex justify-content-between w-100">
-                            <h5 class="mb-1"><?=$sname.' - '.$taskname ?></h5>
+                          if($slct_type_of_task == $tasktype){ ?>
+                        <a data-task_id="<?=$task_id;?>" class="list-group-item list-group-item-action flex-column align-items-start active mb-1 taskperformaction" >
+                            <div class="d-flex justify-content-between w-100">
+                            <input type="hidden" id="tasktype"  name="tasktype" value="<?=$tasktype?>"/>
+                            <input type="hidden" id="tasktype_id" name="tasktype_id" value="<?= $task_action?>"/>
+                            <h5 class="mb-1"><?=$sname.' - '.$taskname; ?></h5>
                             <!-- <small> <span id="countdown1"></span> - <span id="status1"></span> </small> -->
                           </div>
-                          <p class="mb-1">
-                            <?=$taskname ?> ===== Donut dragée jelly pie halvah. Danish gingerbread bonbon cookie wafer candy oat cake ice
-                            cream. Gummies halvah tootsie roll muffin biscuit icing dessert gingerbread. Pastry ice cream
-                            cheesecake fruitcake.
-                          </p>
-                          <small> <span id="countdown<?=$task_id;?>"></span> - <span id="status<?=$task_id;?>"></span> </small>
+                          <?php 
+                         // dd($data);
+                            //$this->load->view('common/MaintainanceView');
+                          ?>
+                          <small> <span id="countdown<?=$task_id;?>"></span> - <span id="status<?=$task_id;?>"></span> 
+                        </small>
                         </a>
-                        <script> checkCountDownTime("<?=$fwd_date;?>",<?=$task_id;?>);</script>
-                        <?php $i++; }   } ?>
+                        <script> checkCountDownTime("<?=$fwd_date;?>",<?=$type_of_task;?>);</script>
+                        <?php $i++; } 
+                        } ?>
                       </div>
                     </div>
                   </div>
@@ -123,17 +130,7 @@
                 $firstPane = false; // Set to false after first iteration
                 endforeach; 
                 ?>
-              <div class="tab-pane fade" id="navs-pills-justified-messages" role="tabpanel">
-                <p>
-                  Oat cake chupa chups dragée donut toffee. Sweet cotton candy jelly beans macaroon gummies
-                  cupcake gummi bears cake chocolate.
-                </p>
-                <p class="mb-0">
-                  Cake chocolate bar cotton candy apple pie tootsie roll ice cream apple pie brownie cake. Sweet
-                  roll icing sesame snaps caramels danish toffee. Brownie biscuit dessert dessert. Pudding jelly
-                  jelly-o tart brownie jelly.
-                </p>
-              </div>
+              
             </div>
           </div>
         </div>
@@ -141,16 +138,56 @@
     </div>
   </div>
 </div>
+<div class="col-lg-4 col-md-6">
+  <!-- <small class="text-light fw-medium">Vertically centered</small> -->
+  <div class="mt-4">
+    <!-- Button trigger modal -->
+    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
+    Launch modal
+    </button> -->
+    <!-- Modal -->
+    <div class="modal fade" id="modalCenter" tabindex="-1" style="display: none;" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document" id="submodal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalCenterTitle"><?php echo $taskname;?></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+           <div class="modal-body" id="taskModal">
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+   
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
   $(document).ready(function() {
     // When an element with class 'taskperformaction' is clicked
     $('.taskperformaction').on('click', function() {
-        var taskId = $(this).data('task_id'); // Retrieve the 'task_id' data
-        $('#modalCenter').modal('show');
-        $('#modalCenterTitle').text("Task ID IS = "+taskId);
-        console.log(taskId); // Log the task ID or use it as needed
-        // alert(taskId);
+        var taskId   = $(this).data('task_id'); // Retrieve the 'task_id' data
+        var tasktype = $("#tasktype").val();
+        var tasktype_id = $("#tasktype_id").val();
+       //   alert(taskId+"==="+tasktype);
+        $.ajax({
+                        url:'<?=base_url();?>Menu/taskExecution/',
+                        type: "POST",
+                        data: {
+                               taskId: taskId ,
+                               tasktype :tasktype,
+                               tasktype_id : tasktype_id
+                        },
+                        cache: false,
+                        success: function (response){
+                          $('#modalCenter').modal('show');
+                       // $('#modalCenterTitle').text("Task ID IS = "+taskId);
+                          // $('#maintenanceModal').css('show');
+                          $("#taskModal").html(response);
+                        }
+                });
+       // $('#maintenanceModal').modal('show');
+       // $('#modalCenterTitle').text("Task ID IS = "+taskId);
     });
 });
 </script>
