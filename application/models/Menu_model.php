@@ -6110,8 +6110,6 @@ public function GetSchoolIdentificationALLTask($taskid){
 SELECT task_id, task_action_id, taskname, sname,task_status FROM TaskHierarchy");
     return $query->result();
 }
-
-
 public function GetTodaysAllTaskCountByUid($uid,$tdate,$perform){
    
     $query = $this->db->query("SELECT `task_action`.`tasktype`, COUNT(`tblcallevents`.`id`) AS task_count FROM `task_action` LEFT JOIN `tblcallevents` ON `tblcallevents`.`task_action` = `task_action`.`id` AND DATE(`tblcallevents`.`appointment_datetime`) = '$tdate' AND `tblcallevents`.`task_status` = 0 AND `tblcallevents`.`user_id` = '$uid' WHERE `task_action`.`perform_by` = '$perform' 
@@ -6133,6 +6131,30 @@ public function GetTodaysAllTaskByUid($uid,$tdate){
 }
 
 
+<<<<<<< HEAD
+public function GetTodaysAllTaskCountByUid($uid,$tdate,$perform){
+   
+    $query = $this->db->query("SELECT `task_action`.`tasktype`, COUNT(`tblcallevents`.`id`) AS task_count FROM `task_action` LEFT JOIN `tblcallevents` ON `tblcallevents`.`task_action` = `task_action`.`id` AND DATE(`tblcallevents`.`appointment_datetime`) = '$tdate' AND `tblcallevents`.`task_status` = 0 AND `tblcallevents`.`user_id` = '$uid' WHERE `task_action`.`perform_by` = '$perform' 
+     GROUP BY `task_action`.`tasktype` ORDER BY `task_action`.`tasktype` ASC");
+    return $query->result();
+}
+public function GetTodaysAllTaskByUid($uid,$tdate){
+    $query=$this->db->query("SELECT tblcallevents.id as task_id, spdr.sname, tblcallevents.task_action,tblcallevents.fwd_date, ta.tasktype,
+                             ta.taskname, tblcallevents.task_status, tblcallevents.appointment_datetime, tblcallevents.initiate_datetime, 
+                             tblcallevents.updated_datetime, tblcallevents.assigned_by, tblcallevents.bdrid, tblcallevents.comments,
+                             tblcallevents.project_code, tblcallevents.actontaken, tblcallevents.purpose_achieved, tblcallevents.cid_id, 
+                             tblcallevents.sales_cid, tblcallevents.sid, tblcallevents.bd_idetype, tblcallevents.target_date, 
+                             tblcallevents.exdate as expected_date 
+        FROM `tblcallevents` 
+        LEFT JOIN spd_request spdr ON spdr.id = tblcallevents.rsid 
+        LEFT JOIN task_action ta ON ta.id = tblcallevents.task_action 
+        WHERE CAST(appointment_datetime AS DATE) = '$tdate' AND user_id = '$uid' AND tblcallevents.task_status !=1");
+    return $query->result();
+}
+
+
+=======
+>>>>>>> 214c7549dfa85f67fd36b0cfe9efefeb6b10b0d7
 public function getTaskDetails($taskId,$taskactionId){
     $query =  $this->db->query("SELECT tbe.*,spd.*,spdc.* 
                                  FROM tblcallevents tbe LEFT JOIN spd ON spd.id = tbe.sid 
@@ -6177,6 +6199,10 @@ public function getTaskDetails($taskId,$taskactionId){
     echo $insertQuery;exit;
      return true;
  }
+<<<<<<< HEAD
+=======
+
+>>>>>>> 214c7549dfa85f67fd36b0cfe9efefeb6b10b0d7
  public function batch_insert_task_execution($data) {
     $this->db->insert_batch('task_execution_details', $data);
 }
@@ -6190,11 +6216,17 @@ public function getTaskDetails($taskId,$taskactionId){
  public function getViewFormData($tasktypeId,$dept){
       $query =   $this->db->query(" SELECT * FROM main_task WHERE tasktype = '".$tasktypeId."' AND taskperformedby = '".$dept."' ");
       $query_result = $query->result_array();
+<<<<<<< HEAD
 
     //   foreach($query_result as $key=>$val){
     //     $query_result_Array[$val['taskname']][$key] = $val;
     //   }
      
+=======
+    //   foreach($query_result as $key=>$val){
+    //     $query_result_Array[$val['taskname']][$key] = $val;
+    //   }
+>>>>>>> 214c7549dfa85f67fd36b0cfe9efefeb6b10b0d7
       return $query_result;
  }
 
