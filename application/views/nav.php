@@ -112,7 +112,7 @@
 
   <?php 
   $dep_id = $user['dep_id'];
-  
+  //dd($user);
   ?>
 
     <!-- Layout wrapper -->
@@ -136,54 +136,6 @@
 
           <ul class="menu-inner py-1">
             <!-- Dashboards -->
-              <!-- <li class="menu-item active open">
-                <a href="javascript:void(0);" class="menu-link menu-toggle">
-                  <i class="menu-icon tf-icons bx bx-home-smile"></i>
-                  <div class="text-truncate" data-i18n="Dashboards">Dashboards</div>
-                  <span class="badge rounded-pill bg-danger ms-auto">5</span>
-                </a>
-                <ul class="menu-sub">
-                  <li class="menu-item active">
-                    <a href="index.html" class="menu-link">
-                      <div class="text-truncate" data-i18n="Analytics">Analytics</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a
-                      href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template/dashboards-crm.html"
-                      target="_blank"
-                      class="menu-link">
-                      <div class="text-truncate" data-i18n="CRM">CRM</div>
-                      <div class="badge rounded-pill bg-label-primary text-uppercase fs-tiny ms-auto">Pro</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a
-                      href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template/app-ecommerce-dashboard.html"
-                      target="_blank"
-                      class="menu-link">
-                      <div class="text-truncate" data-i18n="eCommerce">eCommerce</div>
-                      <div class="badge rounded-pill bg-label-primary text-uppercase fs-tiny ms-auto">Pro</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a
-                      href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template/app-logistics-dashboard.html"
-                      target="_blank"
-                      class="menu-link">
-                      <div class="text-truncate" data-i18n="Logistics">Logistics</div>
-                      <div class="badge rounded-pill bg-label-primary text-uppercase fs-tiny ms-auto">Pro</div>
-                    </a>
-                  </li>
-                  <li class="menu-item">
-                    <a href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/html/vertical-menu-template/app-academy-dashboard.html" target="_blank" class="menu-link">
-                      <div class="text-truncate" data-i18n="Academy">Academy</div>
-                      <div class="badge rounded-pill bg-label-primary text-uppercase fs-tiny ms-auto">Pro</div>
-                    </a>
-                  </li>
-                </ul>
-              </li> -->
-
               <?php if($dep_id == 2): ?>
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Request</span></li>
               <li class="menu-item">
@@ -203,8 +155,9 @@
                 </a>
               </li>
               <?php endif; ?>
-            <!-- Misc -->
-            <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
+         
+            <?php if($dep_id == 2): ?>
+            <li class="menu-header small text-uppercase"><span class="menu-header-text"></span></li>
             <li class="menu-item">
               <a href="Dashboard"
                 target="_blank"
@@ -214,9 +167,34 @@
               </a>
             </li>
             <li class="menu-item">
+              <a href="MyNextDayPlan/<?=date('Y-m-d');?>"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Sharetodaysplan">Share You Today's Plan</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="AddTempPersion"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="AddTempPersion">Add Temp Person</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="CreateGoals"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="CreateGoals">Create Goals</div>
+              </a>
+            </li>
+            <?php endif; ?>
+            <li class="menu-item">
               <a href="DayManagement" target="_blank" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Dashboard">Day Management</div>
+                <div class="text-truncate" data-i18n="DayManagement">Day Management</div>
               </a>
             </li>
             <li class="menu-item">
@@ -224,55 +202,55 @@
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Dashboard">Transit Process</div>
+                <div class="text-truncate" data-i18n="TransitProcess">Transit Process</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="CreateJoinCallHI"
+              <a href="MyDayDetail"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Dashboard">Day Management Detail</div>
+                <div class="text-truncate" data-i18n="MyDayDetail">Day Management Detail</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="ProgramTimeLine"
+              <a href="NextDayPlan"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Dashboard">Next Day Plan</div>
+                <div class="text-truncate" data-i18n="NextDayPlan">Next Day Plan</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="BDRequestBox"
+              <a href="CreateTask"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Dashboard">Create Task</div>
+                <div class="text-truncate" data-i18n="CreateTask">Create Task</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="MeetingRequest"
+              <a href="RequestAmount"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Dashboard">Request Amount</div>
+                <div class="text-truncate" data-i18n="RequestAmount">Request Amount</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="ParticalBPApr"
+              <a href="maintenanceBag"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Dashboard">Maintenance Bag</div>
+                <div class="text-truncate" data-i18n="maintenanceBag">Maintenance Bag</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="PaymentApr"
+              <a href="editProfile"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Dashboard">Edit Profile</div>
+                <div class="text-truncate" data-i18n="editProfile">Edit Profile</div>
               </a>
             </li>
             <li class="menu-item">
@@ -283,15 +261,6 @@
                 <div class="text-truncate" data-i18n="Logout">Logout</div>
               </a>
             </li>
-           
-
-
-
-
-
-
-
-
           </ul>
         </aside>
         <!-- / Menu -->
@@ -299,7 +268,6 @@
         <!-- Layout container -->
         <div class="layout-page">
           <!-- Navbar -->
-
           <nav
             class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
             id="layout-navbar">

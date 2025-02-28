@@ -2863,18 +2863,19 @@ class Menu extends CI_Controller {
         else{
             $date = date('Y-m-d');
         }
-        $sd=$date;
-        $ed=$date;
+        $data['sd'] = $date;
+        $data['ed'] = $date;    
         $sdate = new DateTime($date);
         $edate = new DateTime($date);
-        $user = $this->session->userdata('user');
+        $user= $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
         $this->load->model('Menu_model');
-        $notify=$this->Menu_model->get_notifybyid($uid);
+        $data['notify']=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
-        $this->load->view($dep_name.'/MyNextDayPlan', ['notify'=>$notify,'user'=>$user,'sd'=>$sd,'ed'=>$ed]);
+        $data['user']  = $user;
+        $this->display($dep_name.'/MyNextDayPlan', $data);
     }
     public function MBagR(){
         $user = $this->session->userdata('user');
@@ -6862,9 +6863,9 @@ class Menu extends CI_Controller {
            // $data['bdrequest']  =  $this->load->view();
         }
         $data['utype'] =  $data['dt'][0]->id;
-
+       
         if(!empty($user)){
-            $this->display('common/index',$data);
+            $this->display($data['dep_name'].'/index',$data);
         }else{
             redirect('Menu/main');
         }
@@ -7020,10 +7021,10 @@ public function updateTask($tasktypeid=''){
   }
   
   public function display($viewname,$data){
-      $this->load->view('common/header');
+      $this->load->view('templates/header');
     //  $this->load->view('common/nav',$data);
       $this->load->view($viewname,$data);
-      $this->load->view('common/footer');
+      $this->load->view('templates/footer');
   }
   
     public function TeamDailyReport($date){
@@ -7460,7 +7461,7 @@ public function updateTask($tasktypeid=''){
         $spd = $this->Menu_model->get_mspd();
         $this->load->view($dep_name.'/TaskPlanning', ['notify'=>$notify,'region'=>$dr,'dep'=>$dt, 'data'=>$data, 'client'=>$client, 'spd'=>$spd, 'user'=>$user,'year'=>$year]);
     }
-    public function AddTempPersion(){
+    public function AddTempPerson(){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
@@ -7468,7 +7469,9 @@ public function updateTask($tasktypeid=''){
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
-        $this->load->view($dep_name.'/AddTempPersion', ['notify'=>$notify,'user'=>$user]);
+        $data['notify'] = $notify;
+        $this->display('AddTempPersonView',$data);
+    //    $this->load->view($dep_name.'/AddTempPersonView', ['notify'=>$notify,'user'=>$user]);
     }
      public function AcademicCalendar(){
         $user = $this->session->userdata('user');

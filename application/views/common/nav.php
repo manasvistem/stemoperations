@@ -56,7 +56,6 @@
         </div>
       </div>
       
-      
       <?php $hjlink = $this->Menu_model->get_hjoinlink();
         if($hjlink){
         $meetlink = $hjlink[0]->meetlink;?>
