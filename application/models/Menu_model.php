@@ -1471,19 +1471,19 @@ LEFT JOIN
     }
     public function submit_day($wffo,$flink,$user_id,$lat,$lng,$do){
         date_default_timezone_set("Asia/Kolkata");
-        $date = date('Y-m-d H:i:s');
-        $da = date('Y-m-d');
+        $date   = date('Y-m-d H:i:s');
+        $da     = date('Y-m-d');
         if($do==0){
-        $this->db->query("INSERT INTO user_day(user_id, ustart, usimg, slatitude, slongitude,wffo) VALUES ('$user_id','$date','$flink','$lat','$lng','$wffo')");
-        $id =  $this->db->insert_id();
-        $query=$this->db->query("SELECT * FROM plantask WHERE user_id='$user_id' and tdone='0' and cast(plandate as DATE)<'$da'");
-        $data = $query->result();
-        foreach($data as $dt){
-           $tid = $dt->taskid;
-           $this->db->query("Update task_assign set plan='0' where id='$tid'");
-           $this->db->query("DELETE FROM plantask WHERE taskid='$tid'");
-        }
-        return $id;
+            $this->db->query("INSERT INTO user_day(user_id, ustart, usimg, slatitude, slongitude,wffo) VALUES ('$user_id','$date','$flink','$lat','$lng','$wffo')");
+            $id     =   $this->db->insert_id();
+            $query  =   $this->db->query("SELECT * FROM plantask WHERE user_id='$user_id' and tdone='0' and cast(plandate as DATE)<'$da'");
+            $data   = $query->result();
+            foreach($data as $dt){
+                $tid = $dt->taskid;
+                $this->db->query("Update task_assign set plan='0' where id='$tid'");
+                $this->db->query("DELETE FROM plantask WHERE taskid='$tid'");
+            }
+            return $id;
         }
         if($do==1){
             $tdate=date('Y-m-d');
@@ -1495,6 +1495,10 @@ LEFT JOIN
         }else{
             $query=$this->db->query("select * from spd where pi_id='$pi' and status='$status'");
         }
+        return $query->result();
+    }
+    public function userworkfrom(){
+        $query=$this->db->query("SELECT * FROM `userworkfrom`");
         return $query->result();
     }
     public function get_daydbyad($tdate){
@@ -4112,6 +4116,7 @@ LEFT JOIN
         return $query->result();
     }
     public function  get_mscccbypia($uid){
+      //  $uid =41;
         $query=$this->db->query("SELECT *  FROM msccc WHERE piid='$uid'");
         return $query->result();
     }
@@ -5118,20 +5123,63 @@ wanamelink = '$indata[30]',tehshil = '$indata[34]',zh_id = '$admin',clientname =
        return $id;
     }
     public function uploadfile($filname, $uploadPath){
-        $fn = $_FILES['file']['name'] = $_FILES['filname']['name'];
-        $_FILES['file']['type']     = $_FILES['filname']['type'];
-        $_FILES['file']['tmp_name'] = $_FILES['filname']['tmp_name'];
-        $_FILES['file']['error']     = $_FILES['filname']['error'];
-        $_FILES['file']['size']     = $_FILES['filname']['size'];
-        $config['upload_path'] = $uploadPath;
-        $config['allowed_types'] = '*';
-        $config['file_name'] = $fn;
-        $this->load->library('upload', $config);
-        $this->upload->do_upload('file');
-        $uploadData = $this->upload->data();
-         $filename = $uploadData['file_name'];
-        return $fpn = $uploadPath.$filename;
+        // Prepare the uploaded file data
+          $_FILES['file']['name']     = $_FILES['filname']['name'];
+          $_FILES['file']['type']     = $_FILES['filname']['type'];
+          $_FILES['file']['tmp_name'] = $_FILES['filname']['tmp_name'];
+          $_FILES['file']['error']    = $_FILES['filname']['error'];
+          $_FILES['file']['size']     = $_FILES['filname']['size'];
+     
+          // Generate a unique file name using the current timestamp and original file extension
+          $extension = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION); // Get file extension
+          $uniqueFileName = date("Y-m-d").time() . '_' . uniqid() . '.' . $extension; // Generate unique name
+      
+          $config['upload_path']   = $uploadPath;
+          $config['allowed_types'] = '*';
+          $config['file_name']     = $uniqueFileName;
+        //   $config['max_size'] = 10000; // in KB
+        //   $config['max_width'] = 1024;
+        //   $config['max_height'] = 768;
+      
+          // Load the upload library and perform the upload
+          $this->load->library('upload', $config);
+          if ($this->upload->do_upload('file')) {
+              $uploadData = $this->upload->data(); // Uploaded file data
+              //dd($uploadData);
+              $filename = $uploadData['file_name'];
+              $fpn = $uploadPath . $filename; // Return the full path of the uploaded file
+              return  $fpn;
+          } else {
+           // echo "test"; exit;
+              $error = array('error' => $this->upload->display_errors());
+              $cuser      = $this->session->userdata('user');
+              $cuid       = $cuser['user_id'];
+             return $fpn = $uploadPath;
+              // Handle upload errors
+             // $error = $this->upload->display_errors();
+             // return ['error' => $error];
+          }
     }
+      
+
+    // public function uploadfile($filname, $uploadPath){
+    //     $fn = $_FILES['file']['name'] = $_FILES['filname']['name'];
+    //     $_FILES['file']['type']       = $_FILES['filname']['type'];
+    //     $_FILES['file']['tmp_name']   = $_FILES['filname']['tmp_name'];
+    //     $_FILES['file']['error']      = $_FILES['filname']['error'];
+    //     $_FILES['file']['size']       = $_FILES['filname']['size'];
+    //     $config['upload_path']        = $uploadPath;
+    //     $config['allowed_types']      = '*';
+    //     $config['file_name']          = $fn;
+       
+    //     $this->load->library('upload', $config);
+    //     $this->upload->do_upload('file');
+       
+    //     $uploadData     = $this->upload->data();
+    //     $filename       = $uploadData['file_name'];
+    //     return $fpn     = $uploadPath.$filename;
+    // }
+
     public function muploadfile($filname, $uploadPath){
         $l = sizeof($filname);
         for($i=0;$i<$l;$i++){
@@ -6191,16 +6239,40 @@ public function getTaskDetails($taskId,$taskactionId){
  public function getViewFormData($tasktypeId,$dept){
       $query =   $this->db->query(" SELECT * FROM main_task WHERE tasktype = '".$tasktypeId."' AND taskperformedby = '".$dept."' ");
       $query_result = $query->result_array();
-
     //   foreach($query_result as $key=>$val){
     //     $query_result_Array[$val['taskname']][$key] = $val;
     //   }
-     
     //   foreach($query_result as $key=>$val){
     //     $query_result_Array[$val['taskname']][$key] = $val;
     //   }
       return $query_result;
  }
-
+ public function get_Yestdaydetail($uid,$tdate){
+    $query=$this->db->query("SELECT id,ustart,uclose FROM user_day WHERE user_id='$uid' and cast(ustart as DATE)='$tdate' and uclose is null order by user_day.id DESC limit 1 ");
+    return $query->result();
+}
+public function getShiftStartData($uid,$tdate){
+    $query=$this->db->query("SELECT * FROM daystartrequest WHERE user_id='$uid' and cast(created_at as DATE)='$tdate'");
+    return $query->result();
+}
+public function GetDayCloseRequest($uid,$tdate){
+    $query = $this->db->query("SELECT * FROM `close_your_day_request` WHERE user_id= '$uid' AND DATE(req_date) ='$tdate'");
+    $data = $query->result();
+    return $data;
+}
+public function CreateCloseDayRequest($data){
+    $this->db->insert('close_your_day_request', $data);
+    $insert_id = $this->db->insert_id();
+    return  $insert_id;
+}
+public function get_userbyid($uid){
+    $query=$this->db->query("SELECT * FROM user_detail where id='$uid'");
+    return $query->result();
+}
+public function UpdateCloseYesterDay($flink,$user_id,$lat,$lng,$req_id){
+    $tdate=date('Y-m-d H:i:s');
+    $this->db->query("Update user_day set uclose='$tdate',ucimg='$flink',clatitude='$lat',clongitude='$lng' where id='$req_id'");
+ //   $this->db->query("INSERT INTO notify(uid,type,sms) VALUES ('$user_id','1','You Are Closed Your Yesterday Day at $tdate')");
+}
 
 }

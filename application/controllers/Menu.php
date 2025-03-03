@@ -9,7 +9,6 @@ class Menu extends CI_Controller {
         $this->load->helper('common_helper');
     }
     public function get_users(){
-        $this->load->model('Menu_model');
         $dt=$this->Menu_model->get_data();
         $this->load->view('users',['data'=>$dt]);
     }
@@ -23,14 +22,14 @@ class Menu extends CI_Controller {
         $uid = $_POST['ur_id'];
         $latitude = $_POST['latitude'];
         $longitude = $_POST['longitude'];
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->s_location($uid,$latitude,$longitude);
     }
     public function TeamDetail(){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -41,7 +40,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -52,7 +51,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -63,7 +62,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -73,7 +72,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -83,7 +82,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -93,7 +92,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -103,7 +102,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -113,7 +112,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -123,7 +122,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -133,7 +132,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -143,7 +142,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -153,7 +152,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -163,7 +162,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -173,7 +172,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -183,7 +182,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -193,7 +192,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -203,7 +202,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -211,20 +210,25 @@ class Menu extends CI_Controller {
         $this->load->view($dep_name.'/NIProgram',['notify'=>$notify,'user'=>$user,'mdata'=>$mdata,'uid'=>$uid]);
     }
     public function TransitProcess(){
-        $user = $this->session->userdata('user');
-        $data['user'] = $user;$uid= $user['id'];
-        $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
-        $notify=$this->Menu_model->get_notifybyid($uid);
-        $dt=$this->Menu_model->get_depatment_byid($id);
-        $dep_name = $dt[0]->dep_name;
-        $this->load->view($dep_name.'/TransitProcess',['notify'=>$notify,'user'=>$user,'uid'=>$uid]);
+        $user           = $this->session->userdata('user');
+        $data['user']   = $user;
+        $uid            = $user['id'];
+        $id             = $user['dep_id'];
+
+        
+        $notify         =   $this->Menu_model->get_notifybyid($uid);
+        $dt             =   $this->Menu_model->get_depatment_byid($id);
+        $dep_name       =   $dt[0]->dep_name;
+        $data['notify'] =   $notify;
+        $data['user']   =   $user;
+        $data['uid']    =   $uid;
+        $this->display($dep_name.'/TransitProcess',$data);
     }
     public function PIATASKDETAIL(){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -232,14 +236,19 @@ class Menu extends CI_Controller {
         $this->load->view($dep_name.'/PIATASKDETAIL',['notify'=>$notify,'user'=>$user,'mdata'=>$mdata,'uid'=>$uid]);
     }
     public function CreateGoals(){
-        $user = $this->session->userdata('user');
-        $data['user'] = $user;$uid= $user['id'];
-        $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
-        $notify=$this->Menu_model->get_notifybyid($uid);
-        $dt=$this->Menu_model->get_depatment_byid($id);
-        $dep_name = $dt[0]->dep_name;
-        $this->load->view($dep_name.'/CreateGoals',['notify'=>$notify,'user'=>$user,'uid'=>$uid]);
+        $user           = $this->session->userdata('user');
+        $data['user']   = $user;$uid= $user['id'];
+        $id             =  $user['dep_id'];
+
+        
+
+        $notify         =  $this->Menu_model->get_notifybyid($uid);
+        $dt             =  $this->Menu_model->get_depatment_byid($id);
+        $dep_name       =  $dt[0]->dep_name; 
+        $data['notify'] =  $notify;
+        $data['user']   =  $user;
+        $data['uid']    =  $uid;
+        $this->display($dep_name.'/CreateGoals',$data);
     }
     public function MediaDownload(){
         if(isset($_POST['sdate'])){
@@ -257,7 +266,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -268,7 +277,7 @@ class Menu extends CI_Controller {
         $date = $_POST['date'];
         $tasktype = $_POST['tasktype'];
         $remark = $_POST['remark'];
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->Goals_Create($uid,$date,$tasktype,$remark);
         redirect('Menu/CreateGoals');
     }
@@ -276,7 +285,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -287,7 +296,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $did =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -306,7 +315,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -317,7 +326,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -328,7 +337,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -339,7 +348,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -350,7 +359,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -361,7 +370,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $pia=$this->Menu_model->get_user_pia();
@@ -373,7 +382,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $mdata = $this->Menu_model->get_NWB15DB1();
@@ -384,7 +393,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $mdata = $this->Menu_model->get_NWB15DB2($pia);
@@ -395,7 +404,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $pia=$this->Menu_model->get_user_pia();
@@ -407,7 +416,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -417,7 +426,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -429,7 +438,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -439,7 +448,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -449,7 +458,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $pia=$this->Menu_model->get_user_pia();
@@ -461,7 +470,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -471,7 +480,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -482,7 +491,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $pispdlist=$this->Menu_model->get_pischoollist();
@@ -493,7 +502,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -516,7 +525,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -538,7 +547,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -548,7 +557,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -566,7 +575,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $mydetail=$this->Menu_model->get_mydetail($piid);
@@ -587,7 +596,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -604,7 +613,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -620,7 +629,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -636,7 +645,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -654,14 +663,14 @@ class Menu extends CI_Controller {
         $uname = $user['fullname'];
         $rid = $_POST['rid'];
         $rcomment = $_POST['rcomment'];
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->bdr_comment($rid,$rcomment,$uname);
         redirect('Menu/TotalBDRequest/1');
     }
     public function RepairNow($id,$mid){
         $user = $this->session->userdata('user');
         $data['user'] = $user;
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->Repair_Now($id,$mid);
         redirect('Menu/RIDCheck/'.$mid);
     }
@@ -673,7 +682,7 @@ class Menu extends CI_Controller {
         $uname = $user['fullname'];
         $rid = $_POST['rid'];
         $rcomment = $_POST['rcomment'];
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->bdr_comment($rid,$rcomment,$uname);
         redirect('Menu/SelseOTReview');
     }
@@ -683,7 +692,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -706,7 +715,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -724,7 +733,7 @@ class Menu extends CI_Controller {
         $udid = $_POST['udid'];
         $que = $_POST['que'];
         $sremark = $_POST['sremark'];
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->check_days($rat1,$rat2,$rat3,$rat4,$sremark,$udid,$que);
         redirect('Menu/DayStartCheck');
     }
@@ -734,7 +743,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -751,7 +760,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -763,7 +772,7 @@ class Menu extends CI_Controller {
     }
     public function Muser(){
         $id= $this->input->post('id');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_user_byid($id);
         echo json_encode($result);
     }
@@ -776,12 +785,12 @@ class Menu extends CI_Controller {
         $email= $this->input->post('email');
         $phoneno= $this->input->post('phoneno');
         $active= $this->input->post('active');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->manage_user($user_id,$name,$username,$password,$email,$phoneno,$active);
         redirect('Menu/teamdetail');
     }
     public function ZipSchool($sid){
-        $this->load->model('Menu_model');
+        
         $wgdata=$this->Menu_model->get_wgbysid($sid);
         $this->load->library('zip');
           foreach($wgdata as $w)
@@ -801,7 +810,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -824,7 +833,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -833,12 +842,12 @@ class Menu extends CI_Controller {
     public function PurchaseItem(){
         $user = $this->session->userdata('user');
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $this->load->view('Purchase/purchase-item', ['user'=>$user,'notify'=>$notify]);
     }
     public function ZipProject($cid){
-        $this->load->model('Menu_model');
+        
         $pcode=$this->Menu_model->get_clientbyid($cid);
         $pcode=$pcode[0]->projectcode;
         $wgdata=$this->Menu_model->get_wgbypcode($pcode);
@@ -857,7 +866,7 @@ class Menu extends CI_Controller {
         $this->zip->download(time().'.zip');
     }
     public function ZipSchoolbydate($sid,$sd,$ed){
-        $this->load->model('Menu_model');
+        
         $wgdata=$this->Menu_model->get_wgbysidbydt($sid,$sd,$ed);
         $this->load->library('zip');
           foreach($wgdata as $w)
@@ -909,7 +918,7 @@ class Menu extends CI_Controller {
         $outbondc=$_POST['outbondc'];
         $bdreview=$_POST['bdreview'];
         $cengagement=$_POST['cengagement'];
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->program_timeline($piid,$projectcode,$uid,$bdid,$wmessage,$communication,$callsfu,$reporttype,$fttp,$rttp,$casestudy,$maintenance,$replacement,$diy,$blmne,$elmne,$nsp,$utilisation,$otherdvisit,$otherdcall,$outbondc,$bdreview,$cengagement);
         redirect('Menu/ProgramTimeLine/');
     }
@@ -938,7 +947,6 @@ class Menu extends CI_Controller {
         $outbondc=$_POST['outbondc'];
         $bdreview=$_POST['bdreview'];
         $cengagement=$_POST['cengagement'];
-        $this->load->model('Menu_model');
         $this->Menu_model->school_timeline($sid,$piid,$projectcode,$uid,$bdid,$wmessage,$communication,$callsfu,$reporttype,$fttp,$rttp,$casestudy,$maintenance,$replacement,$diy,$blmne,$elmne,$nsp,$utilisation,$otherdvisit,$otherdcall,$outbondc,$bdreview,$cengagement);
         redirect('Menu/SchoolTimeLine/');
     }
@@ -953,7 +961,7 @@ class Menu extends CI_Controller {
         $remark=$_POST['remark'];
         $exsid=$_POST['exsid'];
         $exdate=$_POST['exdate'];
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->all_rremark($rid,$spdid,$piuid,$remark,$ntdate,$ntaction,$adminuid,$exsid,$exdate,$nsp);
         redirect('Menu/AllReviewPlaing/');
     }
@@ -976,7 +984,7 @@ class Menu extends CI_Controller {
             $paspirational=$_POST['paspirational'];
             $pwg=$_POST['pwg'];
             $pwga=$_POST['pwga'];
-            $this->load->model('Menu_model');
+            
             $this->Menu_model->all_rremarkpip($rid,$spdid,$piuid,$remark,$ntdate,$ntaction,$adminuid,$exsid,$exdate,$pcategory,$pcasestudy,$preports,$psell,$paspirational,$pwg,$pwga);
             redirect('Menu/AllReviewPlaing/');
         }else{
@@ -995,13 +1003,13 @@ class Menu extends CI_Controller {
             $casestudy=$_POST['casestudy'];
             $utilizationtype=$_POST['utilizationtype'];
             $logsactivity=$_POST['logsactivity'];
-            $this->load->model('Menu_model');
+            
             $this->Menu_model->all_rremarkpi($rid,$spdid,$piuid,$remark,$ntdate,$ntaction,$adminuid,$exsid,$exdate,$awg,$categories,$categreason,$relation,$socialmedia,$nsp,$nspno,$summeractivity,$scno,$support,$diy,$opportunity,$casestudy,$utilizationtype,$logsactivity);
             redirect('Menu/AllReviewPlaing/');
         }
     }
     public function VisitZipDownload($tid){
-        $this->load->model('Menu_model');
+        
         $wgdata1=$this->Menu_model->get_visitmediatid1($tid);
         $wgdata2=$this->Menu_model->get_visitmediatid2($tid);
         $this->load->library('zip');
@@ -1018,7 +1026,7 @@ class Menu extends CI_Controller {
         $this->zip->download(time().'.zip');
     }
     public function ZipDownload($tid){
-        $this->load->model('Menu_model');
+        
         $wgdata=$this->Menu_model->get_wgbytid($tid);
         $this->load->library('zip');
           foreach($wgdata as $w)
@@ -1033,7 +1041,7 @@ class Menu extends CI_Controller {
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_user();
         $reg=$this->Menu_model->get_region();
@@ -1049,29 +1057,61 @@ class Menu extends CI_Controller {
         }
     }
     public function DayManagement(){
-        date_default_timezone_set("Asia/Calcutta");
-        $tdate=date('Y-m-d');
-        $user = $this->session->userdata('user');
-        $data['user'] = $user;$uid= $user['id'];
-        $uid= $user['id'];
-        $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
-        $notify=$this->Menu_model->get_notifybyid($uid);
-        $dt=$this->Menu_model->get_depatment_byid($id);
-        $dep_name = $dt[0]->dep_name;
-        $mdata = $this->Menu_model->get_daydetail($uid,$tdate);
+        date_default_timezone_set("Asia/Calcutta"); 
+        $tdate          = date('Y-m-d');
+        $user           = $this->session->userdata('user');
+        $data['user']   = $user;
+        $uid            = $user['id'];
+        $id             = $user['dep_id'];
+        $notify         = $this->Menu_model->get_notifybyid($uid);
+        $dt             = $this->Menu_model->get_depatment_byid($id);
+        $dep_name       = $dt[0]->dep_name;
+        $mdata          = $this->Menu_model->get_daydetail($uid,$tdate);
         if($mdata)
-        {$st = $mdata[0]->ustart;
-         $ct = $mdata[0]->uclose;
+        {
+            $st = $mdata[0]->ustart;
+            $ct = $mdata[0]->uclose;
             if($st!=''){$do=1;}
             if($ct!=''){$do=2;}
         }else{$do=0;}
-        if(!empty($user)){
-            $this->load->view($dep_name.'/DayManagement',['uid'=>$uid,'user'=>$user,'mdata'=>$mdata,'uid'=>$uid,'do'=>$do]);
-        }else{
+        $data['uid']         = $uid;
+        $data['user']        = $user;
+        $data['mdata']       = $mdata;
+        $data['uid']         = $uid;
+        $data['do']          = $do;
+        $userdfrom           = $this->Menu_model->userworkfrom();
+        $yesterday           = date('Y-m-d', strtotime('-1 day', strtotime($tdate)));
+        $isweekend           = isNotWeekend($yesterday);
+        if(!$isweekend){
+            $yesterday           = date('Y-m-d', strtotime('-2 day', strtotime($tdate)));
+            $yestdata            = $this->Menu_model->get_Yestdaydetail($uid,$yesterday);
+        }
+        else{
+            $yestdata            = $this->Menu_model->get_Yestdaydetail($uid,$yesterday);
+        }
+    //   $getDayCloseRequest = $this->Menu_model->GetDayCloseRequest($uid,$tdate);
+        $yestdatacnt                        = sizeof($yestdata);
+        $uystart_id                         = $yestdata[0]->id;
+        $uystart                            = $yestdata[0]->ustart;
+        $uyclose                            = $yestdata[0]->uclose;
+        $data['userdfrom']                  = $userdfrom;
+        $data['yestdatacnt']                = $yestdatacnt;
+        $data['getDayCloseRequest']         = $this->Menu_model->GetDayCloseRequest($uid,$tdate);
+        $data['getDayCloseRequescnt']       = sizeof($data['getDayCloseRequest']);
+        $data['uystart']                    = $uystart;
+        $data['uystart_id']                 = $uystart_id;
+
+        if ($yestdatacnt == 1){ 
+            $this->display($dep_name.'/close_day_page',$data);
+        }
+        else if(!empty($user)){
+            $this->display($dep_name.'/DayManagement',$data);
+        }
+        else{
             redirect('Menu/main');
         }
     }
+
     public function AllReviewPlaing(){
         date_default_timezone_set("Asia/Calcutta");
         $tdate=date('Y-m-d H:i:s');
@@ -1079,7 +1119,7 @@ class Menu extends CI_Controller {
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
         if(!empty($user)){
@@ -1095,7 +1135,7 @@ class Menu extends CI_Controller {
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
         if(!empty($user)){
@@ -1111,7 +1151,7 @@ class Menu extends CI_Controller {
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
         if(!empty($user)){
@@ -1127,7 +1167,7 @@ class Menu extends CI_Controller {
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
         if(!empty($user)){
@@ -1143,7 +1183,7 @@ class Menu extends CI_Controller {
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
         if(!empty($user)){
@@ -1159,7 +1199,7 @@ class Menu extends CI_Controller {
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
         if(!empty($user)){
@@ -1191,7 +1231,7 @@ class Menu extends CI_Controller {
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_depatment_byid($id);
         $mdata = $this->Menu_model->get_reviewr($adid,$piid,$sd,$ed);
         $dep_name = $dt[0]->dep_name;
@@ -1208,7 +1248,7 @@ class Menu extends CI_Controller {
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_depatment_byid($id);
         $mdata = $this->Menu_model->get_reviewdetailm($rid);
         $rdata= $this->Menu_model->get_allreview($rid);
@@ -1226,7 +1266,7 @@ class Menu extends CI_Controller {
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_depatment_byid($id);
         $mdata = $this->Menu_model->get_schoolreviewdetail();
         $dep_name = $dt[0]->dep_name;
@@ -1243,7 +1283,7 @@ class Menu extends CI_Controller {
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_depatment_byid($id);
         $mdata = $this->Menu_model->get_competitionReport();
         $dep_name = $dt[0]->dep_name;
@@ -1260,7 +1300,7 @@ class Menu extends CI_Controller {
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_depatment_byid($id);
         $mdata = $this->Menu_model->get_programreviewdetail();
         $dep_name = $dt[0]->dep_name;
@@ -1276,7 +1316,7 @@ class Menu extends CI_Controller {
         $fdate = $this->input->post('fdate');
         $rid = $this->input->post('rid');
         $rtype = $this->input->post('rtype');
-        $this->load->model('Menu_model');
+        
         $cmp=$this->Menu_model->get_spdbybdnst($stid,$piid,$fdate,$rtype);
         $program=$this->Menu_model->get_programbybdnst($stid,$piid,$fdate,$rtype);
         if($rtype=='Program Self Review'){
@@ -1301,7 +1341,7 @@ class Menu extends CI_Controller {
     }
     public function getppcode(){
         $piaid = $this->input->post('piaid');
-        $this->load->model('Menu_model');
+        
         $cmp=$this->Menu_model->get_projectbypia($piaid);
         echo '<option value="">Select Project Code</option>';
         foreach($cmp as $dt){
@@ -1314,7 +1354,7 @@ class Menu extends CI_Controller {
     }
     public function getpalldata(){
         $pcode = $this->input->post('pcode');
-        $this->load->model('Menu_model');
+        
         $programd1=$this->Menu_model->get_programdetail1($pcode);
         $programd2=$this->Menu_model->get_programdetail2($pcode);
         $programd3=$this->Menu_model->get_programdetail3($pcode);
@@ -1443,13 +1483,13 @@ class Menu extends CI_Controller {
     <?php }
     public function getpyear(){
         $pcode = $this->input->post('pcode');
-        $this->load->model('Menu_model');
+        
         $program = $this->Menu_model->get_clientbypc($pcode);
         echo $program[0]->project_year;
     }
     public function getpdetail(){
         $pcode = $this->input->post('pcode');
-        $this->load->model('Menu_model');
+        
         $pdetail=$this->Menu_model->get_myprogramdetail($pcode);
         $pre = $this->Menu_model->get_prorebypipro($pcode);
         $program = $this->Menu_model->get_clientbypc($pcode);
@@ -1511,7 +1551,7 @@ class Menu extends CI_Controller {
     public function getSchoolList(){
         $pcode = $this->input->post('pcode');
         $piid = $this->input->post('piaid');
-        $this->load->model('Menu_model');
+        
         echo '<div class="row">';
         $ai=1;
         $SchoolList=$this->Menu_model->get_getSchoolList($pcode,$piid);
@@ -1529,7 +1569,7 @@ class Menu extends CI_Controller {
     public function getThisWeekTask(){
         $pcode = $this->input->post('pcode');
         $piid = $this->input->post('piaid');
-        $this->load->model('Menu_model');
+        
         date_default_timezone_set('Asia/Kolkata');
         $currentDate = date('Y-m-d');
         $dayOfWeek = date('w', strtotime($currentDate));
@@ -1632,7 +1672,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -1642,7 +1682,7 @@ class Menu extends CI_Controller {
     public function getAcademicCalendar(){
         $pcode = $this->input->post('pcode');
         $piid = $this->input->post('piaid');
-        $this->load->model('Menu_model');
+        
         $myac=$this->Menu_model->get_accalendarbyYM($piid,'2023','4');
         if($myac){
         echo '<div><hr><b>April</b><br>';
@@ -1745,7 +1785,7 @@ class Menu extends CI_Controller {
         $piid = $this->input->post('piid');
         $fdate = $this->input->post('fdate');
         $rid = $this->input->post('rid');
-        $this->load->model('Menu_model');
+        
         $cmp=$this->Menu_model->get_spdbybdnst($stid,$piid,$fdate);
         echo '<option value="">Select School</option>';
         foreach($cmp as $dt){
@@ -1759,7 +1799,7 @@ class Menu extends CI_Controller {
     public function getProgramReview(){
         $pcode = $this->input->post('pcode');
         $piid = $this->input->post('piaid');
-        $this->load->model('Menu_model');
+        
         $mdata = $this->Menu_model->get_prorebypipro($piid,$pcode);
         $i=1;
         foreach($mdata as $md){?>
@@ -1781,7 +1821,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -1791,7 +1831,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -1801,25 +1841,25 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
         $this->load->view($dep_name.'/PaymentApr', ['notify'=>$notify,'user'=>$user]);
     }
     public function vendordone($pid,$vid){
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->vendor_done($pid,$vid);
         redirect('Menu/ParticalBPApr');
     }
     public function processpay($purreq_id){
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->process_pay($purreq_id);
         redirect('Menu/PaymentApr');
     }
     public function getallpendingtask(){
         $piid = $this->input->post('piaid');
-        $this->load->model('Menu_model');
+        
         $sd = date('Y-m-d');
         $ed = "2024-03-31";
         $nxtdtask=$this->Menu_model->get_nxtdtaskplan($piid,$sd,$ed);
@@ -1900,7 +1940,7 @@ class Menu extends CI_Controller {
         $i=1;
         $pcode = $this->input->post('pcode');
         $piid = $this->input->post('piaid');
-        $this->load->model('Menu_model');
+        
         $spd = $this->Menu_model->get_spdbypcbypi($pcode,$piid);
         foreach($spd as $spd){
             $insr=0;$fttpr=0;$montr=0;$mner=0;$diyr=0;$rttpr=0;$mainr=0;$annr=0;$uti=0;
@@ -1962,7 +2002,7 @@ class Menu extends CI_Controller {
         $i=1;
         $pcode = $this->input->post('pcode');
         $piid = $this->input->post('piaid');
-        $this->load->model('Menu_model');
+        
         $slog=$this->Menu_model->get_taskbypcodebypi($pcode,$piid);
           foreach ($slog as $sl){
               $sid = $sl->sid;
@@ -2001,7 +2041,7 @@ class Menu extends CI_Controller {
         $actionid = $this->input->post('actionid');
         $fdate = $this->input->post('fdate');
         $piid = $this->input->post('piid');
-        $this->load->model('Menu_model');
+        
         $mdata = $this->Menu_model->get_taskdata($piid,$fdate,$date,$actionid);
         $i=1;
         foreach($mdata as $d){?>
@@ -2025,7 +2065,7 @@ class Menu extends CI_Controller {
     public function getspdlog(){
         $spdid = $this->input->post('spdid');
         $fdate = $this->input->post('fdate');
-        $this->load->model('Menu_model');
+        
         $spd=$this->Menu_model->get_spdlog($spdid);
         echo '<h5><b><a target="_blank" href=school_detail/'.$spd[0]->spdid.'>'.$spd[0]->sname.'</a></b></h5>';
         echo '<lable><b>Current Status: '.$spd[0]->csstatus.'</b></lable><hr>';
@@ -2076,7 +2116,7 @@ class Menu extends CI_Controller {
     public function getspdlogs(){
         $spdid = $this->input->post('spdid');
         $fdate = $this->input->post('fdate');
-        $this->load->model('Menu_model');
+        
         $slog=$this->Menu_model->get_schoollogs($spdid,$fdate);
         $i=1;
         foreach($slog as $sl){
@@ -2109,7 +2149,7 @@ class Menu extends CI_Controller {
     }
     public function getreqreqdetail(){
         $reqid = $this->input->post('reqid');
-        $this->load->model('Menu_model');
+        
         $req=$this->Menu_model->get_bdrbyid($reqid);
         echo '<p> BD Name : '.$req[0]->bd_name.'</p>';
         echo '<p> Compant Name : '.$req[0]->cname.' '.$req[0]->cpname.'</p>';
@@ -2122,7 +2162,7 @@ class Menu extends CI_Controller {
     public function getreqlogs(){
         $olddate = "";
         $reqid = $this->input->post('reqid');
-        $this->load->model('Menu_model');
+        
         $rlogs=$this->Menu_model->get_bdrequestlog($reqid);
         $attech=$this->Menu_model->get_bdrequestattech($reqid);
         $i=1;
@@ -2147,7 +2187,7 @@ class Menu extends CI_Controller {
         $fixdate = $_POST['fixdate'];
         $reviewtype = $_POST['reviewtype'];
         $meetlink = $_POST['meetlink'];
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->piaplan_review($plandate,$uid,$piid,$reviewtype,$meetlink,$fixdate);
         redirect('Menu/PIAReview');
     }
@@ -2163,7 +2203,7 @@ class Menu extends CI_Controller {
         $insrd = $_POST['insrd'];
         $rrd = $_POST['rrd'];
         $remark = $_POST['remark'];
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->ph_timeline($pcode,$dud,$dad,$pd,$pbpd,$pad,$disd,$insd,$insrd,$rrd,$remark);
         redirect('Menu/CreateJoinCallHI');
     }
@@ -2174,7 +2214,7 @@ class Menu extends CI_Controller {
         $fixdate = $_POST['fixdate'];
         $reviewtype = $_POST['reviewtype'];
         $meetlink = $_POST['meetlink'];
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->plan_review($plandate,$uid,$piid,$reviewtype,$meetlink,$fixdate);
         redirect('Menu/AllReviewPlaing');
     }
@@ -2183,43 +2223,60 @@ class Menu extends CI_Controller {
         $uid = $_POST['uid'];
         $pcode = $_POST['pcode'];
         $meetlink = $_POST['meetlink'];
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->plan_joincall($plandate,$uid,$pcode,$meetlink);
         redirect('Menu/CreateJoinCallHI');
     }
     public function piastartreview(){
         $startt = $_POST['startt'];
         $reviewid = $_POST['reviewid'];
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->piastart_review($startt,$reviewid);
         redirect('Menu/PIAReview');
     }
     public function startreview(){
         $startt = $_POST['startt'];
         $reviewid = $_POST['reviewid'];
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->start_review($startt,$reviewid);
         redirect('Menu/AllReviewPlaing');
     }
     public function startjoincall(){
         $startt = $_POST['startt'];
         $reviewid = $_POST['reviewid'];
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->start_joincall($startt,$reviewid);
         redirect('Menu/CreateJoinCallHI');
     }
     public function daysc(){
-        $do = $_POST['do'];
+        $do                             = $_POST['do'];
         if(isset($_POST['wffo'])){$wffo = $_POST['wffo'];}else{$wffo='1';}
-        $user_id = $_POST['user_id'];
-        $lat = $_POST['lat'];
-        $lng = $_POST['lng'];
-        $filname = $_FILES['filname']['name'];
-        $uploadPath = 'uploads/day/';
-        $this->load->model('Menu_model');
-        $flink = $this->Menu_model->uploadfile($filname, $uploadPath);
-        $this->Menu_model->submit_day($wffo,$flink,$user_id,$lat,$lng,$do);
+
+        $user_id        = $_POST['user_id'];
+        $lat            = $_POST['lat'];
+        $lng            = $_POST['lng'];
+        $filname        = $_FILES['filname']['name'];
+       
+        $subfoldername  = 'day_'.date("Y-m-d");
+        $uploadPath     = 'uploads/day/';
+        $flink          = $this->Menu_model->uploadfile($filname, $uploadPath);
+        $this->Menu_model->submit_day($wffo,$flink,$user_id,$lat,$lng,$do); 
         redirect('Menu/Dashboard');
+    }
+    public function YesterdayDayClose(){
+        $user_id    = $_POST['user_id'];
+        $lat        = $_POST['lat'];
+        $lng        = $_POST['lng'];
+        $req_id     = $_POST['req_id'];
+      
+        $filname    = $_FILES['filname']['name'];
+        $uploadPath = 'uploads/day/';
+        $this->load->library('session');
+        $this->load->model('Menu_model');
+        $flink      = $this->Menu_model->uploadfile($filname, $uploadPath);
+        $this->Menu_model->UpdateCloseYesterDay($flink,$user_id,$lat,$lng,$req_id);
+        $this->session->set_flashdata('success_message','*You have closed the previous day successfully, Start You Day Now.');
+        redirect('Menu/DayManagement');
     }
     public function addresorce(){
         $title= $this->input->post('title');
@@ -2227,15 +2284,16 @@ class Menu extends CI_Controller {
         $tof= $this->input->post('tof');
         $creatives= $this->input->post('creatives');
         $vlink= $this->input->post('vlink');
-        $this->load->model('Menu_model');
+        
         $resource=$this->Menu_model->add_resource($title,$sts,$tof,$creatives,$vlink);
         redirect('Menu/UploadResource');
     }
+
     public function ResourceDetail(){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $rec=$this->Menu_model->get_resource();
@@ -2250,7 +2308,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $spdc=$this->Menu_model->get_school_contact($sid);
@@ -2266,7 +2324,7 @@ class Menu extends CI_Controller {
         $sid= $this->input->post('sid');
         $uid= $this->input->post('uid');
         $set= $this->input->post('set');
-        $this->load->model('Menu_model');
+        
         $resource=$this->Menu_model->set_pcontact($sid,$set,$uid);
         redirect('Menu/school_detail/'.$sid);
     }
@@ -2275,7 +2333,7 @@ class Menu extends CI_Controller {
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_user();
         $reg=$this->Menu_model->get_region();
@@ -2295,7 +2353,7 @@ class Menu extends CI_Controller {
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $reg=$this->Menu_model->get_region();
         $procode=$this->Menu_model->get_handover();
@@ -2315,7 +2373,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_user();
         $reg=$this->Menu_model->get_region();
         $procode=$this->Menu_model->get_clientbyid($cid);
@@ -2331,7 +2389,7 @@ class Menu extends CI_Controller {
         $newpass= $this->input->post('newpass');
         $phoneno= $this->input->post('phoneno');
         $email= $this->input->post('email');
-        $this->load->model('Menu_model');
+        
         $mid = $this->Menu_model->profile_edit($id,$oldpass,$newpass,$phoneno,$email);
         if($mid==''){
            $msg =  'You Entered Wrong Password';
@@ -2339,7 +2397,7 @@ class Menu extends CI_Controller {
             $msg =  'Password Change Successfully';
         }
         $this->session->unset_userdata('user');
-        $this->load->model('Menu_model');
+        
         $dep=$this->Menu_model->get_depatment();
         $this->load->view('index', ['dep'=>$dep,'msg'=>$msg]);
     }
@@ -2347,7 +2405,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_user();
         $reg=$this->Menu_model->get_region();
@@ -2366,7 +2424,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_user();
         $reg=$this->Menu_model->get_region();
@@ -2385,7 +2443,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_user();
         $reppc=$this->Menu_model->get_repairpc();
@@ -2401,7 +2459,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_user();
         $dt=$this->Menu_model->get_depatment_byid($id);
@@ -2416,7 +2474,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_user();
         $reppc=$this->Menu_model->get_reppc();
@@ -2432,7 +2490,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_user();
         $reppc=$this->Menu_model->get_RIDPending();
@@ -2448,7 +2506,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_user();
         $reppc=$this->Menu_model->get_reppc();
@@ -2464,7 +2522,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_user();
         $reppc=$this->Menu_model->get_repschoolwise($pid);
@@ -2480,7 +2538,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_user();
         $reppc=$this->Menu_model->get_repmodelwise($sid);
@@ -2496,7 +2554,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_user();
         $reppc=$this->Menu_model->get_InstallationNotDone($sid);
@@ -2512,7 +2570,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $pcid = $this->Menu_model->get_clientbyid($cid);
         $pcode = $pcid[0]->projectcode;
         $notify=$this->Menu_model->get_notifybyid($uid);
@@ -2530,7 +2588,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_user();
         $sm=$this->Menu_model->get_repspdm($sid);
@@ -2546,7 +2604,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $pcid = $this->Menu_model->get_clientbyid($cid);
         $pcode = $pcid[0]->projectcode;
         $dt=$this->Menu_model->get_user();
@@ -2556,17 +2614,17 @@ class Menu extends CI_Controller {
         redirect('Menu/MaintenanceReport');
     }
     public function repairfmbag($rrid){
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->repair_fmbag($rrid);
         redirect('Menu/repaircheck');
     }
     public function rrClosed($rrid){
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->rr_Closed($rrid);
         redirect('Menu/repaircheck');
     }
     public function sendtofactory($rrid){
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->send_tofactory($rrid);
         redirect('Menu/repaircheck');
     }
@@ -2575,7 +2633,7 @@ class Menu extends CI_Controller {
         $type= $this->input->post('type');
         $pmname= $this->input->post('pmname');
         $remark= $this->input->post('remark');
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->rrr_chenge($rrid,$type,$pmname,$remark);
         redirect('Menu/repaircheck');
     }
@@ -2583,7 +2641,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_user();
         $reg=$this->Menu_model->get_region();
@@ -2605,7 +2663,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt['dep_name'];
@@ -2614,7 +2672,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         if(!empty($user)){
         $this->load->view('Partnership/OtherTask', $data);
@@ -2627,7 +2685,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -2640,19 +2698,19 @@ class Menu extends CI_Controller {
     }
     public function main(){
         $msg = '';
-        $this->load->model('Menu_model');
+        
         $dep=$this->Menu_model->get_depatment();
         $this->load->view('index', ['dep'=>$dep,'msg'=>$msg]);
     }
     public function ForgotPassword(){
         $msg = '';
-        $this->load->model('Menu_model');
+        
         $dep=$this->Menu_model->get_depatment();
         $this->load->view('ForgotPassword', ['dep'=>$dep,'msg'=>$msg]);
     }
     public function srcmail(){
         $email= $this->input->post('email');
-        $this->load->model('Menu_model');
+        
         $udata=$this->Menu_model->get_userbyemail($email);
         if($udata){
         $udata[0]->user_name;
@@ -2665,7 +2723,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $spd=$this->Menu_model->get_mspd();
@@ -2680,7 +2738,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -2694,7 +2752,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $piap=$this->Menu_model->get_piaprogram();
@@ -2709,7 +2767,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $pispdlist=$this->Menu_model->get_pischoollist();
@@ -2724,7 +2782,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $piap=$this->Menu_model->get_piaprogrambypiid($piid);
@@ -2739,7 +2797,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $pischoolpc=$this->Menu_model->get_spdbypipc($pcode,$piid);
@@ -2754,7 +2812,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $spd=$this->Menu_model->get_mspdpi($pi,$status);
@@ -2769,7 +2827,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $spd=$this->Menu_model->get_mspdzh($zh,$status);
@@ -2784,7 +2842,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $spd=$this->Menu_model->get_mspdpm($zh,$status);
@@ -2799,7 +2857,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $spd=$this->Menu_model->get_testcode();
@@ -2815,7 +2873,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $spd=$this->Menu_model->get_mspdbbyststus($status);
@@ -2830,7 +2888,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $umbag=$this->Menu_model->get_umbag($uid);
@@ -2845,7 +2903,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $umbag=$this->Menu_model->get_umbag($uid);
@@ -2870,7 +2928,7 @@ class Menu extends CI_Controller {
         $user= $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $data['notify']=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -2881,7 +2939,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $mbagr=$this->Menu_model->get_umbagr();
@@ -2899,7 +2957,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -2909,7 +2967,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->get_ubrequest($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -2919,7 +2977,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->get_ubrequestpm();
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -2927,7 +2985,7 @@ class Menu extends CI_Controller {
     }
     public function getspdbycode(){
         $projcode= $this->input->post('projcode');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_spdbypc($projcode);
         foreach($result as $d){if($d->status!='1'){
            echo  $data = '<option value='.$d->id.'>'.$d->sname.'</option>';
@@ -2936,7 +2994,7 @@ class Menu extends CI_Controller {
     }
     public function getspdbypc(){
         $project_code= $this->input->post('project_code');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_spdbypc($project_code);
         $client=$this->Menu_model->get_clientbypc($project_code);
         if(empty($client)){$cpc=0;}else{$cpc = $client[0]->noofschool;}
@@ -2944,7 +3002,7 @@ class Menu extends CI_Controller {
         echo  $data = '<p><b>'.$ts.' School Added Already and Total Required School is '.$cpc.'</b></p>';
     }
     public function search_company(){
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_company();
         $this->load->view('Admin/searchcompany', ['data'=>$dt]);
     }
@@ -2952,7 +3010,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -2964,7 +3022,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -2976,7 +3034,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -2986,13 +3044,13 @@ class Menu extends CI_Controller {
         $this->load->view($dep_name.'/clientschool', ['notify'=>$notify,'spd'=>$spd, 'user'=>$user]);
     }
     public function admin(){
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_data();
         $this->load->view('Admin/register',['data'=>$dt]);
     }
     public function SchoolConversion(){
         $user = $this->session->userdata('user');
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_user();
         $this->load->view('Program-Manager/School-Conversion',['data'=>$dt, 'user'=>'$user']);
     }
@@ -3000,7 +3058,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $mdata=$this->Menu_model->get_user();
@@ -3014,7 +3072,7 @@ class Menu extends CI_Controller {
     }
     public function synopsis(){
         $user = $this->session->userdata('user');
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_user();
         $this->load->view('Program-Manager/synopsis',['data'=>$dt, 'user'=>'$user']);
     }
@@ -3022,7 +3080,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $mydetail=$this->Menu_model->get_mydetail($piid);
@@ -3044,7 +3102,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $program= $this->Menu_model->get_clientbyid($pid);
@@ -3066,7 +3124,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $spd= $this->Menu_model->get_spdbyid($sid);
@@ -3088,7 +3146,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $program= $this->Menu_model->get_clientbyid($pid);
@@ -3109,7 +3167,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $program= $this->Menu_model->get_clientbyid($pid);
@@ -3130,7 +3188,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $spd= $this->Menu_model->get_spdbyid($sid);
@@ -3151,7 +3209,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $spd= $this->Menu_model->get_spdbyid($sid);
@@ -3172,7 +3230,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $program = $this->Menu_model->get_clientbyid($pid);
@@ -3193,7 +3251,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $spd=$this->Menu_model->get_school_detail($sid);
         $slog=$this->Menu_model->get_schoollogs($sid);
@@ -3212,7 +3270,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $client=$this->Menu_model->get_clientbyid($cid);
         $pcode = $client[0]->projectcode;
@@ -3236,7 +3294,7 @@ class Menu extends CI_Controller {
         $sid= $this->input->post('sid');
         $remark= $this->input->post('remark');
         $apr = $this->input->post('apr');
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->set_approve($sid,$remark,$apr);
             $user_id = $_POST['user_id'];
@@ -3256,7 +3314,7 @@ class Menu extends CI_Controller {
         $sid= $this->input->post('sid');
         $remark= $this->input->post('remark');
         $apr = $this->input->post('apr');
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->set_pmapprove($sid,$remark,$apr);
             $user_id = $_POST['user_id'];
@@ -3273,7 +3331,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -3288,7 +3346,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -3305,7 +3363,7 @@ class Menu extends CI_Controller {
         $uid            = $user['id'];
         $id             =  $user['dep_id'];
 
-        $this->load->model('Menu_model');
+        
 
         $notify     =   $this->Menu_model->get_notifybyid($uid);
         $dt         =   $this->Menu_model->get_depatment_byid($id);
@@ -3320,14 +3378,14 @@ class Menu extends CI_Controller {
 
     public function readnotify(){
         $id             = $_POST['id'];
-        $this->load->model('Menu_model');
+        
         $mdata          = $this->Menu_model->read_notify($id);
     }
     public function getReport($sid){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -3342,7 +3400,7 @@ class Menu extends CI_Controller {
         $user         = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id           =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify     =$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -3354,25 +3412,25 @@ class Menu extends CI_Controller {
         }
     }
     public function school_d($id){
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_school_detail($id);
         $this->load->view('Admin/test', ['data'=>$dt]);
     }
     public function sd(){
         $id= $this->input->post('id');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_school_detail($id);
         echo json_encode($result);
     }
     public function findfgcode(){
         $umcode= $this->input->post('umcode');
         $sid =  $this->input->post('sid');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->find_fgcode($umcode,$sid);
     }
     public function getpartmaterial(){
         $fgname= $this->input->post('fgname');
-        $this->load->model('Menu_model');
+        
         $pmaterial = $this->Menu_model->get_modelmaterial($fgname);
         foreach($pmaterial as $d){
            echo  $data = '<option>'.$d->material_name.'</option>';
@@ -3386,7 +3444,7 @@ class Menu extends CI_Controller {
     public function mainremark(){
         $action_id= $this->input->post('action_id');
         $status_id= $this->input->post('status_id');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_mainremark($action_id, $status_id);
         foreach($result as $d){
            echo  $data = '<option>'.$d->name.'</option>';
@@ -3395,7 +3453,7 @@ class Menu extends CI_Controller {
     }
     public function getspdbyrid(){
         $rid= $this->input->post('rid');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_spdbyrid($rid);
         foreach($result as $d){
            echo  $data = '<option value='.$d->id.'>'.$d->sname.' ('.$d->saddress.') ('.$d->scity.') ('.$d->sstate.') </option>';
@@ -3405,7 +3463,7 @@ class Menu extends CI_Controller {
     public function getuserbydr(){
         $dep= $this->input->post('dep');
         $region= $this->input->post('region');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_user_bydr($dep,$region);
         foreach($result as $d){
            echo  $data = '<option value='.$d->id.'>'.$d->fullname.'</option>';
@@ -3469,7 +3527,7 @@ class Menu extends CI_Controller {
     }
     public function pcodebyyear(){
         $year= $this->input->post('year');
-        $this->load->model('Menu_model');
+        
         echo  $data = '<option value="">Select Project Code</option>';
         $result=$this->Menu_model->get_pcodebyyear($year);
         foreach($result as $d){
@@ -3479,7 +3537,7 @@ class Menu extends CI_Controller {
     }
     public function spdbypcode(){
         $pcode= $this->input->post('pcode');
-        $this->load->model('Menu_model');
+        
         echo  $data = '<option value=""> Select School </option>';
         $result=$this->Menu_model->get_spdbypc($pcode);
         foreach($result as $d){
@@ -3489,7 +3547,7 @@ class Menu extends CI_Controller {
     }
     public function spdinfobysid(){
         $sid= $this->input->post('sid');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_spdbyid($sid);
         $piid = $result[0]->pi_id;
         $piid = $this->Menu_model->get_user_byid($piid);
@@ -3505,7 +3563,7 @@ class Menu extends CI_Controller {
     }
     public function getuserbydepbag(){
         $dep= $this->input->post('dep');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_user_bydepbag($dep);
         foreach($result as $d){
            echo  $data = '<option value='.$d->id.'>'.$d->fullname.'</option>';
@@ -3514,7 +3572,7 @@ class Menu extends CI_Controller {
     }
     public function getspdbypcode(){
         $pcode= $this->input->post('pcode');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_spdbypc($pcode);
         foreach($result as $d){if($d->pm_apr==1){
            echo  $data = '<option value='.$d->id.'>'.$d->sname.'</option>';
@@ -3523,7 +3581,7 @@ class Menu extends CI_Controller {
     }
     public function getallspdbypcode(){
         $pcode= $this->input->post('pcode');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_spdbypc($pcode);
         foreach($result as $d){
            echo  $data = '<option value='.$d->id.'>'.$d->sname.'</option>';
@@ -3533,7 +3591,7 @@ class Menu extends CI_Controller {
     public function getspdbypcsbys(){
         $stid = $this->input->post('status');
         $pcode= $this->input->post('pcode');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_spdbypcbystatus($pcode,$stid);
         foreach($result as $d){
            echo  $data = '<option value='.$d->id.'>'.$d->sname.'('.$d->scity.' '.$d->sstate.')</option>';
@@ -3542,7 +3600,7 @@ class Menu extends CI_Controller {
     }
     public function getspdbypcs(){
         $pcode= $this->input->post('pcode');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_spdbypc($pcode);
         foreach($result as $d){
            echo  $data = '<option value='.$d->id.'>'.$d->sname.'('.$d->scity.' '.$d->sstate.')</option>';
@@ -3551,7 +3609,7 @@ class Menu extends CI_Controller {
     }
     public function getspdbypcode1(){
         $pcode = $this->input->post('pcode');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_spdbypc($pcode);
         foreach($result as $d){
            echo  $data = '<option value='.$d->id.'>'.$d->sname.'('.$d->scity.' '.$d->sstate.')</option>';
@@ -3560,7 +3618,7 @@ class Menu extends CI_Controller {
     }
     public function getspdbyclient1(){
         $client = $this->input->post('client');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_spdbyclient($client);
         foreach($result as $d){
            echo  $data = '<option value='.$d->id.'>'.$d->sname.'('.$d->scity.' '.$d->sstate.')</option>';
@@ -3570,7 +3628,7 @@ class Menu extends CI_Controller {
     public function msccc(){
         $hmcr = $this->input->post('hmcr');
         $userid = $this->input->post('userid');
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->add_msccc($hmcr,$userid);
          redirect('Menu/CMSCCC');
     }
@@ -3588,14 +3646,14 @@ class Menu extends CI_Controller {
         $sdate = $this->input->post('sdate');
         $edate = $this->input->post('edate');
         $remark = $this->input->post('remark');
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->add_planmsccc($userid,$cname,$spd,$tpct,$sdate,$edate,$remark);
          redirect('Menu/CMSCCC');
     }
     public function getspdbyuserpcs(){
         $pcode= $this->input->post('pcode');
         $userid = $this->input->post('userid');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_spdbyusernpc($pcode,$userid);
         echo  $data = '<option>Select School</option>';
         foreach($result as $d){
@@ -3610,7 +3668,7 @@ class Menu extends CI_Controller {
     public function getspdbyuserpcs1(){
         $pcode= $this->input->post('pcode');
         $userid = $this->input->post('userid');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_spdbyusernpc($pcode,$userid);
         echo  $data = '<option>Select School</option>';
         foreach($result as $d){
@@ -3624,12 +3682,12 @@ class Menu extends CI_Controller {
     }
     public function getprogramtimelineforpi(){
         $pcode= $this->input->post('pcode');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_programtimelineforpi($pcode);
         echo json_encode($result);
     }
     public function getmodel(){
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_model();
         foreach($result as $d){
            echo  $data = '<option value='.$d->id.'>'.$d->model_name.'</option>';
@@ -3638,7 +3696,7 @@ class Menu extends CI_Controller {
     }
     public function getmodelbytype(){
         $mtype= $this->input->post('mtype');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_modelbytype($mtype);
         foreach($result as $d){
            echo  $data = '<option value='.$d->model_name.'>'.$d->model_name.'</option>';
@@ -3647,7 +3705,7 @@ class Menu extends CI_Controller {
     }
     public function getpcodebyyear(){
         $year= $this->input->post('year');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_pcodebyy($year);
         foreach($result as $d){
            echo  $data = '<option value='.$d->id.'>'.$d->project_code.'</option>';
@@ -3656,7 +3714,7 @@ class Menu extends CI_Controller {
     }
     public function getpcodebypiid(){
         $user_id= $this->input->post('user_id');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_pcodebypi($user_id);
         echo $data = '<option>All</option>';
         foreach($result as $d){
@@ -3666,7 +3724,7 @@ class Menu extends CI_Controller {
     }
     public function getcity(){
         $statename= $this->input->post('statename');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_city($statename);
         foreach($result as $d){
            echo  $data = '<option>'.$d->cityname.'</option>';
@@ -3675,7 +3733,7 @@ class Menu extends CI_Controller {
     }
     public function getdistrict(){
         $statename= $this->input->post('statename');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_district($statename);
         foreach($result as $d){
            echo  $data = '<option>'.$d->districtn.'</option>';
@@ -3684,7 +3742,7 @@ class Menu extends CI_Controller {
     }
     public function gettehshil(){
         $statename= $this->input->post('statename');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_tehshil($statename);
         foreach($result as $d){
            echo  $data = '<option>'.$d->tehshiln.'</option>';
@@ -3693,7 +3751,7 @@ class Menu extends CI_Controller {
     }
     public function getyear(){
         $projcode= $this->input->post('projcode');
-        $this->load->model('Menu_model');
+        
         $yfh=$this->Menu_model->get_yearfh($projcode);
         $hy = $yfh[0]->project_year;
         $gy=$this->Menu_model->get_year($projcode);
@@ -3706,7 +3764,7 @@ class Menu extends CI_Controller {
     }
     public function getyearu(){
         $projcode= $this->input->post('projcode');
-        $this->load->model('Menu_model');
+        
         $yfh=$this->Menu_model->get_yearfh($projcode);
         $hy = $yfh[0]->project_year;
         $gy=$this->Menu_model->get_yearu($projcode);
@@ -3719,7 +3777,7 @@ class Menu extends CI_Controller {
     }
     public function purpose(){
         $action_id= $this->input->post('action_id');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_purpose($action_id);
         foreach($result as $d){
            echo  $data = '<option value='.$d->id.'>'.$d->name.'</option>';
@@ -3728,7 +3786,7 @@ class Menu extends CI_Controller {
     }
     public function actionremark(){
         $purpose_id= $this->input->post('purpose_id');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_actionremark($purpose_id);
         foreach($result as $d){
            echo  $data = '<option>Select Remark</option><option>'.$d->name.'</option>';
@@ -3737,7 +3795,7 @@ class Menu extends CI_Controller {
     }
     public function getteacher(){
         $tid= $this->input->post('tid');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_spdteacherbytid($tid);
         foreach($result as $d){
            echo  $data = '<option>Select Teacher</option><option>'.$d->contact_name.'</option>';
@@ -3746,17 +3804,17 @@ class Menu extends CI_Controller {
     }
     public function getremark(){
         $id= $this->input->post('id');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_remark($id);
         print_r($result);
     }
     public function spd_add(){
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_spd();
         $this->load->view('Admin/spd_add', ['data'=>$dt]);
     }
     public function add_task(){
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_depatment();
         $du=$this->Menu_model->get_user();
         $this->load->view('Admin/add-task', ['dep'=>$dt, 'user'=>$du]);
@@ -3777,7 +3835,7 @@ class Menu extends CI_Controller {
         $ifsc=$this->input->post('ifsc');
         $del_tarms=$this->input->post('del_tarms');
         $remark=$this->input->post('remark');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->add_puritem($project_code, $item_name, $item_qty, $unit, $rate, $pay_tarms, $vendor_name, $v_mno, $v_email, $v_address, $bank_name, $account_no, $ifsc, $del_tarms ,$remark);
         if($id){
             redirect('Menu/PurchaseItem');
@@ -3791,7 +3849,7 @@ class Menu extends CI_Controller {
         $subject=$this->input->post('subject');
         $matter=$this->input->post('matter');
         $file=$this->input->post('file');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->add_Compose($to_user,$from_user,$subject,$matter,$file);
         if($id){
             redirect('Menu/Compose');
@@ -3803,7 +3861,7 @@ class Menu extends CI_Controller {
         $date= $this->input->post('date');
         $user=$this->input->post('user');
         $bcode=$this->input->post('bcode');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->bag_assign($date, $user, $bcode);
         if($id){
                redirect('Menu/AssignBag');
@@ -3814,7 +3872,7 @@ class Menu extends CI_Controller {
     }
     public function taskassign(){
         $indata= $this->input->post('indata');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->task_assign($indata);
         if($id){
             redirect('Menu/CreateTask');
@@ -3823,21 +3881,28 @@ class Menu extends CI_Controller {
         }
     }
     public function addtp(){
-        $piaid= $this->input->post('piaid');
-        $person_name= $this->input->post('person_name');
-        $phone_number= $this->input->post('phone_number');
-        $email_address= $this->input->post('email_address');
-        $address= $this->input->post('address');
-        $city= $this->input->post('city');
-        $district= $this->input->post('district');
-        $state= $this->input->post('state');
-        $qualification= $this->input->post('qualification');
-        $remark= $this->input->post('remark');
-        $cluster= $this->input->post('cname');
-        $this->load->model('Menu_model');
+        $piaid          = $this->input->post('piaid');
+        $person_name    = $this->input->post('person_name');
+        $phone_number   = $this->input->post('phone_number');
+        $email_address  = $this->input->post('email_address');
+        $address        = $this->input->post('address');
+        $city           = $this->input->post('city');
+        $district       = $this->input->post('district');
+        $state          = $this->input->post('state');
+        $qualification  = $this->input->post('qualification');
+        $remark         = $this->input->post('remark');
+        $cluster        = $this->input->post('cname');
+        $user           = $this->session->userdata('user');
+        $data['user']   = $user;$uid= $user['id'];
+        $uid            = $user['id'];
+        $id             = $user['dep_id'];
         $this->Menu_model->add_tp($piaid,$person_name,$phone_number,$email_address,$address,$city,$district,$state,$qualification,$remark,$cluster);
-        redirect('Menu/AddTempPersion');
+        $dt                 = $this->Menu_model->get_depatment_byid($id);
+        $dep_name           = $dt[0]->dep_name;
+        $data['dep_name']   = $dep_name;
+        $this->display($dep_name.'/AddTempPerson',$data);
     }
+
     public function taskassignins(){
         $from_user= $this->input->post('from_user');
         $task_date= $this->input->post('task_date');
@@ -3845,7 +3910,7 @@ class Menu extends CI_Controller {
         $pcode= $this->input->post('pcode');
         $spd_id= $this->input->post('spd_id');
         $Remark= $this->input->post('Remark');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->task_assign_ins($from_user,$task_date,$to_user,$pcode,$spd_id,$Remark);
         if($id){
             redirect('Menu/CreateInstallation');
@@ -3857,7 +3922,7 @@ class Menu extends CI_Controller {
         $closeremark = $_POST['closeremark'];
         $closetdate = $_POST['closetdate'];
         $rrid = $_POST['rrid'];
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->piaclose_review($closetdate,$closeremark,$rrid);
         redirect('Menu/AllReviewPlaing');
     }
@@ -3865,7 +3930,7 @@ class Menu extends CI_Controller {
         $closeremark = $_POST['closeremark'];
         $closetdate = $_POST['closetdate'];
         $rrid = $_POST['rrid'];
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->close_review($closetdate,$closeremark,$rrid);
         redirect('Menu/AllReviewPlaing');
     }
@@ -3877,7 +3942,7 @@ class Menu extends CI_Controller {
         $location= $this->input->post('location');
         $remark= $this->input->post('remark');
         $tcname= $this->input->post('tcname');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->pm_request($tdate,$tasttype,$schooltype,$noofschool,$location,$remark,$tcname);
         if($id){
             redirect('Menu/CreateRequest');
@@ -3889,7 +3954,7 @@ class Menu extends CI_Controller {
         $uid= $this->input->post('uid');
         $tid= $this->input->post('tid');
         $cremark= $this->input->post('cremark');
-        $this->load->model('Menu_model');
+        
         if(isset($_FILES['filname']['name'])) {
         $filname = $_FILES['filname']['name'];
         $count = sizeof($filname);
@@ -3901,7 +3966,7 @@ class Menu extends CI_Controller {
         $uuid       = $this->input->post('uuid');
         $rid        = $this->input->post('rid');
         $noofschool = $this->input->post('noofschool');
-        $this->load->model('Menu_model');
+        
         $this->load->library('session');
         $id         = $this->Menu_model->bdr_plansitask($uuid,$rid,$noofschool);
         $this->session->set_flashdata('success_message','  Task Planned Successfully !!');
@@ -3912,7 +3977,7 @@ class Menu extends CI_Controller {
         $rid= $this->input->post('rid');
         $pcode= $this->input->post('pcode');
         $sid= $this->input->post('spdid');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->bdr_plansinog($uuid,$rid,$pcode,$sid);
         redirect('Menu/Dashboard/');
     }
@@ -3922,7 +3987,7 @@ class Menu extends CI_Controller {
         $assignto = $this->input->post('assignto');
         $remark   = $this->input->post('remark');
         $exdate   = $this->input->post('exdate');
-        $this->load->model('Menu_model');
+        
         $this->load->library('session');
         $id       = $this->Menu_model->bdr_assignto($uid,$tid,$assignto,$remark,$exdate);
         $this->session->set_flashdata('success_message','  Task Created Successfully !!');
@@ -3937,7 +4002,7 @@ class Menu extends CI_Controller {
         $nooftask= $this->input->post('nooftask');
         $exdate= $this->input->post('exdate');
         $cterms= $this->input->post('cterms');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->bdr_stageassign($byid,$tid,$tasktype,$purpose,$assignto,$nooftask,$cterms,$exdate);
         redirect('Menu/bdrapending/');
     }
@@ -3951,7 +4016,7 @@ class Menu extends CI_Controller {
         $pi= $this->input->post('pi');
         $status= $this->input->post('status');
         $uid= $this->input->post('uid');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->assign_rtask($sid,$rremark,$tdate,$ttype,$tstype,$remark,$pi,$uid);
         redirect('Menu/pischool/'.$pi.'/'.$status);
     }
@@ -3963,7 +4028,7 @@ class Menu extends CI_Controller {
         $status= $this->input->post('status');
         $uid= $this->input->post('uid');
         $rremark = $this->input->post('rremark');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->pm_review($sid,$pi,$uid,$ques,$remark,$rremark);
         redirect('Menu/pischool/'.$pi.'/'.$status);
     }
@@ -3972,14 +4037,14 @@ class Menu extends CI_Controller {
         $piid= $this->input->post('piid');
         $uid= $this->input->post('uid');
         $remark= $this->input->post('remark');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->pm_spdreview($sid,$piid,$uid,$remark);
         redirect('Menu/CreateARTask');
     }
     public function sendtofm(){
         $program= $this->input->post('program');
         $request= $this->input->post('request');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->send_tofm($program,$request);
         if($id){
             redirect('Menu/pmtofmrequest');
@@ -3994,7 +4059,7 @@ class Menu extends CI_Controller {
         $ttdate = $this->input->post('ttdate');
         $taskdetail = $this->input->post('taskdetail');
         $remark = $this->input->post('remark');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->add_newtask($fuser,$touser,$tadate,$ttdate,$taskdetail,$remark);
         if($id){
             redirect('Menu/CreateOTask');
@@ -4010,7 +4075,7 @@ class Menu extends CI_Controller {
         $sid = $this->input->post('sid');
         $brid = $this->input->post('brid');
         $taskremark= $this->input->post('taskremark');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->create_aot($uid,$tasktype,$action,$pcode,$sid,$brid,$taskremark);
         if($id){
             redirect('Menu/CreateDifferentTask');
@@ -4025,7 +4090,7 @@ class Menu extends CI_Controller {
         $premark= $this->input->post('premark');
         $mlink= $this->input->post('mlink');
         $uvideo= $this->input->post('uvideo');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->plan_sc($pdate,$createdby,$task_type,$premark,$mlink,$uvideo);
         if($id){
             redirect('Menu/Dashboard');
@@ -4042,7 +4107,7 @@ class Menu extends CI_Controller {
         $statename= $this->input->post('statename');
         $districtname= $this->input->post('districtname');
         $premark= $this->input->post('premark');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->rw_plan($pdate,$createdby,$task_type,$statename,$districtname,$premark,$pcode,$sid);
         if($id){
             redirect('Menu/Dashboard');
@@ -4055,16 +4120,16 @@ class Menu extends CI_Controller {
         $scid= $this->input->post('scid');
         $filname = $_FILES['filname']['name'];
         $uploadPath = 'uploads/day/';
-        $this->load->model('Menu_model');
+        
         $flink = $this->Menu_model->uploadfile($filname, $uploadPath);
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->start_sc($sdate,$scid,$flink);
         redirect('Menu/Dashboard');
     }
     public function startrw(){
         $sdate= $this->input->post('sdate');
         $scid= $this->input->post('scid');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->start_rw($sdate,$scid);
         redirect('Menu/Dashboard');
     }
@@ -4074,7 +4139,7 @@ class Menu extends CI_Controller {
         $cphoto= $this->input->post('cphoto');
         $vlink= $this->input->post('vlink');
         $creamrk= $this->input->post('creamrk');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->close_sc($sdate,$scid,$cphoto,$vlink,$creamrk);
         redirect('Menu/Dashboard');
     }
@@ -4083,10 +4148,10 @@ class Menu extends CI_Controller {
         $scid= $this->input->post('scid');
         $filname = $_FILES['filname']['name'];
         $uploadPath = 'uploads/day/';
-        $this->load->model('Menu_model');
+        
         $flink = $this->Menu_model->uploadfile($filname, $uploadPath);
         $creamrk= $this->input->post('creamrk');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->close_rw($sdate,$scid,$flink,$creamrk);
         redirect('Menu/Dashboard');
     }
@@ -4099,7 +4164,7 @@ class Menu extends CI_Controller {
         $sicl= $this->input->post('sicl');
         $cllist= $this->input->post('cllist');
         $remark= $this->input->post('remark');
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->piatask_assign($userid,$task_type,$PhVi,$pcode,$spd_id,$sicl,$cllist,$remark);
         redirect('Menu/CreateTask');
     }
@@ -4113,14 +4178,14 @@ class Menu extends CI_Controller {
         $sicl= $this->input->post('sicl');
         $cllist= $this->input->post('cllist');
         $remark= $this->input->post('remark');
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->imtask_assign($userid,$task_type,$PhVi,$pcode,$spd_id,$sicl,$cllist,$remark,$uname);
         redirect('Menu/CreateTask');
     }
     public function deliveryassign(){
         $pcode = $this->input->post('pcode');
         $recid = $this->input->post('recid');
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->delivery_assign($pcode,$recid);
         redirect('Menu/TransitAssign');
     }
@@ -4157,7 +4222,7 @@ class Menu extends CI_Controller {
         if($tt=='OTask'){$indata[6]='';$indata[7]='';$indata[8]='';$indata[10]='';$page='';$tst='';$sid='';$pcode='';}
         $datet=$indata[0];
         $tid=$msid;
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->autotask($sid,$pi,$fid,$pcode,$tt,$tst,$page,$datet,$tid);
         if($id){
             redirect('Menu/CreateTask');
@@ -4170,7 +4235,7 @@ class Menu extends CI_Controller {
         $model= $this->input->post('model');
         $remark= $this->input->post('remark');
         $tid= $this->input->post('tid');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->model_replacement($tid,$sid,$model,$remark,$part_name);
         if($id){
             redirect('Menu/CreateReplacement');
@@ -4184,7 +4249,7 @@ class Menu extends CI_Controller {
         $remark= $this->input->post('remark');
         $part_name= $this->input->post('part_name');
         $tid= $this->input->post('tid');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->model_repair($tid,$sid,$model,$remark,$part_name);
         if($id){
             redirect('Menu/CreateRepair');
@@ -4198,7 +4263,7 @@ class Menu extends CI_Controller {
         $pi= $this->input->post('pi');
         $fid = $this->input->post('fid');
         $pcode = $this->input->post('pcode');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->assign_piins($sid,$ins,$pi,$fid,$pcode);
         if($id){
             redirect('Menu/AssignPerson');
@@ -4215,7 +4280,7 @@ class Menu extends CI_Controller {
         $pcode = $this->input->post('pcode');
         $mtype = $this->input->post('mtype');
         $datet = $this->input->post('datet');
-        $this->load->model('Menu_model');
+        
         $tid='';
         $id=$this->Menu_model->assign_piinszh($sid,$ins,$pi,$fid,$pcode,$zh,$mtype,$datet,$tid);
         if($id){
@@ -4231,7 +4296,7 @@ class Menu extends CI_Controller {
         $sid= $this->input->post('sid');
         $ins= $this->input->post('ins');
         $pi= $this->input->post('pi');
-        $this->load->model('Menu_model');
+        
         $userd=$this->Menu_model->get_user_byid($pi);
         $zh = $userd[0]->adminid;
         $id=$this->Menu_model->assigncptospd($sid,$ins,$pi,$zh,$cid,$cname,$pcode);
@@ -4257,7 +4322,7 @@ class Menu extends CI_Controller {
         $contact_no = $this->input->post('contact_no');
         $pia = $this->input->post('pi');
         $ins = $this->input->post('ins');
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->Change_school_update($pia,$ins,$sid,$sname,$slanguage,$total_teachers,$total_students,$boys,$girls,$saddress,$spincode,$scity,$sstate,$contact_name,$contact_no);
         redirect('Menu/ChangeIDSPD');
     }
@@ -4270,7 +4335,7 @@ class Menu extends CI_Controller {
         $pcode = $this->input->post('pcode');
         $mtype = $this->input->post('mtype');
         $datet = $this->input->post('datet');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->assign_piinszhforos($sid,$ins,$pi,$fid,$pcode,$zh,$mtype,$datet);
         if($id){
             redirect('Menu/assignpersonforolds');
@@ -4293,7 +4358,7 @@ class Menu extends CI_Controller {
         $timing=$this->input->post('timing');
         $website=$this->input->post('website');
         $status=$this->input->post('status');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->add_spd($sname,$saddress,$slocation,$slanguage,$snoyear,$sayear,$std,$boys,$girls,$total_students,$total_teachers,$timing,$website,$status);
         if($id){
             redirect('Menu/spd_add');
@@ -4307,7 +4372,7 @@ class Menu extends CI_Controller {
         $saddress=$this->input->post('saddress');
         $scity=$this->input->post('scity');
         $sstate=$this->input->post('sstate');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->add_spdwithpc($project_code,$sname,$saddress,$scity,$sstate);
         if($id){
             redirect('Menu/SchoolWithPC');
@@ -4322,20 +4387,20 @@ class Menu extends CI_Controller {
         $que= $this->input->post('que');
         $remark= $this->input->post('remark');
         $indata= $this->input->post('indata');
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->add_installmodel($model,$ndel,$nwork,$que,$remark,$indata);
     }
     public function ans_1stttp(){
         $que= $this->input->post('que');
         $remark= $this->input->post('remark');
         $indata= $this->input->post('indata');
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->add_ans($que,$remark,$indata);
     }
     public function pcodebyyearnzhid(){
         $year= $this->input->post('year');
         $zhid= $this->input->post('user');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_pcodebyyearnzhid($year,$zhid);
         foreach($result as $d){
            echo  $data = '<option>'.$d->project_code.'</option>';
@@ -4347,7 +4412,7 @@ class Menu extends CI_Controller {
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $mrequest=$this->Menu_model->get_mrequest();
@@ -4363,7 +4428,7 @@ class Menu extends CI_Controller {
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $mytarget=$this->Menu_model->get_mytarget($uid);
@@ -4375,19 +4440,19 @@ class Menu extends CI_Controller {
         }
     }
     public function MeetingStart($uid,$mid){
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->Meeting_Start($uid,$mid);
         redirect('Menu/MeetingRequest');
     }
     public function MytargetStart($uid,$mid){
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->Mytarget_Start($uid,$mid);
         redirect('Menu/Mytarget');
     }
     public function MeetingClose(){
         $mid = $this->input->post('taskid');
         $mcremark = $this->input->post('mcremark');
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->Meeting_Close($mid,$mcremark);
         redirect('Menu/MeetingRequest');
     }
@@ -4396,7 +4461,7 @@ class Menu extends CI_Controller {
         $attch = $_FILES['attch']['name'];
         $count = sizeof($attch);
         $mcremark = $this->input->post('mcremark');
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->Mytarget_Close($mid,$mcremark,$attch,$count);
         redirect('Menu/Mytarget');
     }
@@ -4404,7 +4469,7 @@ class Menu extends CI_Controller {
         $mid = $this->input->post('ttaskid');
         $ttchange = $this->input->post('ttchange');
         $mcremark = $this->input->post('cremark');
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->Mytarget_chnage($mid,$mcremark,$ttchange);
         redirect('Menu/Mytarget');
     }
@@ -4413,7 +4478,7 @@ class Menu extends CI_Controller {
         $uid = $this->input->post('uid');
         $mvid = $this->input->post('mvid');
         $remark = $this->input->post('remark');
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->add_Reminder($tid,$uid,$remark,$mvid);
         redirect('Menu/LiveVisit');
     }
@@ -4421,7 +4486,7 @@ class Menu extends CI_Controller {
         $tid = $this->input->post('ttid');
         $uid = $this->input->post('uuid');
         $remark = $this->input->post('remark');
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->add_Appreciate($tid,$uid,$remark);
         redirect('Menu/LiveVisit');
     }
@@ -4430,7 +4495,7 @@ class Menu extends CI_Controller {
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $client=$this->Menu_model->get_handover();
@@ -4448,7 +4513,7 @@ class Menu extends CI_Controller {
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $client=$this->Menu_model->get_handover();
@@ -4462,12 +4527,12 @@ class Menu extends CI_Controller {
         }
     }
     public function noissues($tid,$sid,$page,$plaid){
-     $this->load->model('Menu_model');
+     
      $this->Menu_model->no_issues($tid,$sid,$page,$plaid);
      redirect('Menu/visitlist/'.$page.'/'.$plaid);
     }
     public function PurposeNotAchieved($tid,$sid,$page,$plaid){
-     $this->load->model('Menu_model');
+     
      $this->Menu_model->Purpose_NotAchieved($tid,$sid,$page,$plaid);
      redirect('Menu/Dashboard');
     }
@@ -4480,7 +4545,7 @@ class Menu extends CI_Controller {
         $pageno = $this->input->post('pageno');
         $lat = $this->input->post('lat');
         $lng = $this->input->post('lng');
-        $this->load->model('Menu_model');
+        
         if($quen=='Select Not Working Model'){
             $mtid = $this->input->post('mtid');
             $fgname = $this->input->post('fgname');
@@ -4557,7 +4622,7 @@ class Menu extends CI_Controller {
             $ntid = $this->db->insert_id();
             $this->db->query("update task_assign set sdatet='$tdatet',task_date='$tdatet',plan='0' where id='$ntid'");
             $this->db->query("update plantask set actiontaken='No',purpose='No',donet='$tdatet',tdone='1',remark='$actionnoremark' where taskid='$tid'");
-            $this->load->model('Menu_model');
+            
                    $task=$this->Menu_model->get_taskbyid($tid);
                    $sid = $task[0]->spd_id;
                    $ttype = $task[0]->task_type;
@@ -4581,7 +4646,7 @@ class Menu extends CI_Controller {
                 $ntid = $this->db->insert_id();
                 $this->db->query("update task_assign set sdatet='$tdatet',task_date='$tdatet',plan='0' where id='$ntid'");
                 $this->db->query("update plantask set actiontaken='Yes',purpose='No',donet='$tdatet',tdone='1',remark='$purposenoremark' where taskid='$tid'");
-                $this->load->model('Menu_model');
+                
                    $task=$this->Menu_model->get_taskbyid($tid);
                    $sid = $task[0]->spd_id;
                    $ttype = $task[0]->task_type;
@@ -4606,7 +4671,7 @@ class Menu extends CI_Controller {
                 $remat= $this->input->post('remat');
                 $datein= $this->input->post('datein');
                 $rate = $this->input->post('rate');
-                $this->load->model('Menu_model');
+                
                 if(isset($_FILES['attac']['name'])) {
                    $attac = $_FILES['attac']['name'];
                    $count = sizeof($attac);
@@ -4664,7 +4729,7 @@ class Menu extends CI_Controller {
         }elseif(isset($_POST['mtype'])){
             $mtype= $this->input->post('mtype');
             $nwork= $this->input->post('nwork');
-            $this->load->model('Menu_model');
+            
             $model=$this->Menu_model->get_modelbytype($mtype);
         }
         else{$model=0;$ndel=0;$nwork=0;}
@@ -4679,7 +4744,7 @@ class Menu extends CI_Controller {
         $remat= $this->input->post('remat');
         $datein= $this->input->post('datein');
         $page= $this->input->post('page');
-        $this->load->model('Menu_model');
+        
         if(isset($_POST['filname'])) {$filname = $_FILES['filname']['name'];
         $uploadPath = 'uploads/ansupload/';
         $flink = $this->Menu_model->muploadfile($filname, $uploadPath);
@@ -4718,7 +4783,7 @@ class Menu extends CI_Controller {
         $remat= $this->input->post('remat');
         $datein= $this->input->post('datein');
         $page= $this->input->post('page');
-        $this->load->model('Menu_model');
+        
         if(isset($_POST['filname'])) {$filname = $_FILES['filname']['name'];
         $uploadPath = 'uploads/ansupload/';
         $flink = $this->Menu_model->muploadfile($filname, $uploadPath);
@@ -4743,7 +4808,7 @@ class Menu extends CI_Controller {
         $mname= $this->input->post('mname');
         $sid= $this->input->post('sid');
         $tid= $this->input->post('tid');
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->add_modelnwrr($sid,$tid,$replace,$repair,$repaired,$filname,$mname);
         redirect('Menu/RepairePartName/'.$tid);
     }
@@ -4753,26 +4818,26 @@ class Menu extends CI_Controller {
         $rremark= $this->input->post('rremark');
         $sid= $this->input->post('sid');
         $tid= $this->input->post('tid');
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->add_mpartremrk($sid,$tid,$part,$remark,$rremark);
         redirect('Menu/useBagMaterial/'.$tid);
     }
     public function oldschooldata(){
         $indata= $this->input->post('indata');
-        $this->load->model('Menu_model');
+        
         $sid = $this->Menu_model->add_oldschool($indata);
         redirect('Menu/AddSchoolDetail', 'refresh');
     }
     public function editoldschooldata(){
         $indata= $this->input->post('indata');
         $sid= $this->input->post('sid');
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->edit_oldschool($indata,$sid);
         redirect('Menu/Dashboard');
     }
     public function oldclientdata(){
         $indata= $this->input->post('indata');
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->add_oldclient($indata);
         redirect('Menu/search_client');
     }
@@ -4781,7 +4846,7 @@ class Menu extends CI_Controller {
         $na= $this->input->post('na');
         $filname = $_FILES['filname']['name'];
         $uploadPath = 'uploads/report/';
-        $this->load->model('Menu_model');
+        
         $flink = $this->Menu_model->muploadfile($filname, $uploadPath);
         $this->Menu_model->add_report($indata,$flink,$na);
         redirect('Menu/AddReport');
@@ -4792,7 +4857,7 @@ class Menu extends CI_Controller {
         if($na[0]=='YES'){$filname = $_FILES['filname']['name'];}
         if($na[1]=='YES'){$waimage = $_FILES['waimage']['name'];}
         if($na[2]=='YES'){$wavideo = $_FILES['wavideo']['name'];}
-        $this->load->model('Menu_model');
+        
         if($indata[3]=='Utilisation'){
             if($na[1]=='YES'){
             $count = sizeof($waimage);
@@ -4822,7 +4887,7 @@ class Menu extends CI_Controller {
     }
     public function handoverfm(){
         $btn = $this->input->post('btn');
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->pm_tofm($btn);
         redirect('Menu/handoverDetail');
     }
@@ -4840,7 +4905,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_taskassign();
         $dd=$this->Menu_model->get_depatment_byid($did);
@@ -4865,7 +4930,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -4875,7 +4940,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -4899,7 +4964,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -4923,21 +4988,21 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
         $this->load->view($dep_name.'/UserPendingTask', ['notify'=>$notify,'user'=>$user,'sd'=>$sd, 'ed'=>$ed,'sdate'=>$sdate,'edate'=>$edate,'departmet'=>$departmet]);
     }
     public function replan(){
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->get_replan();
     }
     public function ttaskuser($date,$tasktype){
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_ttaskbyuser($date,$tasktype);
         $dd=$this->Menu_model->get_depatment_byid($did);
@@ -4948,7 +5013,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -4968,7 +5033,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $depu=$this->Menu_model->get_user($depid);
         $dd=$this->Menu_model->get_depatment_byid($did);
@@ -4976,12 +5041,12 @@ class Menu extends CI_Controller {
         $this->load->view($dep_name.'/taskdetailbyuser', ['notify'=>$notify,'user'=>$user,'depu'=>$depu,'depid'=>$depid,'sdate'=>$sdate, 'edate'=>$edate,'all'=>$all]);
     }
      public function startdayreview($uid,$ttype){
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->start_dayreview($uid,$ttype);
         redirect('Menu/DayStartCheck');
     }
     public function closedayreview($rid){
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->close_dayreview($rid);
         redirect('Menu/DayStartCheck');
     }
@@ -5001,7 +5066,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5023,7 +5088,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5045,7 +5110,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5067,7 +5132,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5077,7 +5142,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5087,7 +5152,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5097,7 +5162,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5119,7 +5184,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5141,7 +5206,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5151,7 +5216,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5161,7 +5226,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5171,7 +5236,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5181,7 +5246,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5191,7 +5256,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5201,7 +5266,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5211,7 +5276,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5221,7 +5286,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5231,7 +5296,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5241,7 +5306,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $mdata=$this->Menu_model->get_clientbyid($cid);
@@ -5257,7 +5322,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $mdata=$this->Menu_model->get_clientbyid($cid);
@@ -5273,7 +5338,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5283,7 +5348,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5293,7 +5358,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5303,7 +5368,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5313,7 +5378,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5323,7 +5388,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5333,7 +5398,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5343,7 +5408,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5353,7 +5418,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5363,7 +5428,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5373,7 +5438,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5383,7 +5448,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5393,7 +5458,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5403,7 +5468,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5413,7 +5478,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5423,7 +5488,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5446,7 +5511,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5469,7 +5534,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5492,7 +5557,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5515,7 +5580,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5538,7 +5603,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5561,7 +5626,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5584,7 +5649,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5607,7 +5672,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5630,7 +5695,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5653,7 +5718,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5676,7 +5741,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -5698,7 +5763,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $mdata = $this->Menu_model->get_School($pid);
@@ -5721,7 +5786,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $mdata = $this->Menu_model->get_School($uid);
@@ -5744,7 +5809,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $mdata = $this->Menu_model->get_School($uid);
@@ -5767,7 +5832,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $mdata = $this->Menu_model->get_School($uid);
@@ -5790,7 +5855,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $mdata = $this->Menu_model->get_School($uid);
@@ -5813,7 +5878,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $mdata = $this->Menu_model->get_School($uid);
@@ -5836,7 +5901,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $mdata = $this->Menu_model->get_School($uid);
@@ -5859,7 +5924,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $mdata = $this->Menu_model->get_School($uid);
@@ -5882,7 +5947,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $mdata = $this->Menu_model->get_School($uid);
@@ -5905,7 +5970,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $mdata = $this->Menu_model->get_School($uid);
@@ -5928,7 +5993,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $mdata = $this->Menu_model->get_School($uid);
@@ -5951,7 +6016,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $mdata = $this->Menu_model->get_School($uid);
@@ -5971,7 +6036,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $mdata = $this->Menu_model->get_School($uid);
@@ -5994,7 +6059,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $mdata = $this->Menu_model->get_School($uid);
@@ -6017,7 +6082,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $mdata = $this->Menu_model->get_School($uid);
@@ -6040,7 +6105,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $mdata = $this->Menu_model->get_School($uid);
@@ -6051,7 +6116,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $mdata = $this->Menu_model->get_School($pid);
@@ -6062,7 +6127,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $mdata = $this->Menu_model->get_School($pid);
@@ -6073,7 +6138,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $mdata = $this->Menu_model->get_School($pid);
@@ -6084,7 +6149,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $mdata = $this->Menu_model->get_School($pid);
@@ -6095,7 +6160,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -6105,7 +6170,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -6115,7 +6180,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -6125,7 +6190,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -6135,7 +6200,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -6145,7 +6210,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -6155,7 +6220,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -6165,7 +6230,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -6175,7 +6240,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -6185,7 +6250,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -6195,7 +6260,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -6205,7 +6270,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -6215,7 +6280,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -6223,7 +6288,7 @@ class Menu extends CI_Controller {
     }
     public function indtime(){
         $tid= $this->input->post('tid');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->in_dtime($tid);
         echo json_encode($result);
     }
@@ -6241,7 +6306,7 @@ class Menu extends CI_Controller {
             $edate = date('Y-m-d');
             $zhid=$uid;
         }
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $mdata=$this->Menu_model->get_reviewdetail($zhid,$sdate,$edate);
@@ -6260,7 +6325,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -6270,7 +6335,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $uti=$this->Menu_model->get_wgdbyay($year);
         $dd=$this->Menu_model->get_depatment_byid($did);
@@ -6281,7 +6346,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $uti=$this->Menu_model->get_wgdgbay();
         $year=$this->Menu_model->all_year();
@@ -6293,7 +6358,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_ttbydu($sdate,$edate,$tasktype,$touser);
         $dd=$this->Menu_model->get_depatment_byid($did);
@@ -6308,7 +6373,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_ttbydu($sdate,$edate,$tasktype,$touser);
         $dd=$this->Menu_model->get_depatment_byid($did);
@@ -6320,7 +6385,7 @@ class Menu extends CI_Controller {
         $did =  $user['dep_id'];
         $uid= $user['id'];
         $touser=$uid;
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_ttbydu($sdate,$edate,$tasktype,$touser);
         $dd=$this->Menu_model->get_depatment_byid($did);
@@ -6332,7 +6397,7 @@ class Menu extends CI_Controller {
         $did =  $user['dep_id'];
         $uid= $user['id'];
         $btn = $this->input->post('btn');
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->task_Detail($btn);
         $dd=$this->Menu_model->get_taskassign_byid($btn);
@@ -6343,7 +6408,7 @@ class Menu extends CI_Controller {
     public function handoverToaccount(){
         $user = $this->session->userdata('user');
         $btn = $this->input->post('btn');
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->bd_toaccount($btn);
         $this->load->view('BD/bdtoacc', ['data'=>$dt, 'user'=>$user]);
     }
@@ -6354,7 +6419,7 @@ class Menu extends CI_Controller {
         $designation=$this->input->post('designation');
         $contact_no=$this->input->post('contact_no');
         $email=$this->input->post('email');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->add_cont($sid,$contact_name,$designation,$contact_no,$email,$uid);
         redirect('Menu/school_detail/'.$sid);
     }
@@ -6362,7 +6427,7 @@ class Menu extends CI_Controller {
         $taskid= $this->input->post('taskid');
         $date=$this->input->post('date');
         $uid=$this->input->post('uid');
-        $this->load->model('Menu_model');
+        
         $task=$this->Menu_model->get_taskassign_byid($taskid);
         $sid = $task[0]->spd_id;
         $action = $task[0]->task_type;
@@ -6373,31 +6438,31 @@ class Menu extends CI_Controller {
         $rid = $this->input->post('rid');
         $uuid = $this->input->post('uuid');
         $comment = $this->input->post('comment');
-        $this->load->model('Menu_model');
+        
         $task=$this->Menu_model->get_bdrcom($rid,$uuid,$comment);
         redirect('Menu/AssBDRequest');
     }
     public function cctd(){
         $tid= $this->input->post('tid');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_cctd($tid);
         echo json_encode($result);
     }
     public function piidtoar(){
         $piid = $this->input->post('piid');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_piidtoar($piid);
         echo json_encode($result);
     }
     public function cctdp(){
         $tid= $this->input->post('tid');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_cctdp($tid);
         echo json_encode($result);
     }
     public function pagedata(){
         $page= $this->input->post('page');
-        $this->load->model('Menu_model');
+        
         $result=$this->Menu_model->get_pagedata($page);
         echo json_encode($result);
     }
@@ -6416,7 +6481,7 @@ class Menu extends CI_Controller {
         $project_code= $this->input->post('project_code');
         $remark=$this->input->post('remark');
         $type="Utilisation";
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->add_wgdata($date,$year,$project_code,$sid,$waimage,$remark,$count,$type,$howmay,$tid,$pi,$model,$teacher);
         redirect('Menu/Dashboard');
     }
@@ -6424,7 +6489,7 @@ class Menu extends CI_Controller {
         $purposetaken= $this->input->post('purposetaken');
         $rtremark= $this->input->post('rtremark');
         $rrtid= $this->input->post('rrtid');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->add_research($rrtid,$purposetaken,$rtremark);
         redirect('Menu/Dashboard');
     }
@@ -6441,7 +6506,7 @@ class Menu extends CI_Controller {
         $project_code= $this->input->post('coproject_code');
         $remark=$this->input->post('remark');
         $type="Communication";
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->add_commdata($date,$year,$project_code,$sid,$waimage,$remark,$count,$type,$howmay,$tid,$pi);
         redirect('Menu/Dashboard');
     }
@@ -6458,7 +6523,7 @@ class Menu extends CI_Controller {
         $project_code= $this->input->post('caproject_code');
         $remark=$this->input->post('remark');
         $type="CaseStudy";
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->add_casedata($date,$year,$project_code,$sid,$caimage,$remark,$count,$type,$howmay,$tid,$pi);
         redirect('Menu/Dashboard');
     }
@@ -6476,7 +6541,7 @@ class Menu extends CI_Controller {
         $project_code= $this->input->post('project_code');
         $remark=$this->input->post('remark');
         $type="Communication";
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->add_wgdata($date,$year,$project_code,$sid,$waimage,$remark,$count,$type,$yn,$howmay,$tid,$pi);
         redirect('Menu/school_detail/'.$sid);
     }
@@ -6486,7 +6551,7 @@ class Menu extends CI_Controller {
         $urtid=$this->input->post('urtid');
         $tid = $this->input->post('tid');
         $remark=$this->input->post('remark');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->add_wgurdata($urtid,$tid,$remark,$que,$rat1);
         redirect('Menu/Dashboard');
     }
@@ -6500,7 +6565,7 @@ class Menu extends CI_Controller {
         $year = $this->input->post('year');
         $filname = $_FILES['filname']['name'];
         $uploadPath = 'uploads/report/';
-        $this->load->model('Menu_model');
+        
         $task=$this->Menu_model->get_taskassign_byid($tid);
         $type = $task[0]->task_subtype;
         $flink = $this->Menu_model->uploadfile($filname, $uploadPath);
@@ -6511,7 +6576,7 @@ class Menu extends CI_Controller {
         $id= $this->input->post('tid');
         $touser=$this->input->post('touser');
         $fromuser=$this->input->post('fromuser');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->forward_task($id,$touser,$fromuser);
         redirect('Menu/assigntask');
     }
@@ -6519,7 +6584,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $did =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -6536,7 +6601,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $did =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -6556,7 +6621,7 @@ class Menu extends CI_Controller {
         $data['user'] = $user;$uid = $user['id'];
         $did          =  $user['dep_id'];
 
-        $this->load->model('Menu_model');
+        
 
         $notify   = $this->Menu_model->get_notifybyid($uid);
         $dd       = $this->Menu_model->get_depatment_byid($did);
@@ -6578,7 +6643,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $did =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -6595,7 +6660,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $did =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -6612,7 +6677,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $did =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -6629,7 +6694,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $did =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -6648,7 +6713,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $did =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -6667,7 +6732,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $did =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -6686,7 +6751,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $did =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -6703,7 +6768,7 @@ class Menu extends CI_Controller {
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $did =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -6719,7 +6784,7 @@ class Menu extends CI_Controller {
     }
     public function Checklist_MandE1st($id){
         $user = $this->session->userdata('user');
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_question();
         $plan=$this->Menu_model->get_plantaskbyid($id);
         $sid = $plan[0]->spd_id;
@@ -6730,7 +6795,7 @@ class Menu extends CI_Controller {
     }
     public function Checklist_MandE($id){
         $user = $this->session->userdata('user');
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_question();
         $plan=$this->Menu_model->get_plantaskbyid($id);
         $sid = $plan[0]->spd_id;
@@ -6741,7 +6806,7 @@ class Menu extends CI_Controller {
     }
     public function checklist_1stTTP($id){
         $user = $this->session->userdata('user');
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_question();
         $plan=$this->Menu_model->get_plantaskbyid($id);
         $sid = $plan[0]->spd_id;
@@ -6752,7 +6817,7 @@ class Menu extends CI_Controller {
     }
     public function Maintenance_checklist($id){
         $user = $this->session->userdata('user');
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_question();
         $model=$this->Menu_model->get_model();
         $plan=$this->Menu_model->get_plantaskbyid($id);
@@ -6764,7 +6829,7 @@ class Menu extends CI_Controller {
     }
     public function checklist_TTP(){
         $user = $this->session->userdata('user');
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_question();
         $plan=$this->Menu_model->get_plantaskbyid($id);
         $sid = $plan[0]->spd_id;
@@ -6775,25 +6840,25 @@ class Menu extends CI_Controller {
     }
     public function checklist_rpm(){
         $user = $this->session->userdata('user');
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_question();
         $this->load->view('Admin/rpm', ['data'=>$dt, 'user'=>$user]);
     }
     public function checklist_adnp(){
         $user = $this->session->userdata('user');
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_question();
         $this->load->view('Admin/adnp', ['data'=>$dt, 'user'=>$user]);
     }
     public function checklist_delivery(){
         $user = $this->session->userdata('user');
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_question();
         $this->load->view('Admin/delivery', ['data'=>$dt, 'user'=>$user]);
     }
     public function InstallationChecklist($id){
         $user = $this->session->userdata('user');
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_question();
         $model=$this->Menu_model->get_model();
         $plan=$this->Menu_model->get_plantaskbyid($id);
@@ -6805,19 +6870,19 @@ class Menu extends CI_Controller {
     }
     public function school_identification(){
         $user = $this->session->userdata('user');
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_question();
         $this->load->view('Admin/schoolidentification', ['data'=>$dt, 'user'=>$user]);
     }
     public function final_mnet(){
         $user = $this->session->userdata('user');
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_question();
         $this->load->view('Admin/final-mnet)', ['data'=>$dt, 'user'=>$user]);
     }
     public function final_mnes(){
         $user = $this->session->userdata('user');
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_question();
         $this->load->view('Admin/final-mnes)', ['data'=>$dt, 'user'=>$user]);
     }
@@ -6825,7 +6890,7 @@ class Menu extends CI_Controller {
         $name= $this->input->post('fullname');
         $user=$this->input->post('user');
         $password=$this->input->post('password');
-        $this->load->model('Menu_model');
+        
         $id=$this->Menu_model->add_data($name,$user,$password);
         if($id){
             redirect('Menu/admin');
@@ -6835,6 +6900,7 @@ class Menu extends CI_Controller {
     }
     public function Dashboard(){
         date_default_timezone_set('Asia/Kolkata');
+
         if (isset($_POST['submit'])) {
             $tdate = $_POST['filterdate'];
         }else{
@@ -6844,35 +6910,40 @@ class Menu extends CI_Controller {
         $data['user']   = $user;
         $uid            = $user['id'];
         $id             = $user['dep_id'];
-        $this->load->model('Menu_model');
+        $user_day       = $this->Menu_model->get_daydetail($uid,date("Y-m-d"));
 
-        $data['uid']        = $uid;       
-        $notify             = $this->Menu_model->get_notifybyid($uid);
-        $data['dt']         = $this->Menu_model->get_depatment_byid($id);
-      // $data['spd']       = $this->Menu_model->get_mspd();
-        $data['status']     = $this->Menu_model->get_spdsbypi($uid);
-        $data['zhspd']      = $this->Menu_model->get_spdsbyzh($uid);
-        $data['pmspd']      = $this->Menu_model->get_spdsbypm();
-        $data['td']         = $this->Menu_model->get_tdetail($uid,$tdate);
-     //   $data['program']    = $this->Menu_model->get_handover();
-        $data['bdr']        = $this->Menu_model->get_bdreqest($uid);
-        $data['bdrzh']      = $this->Menu_model->get_bdreqestzh($uid);
-        $data['dep_name']   = $data['dt'][0]->dep_name;
-        if($data['dep_name'] == "Program-Manager"){
-            $data['bdrequest']  =  $this->load->view('bdrequest_data');
-           // $data['bdrequest']  =  $this->load->view();
+        if(empty($user_day) && count($user_day)<= 0){
+            $this->session->set_flashdata('error_message','* Please Start Your Day');
+            redirect('Menu/DayManagement');
         }
-        $data['utype'] =  $data['dt'][0]->id;
-       
-        if(!empty($user)){
-            $this->display($data['dep_name'].'/index',$data);
-        }else{
-            redirect('Menu/main');
+        else{
+            $data['uid']        = $uid;       
+            $notify             = $this->Menu_model->get_notifybyid($uid);
+            $data['dt']         = $this->Menu_model->get_depatment_byid($id);
+        // $data['spd']       = $this->Menu_model->get_mspd();
+            $data['status']     = $this->Menu_model->get_spdsbypi($uid);
+            $data['zhspd']      = $this->Menu_model->get_spdsbyzh($uid);
+            $data['pmspd']      = $this->Menu_model->get_spdsbypm();
+            $data['td']         = $this->Menu_model->get_tdetail($uid,$tdate);
+        //   $data['program']    = $this->Menu_model->get_handover();
+            $data['bdr']        = $this->Menu_model->get_bdreqest($uid);
+            $data['bdrzh']      = $this->Menu_model->get_bdreqestzh($uid);
+            $data['dep_name']   = $data['dt'][0]->dep_name;
+            if($data['dep_name'] == "Program-Manager"){
+                $data['bdrequest']  =  $this->load->view('bdrequest_data');
+            // $data['bdrequest']  =  $this->load->view();
+            }
+            $data['utype'] =  $data['dt'][0]->id;
+            if(!empty($user)){
+                $this->display($data['dep_name'].'/index',$data);
+            }else{
+                redirect('Menu/main');
+            }
         }
     }
     
     public function taskExecution(){
-            $this->load->model('Menu_model');
+            
             $taskId                    = $_POST['taskId'];
             $taskType                  = $_POST['tasktype'];
             $tasktypeid                = $_POST['tasktype_id'];
@@ -6906,7 +6977,7 @@ class Menu extends CI_Controller {
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify    =   $this->Menu_model->get_notifybyid($uid);
         $dt        =   $this->Menu_model->get_depatment_byid($id);
         $spd=$this->Menu_model->get_mspd();
@@ -7022,7 +7093,7 @@ public function updateTask($tasktypeid=''){
   
   public function display($viewname,$data){
       $this->load->view('templates/header');
-    //  $this->load->view('common/nav',$data);
+      $this->load->view('templates/nav',$data);
       $this->load->view($viewname,$data);
       $this->load->view('templates/footer');
   }
@@ -7032,7 +7103,7 @@ public function updateTask($tasktypeid=''){
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $spd=$this->Menu_model->get_mspd();
@@ -7054,7 +7125,7 @@ public function updateTask($tasktypeid=''){
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $userd=$this->Menu_model->get_user();
         $dt=$this->Menu_model->get_depatment_byid($id);
@@ -7071,7 +7142,7 @@ public function updateTask($tasktypeid=''){
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7086,7 +7157,7 @@ public function updateTask($tasktypeid=''){
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7101,7 +7172,7 @@ public function updateTask($tasktypeid=''){
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7116,7 +7187,7 @@ public function updateTask($tasktypeid=''){
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7132,7 +7203,7 @@ public function updateTask($tasktypeid=''){
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $BDRPRT=$this->Menu_model->get_BDRPRT();
@@ -7148,7 +7219,7 @@ public function updateTask($tasktypeid=''){
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $BDRPRT=$this->Menu_model->get_BDRPRT();
@@ -7165,7 +7236,7 @@ public function updateTask($tasktypeid=''){
         $data['user']    = $user;$uid= $user['id'];
         $uid             = $user['id'];
         $id              =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify          = $this->Menu_model->get_notifybyid($uid);
         $dt              = $this->Menu_model->get_depatment_byid($id);
         $bdr             = $this->Menu_model->get_bdrbyd($code);
@@ -7183,7 +7254,7 @@ public function updateTask($tasktypeid=''){
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $bdr=$this->Menu_model->get_bdrbyd($code);
@@ -7201,7 +7272,7 @@ public function updateTask($tasktypeid=''){
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $bdrlogs=$this->Menu_model->get_bdrlogdetails($rid);
@@ -7217,7 +7288,7 @@ public function updateTask($tasktypeid=''){
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $bdr=$this->Menu_model->get_bdrbypia($uid);
@@ -7235,7 +7306,7 @@ public function updateTask($tasktypeid=''){
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $client=$this->Menu_model->get_handover();
@@ -7253,7 +7324,7 @@ public function updateTask($tasktypeid=''){
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $client=$this->Menu_model->get_handover();
@@ -7272,7 +7343,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $spd=$this->Menu_model->get_spdbyid($sid);
@@ -7293,7 +7364,7 @@ public function updateTask($tasktypeid=''){
             $pcode = $_POST['pcode'];
             if($pcode=='All'){
                 $user_id = $_POST['user_id'];
-                $this->load->model('Menu_model');
+                
                 $notify=$this->Menu_model->get_notifybyid($uid);
                 $dt=$this->Menu_model->get_depatment_byid($id);
                 $spd=$this->Menu_model->get_spdbypiid($user_id);
@@ -7304,7 +7375,7 @@ public function updateTask($tasktypeid=''){
                     redirect('Menu/main');
                 }
             }else{
-                $this->load->model('Menu_model');
+                
                 $notify=$this->Menu_model->get_notifybyid($uid);
                 $dt=$this->Menu_model->get_depatment_byid($id);
                 $spd=$this->Menu_model->get_spdbypc($pcode);
@@ -7318,7 +7389,7 @@ public function updateTask($tasktypeid=''){
         }
         else
         {
-            $this->load->model('Menu_model');
+            
             $notify=$this->Menu_model->get_notifybyid($uid);
             $dt=$this->Menu_model->get_depatment_byid($id);
             $spd=$this->Menu_model->get_spd();
@@ -7334,7 +7405,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $spd=$this->Menu_model->get_spd();
@@ -7349,7 +7420,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $spd=$this->Menu_model->get_spdbypiid($uid);
@@ -7364,7 +7435,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $spd=$this->Menu_model->get_spdbypiid($uid);
@@ -7379,7 +7450,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $spd=$this->Menu_model->get_spdbyid($sid);
@@ -7394,7 +7465,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7404,7 +7475,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7418,7 +7489,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7433,7 +7504,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7449,7 +7520,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7462,22 +7533,27 @@ public function updateTask($tasktypeid=''){
         $this->load->view($dep_name.'/TaskPlanning', ['notify'=>$notify,'region'=>$dr,'dep'=>$dt, 'data'=>$data, 'client'=>$client, 'spd'=>$spd, 'user'=>$user,'year'=>$year]);
     }
     public function AddTempPerson(){
-        $user = $this->session->userdata('user');
-        $data['user'] = $user;$uid= $user['id'];
-        $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
-        $notify=$this->Menu_model->get_notifybyid($uid);
-        $dt=$this->Menu_model->get_depatment_byid($id);
-        $dep_name = $dt[0]->dep_name;
+        $user           = $this->session->userdata('user');
+        $data['user']   = $user;$uid= $user['id'];
+    //echo $uid;exit;
+        $id             = $user['dep_id'];
+        
+
+        $notify         = $this->Menu_model->get_notifybyid($uid);
+        $dt             = $this->Menu_model->get_depatment_byid($id);
+        $dep_name       = $dt[0]->dep_name;
         $data['notify'] = $notify;
-        $this->display('AddTempPersonView',$data);
-    //    $this->load->view($dep_name.'/AddTempPersonView', ['notify'=>$notify,'user'=>$user]);
+        $data['mdata'] = $this->Menu_model->get_tpdetail($uid);
+        $data['cname'] = $this->Menu_model->get_mscccbypia($uid);
+        //dd($data);
+        $this->display($dep_name.'/AddTempPerson',$data);
     }
+
      public function AcademicCalendar(){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $piastate=$this->Menu_model->get_piastate($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
@@ -7494,7 +7570,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $piastate=$this->Menu_model->get_piastate($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
@@ -7506,7 +7582,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7522,7 +7598,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7538,7 +7614,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7555,7 +7631,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7571,7 +7647,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7587,7 +7663,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7603,7 +7679,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7619,7 +7695,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7632,7 +7708,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7643,7 +7719,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7654,7 +7730,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7665,7 +7741,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7676,7 +7752,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7687,7 +7763,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7703,7 +7779,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7719,7 +7795,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7735,7 +7811,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7751,7 +7827,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7768,7 +7844,7 @@ public function updateTask($tasktypeid=''){
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
         $uid=$user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7784,7 +7860,7 @@ public function updateTask($tasktypeid=''){
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
         $uid=$user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7801,7 +7877,7 @@ public function updateTask($tasktypeid=''){
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
         $uid=$user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7816,7 +7892,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7831,7 +7907,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_depatment_byid($id);
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dep_name = $dt[0]->dep_name;
@@ -7842,7 +7918,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->get_depatment_byid($id);
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dep_name = $dt[0]->dep_name;
@@ -7853,7 +7929,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7868,7 +7944,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7882,7 +7958,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7902,7 +7978,7 @@ public function updateTask($tasktypeid=''){
         $model_name= $this->input->post('model_name');
         $mtid= $this->input->post('mtid');
         $mqty= $this->input->post('mqty');
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->Bag_Muse($tid,$model_name,$mtid,$mqty);
         redirect('Menu/useBagMaterial/'.$tid);
     }
@@ -7913,7 +7989,7 @@ public function updateTask($tasktypeid=''){
         $state= $this->input->post('state');
         $type= $this->input->post('type');
         $remark= $this->input->post('remark');
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->academic_calendar($piaid,$fdate,$todate,$state,$type,$remark);
         redirect('Menu/AcademicCalendar');
     }
@@ -7921,7 +7997,7 @@ public function updateTask($tasktypeid=''){
         $tid= $this->input->post('ttid');
         $page= $this->input->post('page');
         $tdatet=date('Y-m-d H:i:s');
-        $this->load->model('Menu_model');
+        
         $this->db->query("update plantask set actiontaken='Yes',purpose='Yes',donet='$tdatet',tdone='1' where taskid='$tid'");
         $task=$this->Menu_model->get_taskbyid($tid);
         $sid = $task[0]->spd_id;
@@ -7952,14 +8028,14 @@ public function updateTask($tasktypeid=''){
     public function changespdinsp(){
         $sid= $this->input->post('spdi');
         $ins= $this->input->post('ins');
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->change_insp($sid,$ins);
         redirect('Menu/ChangeinSPD');
     }
     public function startar(){
         $sdate= $this->input->post('sdate');
         $piid= $this->input->post('piid');
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->start_ar($sdate,$piid);
         redirect('Menu/CreateARTask');
     }
@@ -7970,14 +8046,14 @@ public function updateTask($tasktypeid=''){
         $piid = $this->input->post('piid');
         $standard = $this->input->post('standard');
         $remark = $this->input->post('remark');
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->assign_curiculum($sdate,$piid,$standard,$remark,$tdate,$noc);
         redirect('Menu/CuriculumAssign');
     }
     public function curiculumstart(){
         $sdate = $this->input->post('sdate');
         $piid = $this->input->post('piid');
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->curiculum_start($sdate,$piid);
         redirect('Menu/CuriculumResearch');
     }
@@ -7993,21 +8069,21 @@ public function updateTask($tasktypeid=''){
         $rvlink = $this->input->post('rvlink');
         $attechment = $_FILES['attechment']['name'];
         $count = sizeof($attechment);
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->curiculum_close($cdate,$piid,$standard,$subject,$concept,$loutcomes,$tmethodologhy,$rwebsite,$rvlink,$attechment,$count);
         redirect('Menu/CuriculumResearch');
     }
     public function closear(){
         $cdate= $this->input->post('cdate');
         $piid= $this->input->post('ppiid');
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->close_ar($cdate,$piid);
         redirect('Menu/CreateARTask');
     }
     public function changespdpia(){
         $sid= $this->input->post('spd');
         $pia= $this->input->post('pia');
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->change_pia($sid,$pia);
         redirect('Menu/ChangeinSPD');
     }
@@ -8018,7 +8094,7 @@ public function updateTask($tasktypeid=''){
         $schlang = $this->input->post('schlang');
         $sutid = $this->input->post('sutid');
         $supage = $this->input->post('supage');
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->update_spd($spdid,$schaddress,$schpinno,$schlang);
         redirect('Menu/callclist/'.$supage.'/'.$sutid);
     }
@@ -8027,7 +8103,7 @@ public function updateTask($tasktypeid=''){
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
         $uid=$user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -8043,7 +8119,7 @@ public function updateTask($tasktypeid=''){
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
         $uid=$user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -8059,7 +8135,7 @@ public function updateTask($tasktypeid=''){
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
         $uid=$user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -8072,7 +8148,7 @@ public function updateTask($tasktypeid=''){
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
         $uid=$user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -8084,7 +8160,7 @@ public function updateTask($tasktypeid=''){
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
         $uid=$user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -8096,7 +8172,7 @@ public function updateTask($tasktypeid=''){
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
         $uid=$user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -8108,7 +8184,7 @@ public function updateTask($tasktypeid=''){
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
         $uid=$user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -8120,7 +8196,7 @@ public function updateTask($tasktypeid=''){
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
         $uid=$user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -8132,7 +8208,7 @@ public function updateTask($tasktypeid=''){
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
         $uid=$user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -8144,7 +8220,7 @@ public function updateTask($tasktypeid=''){
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
         $uid=$user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -8156,7 +8232,7 @@ public function updateTask($tasktypeid=''){
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
         $uid=$user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -8167,26 +8243,26 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $uid= $user['id'];
         if($user['dep_id']=='9'){
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt =$this->Menu_model->get_handover();
      
         $this->load->view('Accounts/handover-detail', ['notify'=>$notify,'data'=>$dt, 'user'=>$user]);
         }
         if($user['dep_id']=='12'){
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_handoverforfm();
         $this->load->view('Program-Manager/handovertofm', ['notify'=>$notify,'data'=>$dt, 'user'=>$user]);
         }
         if($user['dep_id']=='11'){
-            $this->load->model('Menu_model');
+            
             $notify=$this->Menu_model->get_notifybyid($uid);
             $dt=$this->Menu_model->get_handoverforfm();
             $this->load->view('Zones-Head/handovertofm', ['notify'=>$notify,'data'=>$dt, 'user'=>$user]);
         }
         if($user['dep_id']=='14'){
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_handover();
         $this->load->view('BD/handover_to_account',['notify'=>$notify,'data'=>$dt, 'user'=>$user]);
@@ -8197,13 +8273,13 @@ public function updateTask($tasktypeid=''){
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
         if($user['dep_id']=='12'){
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $client=$this->Menu_model->get_handover();
         $this->load->view('Program-Manager/backdrop', ['client'=>$client, 'user'=>$user,'notify'=>$notify]);
         }
         if($user['dep_id']=='14'){
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $client=$this->Menu_model->get_handover();
         $this->load->view('BD/backdrop', ['client'=>$client, 'user'=>$user,'notify'=>$notify]);
@@ -8224,7 +8300,7 @@ public function updateTask($tasktypeid=''){
             $id=$apr;
             $val=2;
         }
-        $this->load->model('Menu_model');
+        
         $client=$this->Menu_model->get_clientbyid($id);
         $cid=$client[0]->id;
         $this->Menu_model->backdrop_ar($id, $val, $rem,$by,$cid);
@@ -8244,7 +8320,7 @@ public function updateTask($tasktypeid=''){
             $id=$apr;
             $val=3;
         }
-        $this->load->model('Menu_model');
+        
         $client=$this->Menu_model->get_clientbyid($id);
         $cid=$client[0]->id;
         $this->Menu_model->backdrop_ar($id, $val, $rem,$by,$cid);
@@ -8254,7 +8330,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         if($user['dep_id']=='12'){
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_handover();
         $this->load->view('Program-Manager/report', ['notify'=>$notify,'data'=>$dt]);
@@ -8264,7 +8340,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -8279,7 +8355,7 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -8315,7 +8391,7 @@ public function updateTask($tasktypeid=''){
         $contact_no= $this->input->post('contact_no');
         $filname = $_FILES['filname']['name'];
         $uploadPath = 'uploads/logo/';
-        $this->load->model('Menu_model');
+        
         $logo=$this->Menu_model->uploadfile($filname, $uploadPath);
         $id=$this->Menu_model->add_bdHandover($client_name, $mediator, $noofschool, $location, $city, $state, $spd_identify_by, $infrastructure, $logo, $contact_person, $cp_mno, $acontact_person, $acp_mno, $language, $expected_installation_date, $project_tenure,$project_type, $comments,$sname, $saddress, $scity, $sstate, $contact_name, $contact_no);
         if($id){
@@ -8338,33 +8414,33 @@ public function updateTask($tasktypeid=''){
         $goodschool=$_POST['goodschool'];
         $modelschool=$_POST['modelschool'];
         $gsremark=$_POST['gsremark'];
-        $this->load->model('Menu_model');
+        
         $this->Menu_model->Goal_Setting($rrrid,$gsuid,$gspiid,$targetdt,$tcall,$email,$utilisation,$ttp,$mne,$diy,$goodschool,$modelschool,$gsremark);
         redirect('Menu/AllReviewPlaing/');
     }
     public function allpopup(){
         $ur_id= $this->input->post('ur_id');
-        $this->load->model('Menu_model');
+        
         echo $data = $this->Menu_model->get_allpopup($ur_id);
     }
     public function pipopup(){
         $ur_id= $this->input->post('ur_id');
-        $this->load->model('Menu_model');
+        
         echo $data = $this->Menu_model->get_pipopup($ur_id);
     }
     public function pmpopup(){
         $ur_id= $this->input->post('ur_id');
-        $this->load->model('Menu_model');
+        
         echo $data = $this->Menu_model->get_pmpopup($ur_id);
     }
     public function pcpopup(){
         $ur_id= $this->input->post('ur_id');
-        $this->load->model('Menu_model');
+        
         echo $data = $this->Menu_model->get_pcpopup($ur_id);
     }
     public function zhpopup(){
         $ur_id= $this->input->post('ur_id');
-        $this->load->model('Menu_model');
+        
         echo $data = $this->Menu_model->get_zhpopup($ur_id);
     }
     public function bdaccount(){
@@ -8389,7 +8465,7 @@ public function updateTask($tasktypeid=''){
         $taxinvoicedate= $this->input->post('taxinvoicedate');
         $filname = $_FILES['filname']['name'];
         $uploadPath = 'uploads/mou/';
-        $this->load->model('Menu_model');
+        
         $mou=$this->Menu_model->uploadfile($filname, $uploadPath);
         $id=$this->Menu_model->add_bdaccount($handover_id, $wono, $porno, $gstno, $panno,$tbudget, $payterm, $pwosdate, $moudate, $srfinovice, $mou,$bname, $basic, $gst, $total, $oney, $twoy, $threey,$proformadate,$taxinvoicedate);
         if($id){
@@ -8405,7 +8481,7 @@ public function updateTask($tasktypeid=''){
     public function login(){
         $user=$this->input->post('user');
         $password=$this->input->post('password');
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->user_login($user,$password);
         if(!empty($dt))
         {
@@ -8422,7 +8498,7 @@ public function updateTask($tasktypeid=''){
     }
      public function delete_user(){
         $id= $this->input->get('id');
-        $this->load->model('Menu_model');
+        
         $dt=$this->Menu_model->delete_user($id);
         if($dt){
             redirect('Menu/register');
@@ -8436,7 +8512,7 @@ public function updateTask($tasktypeid=''){
         $data['user']   = $user;$uid= $user['id'];
         $uid            = $user['id'];
         $id             =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify     =   $this->Menu_model->get_notifybyid($uid);
         $dt         =   $this->Menu_model->get_depatment_byid($id);
         $client     =   $this->Menu_model->get_handover();
@@ -8477,7 +8553,7 @@ public function updateTask($tasktypeid=''){
  }
     public function reviewspcodebyyear(){
     $year = $this->input->post('year');
-    $this->load->model('Menu_model');
+    
     $result = $this->Menu_model->get_pcodebyyear($year);
     $data = '';
     $data .= '<option value="">Select Project Code</option>';
@@ -8508,7 +8584,7 @@ public function updateTask($tasktypeid=''){
             $data['user']   =   $user;
             $uid            =   $user['id'];
             $id             =   $user['dep_id'];
-            $this->load->model('Menu_model');
+            
             $notify         =   $this->Menu_model->get_notifybyid($uid);
             $dt             =   $this->Menu_model->get_depatment_byid($id);
             $dep_name       =   $dt[0]->dep_name;
@@ -8531,7 +8607,7 @@ public function updateTask($tasktypeid=''){
     $data['user'] = $user;$uid= $user['id'];
     $uid= $user['id'];
     $id =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
     $notify=$this->Menu_model->get_notifybyid($uid);
     $dt=$this->Menu_model->get_depatment_byid($id);
     $client=$this->Menu_model->get_handover();
@@ -8556,7 +8632,7 @@ public function ProgrramReviewPage(){
     $data['user']   = $user;$uid= $user['id'];
     $uid            = $user['id'];
     $id             =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
     $dt              = $this->Menu_model->get_depatment_byid($id);
     $dep_name        = $dt[0]->dep_name;
     $getsprogram    = $this->db->query("SELECT * FROM `progrram_review_sby_pm` WHERE pmid='$uid' AND end_date=''");
@@ -8582,7 +8658,7 @@ public function ProgrramReviewPage(){
     $data['user'] = $user;$uid= $user['id'];
     $uid          = $user['id'];
     $id           =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
     $currentDateTime = date('Y-m-d H:i:s');
     $dt              = $this->Menu_model->get_depatment_byid($id);
     $dep_name        = $dt[0]->dep_name;
@@ -8603,7 +8679,7 @@ public function ProgrramReviewPage(){
     $data['user'] = $user;$uid= $user['id'];
     $uid          = $user['id'];
     $id           =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
     $currentDateTime = date('Y-m-d H:i:s');
     $dt              = $this->Menu_model->get_depatment_byid($id);
     $dep_name        = $dt[0]->dep_name;
@@ -8687,7 +8763,7 @@ $query =  $this->db->query("UPDATE `progrram_review_sby_pm` SET `programreviewti
             $uid        = $user['id'];
             $id         =  $user['dep_id'];
             $pcode      = urldecode($pcode);
-            $this->load->model('Menu_model');
+            
             $notify     =   $this->Menu_model->get_notifybyid($uid);
             $dt         =   $this->Menu_model->get_depatment_byid($id);
             $dep_name   =   $dt[0]->dep_name;
@@ -8698,7 +8774,7 @@ $query =  $this->db->query("UPDATE `progrram_review_sby_pm` SET `programreviewti
             $data['user'] = $user;$uid= $user['id'];
             $uid          = $user['id'];
             $id           =  $user['dep_id'];
-            $this->load->model('Menu_model');
+            
             $pcode     = $_POST['pcode'];
             $questions   = [];
             $lastyearProgramstatus = $_POST['lastyearProgramstatus'];
@@ -8851,7 +8927,7 @@ $query =  $this->db->query("UPDATE `progrram_review_sby_pm` SET `programreviewti
             $pcode      = urldecode($pcode);
             // echo " Project code ".$_GET['pcode'];
             // die;
-            $this->load->model('Menu_model');
+            
             $notify     =   $this->Menu_model->get_notifybyid($uid);
             $dt         =   $this->Menu_model->get_depatment_byid($id);
             $dep_name   =   $dt[0]->dep_name;
@@ -8865,7 +8941,7 @@ $query =  $this->db->query("UPDATE `progrram_review_sby_pm` SET `programreviewti
             $data['user'] = $user;
             $uid        = $user['id'];
             $id         =  $user['dep_id'];
-            $this->load->model('Menu_model');
+            
             $dt         =   $this->Menu_model->get_depatment_byid($id);
             $pcode = $_POST['pcode'];
             $meetinglink = $_POST['meetinglink'];
@@ -8884,7 +8960,7 @@ $query =  $this->db->query("UPDATE `progrram_review_sby_pm` SET `programreviewti
             $data['user'] = $user;
             $uid        = $user['id'];
             $id         =  $user['dep_id'];
-            $this->load->model('Menu_model');
+            
             $dt         =   $this->Menu_model->get_depatment_byid($id);
             $pcode = $_POST['pcode'];
             $haseverybody = $_POST['haseverybody'];
@@ -8907,7 +8983,7 @@ $query =  $this->db->query("UPDATE `progrram_review_sby_pm` SET `programreviewti
             $id         =  $user['dep_id'];
             $pcode      = $_GET['pcode'];
             $pcode      = urldecode($pcode);
-            $this->load->model('Menu_model');
+            
             $notify     =   $this->Menu_model->get_notifybyid($uid);
             $dt         =   $this->Menu_model->get_depatment_byid($id);
             $dep_name   =   $dt[0]->dep_name;
@@ -8918,7 +8994,7 @@ $query =  $this->db->query("UPDATE `progrram_review_sby_pm` SET `programreviewti
             $data['user'] = $user;
             $uid        = $user['id'];
             $id         =  $user['dep_id'];
-            $this->load->model('Menu_model');
+            
             $dt         =   $this->Menu_model->get_depatment_byid($id);
             $pcode = $_POST['pcode'];
             $meetinglink = $_POST['meetinglink'];
@@ -8938,7 +9014,7 @@ $query =  $this->db->query("UPDATE `progrram_review_sby_pm` SET `programreviewti
             $id         =  $user['dep_id'];
             $pcode      = $_GET['pcode'];
             $pcode      = urldecode($pcode);
-            $this->load->model('Menu_model');
+            
             $notify     =   $this->Menu_model->get_notifybyid($uid);
             $dt         =   $this->Menu_model->get_depatment_byid($id);
             $dep_name   =   $dt[0]->dep_name;
@@ -8952,7 +9028,7 @@ $query =  $this->db->query("UPDATE `progrram_review_sby_pm` SET `programreviewti
     $user = $this->session->userdata('user');
     $data['user'] = $user;$uid= $user['id'];
     $id =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
     $notify=$this->Menu_model->get_notifybyid($uid);
     $dt=$this->Menu_model->get_depatment_byid($id);
     // $pia=$this->Menu_model->get_user_pia();
@@ -8962,7 +9038,7 @@ $query =  $this->db->query("UPDATE `progrram_review_sby_pm` SET `programreviewti
     $this->load->view($dep_name.'/ProgramPlanningTimeLine',['week'=>$week,'notify'=>$notify,'user'=>$user,'uid'=>$uid]);
 }
      public function programtimelineplanning(){
-    $this->load->model('Menu_model');
+    
     $projectcode=$_POST['projectcode'];
     // $piid=$_POST['piid'];
     $projectcode    =   $_POST['projectcode'];
@@ -9133,7 +9209,7 @@ $query =  $this->db->query("UPDATE `progrram_review_sby_pm` SET `programreviewti
     }
 }
 // End Task SubTask creation
-    $this->load->model('Menu_model');
+    
     $this->Menu_model->program_timeline12($projectcode,$uid,$bdid,$wmessage,$communication1,$communication2,$communication3,$callsfu1,$callsfu2,$reporttype,$fttp,$rttp,$casestudy,$maintenance,$replacement,$diy,$blmne,$elmne,$nsp,$utilisation1,$utilisation2,$utilisation3,$otherdcall,$outbondc1,$outbondc2,$outbondc3,$bdreview,$cengagement,$zmvisit,$pmvisit,$exstatusdt,$status,$summeractivity,$winteractivity,$onlineactivity,$webinar,$socialMediaPost1,$socialMediaPost2,$socialMediaPost3,$socialMediaPost4);
     $cdate = date("Y-m-d H:i:s");
     $meetingremark = "Program Timeline Added Successfully";
@@ -9143,7 +9219,7 @@ $query =  $this->db->query("UPDATE `progrram_review_sby_pm` SET `programreviewti
 }
      public function donereviewspcodebyyear(){
     $year= $this->input->post('year');
-    $this->load->model('Menu_model');
+    
     $data = '';
     $result = $this->db->select('projectcode')->from('progrram_review_sby_pm')->where(['year'=> $year])->get()->result();
     foreach($result as $dt){
@@ -9155,7 +9231,7 @@ $query =  $this->db->query("UPDATE `progrram_review_sby_pm` SET `programreviewti
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -9168,7 +9244,7 @@ $query =  $this->db->query("UPDATE `progrram_review_sby_pm` SET `programreviewti
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -9189,7 +9265,7 @@ $query =  $this->db->query("UPDATE `progrram_review_sby_pm` SET `programreviewti
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $piaid = $_POST['id'];
         $status = $_POST['status'];
         if($status ==1){
@@ -9205,7 +9281,7 @@ $query =  $this->db->query("UPDATE `progrram_review_sby_pm` SET `programreviewti
         $user = $this->session->userdata('user');
         $did =  $user['dep_id'];
         $uid= $user['id'];
-        $this->load->model('Menu_model');
+        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
@@ -9224,7 +9300,7 @@ $query =  $this->db->query("UPDATE `progrram_review_sby_pm` SET `programreviewti
     $data['user'] = $user;
     $uid          = $user['id'];
     $id           =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
     $notify   = $this->Menu_model->get_notifybyid($uid);
     $dt       = $this->Menu_model->get_depatment_byid($id);
     $dep_name = $dt[0]->dep_name;
@@ -9279,7 +9355,7 @@ public function SelectSchoolForReview(){
     $data['user'] = $user;
     $uid= $user['id'];
     $id =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
     $notify=$this->Menu_model->get_notifybyid($uid);
     $dt=$this->Menu_model->get_depatment_byid($id);
     $spd=$this->Menu_model->get_mspdpi($uid,0);
@@ -9346,7 +9422,7 @@ public function SelectSchoolForReview(){
     $data['user'] = $user;
     $uid = $user['id'];
     $id  =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
     $selectSchool = $_POST['selectSchool'];
     $spd    =   $this->Menu_model->getSchoolByPiAId($uid);
     // $getsid = $this->db->query("SELECT DISTINCT(sid) FROM `annual_project_review`");
@@ -9377,7 +9453,7 @@ public function SelectSchoolForReview(){
     $data['user'] = $user;
     $uid= $user['id'];
     $id =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
     $notify=$this->Menu_model->get_notifybyid($uid);
     $dt=$this->Menu_model->get_depatment_byid($id);
     $dep_name = $dt[0]->dep_name;
@@ -9410,7 +9486,7 @@ public function SelectSchoolForReview(){
     $this->load->view($dep_name.'/SchoolReviewDetailsStatus', ['uid'=>$uid,'user'=>$user,'schstatus'=>$status,'scodata'=>$scodata,'comschool'=>$comschool,'pendigSch'=>$pendigSch]);
 }
    public function schoolreviewPageForPIA(){
-    $this->load->model('Menu_model');
+    
     $slctSchool = $_POST['select'];
     $sstatus = $this->db->query("SELECT status FROM `spd` WHERE id='$slctSchool'");
     $sstatus = $sstatus->result();
@@ -9431,7 +9507,7 @@ public function SelectSchoolForReview(){
     $data['user'] = $user;
     $uid= $user['id'];
     $id =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
     $notify=$this->Menu_model->get_notifybyid($uid);
     $dt=$this->Menu_model->get_depatment_byid($id);
     $dep_name = $dt[0]->dep_name;
@@ -9464,7 +9540,7 @@ public function SelectSchoolForReview(){
     $data['user'] = $user;
     $uid = $user['id'];
     $id  =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
     foreach ($_POST as $key => $value) {
         // Extracting prefix from the key
         $prefix = substr($key, 0, strpos($key, '_'));
@@ -9547,7 +9623,7 @@ public function NextYearSchoolPlanAfterReview(){
     $uid    = $user['id'];
     $id     =  $user['dep_id'];
     $pcode  = urldecode($pcode);
-    $this->load->model('Menu_model');
+    
     $notify     =   $this->Menu_model->get_notifybyid($uid);
     $dt         =   $this->Menu_model->get_depatment_byid($id);
     $dep_name   =   $dt[0]->dep_name;
@@ -9558,7 +9634,7 @@ public function NextYearSchoolPlanAfterReview(){
     $data['user'] = $user;$uid= $user['id'];
     $uid          = $user['id'];
     $id           =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
     $pcode = $_POST['pcode'];
     $sid = $_POST['sid'];
     $question1 = $_POST['question1'];
@@ -9611,7 +9687,7 @@ public function NextYearSchoolPlanAfterReview(){
     $user = $this->session->userdata('user');
     $data['user'] = $user;$uid= $user['id'];
     $id =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
     $notify=$this->Menu_model->get_notifybyid($uid);
     $dt=$this->Menu_model->get_depatment_byid($id);
     $pia=$this->Menu_model->get_user_pia();
@@ -9623,7 +9699,7 @@ public function NextYearSchoolPlanAfterReview(){
      public function getspdbyuserpcs12(){
     $pcode= $this->input->post('pcode');
     $userid = $this->input->post('userid');
-    $this->load->model('Menu_model');
+    
     $result=$this->Menu_model->get_spdbyusernpc($pcode,$userid);
     echo  $data = '<option selected disabled>Select School</option>';
     foreach($result as $d){
@@ -9638,7 +9714,7 @@ public function NextYearSchoolPlanAfterReview(){
      public function getTargetDateBYPM(){
     $pcode  = $this->input->post('pcode');
     $spd_id = $this->input->post('spd_id');
-    $this->load->model('Menu_model');
+    
     $data = $this->Menu_model->getPmTargetDateSchool($pcode,$spd_id);
     print_r(json_encode($data));
 }
@@ -9647,7 +9723,7 @@ public function NextYearSchoolPlanAfterReview(){
     $data['user'] = $user;
     $uid          = $user['id'];
     $id           =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
     $notify     =   $this->Menu_model->get_notifybyid($uid);
     $dt         =   $this->Menu_model->get_depatment_byid($id);
     $pia        =   $this->Menu_model->get_user_pia();
@@ -10449,7 +10525,7 @@ public function NextYearSchoolPlanAfterReview(){
             $id         =  $user['dep_id'];
             $pcode      = $_GET['pcode'];
             $pcode      = urldecode($pcode);
-            $this->load->model('Menu_model');
+            
             $notify     =   $this->Menu_model->get_notifybyid($uid);
             $dt         =   $this->Menu_model->get_depatment_byid($id);
             $dep_name   =   $dt[0]->dep_name;
@@ -10462,7 +10538,7 @@ public function NextYearSchoolPlanAfterReview(){
     $data['user'] = $user;
     $uid          = $user['id'];
     $id           =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
     $notify   = $this->Menu_model->get_notifybyid($uid);
     $dt       = $this->Menu_model->get_depatment_byid($id);
     $dep_name = $dt[0]->dep_name;
@@ -10513,7 +10589,7 @@ public function NextYearSchoolPlanAfterReview(){
             $data['user'] = $user;
             $uid        = $user['id'];
             $id         =  $user['dep_id'];
-            $this->load->model('Menu_model');
+            
             $notify     =   $this->Menu_model->get_notifybyid($uid);
             $dt         =   $this->Menu_model->get_depatment_byid($id);
             $dep_name   =   $dt[0]->dep_name;
@@ -10529,7 +10605,7 @@ public function NextYearSchoolPlanAfterReview(){
             $data['user'] = $user;
             $uid        = $user['id'];
             $id         =  $user['dep_id'];
-            $this->load->model('Menu_model');
+            
             $notify     =   $this->Menu_model->get_notifybyid($uid);
             $dt         =   $this->Menu_model->get_depatment_byid($id);
             $dep_name   =   $dt[0]->dep_name;
@@ -10546,7 +10622,7 @@ public function NextYearSchoolPlanAfterReview(){
             $data['user'] = $user;
             $uid        = $user['id'];
             $id         =  $user['dep_id'];
-            $this->load->model('Menu_model');
+            
             $notify     =   $this->Menu_model->get_notifybyid($uid);
             $dt         =   $this->Menu_model->get_depatment_byid($id);
             $dep_name   =   $dt[0]->dep_name;
@@ -10559,7 +10635,7 @@ public function NextYearSchoolPlanAfterReview(){
         $data['user'] = $user;
         $uid        = $user['id'];
         $id         =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify     =   $this->Menu_model->get_notifybyid($uid);
         $dt         =   $this->Menu_model->get_depatment_byid($id);
         $dep_name   =   $dt[0]->dep_name;
@@ -10580,7 +10656,7 @@ public function addNewSchoolUsingCsv(){
     $data['user'] = $user;
     $uid = $user['id'];
     $id = $user['dep_id'];
-    $this->load->model('Menu_model');
+    
     $notify = $this->Menu_model->get_notifybyid($uid);
     $dt = $this->Menu_model->get_depatment_byid($id);
     $dep_name = $dt[0]->dep_name;
@@ -10656,7 +10732,7 @@ public function updateProjectSid(){
     $data['user'] = $user;
     $uid        = $user['id'];
     $id         =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
     $notify     =   $this->Menu_model->get_notifybyid($uid);
     $dt         =   $this->Menu_model->get_depatment_byid($id);
     $dep_name   =   $dt[0]->dep_name;
@@ -10671,7 +10747,7 @@ public function UpdateProgramPage(){
     $data['user'] = $user;
     $uid        = $user['id'];
     $id         =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
     $notify     =   $this->Menu_model->get_notifybyid($uid);
     $dt         =   $this->Menu_model->get_depatment_byid($id);
     $dep_name   =   $dt[0]->dep_name;
@@ -10689,7 +10765,7 @@ public function UpdateProgramReportPage(){
     $data['user'] = $user;
     $uid        = $user['id'];
     $id         =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
     $notify     =   $this->Menu_model->get_notifybyid($uid);
     $dt         =   $this->Menu_model->get_depatment_byid($id);
     $dep_name   =   $dt[0]->dep_name;
@@ -10707,7 +10783,7 @@ public function UpdateProgramPageSID(){
     $data['user'] = $user;
     $uid        = $user['id'];
     $id         =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
     $pcode = $_POST['project_code'];
     $old_sid = $_POST['old_sid'];
     $upsid = $_POST['update_sid'];
@@ -10719,7 +10795,7 @@ public function UpdateProgramReportPageSID(){
     $data['user'] = $user;
     $uid        = $user['id'];
     $id         =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
     $pcode = $_POST['project_code'];
     $old_sid = $_POST['old_sid'];
     $upsid = $_POST['update_sid'];
@@ -10731,7 +10807,7 @@ public function InsertSchoolDetailsUsingCSV(){
     $data['user'] = $user;
     $uid        = $user['id'];
     $id         =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
     $file_path  = "https://stemoppapp.in/uploads/spd/spd_new11.csv";
    
       if (($handle = fopen($file_path, "r")) !== FALSE) {
@@ -10807,7 +10883,7 @@ public function AllBDRequestAssign($rtype,$code){
     $data['user']   = $user;$uid= $user['id'];
     $uid            = $user['id'];
     $id             =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
     $notify         = $this->Menu_model->get_notifybyid($uid);
     $dt             = $this->Menu_model->get_depatment_byid($id);
     $bdr            = $this->Menu_model->GetAllBDRequestByRequestType($rtype,$code);
@@ -10826,7 +10902,7 @@ public function bdrassign($rtype,$code){
     $data['user']   = $user;$uid= $user['id'];
     $uid            = $user['id'];
     $id             =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
     $notify         = $this->Menu_model->get_notifybyid($uid);
     $dt             = $this->Menu_model->get_depatment_byid($id);
     // $bdr            = $this->Menu_model->get_bdrbyd($code);
@@ -10848,7 +10924,7 @@ public function TheAssigningProcess($rtype,$reqID){
     $data['user']   = $user;$uid= $user['id'];
     $uid            = $user['id'];
     $id             =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
     $notify         = $this->Menu_model->get_notifybyid($uid);
     $dt             = $this->Menu_model->get_depatment_byid($id);
     $bdr            = $this->Menu_model->GetBDRequestByRequestID($reqID);
@@ -10874,7 +10950,7 @@ public function BDREQUEST(){
     $data['user']    = $user;$uid= $user['id'];
     $uid             = $user['id'];
     $id              =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
     $notify          = $this->Menu_model->get_notifybyid($uid);
     $dt              = $this->Menu_model->get_depatment_byid($id);
     $bdr             = $this->Menu_model->get_bdrbyd($code);
@@ -10892,7 +10968,7 @@ public function BDREQUEST_DATA($rtype,$code){
     $data['user']   = $user;$uid= $user['id'];
     $uid            = $user['id'];
     $id             =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
     $notify         = $this->Menu_model->get_notifybyid($uid);
     $dt             = $this->Menu_model->get_depatment_byid($id);
     // $bdr            = $this->Menu_model->get_bdrbyd($code);
@@ -10914,7 +10990,7 @@ public function GetTaskOnBDRequestTaskId(){
     $data['user']   = $user;$uid= $user['id'];
     $uid            = $user['id'];
     $id             =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
 
     $selectedTaskId = $this->input->post('selectedTaskId');
     $reqID          = $this->input->post('reqID');
@@ -10934,7 +11010,7 @@ public function GetTaskOnBDRequestTBLTaskId(){
     $data['user']   = $user;$uid= $user['id'];
     $uid            = $user['id'];
     $id             =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
 
     $tbltaskId = $this->input->post('tbltaskId');
     $reqID          = $this->input->post('reqID');
@@ -10956,7 +11032,7 @@ public function GetTaskOnBDRequestTaskIdResearch(){
     $data['user']   = $user;$uid= $user['id'];
     $uid            = $user['id'];
     $id             =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
 
     $selectedTaskId = $this->input->post('selectedTaskId');
     $reqID          = $this->input->post('reqID');
@@ -10980,7 +11056,7 @@ public function GetTaskOnBDRequestTBLTaskIdResearch(){
     $data['user']   = $user;$uid= $user['id'];
     $uid            = $user['id'];
     $id             =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
 
     $selectedTaskId = $this->input->post('tbltaskId');
     $reqID          = $this->input->post('reqID');
@@ -11007,7 +11083,7 @@ public function BDRequestAssignToProcess(){
     $data['user']   = $user;$uid= $user['id'];
     $uid            = $user['id'];
     $id             =  $user['dep_id'];
-    $this->load->model('Menu_model');
+    
 
     $reqID              = $this->input->post('reqID');
     $request_code       = $this->input->post('request_code');
@@ -11098,6 +11174,42 @@ public function BDRequestAssignToProcess(){
     redirect('Menu/TheAssigningProcess/'.$request_code.'/'.$reqID.'/');
   
 }
+public function dayscRequest(){
+    $user         = $this->session->userdata('user');
+    $uid          = $user['id'];
+    $uyid         =  $user['type_id'];
+    $data['user'] = $user;
+
+    $req_id             = $_POST['req_id'];
+    $req_answer         = $_POST['would_you_want'];
+    $message            = $_POST['requestForTodaysTaskPlan'];
+    $startautotasktime  = $_POST['startautotasktime'];
+    $endautotasktime    = $_POST['endautotasktime'];
+    $start_tttpft       = $_POST['start_tttpft'];
+    $end_tttpft         = $_POST['end_tttpft'];
+    $autotasktimeisset  = (isset($_POST['autotasktimeisset']))?($_POST['autotasktimeisset']):'0';
+    $data = array(
+        'user_id' => $uid,
+        'req_id' => $req_id,
+        'req_date' => date("Y-m-d H:i:s"),
+        'why_did_you' => $req_answer,
+        'req_remarks' => $message,
+        'autotasktimeisset' => $autotasktimeisset);
+
+    //$autotasktimeisset  = (isset($_POST['autotasktimeisset']))?($_POST['autotasktimeisset']):'0';
+    // if($autotasktimeisset != 0){
+        $planbutnotinited = $this->Menu_model->CreateCloseDayRequest($data);
+    // }else{
+    //     $planbutnotinited = $this->Menu_model->CreateCloseDayRequestWithAutoTaskTime($uid,$req_id,$req_answer,$message,$startautotasktime,$endautotasktime,$start_tttpft,$end_tttpft,$autotasktimeisset);
+    // }
+
+    
+
+
+
+    $this->session->set_flashdata('success_message','* Day Close Request Sent SuccessFully !');
+    redirect('Menu/DayManagement');
+}
 
 
 
@@ -11108,7 +11220,7 @@ public function BDRequestAssignToProcess(){
 //     $data['user']   = $user;$uid= $user['id'];
 //     $uid            = $user['id'];
 //     $id             =  $user['dep_id'];
-//     $this->load->model('Menu_model');
+//     
 
 //     $query = $this->db->query("SELECT * FROM `tblcallevents`");
 //     $data =  $query->result();
