@@ -2,6 +2,7 @@
     <div class="container-fluid">
       <div class="row p-3">
 <?php
+
 if($getDayCloseRequescnt > 0){
  $approved_status      = $getDayCloseRequest[0]->approved_status;
                   if($approved_status == '' || $approved_status == 'Reject'){
@@ -168,3 +169,5 @@ else{?>
 </div>
 </div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="<?php echo base_url();?>/assets/js/daymanagement_js.js"></script>

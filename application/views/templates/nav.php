@@ -144,7 +144,7 @@
             </li>
               <?php endif; ?>
 
-          <?php if($dep_id == 12): ?>
+          <?php if($dep_id == 12 || $dep_id==11): ?>
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Request</span></li>
               <li class="menu-item">
                 <a href="<?=base_url().'Menu/BDREQUEST'?>" class="menu-link">

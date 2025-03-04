@@ -6275,4 +6275,30 @@ public function UpdateCloseYesterDay($flink,$user_id,$lat,$lng,$req_id){
  //   $this->db->query("INSERT INTO notify(uid,type,sms) VALUES ('$user_id','1','You Are Closed Your Yesterday Day at $tdate')");
 }
 
+public function change_user_day_request($uid){
+    $query=$this->db->query("SELECT * FROM `change_user_day_request` where user_id ='$uid' AND DATE(date) = CURDATE()");
+    return $query->result();
+}
+
+public function user_day_start_from($userid,$cdate){
+   $query = $this->db->query(" SELECT userworkfrom FROM autotask_time WHERE user_id = '".$userid."' AND date = '".$cdate."' ");
+    return $query->row();
+}
+public function GetDayCloseRequestData($uid,$adate,$uyid){
+    
+    if($uyid == 11 || $uyid == 12){
+        $text = "user_detail.adminid = '$uid'";
+    }
+
+    $getreqData  =  $this->db->query("SELECT *,close_your_day_request.id 
+                    FROM close_your_day_request 
+                    LEFT JOIN user_detail ON close_your_day_request.id = user_detail.id 
+                    WHERE $text and DATE(req_date) ='$adate'");
+                    
+    $getreqData  =  $getreqData->result();
+
+
+    return $getreqData;
+}
+
 }

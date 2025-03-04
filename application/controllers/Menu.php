@@ -739,21 +739,74 @@ class Menu extends CI_Controller {
     }
     public function DayCloseCheck(){
         date_default_timezone_set("Asia/Calcutta");
-        $tdate=date('2023-07-25');
-        $user = $this->session->userdata('user');
+      //  $tdate=date('2023-07-25');
+        $user           = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
-        $id =  $user['dep_id'];
+        $id           =  $user['dep_id'];
         
-        $notify=$this->Menu_model->get_notifybyid($uid);
-        $dt=$this->Menu_model->get_depatment_byid($id);
-        $dep_name = $dt[0]->dep_name;
-        $mdata = $this->Menu_model->get_BDdayclose($uid,$tdate);
+        $notify             =   $this->Menu_model->get_notifybyid($uid);
+        $dt                 =   $this->Menu_model->get_depatment_byid($id);
+        $dep_name           =   $dt[0]->dep_name;
+        $mdata              =   $this->Menu_model->get_BDdayclose($uid,$tdate);
+
         if(!empty($user)){
             $this->load->view($dep_name.'/DayCloseCheck',['uid'=>$uid,'user'=>$user,'mdata'=>$mdata,'tdate'=>$tdate]);
         }else{
             redirect('Menu/main');
         }
     }
+    public function YesterDayDaysCloseRequest(){
+        $user           =   $this->session->userdata('user');
+        $data['user']   =   $user;
+        $uid            =   $user['id'];
+        $uyid           =   $user['type_id'];
+        $dept_id        =   $user['dep_id'];
+
+        $this->load->library('session');
+        $this->load->model('Menu_model');
+       
+        // $dt             =   $this->Menu_model->get_utype($uyid);
+        // $tptime         =   $this->Menu_model->get_tptime($uid);
+        // $tptime         =   $tptime[0]->tptime;
+
+        $dept_name = $this->Menu_model->get_dep_byid($dept_id);
+        $dep_name  = $dept_name[0]->dep_name;
+        if(isset($_POST['targetdate'])){
+            $adate = $_POST['targetdate'];
+        }else{
+            $adate = date("Y-m-d");
+        }
+
+        $getreqData     = $this->Menu_model->GetDayCloseRequestData($uid,$adate,$dept_id);
+        $data           = array('uid'=>$uid,'user'=>$user,'adate'=>$adate,'getreqData'=>$getreqData);
+      
+         if(!empty($user)){
+            $this->display($dep_name,'YesterDayDaysCloseRequest',$data);
+        }else{
+            redirect('Menu/main');
+        }
+    }
+
+    public function DayCheckManagement(){
+
+        date_default_timezone_set("Asia/Calcutta");
+
+        $user           = $this->session->userdata('user');
+
+        $data['user']   = $user;
+        $uid            = $user['id'];
+        $id             = $user['dep_id'];
+        $notify         = $this->Menu_model->get_notifybyid($uid);
+        $dt             = $this->Menu_model->get_depatment_byid($id);
+        $dep_name       = $dt[0]->dep_name;
+
+        if(!empty($user)){
+            $this->load->view($dep_name.'/UserDayCheck',['uid'=>$uid,'user'=>$user,'tdate'=>$tdate]);
+        }else{
+            redirect('Menu/main');
+        }
+    }
+
     public function UserDayCheck(){
         date_default_timezone_set("Asia/Calcutta");
         $tdate=date('2023-07-25');
@@ -1056,6 +1109,24 @@ class Menu extends CI_Controller {
             redirect('Menu/main');
         }
     }
+    public function GetTodaysTeamDayChnageRequestData(){
+        $user           = $this->session->userdata('user');
+        $data['user']   = $user;
+        $uid            = $user['user_id'];
+        $uyid           =  $user['type_id'];
+        $this->load->model('Menu_model');
+
+        $dt             = $this->Menu_model->get_utype($uyid);
+        $dep_name       = $dt[0]->name;
+        $daychangedata  = $this->Menu_model->GetTodaysTeamDayChnageRequest($uid);
+
+        if(!empty($user)){
+            $this->display($dep_name.'/DayChangeRequestPage',['uid'=>$uid,'user'=>$user,'daychangedata'=>$daychangedata]);
+        }else{
+            redirect('Menu/main');
+        }
+    }
+
     public function DayManagement(){
         date_default_timezone_set("Asia/Calcutta"); 
         $tdate          = date('Y-m-d');
@@ -1069,19 +1140,26 @@ class Menu extends CI_Controller {
         $mdata          = $this->Menu_model->get_daydetail($uid,$tdate);
         if($mdata)
         {
-            $st = $mdata[0]->ustart;
-            $ct = $mdata[0]->uclose;
+            $st         = $mdata[0]->ustart;
+            $ct         = $mdata[0]->uclose;
             if($st!=''){$do=1;}
             if($ct!=''){$do=2;}
-        }else{$do=0;}
+        }
+        else
+        {
+            $do=0;
+        }
         $data['uid']         = $uid;
         $data['user']        = $user;
         $data['mdata']       = $mdata;
         $data['uid']         = $uid;
         $data['do']          = $do;
+
         $userdfrom           = $this->Menu_model->userworkfrom();
         $yesterday           = date('Y-m-d', strtotime('-1 day', strtotime($tdate)));
+
         $isweekend           = isNotWeekend($yesterday);
+
         if(!$isweekend){
             $yesterday           = date('Y-m-d', strtotime('-2 day', strtotime($tdate)));
             $yestdata            = $this->Menu_model->get_Yestdaydetail($uid,$yesterday);
@@ -1089,7 +1167,9 @@ class Menu extends CI_Controller {
         else{
             $yestdata            = $this->Menu_model->get_Yestdaydetail($uid,$yesterday);
         }
+
     //   $getDayCloseRequest = $this->Menu_model->GetDayCloseRequest($uid,$tdate);
+
         $yestdatacnt                        = sizeof($yestdata);
         $uystart_id                         = $yestdata[0]->id;
         $uystart                            = $yestdata[0]->ustart;
@@ -1100,12 +1180,14 @@ class Menu extends CI_Controller {
         $data['getDayCloseRequescnt']       = sizeof($data['getDayCloseRequest']);
         $data['uystart']                    = $uystart;
         $data['uystart_id']                 = $uystart_id;
+        $data['user_day_start_from']        = $this->Menu_model->user_day_start_from($uid,$tdate);
+       // $yestdatacnt                      = 0;
 
-        if ($yestdatacnt == 1){ 
-            $this->display($dep_name.'/close_day_page',$data);
+        if($yestdatacnt == 1){ 
+            $this->display($dep_name,'close_day_page',$data);
         }
         else if(!empty($user)){
-            $this->display($dep_name.'/DayManagement',$data);
+            $this->display($dep_name,'DayManagement',$data);
         }
         else{
             redirect('Menu/main');
@@ -2250,17 +2332,22 @@ class Menu extends CI_Controller {
     }
     public function daysc(){
         $do                             = $_POST['do'];
-        if(isset($_POST['wffo'])){$wffo = $_POST['wffo'];}else{$wffo='1';}
+        if(isset($_POST['wffo'])){
+            $wffo = $_POST['wffo'];
+        }else{
+            $wffo='1';
+        }
 
         $user_id        = $_POST['user_id'];
         $lat            = $_POST['lat'];
         $lng            = $_POST['lng'];
         $filname        = $_FILES['filname']['name'];
-       
         $subfoldername  = 'day_'.date("Y-m-d");
         $uploadPath     = 'uploads/day/';
+      
         $flink          = $this->Menu_model->uploadfile($filname, $uploadPath);
         $this->Menu_model->submit_day($wffo,$flink,$user_id,$lat,$lng,$do); 
+
         redirect('Menu/Dashboard');
     }
     public function YesterdayDayClose(){
@@ -2698,10 +2785,11 @@ class Menu extends CI_Controller {
     }
     public function main(){
         $msg = '';
+        $dep   =   $this->Menu_model->get_depatment();
         
-        $dep=$this->Menu_model->get_depatment();
         $this->load->view('index', ['dep'=>$dep,'msg'=>$msg]);
     }
+
     public function ForgotPassword(){
         $msg = '';
         
@@ -6900,7 +6988,6 @@ class Menu extends CI_Controller {
     }
     public function Dashboard(){
         date_default_timezone_set('Asia/Kolkata');
-
         if (isset($_POST['submit'])) {
             $tdate = $_POST['filterdate'];
         }else{
@@ -6920,22 +7007,22 @@ class Menu extends CI_Controller {
             $data['uid']        = $uid;       
             $notify             = $this->Menu_model->get_notifybyid($uid);
             $data['dt']         = $this->Menu_model->get_depatment_byid($id);
-        // $data['spd']       = $this->Menu_model->get_mspd();
+        // $data['spd']         = $this->Menu_model->get_mspd();
             $data['status']     = $this->Menu_model->get_spdsbypi($uid);
             $data['zhspd']      = $this->Menu_model->get_spdsbyzh($uid);
             $data['pmspd']      = $this->Menu_model->get_spdsbypm();
             $data['td']         = $this->Menu_model->get_tdetail($uid,$tdate);
-        //   $data['program']    = $this->Menu_model->get_handover();
+        //   $data['program']   = $this->Menu_model->get_handover();
             $data['bdr']        = $this->Menu_model->get_bdreqest($uid);
             $data['bdrzh']      = $this->Menu_model->get_bdreqestzh($uid);
             $data['dep_name']   = $data['dt'][0]->dep_name;
+
             if($data['dep_name'] == "Program-Manager"){
                 $data['bdrequest']  =  $this->load->view('bdrequest_data');
-            // $data['bdrequest']  =  $this->load->view();
             }
             $data['utype'] =  $data['dt'][0]->id;
             if(!empty($user)){
-                $this->display($data['dep_name'].'/index',$data);
+                $this->display($data['dep_name'],'index',$data);
             }else{
                 redirect('Menu/main');
             }
@@ -6943,7 +7030,6 @@ class Menu extends CI_Controller {
     }
     
     public function taskExecution(){
-            
             $taskId                    = $_POST['taskId'];
             $taskType                  = $_POST['tasktype'];
             $tasktypeid                = $_POST['tasktype_id'];
@@ -7091,10 +7177,11 @@ public function updateTask($tasktypeid=''){
      return $viewData;
   }
   
-  public function display($viewname,$data){
+  public function display($dept_name,$viewname,$data){
+ 
       $this->load->view('templates/header');
-      $this->load->view('templates/nav',$data);
-      $this->load->view($viewname,$data);
+      $this->load->view('templates/nav_'.$dept_name,$data);
+      $this->load->view($dept_name."/".$viewname,$data);
       $this->load->view('templates/footer');
   }
   
@@ -11156,7 +11243,6 @@ public function BDRequestAssignToProcess(){
                 'comments'              => $uid,
                 'comment_by'            => $remark
             ];
-            
             $this->db->where('id', $task_id);
             $this->db->update('tblcallevents', $data);
         }
@@ -11202,81 +11288,39 @@ public function dayscRequest(){
     // }else{
     //     $planbutnotinited = $this->Menu_model->CreateCloseDayRequestWithAutoTaskTime($uid,$req_id,$req_answer,$message,$startautotasktime,$endautotasktime,$start_tttpft,$end_tttpft,$autotasktimeisset);
     // }
-
-    
-
-
-
     $this->session->set_flashdata('success_message','* Day Close Request Sent SuccessFully !');
     redirect('Menu/DayManagement');
 }
+public function CheckuserDayAccardingPlanner(){
+    
+    $user   = $this->session->userdata('user');
+    $uid    = $user['user_id'];
+    $uyid   =  $user['type_id'];
+    $this->load->model('Menu_model');
+    
+    $wffo = $this->input->post('wffo');
+    $usdata1 = $this->Menu_model->userworkfrombyid($wffo);
+    $wffomsg = $usdata1[0]->TYPE;
+    $cdate = date("Y-m-d");
+    $uime =$this->db->select('*') ->from('autotask_time') ->where('date', $cdate) ->where('user_id', $uid) ->order_by('id', 'DESC') ->get() ->result();
+    $uimecnt = sizeof($uime);
+    if($uimecnt > 0){
+        $userworkfrom = $uime[0]->userworkfrom;
+        if($wffo !== $userworkfrom){
+            $usdata = $this->Menu_model->userworkfrombyid($userworkfrom);
+            $usdatamsg = $usdata[0]->TYPE;
+            echo $usdatamsg;
+        }
+    }
+}
 
-
-
-
-// public function GetAllTask(){
-//     set_time_limit(108000);
-//     $user           = $this->session->userdata('user');
-//     $data['user']   = $user;$uid= $user['id'];
-//     $uid            = $user['id'];
-//     $id             =  $user['dep_id'];
-//     
-
-//     $query = $this->db->query("SELECT * FROM `tblcallevents`");
-//     $data =  $query->result();
-  
-//     foreach($data as $task){
-
-//         $tblid              = $task->id;
-//         $sid                = $task->sid;
-//         $project_code       = $task->project_code;
-      
-//         if($project_code !=='' && $sid == 0){
-
-//             $query1 = $this->db->query("SELECT * FROM `school_planning_task` where  project_code = '$project_code' AND sid = ''");
-//             $data1 =  $query1->result();
-//             $task_assignby       = $data1[0]->task_assignby;
-           
-//             $data2 = array(
-//                 'comments'           => $task_assignby,
-//             );
-//             $this->db->where('id',$tblid);
-//             $success = $this->db->update('tblcallevents', $data2);
-
-//         }else if($project_code !=='' && $sid !== 0){
-//             $query1 = $this->db->query("SELECT * FROM `school_planning_task` where  project_code = '$project_code' AND sid = '$sid'");
-//             $data1 =  $query1->result();
-//             $task_assignby       = $data1[0]->task_assignby;
-            
-           
-//             $data2 = array(
-//                 'comments'           => $task_assignby,
-//             );
-//             $this->db->where('id',$tblid);
-//             $success = $this->db->update('tblcallevents', $data2);
-//         }
-
-//             // echo $this->last_query();
-
-//     }
-  
-//    die("Complete");
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+public function viewProfile(){
+    $user   = $this->session->userdata('user');
+    dd($user);
+    $uid    = $user['user_id'];
+    $uyid   =  $user['type_id'];
+    $dep_id =$user['dep_id'];
+    $this->display($dep_name,$viewname,$data);
+}
 
 }
