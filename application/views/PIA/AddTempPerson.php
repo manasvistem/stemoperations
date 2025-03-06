@@ -28,11 +28,15 @@
                   <form action="<?=base_url();?>Menu/addtp" method="post">
                       <input type="hidden" value="<?=$uid?>" name="userid" id="userid">
                       <div class="form-group">
-                        <?php $spd = $this->Menu_model->get_spdbypiid($uid); $tspd=sizeof($spd);?>
+                        <?php 
+                        $spd   = $this->Menu_model->get_spdbypiid($uid); 
+                    
+                        $tspd  = sizeof($spd);
+
+                        ?>
                         <label>You Have Total <?=$tspd?> School</label><br>
                         <?php 
                         $msccc = $this->Menu_model->get_mscccbypiid($uid);
-                        
                         if($msccc[0]->cont1>0){?>
                         <label>You Have Total <?=$msccc[0]->cont1?> Cluster</label><br>
                         <label>You Have Plan For <?=$msccc[0]->cont2?> Cluster</label><br>
@@ -117,18 +121,19 @@
                 
               </tr>
               <?php
-             // $mdata = $this->Menu_model->get_tpdetail($uid);
+              $mdata = $this->Menu_model->get_tpdetail($uid);
+             
               foreach($mdata as $md){?>
                 <tr>
-                    <td><?=$md->person_names?></td>
-                    <td><?=$md->phone_numbers?></td>
-                    <td><?=$md->email_addresses?></td>
-                    <td><?=$md->addresses?></td>
-                    <td><?=$md->cities?></td>
-                    <td><?=$md->districts?></td>
-                    <td><?=$md->states?></td>
-                    <td><?=$md->qualifications?></td>
-                    <td><?=$md->remarks?></td>
+                    <td><?=$md->person_name?></td>
+                    <td><?=$md->phone_number?></td>
+                    <td><?=$md->email_address?></td>
+                    <td><?=$md->address?></td>
+                    <td><?=$md->city?></td>
+                    <td><?=$md->district?></td>
+                    <td><?=$md->state?></td>
+                    <td><?=$md->qualification?></td>
+                    <td><?=$md->remark?></td>
                     <td><?=$md->cluster?></td>
                     
                 </tr>

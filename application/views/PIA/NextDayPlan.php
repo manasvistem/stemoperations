@@ -1,29 +1,11 @@
 
 <div class="wrapper">
-  <!-- Preloader -->
-  
 
-  <!-- Navbar -->
-  <?php require('nav.php');?>
   <!-- /.navbar -->
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <h4></h4>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    
+   
 <form class="p-3" method="POST" action="<?=base_url();?>/Menu/NextDayPlan">
     <input type="date" name="sdate" class="mr-2" value="<?=$sd?>">
     <input type="date" name="edate" class="mr-2" value="<?=$ed?>">
@@ -55,13 +37,14 @@
                                     <tbody>
                                         <?php $i=1;
                                         date_default_timezone_set("Asia/Kolkata");
-                                        $nextdate = date('Y-m-d', strtotime('+1 day')); 
-                                        $nxtdtask=$this->Menu_model->get_nxtdtaskplan($uid,$sd,$ed);
-                                        $nxtdreport=$this->Menu_model->get_nxtdreportplan($uid,$sd,$ed);
-                                        $nxtdsummer=$this->Menu_model->get_nxtdsummerplan($uid,$sd,$ed);
-                                        $nxtdcuriculum=$this->Menu_model->get_nxtdcuriculumplan($uid,$sd,$ed);
-                                        $nxtdreview=$this->Menu_model->get_nxtdreviewplan($uid,$sd,$ed);
-                                        
+                                        $nextdate       = date('Y-m-d', strtotime('+1 day')); 
+                                        $nxtdtask       =$this->Menu_model->get_nxtdtaskplan($uid,$sd,$ed);
+                                        //dd($nxtdate);
+                                        $nxtdreport     =$this->Menu_model->get_nxtdreportplan($uid,$sd,$ed);
+                                        $nxtdsummer     =$this->Menu_model->get_nxtdsummerplan($uid,$sd,$ed);
+                                        $nxtdcuriculum  =$this->Menu_model->get_nxtdcuriculumplan($uid,$sd,$ed);
+                                        $nxtdreview     =$this->Menu_model->get_nxtdreviewplan($uid,$sd,$ed);
+                                      //  dd($nxtdreview);
                                         foreach($nxtdtask as $md){
                                             $startt = $md->plandate;
                                             $startt = date('d-m-Y  h:i A', strtotime($startt));
@@ -152,32 +135,3 @@
      </div></div>
     </section>
   
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type='text/javascript'>
-
-
-
-</script>
-
-          
-        <!-- /.row (main row) -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2021-2022 <a href="<?=base_url();?>">Stemlearning</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 1.0
-    </div>
-  </footer>
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->

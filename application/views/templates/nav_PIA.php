@@ -133,8 +133,6 @@
           <div class="menu-inner-shadow"></div>
 
           <ul class="menu-inner py-1">
-            <!-- Dashboards -->
-              <?php if($dep_id == 2): ?>
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Request</span></li>
               <li class="menu-item">
                 <a href="<?=base_url().'Menu/BDREQUEST'?>" class="menu-link">
@@ -142,19 +140,7 @@
                   <div class="text-truncate" data-i18n="Boxicons">REQUEST</div>
                 </a>
             </li>
-              <?php endif; ?>
-
-          <?php if($dep_id == 12 || $dep_id==11): ?>
-            <li class="menu-header small text-uppercase"><span class="menu-header-text">Request</span></li>
-              <li class="menu-item">
-                <a href="<?=base_url().'Menu/BDREQUEST'?>" class="menu-link">
-                  <i class="menu-icon tf-icons bx bx-crown"></i>
-                  <div class="text-truncate" data-i18n="Boxicons">BD REQUEST</div>
-                </a>
-              </li>
-              <?php endif; ?>
-         
-            <?php if($dep_id == 2): ?>
+           
             <li class="menu-header small text-uppercase"><span class="menu-header-text"></span></li>
             <li class="menu-item">
               <a href="Dashboard"
@@ -188,27 +174,32 @@
                 <div class="text-truncate" data-i18n="CreateGoals">Create Goals</div>
               </a>
             </li>
-            <?php endif; ?>
             <li class="menu-item">
-              <a href="DayManagement" target="_blank" class="menu-link">
+              <a href="MyProfile/<?=$uid?>" target="_blank" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="DayManagement">Day Management</div>
+                <div class="text-truncate" data-i18n="Myprofile">My Profile</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="TransitProcess"
-                target="_blank"
-                class="menu-link">
+              <a href="CMSCCC" target="_blank" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="TransitProcess">Transit Process</div>
+                <div class="text-truncate" data-i18n="Myprofile">Create Cluster for MSC Clean</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="MyDayDetail"
+              <a href="Mytarget"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="MyDayDetail">Day Management Detail</div>
+                <div class="text-truncate" data-i18n="TransitProcess">My Target</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="DayManagement"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="MyDayDetail">Day Management</div>
               </a>
             </li>
             <li class="menu-item">
@@ -220,6 +211,14 @@
               </a>
             </li>
             <li class="menu-item">
+              <a href="LiveVisit"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="NextDayPlan">Live Visit</div>
+              </a>
+            </li>
+            <li class="menu-item">
               <a href="CreateTask"
                 target="_blank"
                 class="menu-link">
@@ -228,19 +227,83 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="RequestAmount"
+              <a href="AllReviewPlaing"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="RequestAmount">Request Amount</div>
+                <div class="text-truncate" data-i18n="RequestAmount">All Review</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="maintenanceBag"
+              <a href="reviewreport"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="maintenanceBag">Maintenance Bag</div>
+                <div class="text-truncate" data-i18n="maintenanceBag">Review Report</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="PlanReportWriting"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="editProfile">Plan Report Writing</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="StartReportWriting"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="editProfile">Start Report Writing</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="CloseReportWriting"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="editProfile">Close Report Writing</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="AcademicCalendar"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="editProfile">Academic calendar</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="PlanReportWriting"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="editProfile">Start School Review</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="PlanReportWriting"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="editProfile">School Review Report</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="allbdrequest"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="DailyReport">BD Request</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="PlanReportWriting"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="PlanReportWriting">Daily Report</div>
               </a>
             </li>
             <li class="menu-item">
@@ -290,14 +353,13 @@
               <!-- /Search -->
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <li class="nav-item lh-1 me-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
+                </svg></li>
                 <!-- Place this tag where you want the button to render. -->
                 <li class="nav-item lh-1 me-4">
-                  <a
-                    class="github-button"
-                    href="viewProfile"
-                    data-icon="octicon-star"
-                    data-size="large"
-                    data-show-count="true"
+                  <a class="github-button"  href="viewProfile" data-icon="octicon-star" data-size="large" data-show-count="true"
                     aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
                     ><?php echo $user['user_name'];?></a>
                 </li>
@@ -323,7 +385,7 @@
                           </div>
                           <div class="flex-grow-1">
                             <h6 class="mb-0"><?=$user['fullname']?></h6>
-                            <small class="text-muted">Admin</small>
+                            <small class="text-muted"><?php echo $dep_name;?></small>
                           </div>
                         </div>
                         <?php // print_r($user['dep_id']); ?>
@@ -337,23 +399,14 @@
                         <i class="bx bx-user bx-md me-3"></i><span>My Profile</span>
                       </a>
                     </li>
-                    <li>
+                    <!-- <li>
                       <a class="dropdown-item" href="#"> <i class="bx bx-cog bx-md me-3"></i><span>Settings</span> </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <span class="d-flex align-items-center align-middle">
-                          <i class="flex-shrink-0 bx bx-credit-card bx-md me-3"></i
-                          ><span class="flex-grow-1 align-middle">Billing Plan</span>
-                          <span class="flex-shrink-0 badge rounded-pill bg-danger">4</span>
-                        </span>
-                      </a>
-                    </li>
+                    </li> -->
                     <li>
                       <div class="dropdown-divider my-1"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="javascript:void(0);">
+                      <a class="dropdown-item" href="logout">
                         <i class="bx bx-power-off bx-md me-3"></i><span>Log Out</span>
                       </a>
                     </li>

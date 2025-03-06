@@ -13,6 +13,8 @@
                   <hr>
                   <form action="<?=base_url();?>Menu/daysc" method="post" enctype="multipart/form-data">
                     <input type ="hidden" id="wffo_planner" value="<?php echo $user_day_start_from->userworkfrom;?>"/>
+                    <input type ="hidden" id="wffoval" value="<?php echo $user_day_start_from->userworkfrom_val;?>"/>
+
                     <div class="form-group">
                         <input type="hidden" name="user_id" value="<?=$uid?>">
                         <center><b class="text-info">Today's Date : <?=date('d-m-Y');?> </b>
@@ -148,7 +150,7 @@
                         <center><b class="text-info">Today's Date : <?=date('d-m-Y');?> </b>
                         <p>You have Started your Day at <b><?=$ustart=$mdata[0]->ustart?></b></p>
                         <p>You have Started your Day from <b><?php if($mdata[0]->wffo==1){echo'Work From Office';}if($mdata[0]->wffo==2){echo'Work From Field';}if($mdata[0]->wffo==3){echo'Work From Field+Office';}?></b></p>
-                        <p>You have Closing your Day at <b><?=$cdate=date('H:i:s');?></b></p>
+                        <p>You are Closing your Day at <b><?=$cdate=date('H:i:s');?></b></p>
                         <p>Time diffrence is <b><?=$this->Menu_model->timediff($ustart,$cdate);?></b></p>
                         <div class="mb-4 d-flex justify-content-center">
                             <img class="border" id="blah" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="your image" style="width:150px;height:250px"/>
@@ -220,22 +222,20 @@
                 <div class="modal-body">
                 <p id="changemessage" class="text-danger text-center" ></p>
                 <hr>
-                <form action="<?=base_url();?>Management/SendRequestForDayStartChnage" method="post">
-                <input type="hidden" id="user_want_start" name="user_want_start" class="form-control d-none" />
-                <div class="form-group">
-                <label>Write down why you want to change : </label>
-                <textarea class="form-control" name="message" rows="3"></textarea>
-                </div>
-                <div class="form-group text-center">
-                <button type="submit" class="btn btn-primary">Send Request</button>
-                </div>
+                <form action="<?=base_url();?>Menu/SendRequestForDayStartChnage" method="post">
+                  <input type="hidden" id="user_want_start" name="user_want_start" class="form-control d-none" />
+                  <div class="form-group">
+                  <label>Write down why you want to change : </label>
+                  <textarea class="form-control" name="message" rows="3"></textarea>
+                  </div>
+                  <div class="form-group text-center">
+                  <button type="submit" class="btn btn-primary">Send Request</button>
+                  </div>
                 </form>
                 </div>
                 </div>
                 </div>
       </div>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type='text/javascript'>
       document.getElementById("location").style.display = "none";
@@ -304,7 +304,7 @@
                           return (hours * 60) + minutes;
                       }
 
-                      $('#end-time').on('change', function() {
+        $('#end-time').on('change', function() {
         let endTime = $(this).val();
 
         if (endTime) {
@@ -328,30 +328,23 @@
 
     $('#wffo').on('change', function() {
               var wffo = $('#wffo').val();
-              $.ajax({
-                url:'<?=base_url();?>Menu/CheckuserDayAccardingPlanner',
-                type: "POST",
-                data: {
-                  wffo: wffo,
-                },
-                cache: false,
-                success: function a(result){
-                  if(result !==''){
-                    var recnt = <?= sizeof($geturdata); ?>;
-                    var recntapr = <?= empty($geturdata[0]->apr_status) ? 0 : $geturdata[0]->apr_status; ?>;
-                    if(recnt == 0){
-                    var selectedText = $('#wffo option:selected').text();
-                    $("#user_want_start").val(wffo);
-                    var result ='You planed to start their day : <b>'+ result+'</b>';
-                    var selectedText = ' But You want to start : <b>'+selectedText+'</b>';
-                    var message = result+selectedText;
-                    $("#changemessage").html(message);
-                    $('#submitButton').prop('disabled', true);
-                    $('#exampleModalReminder').modal('show');
+              var wffo_planner = $("#wffo_planner").val();// work from id
+              var wffoval = $("#wffoval").val();// work from name
+/*
+                    if(wffo !== wffo_planner){
+                      var selectedText      = $('#wffo option:selected').text();
+                      $("#user_want_start").val(wffo);
+                      var result        = 'You have planned to start your day from : <b>'+ wffoval+'</b>';
+                      var selectedText  = 'But You want to start : <b>'+selectedText+'</b>';
+                      var message       = result  +  selectedText;
+                  //alert(message);
+                      $("#changemessage").html(message);
+                      $('#submitButton').prop('disabled', true);
+                      $('#exampleModalReminder').modal('show');
                     }else{
                       if(recntapr == 0 || recntapr ==''){
                         $('#submitButton').prop('disabled', true);
-                        $('#goodmessage').text("* Please Wait !, While Your Request was Approved.").css('color', 'red');
+                        $('#goodmessage').text("* Please Wait !, While Your Request gets Approved.").css('color', 'red');
                       }else if(recntapr == 1){
                         $('#goodmessage').text("* You are able to change your day because your manager has approved your day change request.").css('color', 'green');
                         $('#submitButton').prop('disabled', false);
@@ -360,12 +353,13 @@
                         $('#goodmessage').text("* You are not able to change your day because your manager has reject your day change request.").css('color', 'red');
                       }
                     }
-                  }else{
-                    // $('#goodmessage').text("* Good Plan As Your Days According to Planner.").css('color', 'green');
-                    $('#submitButton').prop('disabled', false);
-                  }
-                }
-                });
+                  // }else{
+                  //   // $('#goodmessage').text("* Good Plan As Your Days According to Planner.").css('color', 'green');
+                  //   $('#submitButton').prop('disabled', false);
+                  // }
+                     */
           });
-      });
+       
+          
+        });
     </script>

@@ -65,7 +65,6 @@
                                   <th scope="col">Name</th>
                                   <th scope="col">Date</th>
                                   <th scope="col">Request Reason</th>
-                                  <th scope="col">Request Message</th>
                                   <th scope="col">Approved By</th>
                                   <th scope="col">Approved Remarks</th>
                                   <th scope="col">Approved Date</th>
@@ -79,11 +78,10 @@
                                 foreach($getreqData as $data){ ?>
                                 <tr>
                                   <th><?= $j ?></th>
-                                  <td><?= $this->Menu_model->get_userbyid($data->user_id)[0]->name ?></td>
+                                  <td><?= $this->Menu_model->get_userbyid($data->user_id)[0]->fullname ?></td>
                                   <td><?= $data->created_at ?></td>
                                   <td><?= $data->why_did_you ?></td>
-                                  <td><?= $data->req_remarks ?></td>
-                                  <td><?= $this->Menu_model->get_userbyid($data->approved_by)[0]->name ?></th>
+                                  <td><?= $this->Menu_model->get_userbyid($data->approved_by)[0]->fullname ?></th>
                                   <td><?= $data->approved_remarks ?></td>
                                   <td><?= $data->approved_date ?></td>
                                   <td>

@@ -1,4 +1,4 @@
-<?php  $this->load->view('nav'); ?>
+
 <!-- Content wrapper -->
 <div class="content-wrapper">
   <!-- Content -->
@@ -25,11 +25,11 @@
             <ul class="nav nav-pills mb-4 nav-fill" role="tablist">
               <?php  
            
-                $getTodaysTaskCounts = $this->Menu_model->GetTodaysAllTaskCountByUid($uid, date("Y-m-d"), $utype);
+               // $getTodaysTaskCounts = $this->Menu_model->GetTodaysAllTaskCountByUid($uid, date("Y-m-d"), $utype);
                // dd($getTodaysTaskCounts);
                 $firstTab = true; // Track first tab
                 $count = 0;
-                foreach ($getTodaysTaskCounts as $getTodaysTaskCount):
+                foreach ($getTodaysTaskCounts as $getTodaysTaskCount){
                     $formatted_string = preg_replace("/[ \/'-]+/", "_", $getTodaysTaskCount->tasktype);
                     if($getTodaysTaskCount->task_count !=0){
                 ?>
@@ -58,7 +58,7 @@
                 else{
                   $count ++;
                 }
-                endforeach; 
+               }
                 ?>
               <li class="nav-item" role="presentation">
                 <button type="button" class="nav-link" role="tab" 
@@ -76,13 +76,11 @@
             </ul>
             <div class="tab-content">
               <?php 
-                $getTodaysTasks = $this->Menu_model->GetTodaysAllTaskByUid($uid, date('Y-m-d'));
                 $firstPane = true; // Track first tab content
-              //  dd($getTodaysTasks);
-                foreach ($getTodaysTaskCounts as $getTodaysTaskCount):
+         //  dd($getTodaysTaskCounts);
+                foreach ($getTodaysTaskCounts as $getTodaysTaskCount){
                     $slct_type_of_task = $getTodaysTaskCount->tasktype;
-                  //  dd($slct_type_of_task)
-                    $formatted_string = preg_replace("/[ \/'-]+/", "_", $getTodaysTaskCount->tasktype);
+                //    $formatted_string = preg_replace("/[ \/'-]+/", "_", $getTodaysTaskCount->tasktype);
                 ?>
               <div class="tab-pane fade <?= $firstPane ? 'show active' : '' ?>" 
                 id="<?= $formatted_string ?>" 
@@ -90,12 +88,11 @@
                 <div class="row">
                   <div class="col-lg-12">
                     <small class="text-light fw-medium">Custom content</small>
-                    <div class="mt-4">
-                      <div class="list-group">
+                        <div class="mt-4">
+                        <div class="list-group">
                         <?php 
                           $i=1;
                           foreach($getTodaysTasks as $sctasklist){
-                          // dd($sctasklist);
                             $task_id              = $sctasklist->task_id;
                             $appointment_datetime = $sctasklist->appointment_datetime;
                             $sname                = $sctasklist->sname;
@@ -107,23 +104,28 @@
                             $target_date          = $sctasklist->target_date;
                             $expected_date        = $sctasklist->expected_date;
                             $fwd_date             = $sctasklist->fwd_date;
-                          if($slct_type_of_task == $tasktype){ ?>
+                            
+                            // echo $slct_type_of_task;
+                            // echo "<br>";
+                            // echo $tasktype;
+                          if($slct_type_of_task === $tasktype){ ?>
                           <a data-task_id="<?=$task_id;?>" class="list-group-item list-group-item-action flex-column align-items-start active mb-1 taskperformaction" >
                             <div class="d-flex justify-content-between w-100">
                             <input type="hidden" id="tasktype"  name="tasktype" value="<?=$tasktype?>"/>
                             <input type="hidden" id="tasktype_id" name="tasktype_id" value="<?= $task_action?>"/>
                             <h5 class="mb-1"><?=$sname.' - '.$taskname; ?></h5>
                             <!-- <small> <span id="countdown1"></span> - <span id="status1"></span> </small> -->
-                          </div>
+                            </div>
                           <?php 
                          // dd($data);
-                            //$this->load->view('common/MaintainanceView');
                           ?>
-                          <small> <span id="countdown<?=$task_id;?>"></span> - <span id="status<?=$task_id;?>"></span> 
+                          <!-- <small> <span id="countdown<?=$task_id;?>"></span> - <span id="status<?=$task_id;?>"></span>  -->
                         </small>
                         </a>
-                        <script> checkCountDownTime("<?=$fwd_date;?>",<?=$type_of_task;?>);</script>
-                        <?php $i++; } 
+                        <!-- <script> // checkCountDownTime("<?=$fwd_date;?>",<?=$type_of_task;?>);</script> -->
+                        <?php $i++;
+                           // $slct_type_of_task = "";
+                          } 
                         } ?>
                       </div>
                     </div>
@@ -132,7 +134,7 @@
               </div>
               <?php 
                 $firstPane = false; // Set to false after first iteration
-                endforeach; 
+                      }
                 ?>
               
             </div>

@@ -2198,6 +2198,7 @@ LEFT JOIN
         return $query->result();
     }
     public function get_spdbypiid($uid){
+       
         $query=$this->db->query("select * from spd where pi_id='$uid' and pm_apr='1'");
         return $query->result();
     }
@@ -6281,11 +6282,13 @@ public function change_user_day_request($uid){
 }
 
 public function user_day_start_from($userid,$cdate){
-   $query = $this->db->query(" SELECT userworkfrom FROM autotask_time WHERE user_id = '".$userid."' AND date = '".$cdate."' ");
+   $query = $this->db->query(" SELECT autotask_time.userworkfrom , userworkfrom.TYPE FROM autotask_time 
+                               LEFT JOIN userworkfrom ON userworkfrom.ID = autotask_time.userworkfrom 
+                               WHERE user_id = '".$userid."' AND date = '".$cdate."' ");
     return $query->row();
 }
+
 public function GetDayCloseRequestData($uid,$adate,$uyid){
-    
     if($uyid == 11 || $uyid == 12){
         $text = "user_detail.adminid = '$uid'";
     }
