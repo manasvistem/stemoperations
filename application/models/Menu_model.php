@@ -6204,8 +6204,8 @@ public function getTaskDetails($taskId,$taskactionId){
      }
      $updateQuery    = substr($updateQuery,0,'-1');
      $updateQuery  .= " WHERE `id` = '".$taskid."' ";
-          $this->db->query($updateQuery);
-     //echo $this->db->last_query();exit;
+    $this->db->query($updateQuery);
+     echo $this->db->last_query();exit;
      return true;
  }
 
@@ -6302,6 +6302,15 @@ public function GetDayCloseRequestData($uid,$adate,$uyid){
 
 
     return $getreqData;
+}
+
+public function insertIntoInauguration($data){
+//dd($data);
+    $insertQuery =   $this->db->query("INSERT INTO inauguration(task_id,user_role,user_id,question_id,question_val,created_date,updated_date) 
+                     VALUES(".$data['task_id'].",".$data['user_role'].",".$data['user_id'].",".$data['question_id'].",
+                    ".$data['question_val'].",".$data['created_date'].",".$data['update_date'].")");   
+    echo $this->db->last_query();
+    exit;
 }
 
 }

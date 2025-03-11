@@ -39,12 +39,10 @@
                                         date_default_timezone_set("Asia/Kolkata");
                                         $nextdate       = date('Y-m-d', strtotime('+1 day')); 
                                         $nxtdtask       =$this->Menu_model->get_nxtdtaskplan($uid,$sd,$ed);
-                                        //dd($nxtdate);
                                         $nxtdreport     =$this->Menu_model->get_nxtdreportplan($uid,$sd,$ed);
                                         $nxtdsummer     =$this->Menu_model->get_nxtdsummerplan($uid,$sd,$ed);
                                         $nxtdcuriculum  =$this->Menu_model->get_nxtdcuriculumplan($uid,$sd,$ed);
                                         $nxtdreview     =$this->Menu_model->get_nxtdreviewplan($uid,$sd,$ed);
-                                      //  dd($nxtdreview);
                                         foreach($nxtdtask as $md){
                                             $startt = $md->plandate;
                                             $startt = date('d-m-Y  h:i A', strtotime($startt));
@@ -59,9 +57,8 @@
                                         <td><?=$md->taskname?></td>
                                     </tr>
                                     <?php $i++;} ?>
-                                    
-                                    
-                                    <?php foreach($nxtdreport as $md){
+                                    <?php
+                                    foreach($nxtdreport as $md){
                                             $startt = $md->plan;
                                             $startt = date('d-m-Y  h:i A', strtotime($startt));?>
                                     <tr>

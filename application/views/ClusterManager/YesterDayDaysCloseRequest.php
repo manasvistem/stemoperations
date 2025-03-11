@@ -51,7 +51,6 @@
                     ?>
                     <div class="btn btn-primary colapsboxsha col-md-12 col-lg-12 mt-2 d-flex justify-content-between align-items-center" data-toggle="collapse" href="#collapseExample<?=$k?>" role="button" aria-expanded="false" aria-controls="collapseExample<?=$k?>">
                       Request :
-                      
                     </div>
                     <div class="collapse show mt-3" id="collapseExample<?=$k?>">
                       <div class="card card-body" style="background: azure;"  >

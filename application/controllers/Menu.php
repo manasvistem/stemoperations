@@ -771,23 +771,58 @@ class Menu extends CI_Controller {
         }else{
             $adate = date("Y-m-d");
         }
-      
         $getreqData     = $this->Menu_model->GetDayCloseRequestData($uid,$adate,$dept_id);
         $data           = array('uid'=>$uid,'user'=>$user,'adate'=>$adate,'getreqData'=>$getreqData);
-     
+   
+
          if(!empty($user)){
-            $this->display($dep_name,'YesterDayDaysCloseRequest',$data);
+            $this->display($dep_name,'YesterDayDaysCloseRequest',$data,$model='');
         }else{
             redirect('Menu/main');
         }
     }
-
-    public function DayCheckManagement(){
-
-        date_default_timezone_set("Asia/Calcutta");
-
+    public function YesterdayCloseRequestApprove($id,$type){
         $user           = $this->session->userdata('user');
-
+        $data['user']   = $user;
+        $uid            = $user['user_id'];
+        $this->load->library('session');
+        $this->load->model('Menu_model');
+        if($type == 'Approved'){
+            $status     = "Approved";
+            $reamrks    = "Approved By ".$user['name'];
+            $apdate     =  date("Y-m-d H:i:s");
+            
+            $queryslct =  $this->db->query("SELECT * FROM `close_your_day_request` WHERE id = '$id'");
+            $data = $queryslct->result();
+            $autotasktimeisset  = $data[0]->autotasktimeisset;
+            if($autotasktimeisset == 0 ){
+                $startautotasktime  = $data[0]->startautotasktime;
+                $endautotasktime    = $data[0]->endautotasktime;
+                $start_tttpft       = $data[0]->start_tttpft;
+                $end_tttpft         = $data[0]->end_tttpft;
+                $suser_id           = $data[0]->user_id;
+                $req_date           = $data[0]->req_date;
+                $date_only          = date("Y-m-d", strtotime($req_date));
+                $dataslct = array(
+                    'user_id'      => $suser_id,
+                    'date'         => $date_only,
+                    'stime'        => $startautotasktime,
+                    'etime'        => $endautotasktime,
+                    'start_tttpft' => $start_tttpft,
+                    'end_tttpft'   => $end_tttpft
+                );
+                $this->db->insert('autotask_time', $dataslct);
+            }
+            $query =  $this->db->query("UPDATE `close_your_day_request` SET `approved_status`='$status',`approved_remarks`='$reamrks',`approved_date`='$apdate', `approved_by`='$uid' WHERE id = $id");
+            $this->session->set_flashdata('success_message','* Request Approved Successfully !');
+            redirect("Menu/YesterDayDaysCloseRequest");
+        }else{
+            redirect('Menu/main');
+        }
+    }
+    public function DayCheckManagement(){
+        date_default_timezone_set("Asia/Calcutta");
+        $user           = $this->session->userdata('user');
         $data['user']   = $user;
         $uid            = $user['id'];
         $id             = $user['dep_id'];
@@ -1051,7 +1086,6 @@ class Menu extends CI_Controller {
             $casestudy=$_POST['casestudy'];
             $utilizationtype=$_POST['utilizationtype'];
             $logsactivity=$_POST['logsactivity'];
-            
             $this->Menu_model->all_rremarkpi($rid,$spdid,$piuid,$remark,$ntdate,$ntaction,$adminuid,$exsid,$exdate,$awg,$categories,$categreason,$relation,$socialmedia,$nsp,$nspno,$summeractivity,$scno,$support,$diy,$opportunity,$casestudy,$utilizationtype,$logsactivity);
             redirect('Menu/AllReviewPlaing/');
         }
@@ -1074,7 +1108,6 @@ class Menu extends CI_Controller {
         $this->zip->download(time().'.zip');
     }
     public function ZipDownload($tid){
-        
         $wgdata=$this->Menu_model->get_wgbytid($tid);
         $this->load->library('zip');
           foreach($wgdata as $w)
@@ -1123,7 +1156,6 @@ class Menu extends CI_Controller {
     }
    
     public function DayManagement(){
-      //  return true;
         date_default_timezone_set("Asia/Calcutta"); 
         $tdate          = date('Y-m-d');
         $user           = $this->session->userdata('user');
@@ -1154,6 +1186,7 @@ class Menu extends CI_Controller {
         $userdfrom           = $this->Menu_model->userworkfrom();
         $yesterday           = date('Y-m-d', strtotime('-1 day', strtotime($tdate)));
         $isweekend           = isNotWeekend($yesterday);
+//echo $isweekend; exit;
         if(!$isweekend){
             $yesterday           = date('Y-m-d', strtotime('-2 day', strtotime($tdate)));
             $yestdata            = $this->Menu_model->get_Yestdaydetail($uid,$yesterday);
@@ -1161,6 +1194,7 @@ class Menu extends CI_Controller {
         else{
             $yestdata            = $this->Menu_model->get_Yestdaydetail($uid,$yesterday);
         }
+        //dd($yestdata);exit;
 
     //   $getDayCloseRequest = $this->Menu_model->GetDayCloseRequest($uid,$tdate);
 
@@ -1184,10 +1218,10 @@ class Menu extends CI_Controller {
         $data['userworkfrom_val']           = $user_day_start_from->TYPE;
 
         if($yestdatacnt == 1){ 
-            $this->display($dep_name,'close_day_page',$data);
+            $this->display($dep_name,'close_day_page',$data,$type='');
         }
         else if(!empty($user)){
-            $this->display($dep_name,'DayManagement',$data);
+            $this->display($dep_name,'DayManagement',$data,$type='');
         }
         else{
             redirect('Menu/main');
@@ -1227,7 +1261,7 @@ class Menu extends CI_Controller {
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
         if(!empty($user)){
-            $this->load->view($dep_name.'/AllReviewPlaing.php',['uid'=>$uid,'user'=>$user]);
+            $this->display($dep_name,'AllReviewPlaing.php',['uid'=>$uid,'user'=>$user]);
         }else{
             redirect('Menu/main');
         }
@@ -1330,17 +1364,16 @@ class Menu extends CI_Controller {
         $sdate = new DateTime($sdate);
         $edate = new DateTime($edate);
         date_default_timezone_set("Asia/Calcutta");
-        $tdate=date('Y-m-d H:i:s');
-        $user = $this->session->userdata('user');
+        $tdate        = date('Y-m-d H:i:s');
+        $user         = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
-        $uid= $user['id'];
-        $id =  $user['dep_id'];
-        
-        $dt=$this->Menu_model->get_depatment_byid($id);
+        $uid          = $user['id'];
+        $id           = $user['dep_id'];
+        $dt           = $this->Menu_model->get_depatment_byid($id);
         $mdata = $this->Menu_model->get_reviewr($adid,$piid,$sd,$ed);
         $dep_name = $dt[0]->dep_name;
         if(!empty($user)){
-            $this->load->view($dep_name.'/reviewreport.php',['mdata'=>$mdata,'uid'=>$uid,'user'=>$user,'sd'=>$sd,'ed'=>$ed,'sdate'=>$sdate,'edate'=>$edate]);
+            $this->display($dep_name,'reviewreport',['mdata'=>$mdata,'uid'=>$uid,'user'=>$user,'sd'=>$sd,'ed'=>$ed,'sdate'=>$sdate,'edate'=>$edate]);
         }else{
             redirect('Menu/main');
         }
@@ -2498,7 +2531,8 @@ class Menu extends CI_Controller {
         $newpass= $this->input->post('newpass');
         $phoneno= $this->input->post('phoneno');
         $email= $this->input->post('email');
-        
+        $user           = $this->session->userdata('user');
+       // dd($user);
         $mid = $this->Menu_model->profile_edit($id,$oldpass,$newpass,$phoneno,$email);
         if($mid==''){
            $msg =  'You Entered Wrong Password';
@@ -2508,23 +2542,26 @@ class Menu extends CI_Controller {
         $this->session->unset_userdata('user');
         
         $dep=$this->Menu_model->get_depatment();
-        $this->load->view('index', ['dep'=>$dep,'msg'=>$msg]);
+     $dep_name = 
+        $this->display($dept_name,'index', ['dep'=>$dep,'msg'=>$msg]);
     }
     public function editProfile(){
-        $user = $this->session->userdata('user');
-        $data['user'] = $user;$uid= $user['id'];
-        $id =  $user['dep_id'];
-        
-        $notify=$this->Menu_model->get_notifybyid($uid);
-        $dt=$this->Menu_model->get_user();
-        $reg=$this->Menu_model->get_region();
-        $procode=$this->Menu_model->get_handover();
-        $spd=$this->Menu_model->get_spd();
-        $status=$this->Menu_model->get_status();
-        $dt=$this->Menu_model->get_depatment_byid($id);
-        $dep_name = $dt[0]->dep_name;
+        $user           =  $this->session->userdata('user');
+        $data['user']   =  $user;
+        $uid            =  $user['id'];
+        $id             =  $user['dep_id'];
+        $notify         =   $this->Menu_model->get_notifybyid($uid);
+        $dt             =   $this->Menu_model->get_user();
+        $reg            =   $this->Menu_model->get_region();
+        $procode        =   $this->Menu_model->get_handover();
+        $spd            =   $this->Menu_model->get_spd();
+        $status         =   $this->Menu_model->get_status();
+        $dt             =   $this->Menu_model->get_depatment_byid($id);
+        $dep_name       =   $dt[0]->dep_name;
+        $data['dt']     =   $this->Menu_model->get_depatment_byid($depid);
+
         if(!empty($user)){
-            $this->load->view($dep_name.'/editprofile', ['notify'=>$notify,'user'=>$user,'data'=>$dt, 'reg'=>$reg, 'procode'=>$procode, 'spd'=>$spd, 'status'=>$status]);
+            $this->display($dep_name,'editprofile', ['notify'=>$notify,'user'=>$user,'data'=>$dt, 'reg'=>$reg, 'procode'=>$procode, 'spd'=>$spd, 'status'=>$status]);
         }else{
             redirect('Menu/main');
         }
@@ -3188,10 +3225,9 @@ class Menu extends CI_Controller {
         $this->load->view('Program-Manager/synopsis',['data'=>$dt, 'user'=>'$user']);
     }
     public function MyProfile($piid){
-        $user = $this->session->userdata('user');
-        $data['user'] = $user;$uid= $user['id'];
-        $id =  $user['dep_id'];
-        
+        $user           = $this->session->userdata('user');
+        $data['user']   = $user; $uid= $user['id'];
+        $id             =  $user['dep_id'];
         $notify   =$this->Menu_model->get_notifybyid($uid);
         $dt       =$this->Menu_model->get_depatment_byid($id);
         $mydetail =$this->Menu_model->get_mydetail($piid);
@@ -3202,21 +3238,20 @@ class Menu extends CI_Controller {
         $mysrd    =$this->Menu_model->get_myschoolreviewdetail($piid);
         $myprd    =$this->Menu_model->get_myprogramreviewdetail($piid);
         $myac     =$this->Menu_model->get_myacademiccalendar($piid);
-        $dep_name = $dt[0]->dep_name;
-
+        $dep_name =$dt[0]->dep_name;
+        $data['dep_name'] = $dep_name;
         $data = array('myac'=>$myac,'myprd'=>$myprd,'mysrd'=>$mysrd,'piid'=>$piid,'notify'=>$notify, 'user'=>$user,'mydetail'=>$mydetail,'mytd1'=>$mytd1,'mytd2'=>$mytd2,'mytd3'=>$mytd3,'mytd4'=>$mytd4);
- //dd($data);
+//dd($data);
             if(!empty($user)){
-                $this->load->display($dep_name,'MyProfile', $data);
+                $this->load->display($dep_name,'MyProfile',$data);
             }else{
                 redirect('Menu/main');
             }
     }
     public function PWTaskList($pid,$page,$action,$tt){
-        $user = $this->session->userdata('user');
+        $user         = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
-        $id =  $user['dep_id'];
-        
+        $id           =  $user['dep_id'];
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $program= $this->Menu_model->get_clientbyid($pid);
@@ -3235,21 +3270,22 @@ class Menu extends CI_Controller {
             }
     }
     public function SWTaskList($sid,$page,$action){
-        $user = $this->session->userdata('user');
-        $data['user'] = $user;$uid= $user['id'];
-        $id =  $user['dep_id'];
+        $user           = $this->session->userdata('user');
+        $data['user']   = $user;$uid= $user['id'];
+        $id             =  $user['dep_id'];
         
-        $notify=$this->Menu_model->get_notifybyid($uid);
-        $dt=$this->Menu_model->get_depatment_byid($id);
-        $spd= $this->Menu_model->get_spdbyid($sid);
-        $pcode = $spd[0]->project_code;
-        $programd1=$this->Menu_model->get_spddetail1($sid);
-        $programd2=$this->Menu_model->get_spddetail2($sid);
-        $programd3=$this->Menu_model->get_spddetail3($sid);
-        $programd4=$this->Menu_model->get_spddetail4($sid);
-        $sdetail=$this->Menu_model->get_sdetail($sid);
-        $tasklist= $this->Menu_model->gettdonebyd($sid,$page,$action);
-        $dep_name = $dt[0]->dep_name;
+        $notify     = $this->Menu_model->get_notifybyid($uid);
+        $dt         = $this->Menu_model->get_depatment_byid($id);
+        $spd        = $this->Menu_model->get_spdbyid($sid);
+        $pcode      = $spd[0]->project_code;
+        $programd1  = $this->Menu_model->get_spddetail1($sid);
+        $programd2  = $this->Menu_model->get_spddetail2($sid);
+        $programd3  = $this->Menu_model->get_spddetail3($sid);
+        $programd4  = $this->Menu_model->get_spddetail4($sid);
+        $sdetail    = $this->Menu_model->get_sdetail($sid);
+        $tasklist   = $this->Menu_model->gettdonebyd($sid,$page,$action);
+        $dep_name   = $dt[0]->dep_name;
+
             if(!empty($user)){
                 $this->load->view($dep_name.'/SWTaskList', ['tasklist'=>$tasklist,'page'=>$page,'action'=>$action,'sid'=>$sid,'sdetail'=>$sdetail,'programd4'=>$programd4,'programd3'=>$programd3,'programd2'=>$programd2,'programd1'=>$programd1,'notify'=>$notify, 'user'=>$user,'spd'=>$spd]);
             }else{
@@ -7016,12 +7052,12 @@ class Menu extends CI_Controller {
     }
     public function Dashboard(){
         date_default_timezone_set('Asia/Kolkata');
+
         if (isset($_POST['submit'])) {
             $tdate = $_POST['filterdate'];
         }else{
-           $tdate = date("Y-m-d");
+           $tdate  = date("Y-m-d");
         }
-
         $user                           = $this->session->userdata('user');
         $data['user']                   = $user;
         $uid                            = $user['id'];
@@ -7031,7 +7067,7 @@ class Menu extends CI_Controller {
         $getTodaysTaskCounts            = $this->Menu_model->GetTodaysAllTaskCountByUid($uid, date("Y-m-d"), $depid);
         $getTodaysTasks                 = $this->Menu_model->GetTodaysAllTaskByUid($uid, date('Y-m-d'));
         $data['getTodaysTaskCounts']    = $getTodaysTaskCounts;
-        $data['getTodaysTasks']         = $getTodaysTasks ;
+        $data['getTodaysTasks']         = $getTodaysTasks;
 
         if(empty($user_day) && count($user_day)<= 0){
             $this->session->set_flashdata('error_message','* Please Start Your Day');
@@ -7050,16 +7086,14 @@ class Menu extends CI_Controller {
             $data['bdr']        = $this->Menu_model->get_bdreqest($uid);
             $data['bdrzh']      = $this->Menu_model->get_bdreqestzh($uid);
             $data['dep_name']   = $data['dt'][0]->dep_name;
-           
+            $dep_name           = $data['dep_name'];
             if($data['dep_name'] == "ProgramManager"){
                 $data['bdrequest']  =  $this->load->view('bdrequest_data');
             }
             $data['utype'] =  $data['dt'][0]->id;
 
-            if(!empty($user)){
-            //    echo "<br>";
-            //    echo time("h:i:s");
-                $this->display($data['dep_name'],'index',$data);
+            if(!empty($user)){// echo $data['dep_name']; 
+                $this->display($dep_name,'index',$data,$type='');
             }else{
                 redirect('Menu/main');
             }
@@ -7070,23 +7104,26 @@ class Menu extends CI_Controller {
             $taskId                    = $_POST['taskId'];
             $taskType                  = $_POST['tasktype'];
             $tasktypeid                = $_POST['tasktype_id'];
+            $tasknameData              = $this->Menu_model->getTasktypeName($tasktypeid);
             $taskDetails               = $this->Menu_model->getTaskDetails($taskId,$tasktypeid);
             $user                      = $_SESSION['user']['user_name'];
             $user_id                   = $_SESSION['user']['id'];
             $dept                      = $_SESSION['user']['dep_id'];
             $data['taskType']          = $taskType;
             $data['taskDetails']       = $taskDetails;
-            $data['taskstatus']        = "Initiate";
-            $viewname                  = $taskType."View";
+           // $data['taskstatus']      = "Initiate";
+            $taskname                  = $tasknameData['taskname'];
+
+            $cleanString               = preg_replace('/[^a-zA-Z0-9]/', '', $taskname);
+            $viewname                  = $cleanString."View";
             $data['taskId']            = $taskId;
             $data['taskType']          = $taskType;
             $data['tasktypeid']        = $tasktypeid;
             $data['formdata']          = $this->Menu_model->getViewFormData($tasktypeid,$dept);
-            // echo $viewname;exit;
-            // echo $this->db->last_query();exit;  
-            // dd($data);
-            // $viewname = "PreInaugurationVisit";
-            $this->load->view("common/".$viewname,$data);
+            $depnameData               = $this->Menu_model->get_depatment_byid($dept);
+            $dep_name                  = $depnameData[0]->dep_name;
+
+            $this->display($dep_name,$viewname,$data,$type='modal');
     }
 
     public function Dashboard1(){
@@ -7108,25 +7145,168 @@ class Menu extends CI_Controller {
         $zhspd=$this->Menu_model->get_spdsbyzh($uid);
         $pmspd=$this->Menu_model->get_spdsbypm();
         $td=$this->Menu_model->get_tdetail($uid,$tdate);
-        $program=$this->Menu_model->get_handover();
-        $bdr=$this->Menu_model->get_bdreqest($uid);
-        $bdrzh=$this->Menu_model->get_bdreqestzh($uid);
-        $dep_name = $dt[0]->dep_name;
+        $program    = $this->Menu_model->get_handover();
+        $bdr        = $this->Menu_model->get_bdreqest($uid);
+        $bdrzh      = $this->Menu_model->get_bdreqestzh($uid);
+        $dep_name   = $dt[0]->dep_name;
         if(!empty($user)){
             $this->load->view($dep_name.'/index1', ['pmspd'=>$pmspd,'zhspd'=>$zhspd,'bdrzh'=>$bdrzh,'spd'=>$spd, 'user'=>$user,'notify'=>$notify,'program'=>$program,'status'=>$status,'td'=>$td,'tdate'=>$tdate,'bdr'=>$bdr,'uid'=>$uid]);
         }else{
             redirect('Menu/main');
         }
     }
-    
+    public function PreInaugurationVisitUpdate(){
+
+    }
+    public function PreInaugurationCallUpdate(){
+        $post_data                  = $_POST;
+        $taskname                   = $_POST['taskType'];
+        $tasktypeid                 = $_POST['tasktypeid'];
+        $taskId                     = $_POST['taskId'];
+        $insertData['taskType']     = $_POST['taskType'];
+        $insertData['tasktypeid']   = $_POST['tasktypeid'];
+
+       //dd($post_data);
+        foreach ($post_data as $key => $val){  
+            if($key == "eventDate"){
+                $main_task_id               = "567";
+                $task_response              =  $val[0]."=".$val[1];
+                $taskexecutionDetails       = [    // Initialize the array inside the loop
+                    'main_task_id'      => $main_task_id,
+                    'task_response'     => $task_response,
+                    'performed_by'      => $_SESSION['user']['id'],
+                    'updated_at'        => date("Y-m-d h:i:s") // Correct time format to 24-hour format
+                ];
+            }
+                if($key == "teacherCount"){
+                    $main_task_id           = "570";
+                    $task_response          =  $val;
+                    $taskexecutionDetails   = [    // Initialize the array inside the loop
+                        'main_task_id'      => $main_task_id,
+                        'task_response'     => $task_response,
+                        'performed_by'      => $_SESSION['user']['id'],
+                        'updated_at'        => date("Y-m-d h:i:s") // Correct time format to 24-hour format
+                    ];
+                }
+                else if($key == "studentCount"){
+                        $main_task_id           = "571";
+                        $task_response          =  $val;
+                        $taskexecutionDetails   = [    // Initialize the array inside the loop
+                            'main_task_id'      => $main_task_id,
+                            'task_response'     => $task_response,
+                            'performed_by'      => $_SESSION['user']['id'],
+                            'updated_at'        => date("Y-m-d h:i:s") // Correct time format to 24-hour format
+                        ];
+                }
+                else if($key == "facilities"){
+                    $main_task_id           = "568";
+                    $task_response          =  $val;
+                    $taskexecutionDetails   = [    // Initialize the array inside the loop
+                        'main_task_id'      => $main_task_id,
+                        'task_response'     => $task_response,
+                        'performed_by'      => $_SESSION['user']['id'],
+                        'updated_at'        => date("Y-m-d h:i:s") // Correct time format to 24-hour format
+                    ];
+                }
+                else if($key == "welcomesong"){
+                    $main_task_id           = "572";
+                    $task_response          =  $val;
+                    $taskexecutionDetails   = [    // Initialize the array inside the loop
+                        'main_task_id'      => $main_task_id,
+                        'task_response'     => $task_response,
+                        'performed_by'      => $_SESSION['user']['id'],
+                        'updated_at'        => date("Y-m-d h:i:s") // Correct time format to 24-hour format
+                    ];
+                }
+                else if($key == "modelExplanation")
+                {
+                    $main_task_id = "573";
+                    $task_response =  $val;
+                    $taskexecutionDetails = [    // Initialize the array inside the loop
+                        'main_task_id'      => $main_task_id,
+                        'task_response'     => $task_response,
+                        'performed_by'      => $_SESSION['user']['id'],
+                        'updated_at'        => date("Y-m-d h:i:s") // Correct time format to 24-hour format
+                    ];
+                }
+                else if($key == "snacks"){
+                    $main_task_id = "574";
+                    $task_response =  $val;
+                    $taskexecutionDetails = [    // Initialize the array inside the loop
+                        'main_task_id'      => $main_task_id,
+                        'task_response'     => $task_response,
+                        'performed_by'      => $_SESSION['user']['id'],
+                        'updated_at'        => date("Y-m-d h:i:s") // Correct time format to 24-hour format
+                    ];
+                }
+                else if($key == "decoration"){
+                    $main_task_id = "575";
+                    $task_response =  $val;
+                    $taskexecutionDetails = [    // Initialize the array inside the loop
+                        'main_task_id'      => $main_task_id,
+                        'task_response'     => $task_response,
+                        'performed_by'      => $_SESSION['user']['id'],
+                        'updated_at'        => date("Y-m-d h:i:s") // Correct time format to 24-hour format
+                    ];
+                }
+                else if($key == "preVisit"){
+                    $main_task_id = "576";
+                    $task_response =  $val;
+                    $taskexecutionDetails = [    // Initialize the array inside the loop
+                        'main_task_id'      => "576",
+                        'task_response'     => $val,
+                        'performed_by'      => $_SESSION['user']['id'],
+                        'updated_at'        => date("Y-m-d h:i:s") // Correct time format to 24-hour format
+                    ];
+                }
+                else if($key == "eventStart"){
+                    $main_task_id = "576";
+                    $task_response =  $val;
+                    $taskexecutionDetails = [    // Initialize the array inside the loop
+                        'main_task_id'      => "576",
+                        'task_response'     => $val,
+                        'performed_by'      => $_SESSION['user']['id'],
+                        'updated_at'        => date("Y-m-d h:i:s") // Correct time format to 24-hour format
+                    ];
+                }
+                else if($key == "eventEnd"){
+                    $main_task_id = "576";
+                    $task_response =  $val;
+                    $taskexecutionDetails = [    // Initialize the array inside the loop
+                        'main_task_id'      => "576",
+                        'task_response'     => $val,
+                        'performed_by'      => $_SESSION['user']['id'],
+                        'updated_at'        => date("Y-m-d h:i:s") // Correct time format to 24-hour format
+                    ];
+                }
+            
+            $taskInsertArr[] = $taskexecutionDetails;
+        }     
+
+    //dd($taskInsertArr);
+        // If batch insert is supported
+        if (!empty($taskInsertArr)) {
+            $this->Menu_model->batch_insert_task_execution($taskInsertArr);
+        }
+
+        unset($post_data['taskId']);
+        unset($post_data['taskname']);
+        
+        $updatetblcalleventsData = ['updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+
+        $updateQuery             = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+
+        echo json_encode(["status" => "success"]);
+    }
+
 public function updateTask($tasktypeid=''){
     $post_data          = $_POST;
     $taskname           = $_POST['taskType'];
     $tasktypeid         = $_POST['tasktypeid'];
     $taskid             = $_POST['taskId'];
-   
     // to get the task type & accordingly update the task 
     //to set the pattern for all tables, tblcallevents , task_execution_details , 
+
       if($taskname == "PreInaugurationVisit"){
           $taskData                  = '';
          // $updateQuery             = $this->Menu_model->updateTasksById($taskid,$post_data);
@@ -7136,6 +7316,7 @@ public function updateTask($tasktypeid=''){
         $taskid                                   = $this->input->post("taskId"); 
         $tblcalleventsdata['task_status']         = $this->input->post("status"); 
         $tblcalleventsdata['updated_datetime']    = date("Y-m-d h:i:s");
+
         $this->Menu_model->updateTasksById($taskid,$tblcalleventsdata);
 
         $taskexecutionDetails   =   [];
@@ -7154,28 +7335,27 @@ public function updateTask($tasktypeid=''){
                     }
                 }
             }       
-
         // If batch insert is supported
         if (!empty($taskInsertArr)) {
             $this->Menu_model->batch_insert_task_execution($taskInsertArr);
             echo json_encode(["status" => "success"]);
-
         }
     }
   
-    // if(array_key_exists('task_id',$post_data)){
-    //     $taskid                                 = $post_data['task_id'];
-    //     unset($post_data['task_id']);
-    //     unset($post_data['taskname']);
-    //     $updateQuery                            = $this->Menu_model->updateTasksById($taskid,$post_data);
-    //     if(isset($_FILES)){
-    //           $uploadPath                       = "uploads/Visit/";
-    //           $post_data['attachment_link']     = $this->uploadFile($_FILES[$taskname],$uploadPath);
-    //           // $updateQuery                   = $this->Menu_model->updateTasksById($taskid,$post_data); 
-    //           $post_data['task_id']             = $taskid;
-    //           $updateWithAttachemnts            = $this->Menu_model->insertTasksWithAttachements($post_data);
-    //       }
-    //   }
+    if(array_key_exists('task_id',$post_data)){
+        $taskid                                 = $post_data['task_id'];
+        unset($post_data['task_id']);
+        unset($post_data['taskname']);
+        $updateQuery                            = $this->Menu_model->updateTasksById($taskid,$post_data);
+
+        if(isset($_FILES)){
+              $uploadPath                       = "uploads/Visit/";
+              $post_data['attachment_link']     = $this->uploadFile($_FILES[$taskname],$uploadPath);
+              // $updateQuery                   = $this->Menu_model->updateTasksById($taskid,$post_data); 
+              $post_data['task_id']             = $taskid;
+              $updateWithAttachemnts            = $this->Menu_model->insertTasksWithAttachements($post_data);
+          }
+      }
   }
   
   public function uploadFile($data,$uploadPath){
@@ -7214,36 +7394,45 @@ public function updateTask($tasktypeid=''){
      return $viewData;
   }
   
-  public function display($dept_name,$viewname,$data){
- 
-      $this->load->view('templates/header');
-      $this->load->view('templates/nav_'.$dept_name,$data);
-      $this->load->view($dept_name."/".$viewname,$data);
-      $this->load->view('templates/footer');
+  public function display($dept_name,$viewname,$data,$type){
+        if($type !='modal'){
+            $this->load->view('templates/header');
+            $this->load->view($dept_name.'/nav_'.$dept_name,$data);
+            $this->load->view($dept_name."/".$viewname,$data);
+            $this->load->view('templates/footer');
+        }
+        else{
+            $this->load->view($dept_name."/".$viewname,$data);
+
+        }
   }
   
     public function TeamDailyReport($date){
-        $user = $this->session->userdata('user');
-        $data['user'] = $user;$uid= $user['id'];
-        $uid= $user['id'];
-        $id =  $user['dep_id'];
-        
-        $notify=$this->Menu_model->get_notifybyid($uid);
-        $dt=$this->Menu_model->get_depatment_byid($id);
-        $spd=$this->Menu_model->get_mspd();
-        $status=$this->Menu_model->get_spdsbypi($uid);
-        $zhspd=$this->Menu_model->get_spdsbyzh($uid);
-        $td=$this->Menu_model->get_tdetail($uid,$date);
-        $program=$this->Menu_model->get_handover();
-        $bdr=$this->Menu_model->get_bdreqest($uid);
-        $bdrzh=$this->Menu_model->get_bdreqestzh($uid);
-        $dep_name = $dt[0]->dep_name;
+        $user         = $this->session->userdata('user');
+        $data['user'] = $user;
+        $uid          = $user['id'];
+        $uid          = $user['id'];
+        $id           = $user['dep_id'];
+        $notify       = $this->Menu_model->get_notifybyid($uid);
+        $dt           = $this->Menu_model->get_depatment_byid($id);
+
+        $spd          = $this->Menu_model->get_mspd();
+        $status       = $this->Menu_model->get_spdsbypi($uid);
+        $zhspd        = $this->Menu_model->get_spdsbyzh($uid);
+        $td           = $this->Menu_model->get_tdetail($uid,$date);
+
+        $program      = $this->Menu_model->get_handover();
+        $bdr          = $this->Menu_model->get_bdreqest($uid);
+        $bdrzh        = $this->Menu_model->get_bdreqestzh($uid);
+        $dep_name     = $dt[0]->dep_name;
+
         if(!empty($user)){
             $this->load->view($dep_name.'/TeamDailyReport', ['zhspd'=>$zhspd,'bdrzh'=>$bdrzh,'spd'=>$spd, 'user'=>$user,'notify'=>$notify,'program'=>$program,'status'=>$status,'td'=>$td,'date'=>$date,'bdr'=>$bdr]);
         }else{
             redirect('Menu/main');
         }
     }
+
     public function BDRequestBox(){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
@@ -7638,7 +7827,7 @@ public function updateTask($tasktypeid=''){
         $client     =$this->Menu_model->get_pcbypiid($uid);
         $spd        = $this->Menu_model->get_mspd();
 
-        $this->load->view($dep_name,'createtask', ['notify'=>$notify,'region'=>$dr,'dep'=>$dt, 'data'=>$data, 'client'=>$client, 'spd'=>$spd, 'user'=>$user,'year'=>$year]);
+        $this->display($dep_name,'createtask', ['notify'=>$notify,'region'=>$dr,'dep'=>$dt, 'data'=>$data, 'client'=>$client, 'spd'=>$spd, 'user'=>$user,'year'=>$year],$type='');
     }
     public function TaskPlanning(){
         $user = $this->session->userdata('user');
@@ -7667,7 +7856,7 @@ public function updateTask($tasktypeid=''){
         $data['mdata'] = $this->Menu_model->get_tpdetail($uid);
         $data['cname'] = $this->Menu_model->get_mscccbypia($uid);
         
-        $this->display($dep_name,'AddTempPerson',$data);
+        $this->display($dep_name,'AddTempPerson',$data,$type);
     }
 
      public function AcademicCalendar(){
@@ -8617,89 +8806,89 @@ public function updateTask($tasktypeid=''){
         redirect('Menu/Dashboard');}
         else{redirect('Menu/main');}
     }
-     public function delete_user(){
-        $id= $this->input->get('id');
+//      public function delete_user(){
+//         $id= $this->input->get('id');
         
-        $dt=$this->Menu_model->delete_user($id);
-        if($dt){
-            redirect('Menu/register');
-        }else{
-            print('error in delete function ');
-        }
-     }
-    //  Add New Function 09-05-2024- Deepak
-      public function StartProgrramReview(){
-        $user           = $this->session->userdata('user');
-        $data['user']   = $user;$uid= $user['id'];
-        $uid            = $user['id'];
-        $id             =  $user['dep_id'];
+//         $dt=$this->Menu_model->delete_user($id);
+//         if($dt){
+//             redirect('Menu/register');
+//         }else{
+//             print('error in delete function ');
+//         }
+//      }
+//     //  Add New Function 09-05-2024- Deepak
+//       public function StartProgrramReview(){
+//         $user           = $this->session->userdata('user');
+//         $data['user']   = $user;$uid= $user['id'];
+//         $uid            = $user['id'];
+//         $id             =  $user['dep_id'];
         
-        $notify     =   $this->Menu_model->get_notifybyid($uid);
-        $dt         =   $this->Menu_model->get_depatment_byid($id);
-        $client     =   $this->Menu_model->get_handover();
-        $zmpi       =   $this->Menu_model->get_user();
-        $ally       =   $this->Menu_model->get_allyear();
-        $dep_name   = $dt[0]->dep_name;
-        if(!empty($user)){
-            $getpiares = $this->db->query("SELECT id FROM `user_detail` WHERE dep_id=2 AND status='active'");
-            $getpiaid = $getpiares->result();
-            $totalPia = sizeof($getpiaid);
-            $cnt =0;
-            foreach($getpiaid as $piid){
-                $getaca = $this->db->query("SELECT * FROM `academiccalendar` WHERE piaid=$piid->id");
-                $getacaData = $getaca->result();
-                $getacountData =  sizeof($getacaData);
-                if($getacountData > 0){
-                    $cnt +=1;
-                }
-            }
-            $remeningPIA = $totalPia - $cnt;
-            $remeningPIA = 0;
-            if($remeningPIA == 0){
-                $getsprogram = $this->db->query("SELECT * FROM `progrram_review_sby_pm` WHERE pmid='$uid' AND end_date=''");
-                $getsprogram = $getsprogram->result();
-                if(sizeof($getsprogram)>0){
-                        redirect('Menu/ProgrramReviewPage');
-                }else{
-                    $this->load->view($dep_name.'/StartProgrramReview', ['user'=>$user,'ally'=>$ally]);
-                }
-            }else{
-                $this->load->library('session');
-                $this->session->set_flashdata('approved_message',  $remeningPIA. ' PIA Remaining for Add Academic Calender.');
-                redirect('/Menu/ShowPIAStatusWithAcadeCal');
-            }
-        }else{
-            redirect('Menu/main');
-        }
- }
-    public function reviewspcodebyyear(){
-    $year = $this->input->post('year');
+//         $notify     =   $this->Menu_model->get_notifybyid($uid);
+//         $dt         =   $this->Menu_model->get_depatment_byid($id);
+//         $client     =   $this->Menu_model->get_handover();
+//         $zmpi       =   $this->Menu_model->get_user();
+//         $ally       =   $this->Menu_model->get_allyear();
+//         $dep_name   = $dt[0]->dep_name;
+//         if(!empty($user)){
+//             $getpiares = $this->db->query("SELECT id FROM `user_detail` WHERE dep_id=2 AND status='active'");
+//             $getpiaid = $getpiares->result();
+//             $totalPia = sizeof($getpiaid);
+//             $cnt =0;
+//             foreach($getpiaid as $piid){
+//                 $getaca = $this->db->query("SELECT * FROM `academiccalendar` WHERE piaid=$piid->id");
+//                 $getacaData = $getaca->result();
+//                 $getacountData =  sizeof($getacaData);
+//                 if($getacountData > 0){
+//                     $cnt +=1;
+//                 }
+//             }
+//             $remeningPIA = $totalPia - $cnt;
+//             $remeningPIA = 0;
+//             if($remeningPIA == 0){
+//                 $getsprogram = $this->db->query("SELECT * FROM `progrram_review_sby_pm` WHERE pmid='$uid' AND end_date=''");
+//                 $getsprogram = $getsprogram->result();
+//                 if(sizeof($getsprogram)>0){
+//                         redirect('Menu/ProgrramReviewPage');
+//                 }else{
+//                     $this->load->view($dep_name.'/StartProgrramReview', ['user'=>$user,'ally'=>$ally]);
+//                 }
+//             }else{
+//                 $this->load->library('session');
+//                 $this->session->set_flashdata('approved_message',  $remeningPIA. ' PIA Remaining for Add Academic Calender.');
+//                 redirect('/Menu/ShowPIAStatusWithAcadeCal');
+//             }
+//         }else{
+//             redirect('Menu/main');
+//         }
+//  }
+//     public function reviewspcodebyyear(){
+//     $year = $this->input->post('year');
     
-    $result = $this->Menu_model->get_pcodebyyear($year);
-    $data = '';
-    $data .= '<option value="">Select Project Code</option>';
-    foreach($result as $dt){
-        $getsch = $this->db->select('*')->from('spd')->where(['project_code'=> $dt->projectcode])->get()->result();
-        $getschcount = sizeof($getsch);
-       $str = $this->db->last_query();
-    //   echo $str;
-        if($getschcount > 0){
-            $annualpro = $this->db->select('*')->from('progrram_review_sby_pm')->where(['projectcode'=> $dt->projectcode])->get()->result();
-            // echo $this->db->last_query();
-            $programExists = false;
-            foreach ($annualpro as $annual) {
-                if ($annual->projectcode == $dt->projectcode) {
-                    $programExists = true;
-                    break;
-                }
-            }
-            if (!$programExists) {
-              $data .= '<option>' .$dt->projectcode. '</option>';
-            }
-        }
-    }
-    echo $data;
-}
+//     $result = $this->Menu_model->get_pcodebyyear($year);
+//     $data = '';
+//     $data .= '<option value="">Select Project Code</option>';
+//     foreach($result as $dt){
+//         $getsch = $this->db->select('*')->from('spd')->where(['project_code'=> $dt->projectcode])->get()->result();
+//         $getschcount = sizeof($getsch);
+//        $str = $this->db->last_query();
+//     //   echo $str;
+//         if($getschcount > 0){
+//             $annualpro = $this->db->select('*')->from('progrram_review_sby_pm')->where(['projectcode'=> $dt->projectcode])->get()->result();
+//             // echo $this->db->last_query();
+//             $programExists = false;
+//             foreach ($annualpro as $annual) {
+//                 if ($annual->projectcode == $dt->projectcode) {
+//                     $programExists = true;
+//                     break;
+//                 }
+//             }
+//             if (!$programExists) {
+//               $data .= '<option>' .$dt->projectcode. '</option>';
+//             }
+//         }
+//     }
+//     echo $data;
+// }
         public function ProgramReviewStatus(){
             $user           =   $this->session->userdata('user');
             $data['user']   =   $user;
@@ -11349,11 +11538,11 @@ public function CheckuserDayAccardingPlanner(){
 
 public function viewProfile(){
     $user   = $this->session->userdata('user');
-    dd($user);
+   // dd($user);
     $uid    = $user['user_id'];
     $uyid   =  $user['type_id'];
     $dep_id =$user['dep_id'];
-    $this->display($dep_name,$viewname,$data);
+    $this->display($dep_name,$viewname,$data,$type='');
 }
 
 }

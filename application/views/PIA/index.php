@@ -1,4 +1,21 @@
+<div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Dashboard</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+                  <h4></h4> 
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
 
+<p class="text-primary m-3" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="true" aria-controls="collapseExample">
+    Dashboard Data Analysis
+</p>
 <!-- Content wrapper -->
 <div class="content-wrapper">
   <!-- Content -->
@@ -77,10 +94,10 @@
             <div class="tab-content">
               <?php 
                 $firstPane = true; // Track first tab content
-         //  dd($getTodaysTaskCounts);
                 foreach ($getTodaysTaskCounts as $getTodaysTaskCount){
                     $slct_type_of_task = $getTodaysTaskCount->tasktype;
-                //    $formatted_string = preg_replace("/[ \/'-]+/", "_", $getTodaysTaskCount->tasktype);
+                    //echo  $getTodaysTaskCount->tasktype."<br>";
+                    $formatted_string = preg_replace("/[ \/'-]+/", "_", $getTodaysTaskCount->tasktype);
                 ?>
               <div class="tab-pane fade <?= $firstPane ? 'show active' : '' ?>" 
                 id="<?= $formatted_string ?>" 
@@ -104,11 +121,11 @@
                             $target_date          = $sctasklist->target_date;
                             $expected_date        = $sctasklist->expected_date;
                             $fwd_date             = $sctasklist->fwd_date;
-                            
                             // echo $slct_type_of_task;
                             // echo "<br>";
                             // echo $tasktype;
-                          if($slct_type_of_task === $tasktype){ ?>
+                          if($slct_type_of_task === $tasktype){ 
+                            ?>
                           <a data-task_id="<?=$task_id;?>" class="list-group-item list-group-item-action flex-column align-items-start active mb-1 taskperformaction" >
                             <div class="d-flex justify-content-between w-100">
                             <input type="hidden" id="tasktype"  name="tasktype" value="<?=$tasktype?>"/>
@@ -119,13 +136,13 @@
                           <?php 
                          // dd($data);
                           ?>
-                          <!-- <small> <span id="countdown<?=$task_id;?>"></span> - <span id="status<?=$task_id;?>"></span>  -->
+                        <small> <span id="countdown<?=$task_id;?>"></span> - <span id="status<?=$task_id;?>"></span>  
                         </small>
                         </a>
-                        <!-- <script> // checkCountDownTime("<?=$fwd_date;?>",<?=$type_of_task;?>);</script> -->
+                       <script> // checkCountDownTime("<?=$fwd_date;?>",<?=$type_of_task;?>);</script> 
                         <?php $i++;
-                           // $slct_type_of_task = "";
-                          } 
+                          
+                          }
                         } ?>
                       </div>
                     </div>
@@ -133,6 +150,7 @@
                 </div>
               </div>
               <?php 
+              
                 $firstPane = false; // Set to false after first iteration
                       }
                 ?>
@@ -164,31 +182,270 @@
         </div>
       </div>
     </div>
+
   </div>
 </div>
-   
+<div class="card-body">
+                <div class="tab-content" id="custom-tabs-four-tabContent">
+                  
+                  <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+                      <div class="card">
+                            <div class="card-header bg-info" id="headingOne" data-toggle="collapse" data-target="#collapse0911" aria-expanded="true" aria-controls="collapse0911">
+                                                                    <b>9:00 AM to 11:00 AM</b><br>
+                                  Total Task 0 | Call(0) | Email(0) | Whatsapp(0) | Meeting(0) | Proposal(0) | Other(0)
+                            </div>
+                            <div id="collapse0911" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                              <div class="card-body">
+                                                                </div>
+                            </div>
+                          </div>
+                    </div>
+      </div>
+      <div class="card-body">
+                <div class="tab-content" id="custom-tabs-four-tabContent">
+                  
+                  <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+                      <div class="card">
+                            <div class="card-header bg-light" id="headingOne" data-toggle="collapse" data-target="#collapse0911" aria-expanded="true" aria-controls="collapse0911">
+                                                                    <b>11:00 AM to 1:00 PM</b><br>
+                                  Total Task 0 | Call(0) | Email(0) | Whatsapp(0) | Meeting(0) | Proposal(0) | Other(0)
+                            </div>
+                            <div id="collapse0911" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                              <div class="card-body">
+                                                                </div>
+                            </div>
+                          </div>
+                    </div>
+      </div>
+      <div class="card-body">
+                <div class="tab-content" id="custom-tabs-four-tabContent">
+                  
+                  <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+                      <div class="card">
+                            <div class="card-header bg-info" id="headingOne" data-toggle="collapse" data-target="#collapse0911" aria-expanded="true" aria-controls="collapse0911">
+                                                                    <b>1:00 PM to 3:00 PM</b><br>
+                                  Total Task 0 | Call(0) | Email(0) | Whatsapp(0) | Meeting(0) | Proposal(0) | Other(0)
+                            </div>
+                            <div id="collapse0911" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                              <div class="card-body">
+                                                                </div>
+                            </div>
+                          </div>
+                    </div>
+      </div>
+      <div class="card-body">
+                <div class="tab-content" id="custom-tabs-four-tabContent">
+                  
+                  <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+                      <div class="card">
+                            <div class="card-header bg-light" id="headingOne" data-toggle="collapse" data-target="#collapse0911" aria-expanded="true" aria-controls="collapse0911">
+                                                                    <b>3:00 PM to 5:00 PM</b><br>
+                                  Total Task 0 | Call(0) | Email(0) | Whatsapp(0) | Meeting(0) | Proposal(0) | Other(0)
+                            </div>
+                            <div id="collapse0911" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                              <div class="card-body">
+                                                                </div>
+                            </div>
+                          </div>
+                    </div>
+      </div>
+      <div class="card-body">
+                <div class="tab-content" id="custom-tabs-four-tabContent">
+                  
+                  <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+                      <div class="card">
+                            <div class="card-header bg-info" id="headingOne" data-toggle="collapse" data-target="#collapse0911" aria-expanded="true" aria-controls="collapse0911">
+                                                                    <b>5:00 PM to 7:00 PM</b><br>
+                                  Total Task 0 | Call(0) | Email(0) | Whatsapp(0) | Meeting(0) | Proposal(0) | Other(0)
+                            </div>
+                            <div id="collapse0911" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                              <div class="card-body">
+                                                                </div>
+                            </div>
+                          </div>
+                    </div>
+      </div>
+      
+      </div>
+      <div class="card card-primary card-outline card-outline-tabs">
+                <h4 class="p-3">Today's Completed Task</h4>
+              <div class="card-header p-0 border-bottom-0">
+                <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                   <li class="nav-item">
+                    <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home" aria-selected="true">
+                        All <span class="badge badge-success">0</span>
+                    </a>
+                    
+                  </li>
+                  
+                  <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-four-call-tab" data-toggle="pill" href="#custom-tabs-four-call" role="tab" aria-controls="custom-tabs-four-call" aria-selected="false">
+                        Call <span class="badge badge-success">0</span>
+                    </a>
+                  </li>
+                  
+                  <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-four-email-tab" data-toggle="pill" href="#custom-tabs-four-email" role="tab" aria-controls="custom-tabs-four-email" aria-selected="false">
+                        Email <span class="badge badge-success">0</span>
+                    </a>
+                  </li>
+                  
+
+                  <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-four-whatsapp-tab" data-toggle="pill" href="#custom-tabs-four-whatsapp" role="tab" aria-controls="custom-tabs-whatsapp" aria-selected="false">
+                        Whatsapp<span class="badge badge-success">0</span>
+                    </a>
+                  </li>
+                  
+                  
+                  <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-four-visit-tab" data-toggle="pill" href="#custom-tabs-four-visit" role="tab" aria-controls="custom-tabs-four-visit" aria-selected="false">
+                        Visit <span class="badge badge-success">0</span>
+                    </a>
+                  </li>
+                  
+                  
+                  
+                  <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-four-utilisation-tab" data-toggle="pill" href="#custom-tabs-four-utilisation" role="tab" aria-controls="custom-tabs-utilisation" aria-selected="false">
+                        Utilisation<span class="badge badge-success">0</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-four-report-tab" data-toggle="pill" href="#custom-tabs-four-report" role="tab" aria-controls="custom-tabs-four-report" aria-selected="false">
+                        Report <span class="badge badge-success">0</span>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" id="custom-tabs-four-other-tab" data-toggle="pill" href="#custom-tabs-four-other" role="tab" aria-controls="custom-tabs-four-other" aria-selected="false">
+                        Other <span class="badge badge-success">0</span>
+                    </a>
+                  </li>
+                </ul>
+                
+              </div>
+              <div class="card-body">
+                <div class="tab-content" id="custom-tabs-four-tabContent">
+                  
+                  <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
+                      <div class="card">
+                            <div class="card-header bg-info" id="headingOne" data-toggle="collapse" data-target="#collapse0911" aria-expanded="true" aria-controls="collapse0911">
+                                                                    <b>9:00 AM to 11:00 AM</b><br>
+                                  Total Task 0 | Call(0) | Email(0) | Whatsapp(0) | Visit(0) | Utilisation(0) | Report(0) | Other(0)
+                            </div>
+                            <div id="collapse0911" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                              <div class="card-body">
+                                                                </div>
+                            </div>
+                          </div>
+                          
+                         <div class="card">
+                                <div class="card-header bg-light" id="headingTwo" data-toggle="collapse" data-target="#collapse1113" aria-expanded="false" aria-controls="collapse1113">
+                                                                            <b>11:00 AM to 01:00 PM</b><br>
+                                      Total Task 0 | Call(0) | Email(0) | Whatsapp(0) | Visit(0) | Utilisation(0) | Report(0) | Other(0)
+                                </div>
+                                <div id="collapse1113" class="collapse show" aria-labelledby="headingTwo" data-parent="#accordion">
+                                  <div class="card-body">
+                                                                     </div>
+                                </div>
+                              </div> 
+                              <div class="card">
+                                <div class="card-header bg-info" id="headingThree" data-toggle="collapse" data-target="#collapse1315" aria-expanded="false" aria-controls="collapse1315">
+                                                                            <b>01:00 PM to 03:00 PM</b><br>
+                                      Total Task 0 | Call(0) | Email(0) | Whatsapp(0) | Visit(0) | Utilisation(0) | Report(0) | Other(0)
+                                </div>
+                                <div id="collapse1315" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
+                                  <div class="card-body">
+                                                                      </div>
+                                </div>
+                              </div>
+                              <div class="card">
+                                <div class="card-header bg-light" id="headingThree" data-toggle="collapse" data-target="#collapse1517" aria-expanded="false" aria-controls="collapse1517">
+                                                                            <b>03:00 PM to 05:00 PM</b><br>
+                                      Total Task 0 | Call(0) | Email(0) | Whatsapp(0) | Visit(0) | Utilisation(0) | Report(0) | Other(0)
+                                </div>
+                                <div id="collapse1517" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
+                                  <div class="card-body">
+                                                                      </div>
+                                </div>
+                              </div>
+                              
+                              <div class="card">
+                                <div class="card-header bg-info" id="headingThree" data-toggle="collapse" data-target="#collapse1719" aria-expanded="false" aria-controls="collapse1719">
+                                                                            <b>05:00 PM to 07:00 PM</b><br>
+                                      Total Task 0 | Call(0) | Email(0) | Whatsapp(0) | Visit(0) | Utilisation(0) | Report(0) | Other(0)
+                                </div>
+                                <div id="collapse1719" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
+                                  <div class="card-body">
+                                                                      </div>
+                                </div>
+                              </div>
+                              
+                              <div class="card">
+                                <div class="card-header bg-light" id="headingThree" data-toggle="collapse" data-target="#collapse9121" aria-expanded="false" aria-controls="collapse9121">
+                                                                            <b>19:00 PM to 21:00 PM</b><br>
+                                      Total Task 0 | Call(0) | Email(0) | Whatsapp(0) | Visit(0) | Utilisation(0) | Report(0) | Other(0)
+                                </div>
+                                <div id="collapse9121" class="collapse show" aria-labelledby="headingThree" data-parent="#accordion">
+                                  <div class="card-body">
+                                                                     </div>
+                                </div>
+                              </div>
+                      
+                      
+                  </div>
+                      
+                  <div class="tab-pane fade" id="custom-tabs-four-call" role="tabpanel" aria-labelledby="custom-tabs-four-call-tab">
+                                        </div>
+                  <div class="tab-pane fade" id="custom-tabs-four-email" role="tabpanel" aria-labelledby="custom-tabs-four-email-tab">
+                      
+                                            
+                  </div>
+                  <div class="tab-pane fade" id="custom-tabs-four-whatsapp" role="tabpanel" aria-labelledby="custom-tabs-four-whatsapp-tab">
+                      
+                                           
+                  </div>    
+                      
+                  <div class="tab-pane fade" id="custom-tabs-four-visit" role="tabpanel" aria-labelledby="custom-tabs-four-visit-tab">
+                      
+                                        </div>
+                  
+                  <div class="tab-pane fade" id="custom-tabs-four-utilisation" role="tabpanel" aria-labelledby="custom-tabs-four-utilisation-tab">
+                                        </div>
+                  
+                   <div class="tab-pane fade" id="custom-tabs-four-report" role="tabpanel" aria-labelledby="custom-tabs-four-report-tab">
+                      
+                   </div>
+                      
+                   <div class="tab-pane fade" id="custom-tabs-four-other" role="tabpanel" aria-labelledby="custom-tabs-four-other-tab">
+                      
+                      
+                  </div>
+                  
+                </div>
+              </div>
+              <!-- /.card -->
+            </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
   $(document).ready(function() {
     // When an element with class 'taskperformaction' is clicked
     $('.taskperformaction').on('click', function() {
-        var taskId   = $(this).data('task_id'); // Retrieve the 'task_id' data
-        var tasktype = $("#tasktype").val();
+        var taskId      = $(this).data('task_id'); // Retrieve the 'task_id' data
+        var tasktype    = $("#tasktype").val();
         var tasktype_id = $("#tasktype_id").val();
-       //   alert(taskId+"==="+tasktype);
         $.ajax({
-                        url:'<?=base_url();?>Menu/taskExecution/',
+                         url: '<?=base_url();?>Menu/taskExecution/',
                         type: "POST",
                         data: {
-                               taskId: taskId ,
-                               tasktype :tasktype,
-                               tasktype_id : tasktype_id
-                        },
+                               taskId       : taskId ,
+                               tasktype     : tasktype,
+                               tasktype_id  : tasktype_id
+                              },
                         cache: false,
                         success: function (response){
+                     // alert(response);
                           $('#modalCenter').modal('show');
-                       // $('#modalCenterTitle').text("Task ID IS = "+taskId);
-                          // $('#maintenanceModal').css('show');
                           $("#taskModal").html(response);
                         }
                 });
@@ -197,4 +454,4 @@
     });
 });
 </script>
-<?php $this->load->view('footer'); ?>
+<?php // $this->load->view('footer'); ?>

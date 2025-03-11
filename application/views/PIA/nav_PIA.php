@@ -150,14 +150,14 @@
                 <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
               </a>
             </li>
-            <li class="menu-item">
+            <!-- <li class="menu-item">
               <a href="MyNextDayPlan/<?=date('Y-m-d');?>"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Sharetodaysplan">Share You Today's Plan</div>
               </a>
-            </li>
+            </li> -->
             <li class="menu-item">
               <a href="AddTempPerson"
                 target="_blank"
@@ -186,14 +186,14 @@
                 <div class="text-truncate" data-i18n="Myprofile">Create Cluster for MSC Clean</div>
               </a>
             </li>
-            <li class="menu-item">
+            <!-- <li class="menu-item">
               <a href="Mytarget"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="TransitProcess">My Target</div>
               </a>
-            </li>
+            </li> -->
             <li class="menu-item">
               <a href="DayManagement"
                 target="_blank"
@@ -218,14 +218,14 @@
                 <div class="text-truncate" data-i18n="NextDayPlan">Live Visit</div>
               </a>
             </li>
-            <li class="menu-item">
+            <!-- <li class="menu-item">
               <a href="CreateTask"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="CreateTask">Create Task</div>
               </a>
-            </li>
+            </li> -->
             <li class="menu-item">
               <a href="AllReviewPlaing"
                 target="_blank"
@@ -417,9 +417,3 @@
             </div>
           </nav>
           <!-- / Navbar -->
-           <script>
-            $(document).ready(function(){
-              let dept_name = $("#dept_name").val();
-              console.log($dept_name);
-            })
-            </script>

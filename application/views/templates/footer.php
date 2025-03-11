@@ -1,129 +1,111 @@
-        
-    <style>
+  <!-- Footer -->
+  <footer class="content-footer footer bg-footer-theme">
+              <div class="container-xxl">
+                <div
+                  class="footer-container d-flex align-items-center justify-content-between py-4 flex-md-row flex-column">
+                  <div class="text-body">
+                    ©
+                    <script>
+                      document.write(new Date().getFullYear());
+                    </script>
+                    , made with ❤️ by
+                    <a href="https://themeselection.com" target="_blank" class="footer-link">STEM</a>
+                  </div>
+                  <div class="d-none d-lg-inline-block">
+                    <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
+                    <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
 
-#myInput {
-  background-position: 10px 12px;
-  background-repeat: no-repeat;
-  width: 100%;
-  font-size: 9px;
-  padding: 12px 20px 12px 40px;
-  border: 1px solid #ddd;
-  margin-bottom: 12px;
-}
+                    <a
+                      href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/"
+                      target="_blank"
+                      class="footer-link me-4"
+                      >Documentation</a
+                    >
 
-#myUL {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
+                    <a
+                      href="https://github.com/themeselection/sneat-html-admin-template-free/issues"
+                      target="_blank"
+                      class="footer-link"
+                      >Support</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </footer>
+            <!-- / Footer -->
 
-#myUL li a {
-  border: 1px solid #ddd;
-  margin-top: -1px; /* Prevent double borders */
-  background-color: #f6f6f6;
-  padding: 12px;
-  text-decoration: none;
-  font-size: 18px;
-  color: black;
-  display: block
-}
+            <div class="content-backdrop fade"></div>
+          </div>
+          <!-- Content wrapper -->
+        </div>
+        <!-- / Layout page -->
+      </div>
 
-#myUL li a:hover:not(.header) {
-  background-color: #eee;
-}
-</style>           
-<script>
-function myFunction() {
-    var input, filter, ul, li, a, i, txtValue;
-    input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
-    ul = document.getElementById("myUL");
-    li = ul.getElementsByTagName("li");
-    for (i = 0; i < li.length; i++) {
-        a = li[i].getElementsByTagName("a")[0];
-        txtValue = a.textContent || a.innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            li[i].style.display = "";
-        } else {
-            li[i].style.display = "none";
-        }
-    }
-}
-</script>             
-            
-        <!-- /.row (main row) -->
-      </div><!-- /.container-fluid -->
-    </section>
-    
-    </div></div></div>
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2021-2022 <a href="<?=base_url();?>">Stemlearning</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 1.0
+      <!-- Overlay -->
+      <div class="layout-overlay layout-menu-toggle"></div>
     </div>
-  </footer>
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
-</div>
-<!-- ./wrapper -->
 
-<!-- jQuery -->
-<script src="<?=base_url();?>assets/js/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="<?=base_url();?>assets/js/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
-<!-- Bootstrap 4 -->
-<script src="<?=base_url();?>assets/js/bootstrap.bundle.min.js"></script>
-<!-- ChartJS -->
-<script src="<?=base_url();?>assets/js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="<?=base_url();?>assets/js/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="<?=base_url();?>assets/js/jquery.vmap.min.js"></script>
-<script src="<?=base_url();?>assets/js/jquery.vmap.usa.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
-<script src="<?=base_url();?>assets/js/moment.min.js"></script>
-<script src="<?=base_url();?>assets/js/daterangepicker.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="<?=base_url();?>assets/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Summernote -->
-<script src="<?=base_url();?>assets/js/summernote-bs4.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="<?=base_url();?>assets/js/jquery.overlayScrollbars.min.js"></script>
-<!-- DataTables  & Plugins -->
-<script src="<?=base_url();?>assets/js/jquery.dataTables.min.js"></script>
-<script src="<?=base_url();?>assets/js/dataTables.bootstrap4.min.js"></script>
-<script src="<?=base_url();?>assets/js/dataTables.responsive.min.js"></script>
-<script src="<?=base_url();?>assets/js/responsive.bootstrap4.min.js"></script>
-<script src="<?=base_url();?>assets/js/dataTables.buttons.min.js"></script>
-<script src="<?=base_url();?>assets/js/buttons.bootstrap4.min.js"></script>
-<script src="<?=base_url();?>assets/js/jszip.min.js"></script>
-<script src="<?=base_url();?>assets/js/pdfmake.min.js"></script>
-<script src="<?=base_url();?>assets/js/vfs_fonts.js"></script>
-<script src="<?=base_url();?>assets/js/buttons.html5.min.js"></script>
-<script src="<?=base_url();?>assets/js/buttons.print.min.js"></script>
-<script src="<?=base_url();?>assets/js/buttons.colVis.min.js"></script>
-<!-- AdminLTE App -->
-<script src="<?=base_url();?>assets/js/adminlte.js"></script>
 
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?=base_url();?>assets/js/dashboard.js"></script>
+    <!-- / Layout wrapper -->
 
-<script>
-    $("#example1").DataTable({
-      "responsive": false, "lengthChange": false, "autoWi$dth": false,
-      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appen$dto('#example1_wrapper .col-md-6:eq(0)');
-</script>
-</body>
+    <!-- <div class="buy-now">
+      <a
+        href="https://themeselection.com/item/sneat-dashboard-pro-bootstrap/"
+        target="_blank"
+        class="btn btn-danger btn-buy-now"
+        >Upgrade to Pro</a
+      >
+    </div> -->
+
+    <!-- Core JS -->
+    <!-- build:js assets/vendor/js/core.js -->
+
+    <script src="<?= base_url()?>assets/assets/vendor/libs/jquery/jquery.js"></script>
+    <script src="<?= base_url()?>assets/assets/vendor/libs/popper/popper.js"></script>
+    <script src="<?= base_url()?>assets/assets/vendor/js/bootstrap.js"></script>
+    <script src="<?= base_url()?>assets/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+    <script src="<?= base_url()?>assets/assets/vendor/js/menu.js"></script>
+
+    <!-- endbuild -->
+
+    <!-- Vendors JS -->
+    <script src="<?= base_url()?>assets/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+
+    <!-- Main JS -->
+    <script src="<?= base_url()?>assets/js/main.js"></script>
+
+    <!-- Page JS -->
+    <script src="<?= base_url()?>assets/assets/js/dashboards-analytics.js"></script>
+
+    <!-- Place this tag before closing body tag for github widget button. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+
+    <script src="//code.jquery.com/jquery-1.12.3.js"></script>
+    <script src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="//cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="//cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="//cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+    <script src="//cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('#example').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                      'copy', 'excelFlash', 'excel', 'pdf', 'print'
+                  ]
+              } );
+        $('#example1').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+                      'copy', 'excelFlash', 'excel', 'pdf', 'print'
+                  ]
+              } );
+      } );
+    </script>
+  </body>
 </html>
