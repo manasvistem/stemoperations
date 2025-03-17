@@ -1,59 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>STEM Operation | WebAPP</title>
 
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Tempusdominus Bootstrap 4 -->
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/tempusdominus-bootstrap-4.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/icheck-bootstrap.min.css">
-  <!-- JQVMap -->
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/jqvmap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/adminlte.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/OverlayScrollbars.min.css">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/daterangepicker.css">
-  <!-- summernote -->
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/summernote-bs4.min.css">
-</head>
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
-
-  <!-- Preloader -->
-  
-
-  <!-- Navbar -->
-  <?php require('nav.php');?>
-  <!-- /.navbar -->
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <h4></h4>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-<!-- Main content -->
 <?php if($do==0){?>
     <section class="content">
       <div class="container-fluid">
@@ -64,6 +12,8 @@
                   <h3 class="text-center">Manage Your Day</h3>
                   <hr>
                   <form action="<?=base_url();?>Menu/daysc" method="post" enctype="multipart/form-data">
+                    <input type ="hidden" id="wffo_planner" value="<?php echo $user_day_start_from->userworkfrom;?>"/>
+                    <input type ="hidden" id="wffoval" value="<?php echo $user_day_start_from->userworkfrom_val;?>"/>
                     <div class="form-group">
                         <input type="hidden" name="user_id" value="<?=$uid?>">
                         <center><b class="text-info">Today's Date : <?=date('d-m-Y');?> </b>
@@ -71,10 +21,16 @@
                         <input type="hidden" name="ustart" value="<?=date('Y-d-m H:i:s')?>">
                         <p>You Are Starting Day at <b><?=date('H:i:s');?></b><br><br>
                         <div class="mb-4">
-                            <select class="form-control" name="wffo">
+                            <!-- <select class="form-control" name="wffo">
                                 <option value="1">Work From Office</option>
                                 <option value="2">Work From Field</option>
                                 <option value="3">Work From Field+Office</option>
+                            </select> -->
+                            <select class="form-control" name="wffo" id="wffo" style="width:400px" required>
+                              <option value="">Start Your Day</option>
+                                <?php foreach($userdfrom as $udfrom){ ?>
+                                <option value="<?= $udfrom->ID; ?>"><?= $udfrom->TYPE; ?></option>
+                                <?php } ?>
                             </select>
                         </div>
                         <div class="mb-4 d-flex justify-content-center">
@@ -95,15 +51,88 @@
                           <iframe style="width:100%;height:200px;" id="mylocation" src="" frameborder="0" style="border:0" allowfullscreen></iframe>
                         </div>
                         <div class="form-group text-center">
-                            <button type="submit" class="btn btn-success" onclick="this.form.submit(); this.disabled = true;">Start Your Day</button>
-                        </div>
+                        <button type="submit" class="btn btn-success" id="submitButton" >Start Your Day</button>
+                        <center>
+                        <p id="goodmessage"></p>
+                        </center>                        
+                      </div>
                     </div>
-                    
                   </form>
             </div>
           </div>
       </div>   
-     </div>     
+     </div>
+     <?php 
+                $geturdata = $this->Menu_model->change_user_day_request($uid);
+                $geturdatacnt = sizeof($geturdata);
+                if($geturdatacnt > 0){ ?>
+<hr>
+<div class="card p-5">
+<h5 class="bg-info p-2 text-center">Your Request to change the start your Days</h5>
+<table class="table table-striped">
+    <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Date</th>
+            <th>Want To Start</th>
+            <th>Message</th>
+            <th>Approved By</th>
+            <th>Approval Status</th>
+            <th>Admin Message</th>  
+        </tr>
+    </thead>
+    <tbody>
+        <?php 
+        $i=1;
+        foreach ($geturdata as $row): ?>
+        <tr>
+            <td><?php echo $i; ?></td>
+            <td><?php 
+             $udetail = $this->Menu_model->get_userbyid($row->user_id);
+             $username = $udetail[0]->name;
+             echo $username;
+            ?></td>
+            <td><?php echo $row->date; ?></td>
+            <td><?php 
+            echo $this->Menu_model->userworkfrombyid($row->user_want_start)[0]->TYPE;
+           ?></td>
+            <td><?php echo $row->message; ?></td>
+            <td><?php 
+            if($row->apr_by == 0){
+              echo "<span class='p-1 bg-warning'>Pending</span>";
+            }else{
+              $udetail = $this->Menu_model->get_userbyid($row->apr_by);
+              $admidname = $udetail[0]->name;
+              echo $admidname;
+            }
+            ?></td>
+            <td><?php 
+             if($row->apr_status == 0){
+              echo "<span class='p-1 bg-warning'>Pending</span>";
+            }elseif($row->apr_status == 1){
+              echo "<span class='p-1 bg-success'>Approved</span>";
+            }elseif($row->apr_status == 2){
+              echo "<span class='p-1 bg-danger'>Reject</span>";
+            }
+            ?></td>
+            <td><?php 
+            if($row->amessage == ''){
+              echo "<span class='p-1 bg-warning'>Pending</span>";
+            }else{
+              echo $row->amessage; 
+            }
+            ?></td>
+        </tr>
+        <?php $i++; endforeach; ?>
+    </tbody>
+</table>
+</div>
+               <?php } ?>
+              </div>
+            </div>
+          </div>
+        </div>
     </section>
     <?php } if($do==1){?>
     <section class="content">
@@ -120,7 +149,7 @@
                         <center><b class="text-info">Today's Date : <?=date('d-m-Y');?> </b>
                         <p>You have Started your Day at <b><?=$ustart=$mdata[0]->ustart?></b></p>
                         <p>You have Started your Day from <b><?php if($mdata[0]->wffo==1){echo'Work From Office';}if($mdata[0]->wffo==2){echo'Work From Field';}if($mdata[0]->wffo==3){echo'Work From Field+Office';}?></b></p>
-                        <p>You have Closing your Day at <b><?=$cdate=date('H:i:s');?></b></p>
+                        <p>You are Closing your Day at <b><?=$cdate=date('H:i:s');?></b></p>
                         <p>Time diffrence is <b><?=$this->Menu_model->timediff($ustart,$cdate);?></b></p>
                         <div class="mb-4 d-flex justify-content-center">
                             <img class="border" id="blah" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg" alt="your image" style="width:150px;height:250px"/>
@@ -143,7 +172,6 @@
                         <button type="submit" class="btn btn-danger" onclick="this.form.submit(); this.disabled = true;">Close Your Day</button>
                     </div>
                     </div>
-                    
                   </form>
             </div>
           </div>
@@ -171,227 +199,166 @@
      </div>     
     </section>
   <?php }?>
-  
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script type='text/javascript'>
-
-
-
-document.getElementById("location").style.display = "none";
-imgInp.onchange = evt => {
-  const [file] = imgInp.files
-  if (file) {
-    blah.src = URL.createObjectURL(file);
-    document.getElementById("location").style.display = "block";
-    
-    
-  }
-}
-
-
-var x = document.getElementById("lat");
-var y = document.getElementById("lng");
-var z = document.getElementById("mylocation");
-$(document).ready(function(){
-    if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(showPosition);
-  } else { 
-    x.value = "Geolocation is not supported by this browser.";
-  }
-});
-function showPosition(position) {
-  x.value = position.coords.latitude; 
-  y.value = position.coords.longitude;
-  var a = position.coords.latitude;
-  var b = position.coords.longitude;
-  mylocation.src = "https://maps.google.com/?q="+a+","+b+"&t=k&z=13&ie=UTF8&iwloc=&output=embed";
-}
-
-
-
-
-$('#task_subtype').on('change', function() {
-   var tst = this.value;
-   var tt = document.getElementById("task_type").value;
-   if(tt=="VISIT"){
-       if(tst=="New Client"){
-          $("#box1").show();
-          $("#box2").hide(); 
-       }
-       if(tst=="Onboard Client" || tst=="Inauguration"){
-          $("#box2").show();
-          $("#box1").hide();
-       }
-   }
-   if(tt=="TTP"){
-      $("#box2").show();
-      $("#box1").hide();
-   }
-   if(tt=="M&E"){
-      $("#box2").show();
-      $("#box1").hide();
-   }
-   if(tt=="DIY"){
-      $("#box2").show();
-      $("#box1").hide();
-   }
-   if(tt=="Utilisation"){
-      $("#box2").show();
-      $("#box1").hide();
-   }
-   if(tt=="Call"){
-      $("#box2").show();
-      $("#box1").hide();
-   }
-   if(tt=="Email"){
-      $("#box2").show();
-      $("#box1").hide();
-   }
-   if(tt=="Whatsapp"){
-      $("#box2").show();
-      $("#box1").hide();
-   }
-   if(tt=="Other"){
-      $("#box2").hide();
-      $("#box1").hide();
-   }
-});
-
-$('#region').on('change', function b() {
-var dep = document.getElementById("dep").value;
-var region = document.getElementById("region").value;
-   
-$.ajax({
-url:'<?=base_url();?>Menu/getuserbydr',
-type: "POST",
-data: {
-dep: dep,
-region: region
-},
-cache: false,
-success: function a(result){
-$("#to_user").html(result);
-}
-});
-});
-
-
-$('#task_type').on('change', function c() {
-var tt = document.getElementById("task_type").value;
-$.ajax({
-url:'<?=base_url();?>Menu/getpitst',
-type: "POST",
-data: {
-tt: tt
-},
-cache: false,
-success: function a(result){
-$("#task_subtype").html(result);
-}
-});
-});
-
-$('#pcode').on('change', function b() {
-var pcode = document.getElementById("pcode").value;
-$.ajax({
-url:'<?=base_url();?>Menu/getspdbypcs',
-type: "POST",
-data: {
-pcode: pcode
-},
-cache: false,
-success: function a(result){
-$("#spd_id").html(result);
-}
-});
-});
-
-$('#pcode').on('change', function b() {
-var pcode = document.getElementById("pcode").value;
-$.ajax({
-url:'<?=base_url();?>Menu/getspdbypcs',
-type: "POST",
-data: {
-pcode: pcode
-},
-cache: false,
-success: function a(result){
-$("#spd_id1").html(result);
-}
-});
-});
-
-</script>
-
-          
         <!-- /.row (main row) -->
       </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2021-2022 <a href="<?=base_url();?>">Stemlearning</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 1.0
-    </div>
-  </footer>
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
   <!-- /.control-sidebar -->
 </div>
-<!-- ./wrapper -->
+  </div>
+<div class="modal fade" id="exampleModalReminder" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header bg-info text-center">
+                <h5 class="modal-title" id="exampleModalLabel">Create a request to change the start your Days</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                <p id="changemessage" class="text-danger text-center" ></p>
+                <hr>
+                <form action="<?=base_url();?>Menu/SendRequestForDayStartChnage" method="post">
+                  <input type="hidden" id="user_want_start" name="user_want_start" class="form-control d-none" />
+                  <div class="form-group">
+                  <label>Write down why you want to change : </label>
+                  <textarea class="form-control" name="message" rows="3"></textarea>
+                  </div>
+                  <div class="form-group text-center">
+                  <button type="submit" class="btn btn-primary">Send Request</button>
+                  </div>
+                </form>
+                </div>
+                </div>
+                </div>
+      </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type='text/javascript'>
+      document.getElementById("location").style.display = "none";
+      imgInp.onchange = evt => {
+        const [file] = imgInp.files
+        if (file) {
+          blah.src = URL.createObjectURL(file);
+          document.getElementById("location").style.display = "block";
+        }
+      }
+      var x = document.getElementById("lat");
+      var y = document.getElementById("lng");
+      var z = document.getElementById("mylocation");
+      $(document).ready(function(){
+          if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else { 
+          x.value = "Geolocation is not supported by this browser.";
+        }
+      });
+      function showPosition(position) {
+        x.value = position.coords.latitude; 
+        y.value = position.coords.longitude;
+        var a = position.coords.latitude;
+        var b = position.coords.longitude;
+        mylocation.src = "https://maps.google.com/?q="+a+","+b+"&t=k&z=13&ie=UTF8&iwloc=&output=embed";
+      }
+      $('#lat').on('change', function() {
+         document.getElementById("closebtn").disabled = true;
+      });
+    </script>
+    <script>
+      $(document).ready(function() {
+          $('#submitButton').click(function(event) {
+              var fileInput = $('#imgInp');
+              if (fileInput.val() === '') {
+                  alert('Please Select Your Picture.');
+                  event.preventDefault();
+                  return false;
+              }
+          });
 
-<!-- jQuery -->
-<script src="<?=base_url();?>assets/js/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="<?=base_url();?>assets/js/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
-<!-- Bootstrap 4 -->
-<script src="<?=base_url();?>assets/js/bootstrap.bundle.min.js"></script>
-<!-- ChartJS -->
-<script src="<?=base_url();?>assets/js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="<?=base_url();?>assets/js/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="<?=base_url();?>assets/js/jquery.vmap.min.js"></script>
-<script src="<?=base_url();?>assets/js/jquery.vmap.usa.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
-<script src="<?=base_url();?>assets/js/moment.min.js"></script>
-<script src="<?=base_url();?>assets/js/daterangepicker.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="<?=base_url();?>assets/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Summernote -->
-<script src="<?=base_url();?>assets/js/summernote-bs4.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="<?=base_url();?>assets/js/jquery.overlayScrollbars.min.js"></script>
-<!-- AdminLTE App -->
-<script src="<?=base_url();?>assets/js/adminlte.js"></script>
 
-<!-- jquery-validation -->
-<script src="<?=base_url();?>assets/js/jquery.validate.min.js"></script>
-<script src="<?=base_url();?>assets/js/additional-methods.min.js"></script>
 
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?=base_url();?>assets/js/dashboard.js"></script>
+          $('#end-time').on('change', function() {
+              var startTime = $('#start-time').val();
+              if (startTime === '') {
+                  alert("Please Enter Start Time");
+                  $('#end-time').val('');
+              } else {
+                  var endTime = $(this).val();
+                  var startTimeMinutes = convertTimeToMinutes(startTime);
+                  var endTimeMinutes = convertTimeToMinutes(endTime);
+                  // Check if the difference is more than 90 minutes
+                 if ((endTimeMinutes - startTimeMinutes) > 90 || (endTimeMinutes - startTimeMinutes) < 90) {
+                      alert('Auto Task Max Time is Only 90 Minutes');
+                      $('#end-time').val('');
+                  }
+              }
+          });
 
-<script>
-$(function() {
-  $.validator.setDefaults({
-    submitHandler: function () {
-      alert( "Form successful submitted!" );
-    }
-  });
-});
-</script>
-</body>
-</html>
+          function convertTimeToMinutes(time) {
+                          var timeParts = time.split(':');
+                          var hours = parseInt(timeParts[0], 10);
+                          var minutes = parseInt(timeParts[1], 10);
+                          return (hours * 60) + minutes;
+                      }
+
+        $('#end-time').on('change', function() {
+        let endTime = $(this).val();
+
+        if (endTime) {
+            // Convert endTime to a Date object
+            let endDateTime = new Date('1970-01-01T' + endTime + ':00');
+
+            // Increment by 1 minute for start_tttpft
+            // let startDateTime = new Date(endDateTime.getTime() + 1 * 60000);
+            let startDateTime = new Date(endDateTime.getTime() + 0 * 60000);
+            let startHours = ('0' + startDateTime.getHours()).slice(-2);
+            let startMinutes = ('0' + startDateTime.getMinutes()).slice(-2);
+            $('#start_tttpft').val(startHours + ':' + startMinutes);
+
+            // Increment by 1 hour for end_tttpft
+            let endTttPftDateTime = new Date(endDateTime.getTime() + 1 * 3600000);
+            let endTttPftHours = ('0' + endTttPftDateTime.getHours()).slice(-2);
+            let endTttPftMinutes = ('0' + endTttPftDateTime.getMinutes()).slice(-2);
+            $('#end_tttpft').val(endTttPftHours + ':' + endTttPftMinutes);
+        }
+    });
+
+    $('#wffo').on('change', function() {
+              var wffo = $('#wffo').val();
+              var wffo_planner = $("#wffo_planner").val();// work from id
+              var wffoval = $("#wffoval").val();// work from name
+/*
+                    if(wffo !== wffo_planner){
+                      var selectedText      = $('#wffo option:selected').text();
+                      $("#user_want_start").val(wffo);
+                      var result        = 'You have planned to start your day from : <b>'+ wffoval+'</b>';
+                      var selectedText  = 'But You want to start : <b>'+selectedText+'</b>';
+                      var message       = result  +  selectedText;
+                  //alert(message);
+                      $("#changemessage").html(message);
+                      $('#submitButton').prop('disabled', true);
+                      $('#exampleModalReminder').modal('show');
+                    }else{
+                      if(recntapr == 0 || recntapr ==''){
+                        $('#submitButton').prop('disabled', true);
+                        $('#goodmessage').text("* Please Wait !, While Your Request gets Approved.").css('color', 'red');
+                      }else if(recntapr == 1){
+                        $('#goodmessage').text("* You are able to change your day because your manager has approved your day change request.").css('color', 'green');
+                        $('#submitButton').prop('disabled', false);
+                      }else if(recntapr == 2){
+                        $('#submitButton').prop('disabled', true);
+                        $('#goodmessage').text("* You are not able to change your day because your manager has reject your day change request.").css('color', 'red');
+                      }
+                    }
+                  // }else{
+                  //   // $('#goodmessage').text("* Good Plan As Your Days According to Planner.").css('color', 'green');
+                  //   $('#submitButton').prop('disabled', false);
+                  // }
+                     */
+          });
+       
+          
+        });
+    </script>

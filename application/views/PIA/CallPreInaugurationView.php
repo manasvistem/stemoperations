@@ -1,18 +1,18 @@
 <div class="container mt-5">
-    <h3 class="text-center mb-4"><?php // echo $taskstatus ?>Pre-Inauguration Task</h3>
+    <h3 class="text-center mb-4"><?php // echo $taskstatus ?>Call Pre-Inauguration Task</h3>
     
     <form action="<?php echo base_url()?>Menu/PreInaugurationCallUpdate" enctype="multipart/form-data"  method="post" name="preInauguration" id="preInauguration">
         <div class="mb-3">
             <label class="form-label fw-bold">Project Code</label>
-            <input type="text" class="form-control" placeholder="Enter Project Code" value="" disabled required>
+            <input type="text" class="form-control" placeholder="Enter Project Code" value="<?php echo $taskDetails['project_code'];?>" disabled required>
         </div>
         <div class="mb-3">
             <label class="form-label fw-bold">School Name</label>
-            <input type="text" class="form-control" placeholder="Enter School Name" value="" disabled required>
+            <input type="text" class="form-control" placeholder="Enter School Name" value="<?php echo $taskDetails['sname'];?>" disabled required>
         </div>
         <div class="mb-3">
             <label class="form-label fw-bold">Address</label>
-            <textarea class="form-control" rows="3" placeholder="Enter Address" value="" disabled required></textarea>
+            <textarea class="form-control" rows="3" placeholder="Enter Address" disabled required><?php echo $taskDetails['saddress'];?></textarea>
         </div>
         <div class="mb-3">
             <div class="form-check">Action Taken 
@@ -94,7 +94,6 @@
     <!-- Pre-Visit Task (Hidden Initially) -->
     <!-- <div class="form-group" id="preVisitTask" style="display: none;"></div> -->
 
-  </div>
         <input type="hidden" value="PreInaugurationVisit" name="taskname"/>
         <input type="hidden" value="<?php echo $taskId;?>" name="taskId"/>
         <div class="text-center">
@@ -106,7 +105,7 @@
 <!-- Include Footer Here -->
 <script>
 $("document").ready(function(){
-  var action = '';   var purpose  = ''
+  var action = '';   var purpose  = '';
         $('input[name="action"]').on('change', function() {
                action       = $('input[name="action"]:checked').val()
               $('input[name="purpose"]').on('change', function(){
@@ -126,7 +125,6 @@ $("document").ready(function(){
             url: $(this).attr("action"), // Get action URL from form
             type: "POST",
             data: $(this).serialize(), // Serialize form data
-            dataType: "json",
             success: function (response) {
                 if (response.status == 'success') {
                     alert("Task updated successfully!");
@@ -134,7 +132,7 @@ $("document").ready(function(){
                    // $("#dynamicStatus").text("Task Status: Updated"); // Update text
                     $("#modalCenter").hide();
                     setTimeout(function () {
-                      location.reload(); // Reload the page to return to main view
+                          location.reload(); // Reload the page to return to main view
                       }, 500);
                     } else {
                         alert("Error updating task. Try again.");
@@ -142,7 +140,6 @@ $("document").ready(function(){
             },
             error: function () {
                 //error occurred
-
             }
         });
     });

@@ -6161,11 +6161,13 @@ SELECT task_id, task_action_id, taskname, sname,task_status FROM TaskHierarchy")
     return $query->result();
 }
 public function GetTodaysAllTaskCountByUid($uid,$tdate,$perform){
-   
-    $query = $this->db->query("SELECT `task_action`.`tasktype`, COUNT(`tblcallevents`.`id`) AS task_count FROM `task_action` LEFT JOIN `tblcallevents` ON `tblcallevents`.`task_action` = `task_action`.`id` AND DATE(`tblcallevents`.`appointment_datetime`) = '$tdate' AND `tblcallevents`.`task_status` = 0 AND `tblcallevents`.`user_id` = '$uid' WHERE `task_action`.`perform_by` = '$perform' 
-     GROUP BY `task_action`.`tasktype` ORDER BY `task_action`.`tasktype` ASC");
+    $query = $this->db->query("SELECT `task_action`.`tasktype`, COUNT(`tblcallevents`.`id`) AS task_count FROM `task_action` 
+            LEFT JOIN `tblcallevents` ON `tblcallevents`.`task_action` = `task_action`.`id` 
+            AND DATE(`tblcallevents`.`appointment_datetime`) = '$tdate' AND `tblcallevents`.`task_status` = 0 AND `tblcallevents`.`user_id` = '$uid' WHERE `task_action`.`perform_by` = '$perform' 
+            GROUP BY `task_action`.`tasktype` ORDER BY `task_action`.`tasktype` ASC");
     return $query->result();
 }
+
 public function GetTodaysAllTaskByUid($uid,$tdate){
     $query=$this->db->query("SELECT tblcallevents.id as task_id, spdr.sname, tblcallevents.task_action,tblcallevents.fwd_date, ta.tasktype,
                              ta.taskname, tblcallevents.task_status, tblcallevents.appointment_datetime, tblcallevents.initiate_datetime, 
@@ -6177,16 +6179,18 @@ public function GetTodaysAllTaskByUid($uid,$tdate){
         LEFT JOIN spd_request spdr ON spdr.id = tblcallevents.rsid 
         LEFT JOIN task_action ta ON ta.id = tblcallevents.task_action 
         WHERE CAST(appointment_datetime AS DATE) = '$tdate' AND user_id = '$uid' AND tblcallevents.task_status !=1");
+      //  echo $this->db->last_query();exit;
     return $query->result();
 }
 
 
-
 public function getTaskDetails($taskId,$taskactionId){
-    $query =  $this->db->query("SELECT tbe.*,spd.*,spdc.* 
-                                 FROM tblcallevents tbe LEFT JOIN spd ON spd.id = tbe.sid 
-                                 LEFT JOIN spd_contact spdc ON spdc.sid= spd.id 
+    $query =  $this->db->query("SELECT tbe.id as taskId, tbe.*,spd.*
+                                 FROM tblcallevents tbe 
+                                 LEFT JOIN spd ON spd.id = tbe.sid 
+                                /*LEFT JOIN spd_contact spdc ON spdc.sid= spd.id */
                                  WHERE tbe.id = '".$taskId."' AND tbe.task_action= '".$taskactionId."' ");
+ //echo $this->db->last_query();exit;
      $resultArr =  $query->result_array();
      return $resultArr;
  }
@@ -6205,30 +6209,28 @@ public function getTaskDetails($taskId,$taskactionId){
      $updateQuery    = substr($updateQuery,0,'-1');
      $updateQuery  .= " WHERE `id` = '".$taskid."' ";
     $this->db->query($updateQuery);
-     echo $this->db->last_query();exit;
+   //  echo $this->db->last_query();exit;
      return true;
  }
 
  public function insertTasksWithAttachements($data){
    $data['status']       = 1;
    $data['created_date'] = date('Y-m-d');
-  // dd($data);
    $insertQuery          = " INSERT INTO tblcallevents_attachments (task_id,attachment_link,remark,user_id,created_at) VALUES ( ";
 
-           foreach($data as $key=>$val){
-                $key         =  strtolower($key);
-                $insertQuery .=   " `".$val."`,";
-            }
-
+    foreach($data as $key=>$val){
+        $key         =  strtolower($key);
+        $insertQuery .=   " `".$val."`,";
+    }
     $insertQuery          =  substr($insertQuery,0,-1);
-
     $insertQuery .= ")";
-   // echo $insertQuery;exit;
      return true;
  }
 
  public function batch_insert_task_execution($data) {
+
     $this->db->insert_batch('task_execution_details', $data);
+  
 }
 //  public function task_execution_details($data){
 //      $insertQuery =   $this->db->query("INSERT INTO task_execution_details(main_task_id,task_response,tbe_attachment_id,remark,tbe_id,performed_by,updated_at,status) 
@@ -6297,20 +6299,31 @@ public function GetDayCloseRequestData($uid,$adate,$uyid){
                     FROM close_your_day_request 
                     LEFT JOIN user_detail ON close_your_day_request.id = user_detail.id 
                     WHERE $text and DATE(req_date) ='$adate'");
-                    
     $getreqData  =  $getreqData->result();
-
-
     return $getreqData;
 }
 
 public function insertIntoInauguration($data){
-//dd($data);
+   // dd($data);
     $insertQuery =   $this->db->query("INSERT INTO inauguration(task_id,user_role,user_id,question_id,question_val,created_date,updated_date) 
                      VALUES(".$data['task_id'].",".$data['user_role'].",".$data['user_id'].",".$data['question_id'].",
-                    ".$data['question_val'].",".$data['created_date'].",".$data['update_date'].")");   
-    echo $this->db->last_query();
-    exit;
+                    ".$data['question_val'].",".$data['created_date'].",".$data['update_date'].")");  
+}
+
+public function updateVisitDuringIngurationTask(){
+    $insertQuery = $this->db->query("INSERT INTO task_execution ");
+}
+public function getTaskIds($taskTypeId,$taskperformedby){
+    $query  = $this->db->query("SELECT id,tasktype,taskname,taskdetails,taskperformedby 
+                                FROM main_task WHERE taskType=".$taskTypeId." AND taskperformedby =".$taskperformedby." ");
+
+    $result = $query->result_array();
+    return $result;
+}
+public function getFactoryModelList(){
+    $db2    = $this->load->database('db2', TRUE);
+    $query  = $db2->query("SELECT DISTINCT(model_name),id FROM dep_mreq ");
+    $result = $query->result_array(); return $result;
 }
 
 }

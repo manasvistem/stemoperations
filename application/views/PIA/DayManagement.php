@@ -14,7 +14,6 @@
                   <form action="<?=base_url();?>Menu/daysc" method="post" enctype="multipart/form-data">
                     <input type ="hidden" id="wffo_planner" value="<?php echo $user_day_start_from->userworkfrom;?>"/>
                     <input type ="hidden" id="wffoval" value="<?php echo $user_day_start_from->userworkfrom_val;?>"/>
-
                     <div class="form-group">
                         <input type="hidden" name="user_id" value="<?=$uid?>">
                         <center><b class="text-info">Today's Date : <?=date('d-m-Y');?> </b>
@@ -173,7 +172,6 @@
                         <button type="submit" class="btn btn-danger" onclick="this.form.submit(); this.disabled = true;">Close Your Day</button>
                     </div>
                     </div>
-                    
                   </form>
             </div>
           </div>

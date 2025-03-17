@@ -1,10 +1,10 @@
-<!doctype html>
+<!-- <!doctype html>
 <html
   lang="en"
   class="light-style layout-menu-fixed layout-compact"
   dir="ltr"
   data-theme="theme-default"
-  data-assets-path="<?= base_url() ?>assets/assets/"
+  data-assets-path="<?= base_url() ?>assets/"
   data-template="vertical-menu-template-free"
   data-style="light">
   <head>
@@ -13,10 +13,10 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
     <title>Demo : Dashboard - Analytics | sneat - Bootstrap Dashboard PRO</title>
-    <meta name="description" content="" />
+    <meta name="description" content="" /> -->
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="<?= base_url() ?>assets/assets/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="<?= base_url() ?>assets/img/favicon/favicon.ico" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -25,23 +25,23 @@
       href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
       rel="stylesheet" />
       
-      <link rel="stylesheet" href="<?= base_url() ?>assets/assets/vendor/fonts/boxicons.css" />
+      <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/fonts/boxicons.css" />
     <!-- Core CSS -->
-    <link rel="stylesheet" href="<?= base_url() ?>assets/assets/vendor/css/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="<?= base_url() ?>assets/assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
-    <link rel="stylesheet" href="<?= base_url() ?>assets/assets/css/demo.css" />
+    <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="<?= base_url() ?>assets/css/demo.css" />
 
     <!-- Vendors CSS -->
-    <link rel="stylesheet" href="<?= base_url() ?>assets/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
-    <link rel="stylesheet" href="<?= base_url() ?>assets/assets/vendor/libs/apex-charts/apex-charts.css" />
-    <link rel="stylesheet" href="<?= base_url() ?>assets/assets/vendor/libs/apex-charts/apex-charts.css" />
+    <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/libs/apex-charts/apex-charts.css" />
+    <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/libs/apex-charts/apex-charts.css" />
     
   
 
     <!-- Page CSS -->
 
     <!-- Helpers -->
-    <script src="<?= base_url() ?>assets/assets/vendor/js/helpers.js"></script>
+    <script src="<?= base_url() ?>assets/vendor/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="<?= base_url() ?>assets/js/config.js"></script>
@@ -315,9 +315,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="Logout"
-                target="_blank"
-                class="menu-link">
+              <a href="<?php echo base_url()?>/Menu/logout" target="_blank" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Logout">Logout</div>
               </a>
@@ -371,7 +369,7 @@
                     href="javascript:void(0);"
                     data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="<?= base_url() ?>assets/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                      <img src="<?= base_url() ?>assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -380,7 +378,7 @@
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img src="<?= base_url() ?>assets/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                              <img src="<?= base_url() ?>assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
                             </div>
                           </div>
                           <div class="flex-grow-1">

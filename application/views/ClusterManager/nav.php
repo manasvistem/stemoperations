@@ -1,1008 +1,393 @@
-<nav class="main-header navbar navbar-expand navbar-white navbar-light">
 
-    <!-- Left navbar links -->
-
-    <ul class="navbar-nav">
-
-      <li class="nav-item">
-
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-
-      </li>
-
-      <li class="nav-item d-none d-sm-inline-block">
-
-        <a href="<?=base_url();?>Menu/Dashboard" class="nav-link">Home</a>
-
-      </li>
-
-      <li class="nav-item d-none d-sm-inline-block">
-
-        <button type="button" class="btn btn-primary ml-3" onclick="goBack()">Go Back</button>
-
-      </li>
-
-      <li class="nav-item d-none d-sm-inline-block">
-
-        <button type="button" class="btn btn-secondary ml-3" onclick="goForward()">Go Forward</button>
-
-      </li>
-
-    </ul>
-
-    <!-- Right navbar links -->
-
-    <ul class="navbar-nav ml-auto">
-
-      <!-- Navbar Search -->
-
-      
-
-      <!-- Messages Dropdown Menu -->
-
-      <?php 
-
-        $user = $this->session->userdata('user');
-
-        $data['user'] = $user;$uid= $user['id'];
-
-        $uid= $user['id'];
-
-      ?>
-
-      <h4>HI!  <?=$user['fullname']?></h4>
-
-      <input type="hidden" id="ur_id" value="<?=$uid?>">
-
-      <li class="nav-item">
-
-        <a class="nav-link" href="<?=base_url();?>/Menu/Notification">
-
-          <i class="far fa-bell"></i>
-
-          <?php $notify=$this->Menu_model->get_notifybyid($uid);?>
-
-          <span class="badge badge-warning navbar-badge"><?=sizeof($notify);?></span>
-
-        </a> 
-
-      </li>
-
-      <li class="nav-item">
-
-        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-
-          <i class="fas fa-expand-arrows-alt"></i>
-
-        </a>
-
-      </li>
-
-    </ul>
-
-  </nav>
-
-
-
-
-
-  <!-- Main Sidebar Container -->
-
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-
-    <!-- Brand Logo -->
-
-    <img src="https://stemlearning.in/wp-content/uploads/2020/07/stem-new-logo-2-1.png" width="80%" class="p-3">
-
-    <center><h5 class="text-white"><b>STEM Operation</b></h5></center>
-
-    <hr>
-
-
-
-    <!-- Sidebar -->
-
-    <div class="sidebar">
-
-      <!-- Sidebar user panel (optional) -->
-
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-
-        <div class="image">
-
-          <img src="<?=base_url();?>assets/image/user/Team.jpg" class="img-circle elevation-2" alt="User Image">
-
-        </div>
-
-        <div class="info">
-
-          <a href="#" class="d-block">User Name</a>
-
-        </div>
-
-      </div>
-
-      <!-- Sidebar Menu -->
-
-      
-
-      
-
-      <?php $hjlink = $this->Menu_model->get_hjoinlink();
-
-        if($hjlink){
-
-        $meetlink = $hjlink[0]->meetlink;?>
-
-        <a href="<?=$meetlink?>" class="btn btn-primary" target="_blank">Review Link</a>
-
-      <?php } ?>
-
-      
-
-      
-
-      <nav class="mt-2">
-
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
-          <!-- Add icons to the links using the .nav-icon class
-
-               with font-awesome or any other icon font library -->
-
-          <!--<li class="nav-item">
-
-            <div class="bg-light"><a href="<?=base_url();?>Menu/AddSchoolDetail" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Add Old School Detail</p>
-
-            </a></div>
-
-          </li>
-
-          <li class="nav-item">
-
-            <div class="bg-light"><a href="<?=base_url();?>Menu/AddReport" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Add Report</p>
-
-            </a></div>
-
-          </li>
-
-          
-
-          <li class="nav-item">
-
-            <div class="bg-light"><a href="<?=base_url();?>Menu/AddUtilisation" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Add Implementation</p>
-
-            </a></div>
-
-          </li>
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/AssignPerson" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Initiate Installation</p>
-
-            </a>
-
-          </li>
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/assignpersonforolds" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Initiate Maintence<br>for Old School</p>
-
-            </a>
-
-          </li>-->
-
-          
-
-          <li class="nav-item menu-open">
-
-            <a href="<?=base_url();?>Menu/Dashboard" class="nav-link">
-
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-
-              <p>Dashboard</p>
-
-            </a>
-
-          </li>
-
-          
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/CompetitionReport" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>NSP Report</p>
-
-            </a>
-
-          </li>
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/ProgramTimeLine" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Program Time Line</p>
-
-            </a>
-
-          </li>
-
-          
-
-          
-
-          <li class="nav-item menu-open">
-
-            <a href="<?=base_url();?>Menu/MeetingRequest" class="nav-link">
-
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-
-              <p>Meeting Request</p>
-
-            </a>
-
-          </li>
-
-          
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/Mytarget" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>My Target</p>
-
-            </a>
-
-          </li>
-
-          
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/LiveVisit" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Live Visit</p>
-
-            </a>
-
-          </li>
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/ReportVisit" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Report Visit</p>
-
-            </a>
-
-          </li>
-
-          
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/NextDayPlan" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Next Day Plan</p>
-
-            </a>
-
-          </li>
-
-          
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/ShowAcademicCalendar" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Academic Calendar</p>
-
-            </a>
-
-          </li>
-
-          
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/SchoolReviewDetail" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>All School Review by PIA</p>
-
-            </a>
-
-          </li>
-
-          
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/ProgramReviewDetail" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>All Program Review by PIA</p>
-
-            </a>
-
-          </li>
-
-          
-
-          
-
-          
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/TeamDailyReport/<?=date('Y-m-d')?>" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Team Daily Report</p>
-
-            </a>
-
-          </li>
-
-          
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/AllReviewPlaing" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>All Review</p>
-
-            </a>
-
-          </li>
-
-          
-
-          
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/reviewreport" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Review Report</p>
-
-            </a>
-
-          </li>
-
-          
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/PIAwiseProgram" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>PIA wise Program</p>
-
-            </a>
-
-          </li>
-
-          
-
-          
-
-          <li class="nav-item menu-open">
-
-            <a href="<?=base_url();?>Menu/totalcd" class="nav-link">
-
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-
-              <p>Project Detail</p>
-
-            </a>
-
-          </li>
-
-          <li class="nav-item menu-open">
-
-            <a href="<?=base_url();?>Menu/programs" class="nav-link">
-
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-
-              <p>Programs Detail</p>
-
-            </a>
-
-          </li>
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/bdrapending" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>BD Request</p>
-
-            </a>
-
-          </li>
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/CuriculumAssign" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Curiculum Assign</p>
-
-            </a>
-
-          </li>
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/CuriculumAssignData" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Curiculum Assign Data</p>
-
-            </a>
-
-          </li>
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/CreateTask" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Create Task</p>
-
-            </a>
-
-          </li>
-
-          <!--<li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/CreateInstallation" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Create Installation Task</p>
-
-            </a>
-
-          </li>-->
-
-          <!--<li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/ChangeinSPD" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Change SPD</p>
-
-            </a>
-
-          </li>-->
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/nobdproject" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>NO BD Project</p>
-
-            </a>
-
-          </li>
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/nospdsid" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>School not in SPD</p>
-
-            </a>
-
-          </li>
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/CreateOTask" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Create Other Task</p>
-
-            </a>
-
-          </li>
-
-          
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/MaintenanceReport" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Ins-Main Request</p>
-
-            </a>
-
-          </li>
-
-          
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/handoverDetail" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>New Handover</p>
-
-            </a>
-
-          </li>
-
-          
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/CluserLinkTE" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Cluser By PIA</p>
-
-            </a>
-
-          </li>
-
-          
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/PIAwiseSchoolDetail" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>PIA Wise Pending Detail</p>
-
-            </a>
-
-          </li>
-
-          
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/inspending" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Installation Pending</p>
-
-            </a>
-
-          </li>
-
-          
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/insreportpending" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Installation Report Pending</p>
-
-            </a>
-
-          </li>
-
-          
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/fttppending" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>FTTP Pending</p>
-
-            </a>
-
-          </li>
-
-          
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/fttpreportpending" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>FTTP Report Pending</p>
-
-            </a>
-
-          </li>
-
-          
-
-          
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/utilisationpending" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Utilisation Pending</p>
-
-            </a>
-
-          </li>
-
-          
-
-          
-
-          
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/AcademicCalenderApprove" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Academic Calender Approve</p>
-
-            </a>
-
-          </li>
-
-           <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/ShowPIAStatusWithAcadeCal" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>PIA Status With Academic Calender</p>
-
-            </a>
-
-          </li>
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/StartProgrramReview" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Start Progrram Review</p>
-
-            </a>
-
-          </li>
-
-
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/AnnualProgramReviewReport" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Annual Program Review Report</p>
-
-            </a>
-
-          </li>
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/AnnualReviewMeetingList" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Annual Program Review Meeting List</p>
-
-            </a>
-
-          </li>
-
-             <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/CheckProgramTimelineData" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Program Timeline Data</p>
-
-            </a>
-
-          </li>
-
-          
-
-          
-
-          
-
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/updateProjectSid" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Program SID Update</p>
-            </a>
-          </li>
-
-          
-
-          <!--<li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/AssignTask" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Task Forward</p>
-
-            </a>
-
-          </li>-->
-
-          
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/editProfile" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Edit Profile</p>
-
-            </a>
-
-          </li>
-
-          
-
-          <li class="nav-item">
-
-            <a href="<?=base_url();?>Menu/logout" class="nav-link">
-
-              <i class="far fa-circle nav-icon"></i>
-
-              <p>Logout</p>
-
-            </a>
-
-          </li>
-
-          
-
-        </ul>
-
-      </nav>
-
-      <!-- /.sidebar-menu -->
-
-      
-
-      <hr><center><lable class="text-warning"><b>Alert!</b></lable></center><hr>
-
-          <span id="alsmss"></span>
-
-          <div class="alert alert-success" role="alert"><b><?=$notify[0]->msg;?></b></div>
-
-    </div>
-
-    <!-- /.sidebar -->
-
-  </aside>
-
-
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script> 
-
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="<?= base_url() ?>assets/img/favicon/favicon.ico" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet" />
+    <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/fonts/boxicons.css" />
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="<?= base_url() ?>assets/css/demo.css" />
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/libs/apex-charts/apex-charts.css" />
+    <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/libs/apex-charts/apex-charts.css" />
+    <!-- Page CSS -->
+    <!-- Helpers -->
+    <script src="<?= base_url() ?>assets/vendor/js/helpers.js"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="<?= base_url() ?>assets/js/config.js"></script>
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" />
+    <style>
+  thead.thead-dark {
+  background: black;
+  color: white !important;
+  }
+  thead.thead-dark tr th {
+  color: white !important;
+  }
+  .table:not(.table-borderless):not(.table-dark) > :not(caption) > *:not(.table-dark) > * {
+    font-weight: 700;
+}
+.on-time { color: #28a745; /* Green text */ } .late { color: #dc3545; /* Red text */ }
+</style>
 <script>
-
-
-
-
-
-function handleGeolocationError() {
-
-   const bodyElement = document.querySelector("body");
-
-   bodyElement.style.display = "none";
-
-   alert('Error: Geolocation is not available or location services are turned off.');
-
-}
-
-function handleGeolocationSuccess(position) {
-
-    const latitude = position.coords.latitude;
-
-    const longitude = position.coords.longitude;
-
-    const contentDiv = document.getElementById("content");
-
-    contentDiv.style.display = "block";
-
-}
-
-function getLocation() {
-
-    if ("geolocation" in navigator) {
-
-        navigator.geolocation.getCurrentPosition(handleGeolocationSuccess, handleGeolocationError);
-
-    } else {
-
-        const errorMessage = document.getElementById("error-message");
-
-        errorMessage.style.display = "block";
-
-    }
-
-}
-
-window.onload = getLocation;
-
-
-
-
-
-function startCamera() {
-
-    navigator.mediaDevices.getUserMedia({ video: true })
-
-        .then(function(stream) {
-
-        })
-
-        .catch(function(error) {
-
-             const bodyElement = document.querySelector("body");
-
-             bodyElement.style.display = "none";
-
-             alert('Error: Camera access permission denied.');
-
-        });
-
-}
-
-startCamera();
-
-
-
-$(document).ready(function() {
-
-    trackLocation();
-
-});
-
-
-
-function trackLocation() {
-
-    if ("geolocation" in navigator) {
-
-      navigator.geolocation.getCurrentPosition(
-
-        function (position) {
-
-          var ur_id = document.getElementById("ur_id").value;
-
-          var latitude = position.coords.latitude;
-
-          var longitude = position.coords.longitude;
-
-            $.ajax({
-
-                url:'<?=base_url();?>Menu/store_location',
-
-                 method: 'post',
-
-                 data: {latitude: latitude, longitude: longitude, ur_id: ur_id},
-
-                 success: function(result){
-
-                }
-
-            });
-
-        },
-
-        function (error) {
-
-          console.error("Error getting location: " + error.message);
-
+    function checkCountDownTime(first_date, givenid) {
+    var targetDate = new Date(first_date).getTime();
+
+    function updateTimer() {
+        var now = new Date().getTime();
+        var diff = targetDate - now;
+        var isPast = diff < 0; // Check if the date is in the past
+        diff = Math.abs(diff); // Always take absolute value for calculations
+
+        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        var countdownText = [];
+        if (days > 0) countdownText.push(days + " days");
+        if (hours > 0) countdownText.push(hours + " hours");
+        if (minutes > 0) countdownText.push(minutes + " minutes");
+        if (seconds > 0) countdownText.push(seconds + " seconds");
+
+        var countdownElement = document.getElementById("countdown" + givenid);
+        var statusElement = document.getElementById("status" + givenid);
+
+        if (isPast) {
+            countdownElement.textContent = countdownText.join(", ");
+            countdownElement.classList.add("late");
+            statusElement.textContent = "Late";
+            statusElement.classList.remove("on-time");
+            statusElement.classList.add("late");
+        } else {
+            countdownElement.textContent = countdownText.join(", ");
+            countdownElement.classList.add("on-time");
+            statusElement.textContent = "On Time";
+            statusElement.classList.remove("late");
+            statusElement.classList.add("on-time");
         }
-
-      );
-
-    } 
-
-    else {console.error("Geolocation is not supported by this browser.");} 
-
-}
-
-
-
-function goBack() { window.history.back(); }
-
-function goForward() { window.history.forward(); }
-
-    var ur_id = document.getElementById("ur_id").value;
-
-    $.ajax({
-
-    url:'<?=base_url();?>Menu/zhpopup',
-
-     method: 'post',
-
-     data: {ur_id: ur_id},
-
-     success: function(result){
-
-        var res = result;
-
-        $("#alsmss").html(res);
-
     }
 
-    });
+    setInterval(updateTimer, 1000);
+    updateTimer();
+}
 
-</script>
+        // Start the countdown/countup
+        // checkCountDownTime("2025-02-12 12:57:07",1);
+    </script>
+  </head>
+  <body>
+  <?php 
+  $dep_id = $user['dep_id'];
+  //dd($user);
+  ?>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+      <div class="layout-container">
+        <!-- Menu -->
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+          <div class="app-brand demo">
+            <a href="<?=base_url().'Menu/Dashboard'?>" class="app-brand-link">
+              <span class="app-brand-logo demo">
+                <img class="img-fluid" style="width: 200px;" src="https://stemlearning.in/wp-content/uploads/2020/07/stem-new-logo-2-1.png" alt="">
+              </span>
+            </a>
+
+            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+              <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+            </a>
+          </div>
+
+          <div class="menu-inner-shadow"></div>
+
+          <ul class="menu-inner py-1">
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Request</span></li>
+              <li class="menu-item">
+                <a href="<?=base_url().'Menu/BDREQUEST'?>" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-crown"></i>
+                  <div class="text-truncate" data-i18n="Boxicons">REQUEST</div>
+                </a>
+            </li>
+           
+            <li class="menu-header small text-uppercase"><span class="menu-header-text"></span></li>
+            <li class="menu-item">
+              <a href="Dashboard"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
+              </a>
+            </li>
+            <!-- <li class="menu-item">
+              <a href="MyNextDayPlan/<?=date('Y-m-d');?>"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Sharetodaysplan">Share You Today's Plan</div>
+              </a>
+            </li> -->
+            <li class="menu-item">
+              <a href="AddTempPerson"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="AddTempPerson">Add Temp Person</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="CreateGoals"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="CreateGoals">Create Goals</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="MyProfile/<?=$uid?>" target="_blank" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">My Profile</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="CMSCCC" target="_blank" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Create Cluster for MSC Clean</div>
+              </a>
+            </li>
+            <!-- <li class="menu-item">
+              <a href="Mytarget"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="TransitProcess">My Target</div>
+              </a>
+            </li> -->
+            <li class="menu-item">
+              <a href="DayManagement"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="MyDayDetail">Day Management</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="NextDayPlan"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="NextDayPlan">Next Day Plan</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="LiveVisit"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="NextDayPlan">Live Visit</div>
+              </a>
+            </li>
+            <!-- <li class="menu-item">
+              <a href="CreateTask"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="CreateTask">Create Task</div>
+              </a>
+            </li> -->
+            <li class="menu-item">
+              <a href="AllReviewPlaing"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="RequestAmount">All Review</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="reviewreport"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="maintenanceBag">Review Report</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="PlanReportWriting"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="editProfile">Plan Report Writing</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="StartReportWriting"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="editProfile">Start Report Writing</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="CloseReportWriting"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="editProfile">Close Report Writing</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="AcademicCalendar"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="editProfile">Academic calendar</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="PlanReportWriting"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="editProfile">Start School Review</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="PlanReportWriting"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="editProfile">School Review Report</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="allbdrequest"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="DailyReport">BD Request</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="PlanReportWriting"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="PlanReportWriting">Daily Report</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="editProfile"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="editProfile">Edit Profile</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="<?php echo base_url()?>/Menu/logout" target="_blank" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Logout">Logout</div>
+              </a>
+            </li>
+          </ul>
+        </aside>
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+          <nav
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            id="layout-navbar">
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-4 me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-6" href="javascript:void(0)">
+                <i class="bx bx-menu bx-md"></i>
+              </a>
+            </div>
+
+            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+              <!-- Search -->
+              <div class="navbar-nav align-items-center">
+                <div class="nav-item d-flex align-items-center">
+                  <i class="bx bx-search bx-md"></i>
+                  <input
+                    type="text"
+                    class="form-control border-0 shadow-none ps-1 ps-sm-2"
+                    placeholder="Search..."
+                    aria-label="Search..." />
+                </div>
+              </div>
+              <!-- /Search -->
+
+              <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <li class="nav-item lh-1 me-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
+                </svg></li>
+                <!-- Place this tag where you want the button to render. -->
+                <li class="nav-item lh-1 me-4">
+                  <a class="github-button"  href="viewProfile" data-icon="octicon-star" data-size="large" data-show-count="true"
+                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
+                    ><?php echo $user['user_name'];?></a>
+                </li>
+
+                <!-- User -->
+                <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                  <a
+                    class="nav-link dropdown-toggle hide-arrow p-0"
+                    href="javascript:void(0);"
+                    data-bs-toggle="dropdown">
+                    <div class="avatar avatar-online">
+                      <img src="<?= base_url() ?>assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                    </div>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li>
+                      <a class="dropdown-item" href="#">
+                        <div class="d-flex">
+                          <div class="flex-shrink-0 me-3">
+                            <div class="avatar avatar-online">
+                              <img src="<?= base_url() ?>assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                            </div>
+                          </div>
+                          <div class="flex-grow-1">
+                            <h6 class="mb-0"><?=$user['fullname']?></h6>
+                            <small class="text-muted"><?php echo $dep_name;?></small>
+                          </div>
+                        </div>
+                        <?php // print_r($user['dep_id']); ?>
+                      </a>
+                    </li>
+                    <li>
+                      <div class="dropdown-divider my-1"></div>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">
+                        <i class="bx bx-user bx-md me-3"></i><span>My Profile</span>
+                      </a>
+                    </li>
+                    <!-- <li>
+                      <a class="dropdown-item" href="#"> <i class="bx bx-cog bx-md me-3"></i><span>Settings</span> </a>
+                    </li> -->
+                    <li>
+                      <div class="dropdown-divider my-1"></div>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="logout">
+                        <i class="bx bx-power-off bx-md me-3"></i><span>Log Out</span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <!--/ User -->
+              </ul>
+            </div>
+          </nav>
+          <!-- / Navbar -->

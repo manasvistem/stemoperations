@@ -31,7 +31,6 @@
                       <b><?=$this->Menu_model->timediff($uystart,$ctdate);?></b>
                     </div>
                   </div>
-                 
                 </div>
                 <hr class="hrclass" style="width: 500px;"/>
                 <?php          
@@ -115,4 +114,5 @@
                 </div>
               </div>
             </div>
-    <?php } ?>
+    <?php } } ?>
+    </div>

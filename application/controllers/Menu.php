@@ -2585,22 +2585,24 @@ class Menu extends CI_Controller {
             redirect('Menu/main');
         }
     }
+
     public function RepairReport(){
-        $user = $this->session->userdata('user');
-        $data['user'] = $user;$uid= $user['id'];
-        $id =  $user['dep_id'];
-        
-        $notify=$this->Menu_model->get_notifybyid($uid);
-        $dt=$this->Menu_model->get_user();
-        $reppc=$this->Menu_model->get_repairpc();
-        $dt=$this->Menu_model->get_depatment_byid($id);
-        $dep_name = $dt[0]->dep_name;
+        $user          = $this->session->userdata('user');
+        $data['user']  = $user;$uid= $user['id'];
+        $id            = $user['dep_id'];
+        $notify        = $this->Menu_model->get_notifybyid($uid);
+        $dt            = $this->Menu_model->get_user();
+        $reppc         = $this->Menu_model->get_repairpc();
+        $dt            = $this->Menu_model->get_depatment_byid($id);
+        $dep_name      = $dt[0]->dep_name;
+
         if(!empty($user)){
             $this->load->view($dep_name.'/RepairReport', ['notify'=>$notify,'user'=>$user, 'reppc'=>$reppc]);
         }else{
             redirect('Menu/main');
         }
     }
+
     public function TransitAssign(){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
@@ -3243,7 +3245,7 @@ class Menu extends CI_Controller {
         $data = array('myac'=>$myac,'myprd'=>$myprd,'mysrd'=>$mysrd,'piid'=>$piid,'notify'=>$notify, 'user'=>$user,'mydetail'=>$mydetail,'mytd1'=>$mytd1,'mytd2'=>$mytd2,'mytd3'=>$mytd3,'mytd4'=>$mytd4);
 //dd($data);
             if(!empty($user)){
-                $this->load->display($dep_name,'MyProfile',$data);
+                $this->load->display($dep_name,'MyProfile/'.$piid,$data,$type='');
             }else{
                 redirect('Menu/main');
             }
@@ -7052,7 +7054,6 @@ class Menu extends CI_Controller {
     }
     public function Dashboard(){
         date_default_timezone_set('Asia/Kolkata');
-
         if (isset($_POST['submit'])) {
             $tdate = $_POST['filterdate'];
         }else{
@@ -7069,6 +7070,8 @@ class Menu extends CI_Controller {
         $data['getTodaysTaskCounts']    = $getTodaysTaskCounts;
         $data['getTodaysTasks']         = $getTodaysTasks;
 
+    // dd($data);
+
         if(empty($user_day) && count($user_day)<= 0){
             $this->session->set_flashdata('error_message','* Please Start Your Day');
             redirect('Menu/DayManagement');
@@ -7077,21 +7080,22 @@ class Menu extends CI_Controller {
             $data['uid']        = $uid;       
             $notify             = $this->Menu_model->get_notifybyid($uid);
             $data['dt']         = $this->Menu_model->get_depatment_byid($depid);
-        //  $data['spd']         = $this->Menu_model->get_mspd();
+        //  $data['spd']        = $this->Menu_model->get_mspd();
             $data['status']     = $this->Menu_model->get_spdsbypi($uid);
             $data['zhspd']      = $this->Menu_model->get_spdsbyzh($uid);
             $data['pmspd']      = $this->Menu_model->get_spdsbypm();
             $data['td']         = $this->Menu_model->get_tdetail($uid,$tdate);
-        //  $data['program']   = $this->Menu_model->get_handover();
+        //  $data['program']    = $this->Menu_model->get_handover();
             $data['bdr']        = $this->Menu_model->get_bdreqest($uid);
             $data['bdrzh']      = $this->Menu_model->get_bdreqestzh($uid);
             $data['dep_name']   = $data['dt'][0]->dep_name;
             $dep_name           = $data['dep_name'];
             if($data['dep_name'] == "ProgramManager"){
-                $data['bdrequest']  =  $this->load->view('bdrequest_data');
+                 //   $data['bdrequest']  =  $this->load->view('bdrequest_data');
+                  $data['bdrequest']  =   $this->display($dep_name,'bdrequest_data',$data,$type='');
             }
-            $data['utype'] =  $data['dt'][0]->id;
 
+            $data['utype'] =  $data['dt'][0]->id;
             if(!empty($user)){// echo $data['dep_name']; 
                 $this->display($dep_name,'index',$data,$type='');
             }else{
@@ -7110,10 +7114,8 @@ class Menu extends CI_Controller {
             $user_id                   = $_SESSION['user']['id'];
             $dept                      = $_SESSION['user']['dep_id'];
             $data['taskType']          = $taskType;
-            $data['taskDetails']       = $taskDetails;
-           // $data['taskstatus']      = "Initiate";
+            $data['taskDetails']       = $taskDetails[0];
             $taskname                  = $tasknameData['taskname'];
-
             $cleanString               = preg_replace('/[^a-zA-Z0-9]/', '', $taskname);
             $viewname                  = $cleanString."View";
             $data['taskId']            = $taskId;
@@ -7122,7 +7124,8 @@ class Menu extends CI_Controller {
             $data['formdata']          = $this->Menu_model->getViewFormData($tasktypeid,$dept);
             $depnameData               = $this->Menu_model->get_depatment_byid($dept);
             $dep_name                  = $depnameData[0]->dep_name;
-
+            $data['getFactoryModelList'] = $this->Menu_model->getFactoryModelList();
+            //echo $viewname;exit;
             $this->display($dep_name,$viewname,$data,$type='modal');
     }
 
@@ -7156,8 +7159,9 @@ class Menu extends CI_Controller {
         }
     }
     public function PreInaugurationVisitUpdate(){
-
+//dd($_POST);
     }
+
     public function PreInaugurationCallUpdate(){
         $post_data                  = $_POST;
         $taskname                   = $_POST['taskType'];
@@ -7288,14 +7292,10 @@ class Menu extends CI_Controller {
         if (!empty($taskInsertArr)) {
             $this->Menu_model->batch_insert_task_execution($taskInsertArr);
         }
-
         unset($post_data['taskId']);
         unset($post_data['taskname']);
-        
         $updatetblcalleventsData = ['updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
-
         $updateQuery             = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
-
         echo json_encode(["status" => "success"]);
     }
 
@@ -7306,7 +7306,6 @@ public function updateTask($tasktypeid=''){
     $taskid             = $_POST['taskId'];
     // to get the task type & accordingly update the task 
     //to set the pattern for all tables, tblcallevents , task_execution_details , 
-
       if($taskname == "PreInaugurationVisit"){
           $taskData                  = '';
          // $updateQuery             = $this->Menu_model->updateTasksById($taskid,$post_data);
@@ -7318,7 +7317,6 @@ public function updateTask($tasktypeid=''){
         $tblcalleventsdata['updated_datetime']    = date("Y-m-d h:i:s");
 
         $this->Menu_model->updateTasksById($taskid,$tblcalleventsdata);
-
         $taskexecutionDetails   =   [];
         $taskInsertArr          =   []; // Initialize an empty array
 
@@ -7341,7 +7339,6 @@ public function updateTask($tasktypeid=''){
             echo json_encode(["status" => "success"]);
         }
     }
-  
     if(array_key_exists('task_id',$post_data)){
         $taskid                                 = $post_data['task_id'];
         unset($post_data['task_id']);
@@ -7369,11 +7366,9 @@ public function updateTask($tasktypeid=''){
         $extension                = pathinfo($data['name'], PATHINFO_EXTENSION); // Get file extension
         $uniqueFileName           = date("Y-m-d").time() . '_' . uniqid() . '.' . $extension; // Generate unique name
         $uploadPath               = 'uploads/Visit/';
-  
         $config['upload_path']    = $uploadPath;
         $config['allowed_types']  = '*';
         $config['file_name']      = $uniqueFileName;
-  
         // Load the upload library and perform the upload
         $this->load->library('upload', $config);
         if ($this->upload->do_upload('file')){
@@ -7396,14 +7391,13 @@ public function updateTask($tasktypeid=''){
   
   public function display($dept_name,$viewname,$data,$type){
         if($type !='modal'){
-            $this->load->view('templates/header');
-            $this->load->view($dept_name.'/nav_'.$dept_name,$data);
-            $this->load->view($dept_name."/".$viewname,$data);
-            $this->load->view('templates/footer');
+          // $this->load->view('templates/header');
+             $this->load->view($dept_name.'/nav',$data);
+             $this->load->view($dept_name."/".$viewname,$data);
+             $this->load->view('templates/footer');
         }
         else{
             $this->load->view($dept_name."/".$viewname,$data);
-
         }
   }
   
@@ -11536,13 +11530,245 @@ public function CheckuserDayAccardingPlanner(){
     }
 }
 
+public function visitPreInauguarationTask($taskId){
+    $user               = $this->session->userdata('user');
+    $uid                = $user['user_id'];
+    $uyid               = $user['type_id'];
+    $dep_id             = $user['dep_id'];
+    $dt                 = $this->Menu_model->get_depatment_byid($dep_id);
+    $dep_name           = $dt[0]->dep_name;
+    $data['taskId']     = $taskId;
+  //  $this->display($dep_name,'visitPreInauguarationView',$taskId,$type='');
+ // $this->display($dep_name,"/visitDuringInaugurationView",$data,$type="");
+  $this->display($dep_name,"/preInterventionEnquiryView",$data,$type="");
+
+}
+
+public function callPreInterventionEnquiry($taskId){
+    $user               = $this->session->userdata('user');
+    $uid                = $user['user_id'];
+    $uyid               = $user['type_id'];
+    $dep_id             = $user['dep_id'];
+    $dt                 = $this->Menu_model->get_depatment_byid($dep_id);
+    $dep_name           = $dt[0]->dep_name;
+    $data['taskId']     = $taskId;
+  $this->display($dep_name,"/preInterventionEnquiryView",$data,$type="");
+}
 public function viewProfile(){
     $user   = $this->session->userdata('user');
-   // dd($user);
     $uid    = $user['user_id'];
-    $uyid   =  $user['type_id'];
-    $dep_id =$user['dep_id'];
+    $uyid   = $user['type_id'];
+    $dep_id = $user['dep_id'];
     $this->display($dep_name,$viewname,$data,$type='');
+}
+
+public function updateVisitInauguration(){
+    $post_data                  = $_POST;
+    $taskname                   = $_POST['taskType'];
+    $tasktypeid                 = $_POST['tasktypeid'];
+    $taskId                     = $_POST['taskId'];
+    $insertData['taskType']     = $_POST['taskType'];
+    $insertData['tasktypeid']   = $_POST['tasktypeid'];
+   
+    foreach ($post_data as $key => $val){  
+        if($key == "eventDate"){
+            $main_task_id               = "567";
+            $task_response              =  $val[0]."=".$val[1];
+            $taskexecutionDetails       = [    // Initialize the array inside the loop
+                                            'main_task_id'      => $main_task_id,
+                                            'task_response'     => $task_response,
+                                            'performed_by'      => $_SESSION['user']['id'],
+                                            'updated_at'        => date("Y-m-d h:i:s") // Correct time format to 24-hour format
+                                            ];
+        }
+            if($key == "teacherCount"){
+                $main_task_id           = "570";
+                $task_response          =  $val;
+                $taskexecutionDetails   = [    // Initialize the array inside the loop
+                    'main_task_id'      => $main_task_id,
+                    'task_response'     => $task_response,
+                    'performed_by'      => $_SESSION['user']['id'],
+                    'updated_at'        => date("Y-m-d h:i:s") // Correct time format to 24-hour format
+                ];
+            }
+            else if($key == "studentCount"){
+                    $main_task_id           = "571";
+                    $task_response          =  $val;
+                    $taskexecutionDetails   = [    // Initialize the array inside the loop
+                        'main_task_id'      => $main_task_id,
+                        'task_response'     => $task_response,
+                        'performed_by'      => $_SESSION['user']['id'],
+                        'updated_at'        => date("Y-m-d h:i:s") // Correct time format to 24-hour format
+                    ];
+            }
+            else if($key == "facilities"){
+                $main_task_id           = "568";
+                $task_response          =  $val;
+                $taskexecutionDetails   = [    // Initialize the array inside the loop
+                    'main_task_id'      => $main_task_id,
+                    'task_response'     => $task_response,
+                    'performed_by'      => $_SESSION['user']['id'],
+                    'updated_at'        => date("Y-m-d h:i:s") // Correct time format to 24-hour format
+                ];
+            }
+            else if($key == "welcomesong"){
+                $main_task_id           = "572";
+                $task_response          =  $val;
+                $taskexecutionDetails   = [    // Initialize the array inside the loop
+                    'main_task_id'      => $main_task_id,
+                    'task_response'     => $task_response,
+                    'performed_by'      => $_SESSION['user']['id'],
+                    'updated_at'        => date("Y-m-d h:i:s") // Correct time format to 24-hour format
+                ];
+            }
+            else if($key == "modelExplanation")
+            {
+                $main_task_id = "573";
+                $task_response =  $val;
+                $taskexecutionDetails = [    // Initialize the array inside the loop
+                    'main_task_id'      => $main_task_id,
+                    'task_response'     => $task_response,
+                    'performed_by'      => $_SESSION['user']['id'],
+                    'updated_at'        => date("Y-m-d h:i:s") // Correct time format to 24-hour format
+                ];
+            }
+            else if($key == "snacks"){
+                $main_task_id = "574";
+                $task_response =  $val;
+                $taskexecutionDetails = [    // Initialize the array inside the loop
+                    'main_task_id'      => $main_task_id,
+                    'task_response'     => $task_response,
+                    'performed_by'      => $_SESSION['user']['id'],
+                    'updated_at'        => date("Y-m-d h:i:s") // Correct time format to 24-hour format
+                ];
+            }
+            else if($key == "decoration"){
+                $main_task_id = "575";
+                $task_response =  $val;
+                $taskexecutionDetails = [    // Initialize the array inside the loop
+                    'main_task_id'      => $main_task_id,
+                    'task_response'     => $task_response,
+                    'performed_by'      => $_SESSION['user']['id'],
+                    'updated_at'        => date("Y-m-d h:i:s") // Correct time format to 24-hour format
+                ];
+            }
+            else if($key == "preVisit"){
+                $main_task_id = "576";
+                $task_response =  $val;
+                $taskexecutionDetails = [    // Initialize the array inside the loop
+                    'main_task_id'      => "576",
+                    'task_response'     => $val,
+                    'performed_by'      => $_SESSION['user']['id'],
+                    'updated_at'        => date("Y-m-d h:i:s") // Correct time format to 24-hour format
+                ];
+            }
+            else if($key == "eventStart"){
+                $main_task_id = "576";
+                $task_response =  $val;
+                $taskexecutionDetails = [    // Initialize the array inside the loop
+                    'main_task_id'      => "576",
+                    'task_response'     => $val,
+                    'performed_by'      => $_SESSION['user']['id'],
+                    'updated_at'        => date("Y-m-d h:i:s") // Correct time format to 24-hour format
+                ];
+            }
+            else if($key == "eventEnd"){
+                $main_task_id = "576";
+                $task_response =  $val;
+                $taskexecutionDetails = [    // Initialize the array inside the loop
+                    'main_task_id'      => "576",
+                    'task_response'     => $val,
+                    'performed_by'      => $_SESSION['user']['id'],
+                    'updated_at'        => date("Y-m-d h:i:s") // Correct time format to 24-hour format
+                ];
+            }
+        $taskInsertArr[] = $taskexecutionDetails;
+    }     
+
+//dd($taskInsertArr);
+    // If batch insert is supported
+    if (!empty($taskInsertArr)) {
+        $this->Menu_model->batch_insert_task_execution($taskInsertArr);
+    }
+    unset($post_data['taskId']);
+    unset($post_data['taskname']);
+    $updatetblcalleventsData = ['updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+
+    $updateQuery             = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+
+   // echo json_encode(["status" => "success"]);
+    redirect('Menu/dashboard/');
+}
+
+public function visitDuringInauguarationTask($taskId){
+     $user              = $this->session->userdata('user');
+     $uid               = $user['user_id'];
+     $uyid              = $user['type_id'];
+     $dep_id            = $user['dep_id'];
+     $dt                = $this->Menu_model->get_depatment_byid($dep_id);
+     $dep_name          = $dt[0]->dep_name;
+     $data['taskId']    = $taskId;
+     $data['taskType']  = $taskType;
+    $this->display($dep_name,"visitDuringInaugurationView",$data,$type="");
+}
+
+public function updateCallPreIntervention(){
+    $taskType        = $_POST['taskType'];
+    $taskId          = $_POST['taskId'];
+    $taskTypeId      = $_POST['tasktypeid'];
+    $user            = $_SESSION['user'];
+   
+    $taskperformedby = $user['dep_id'];
+    $getTaskData     = $this->Menu_model->getTaskIds($taskTypeId,$taskperformedby);
+    $posted_data     = $_POST;
+    $taskInsertArr   = '';
+    $commonColumns = [
+        'performed_by' => $_SESSION['user']['id'],
+        'updated_at'   => date("Y-m-d H:i:s"), // 24-hour format
+        'status'       => 'active', // Example of a common value
+        'created_at'   => date("Y-m-d H:i:s"), // If needed
+        'tbe_id'       => $taskId
+    ];
+    
+    foreach ($posted_data as $k => $val) {
+        if ($val != '' && !empty($val)) {
+            $taskInsertArr = [
+                'task_response' => $val
+            ] + $commonColumns; // Merge common values
+    
+            // Assign main_Task_id based on the key
+            switch ($k) {
+                case 'action_completed':
+                    $taskInsertArr['main_Task_id'] = '657';
+                    break;
+                case 'purpose_completed':
+                    $taskInsertArr['main_Task_id'] = '658';
+                    break;
+                case 'called_person':
+                    $taskInsertArr['main_Task_id'] = '659';
+                    break;
+                default:
+                    continue; // Skip unknown keys
+            }
+            // Now you can insert $taskInsertArr into the database
+        }
+      //  $taskInsertArr  = array_filter($taskInsertArr);
+        $taskInsertArr1[] = $taskInsertArr;
+    }
+  
+    if (!empty($taskInsertArr1)){
+
+        $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+    }
+
+    unset($post_data['taskId']);
+    unset($post_data['taskname']);
+    unset($post_data['taskType']);
+
+    $updatetblcalleventsData    = ['updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+    $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+
+    echo json_encode(["status" => "success"]);
 }
 
 }

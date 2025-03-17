@@ -48,7 +48,7 @@
                 $count = 0;
                 foreach ($getTodaysTaskCounts as $getTodaysTaskCount){
                     $formatted_string = preg_replace("/[ \/'-]+/", "_", $getTodaysTaskCount->tasktype);
-                    if($getTodaysTaskCount->task_count !=0){
+                   // if($getTodaysTaskCount->task_count !=0){
                 ?>
               <li class="nav-item mb-1 mb-sm-0" role="presentation">
                 <button type="button" 
@@ -71,10 +71,10 @@
               </li>
               <?php 
                 $firstTab = false; // Set to false after first iteration
-                }
-                else{
-                  $count ++;
-                }
+                // }
+                // else{
+                //   $count ++;
+                // }
                }
                 ?>
               <li class="nav-item" role="presentation">
@@ -109,6 +109,7 @@
                         <div class="list-group">
                         <?php 
                           $i=1;
+                         // dd($getTodaysTasks);
                           foreach($getTodaysTasks as $sctasklist){
                             $task_id              = $sctasklist->task_id;
                             $appointment_datetime = $sctasklist->appointment_datetime;
@@ -128,10 +129,10 @@
                             ?>
                           <a data-task_id="<?=$task_id;?>" class="list-group-item list-group-item-action flex-column align-items-start active mb-1 taskperformaction" >
                             <div class="d-flex justify-content-between w-100">
-                            <input type="hidden" id="tasktype"  name="tasktype" value="<?=$tasktype?>"/>
-                            <input type="hidden" id="tasktype_id" name="tasktype_id" value="<?= $task_action?>"/>
+                            <input type="hidden" id="tasktype_<?=$task_id;?>"  name="tasktype" value="<?=$tasktype?>"/>
+                            <input type="hidden" id="tasktype_id_<?=$task_id;?>" name="tasktype_id" value="<?= $task_action?>"/>
                             <h5 class="mb-1"><?=$sname.' - '.$taskname; ?></h5>
-                            <!-- <small> <span id="countdown1"></span> - <span id="status1"></span> </small> -->
+                           <small> <span id="countdown1"></span> - <span id="status1"></span> </small> 
                             </div>
                           <?php 
                          // dd($data);
@@ -139,9 +140,8 @@
                         <small> <span id="countdown<?=$task_id;?>"></span> - <span id="status<?=$task_id;?>"></span>  
                         </small>
                         </a>
-                       <script> // checkCountDownTime("<?=$fwd_date;?>",<?=$type_of_task;?>);</script> 
+                       <script> //  checkCountDownTime("<?=$fwd_date;?>",<?=$type_of_task;?>);</script> 
                         <?php $i++;
-                          
                           }
                         } ?>
                       </div>
@@ -174,7 +174,7 @@
       <div class="modal-dialog modal-dialog-centered" role="document" id="submodal">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="modalCenterTitle"><?php echo $taskname;?></h5>
+            <h5 class="modal-title" id="modalCenterTitle"></h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
            <div class="modal-body" id="taskModal">
@@ -428,12 +428,58 @@
             </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
+  
+  function checkCountDownTime(first_date, givenid) {
+    var targetDate = new Date(first_date).getTime();
+
+    function updateTimer() {
+        var now = new Date().getTime();
+        var diff = targetDate - now;
+        var isPast = diff < 0; // Check if the date is in the past
+        diff = Math.abs(diff); // Always take absolute value for calculations
+
+        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        var countdownText = [];
+        if (days > 0) countdownText.push(days + " days");
+        if (hours > 0) countdownText.push(hours + " hours");
+        if (minutes > 0) countdownText.push(minutes + " minutes");
+        if (seconds > 0) countdownText.push(seconds + " seconds");
+
+        var countdownElement = document.getElementById("countdown" + givenid);
+        var statusElement = document.getElementById("status" + givenid);
+
+        if (isPast) {
+            countdownElement.textContent = countdownText.join(", ");
+            countdownElement.classList.add("late");
+            statusElement.textContent = "Late";
+            statusElement.classList.remove("on-time");
+            statusElement.classList.add("late");
+        } else {
+            countdownElement.textContent = countdownText.join(", ");
+            countdownElement.classList.add("on-time");
+            statusElement.textContent = "On Time";
+            statusElement.classList.remove("late");
+            statusElement.classList.add("on-time");
+        }
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+}
   $(document).ready(function() {
     // When an element with class 'taskperformaction' is clicked
+    // alert($(this).val());
+    // return false;
+    $("#modalCenterTitle").html();
     $('.taskperformaction').on('click', function() {
         var taskId      = $(this).data('task_id'); // Retrieve the 'task_id' data
-        var tasktype    = $("#tasktype").val();
-        var tasktype_id = $("#tasktype_id").val();
+        var tasktype    = $("#tasktype_"+taskId).val();
+        var tasktype_id = $("#tasktype_id_"+taskId).val();
+        //alert(taskId+"=="+tasktype+"=="+tasktype_id);return false;
         $.ajax({
                          url: '<?=base_url();?>Menu/taskExecution/',
                         type: "POST",
