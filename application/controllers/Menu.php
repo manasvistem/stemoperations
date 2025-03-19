@@ -2392,7 +2392,6 @@ class Menu extends CI_Controller {
         }else{
             $wffo='1';
         }
-
         $user_id        = $_POST['user_id'];
         $lat            = $_POST['lat'];
         $lng            = $_POST['lng'];
@@ -7105,27 +7104,26 @@ class Menu extends CI_Controller {
     }
     
     public function taskExecution(){
-            $taskId                    = $_POST['taskId'];
-            $taskType                  = $_POST['tasktype'];
-            $tasktypeid                = $_POST['tasktype_id'];
-            $tasknameData              = $this->Menu_model->getTasktypeName($tasktypeid);
-            $taskDetails               = $this->Menu_model->getTaskDetails($taskId,$tasktypeid);
-            $user                      = $_SESSION['user']['user_name'];
-            $user_id                   = $_SESSION['user']['id'];
-            $dept                      = $_SESSION['user']['dep_id'];
-            $data['taskType']          = $taskType;
-            $data['taskDetails']       = $taskDetails[0];
-            $taskname                  = $tasknameData['taskname'];
-            $cleanString               = preg_replace('/[^a-zA-Z0-9]/', '', $taskname);
-            $viewname                  = $cleanString."View";
-            $data['taskId']            = $taskId;
-            $data['taskType']          = $taskType;
-            $data['tasktypeid']        = $tasktypeid;
-            $data['formdata']          = $this->Menu_model->getViewFormData($tasktypeid,$dept);
-            $depnameData               = $this->Menu_model->get_depatment_byid($dept);
-            $dep_name                  = $depnameData[0]->dep_name;
-            $data['getFactoryModelList'] = $this->Menu_model->getFactoryModelList();
-            //echo $viewname;exit;
+            $taskId                         = $_POST['taskId'];
+            $taskType                       = $_POST['tasktype'];
+            $tasktypeid                     = $_POST['tasktype_id'];
+            $tasknameData                   = $this->Menu_model->getTasktypeName($tasktypeid);
+            $taskDetails                    = $this->Menu_model->getTaskDetails($taskId,$tasktypeid);
+            $user                           = $_SESSION['user']['user_name'];
+            $user_id                        = $_SESSION['user']['id'];
+            $dept                           = $_SESSION['user']['dep_id'];
+            $data['taskType']               = $taskType;
+            $data['taskDetails']            = $taskDetails[0];
+            $taskname                       = $tasknameData['taskname'];
+            $cleanString                    = preg_replace('/[^a-zA-Z0-9]/', '', $taskname);
+            $viewname                       = $cleanString."View";
+            $data['taskId']                 = $taskId;
+            $data['taskType']               = $taskType;
+            $data['tasktypeid']             = $tasktypeid;
+            $data['formdata']               = $this->Menu_model->getViewFormData($tasktypeid,$dept);
+            $depnameData                    = $this->Menu_model->get_depatment_byid($dept);
+            $dep_name                       = $depnameData[0]->dep_name;
+        //    $data['getFactoryModelList']    = $this->Menu_model->getFactoryModelList();
             $this->display($dep_name,$viewname,$data,$type='modal');
     }
 
@@ -11692,9 +11690,8 @@ public function updateVisitInauguration(){
     }
     unset($post_data['taskId']);
     unset($post_data['taskname']);
-    $updatetblcalleventsData = ['updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
-
-    $updateQuery             = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+    $updatetblcalleventsData        = ['updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+    $updateQuery                    = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
 
    // echo json_encode(["status" => "success"]);
     redirect('Menu/dashboard/');
@@ -11709,7 +11706,118 @@ public function visitDuringInauguarationTask($taskId){
      $dep_name          = $dt[0]->dep_name;
      $data['taskId']    = $taskId;
      $data['taskType']  = $taskType;
+     $data['getFactoryModelList']    = $this->Menu_model->getFactoryModelList();
     $this->display($dep_name,"visitDuringInaugurationView",$data,$type="");
+}
+
+public function visitDuringInstallationTask($taskId){
+    $user              = $this->session->userdata('user');
+    $uid               = $user['user_id'];
+    $uyid              = $user['type_id'];
+    $dep_id            = $user['dep_id'];
+    $dt                = $this->Menu_model->get_depatment_byid($dep_id);
+    $dep_name          = $dt[0]->dep_name;
+    $data['taskId']    = $taskId;
+    $data['taskType']  = $taskType;
+    $data['getFactoryModelList']    = $this->Menu_model->getFactoryModelList();
+   $this->display($dep_name,"visitDuringInstallationView",$data,$type="");
+}
+
+
+public function updateVisitDuringInstallation(){
+    $taskType           = $_POST['taskType'];
+    $taskId             = $_POST['taskId'];
+    $taskTypeId         = $_POST['tasktypeid'];
+    $user               = $_SESSION['user'];
+    $taskperformedby    = $user['dep_id'];
+    $posted_data        = $_POST;
+    $taskInsertArr1     = []; // Initialize array to store all rows
+    $commonColumns      = [
+                            'performed_by' => $_SESSION['user']['id'],
+                            'updated_at'   => date("Y-m-d H:i:s"),
+                            'status'       => 'active',
+                            'tbe_id'       => $taskId
+                          ];
+    
+    dd($_FILES);
+
+ // Remove unnecessary keys
+    dd($_POST);
+
+ unset($posted_data['taskId'], $posted_data['taskType'], $posted_data['tasktypeid']);
+
+ foreach ($posted_data as $k => $val) {
+     if ($val != '' && !empty($val)) {
+         // Assign main_Task_id based on the key
+         if($taskperformedby == '2'){
+         switch ($k){
+             case 'selfie':                    
+                        $main_Task_id = '667';
+                        $this->uploadFile($data,$uploadPath);
+                        break;
+             case 'pre_wall_photo_1':          
+                        $main_Task_id = '668'; 
+                        $this->uploadFile($data,$uploadPath);
+                        break;
+             case 'pre_wall_photo_2':       
+                        $main_Task_id = '669';
+                        $this->uploadFile($data,$uploadPath);
+                        break;
+             case 'pre_wall_photo_3':         
+                          $main_Task_id = '670'; 
+                          $this->uploadFile($data,$uploadPath);
+                          break;
+             case 'pre_wall_photo_4':  
+                         $main_Task_id = '671'; 
+                         $this->uploadFile($data,$uploadPath);
+                         break;
+             case 'pre_wide_angle':            
+                         $main_Task_id = '672'; 
+                         $this->uploadFile($data,$uploadPath);
+                         break;
+             case 'pre_MSC_video':              $main_Task_id = '673'; break;
+             case 'infra_completion':           $main_Task_id = '674'; break;
+             case 'electrical_wiring':          $main_Task_id = '675'; break;
+             case 'backdrops_photo':            $main_Task_id = '676'; break;
+             case 'gate_banner':                $main_Task_id = '677'; break;
+             case 'safety_measures':            $main_Task_id = '678'; break;
+             case 'unboxing_models':            $main_Task_id = '679'; break;
+             case 'barcode_scanning':           $main_Task_id = '680'; break; 
+             case 'NotWorkingModel':            $main_Task_id = '681'; break;
+             case '80_models_stickers':         $main_Task_id = '682'; break;
+             case 'training_manual':            $main_Task_id = '682'; break;
+             case 'user_manual':                $main_Task_id = '682'; break;
+             case 'handbook':                   $main_Task_id = '682'; break;
+             case 'after_msc_photos':           $main_Task_id = '682'; break;
+             case 'after_msc_video':            $main_Task_id = '682'; break;
+             case 'completion_letter':          $main_Task_id = '683'; break; 
+             case 'call_with_manager':          $main_Task_id = '684'; break; 
+             case 'completed_task_selfie':      $main_Task_id = '685'; break; 
+             case 'after_msc_photo_1':          $main_Task_id = '686'; break; 
+             case 'after_msc_photo_2':          $main_Task_id = '687'; break; 
+             case 'after_msc_photo_3':          $main_Task_id = '688'; break; 
+             case 'after_msc_photo_4':          $main_Task_id = '689'; break; 
+             case 'after_msc_photo_5':          $main_Task_id = '690'; break;
+             default:
+             continue 2; // Skip unknown keys
+         }
+        }
+         // Store data in array
+         $taskInsertArr1[] = [
+             'task_response' => $val,
+             'main_Task_id'  => $main_Task_id,
+             'remark' =>  $remark
+         ] + $commonColumns;
+     }
+ }
+ // Insert only if there's data
+ if (!empty($taskInsertArr1)){
+     $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+ }
+ 
+    $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+    $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+    echo json_encode(["status" => "success"]);
 }
 
 public function updateCallPreIntervention(){
@@ -11719,52 +11827,71 @@ public function updateCallPreIntervention(){
     $user            = $_SESSION['user'];
    
     $taskperformedby = $user['dep_id'];
-    $getTaskData     = $this->Menu_model->getTaskIds($taskTypeId,$taskperformedby);
-    $posted_data     = $_POST;
-    $taskInsertArr   = '';
-    $commonColumns = [
-        'performed_by' => $_SESSION['user']['id'],
-        'updated_at'   => date("Y-m-d H:i:s"), // 24-hour format
-        'status'       => 'active', // Example of a common value
-        'created_at'   => date("Y-m-d H:i:s"), // If needed
-        'tbe_id'       => $taskId
-    ];
-    
-    foreach ($posted_data as $k => $val) {
-        if ($val != '' && !empty($val)) {
-            $taskInsertArr = [
-                'task_response' => $val
-            ] + $commonColumns; // Merge common values
-    
-            // Assign main_Task_id based on the key
-            switch ($k) {
-                case 'action_completed':
-                    $taskInsertArr['main_Task_id'] = '657';
-                    break;
-                case 'purpose_completed':
-                    $taskInsertArr['main_Task_id'] = '658';
-                    break;
-                case 'called_person':
-                    $taskInsertArr['main_Task_id'] = '659';
-                    break;
-                default:
-                    continue; // Skip unknown keys
-            }
-            // Now you can insert $taskInsertArr into the database
+ //   $getTaskData     = $this->Menu_model->getTaskIds($taskTypeId,$taskperformedby);
+ $posted_data     = $_POST;
+ $taskInsertArr1  = []; // Initialize array to store all rows
+ $commonColumns   = [
+     'performed_by' => $_SESSION['user']['id'],
+     'updated_at'   => date("Y-m-d H:i:s"),
+     'status'       => 'active',
+     'tbe_id'       => $taskId
+ ];
+ 
+ // Remove unnecessary keys
+ unset($posted_data['taskId'], $posted_data['taskType'], $posted_data['tasktypeid']);
+ 
+ foreach ($posted_data as $k => $val) {
+     if ($val != '' && !empty($val)) {
+         // Assign main_Task_id based on the key
+         if($taskperformedby == '2'){
+         switch ($k) {
+             case 'actionCompleted':         $main_Task_id = '644'; break;
+             case 'purposeCompleted':        $main_Task_id = '645'; break;
+             case 'locationType':            $main_Task_id = '646'; break;
+             case 'wallPaint':               $main_Task_id = '647'; break;
+             case 'whitewash':               $main_Task_id = '648'; break;
+             case 'roomEmpty':               $main_Task_id = '649'; break;
+             case 'emptyRoomPhoto':          $main_Task_id = '650'; break;
+             case 'infrastructureReady':     $main_Task_id = '651'; break;
+             case 'peonNumber':              $main_Task_id = '652'; break;
+             case 'math_teacher_contact':    $main_Task_id = '653'; break;
+             case 'science_teacher_contact': $main_Task_id = '654'; break; // Fixed ID
+             case 'nearestMarket':           $main_Task_id = '655'; break;
+             case 'nearestJunction':         $main_Task_id = '656'; break;
+             case 'distanceRailwaySchool':   $main_Task_id = '657'; break; // Fixed ID
+             default:
+                 continue 2; // Skip unknown keys
+         }
         }
-      //  $taskInsertArr  = array_filter($taskInsertArr);
-        $taskInsertArr1[] = $taskInsertArr;
-    }
-  
-    if (!empty($taskInsertArr1)){
-
-        $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
-    }
-
-    unset($post_data['taskId']);
-    unset($post_data['taskname']);
-    unset($post_data['taskType']);
-
+        else if($taskperformedby == '4'){
+            switch ($k) {
+                case 'actionCompleted':         $main_Task_id = '657'; break;
+                case 'purposeCompleted':        $main_Task_id = '658'; break;
+                case 'called_person':           $main_Task_id = '659';$remark=$_POST['remark_called_person']; break;
+                case 'verified_school':         $main_Task_id = '660';$remark=$_POST['remark_verified_school']; break;
+                case 'transportation':          $main_Task_id = '661';$remark=$_POST['remark_transportation']; break;
+                case 'particle_vendor':         $main_Task_id = '662';$remark=$_POST['remark_particle_vendor']; break;
+                case 'extra_person':            $main_Task_id = '663';$remark=$_POST['remark_extra_person']; break;
+                case 'planned_travel':          $main_Task_id = '664';$remark=$_POST['remark_planned_travel']; break;
+                case 'claimed_advance':         $main_Task_id = '665';$remark=$_POST['remark_claimed_advance']; break;
+                default:
+                    continue 2; // Skip unknown keys
+            }
+        }
+         // Store data in array
+         $taskInsertArr1[] = [
+             'task_response' => $val,
+             'main_Task_id'  => $main_Task_id,
+             'remark' =>  $remark
+         ] + $commonColumns;
+     }
+ }
+ 
+ // Insert only if there's data
+ if (!empty($taskInsertArr1)){
+     $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+ }
+ 
     $updatetblcalleventsData    = ['updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
     $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
 

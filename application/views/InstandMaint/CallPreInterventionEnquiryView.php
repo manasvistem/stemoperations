@@ -9,15 +9,14 @@
         <!-- Action Completed & Purpose Completed -->
         <div class="mb-3">
             <label><strong>Action Completed?</strong></label>
-            <input type="radio" name="action_completed" value="yes"> Yes
-            <input type="radio" name="action_completed" value="no"> No
+            <input type="radio" name="actioncompleted" value="yes"> Yes
+            <input type="radio" name="actioncompleted" value="no"> No
         </div>
         <div class="mb-3">
             <label><strong>Purpose Completed?</strong></label>
-            <input type="radio" name="purpose_completed" value="yes"> Yes
-            <input type="radio" name="purpose_completed" value="no"> No
+            <input type="radio" name="purposecompleted" value="yes"> Yes
+            <input type="radio" name="purposecompleted" value="no"> No
         </div>
-
         <!-- Form Fields - Select Boxes & Remarks -->
         <div id="callinterventionEnquiry" style="display: none;">
             <div class="mb-3">
@@ -103,6 +102,7 @@
 <script>
       $(document).ready(function() {
         $("#installationForm").submit(function (e) {
+          //  alert($(this).attr("action"));
             e.preventDefault(); // Prevent default form submission
                 $.ajax({
                     url: $(this).attr("action"), // Get action URL from form
@@ -149,9 +149,9 @@ $(document).ready(function () {
      });
 
     // Show/hide intervention questions
-    $("input[name='action_completed'], input[name='purpose_completed']").on("change", function () {
-        var action = $("input[name='action_completed']:checked").val();
-        var purpose = $("input[name='purpose_completed']:checked").val();
+    $("input[name='actioncompleted'], input[name='purposecompleted']").on("change", function () {
+        var action = $("input[name='actioncompleted']:checked").val();
+        var purpose = $("input[name='purposecompleted']:checked").val();
         
         if (action === "yes" && purpose === "yes") {
             $("#callinterventionEnquiry").show();

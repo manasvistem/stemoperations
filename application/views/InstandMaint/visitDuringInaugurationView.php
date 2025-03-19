@@ -1,16 +1,17 @@
 <div class="container">
     <div class="container-fluid">
         <h4 class="text-center">Inauguration During Visit Task</h4>
-        <form name="meeting_inauguration" id="visitmeetingForm" action="<?= base_url();?>/Menu/updateVisitInauguration" method="post">
+        <form name="meeting_inauguration" id="visitmeetingForm" action="<?= base_url();?>/Menu/updateVisitDuringInauguration" method="post" enctype="multipart/form-data">
             <!-- First Row -->
             <div class="row">
                 <div class="col-md-12 text-center mb-3">
-                    <label><strong>Take selfie at school</strong></label>
+                    <label><strong>Take Selfie with School</strong></label>
                     <input type="file" class="form-control" name="filname[]" id="imgInp" accept="image/*" capture required >
                     <input type="hidden" id="lat" name="lat">
                     <input type="hidden" id="lng" name="lng">
                     <input type="hidden" name="address" id="address">
                     <p id="locationText" class="text-success mt-2"></p>
+        
         <!-- Hidden Fields to Store Latitude & Longitude -->
         <input type="hidden" name="latitude" id="latitude">
         <input type="hidden" name="longitude" id="longitude">
@@ -21,23 +22,23 @@
                     <input type="hidden" name="elapsed_time" id="elapsedTime">
                 </div>
             <!-- Two-Column Layout -->
-            <div class="row" id="visitDuringInstallation" style="display:none;">
+            <div class="row" id="visitDuringInauguration" style="display:none;">
                 <!-- Left Column -->
                 <div class="col-md-6">
                     <div class="mb-3">
-                        <label><strong>Pre Inauguration Decoration Photo-1</strong></label>
+                        <label><strong>Pre MSC Room Wall 1 Photo</strong></label>
                         <input type="file" class="form-control" name="pre_inauguration_photo[]" accept="image/*" capture required>
                     </div>
                     <div class="mb-3">
-                        <label><strong>During Inauguration Photo -1</strong></label>
+                        <label><strong> Pre MSC Room Wall 2 Photo</strong></label>
                         <input type="file" class="form-control" name="during_inauguration_photo[]" accept="image/*" capture required>
                     </div>
                     <div class="mb-3">
-                        <label><strong>Client feedback video -1</strong></label>
-                        <input type="file" class="form-control" name="client_feedback_video[]" accept="video/*" capture required>
+                        <label><strong>Pre MSC Room Wall 3 Photo</strong></label>
+                        <input type="file" class="form-control" name="client_feedback_video[]" accept="image/*" capture required>
                     </div>
                     <div class="mb-3">
-                        <label><strong>Add More Photos</strong></label>
+                        <label><strong>Pre MSC Room Wall 4 Photo</strong></label>
                         <input type="file" class="form-control" name="more_photos[]" accept="image/*" capture required>
                     </div>
                     <div class="mb-3">
@@ -94,7 +95,7 @@
             </div>
             <!-- Submit Button -->
             <div class="modal-footer" style="align:center;width:20%">
-                <input type="submit" class="btn btn-primary w-100" value="Submit" id="submitButton">
+                <input type="submit" class="btn btn-primary w-100" value="Submit">
             </div>
         </form>
     </div>
@@ -137,8 +138,7 @@
 
     });
 </script>
-<script type='text/javascript'>
-$(document).ready(function () {
+<script type='text/javascript'>$(document).ready(function () {
     var timerInterval;
     var seconds = 0;
     var isRunning = false;
@@ -175,6 +175,34 @@ $(document).ready(function () {
 });
 </script>
 <script type="text/javascript">
+    
+    $(document).ready(function() {
+        $("#installationForm").submit(function (e) {
+          //  alert($(this).attr("action"));
+            e.preventDefault(); // Prevent default form submission
+                $.ajax({
+                    url: $(this).attr("action"), // Get action URL from form
+                    type: "POST",
+                    data: $(this).serialize(), // Serialize form data
+                    success: function (response) {
+                        if (response.status == 'success') {
+                            alert("Task updated successfully!");
+                        //  $("#status").val("Updated"); // Update hidden field
+                        // $("#dynamicStatus").text("Task Status: Updated"); // Update text
+                            $("#modalCenter").hide();
+                            setTimeout(function () {
+                                location.reload(); // Reload the page to return to main view
+                            }, 500);
+                            } else {
+                                alert("Error updating task. Try again.");
+                            }
+                    },
+                    error: function () {
+                        //error occurred
+                    }
+                });
+    });
+    });
    $(document).ready(function () {
     $("#imgInp").click(function () {
         if (navigator.geolocation) {

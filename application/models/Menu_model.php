@@ -6203,13 +6203,16 @@ public function getTaskDetails($taskId,$taskactionId){
 
  public function updateTasksById($taskid,$data){    
      $updateQuery = " UPDATE tblcallevents SET ";
+
      foreach($data as $key => $val){
         $updateQuery .= " `".strtolower($key)."` = '".$val."' ,";
      }
+
      $updateQuery    = substr($updateQuery,0,'-1');
+
      $updateQuery  .= " WHERE `id` = '".$taskid."' ";
-    $this->db->query($updateQuery);
-   //  echo $this->db->last_query();exit;
+
+     $this->db->query($updateQuery);
      return true;
  }
 
@@ -6217,20 +6220,17 @@ public function getTaskDetails($taskId,$taskactionId){
    $data['status']       = 1;
    $data['created_date'] = date('Y-m-d');
    $insertQuery          = " INSERT INTO tblcallevents_attachments (task_id,attachment_link,remark,user_id,created_at) VALUES ( ";
-
     foreach($data as $key=>$val){
         $key         =  strtolower($key);
         $insertQuery .=   " `".$val."`,";
     }
     $insertQuery          =  substr($insertQuery,0,-1);
     $insertQuery .= ")";
-     return true;
+    return true;
  }
 
  public function batch_insert_task_execution($data) {
-
     $this->db->insert_batch('task_execution_details', $data);
-  
 }
 //  public function task_execution_details($data){
 //      $insertQuery =   $this->db->query("INSERT INTO task_execution_details(main_task_id,task_response,tbe_attachment_id,remark,tbe_id,performed_by,updated_at,status) 
@@ -6242,12 +6242,6 @@ public function getTaskDetails($taskId,$taskactionId){
  public function getViewFormData($tasktypeId,$dept){
       $query =   $this->db->query(" SELECT * FROM main_task WHERE tasktype = '".$tasktypeId."' AND taskperformedby = '".$dept."' ");
       $query_result = $query->result_array();
-    //   foreach($query_result as $key=>$val){
-    //     $query_result_Array[$val['taskname']][$key] = $val;
-    //   }
-    //   foreach($query_result as $key=>$val){
-    //     $query_result_Array[$val['taskname']][$key] = $val;
-    //   }
       return $query_result;
  }
  public function get_Yestdaydetail($uid,$tdate){
@@ -6322,7 +6316,7 @@ public function getTaskIds($taskTypeId,$taskperformedby){
 }
 public function getFactoryModelList(){
     $db2    = $this->load->database('db2', TRUE);
-    $query  = $db2->query("SELECT DISTINCT(model_name),id FROM dep_mreq ");
+    $query  = $db2->query("SELECT DISTINCT(model_name), id FROM dep_mreq group by model_name;");
     $result = $query->result_array(); return $result;
 }
 

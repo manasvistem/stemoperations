@@ -59,7 +59,7 @@
             <div class="mb-3 form-check">
                 <label class="form-check-label" for="requestNote">Select Not working Model</label>
                 <input class="form-check-input" type="file" name="taskexe[]" id="requestNote" value="">
-                <select name="not_working_model">
+                <select name="not_working_model" multiple>
                     <?php foreach($getFactoryModelList as $key=>$val){
                         ?>
                         <option val="<?php echo $val['id'];?>"><?php echo $val['model_name'];?></option>

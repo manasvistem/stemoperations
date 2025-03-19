@@ -1,7 +1,10 @@
 
 <div class="container mt-4">
     <h4 class="text-center">Call- PreIntervention Enquiry</h4>
-    <form name="callpreintervention" id="callpreintervention" method="post" action="<?php base_url();?>/Menu/" >
+    <form name="callpreintervention" id="callpreintervention" method="post" action="<?php echo base_url();?>/Menu/updateCallPreIntervention" >
+    <input type="hidden" name="taskId" value="<?php echo $taskId; ?>"/>
+    <input type="hidden" name="taskType" value="<?php echo $taskType; ?>"/>
+    <input type="hidden" name="tasktypeid" value="<?php echo $tasktypeid; ?>"/>
     <!-- Action Completed Section -->
     <div class="mb-3">
         <label><strong>Action Completed?</strong></label><br>
@@ -155,7 +158,7 @@
         });
 
     });
-    $("#maintenanceForm").submit(function (e) {
+    $("#callpreintervention").submit(function (e) {
      e.preventDefault(); // Prevent default form submission
         $.ajax({
             url: $(this).attr("action"), // Get action URL from form
