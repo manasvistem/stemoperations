@@ -1,7 +1,7 @@
 <div class="container">
     <div class="container-fluid">
         <h4 class="text-center">Inauguration During Visit Task</h4>
-        <form name="meeting_inauguration" id="visitmeetingForm" action="<?= base_url();?>/Menu/updateVisitInauguration" method="post">
+        <form name="meeting_inauguration" action="<?= base_url();?>/Menu/updateVisitInauguration" method="post">
             <!-- First Row -->
             <div class="row">
                 <div class="col-md-12 text-center mb-3">

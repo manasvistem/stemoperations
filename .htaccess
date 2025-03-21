@@ -8,4 +8,10 @@ RewriteRule ^/?$ "http\:\/\/localhost\/stemoppapp\/Menu\/main" [R=301,L]
 RewriteCond %{HTTP_HOST} ^stemoppapp\.in$ [OR]
 RewriteCond %{HTTP_HOST} ^www\.stemoppapp\.in$
 RewriteRule ^/?$ "https\:\/\/stemoppapp\.in\/Menu\/main" [R=301,L]
+php_value upload_max_filesize 500M
+php_value post_max_size 600M
+php_value max_execution_time 600
+php_value max_input_time 600
+php_value memory_limit 512M
+
 

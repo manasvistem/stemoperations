@@ -1,7 +1,6 @@
 <div class="container mt-4">
     <h4 class="text-center">Report Submission Form</h4>
     <form action="submit_report.php" method="post" enctype="multipart/form-data">
-        
         <!-- Share Report Initiated first page Screenshot -->
         <div class="form-group">
             <label><strong>Share Report Initiated First Page Screenshot</strong></label>

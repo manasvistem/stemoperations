@@ -7123,8 +7123,12 @@ class Menu extends CI_Controller {
             $data['formdata']               = $this->Menu_model->getViewFormData($tasktypeid,$dept);
             $depnameData                    = $this->Menu_model->get_depatment_byid($dept);
             $dep_name                       = $depnameData[0]->dep_name;
-        //    $data['getFactoryModelList']    = $this->Menu_model->getFactoryModelList();
-            $this->display($dep_name,$viewname,$data,$type='modal');
+
+        //  $data['getFactoryModelList']  = $this->Menu_model->getFactoryModelList();
+
+      //  $viewname = "callInstallationWithPRO";
+        $this->display($dep_name,$viewname,$data,$type='modal');
+          //  $this->display($dep_name,$viewname,$data,$type='modal');
     }
 
     public function Dashboard1(){
@@ -7359,7 +7363,7 @@ public function updateTask($tasktypeid=''){
         $_FILES['file']['tmp_name']  = $data['tmp_name'];
         $_FILES['file']['error']     = $data['error'];
         $_FILES['file']['size']      = $data['size'];
-      
+    //  dd($_FILES);
         // Generate a unique file name using the current timestamp and original file extension
         $extension                = pathinfo($data['name'], PATHINFO_EXTENSION); // Get file extension
         $uniqueFileName           = date("Y-m-d").time() . '_' . uniqid() . '.' . $extension; // Generate unique name
@@ -11704,25 +11708,36 @@ public function visitDuringInauguarationTask($taskId){
      $dep_id            = $user['dep_id'];
      $dt                = $this->Menu_model->get_depatment_byid($dep_id);
      $dep_name          = $dt[0]->dep_name;
-     $data['taskId']    = $taskId;
-     $data['taskType']  = $taskType;
+     $data['taskId']                 = $taskId;
+     $data['taskType']               = $taskType;
      $data['getFactoryModelList']    = $this->Menu_model->getFactoryModelList();
-    $this->display($dep_name,"visitDuringInaugurationView",$data,$type="");
+     $this->display($dep_name,"visitDuringInaugurationView",$data,$type="");
 }
 
 public function visitDuringInstallationTask($taskId){
-    $user              = $this->session->userdata('user');
-    $uid               = $user['user_id'];
-    $uyid              = $user['type_id'];
-    $dep_id            = $user['dep_id'];
-    $dt                = $this->Menu_model->get_depatment_byid($dep_id);
-    $dep_name          = $dt[0]->dep_name;
-    $data['taskId']    = $taskId;
-    $data['taskType']  = $taskType;
+    $user                           = $this->session->userdata('user');
+    $uid                            = $user['user_id'];
+    $uyid                           = $user['type_id'];
+    $dep_id                         = $user['dep_id'];
+    $dt                             = $this->Menu_model->get_depatment_byid($dep_id);
+    $dep_name                       = $dt[0]->dep_name;
+    $data['taskId']                 = $taskId;
+    $data['taskType']               = $taskType;
     $data['getFactoryModelList']    = $this->Menu_model->getFactoryModelList();
-   $this->display($dep_name,"visitDuringInstallationView",$data,$type="");
+    $this->display($dep_name,"visitDuringInstallationView",$data,$type="");
 }
 
+public function getModelPartList(){
+    $model_name = $_POST['model_name'];
+    $modelParts = $this->Menu_model->getModelPartsList($model_name);
+    echo json_encode($modelParts);
+}
+
+public function getModelMaterialList(){
+    $model_name = $_POST['model_name'];
+    $modelMaterials = $this->Menu_model->getModelMaterialList($model_name);
+    echo json_encode($modelMaterials);
+}
 
 public function updateVisitDuringInstallation(){
     $taskType           = $_POST['taskType'];
@@ -11738,42 +11753,79 @@ public function updateVisitDuringInstallation(){
                             'status'       => 'active',
                             'tbe_id'       => $taskId
                           ];
+    $projectDetails         = $this->Menu_model->getTasksAllDetails($taskId);
+
+    // foreach($projectDetails as $detailsKey=>$detailsVal){
+    //     $nonworkingmodeldata['project']     = $detailsVal[''];
+    //     $nonworkingmodeldata['school_name']    = $detailsVal[];
+    //     $nonworkingmodeldata['address']       = $detailsVal[];
+    // }
+
     
-    dd($_FILES);
+    $uploaded_files         = $_FILES;
+    $file_array_key         = array_keys($uploaded_files);
+    $nonworkingmodellist    = $posted_data['NotWorkingModel'];
+    foreach($nonworkingmodellist as $key=>$val){        
+        // insert non working model in factory tables
+      foreach($posted_data as $k=>$v){
+                    if($k == 'part_name_'.$val ){
+                        foreach($v as $value){
+                            $nonworkingmodeldata['part_name']  = $value;
+                            $nonworkingmodeldata['model_name']    = $val;
+                            $nonworkingmodeldata['user_id']       = $_SESSION['user']['id'];
+                            $nonworkingmodeldata['task_id']       = $taskId;
+                            $nonworkingmodeldata['task_type_id']  = $taskTypeId;
+                            $this->Menu_model->insertNonWorkingModelData($nonworkingmodeldata);
+                        }
+                    }
+                    else if($k == 'material_name_'.$val){
+                        foreach($v as $value){
+                            $nonworkingmodeldata['material_name']  = $value;
+                            $nonworkingmodeldata['model_name']    = $val;
+                            $nonworkingmodeldata['user_id']       = $_SESSION['user']['id'];
+                            $nonworkingmodeldata['task_id']       = $taskId;
+                            $nonworkingmodeldata['task_type_id']  = $taskTypeId;
+                           $this->Menu_model->insertNonWorkingModelData($nonworkingmodeldata);
+                        }
+                    }
+             }
+    }
 
- // Remove unnecessary keys
-    dd($_POST);
+    if(isset($uploaded_files)){
+    foreach($uploaded_files as $key=>$values){
+        $uploadPath     = "uploads/".$taskType."/visit/";
+        $this->uploadFile($values,$uploadPath);
+    }
+  }
+    unset($posted_data['taskId'], $posted_data['taskType'], $posted_data['tasktypeid']);
 
- unset($posted_data['taskId'], $posted_data['taskType'], $posted_data['tasktypeid']);
+   
+
 
  foreach ($posted_data as $k => $val) {
      if ($val != '' && !empty($val)) {
          // Assign main_Task_id based on the key
          if($taskperformedby == '2'){
          switch ($k){
-             case 'selfie':                    
+             case 'selfie':    
                         $main_Task_id = '667';
-                        $this->uploadFile($data,$uploadPath);
                         break;
-             case 'pre_wall_photo_1':          
+             case 'pre_wall_photo_1':   
                         $main_Task_id = '668'; 
-                        $this->uploadFile($data,$uploadPath);
                         break;
              case 'pre_wall_photo_2':       
                         $main_Task_id = '669';
-                        $this->uploadFile($data,$uploadPath);
+                         
                         break;
              case 'pre_wall_photo_3':         
                           $main_Task_id = '670'; 
-                          $this->uploadFile($data,$uploadPath);
-                          break;
+                         ;
              case 'pre_wall_photo_4':  
                          $main_Task_id = '671'; 
-                         $this->uploadFile($data,$uploadPath);
+                            
                          break;
              case 'pre_wide_angle':            
-                         $main_Task_id = '672'; 
-                         $this->uploadFile($data,$uploadPath);
+                         $main_Task_id = '672';
                          break;
              case 'pre_MSC_video':              $main_Task_id = '673'; break;
              case 'infra_completion':           $main_Task_id = '674'; break;
@@ -11817,7 +11869,7 @@ public function updateVisitDuringInstallation(){
  
     $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
     $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
-    echo json_encode(["status" => "success"]);
+    redirect('Menu/Dashboard');
 }
 
 public function updateCallPreIntervention(){
@@ -11825,18 +11877,17 @@ public function updateCallPreIntervention(){
     $taskId          = $_POST['taskId'];
     $taskTypeId      = $_POST['tasktypeid'];
     $user            = $_SESSION['user'];
-   
-    $taskperformedby = $user['dep_id'];
- //   $getTaskData     = $this->Menu_model->getTaskIds($taskTypeId,$taskperformedby);
- $posted_data     = $_POST;
- $taskInsertArr1  = []; // Initialize array to store all rows
- $commonColumns   = [
-     'performed_by' => $_SESSION['user']['id'],
-     'updated_at'   => date("Y-m-d H:i:s"),
-     'status'       => 'active',
-     'tbe_id'       => $taskId
- ];
- 
+   $taskperformedby  = $user['dep_id'];
+    //   $getTaskData     = $this->Menu_model->getTaskIds($taskTypeId,$taskperformedby);
+    $posted_data     = $_POST;
+    $taskInsertArr1  = []; // Initialize array to store all rows
+    $commonColumns   = [
+        'performed_by' => $_SESSION['user']['id'],
+        'updated_at'   => date("Y-m-d H:i:s"),
+        'status'       => 'active',
+        'tbe_id'       => $taskId
+    ];
+    
  // Remove unnecessary keys
  unset($posted_data['taskId'], $posted_data['taskType'], $posted_data['tasktypeid']);
  

@@ -6203,15 +6203,11 @@ public function getTaskDetails($taskId,$taskactionId){
 
  public function updateTasksById($taskid,$data){    
      $updateQuery = " UPDATE tblcallevents SET ";
-
      foreach($data as $key => $val){
         $updateQuery .= " `".strtolower($key)."` = '".$val."' ,";
      }
-
      $updateQuery    = substr($updateQuery,0,'-1');
-
      $updateQuery  .= " WHERE `id` = '".$taskid."' ";
-
      $this->db->query($updateQuery);
      return true;
  }
@@ -6298,7 +6294,6 @@ public function GetDayCloseRequestData($uid,$adate,$uyid){
 }
 
 public function insertIntoInauguration($data){
-   // dd($data);
     $insertQuery =   $this->db->query("INSERT INTO inauguration(task_id,user_role,user_id,question_id,question_val,created_date,updated_date) 
                      VALUES(".$data['task_id'].",".$data['user_role'].",".$data['user_id'].",".$data['question_id'].",
                     ".$data['question_val'].",".$data['created_date'].",".$data['update_date'].")");  
@@ -6316,8 +6311,36 @@ public function getTaskIds($taskTypeId,$taskperformedby){
 }
 public function getFactoryModelList(){
     $db2    = $this->load->database('db2', TRUE);
-    $query  = $db2->query("SELECT DISTINCT(model_name), id FROM dep_mreq group by model_name;");
+    $query  = $db2->query("SELECT DISTINCT(model_name) FROM modelm group by model_name;");
     $result = $query->result_array(); return $result;
+}
+
+public function getModelPartsList($modelname){
+    $db2    = $this->load->database('db2', TRUE);
+    $query  = $db2->query("SELECT DISTINCT(part_name),id FROM modelm WHERE model_name like '".$modelname."' GROUP BY part_name ");
+    $result = $query->result_array(); 
+    return $result;
+}
+public function getModelMaterialList($modelname){
+    $db2    = $this->load->database('db2', TRUE);
+    $query  = $db2->query("SELECT DISTINCT(material_name),id FROM modelm WHERE model_name like '".$modelname."' GROUP BY material_name ");
+    $result = $query->result_array(); 
+    return $result;
+}
+public function insertNonWorkingModelData($posted_data){
+    $db2    = $this->load->database('db2',TRUE);
+    $query  = $db2->query("INSERT INTO repairmodel(model_name,part_name,material_name,user_id,task_type_id,updated_date) 
+                        VALUES(".$Model_name.",".$part_name.",".$material_name.", ".$user_id." , ".$task_type_id.",".date('Y-m-d h:i:s').")");
+   return $db2->last_insert_id();
+}
+public function getTasksAllDetails($taskid){
+    $query  = $this->db->query("SELECT tblcallevents.id,spd.id,spd.project_code,
+                                sid ,spd.sname,spd.clientname 
+                                FROM tblcallevents 
+                                LEFT JOIN spd ON spd.id = tblcallevents.sid 
+                                WHERE tblcallevents.id=  '".$taskid."' ");
+    $result = $query->row_array();
+    return $result;
 }
 
 }
