@@ -35,7 +35,7 @@
     <link rel="stylesheet" href="<?= base_url() ?>assets/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="<?= base_url() ?>assets/assets/vendor/libs/apex-charts/apex-charts.css" />
     <link rel="stylesheet" href="<?= base_url() ?>assets/assets/vendor/libs/apex-charts/apex-charts.css" />
-
+    
   
 
     <!-- Page CSS -->
@@ -44,7 +44,7 @@
     <script src="<?= base_url() ?>assets/assets/vendor/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
-    <script src="<?= base_url() ?>assets/js/config.js"></script>
+    <script src="<?= base_url() ?>assets/assets/js/config.js"></script>
       <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" />
     <style>
@@ -58,14 +58,89 @@
   .table:not(.table-borderless):not(.table-dark) > :not(caption) > *:not(.table-dark) > * {
     font-weight: 700;
 }
+.on-time { color: #28a745; /* Green text */ } .late { color: #dc3545; /* Red text */ }
+.nav-align-top > .nav.nav-pills .nav-item { box-shadow: rgba(0, 0, 0, 0.25) 0px 0.0625em 0.0625em, rgba(0, 0, 0, 0.25) 0px 0.125em 0.5em, rgba(255, 255, 255, 0.1) 0px 0px 0px 1px inset;background: ghostwhite; }
+
+/* Extra small devices (phones) */
+@media screen and (max-width: 576px) { 
+  .d-none {
+        display: block !important;
+    }
+    .bx-home:before {display:none!important; }
+  }
+
+/* Small devices (landscape phones) */
+@media screen and (min-width: 577px) and (max-width: 768px) {
+    .d-none {
+        display: block !important; 
+    }
+    .bx-home:before {display:none!important; }
+}
+
+
+/* Medium devices (tablets) */
+/* @media screen and (min-width: 769px) and (max-width: 992px) {  } */
+
+/* Large devices (desktops) */
+/* @media screen and  (min-width: 993px) and (max-width: 1200px) {  } */
+
+/* Extra large devices (large desktops) */
+/* @media screen and (min-width: 1201px) {  } */
+
+
 </style>
+<script>
+    function checkCountDownTime(first_date, givenid) {
+    var targetDate = new Date(first_date).getTime();
+
+    function updateTimer() {
+        var now = new Date().getTime();
+        var diff = targetDate - now;
+        var isPast = diff < 0; // Check if the date is in the past
+        diff = Math.abs(diff); // Always take absolute value for calculations
+
+        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        var countdownText = [];
+        if (days > 0) countdownText.push(days + " days");
+        if (hours > 0) countdownText.push(hours + " hours");
+        if (minutes > 0) countdownText.push(minutes + " minutes");
+        if (seconds > 0) countdownText.push(seconds + " seconds");
+
+        var countdownElement = document.getElementById("countdown" + givenid);
+        var statusElement = document.getElementById("status" + givenid);
+
+        if (isPast) {
+            countdownElement.textContent = countdownText.join(", ");
+            countdownElement.classList.add("late");
+            statusElement.textContent = "Late";
+            statusElement.classList.remove("on-time");
+            statusElement.classList.add("late");
+        } else {
+            countdownElement.textContent = countdownText.join(", ");
+            countdownElement.classList.add("on-time");
+            statusElement.textContent = "On Time";
+            statusElement.classList.remove("late");
+            statusElement.classList.add("on-time");
+        }
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+}
+
+        // Start the countdown/countup
+        // checkCountDownTime("2025-02-12 12:57:07",1);
+    </script>
   </head>
 
   <body>
 
   <?php 
   $dep_id = $user['dep_id'];
-  
   ?>
 
     <!-- Layout wrapper -->
@@ -161,6 +236,12 @@
                   <div class="text-truncate" data-i18n="Boxicons">BD REQUEST</div>
                 </a>
               </li>
+              <li class="menu-item">
+                <a href="<?=base_url().'Menu/TaskPlannerManagement'?>" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-crown"></i>
+                  <div class="text-truncate" data-i18n="Boxicons">Task Management</div>
+                </a>
+              </li>
               <?php endif; ?>
             <!-- Misc -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
@@ -218,6 +299,12 @@
               <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <!-- Place this tag where you want the button to render. -->
                 <li class="nav-item lh-1 me-4">
+                  <a href="javascript:void(0)">
+                    <span class="shadow-none bg-transparent border border-primary p-2"><i class="bx bx-bell me-2 text-danger"></i> Send Reminder</span>
+                  </a>
+                </li>
+                <li class="nav-item lh-1 me-4">
+                
                   <a
                     class="github-button"
                     href="https://github.com/themeselection/sneat-html-admin-template-free"
@@ -225,18 +312,26 @@
                     data-size="large"
                     data-show-count="true"
                     aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
-                    >Star</a
+                    ><i class="bx bx-bell me-2 text-danger"></i></a
                   >
                 </li>
-
+                <?php 
+                  $currentUserData  =  $this->Menu_model->get_user_byid($user['id']);
+                  $userprofile      = $currentUserData[0]->photo;
+                   ?>
                 <!-- User -->
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                  <a
-                    class="nav-link dropdown-toggle hide-arrow p-0"
+                  <a class="nav-link dropdown-toggle hide-arrow p-0"
                     href="javascript:void(0);"
                     data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="<?= base_url() ?>assets/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                      <?php if($userprofile ==''){ ?>
+                        <img src="<?=base_url()?>assets/img/profile.jpg" 
+                          alt="user-avatar" class="w-px-40 h-auto rounded-circle">
+                        <?php }else{ ?>
+                        <img src="<?=base_url().$userprofile;?>" 
+                          alt="user-avatar" class="w-px-40 h-auto rounded-circle" />
+                        <?php } ?>
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -245,7 +340,13 @@
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img src="<?= base_url() ?>assets/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                              <?php if($userprofile == ''){ ?>
+                              <img src="<?=base_url()?>assets/img/profile.jpg" 
+                                alt="user-avatar" class="w-px-40 h-auto rounded-circle">
+                              <?php }else{ ?>
+                              <img src="<?=base_url().$userprofile;?>" 
+                                alt="user-avatar" class="w-px-40 h-auto rounded-circle" />
+                              <?php } ?>
                             </div>
                           </div>
                           <div class="flex-grow-1">
@@ -253,34 +354,31 @@
                             <small class="text-muted">Admin</small>
                           </div>
                         </div>
-                        <?php // print_r($user['dep_id']); ?>
                       </a>
                     </li>
                     <li>
                       <div class="dropdown-divider my-1"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="#">
-                        <i class="bx bx-user bx-md me-3"></i><span>My Profile</span>
+                      <a class="dropdown-item" href="<?=base_url().'Menu/AccountSettings'?>">
+                        <i class="bx bx-user bx-md me-3"></i><span>My Profile & Settings</span>
                       </a>
                     </li>
+                    <?php 
+                    $getnotifications =  $this->Menu_model->GetTodaysNotiifications($user['id'],date("Y-m-d"));
+                    $getnotificationscnt = sizeof($getnotifications);
+                    ?>
                     <li>
-                      <a class="dropdown-item" href="#"> <i class="bx bx-cog bx-md me-3"></i><span>Settings</span> </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="#">
-                        <span class="d-flex align-items-center align-middle">
-                          <i class="flex-shrink-0 bx bx-credit-card bx-md me-3"></i
-                          ><span class="flex-grow-1 align-middle">Billing Plan</span>
-                          <span class="flex-shrink-0 badge rounded-pill bg-danger">4</span>
-                        </span>
+                      <a class="dropdown-item" href="javascript:void(0)" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBothNotification" aria-controls="offcanvasBoth">
+                        <i class="bx bx-bell bx-md me-3"></i><span>Notification 
+                          (<span id="notifynavpage"><?= $getnotificationscnt;?></span></span> )
                       </a>
                     </li>
                     <li>
                       <div class="dropdown-divider my-1"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="javascript:void(0);">
+                      <a class="dropdown-item" href="<?=base_url()?>/Menu/logout">
                         <i class="bx bx-power-off bx-md me-3"></i><span>Log Out</span>
                       </a>
                     </li>

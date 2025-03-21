@@ -22,6 +22,7 @@
   label {
   font-weight: 700;
   }
+  .flexwrapcontent{align-items: center; justify-content: center; display: flex ; }
 </style>
 <!-- Content wrapper -->
 <div class="content-wrapper">
@@ -86,16 +87,30 @@
                   <td>Type of School</td>
                   <td><?= $bdr[0]->schooltype; ?></td>
                 </tr>
+
+                <tr class="table-success">
+                  <td>Single / Multiple Location</td>
+                  <td class="text-capitalize"><?= $bdr[0]->single_or_multi_location; ?></td>
+                </tr>
+
+                <tr class="table-success">
+                  <td>Location Count</td>
+                  <td><?= $bdr[0]->location_count; ?></td>
+                </tr>
+
                 <tr class="table-success">
                   <td>Location</td>
                   <td><?php 
-                    if($bdr[0]->vlocation == ''){
-                        echo "<span class='bg-danger p-1'>N/A</span>";
-                    }else{
-                        echo $bdr[0]->vlocation;
-                    }
-                    ?></td>
+                  $locations =  $this->Menu_model->GetBDRLocations($bdr[0]->id);
+                  $lc =1;
+                  foreach($locations as $location){
+                    echo "<span class='bg-success p-1'>$location->location - $location->number_of_school</span> <hr/>";
+                    $lc++; }
+                  ?></td>
                 </tr>
+
+
+                
                 <tr class="table-warning">
                   <td>Attach NGO Letter (only pdf)</td>
                   <td><?php 
@@ -113,24 +128,49 @@
                 </tr>
                 <?php if($bdr[0]->sletter == 'Yes'){ ?>
                 <tr class="table-success">
+                  <td>School Letter Request Draft</td>
+                  <td><?php 
+                    $school_request_draft = $bdr[0]->school_request_draft;
+                    if($school_request_draft == 'uploads/day/'){
+                      echo "<span class='bg-danger p-1'>N/A</span>";
+                    }else{
+                      echo "<a href='https://stemapp.in/".$school_request_draft."' target='BLANK' class='bg-success p-1'>view</a>";
+                    }
+                    ?></td>
+                </tr>
+                <tr class="table-success">
                   <td>School Letter Remarks</td>
                   <td><?=$bdr[0]->school_letter_remarks;?></td>
                 </tr>
                 <?php } ?>
-                <?php if($bdr[0]->dmletter == 'Yes'){ ?>
-                <tr class="table-success">
-                  <td>School Letter Remarks</td>
-                  <td><?=$bdr[0]->dm_deo_letter_remarks;?></td>
-                </tr>
-                <?php } ?>
+
                 <tr class="table-primary">
                   <td>DM/DEO Letter Required</td>
                   <td><?= $bdr[0]->dmletter; ?></td>
                 </tr>
-                <tr class="table-secondary">
-                  <td>Client Validation</td>
-                  <td><?= $bdr[0]->svalidation; ?></td>
+
+                <?php if($bdr[0]->dmletter == 'Yes'){ ?>
+                <tr class="table-success">
+                  <td>DM Letter Remarks</td>
+                  <td><?=$bdr[0]->dm_deo_letter_remarks;?></td>
                 </tr>
+                <?php } ?>
+               
+                <?php if($bdr[0]->dmletter == 'Yes'){ ?>
+                <tr class="table-success">
+                  <td>DM Letter Request Draft</td>
+                  <td><?php 
+                    $dm_deo_draft = $bdr[0]->dm_deo_draft;
+                    if($dm_deo_draft == 'uploads/day/'){
+                      echo "<span class='bg-danger p-1'>N/A</span>";
+                    }else{
+                      echo "<a href='https://stemapp.in/".$dm_deo_draft."' target='BLANK' class='bg-success p-1'>view</a>";
+                    }
+                    ?></td>
+                </tr>
+                <?php } ?>
+
+          
                 <tr class="table-warning">
                   <td>Request Reamrks</td>
                   <td><?= $bdr[0]->remark; ?></td>
@@ -142,6 +182,8 @@
         </div>
         <div class="col-md-6">
           <div class="card">
+
+          <?php if(sizeof($getSPDRequest) > 0){  ?>
             <div class="card card-form col-md-12" style="background:#dcf3ffed">
               <?=form_open('Menu/BDRequestAssignToProcess')?>
               <input type="hidden" id="tid" value="<?=$reqID;?>" name="reqID">
@@ -172,8 +214,6 @@
                   </div>
                 </div>
                 <div id="RequestDetails">
-
-                
                 <div class="mb-4">
                   <label for="defaultTaskSelect" >Select School</label>
                   <select id="defaultTaskSelect" class="form-select" name="school_id">
@@ -200,13 +240,14 @@
                 </div>
                 <div class="mb-4">
                   <lable>Expected Date</lable>
-                  <input type="date" class="form-control" max="<?=$bdr[0]->targetd;?>" name="exdate" required>
+                  <input type="datetime-local" class="form-control" 
+                      max="<?= date('Y-m-d\TH:i', strtotime($bdr[0]->targetd)); ?>" 
+                      name="exdate" required>
                 </div>
                 <div class="mb-4">
                   <lable>Reamrks</lable>
                   <textarea class="form-control" name="remark" id="remark" required placeholder="Remark"></textarea>
                 </div>
-            
                 <div class="mb-4">
                <center> <lable><b>ZM Approval</b></lable></center>
                 <hr>
@@ -225,20 +266,115 @@
                     </div>
                   </div>
                 </div>
-
                     <br>
                   <center>
                     <button type="submit" style="width:100px;" class="btn btn-primary mt-3" id="requestsubmit">Submit</button>
                     <br>
                   </center>
-
                 </div>
-
-
               </div>
-             
               </form>
             </div>
+            <?php }else{
+              $getDMLatterTaskcnt = sizeof($getDMLatterTask);
+              // $getDMLatterTaskcnt = 0;
+              ?>
+              <?php if($getDMLatterTaskcnt > 0){
+                      $getDMLatterTaskId = $getDMLatterTask[0]->id;
+                ?>
+             
+                    <div class="card p-3" style="background:#dcf3ffed">
+                    <hr>
+                    <div class="mb-4" id="DM_DEO_Letter_Required_Card">
+                      <center><lable><b>DM/DEO Letter Required</b></lable></center>
+                      <hr>
+                      <?=form_open('Menu/BDRequestAssignToProcessDMLatter')?>
+                      <div class="row">
+                        <div class="col-md-12">
+
+                          <input type="hidden" id="tid" value="<?=$reqID;?>" name="reqID">
+                          <input type="hidden" id="request_code" value="<?=$request_code;?>" name="request_code">
+                          <input type="hidden" id="sales_cid" value="<?=$sales_cid;?>" name="sales_cid">
+                          <input type="hidden" name="uid" value="<?=$user['id']?>">
+      
+
+                          <?php $dmlocations =  $this->Menu_model->GetBDRLocations($bdr[0]->id); ?>
+                          <?php foreach($dmlocations as $dmlocation){ ?>
+                            <input type="hidden" name="bdr_location_id[]" value="<?=$dmlocation->id;?>">
+                            <div class="row mb-2">
+                              <div class="col-md-6 card flexwrapcontent">
+                                <?= $dmlocation->location .' - '. $dmlocation->number_of_school ?>
+                              </div>
+                              <div class="col-md-6 card flexwrapcontent">
+                              <div class="mb-1 p-2">
+                                  <select id="AssignTo" name="assignto[]" class="form-select" required>
+                                    <option value="">Select PIA</option>
+                                    <?php $pia=$this->Menu_model->get_user();
+                                      foreach($pia as $pia){if($pia->dep_id==2){?>
+                                    <option value="<?=$pia->id?>"><?=$pia->fullname?></option>
+                                    <?php }} ?>
+                                  </select>
+                                  </div>
+                              </div>
+                            </div>
+                            <?php } ?>
+                            <hr>
+                            <div class="mb-4">
+                              <lable>Appointment Date</lable>
+                              <input type="datetime-local" class="form-control" 
+                                max="<?= date('Y-m-d\TH:i', strtotime($bdr[0]->targetd)); ?>" 
+                                name="exdate" required>
+                            </div>
+                            <div class="mb-4">
+                              <lable>Reamrks</lable>
+                              <textarea class="form-control" name="remark" id="remark" required placeholder="Remark"></textarea>
+                            </div>
+                                <center><button type="submit" class="btn btn-primary mt-3" id="requestsubmit">Assign DM/DEO Task</button></center>
+                        </div>
+                      </div>
+                      </form>
+                    </div>
+                    <hr>
+                    </div>
+                    <?php }else{ ?>
+                      <div class="card p-3" style="background:#dcf3ffed">
+
+                      <?php $bdr_status = $bdr[0]->status;
+                      if($bdr_status == 0){
+                      ?>
+
+                        
+
+                        <?=form_open('Menu/ClosedBDRequestAssignToProcess')?>
+                        <input type="hidden" id="tid" value="<?=$reqID;?>" name="reqID">
+                        <input type="hidden" id="request_code" value="<?=$request_code;?>" name="request_code">
+                          <div class="mb-4 text-center"><br>
+                              <lable>Assigning Proccess Closed Reamrks</lable> <hr>
+                              <textarea class="form-control" name="remark" id="remark" required placeholder=" Remark"></textarea>
+                            </div>
+                                <center><button type="submit" class="btn btn-primary mt-3" id="requestsubmit">Closed Assigning Process</button></center>
+
+                                </form>
+
+                                <?php }else{ ?>
+                                    <div class="card p-5">
+                                    <h4 class="text-center p-2">Assigning Process Done    </h4>
+                                    <div class="text-center">
+                                        <!-- <img src="<?=site_url()?>assets/img/assigning_process_done1.webp" alt="assigning_process_done" height="300" class="img-fluid"> -->
+                                    </div>
+                                    </div>
+                                <?php } ?>
+
+                    </div>
+                      
+                   <?php } ?>
+            <?php }  ?>
+
+
+
+
+
+
           </div>
         </div>
       </div>
@@ -254,6 +390,7 @@
   $('input[name="select_pia_radio"]').change(function() {
     $('#RequestDetailsImage').fadeOut();
     $('#RequestDetails').fadeIn();
+    $('#DM_DEO_Letter_Required_Card').fadeOut();
     if ($('#defaultRadio2').is(':checked')) {
   
         $('#defaultTaskSelect').attr({
@@ -264,10 +401,12 @@
             'multiple': 'multiple',
             'name': 'assignto[]'
         });
-  
+        $('#DM_DEO_Letter_Required_Card').fadeOut();
     } else {
         $('#defaultTaskSelect').removeAttr('multiple').attr('name', 'school_id');
         $('#AssignTo').removeAttr('multiple').attr('name', 'assignto');
+        $('#DM_DEO_Letter_Required_Card').fadeIn();
+
     }
   });
   

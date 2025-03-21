@@ -1,4 +1,6 @@
-  <!-- Footer -->
+
+<?php require_once('common_modal.php'); ?>
+<!-- Footer -->
   <footer class="content-footer footer bg-footer-theme">
               <div class="container-xxl">
                 <div
@@ -73,7 +75,7 @@
     <script src="<?= base_url()?>assets/assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
     <!-- Main JS -->
-    <script src="<?= base_url()?>assets/js/main.js"></script>
+    <script src="<?= base_url()?>assets/assets/js/main.js"></script>
 
     <!-- Page JS -->
     <script src="<?= base_url()?>assets/assets/js/dashboards-analytics.js"></script>
@@ -105,7 +107,30 @@
                       'copy', 'excelFlash', 'excel', 'pdf', 'print'
                   ]
               } );
+
+
+            $(".close-notification").on("click", function(){
+                var notificationId = $(this).data("id");
+                $.ajax({
+                    url: '<?=base_url();?>Menu/delete_notification', // Your backend PHP file
+                    type: "POST",
+                    data: { id: notificationId },
+                    success: function(response){
+                        $("#notifynavpage").text(response);
+                        $("#notifymodal").text(response);
+                        console.log("Notification deleted successfully:", response);
+                    }
+                });
+            });
+
+
+        
       } );
+
+
+
+
+      
     </script>
   </body>
 </html>

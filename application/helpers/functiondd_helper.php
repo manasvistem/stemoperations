@@ -26,4 +26,39 @@ if (!function_exists('dd')) {
         }
     }
 }
+
+
+function checkHalfDayLeave($uid,$date){
+    $CI =& get_instance();
+    // Load the model if not already loaded
+    $CI->load->model('Menu_model');
+    $DataSet = $CI->Menu_model->checkHalfDayLeave($uid,$date);
+    
+    return $DataSet;
+}
+
+if (!function_exists('checkforHoliday')) {
+    function checkforHoliday($date){
+        $CI =& get_instance();
+        // Load the model if not already loaded
+        $CI->load->model('Menu_model');
+        $DataSet = $CI->Menu_model->checkforHoliday($date);
+        
+        return $DataSet;
+    }
+}
+
+
+if (!function_exists('checkLeaveForDay')) {
+    function checkLeaveForDay($uid,$date){
+         $CI =& get_instance();
+         // Load the model if not already loaded
+         $CI->load->model('Menu_model');
+         $DataSet = $CI->Menu_model->checkLeaveForDay($uid,$date);
+         
+         return $DataSet;
+     }
+ }
+ 
+
 ?>
