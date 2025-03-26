@@ -1,4 +1,4 @@
-<?php $this->load->view('nav'); ?>
+
 <style>
   .scrollme {
   overflow-x: auto;
@@ -511,4 +511,3 @@ if (total > selectedSchoolcounts) {
   });
   
 </script>
-<?php $this->load->view('footer'); ?>

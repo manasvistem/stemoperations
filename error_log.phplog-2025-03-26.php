@@ -10329,3 +10329,1545 @@ DEBUG - 2025-03-26 18:22:56 --> Global POST, GET and COOKIE data sanitized
 INFO - 2025-03-26 18:22:56 --> Input Class Initialized
 INFO - 2025-03-26 18:22:56 --> Language Class Initialized
 ERROR - 2025-03-26 18:22:56 --> 404 Page Not Found: Assets/assets
+INFO - 2025-03-26 18:26:41 --> Config Class Initialized
+INFO - 2025-03-26 18:26:41 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:26:41 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:26:41 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:26:41 --> URI Class Initialized
+INFO - 2025-03-26 18:26:41 --> Router Class Initialized
+INFO - 2025-03-26 18:26:41 --> Output Class Initialized
+INFO - 2025-03-26 18:26:41 --> Security Class Initialized
+DEBUG - 2025-03-26 18:26:41 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:26:41 --> Input Class Initialized
+INFO - 2025-03-26 18:26:41 --> Language Class Initialized
+INFO - 2025-03-26 23:56:41 --> Loader Class Initialized
+INFO - 2025-03-26 23:56:41 --> Helper loaded: url_helper
+INFO - 2025-03-26 23:56:41 --> Helper loaded: form_helper
+INFO - 2025-03-26 23:56:41 --> Helper loaded: file_helper
+INFO - 2025-03-26 23:56:41 --> Helper loaded: email_helper
+INFO - 2025-03-26 23:56:41 --> Helper loaded: cookie_helper
+INFO - 2025-03-26 23:56:41 --> Helper loaded: functiondd_helper
+INFO - 2025-03-26 23:56:41 --> Database Driver Class Initialized
+DEBUG - 2025-03-26 23:56:41 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-26 23:56:41 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-26 23:56:41 --> Controller Class Initialized
+INFO - 2025-03-26 23:56:41 --> Form Validation Class Initialized
+INFO - 2025-03-26 23:56:41 --> Model "Menu_model" initialized
+INFO - 2025-03-26 23:56:41 --> Helper loaded: common_helper
+INFO - 2025-03-26 23:56:43 --> File loaded: C:\wamp64\www\stemoppapp\application\views\ProgramManager/nav.php
+INFO - 2025-03-26 23:56:52 --> File loaded: C:\wamp64\www\stemoppapp\application\views\ProgramManager/BDREQUEST_DATA.php
+INFO - 2025-03-26 23:56:52 --> File loaded: C:\wamp64\www\stemoppapp\application\views\templates/footer.php
+INFO - 2025-03-26 23:56:52 --> Final output sent to browser
+DEBUG - 2025-03-26 23:56:52 --> Total execution time: 10.5304
+INFO - 2025-03-26 18:27:48 --> Config Class Initialized
+INFO - 2025-03-26 18:27:48 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:27:48 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:27:48 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:27:48 --> URI Class Initialized
+INFO - 2025-03-26 18:27:48 --> Router Class Initialized
+INFO - 2025-03-26 18:27:48 --> Output Class Initialized
+INFO - 2025-03-26 18:27:48 --> Security Class Initialized
+DEBUG - 2025-03-26 18:27:48 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:27:48 --> Input Class Initialized
+INFO - 2025-03-26 18:27:48 --> Language Class Initialized
+INFO - 2025-03-26 23:57:48 --> Loader Class Initialized
+INFO - 2025-03-26 23:57:48 --> Helper loaded: url_helper
+INFO - 2025-03-26 23:57:48 --> Helper loaded: form_helper
+INFO - 2025-03-26 23:57:48 --> Helper loaded: file_helper
+INFO - 2025-03-26 23:57:48 --> Helper loaded: email_helper
+INFO - 2025-03-26 23:57:48 --> Helper loaded: cookie_helper
+INFO - 2025-03-26 23:57:48 --> Helper loaded: functiondd_helper
+INFO - 2025-03-26 23:57:48 --> Database Driver Class Initialized
+DEBUG - 2025-03-26 23:57:48 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-26 23:57:48 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-26 23:57:48 --> Controller Class Initialized
+INFO - 2025-03-26 23:57:48 --> Form Validation Class Initialized
+INFO - 2025-03-26 23:57:48 --> Model "Menu_model" initialized
+INFO - 2025-03-26 23:57:48 --> Helper loaded: common_helper
+INFO - 2025-03-26 23:57:49 --> File loaded: C:\wamp64\www\stemoppapp\application\views\nav.php
+ERROR - 2025-03-26 23:57:49 --> Severity: Warning --> sizeof(): Parameter must be an array or an object that implements Countable C:\wamp64\www\stemoppapp\application\views\ProgramManager\TheAssigningProcess.php 279
+INFO - 2025-03-26 23:57:49 --> File loaded: C:\wamp64\www\stemoppapp\application\views\footer.php
+INFO - 2025-03-26 23:57:49 --> File loaded: C:\wamp64\www\stemoppapp\application\views\ProgramManager/TheAssigningProcess.php
+INFO - 2025-03-26 23:57:49 --> Final output sent to browser
+DEBUG - 2025-03-26 23:57:49 --> Total execution time: 1.2679
+INFO - 2025-03-26 18:27:50 --> Config Class Initialized
+INFO - 2025-03-26 18:27:50 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:27:50 --> Config Class Initialized
+INFO - 2025-03-26 18:27:50 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:27:50 --> Hooks Class Initialized
+INFO - 2025-03-26 18:27:50 --> URI Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:27:50 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:27:50 --> URI Class Initialized
+INFO - 2025-03-26 18:27:50 --> Router Class Initialized
+INFO - 2025-03-26 18:27:50 --> Router Class Initialized
+INFO - 2025-03-26 18:27:50 --> Output Class Initialized
+INFO - 2025-03-26 18:27:50 --> Output Class Initialized
+INFO - 2025-03-26 18:27:50 --> Security Class Initialized
+INFO - 2025-03-26 18:27:50 --> Security Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:27:50 --> Input Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:27:50 --> Language Class Initialized
+INFO - 2025-03-26 18:27:50 --> Input Class Initialized
+ERROR - 2025-03-26 18:27:50 --> 404 Page Not Found: Assets/assets
+INFO - 2025-03-26 18:27:50 --> Language Class Initialized
+ERROR - 2025-03-26 18:27:50 --> 404 Page Not Found: Assets/assets
+INFO - 2025-03-26 18:27:50 --> Config Class Initialized
+INFO - 2025-03-26 18:27:50 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:27:50 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:27:50 --> URI Class Initialized
+INFO - 2025-03-26 18:27:50 --> Router Class Initialized
+INFO - 2025-03-26 18:27:50 --> Output Class Initialized
+INFO - 2025-03-26 18:27:50 --> Security Class Initialized
+INFO - 2025-03-26 18:27:50 --> Config Class Initialized
+INFO - 2025-03-26 18:27:50 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:27:50 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:27:50 --> URI Class Initialized
+INFO - 2025-03-26 18:27:50 --> Router Class Initialized
+INFO - 2025-03-26 18:27:50 --> Output Class Initialized
+INFO - 2025-03-26 18:27:50 --> Security Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:27:50 --> Input Class Initialized
+INFO - 2025-03-26 18:27:50 --> Language Class Initialized
+ERROR - 2025-03-26 18:27:50 --> 404 Page Not Found: Assets/assets
+INFO - 2025-03-26 18:27:50 --> Config Class Initialized
+INFO - 2025-03-26 18:27:50 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:27:50 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:27:50 --> URI Class Initialized
+INFO - 2025-03-26 18:27:50 --> Router Class Initialized
+INFO - 2025-03-26 18:27:50 --> Output Class Initialized
+INFO - 2025-03-26 18:27:50 --> Security Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:27:50 --> Input Class Initialized
+INFO - 2025-03-26 18:27:50 --> Language Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2025-03-26 18:27:50 --> 404 Page Not Found: Assets/assets
+INFO - 2025-03-26 18:27:50 --> Input Class Initialized
+INFO - 2025-03-26 18:27:50 --> Language Class Initialized
+INFO - 2025-03-26 18:27:50 --> Config Class Initialized
+INFO - 2025-03-26 18:27:50 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:27:50 --> Utf8 Class Initialized
+ERROR - 2025-03-26 18:27:50 --> 404 Page Not Found: Assets/assets
+INFO - 2025-03-26 18:27:50 --> URI Class Initialized
+INFO - 2025-03-26 18:27:50 --> Router Class Initialized
+INFO - 2025-03-26 18:27:50 --> Output Class Initialized
+INFO - 2025-03-26 18:27:50 --> Security Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:27:50 --> Input Class Initialized
+INFO - 2025-03-26 18:27:50 --> Language Class Initialized
+INFO - 2025-03-26 18:27:50 --> Config Class Initialized
+INFO - 2025-03-26 18:27:50 --> Hooks Class Initialized
+ERROR - 2025-03-26 18:27:50 --> 404 Page Not Found: Assets/assets
+DEBUG - 2025-03-26 18:27:50 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:27:50 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:27:50 --> Config Class Initialized
+INFO - 2025-03-26 18:27:50 --> Hooks Class Initialized
+INFO - 2025-03-26 18:27:50 --> Config Class Initialized
+INFO - 2025-03-26 18:27:50 --> Hooks Class Initialized
+INFO - 2025-03-26 18:27:50 --> URI Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:27:50 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:27:50 --> Router Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:27:50 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:27:50 --> Output Class Initialized
+INFO - 2025-03-26 18:27:50 --> URI Class Initialized
+INFO - 2025-03-26 18:27:50 --> Security Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:27:50 --> Input Class Initialized
+INFO - 2025-03-26 18:27:50 --> Language Class Initialized
+INFO - 2025-03-26 18:27:50 --> URI Class Initialized
+ERROR - 2025-03-26 18:27:50 --> 404 Page Not Found: Assets/assets
+INFO - 2025-03-26 18:27:50 --> Router Class Initialized
+INFO - 2025-03-26 18:27:50 --> Router Class Initialized
+INFO - 2025-03-26 18:27:50 --> Output Class Initialized
+INFO - 2025-03-26 18:27:50 --> Config Class Initialized
+INFO - 2025-03-26 18:27:50 --> Output Class Initialized
+INFO - 2025-03-26 18:27:50 --> Security Class Initialized
+INFO - 2025-03-26 18:27:50 --> Security Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2025-03-26 18:27:50 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:27:50 --> Hooks Class Initialized
+INFO - 2025-03-26 18:27:50 --> Input Class Initialized
+INFO - 2025-03-26 18:27:50 --> Input Class Initialized
+INFO - 2025-03-26 18:27:50 --> Language Class Initialized
+INFO - 2025-03-26 18:27:50 --> Language Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:27:50 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:27:50 --> URI Class Initialized
+INFO - 2025-03-26 18:27:50 --> Router Class Initialized
+INFO - 2025-03-26 18:27:50 --> Output Class Initialized
+ERROR - 2025-03-26 18:27:50 --> 404 Page Not Found: Assets/assets
+INFO - 2025-03-26 18:27:50 --> Config Class Initialized
+ERROR - 2025-03-26 18:27:50 --> 404 Page Not Found: Assets/assets
+INFO - 2025-03-26 18:27:50 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:27:50 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:27:50 --> Security Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:27:50 --> URI Class Initialized
+INFO - 2025-03-26 18:27:50 --> Input Class Initialized
+INFO - 2025-03-26 18:27:50 --> Language Class Initialized
+ERROR - 2025-03-26 18:27:50 --> 404 Page Not Found: Assets/assets
+INFO - 2025-03-26 18:27:50 --> Router Class Initialized
+INFO - 2025-03-26 18:27:50 --> Output Class Initialized
+INFO - 2025-03-26 18:27:50 --> Security Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:27:50 --> Config Class Initialized
+INFO - 2025-03-26 18:27:50 --> Input Class Initialized
+INFO - 2025-03-26 18:27:50 --> Hooks Class Initialized
+INFO - 2025-03-26 18:27:50 --> Language Class Initialized
+INFO - 2025-03-26 18:27:50 --> Config Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:27:50 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:27:50 --> Hooks Class Initialized
+ERROR - 2025-03-26 18:27:50 --> 404 Page Not Found: Assets/assets
+INFO - 2025-03-26 18:27:50 --> URI Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:27:50 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:27:50 --> Router Class Initialized
+INFO - 2025-03-26 18:27:50 --> URI Class Initialized
+INFO - 2025-03-26 18:27:50 --> Router Class Initialized
+INFO - 2025-03-26 18:27:50 --> Output Class Initialized
+INFO - 2025-03-26 18:27:50 --> Security Class Initialized
+INFO - 2025-03-26 18:27:50 --> Output Class Initialized
+INFO - 2025-03-26 18:27:50 --> Security Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:27:50 --> Input Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:27:50 --> Language Class Initialized
+INFO - 2025-03-26 18:27:50 --> Input Class Initialized
+INFO - 2025-03-26 18:27:50 --> Language Class Initialized
+ERROR - 2025-03-26 18:27:50 --> 404 Page Not Found: Assets/assets
+ERROR - 2025-03-26 18:27:50 --> 404 Page Not Found: Assets/assets
+INFO - 2025-03-26 18:27:50 --> Config Class Initialized
+INFO - 2025-03-26 18:27:50 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:27:50 --> Config Class Initialized
+INFO - 2025-03-26 18:27:50 --> Hooks Class Initialized
+INFO - 2025-03-26 18:27:50 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:27:50 --> URI Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:27:50 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:27:50 --> Router Class Initialized
+INFO - 2025-03-26 18:27:50 --> Output Class Initialized
+INFO - 2025-03-26 18:27:50 --> Security Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:27:50 --> Input Class Initialized
+INFO - 2025-03-26 18:27:50 --> Language Class Initialized
+INFO - 2025-03-26 18:27:50 --> URI Class Initialized
+ERROR - 2025-03-26 18:27:50 --> 404 Page Not Found: Assets/assets
+INFO - 2025-03-26 18:27:50 --> Config Class Initialized
+INFO - 2025-03-26 18:27:50 --> Router Class Initialized
+INFO - 2025-03-26 18:27:50 --> Hooks Class Initialized
+INFO - 2025-03-26 18:27:50 --> Output Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:27:50 --> Security Class Initialized
+INFO - 2025-03-26 18:27:50 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:27:50 --> URI Class Initialized
+DEBUG - 2025-03-26 18:27:50 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:27:50 --> Input Class Initialized
+INFO - 2025-03-26 18:27:50 --> Router Class Initialized
+INFO - 2025-03-26 18:27:50 --> Language Class Initialized
+INFO - 2025-03-26 18:27:50 --> Output Class Initialized
+INFO - 2025-03-26 18:27:50 --> Security Class Initialized
+ERROR - 2025-03-26 18:27:50 --> 404 Page Not Found: Assets/assets
+DEBUG - 2025-03-26 18:27:50 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:27:50 --> Input Class Initialized
+INFO - 2025-03-26 18:27:50 --> Language Class Initialized
+ERROR - 2025-03-26 18:27:50 --> 404 Page Not Found: Assets/assets
+INFO - 2025-03-26 18:29:04 --> Config Class Initialized
+INFO - 2025-03-26 18:29:04 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:29:04 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:29:04 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:29:04 --> URI Class Initialized
+INFO - 2025-03-26 18:29:04 --> Router Class Initialized
+INFO - 2025-03-26 18:29:04 --> Output Class Initialized
+INFO - 2025-03-26 18:29:04 --> Security Class Initialized
+DEBUG - 2025-03-26 18:29:04 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:29:04 --> Input Class Initialized
+INFO - 2025-03-26 18:29:04 --> Language Class Initialized
+INFO - 2025-03-26 23:59:04 --> Loader Class Initialized
+INFO - 2025-03-26 23:59:04 --> Helper loaded: url_helper
+INFO - 2025-03-26 23:59:04 --> Helper loaded: form_helper
+INFO - 2025-03-26 23:59:04 --> Helper loaded: file_helper
+INFO - 2025-03-26 23:59:04 --> Helper loaded: email_helper
+INFO - 2025-03-26 23:59:04 --> Helper loaded: cookie_helper
+INFO - 2025-03-26 23:59:04 --> Helper loaded: functiondd_helper
+INFO - 2025-03-26 23:59:04 --> Database Driver Class Initialized
+DEBUG - 2025-03-26 23:59:04 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-26 23:59:04 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-26 23:59:04 --> Controller Class Initialized
+INFO - 2025-03-26 23:59:04 --> Form Validation Class Initialized
+INFO - 2025-03-26 23:59:04 --> Model "Menu_model" initialized
+INFO - 2025-03-26 23:59:04 --> Helper loaded: common_helper
+INFO - 2025-03-26 23:59:05 --> File loaded: C:\wamp64\www\stemoppapp\application\views\ProgramManager/nav.php
+INFO - 2025-03-26 23:59:05 --> File loaded: C:\wamp64\www\stemoppapp\application\views\nav.php
+ERROR - 2025-03-26 23:59:05 --> Severity: Warning --> sizeof(): Parameter must be an array or an object that implements Countable C:\wamp64\www\stemoppapp\application\views\ProgramManager\TheAssigningProcess.php 279
+INFO - 2025-03-26 23:59:05 --> File loaded: C:\wamp64\www\stemoppapp\application\views\footer.php
+INFO - 2025-03-26 23:59:05 --> File loaded: C:\wamp64\www\stemoppapp\application\views\ProgramManager/TheAssigningProcess.php
+INFO - 2025-03-26 23:59:05 --> File loaded: C:\wamp64\www\stemoppapp\application\views\templates/footer.php
+INFO - 2025-03-26 23:59:05 --> Final output sent to browser
+DEBUG - 2025-03-26 23:59:05 --> Total execution time: 1.4349
+INFO - 2025-03-26 18:29:05 --> Config Class Initialized
+INFO - 2025-03-26 18:29:05 --> Hooks Class Initialized
+INFO - 2025-03-26 18:29:05 --> Config Class Initialized
+DEBUG - 2025-03-26 18:29:05 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:29:05 --> Hooks Class Initialized
+INFO - 2025-03-26 18:29:05 --> Utf8 Class Initialized
+DEBUG - 2025-03-26 18:29:05 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:29:05 --> URI Class Initialized
+INFO - 2025-03-26 18:29:05 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:29:05 --> Router Class Initialized
+INFO - 2025-03-26 18:29:05 --> URI Class Initialized
+INFO - 2025-03-26 18:29:05 --> Output Class Initialized
+INFO - 2025-03-26 18:29:05 --> Security Class Initialized
+DEBUG - 2025-03-26 18:29:05 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:29:05 --> Router Class Initialized
+INFO - 2025-03-26 18:29:05 --> Input Class Initialized
+INFO - 2025-03-26 18:29:05 --> Output Class Initialized
+INFO - 2025-03-26 18:29:05 --> Language Class Initialized
+INFO - 2025-03-26 18:29:05 --> Security Class Initialized
+ERROR - 2025-03-26 18:29:05 --> 404 Page Not Found: Assets/assets
+DEBUG - 2025-03-26 18:29:05 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:29:05 --> Input Class Initialized
+INFO - 2025-03-26 18:29:05 --> Language Class Initialized
+ERROR - 2025-03-26 18:29:05 --> 404 Page Not Found: Assets/assets
+INFO - 2025-03-26 18:29:05 --> Config Class Initialized
+INFO - 2025-03-26 18:29:05 --> Config Class Initialized
+INFO - 2025-03-26 18:29:05 --> Hooks Class Initialized
+INFO - 2025-03-26 18:29:05 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:29:05 --> UTF-8 Support Enabled
+DEBUG - 2025-03-26 18:29:05 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:29:05 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:29:05 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:29:05 --> URI Class Initialized
+INFO - 2025-03-26 18:29:05 --> URI Class Initialized
+INFO - 2025-03-26 18:29:05 --> Router Class Initialized
+INFO - 2025-03-26 18:29:05 --> Router Class Initialized
+INFO - 2025-03-26 18:29:05 --> Output Class Initialized
+INFO - 2025-03-26 18:29:05 --> Output Class Initialized
+INFO - 2025-03-26 18:29:05 --> Security Class Initialized
+INFO - 2025-03-26 18:29:05 --> Security Class Initialized
+DEBUG - 2025-03-26 18:29:05 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2025-03-26 18:29:05 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:29:05 --> Input Class Initialized
+INFO - 2025-03-26 18:29:05 --> Input Class Initialized
+INFO - 2025-03-26 18:29:05 --> Language Class Initialized
+INFO - 2025-03-26 18:29:05 --> Language Class Initialized
+ERROR - 2025-03-26 18:29:05 --> 404 Page Not Found: Assets/assets
+ERROR - 2025-03-26 18:29:05 --> 404 Page Not Found: Assets/assets
+INFO - 2025-03-26 18:29:05 --> Config Class Initialized
+INFO - 2025-03-26 18:29:05 --> Config Class Initialized
+INFO - 2025-03-26 18:29:05 --> Hooks Class Initialized
+INFO - 2025-03-26 18:29:05 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:29:05 --> UTF-8 Support Enabled
+DEBUG - 2025-03-26 18:29:05 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:29:05 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:29:05 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:29:05 --> URI Class Initialized
+INFO - 2025-03-26 18:29:05 --> URI Class Initialized
+INFO - 2025-03-26 18:29:05 --> Config Class Initialized
+INFO - 2025-03-26 18:29:05 --> Hooks Class Initialized
+INFO - 2025-03-26 18:29:05 --> Router Class Initialized
+INFO - 2025-03-26 18:29:05 --> Router Class Initialized
+INFO - 2025-03-26 18:29:05 --> Output Class Initialized
+DEBUG - 2025-03-26 18:29:05 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:29:05 --> Output Class Initialized
+INFO - 2025-03-26 18:29:05 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:29:05 --> Security Class Initialized
+INFO - 2025-03-26 18:29:05 --> Security Class Initialized
+DEBUG - 2025-03-26 18:29:05 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:29:05 --> URI Class Initialized
+INFO - 2025-03-26 18:29:05 --> Input Class Initialized
+DEBUG - 2025-03-26 18:29:05 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:29:05 --> Input Class Initialized
+INFO - 2025-03-26 18:29:05 --> Language Class Initialized
+INFO - 2025-03-26 18:29:05 --> Router Class Initialized
+INFO - 2025-03-26 18:29:05 --> Language Class Initialized
+ERROR - 2025-03-26 18:29:05 --> 404 Page Not Found: Assets/assets
+INFO - 2025-03-26 18:29:05 --> Output Class Initialized
+ERROR - 2025-03-26 18:29:05 --> 404 Page Not Found: Assets/assets
+INFO - 2025-03-26 18:29:05 --> Security Class Initialized
+DEBUG - 2025-03-26 18:29:05 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:29:05 --> Input Class Initialized
+INFO - 2025-03-26 18:29:05 --> Language Class Initialized
+ERROR - 2025-03-26 18:29:05 --> 404 Page Not Found: Assets/assets
+INFO - 2025-03-26 18:29:05 --> Config Class Initialized
+INFO - 2025-03-26 18:29:05 --> Config Class Initialized
+INFO - 2025-03-26 18:29:05 --> Config Class Initialized
+INFO - 2025-03-26 18:29:05 --> Hooks Class Initialized
+INFO - 2025-03-26 18:29:05 --> Hooks Class Initialized
+INFO - 2025-03-26 18:29:05 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:29:05 --> UTF-8 Support Enabled
+DEBUG - 2025-03-26 18:29:05 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:29:05 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:29:05 --> Utf8 Class Initialized
+DEBUG - 2025-03-26 18:29:05 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:29:05 --> URI Class Initialized
+INFO - 2025-03-26 18:29:05 --> URI Class Initialized
+INFO - 2025-03-26 18:29:05 --> Router Class Initialized
+INFO - 2025-03-26 18:29:05 --> Router Class Initialized
+INFO - 2025-03-26 18:29:05 --> Output Class Initialized
+INFO - 2025-03-26 18:29:05 --> Output Class Initialized
+INFO - 2025-03-26 18:29:05 --> Security Class Initialized
+INFO - 2025-03-26 18:29:05 --> Security Class Initialized
+DEBUG - 2025-03-26 18:29:05 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2025-03-26 18:29:05 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:29:05 --> Input Class Initialized
+INFO - 2025-03-26 18:29:05 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:29:05 --> Input Class Initialized
+INFO - 2025-03-26 18:29:05 --> Language Class Initialized
+INFO - 2025-03-26 18:29:05 --> Language Class Initialized
+ERROR - 2025-03-26 18:29:05 --> 404 Page Not Found: Assets/assets
+ERROR - 2025-03-26 18:29:05 --> 404 Page Not Found: Assets/assets
+INFO - 2025-03-26 18:29:05 --> URI Class Initialized
+INFO - 2025-03-26 18:29:05 --> Router Class Initialized
+INFO - 2025-03-26 18:29:05 --> Output Class Initialized
+INFO - 2025-03-26 18:29:05 --> Security Class Initialized
+DEBUG - 2025-03-26 18:29:05 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:29:05 --> Input Class Initialized
+INFO - 2025-03-26 18:29:05 --> Language Class Initialized
+ERROR - 2025-03-26 18:29:05 --> 404 Page Not Found: Assets/assets
+INFO - 2025-03-26 18:29:05 --> Config Class Initialized
+INFO - 2025-03-26 18:29:05 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:29:05 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:29:05 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:29:05 --> URI Class Initialized
+INFO - 2025-03-26 18:29:05 --> Router Class Initialized
+INFO - 2025-03-26 18:29:05 --> Config Class Initialized
+INFO - 2025-03-26 18:29:05 --> Hooks Class Initialized
+INFO - 2025-03-26 18:29:05 --> Output Class Initialized
+INFO - 2025-03-26 18:29:05 --> Security Class Initialized
+DEBUG - 2025-03-26 18:29:05 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:29:05 --> Utf8 Class Initialized
+DEBUG - 2025-03-26 18:29:05 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:29:05 --> Input Class Initialized
+INFO - 2025-03-26 18:29:05 --> URI Class Initialized
+INFO - 2025-03-26 18:29:05 --> Language Class Initialized
+INFO - 2025-03-26 18:29:05 --> Router Class Initialized
+ERROR - 2025-03-26 18:29:05 --> 404 Page Not Found: Assets/assets
+INFO - 2025-03-26 18:29:05 --> Output Class Initialized
+INFO - 2025-03-26 18:29:05 --> Security Class Initialized
+DEBUG - 2025-03-26 18:29:05 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:29:05 --> Config Class Initialized
+INFO - 2025-03-26 18:29:05 --> Input Class Initialized
+INFO - 2025-03-26 18:29:05 --> Hooks Class Initialized
+INFO - 2025-03-26 18:29:05 --> Language Class Initialized
+DEBUG - 2025-03-26 18:29:05 --> UTF-8 Support Enabled
+ERROR - 2025-03-26 18:29:05 --> 404 Page Not Found: Assets/assets
+INFO - 2025-03-26 18:29:05 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:29:05 --> URI Class Initialized
+INFO - 2025-03-26 18:29:05 --> Router Class Initialized
+INFO - 2025-03-26 18:29:05 --> Output Class Initialized
+INFO - 2025-03-26 18:29:05 --> Security Class Initialized
+DEBUG - 2025-03-26 18:29:05 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:29:05 --> Input Class Initialized
+INFO - 2025-03-26 18:29:05 --> Language Class Initialized
+ERROR - 2025-03-26 18:29:05 --> 404 Page Not Found: Assets/assets
+INFO - 2025-03-26 18:29:05 --> Config Class Initialized
+INFO - 2025-03-26 18:29:05 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:29:05 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:29:05 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:29:05 --> URI Class Initialized
+INFO - 2025-03-26 18:29:05 --> Router Class Initialized
+INFO - 2025-03-26 18:29:05 --> Output Class Initialized
+INFO - 2025-03-26 18:29:05 --> Security Class Initialized
+DEBUG - 2025-03-26 18:29:05 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:29:05 --> Input Class Initialized
+INFO - 2025-03-26 18:29:05 --> Language Class Initialized
+ERROR - 2025-03-26 18:29:05 --> 404 Page Not Found: Assets/assets
+INFO - 2025-03-26 18:29:05 --> Config Class Initialized
+INFO - 2025-03-26 18:29:05 --> Hooks Class Initialized
+INFO - 2025-03-26 18:29:05 --> Config Class Initialized
+INFO - 2025-03-26 18:29:05 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:29:05 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:29:05 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:29:05 --> URI Class Initialized
+DEBUG - 2025-03-26 18:29:05 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:29:05 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:29:05 --> Router Class Initialized
+INFO - 2025-03-26 18:29:05 --> URI Class Initialized
+INFO - 2025-03-26 18:29:05 --> Output Class Initialized
+INFO - 2025-03-26 18:29:05 --> Router Class Initialized
+INFO - 2025-03-26 18:29:05 --> Security Class Initialized
+DEBUG - 2025-03-26 18:29:05 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:29:05 --> Input Class Initialized
+INFO - 2025-03-26 18:29:05 --> Language Class Initialized
+INFO - 2025-03-26 18:29:05 --> Output Class Initialized
+ERROR - 2025-03-26 18:29:05 --> 404 Page Not Found: Assets/assets
+INFO - 2025-03-26 18:29:05 --> Security Class Initialized
+DEBUG - 2025-03-26 18:29:05 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:29:05 --> Input Class Initialized
+INFO - 2025-03-26 18:29:05 --> Language Class Initialized
+ERROR - 2025-03-26 18:29:05 --> 404 Page Not Found: Assets/assets
+INFO - 2025-03-26 18:29:06 --> Config Class Initialized
+INFO - 2025-03-26 18:29:06 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:29:06 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:29:06 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:29:06 --> URI Class Initialized
+INFO - 2025-03-26 18:29:06 --> Router Class Initialized
+INFO - 2025-03-26 18:29:06 --> Output Class Initialized
+INFO - 2025-03-26 18:29:06 --> Security Class Initialized
+DEBUG - 2025-03-26 18:29:06 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:29:06 --> Input Class Initialized
+INFO - 2025-03-26 18:29:06 --> Language Class Initialized
+ERROR - 2025-03-26 18:29:06 --> 404 Page Not Found: Assets/assets
+INFO - 2025-03-26 18:29:24 --> Config Class Initialized
+INFO - 2025-03-26 18:29:24 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:29:24 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:29:24 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:29:24 --> URI Class Initialized
+INFO - 2025-03-26 18:29:24 --> Router Class Initialized
+INFO - 2025-03-26 18:29:24 --> Output Class Initialized
+INFO - 2025-03-26 18:29:24 --> Security Class Initialized
+DEBUG - 2025-03-26 18:29:24 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:29:24 --> Input Class Initialized
+INFO - 2025-03-26 18:29:24 --> Language Class Initialized
+INFO - 2025-03-26 23:59:24 --> Loader Class Initialized
+INFO - 2025-03-26 23:59:24 --> Helper loaded: url_helper
+INFO - 2025-03-26 23:59:24 --> Helper loaded: form_helper
+INFO - 2025-03-26 23:59:24 --> Helper loaded: file_helper
+INFO - 2025-03-26 23:59:24 --> Helper loaded: email_helper
+INFO - 2025-03-26 23:59:24 --> Helper loaded: cookie_helper
+INFO - 2025-03-26 23:59:24 --> Helper loaded: functiondd_helper
+INFO - 2025-03-26 23:59:24 --> Database Driver Class Initialized
+DEBUG - 2025-03-26 23:59:24 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-26 23:59:24 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-26 23:59:24 --> Controller Class Initialized
+INFO - 2025-03-26 23:59:24 --> Form Validation Class Initialized
+INFO - 2025-03-26 23:59:24 --> Model "Menu_model" initialized
+INFO - 2025-03-26 23:59:24 --> Helper loaded: common_helper
+INFO - 2025-03-26 23:59:26 --> File loaded: C:\wamp64\www\stemoppapp\application\views\ProgramManager/nav.php
+ERROR - 2025-03-26 23:59:26 --> Severity: Warning --> sizeof(): Parameter must be an array or an object that implements Countable C:\wamp64\www\stemoppapp\application\views\ProgramManager\TheAssigningProcess.php 279
+INFO - 2025-03-26 23:59:26 --> File loaded: C:\wamp64\www\stemoppapp\application\views\ProgramManager/TheAssigningProcess.php
+INFO - 2025-03-26 23:59:26 --> File loaded: C:\wamp64\www\stemoppapp\application\views\templates/footer.php
+INFO - 2025-03-26 23:59:26 --> Final output sent to browser
+DEBUG - 2025-03-26 23:59:26 --> Total execution time: 1.2585
+INFO - 2025-03-26 18:30:36 --> Config Class Initialized
+INFO - 2025-03-26 18:30:36 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:30:36 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:30:36 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:30:36 --> URI Class Initialized
+INFO - 2025-03-26 18:30:36 --> Router Class Initialized
+INFO - 2025-03-26 18:30:36 --> Output Class Initialized
+INFO - 2025-03-26 18:30:36 --> Security Class Initialized
+DEBUG - 2025-03-26 18:30:36 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:30:36 --> Input Class Initialized
+INFO - 2025-03-26 18:30:36 --> Language Class Initialized
+INFO - 2025-03-26 18:35:38 --> Config Class Initialized
+INFO - 2025-03-26 18:35:38 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:35:38 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:35:38 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:35:38 --> URI Class Initialized
+INFO - 2025-03-26 18:35:38 --> Router Class Initialized
+INFO - 2025-03-26 18:35:38 --> Output Class Initialized
+INFO - 2025-03-26 18:35:38 --> Security Class Initialized
+DEBUG - 2025-03-26 18:35:38 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:35:38 --> Input Class Initialized
+INFO - 2025-03-26 18:35:38 --> Language Class Initialized
+INFO - 2025-03-26 18:35:50 --> Config Class Initialized
+INFO - 2025-03-26 18:35:50 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:35:50 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:35:50 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:35:50 --> URI Class Initialized
+INFO - 2025-03-26 18:35:50 --> Router Class Initialized
+INFO - 2025-03-26 18:35:50 --> Output Class Initialized
+INFO - 2025-03-26 18:35:50 --> Security Class Initialized
+DEBUG - 2025-03-26 18:35:50 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:35:50 --> Input Class Initialized
+INFO - 2025-03-26 18:35:50 --> Language Class Initialized
+INFO - 2025-03-26 18:35:58 --> Config Class Initialized
+INFO - 2025-03-26 18:35:58 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:35:58 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:35:58 --> URI Class Initialized
+INFO - 2025-03-26 18:35:58 --> Router Class Initialized
+INFO - 2025-03-26 18:35:58 --> Output Class Initialized
+INFO - 2025-03-26 18:35:58 --> Security Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:35:58 --> Input Class Initialized
+INFO - 2025-03-26 18:35:58 --> Language Class Initialized
+INFO - 2025-03-26 18:35:58 --> Config Class Initialized
+INFO - 2025-03-26 18:35:58 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:35:58 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:35:58 --> Config Class Initialized
+INFO - 2025-03-26 18:35:58 --> URI Class Initialized
+INFO - 2025-03-26 18:35:58 --> Router Class Initialized
+INFO - 2025-03-26 18:35:58 --> Hooks Class Initialized
+INFO - 2025-03-26 18:35:58 --> Output Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:35:58 --> Security Class Initialized
+INFO - 2025-03-26 18:35:58 --> Utf8 Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:35:58 --> Input Class Initialized
+INFO - 2025-03-26 18:35:58 --> URI Class Initialized
+INFO - 2025-03-26 18:35:58 --> Language Class Initialized
+ERROR - 2025-03-26 18:35:58 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:35:58 --> Router Class Initialized
+INFO - 2025-03-26 18:35:58 --> Output Class Initialized
+INFO - 2025-03-26 18:35:58 --> Security Class Initialized
+INFO - 2025-03-26 18:35:58 --> Config Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:35:58 --> Hooks Class Initialized
+INFO - 2025-03-26 18:35:58 --> Input Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:35:58 --> Language Class Initialized
+INFO - 2025-03-26 18:35:58 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:35:58 --> URI Class Initialized
+ERROR - 2025-03-26 18:35:58 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:35:58 --> Router Class Initialized
+INFO - 2025-03-26 18:35:58 --> Output Class Initialized
+INFO - 2025-03-26 18:35:58 --> Security Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:35:58 --> Input Class Initialized
+INFO - 2025-03-26 18:35:58 --> Language Class Initialized
+ERROR - 2025-03-26 18:35:58 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:35:58 --> Config Class Initialized
+INFO - 2025-03-26 18:35:58 --> Hooks Class Initialized
+INFO - 2025-03-26 18:35:58 --> Config Class Initialized
+INFO - 2025-03-26 18:35:58 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> UTF-8 Support Enabled
+DEBUG - 2025-03-26 18:35:58 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:35:58 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:35:58 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:35:58 --> URI Class Initialized
+INFO - 2025-03-26 18:35:58 --> URI Class Initialized
+INFO - 2025-03-26 18:35:58 --> Router Class Initialized
+INFO - 2025-03-26 18:35:58 --> Output Class Initialized
+INFO - 2025-03-26 18:35:58 --> Security Class Initialized
+INFO - 2025-03-26 18:35:58 --> Router Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:35:58 --> Config Class Initialized
+INFO - 2025-03-26 18:35:58 --> Input Class Initialized
+INFO - 2025-03-26 18:35:58 --> Output Class Initialized
+INFO - 2025-03-26 18:35:58 --> Config Class Initialized
+INFO - 2025-03-26 18:35:58 --> Hooks Class Initialized
+INFO - 2025-03-26 18:35:58 --> Language Class Initialized
+INFO - 2025-03-26 18:35:58 --> Hooks Class Initialized
+ERROR - 2025-03-26 18:35:58 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:35:58 --> Security Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> UTF-8 Support Enabled
+DEBUG - 2025-03-26 18:35:58 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:35:58 --> Utf8 Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:35:58 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:35:58 --> URI Class Initialized
+INFO - 2025-03-26 18:35:58 --> Config Class Initialized
+INFO - 2025-03-26 18:35:58 --> Input Class Initialized
+INFO - 2025-03-26 18:35:58 --> URI Class Initialized
+INFO - 2025-03-26 18:35:58 --> Hooks Class Initialized
+INFO - 2025-03-26 18:35:58 --> Language Class Initialized
+INFO - 2025-03-26 18:35:58 --> Router Class Initialized
+INFO - 2025-03-26 18:35:58 --> Router Class Initialized
+ERROR - 2025-03-26 18:35:58 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:35:58 --> Output Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:35:58 --> Output Class Initialized
+INFO - 2025-03-26 18:35:58 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:35:58 --> Security Class Initialized
+INFO - 2025-03-26 18:35:58 --> Security Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:35:58 --> URI Class Initialized
+INFO - 2025-03-26 18:35:58 --> Input Class Initialized
+INFO - 2025-03-26 18:35:58 --> Language Class Initialized
+INFO - 2025-03-26 18:35:58 --> Router Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:35:58 --> Input Class Initialized
+INFO - 2025-03-26 18:35:58 --> Language Class Initialized
+ERROR - 2025-03-26 18:35:58 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:35:58 --> Output Class Initialized
+INFO - 2025-03-26 18:35:58 --> Security Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:35:58 --> Input Class Initialized
+INFO - 2025-03-26 18:35:58 --> Language Class Initialized
+INFO - 2025-03-26 18:35:58 --> Config Class Initialized
+INFO - 2025-03-26 18:35:58 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:35:58 --> Config Class Initialized
+INFO - 2025-03-26 18:35:58 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:35:58 --> Hooks Class Initialized
+INFO - 2025-03-26 18:35:58 --> URI Class Initialized
+INFO - 2025-03-26 18:35:58 --> Config Class Initialized
+INFO - 2025-03-26 18:35:58 --> Router Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:35:58 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:35:58 --> Output Class Initialized
+INFO - 2025-03-26 18:35:58 --> URI Class Initialized
+INFO - 2025-03-26 18:35:58 --> Security Class Initialized
+INFO - 2025-03-26 18:35:58 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:35:58 --> Input Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:35:58 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:35:58 --> Language Class Initialized
+INFO - 2025-03-26 18:35:58 --> URI Class Initialized
+ERROR - 2025-03-26 18:35:58 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:35:58 --> Router Class Initialized
+INFO - 2025-03-26 18:35:58 --> Router Class Initialized
+INFO - 2025-03-26 18:35:58 --> Output Class Initialized
+INFO - 2025-03-26 18:35:58 --> Output Class Initialized
+INFO - 2025-03-26 18:35:58 --> Security Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:35:58 --> Input Class Initialized
+ERROR - 2025-03-26 18:35:58 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:35:58 --> Config Class Initialized
+INFO - 2025-03-26 18:35:58 --> Config Class Initialized
+INFO - 2025-03-26 18:35:58 --> Hooks Class Initialized
+INFO - 2025-03-26 18:35:58 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> UTF-8 Support Enabled
+DEBUG - 2025-03-26 18:35:58 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:35:58 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:35:58 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:35:58 --> URI Class Initialized
+INFO - 2025-03-26 18:35:58 --> URI Class Initialized
+INFO - 2025-03-26 18:35:58 --> Router Class Initialized
+INFO - 2025-03-26 18:35:58 --> Router Class Initialized
+INFO - 2025-03-26 18:35:58 --> Output Class Initialized
+INFO - 2025-03-26 18:35:58 --> Output Class Initialized
+INFO - 2025-03-26 18:35:58 --> Security Class Initialized
+INFO - 2025-03-26 18:35:58 --> Security Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2025-03-26 18:35:58 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:35:58 --> Input Class Initialized
+INFO - 2025-03-26 18:35:58 --> Input Class Initialized
+INFO - 2025-03-26 18:35:58 --> Language Class Initialized
+INFO - 2025-03-26 18:35:58 --> Language Class Initialized
+ERROR - 2025-03-26 18:35:58 --> 404 Page Not Found: Assets/js
+ERROR - 2025-03-26 18:35:58 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:35:58 --> Security Class Initialized
+INFO - 2025-03-26 18:35:58 --> Config Class Initialized
+INFO - 2025-03-26 18:35:58 --> Hooks Class Initialized
+INFO - 2025-03-26 18:35:58 --> Config Class Initialized
+INFO - 2025-03-26 18:35:58 --> Language Class Initialized
+INFO - 2025-03-26 18:35:58 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:35:58 --> Utf8 Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:35:58 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:35:58 --> URI Class Initialized
+ERROR - 2025-03-26 18:35:58 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:35:58 --> URI Class Initialized
+INFO - 2025-03-26 18:35:58 --> Router Class Initialized
+INFO - 2025-03-26 18:35:58 --> Router Class Initialized
+INFO - 2025-03-26 18:35:58 --> Output Class Initialized
+INFO - 2025-03-26 18:35:58 --> Output Class Initialized
+INFO - 2025-03-26 18:35:58 --> Security Class Initialized
+INFO - 2025-03-26 18:35:58 --> Security Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2025-03-26 18:35:58 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:35:58 --> Input Class Initialized
+INFO - 2025-03-26 18:35:58 --> Input Class Initialized
+INFO - 2025-03-26 18:35:58 --> Language Class Initialized
+INFO - 2025-03-26 18:35:58 --> Language Class Initialized
+ERROR - 2025-03-26 18:35:58 --> 404 Page Not Found: Assets/js
+ERROR - 2025-03-26 18:35:58 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:35:58 --> Config Class Initialized
+INFO - 2025-03-26 18:35:58 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:35:58 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:35:58 --> URI Class Initialized
+INFO - 2025-03-26 18:35:58 --> Router Class Initialized
+INFO - 2025-03-26 18:35:58 --> Output Class Initialized
+INFO - 2025-03-26 18:35:58 --> Security Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:35:58 --> Input Class Initialized
+INFO - 2025-03-26 18:35:58 --> Language Class Initialized
+ERROR - 2025-03-26 18:35:58 --> 404 Page Not Found: Assets/js
+DEBUG - 2025-03-26 18:35:58 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:35:58 --> Input Class Initialized
+INFO - 2025-03-26 18:35:58 --> Language Class Initialized
+ERROR - 2025-03-26 18:35:58 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:35:58 --> Config Class Initialized
+INFO - 2025-03-26 18:35:58 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:35:58 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:35:58 --> Config Class Initialized
+INFO - 2025-03-26 18:35:58 --> Config Class Initialized
+INFO - 2025-03-26 18:35:58 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:35:58 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:35:58 --> URI Class Initialized
+INFO - 2025-03-26 18:35:58 --> Hooks Class Initialized
+INFO - 2025-03-26 18:35:58 --> Router Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:35:58 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:35:58 --> Output Class Initialized
+INFO - 2025-03-26 18:35:58 --> URI Class Initialized
+INFO - 2025-03-26 18:35:58 --> Security Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:35:58 --> Input Class Initialized
+INFO - 2025-03-26 18:35:58 --> Router Class Initialized
+INFO - 2025-03-26 18:35:58 --> Language Class Initialized
+ERROR - 2025-03-26 18:35:58 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:35:58 --> Output Class Initialized
+INFO - 2025-03-26 18:35:58 --> Security Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:35:58 --> Input Class Initialized
+INFO - 2025-03-26 18:35:58 --> Language Class Initialized
+ERROR - 2025-03-26 18:35:58 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:35:58 --> Config Class Initialized
+INFO - 2025-03-26 18:35:58 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:35:58 --> URI Class Initialized
+INFO - 2025-03-26 18:35:58 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:35:58 --> URI Class Initialized
+INFO - 2025-03-26 18:35:58 --> Router Class Initialized
+INFO - 2025-03-26 18:35:58 --> Config Class Initialized
+INFO - 2025-03-26 18:35:58 --> Router Class Initialized
+INFO - 2025-03-26 18:35:58 --> Output Class Initialized
+INFO - 2025-03-26 18:35:58 --> Config Class Initialized
+INFO - 2025-03-26 18:35:58 --> Hooks Class Initialized
+INFO - 2025-03-26 18:35:58 --> Output Class Initialized
+INFO - 2025-03-26 18:35:58 --> Security Class Initialized
+INFO - 2025-03-26 18:35:58 --> Security Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> UTF-8 Support Enabled
+DEBUG - 2025-03-26 18:35:58 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:35:58 --> Utf8 Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:35:58 --> Input Class Initialized
+INFO - 2025-03-26 18:35:58 --> Input Class Initialized
+INFO - 2025-03-26 18:35:58 --> URI Class Initialized
+INFO - 2025-03-26 18:35:58 --> Language Class Initialized
+INFO - 2025-03-26 18:35:58 --> Language Class Initialized
+ERROR - 2025-03-26 18:35:58 --> 404 Page Not Found: Assets/js
+ERROR - 2025-03-26 18:35:58 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:35:58 --> Router Class Initialized
+INFO - 2025-03-26 18:35:58 --> Output Class Initialized
+INFO - 2025-03-26 18:35:58 --> Config Class Initialized
+INFO - 2025-03-26 18:35:58 --> Hooks Class Initialized
+INFO - 2025-03-26 18:35:58 --> Config Class Initialized
+INFO - 2025-03-26 18:35:58 --> Hooks Class Initialized
+INFO - 2025-03-26 18:35:58 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> UTF-8 Support Enabled
+DEBUG - 2025-03-26 18:35:58 --> UTF-8 Support Enabled
+DEBUG - 2025-03-26 18:35:58 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:35:58 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:35:58 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:35:58 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:35:58 --> URI Class Initialized
+INFO - 2025-03-26 18:35:58 --> URI Class Initialized
+INFO - 2025-03-26 18:35:58 --> Router Class Initialized
+INFO - 2025-03-26 18:35:58 --> URI Class Initialized
+INFO - 2025-03-26 18:35:58 --> Output Class Initialized
+INFO - 2025-03-26 18:35:58 --> Security Class Initialized
+INFO - 2025-03-26 18:35:58 --> Router Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:35:58 --> Input Class Initialized
+INFO - 2025-03-26 18:35:58 --> Security Class Initialized
+INFO - 2025-03-26 18:35:58 --> Language Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:35:58 --> Output Class Initialized
+INFO - 2025-03-26 18:35:58 --> Input Class Initialized
+ERROR - 2025-03-26 18:35:58 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:35:58 --> Security Class Initialized
+INFO - 2025-03-26 18:35:58 --> Language Class Initialized
+INFO - 2025-03-26 18:35:58 --> Config Class Initialized
+INFO - 2025-03-26 18:35:58 --> Router Class Initialized
+INFO - 2025-03-26 18:35:58 --> Config Class Initialized
+ERROR - 2025-03-26 18:35:58 --> 404 Page Not Found: Assets/js
+DEBUG - 2025-03-26 18:35:58 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:35:58 --> Hooks Class Initialized
+INFO - 2025-03-26 18:35:58 --> Hooks Class Initialized
+INFO - 2025-03-26 18:35:58 --> Output Class Initialized
+INFO - 2025-03-26 18:35:58 --> Input Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> UTF-8 Support Enabled
+DEBUG - 2025-03-26 18:35:58 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:35:58 --> Language Class Initialized
+INFO - 2025-03-26 18:35:58 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:35:58 --> Security Class Initialized
+ERROR - 2025-03-26 18:35:58 --> 404 Page Not Found: Assets/js
+DEBUG - 2025-03-26 18:35:58 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:35:58 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:35:58 --> URI Class Initialized
+INFO - 2025-03-26 18:35:58 --> Input Class Initialized
+INFO - 2025-03-26 18:35:58 --> URI Class Initialized
+INFO - 2025-03-26 18:35:58 --> Language Class Initialized
+ERROR - 2025-03-26 18:35:58 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:35:58 --> Router Class Initialized
+INFO - 2025-03-26 18:35:58 --> Router Class Initialized
+INFO - 2025-03-26 18:35:58 --> Output Class Initialized
+INFO - 2025-03-26 18:35:58 --> Output Class Initialized
+INFO - 2025-03-26 18:35:58 --> Security Class Initialized
+INFO - 2025-03-26 18:35:58 --> Security Class Initialized
+DEBUG - 2025-03-26 18:35:58 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2025-03-26 18:35:58 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:35:58 --> Input Class Initialized
+INFO - 2025-03-26 18:35:58 --> Input Class Initialized
+INFO - 2025-03-26 18:35:58 --> Language Class Initialized
+INFO - 2025-03-26 18:35:58 --> Language Class Initialized
+ERROR - 2025-03-26 18:35:58 --> 404 Page Not Found: Assets/js
+ERROR - 2025-03-26 18:35:58 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:36:26 --> Config Class Initialized
+INFO - 2025-03-26 18:36:26 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:36:26 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:36:26 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:36:26 --> URI Class Initialized
+INFO - 2025-03-26 18:36:26 --> Router Class Initialized
+INFO - 2025-03-26 18:36:26 --> Output Class Initialized
+INFO - 2025-03-26 18:36:26 --> Security Class Initialized
+DEBUG - 2025-03-26 18:36:26 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:36:26 --> Input Class Initialized
+INFO - 2025-03-26 18:36:26 --> Language Class Initialized
+INFO - 2025-03-26 18:36:27 --> Config Class Initialized
+INFO - 2025-03-26 18:36:27 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:36:27 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:36:27 --> URI Class Initialized
+INFO - 2025-03-26 18:36:27 --> Router Class Initialized
+INFO - 2025-03-26 18:36:27 --> Output Class Initialized
+INFO - 2025-03-26 18:36:27 --> Security Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:36:27 --> Input Class Initialized
+INFO - 2025-03-26 18:36:27 --> Language Class Initialized
+ERROR - 2025-03-26 18:36:27 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:36:27 --> Config Class Initialized
+INFO - 2025-03-26 18:36:27 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:36:27 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:36:27 --> URI Class Initialized
+INFO - 2025-03-26 18:36:27 --> Router Class Initialized
+INFO - 2025-03-26 18:36:27 --> Output Class Initialized
+INFO - 2025-03-26 18:36:27 --> Security Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:36:27 --> Input Class Initialized
+INFO - 2025-03-26 18:36:27 --> Language Class Initialized
+ERROR - 2025-03-26 18:36:27 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:36:27 --> Config Class Initialized
+INFO - 2025-03-26 18:36:27 --> Hooks Class Initialized
+INFO - 2025-03-26 18:36:27 --> Config Class Initialized
+INFO - 2025-03-26 18:36:27 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:36:27 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:36:27 --> URI Class Initialized
+INFO - 2025-03-26 18:36:27 --> Config Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:36:27 --> Hooks Class Initialized
+INFO - 2025-03-26 18:36:27 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:36:27 --> Router Class Initialized
+INFO - 2025-03-26 18:36:27 --> URI Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:36:27 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:36:27 --> URI Class Initialized
+INFO - 2025-03-26 18:36:27 --> Router Class Initialized
+INFO - 2025-03-26 18:36:27 --> Output Class Initialized
+INFO - 2025-03-26 18:36:27 --> Config Class Initialized
+INFO - 2025-03-26 18:36:27 --> Hooks Class Initialized
+INFO - 2025-03-26 18:36:27 --> Security Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:36:27 --> Input Class Initialized
+INFO - 2025-03-26 18:36:27 --> Language Class Initialized
+INFO - 2025-03-26 18:36:27 --> Output Class Initialized
+INFO - 2025-03-26 18:36:27 --> Security Class Initialized
+ERROR - 2025-03-26 18:36:27 --> 404 Page Not Found: Assets/js
+DEBUG - 2025-03-26 18:36:27 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:36:27 --> Input Class Initialized
+INFO - 2025-03-26 18:36:27 --> Language Class Initialized
+ERROR - 2025-03-26 18:36:27 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:36:27 --> Router Class Initialized
+INFO - 2025-03-26 18:36:27 --> Output Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:36:27 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:36:27 --> URI Class Initialized
+INFO - 2025-03-26 18:36:27 --> Router Class Initialized
+INFO - 2025-03-26 18:36:27 --> Output Class Initialized
+INFO - 2025-03-26 18:36:27 --> Security Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:36:27 --> Input Class Initialized
+INFO - 2025-03-26 18:36:27 --> Language Class Initialized
+INFO - 2025-03-26 18:36:27 --> Security Class Initialized
+ERROR - 2025-03-26 18:36:27 --> 404 Page Not Found: Assets/js
+DEBUG - 2025-03-26 18:36:27 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:36:27 --> Input Class Initialized
+INFO - 2025-03-26 18:36:27 --> Language Class Initialized
+ERROR - 2025-03-26 18:36:27 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:36:27 --> Config Class Initialized
+INFO - 2025-03-26 18:36:27 --> Hooks Class Initialized
+INFO - 2025-03-26 18:36:27 --> Config Class Initialized
+INFO - 2025-03-26 18:36:27 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:36:27 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:36:27 --> URI Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:36:27 --> Router Class Initialized
+INFO - 2025-03-26 18:36:27 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:36:27 --> Output Class Initialized
+INFO - 2025-03-26 18:36:27 --> URI Class Initialized
+INFO - 2025-03-26 18:36:27 --> Security Class Initialized
+INFO - 2025-03-26 18:36:27 --> Router Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:36:27 --> Output Class Initialized
+INFO - 2025-03-26 18:36:27 --> Input Class Initialized
+INFO - 2025-03-26 18:36:27 --> Security Class Initialized
+INFO - 2025-03-26 18:36:27 --> Language Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:36:27 --> Input Class Initialized
+ERROR - 2025-03-26 18:36:27 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:36:27 --> Language Class Initialized
+INFO - 2025-03-26 18:36:27 --> Config Class Initialized
+INFO - 2025-03-26 18:36:27 --> Hooks Class Initialized
+INFO - 2025-03-26 18:36:27 --> Config Class Initialized
+INFO - 2025-03-26 18:36:27 --> Config Class Initialized
+INFO - 2025-03-26 18:36:27 --> Hooks Class Initialized
+INFO - 2025-03-26 18:36:27 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:36:27 --> Utf8 Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> UTF-8 Support Enabled
+DEBUG - 2025-03-26 18:36:27 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:36:27 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:36:27 --> URI Class Initialized
+INFO - 2025-03-26 18:36:27 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:36:27 --> URI Class Initialized
+INFO - 2025-03-26 18:36:27 --> Router Class Initialized
+INFO - 2025-03-26 18:36:27 --> URI Class Initialized
+INFO - 2025-03-26 18:36:27 --> Router Class Initialized
+INFO - 2025-03-26 18:36:27 --> Output Class Initialized
+INFO - 2025-03-26 18:36:27 --> Output Class Initialized
+INFO - 2025-03-26 18:36:27 --> Security Class Initialized
+INFO - 2025-03-26 18:36:27 --> Router Class Initialized
+INFO - 2025-03-26 18:36:27 --> Security Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:36:27 --> Output Class Initialized
+INFO - 2025-03-26 18:36:27 --> Input Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:36:27 --> Security Class Initialized
+INFO - 2025-03-26 18:36:27 --> Input Class Initialized
+INFO - 2025-03-26 18:36:27 --> Language Class Initialized
+INFO - 2025-03-26 18:36:27 --> Language Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:36:27 --> Input Class Initialized
+ERROR - 2025-03-26 18:36:27 --> 404 Page Not Found: Assets/js
+ERROR - 2025-03-26 18:36:27 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:36:27 --> Language Class Initialized
+ERROR - 2025-03-26 18:36:27 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:36:27 --> Config Class Initialized
+INFO - 2025-03-26 18:36:27 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:36:27 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:36:27 --> URI Class Initialized
+INFO - 2025-03-26 18:36:27 --> Router Class Initialized
+INFO - 2025-03-26 18:36:27 --> Output Class Initialized
+INFO - 2025-03-26 18:36:27 --> Security Class Initialized
+INFO - 2025-03-26 18:36:27 --> Config Class Initialized
+INFO - 2025-03-26 18:36:27 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:36:27 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:36:27 --> URI Class Initialized
+INFO - 2025-03-26 18:36:27 --> Router Class Initialized
+INFO - 2025-03-26 18:36:27 --> Output Class Initialized
+INFO - 2025-03-26 18:36:27 --> Security Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:36:27 --> Input Class Initialized
+INFO - 2025-03-26 18:36:27 --> Language Class Initialized
+ERROR - 2025-03-26 18:36:27 --> 404 Page Not Found: Assets/js
+DEBUG - 2025-03-26 18:36:27 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:36:27 --> Input Class Initialized
+INFO - 2025-03-26 18:36:27 --> Language Class Initialized
+INFO - 2025-03-26 18:36:27 --> Config Class Initialized
+INFO - 2025-03-26 18:36:27 --> Config Class Initialized
+INFO - 2025-03-26 18:36:27 --> Hooks Class Initialized
+INFO - 2025-03-26 18:36:27 --> Config Class Initialized
+INFO - 2025-03-26 18:36:27 --> Config Class Initialized
+INFO - 2025-03-26 18:36:27 --> Hooks Class Initialized
+INFO - 2025-03-26 18:36:27 --> Hooks Class Initialized
+INFO - 2025-03-26 18:36:27 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> UTF-8 Support Enabled
+DEBUG - 2025-03-26 18:36:27 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:36:27 --> Utf8 Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> UTF-8 Support Enabled
+DEBUG - 2025-03-26 18:36:27 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:36:27 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:36:27 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:36:27 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:36:27 --> URI Class Initialized
+INFO - 2025-03-26 18:36:27 --> URI Class Initialized
+INFO - 2025-03-26 18:36:27 --> URI Class Initialized
+INFO - 2025-03-26 18:36:27 --> URI Class Initialized
+INFO - 2025-03-26 18:36:27 --> Router Class Initialized
+INFO - 2025-03-26 18:36:27 --> Router Class Initialized
+INFO - 2025-03-26 18:36:27 --> Router Class Initialized
+INFO - 2025-03-26 18:36:27 --> Output Class Initialized
+INFO - 2025-03-26 18:36:27 --> Router Class Initialized
+INFO - 2025-03-26 18:36:27 --> Output Class Initialized
+INFO - 2025-03-26 18:36:27 --> Output Class Initialized
+INFO - 2025-03-26 18:36:27 --> Security Class Initialized
+INFO - 2025-03-26 18:36:27 --> Output Class Initialized
+INFO - 2025-03-26 18:36:27 --> Security Class Initialized
+INFO - 2025-03-26 18:36:27 --> Security Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:36:27 --> Security Class Initialized
+INFO - 2025-03-26 18:36:27 --> Input Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2025-03-26 18:36:27 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2025-03-26 18:36:27 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:36:27 --> Input Class Initialized
+INFO - 2025-03-26 18:36:27 --> Input Class Initialized
+INFO - 2025-03-26 18:36:27 --> Language Class Initialized
+INFO - 2025-03-26 18:36:27 --> Input Class Initialized
+INFO - 2025-03-26 18:36:27 --> Language Class Initialized
+INFO - 2025-03-26 18:36:27 --> Language Class Initialized
+INFO - 2025-03-26 18:36:27 --> Language Class Initialized
+ERROR - 2025-03-26 18:36:27 --> 404 Page Not Found: Assets/js
+ERROR - 2025-03-26 18:36:27 --> 404 Page Not Found: Assets/js
+ERROR - 2025-03-26 18:36:27 --> 404 Page Not Found: Assets/js
+ERROR - 2025-03-26 18:36:27 --> 404 Page Not Found: Assets/js
+ERROR - 2025-03-26 18:36:27 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:36:27 --> Config Class Initialized
+INFO - 2025-03-26 18:36:27 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:36:27 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:36:27 --> URI Class Initialized
+INFO - 2025-03-26 18:36:27 --> Router Class Initialized
+INFO - 2025-03-26 18:36:27 --> Output Class Initialized
+INFO - 2025-03-26 18:36:27 --> Security Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:36:27 --> Input Class Initialized
+INFO - 2025-03-26 18:36:27 --> Config Class Initialized
+INFO - 2025-03-26 18:36:27 --> Config Class Initialized
+INFO - 2025-03-26 18:36:27 --> Hooks Class Initialized
+INFO - 2025-03-26 18:36:27 --> Hooks Class Initialized
+INFO - 2025-03-26 18:36:27 --> Language Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> UTF-8 Support Enabled
+DEBUG - 2025-03-26 18:36:27 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:36:27 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:36:27 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:36:27 --> URI Class Initialized
+INFO - 2025-03-26 18:36:27 --> URI Class Initialized
+ERROR - 2025-03-26 18:36:27 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:36:27 --> Router Class Initialized
+INFO - 2025-03-26 18:36:27 --> Router Class Initialized
+INFO - 2025-03-26 18:36:27 --> Output Class Initialized
+INFO - 2025-03-26 18:36:27 --> Output Class Initialized
+INFO - 2025-03-26 18:36:27 --> Security Class Initialized
+INFO - 2025-03-26 18:36:27 --> Security Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2025-03-26 18:36:27 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:36:27 --> Input Class Initialized
+INFO - 2025-03-26 18:36:27 --> Input Class Initialized
+INFO - 2025-03-26 18:36:27 --> Language Class Initialized
+INFO - 2025-03-26 18:36:27 --> Language Class Initialized
+ERROR - 2025-03-26 18:36:27 --> 404 Page Not Found: Assets/js
+ERROR - 2025-03-26 18:36:27 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:36:27 --> Config Class Initialized
+INFO - 2025-03-26 18:36:27 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:36:27 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:36:27 --> URI Class Initialized
+INFO - 2025-03-26 18:36:27 --> Config Class Initialized
+INFO - 2025-03-26 18:36:27 --> Hooks Class Initialized
+INFO - 2025-03-26 18:36:27 --> Router Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:36:27 --> Output Class Initialized
+INFO - 2025-03-26 18:36:27 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:36:27 --> Security Class Initialized
+INFO - 2025-03-26 18:36:27 --> URI Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:36:27 --> Router Class Initialized
+INFO - 2025-03-26 18:36:27 --> Input Class Initialized
+INFO - 2025-03-26 18:36:27 --> Output Class Initialized
+INFO - 2025-03-26 18:36:27 --> Language Class Initialized
+INFO - 2025-03-26 18:36:27 --> Security Class Initialized
+ERROR - 2025-03-26 18:36:27 --> 404 Page Not Found: Assets/js
+DEBUG - 2025-03-26 18:36:27 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:36:27 --> Input Class Initialized
+INFO - 2025-03-26 18:36:27 --> Language Class Initialized
+ERROR - 2025-03-26 18:36:27 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:36:27 --> Config Class Initialized
+INFO - 2025-03-26 18:36:27 --> Hooks Class Initialized
+INFO - 2025-03-26 18:36:27 --> Config Class Initialized
+INFO - 2025-03-26 18:36:27 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:36:27 --> Utf8 Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:36:27 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:36:27 --> URI Class Initialized
+INFO - 2025-03-26 18:36:27 --> URI Class Initialized
+INFO - 2025-03-26 18:36:27 --> Router Class Initialized
+INFO - 2025-03-26 18:36:27 --> Router Class Initialized
+INFO - 2025-03-26 18:36:27 --> Output Class Initialized
+INFO - 2025-03-26 18:36:27 --> Output Class Initialized
+INFO - 2025-03-26 18:36:27 --> Security Class Initialized
+INFO - 2025-03-26 18:36:27 --> Security Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:36:27 --> Input Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:36:27 --> Input Class Initialized
+INFO - 2025-03-26 18:36:27 --> Language Class Initialized
+INFO - 2025-03-26 18:36:27 --> Language Class Initialized
+ERROR - 2025-03-26 18:36:27 --> 404 Page Not Found: Assets/js
+ERROR - 2025-03-26 18:36:27 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:36:27 --> Config Class Initialized
+INFO - 2025-03-26 18:36:27 --> Hooks Class Initialized
+INFO - 2025-03-26 18:36:27 --> Config Class Initialized
+INFO - 2025-03-26 18:36:27 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:36:27 --> Utf8 Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:36:27 --> URI Class Initialized
+INFO - 2025-03-26 18:36:27 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:36:27 --> URI Class Initialized
+INFO - 2025-03-26 18:36:27 --> Router Class Initialized
+INFO - 2025-03-26 18:36:27 --> Output Class Initialized
+INFO - 2025-03-26 18:36:27 --> Security Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:36:27 --> Input Class Initialized
+INFO - 2025-03-26 18:36:27 --> Language Class Initialized
+ERROR - 2025-03-26 18:36:27 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:36:27 --> Router Class Initialized
+INFO - 2025-03-26 18:36:27 --> Output Class Initialized
+INFO - 2025-03-26 18:36:27 --> Security Class Initialized
+DEBUG - 2025-03-26 18:36:27 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:36:27 --> Input Class Initialized
+INFO - 2025-03-26 18:36:27 --> Language Class Initialized
+ERROR - 2025-03-26 18:36:27 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:37:03 --> Config Class Initialized
+INFO - 2025-03-26 18:37:03 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:37:03 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:37:03 --> URI Class Initialized
+INFO - 2025-03-26 18:37:03 --> Router Class Initialized
+INFO - 2025-03-26 18:37:03 --> Output Class Initialized
+INFO - 2025-03-26 18:37:03 --> Security Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:37:03 --> Input Class Initialized
+INFO - 2025-03-26 18:37:03 --> Language Class Initialized
+INFO - 2025-03-26 18:37:03 --> Config Class Initialized
+INFO - 2025-03-26 18:37:03 --> Config Class Initialized
+INFO - 2025-03-26 18:37:03 --> Hooks Class Initialized
+INFO - 2025-03-26 18:37:03 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> UTF-8 Support Enabled
+DEBUG - 2025-03-26 18:37:03 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:37:03 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:37:03 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:37:03 --> URI Class Initialized
+INFO - 2025-03-26 18:37:03 --> URI Class Initialized
+INFO - 2025-03-26 18:37:03 --> Router Class Initialized
+INFO - 2025-03-26 18:37:03 --> Router Class Initialized
+INFO - 2025-03-26 18:37:03 --> Output Class Initialized
+INFO - 2025-03-26 18:37:03 --> Output Class Initialized
+INFO - 2025-03-26 18:37:03 --> Security Class Initialized
+INFO - 2025-03-26 18:37:03 --> Security Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:37:03 --> Input Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:37:03 --> Input Class Initialized
+INFO - 2025-03-26 18:37:03 --> Language Class Initialized
+INFO - 2025-03-26 18:37:03 --> Language Class Initialized
+ERROR - 2025-03-26 18:37:03 --> 404 Page Not Found: Assets/js
+ERROR - 2025-03-26 18:37:03 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:37:03 --> Config Class Initialized
+INFO - 2025-03-26 18:37:03 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:37:03 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:37:03 --> URI Class Initialized
+INFO - 2025-03-26 18:37:03 --> Router Class Initialized
+INFO - 2025-03-26 18:37:03 --> Output Class Initialized
+INFO - 2025-03-26 18:37:03 --> Security Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:37:03 --> Input Class Initialized
+INFO - 2025-03-26 18:37:03 --> Language Class Initialized
+ERROR - 2025-03-26 18:37:03 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:37:03 --> Config Class Initialized
+INFO - 2025-03-26 18:37:03 --> Hooks Class Initialized
+INFO - 2025-03-26 18:37:03 --> Config Class Initialized
+INFO - 2025-03-26 18:37:03 --> Config Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:37:03 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:37:03 --> Hooks Class Initialized
+INFO - 2025-03-26 18:37:03 --> URI Class Initialized
+INFO - 2025-03-26 18:37:03 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:37:03 --> Utf8 Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:37:03 --> URI Class Initialized
+INFO - 2025-03-26 18:37:03 --> Router Class Initialized
+INFO - 2025-03-26 18:37:03 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:37:03 --> Output Class Initialized
+INFO - 2025-03-26 18:37:03 --> Router Class Initialized
+INFO - 2025-03-26 18:37:03 --> URI Class Initialized
+INFO - 2025-03-26 18:37:03 --> Security Class Initialized
+INFO - 2025-03-26 18:37:03 --> Output Class Initialized
+INFO - 2025-03-26 18:37:03 --> Router Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:37:03 --> Security Class Initialized
+INFO - 2025-03-26 18:37:03 --> Input Class Initialized
+INFO - 2025-03-26 18:37:03 --> Output Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:37:03 --> Language Class Initialized
+INFO - 2025-03-26 18:37:03 --> Input Class Initialized
+INFO - 2025-03-26 18:37:03 --> Security Class Initialized
+ERROR - 2025-03-26 18:37:03 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:37:03 --> Language Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:37:03 --> Input Class Initialized
+ERROR - 2025-03-26 18:37:03 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:37:03 --> Language Class Initialized
+ERROR - 2025-03-26 18:37:03 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:37:03 --> Config Class Initialized
+INFO - 2025-03-26 18:37:03 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:37:03 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:37:03 --> URI Class Initialized
+INFO - 2025-03-26 18:37:03 --> Router Class Initialized
+INFO - 2025-03-26 18:37:03 --> Output Class Initialized
+INFO - 2025-03-26 18:37:03 --> Security Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:37:03 --> Input Class Initialized
+INFO - 2025-03-26 18:37:03 --> Language Class Initialized
+INFO - 2025-03-26 18:37:03 --> Config Class Initialized
+INFO - 2025-03-26 18:37:03 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:37:03 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:37:03 --> URI Class Initialized
+INFO - 2025-03-26 18:37:03 --> Router Class Initialized
+INFO - 2025-03-26 18:37:03 --> Output Class Initialized
+INFO - 2025-03-26 18:37:03 --> Security Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:37:03 --> Input Class Initialized
+INFO - 2025-03-26 18:37:03 --> Language Class Initialized
+ERROR - 2025-03-26 18:37:03 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:37:03 --> Config Class Initialized
+INFO - 2025-03-26 18:37:03 --> Config Class Initialized
+INFO - 2025-03-26 18:37:03 --> Hooks Class Initialized
+INFO - 2025-03-26 18:37:03 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> UTF-8 Support Enabled
+DEBUG - 2025-03-26 18:37:03 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:37:03 --> Config Class Initialized
+INFO - 2025-03-26 18:37:03 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:37:03 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:37:03 --> Hooks Class Initialized
+INFO - 2025-03-26 18:37:03 --> URI Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:37:03 --> URI Class Initialized
+INFO - 2025-03-26 18:37:03 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:37:03 --> Router Class Initialized
+INFO - 2025-03-26 18:37:03 --> Router Class Initialized
+INFO - 2025-03-26 18:37:03 --> URI Class Initialized
+INFO - 2025-03-26 18:37:03 --> Output Class Initialized
+INFO - 2025-03-26 18:37:03 --> Output Class Initialized
+INFO - 2025-03-26 18:37:03 --> Router Class Initialized
+INFO - 2025-03-26 18:37:03 --> Security Class Initialized
+INFO - 2025-03-26 18:37:03 --> Security Class Initialized
+INFO - 2025-03-26 18:37:03 --> Output Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2025-03-26 18:37:03 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:37:03 --> Security Class Initialized
+INFO - 2025-03-26 18:37:03 --> Input Class Initialized
+INFO - 2025-03-26 18:37:03 --> Input Class Initialized
+INFO - 2025-03-26 18:37:03 --> Language Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:37:03 --> Language Class Initialized
+INFO - 2025-03-26 18:37:03 --> Input Class Initialized
+ERROR - 2025-03-26 18:37:03 --> 404 Page Not Found: Assets/js
+ERROR - 2025-03-26 18:37:03 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:37:03 --> Language Class Initialized
+ERROR - 2025-03-26 18:37:03 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:37:03 --> Config Class Initialized
+INFO - 2025-03-26 18:37:03 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:37:03 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:37:03 --> URI Class Initialized
+INFO - 2025-03-26 18:37:03 --> Router Class Initialized
+INFO - 2025-03-26 18:37:03 --> Output Class Initialized
+INFO - 2025-03-26 18:37:03 --> Security Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:37:03 --> Input Class Initialized
+INFO - 2025-03-26 18:37:03 --> Language Class Initialized
+ERROR - 2025-03-26 18:37:03 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:37:03 --> Config Class Initialized
+INFO - 2025-03-26 18:37:03 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:37:03 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:37:03 --> URI Class Initialized
+INFO - 2025-03-26 18:37:03 --> Router Class Initialized
+INFO - 2025-03-26 18:37:03 --> Output Class Initialized
+INFO - 2025-03-26 18:37:03 --> Security Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:37:03 --> Input Class Initialized
+INFO - 2025-03-26 18:37:03 --> Language Class Initialized
+ERROR - 2025-03-26 18:37:03 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:37:03 --> Config Class Initialized
+INFO - 2025-03-26 18:37:03 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:37:03 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:37:03 --> URI Class Initialized
+INFO - 2025-03-26 18:37:03 --> Config Class Initialized
+INFO - 2025-03-26 18:37:03 --> Hooks Class Initialized
+INFO - 2025-03-26 18:37:03 --> Router Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:37:03 --> Output Class Initialized
+INFO - 2025-03-26 18:37:03 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:37:03 --> Security Class Initialized
+INFO - 2025-03-26 18:37:03 --> URI Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:37:03 --> Input Class Initialized
+INFO - 2025-03-26 18:37:03 --> Router Class Initialized
+INFO - 2025-03-26 18:37:03 --> Language Class Initialized
+INFO - 2025-03-26 18:37:03 --> Output Class Initialized
+ERROR - 2025-03-26 18:37:03 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:37:03 --> Security Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:37:03 --> Input Class Initialized
+INFO - 2025-03-26 18:37:03 --> Language Class Initialized
+ERROR - 2025-03-26 18:37:03 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:37:03 --> Config Class Initialized
+INFO - 2025-03-26 18:37:03 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:37:03 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:37:03 --> URI Class Initialized
+INFO - 2025-03-26 18:37:03 --> Router Class Initialized
+INFO - 2025-03-26 18:37:03 --> Output Class Initialized
+INFO - 2025-03-26 18:37:03 --> Security Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:37:03 --> Input Class Initialized
+INFO - 2025-03-26 18:37:03 --> Config Class Initialized
+INFO - 2025-03-26 18:37:03 --> Language Class Initialized
+INFO - 2025-03-26 18:37:03 --> Hooks Class Initialized
+ERROR - 2025-03-26 18:37:03 --> 404 Page Not Found: Assets/js
+DEBUG - 2025-03-26 18:37:03 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:37:03 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:37:03 --> URI Class Initialized
+INFO - 2025-03-26 18:37:03 --> Router Class Initialized
+INFO - 2025-03-26 18:37:03 --> Output Class Initialized
+INFO - 2025-03-26 18:37:03 --> Security Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:37:03 --> Input Class Initialized
+INFO - 2025-03-26 18:37:03 --> Language Class Initialized
+ERROR - 2025-03-26 18:37:03 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:37:03 --> Config Class Initialized
+INFO - 2025-03-26 18:37:03 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:37:03 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:37:03 --> URI Class Initialized
+INFO - 2025-03-26 18:37:03 --> Router Class Initialized
+INFO - 2025-03-26 18:37:03 --> Config Class Initialized
+INFO - 2025-03-26 18:37:03 --> Output Class Initialized
+INFO - 2025-03-26 18:37:03 --> Hooks Class Initialized
+INFO - 2025-03-26 18:37:03 --> Security Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:37:03 --> Utf8 Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:37:03 --> Input Class Initialized
+INFO - 2025-03-26 18:37:03 --> URI Class Initialized
+INFO - 2025-03-26 18:37:03 --> Language Class Initialized
+ERROR - 2025-03-26 18:37:03 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:37:03 --> Router Class Initialized
+INFO - 2025-03-26 18:37:03 --> Output Class Initialized
+INFO - 2025-03-26 18:37:03 --> Security Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:37:03 --> Input Class Initialized
+INFO - 2025-03-26 18:37:03 --> Language Class Initialized
+ERROR - 2025-03-26 18:37:03 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:37:03 --> Config Class Initialized
+INFO - 2025-03-26 18:37:03 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:37:03 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:37:03 --> Config Class Initialized
+INFO - 2025-03-26 18:37:03 --> Hooks Class Initialized
+INFO - 2025-03-26 18:37:03 --> URI Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:37:03 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:37:03 --> Router Class Initialized
+INFO - 2025-03-26 18:37:03 --> URI Class Initialized
+INFO - 2025-03-26 18:37:03 --> Output Class Initialized
+INFO - 2025-03-26 18:37:03 --> Router Class Initialized
+INFO - 2025-03-26 18:37:03 --> Security Class Initialized
+INFO - 2025-03-26 18:37:03 --> Output Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:37:03 --> Input Class Initialized
+INFO - 2025-03-26 18:37:03 --> Security Class Initialized
+INFO - 2025-03-26 18:37:03 --> Language Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2025-03-26 18:37:03 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:37:03 --> Input Class Initialized
+INFO - 2025-03-26 18:37:03 --> Language Class Initialized
+ERROR - 2025-03-26 18:37:03 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:37:03 --> Config Class Initialized
+INFO - 2025-03-26 18:37:03 --> Hooks Class Initialized
+INFO - 2025-03-26 18:37:03 --> Config Class Initialized
+INFO - 2025-03-26 18:37:03 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:37:03 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:37:03 --> URI Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:37:03 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:37:03 --> URI Class Initialized
+INFO - 2025-03-26 18:37:03 --> Router Class Initialized
+INFO - 2025-03-26 18:37:03 --> Router Class Initialized
+INFO - 2025-03-26 18:37:03 --> Output Class Initialized
+INFO - 2025-03-26 18:37:03 --> Output Class Initialized
+INFO - 2025-03-26 18:37:03 --> Security Class Initialized
+INFO - 2025-03-26 18:37:03 --> Security Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2025-03-26 18:37:03 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:37:03 --> Input Class Initialized
+INFO - 2025-03-26 18:37:03 --> Input Class Initialized
+INFO - 2025-03-26 18:37:03 --> Language Class Initialized
+INFO - 2025-03-26 18:37:03 --> Language Class Initialized
+ERROR - 2025-03-26 18:37:03 --> 404 Page Not Found: Assets/js
+ERROR - 2025-03-26 18:37:03 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:37:03 --> Config Class Initialized
+INFO - 2025-03-26 18:37:03 --> Config Class Initialized
+INFO - 2025-03-26 18:37:03 --> Hooks Class Initialized
+INFO - 2025-03-26 18:37:03 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> UTF-8 Support Enabled
+DEBUG - 2025-03-26 18:37:03 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:37:03 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:37:03 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:37:03 --> URI Class Initialized
+INFO - 2025-03-26 18:37:03 --> URI Class Initialized
+INFO - 2025-03-26 18:37:03 --> Router Class Initialized
+INFO - 2025-03-26 18:37:03 --> Router Class Initialized
+INFO - 2025-03-26 18:37:03 --> Output Class Initialized
+INFO - 2025-03-26 18:37:03 --> Output Class Initialized
+INFO - 2025-03-26 18:37:03 --> Security Class Initialized
+INFO - 2025-03-26 18:37:03 --> Security Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> Global POST, GET and COOKIE data sanitized
+DEBUG - 2025-03-26 18:37:03 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:37:03 --> Input Class Initialized
+INFO - 2025-03-26 18:37:03 --> Input Class Initialized
+INFO - 2025-03-26 18:37:03 --> Language Class Initialized
+INFO - 2025-03-26 18:37:03 --> Language Class Initialized
+ERROR - 2025-03-26 18:37:03 --> 404 Page Not Found: Assets/js
+ERROR - 2025-03-26 18:37:03 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:37:03 --> Config Class Initialized
+INFO - 2025-03-26 18:37:03 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:37:03 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:37:03 --> URI Class Initialized
+INFO - 2025-03-26 18:37:03 --> Router Class Initialized
+INFO - 2025-03-26 18:37:03 --> Output Class Initialized
+INFO - 2025-03-26 18:37:03 --> Security Class Initialized
+DEBUG - 2025-03-26 18:37:03 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:37:03 --> Input Class Initialized
+INFO - 2025-03-26 18:37:03 --> Language Class Initialized
+ERROR - 2025-03-26 18:37:03 --> 404 Page Not Found: Assets/js
+INFO - 2025-03-26 18:38:01 --> Config Class Initialized
+INFO - 2025-03-26 18:38:01 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:38:01 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:38:01 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:38:01 --> URI Class Initialized
+INFO - 2025-03-26 18:38:01 --> Router Class Initialized
+INFO - 2025-03-26 18:38:01 --> Output Class Initialized
+INFO - 2025-03-26 18:38:01 --> Security Class Initialized
+DEBUG - 2025-03-26 18:38:01 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:38:01 --> Input Class Initialized
+INFO - 2025-03-26 18:38:01 --> Language Class Initialized
+INFO - 2025-03-26 18:38:09 --> Config Class Initialized
+INFO - 2025-03-26 18:38:09 --> Hooks Class Initialized
+DEBUG - 2025-03-26 18:38:09 --> UTF-8 Support Enabled
+INFO - 2025-03-26 18:38:09 --> Utf8 Class Initialized
+INFO - 2025-03-26 18:38:09 --> URI Class Initialized
+INFO - 2025-03-26 18:38:09 --> Router Class Initialized
+INFO - 2025-03-26 18:38:09 --> Output Class Initialized
+INFO - 2025-03-26 18:38:09 --> Security Class Initialized
+DEBUG - 2025-03-26 18:38:09 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-26 18:38:09 --> Input Class Initialized
+INFO - 2025-03-26 18:38:09 --> Language Class Initialized

@@ -1,4 +1,4 @@
-<?php $this->load->view('nav'); ?>
+
 <style>
   .scrollme {
   overflow-x: auto;
@@ -216,4 +216,3 @@
   });
   
 </script>
-<?php $this->load->view('footer'); ?>

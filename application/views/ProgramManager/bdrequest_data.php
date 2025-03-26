@@ -1,4 +1,3 @@
-<?php $this->load->view('nav'); ?>
 
 
 <!-- Content wrapper -->
@@ -1752,4 +1751,3 @@
           document.getElementById("rid").value = rid;
       });
                         </script>
-<?php $this->load->view('footer'); ?>

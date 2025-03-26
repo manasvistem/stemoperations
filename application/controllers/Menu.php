@@ -1425,7 +1425,7 @@ class Menu extends CI_Controller {
         $mdata = $this->Menu_model->get_competitionReport();
         $dep_name = $dt[0]->dep_name;
         if(!empty($user)){
-            $this->load->view($dep_name.'/competitionreport.php',['mdata'=>$mdata,'uid'=>$uid,'user'=>$user]);
+            $this->display($dep_name,'competitionreport',['mdata'=>$mdata,'uid'=>$uid,'user'=>$user],$type='');
         }else{
             redirect('Menu/main');
         }
@@ -1442,7 +1442,7 @@ class Menu extends CI_Controller {
         $mdata = $this->Menu_model->get_programreviewdetail();
         $dep_name = $dt[0]->dep_name;
         if(!empty($user)){
-            $this->load->view($dep_name.'/ProgramReviewDetail.php',['mdata'=>$mdata,'uid'=>$uid,'user'=>$user]);
+            $this->display($dep_name,'ProgramReviewDetail',['mdata'=>$mdata,'uid'=>$uid,'user'=>$user],$type='');
         }else{
             redirect('Menu/main');
         }
@@ -1814,7 +1814,7 @@ class Menu extends CI_Controller {
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
         $spd = $this->Menu_model->get_spdbyid($sid);
-        $this->load->view($dep_name.'/SPDTASSIGN', ['notify'=>$notify,'spd'=>$spd, 'user'=>$user]);
+        $this->display($dep_name,'SPDTASSIGN', ['notify'=>$notify,'spd'=>$spd, 'user'=>$user],$type='');
     }
     public function getAcademicCalendar(){
         $pcode = $this->input->post('pcode');
@@ -1962,7 +1962,7 @@ class Menu extends CI_Controller {
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
-        $this->load->view($dep_name.'/TodayTaskPlan', ['notify'=>$notify,'user'=>$user]);
+        $this->display($dep_name,'TodayTaskPlan', ['notify'=>$notify,'user'=>$user],$type='');
     }
     public function ParticalBPApr(){
         $user = $this->session->userdata('user');
@@ -1972,7 +1972,7 @@ class Menu extends CI_Controller {
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
-        $this->load->view($dep_name.'/ParticalBPApr', ['notify'=>$notify,'user'=>$user]);
+        $this->display($dep_name,'ParticalBPApr', ['notify'=>$notify,'user'=>$user],$type='');
     }
     public function PaymentApr(){
         $user = $this->session->userdata('user');
@@ -1982,7 +1982,7 @@ class Menu extends CI_Controller {
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dd=$this->Menu_model->get_depatment_byid($did);
         $dep_name = $dd[0]->dep_name;
-        $this->load->view($dep_name.'/PaymentApr', ['notify'=>$notify,'user'=>$user]);
+        $this->display($dep_name,'PaymentApr', ['notify'=>$notify,'user'=>$user],$type='');
     }
     public function vendordone($pid,$vid){
         
@@ -2440,7 +2440,7 @@ class Menu extends CI_Controller {
         $rec=$this->Menu_model->get_resource();
         $dep_name = $dt[0]->dep_name;
         if(!empty($user)){
-            $this->load->view($dep_name.'/ResourceDetail', ['notify'=>$notify,'rec'=>$rec,'user'=>$user]);
+            $this->load->view($dep_name,'ResourceDetail', ['notify'=>$notify,'rec'=>$rec,'user'=>$user],$type='');
         }else{
             redirect('Menu/main');
         }
@@ -2456,7 +2456,7 @@ class Menu extends CI_Controller {
         $spd=$this->Menu_model->get_spdbyid($sid);
         $dep_name = $dt[0]->dep_name;
         if(!empty($user)){
-            $this->load->view($dep_name.'/primarycontact', ['notify'=>$notify,'spd'=>$spd,'spdc'=>$spdc, 'user'=>$user]);
+            $this->display($dep_name,'primarycontact', ['notify'=>$notify,'spd'=>$spd,'spdc'=>$spdc, 'user'=>$user],$type='');
         }else{
             redirect('Menu/main');
         }
@@ -2484,7 +2484,7 @@ class Menu extends CI_Controller {
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
         if(!empty($user)){
-            $this->load->view($dep_name.'/addschooldetail', ['user'=>$user,'data'=>$dt, 'reg'=>$reg, 'procode'=>$procode, 'state'=>$state, 'status'=>$status,'notify'=>$notify]);
+            $this->display($dep_name,'addschooldetail', ['user'=>$user,'data'=>$dt, 'reg'=>$reg, 'procode'=>$procode, 'state'=>$state, 'status'=>$status,'notify'=>$notify],$type='');
         }else{
             redirect('Menu/main');
         }
@@ -2504,7 +2504,7 @@ class Menu extends CI_Controller {
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
         if(!empty($user)){
-            $this->load->view($dep_name.'/editschooldetail', ['user'=>$user,'data'=>$dt, 'reg'=>$reg, 'procode'=>$procode, 'state'=>$state, 'status'=>$status,'os'=>$oldspd,'notify'=>$notify]);
+            $this->display($dep_name,'editschooldetail', ['user'=>$user,'data'=>$dt, 'reg'=>$reg, 'procode'=>$procode, 'state'=>$state, 'status'=>$status,'os'=>$oldspd,'notify'=>$notify],$type='');
         }else{
             redirect('Menu/main');
         }
@@ -2521,7 +2521,7 @@ class Menu extends CI_Controller {
         $state=$this->Menu_model->get_state();
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
-        $this->load->view($dep_name.'/addoldclient', ['notify'=>$notify,'user'=>$user,'data'=>$dt, 'reg'=>$reg, 'procode'=>$procode, 'state'=>$state]);
+        $this->display($dep_name,'addoldclient', ['notify'=>$notify,'user'=>$user,'data'=>$dt, 'reg'=>$reg, 'procode'=>$procode, 'state'=>$state],$type='');
     }
     public function profileedit(){
         $msg = '';
@@ -2579,7 +2579,7 @@ $data=  ['notify'=>$notify,'user'=>$user,'data'=>$dt, 'reg'=>$reg, 'procode'=>$p
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
         if(!empty($user)){
-            $this->load->view($dep_name.'/addreport', ['notify'=>$notify,'user'=>$user,'data'=>$dt, 'reg'=>$reg, 'procode'=>$procode, 'spd'=>$spd, 'status'=>$status]);
+            $this->display($dep_name,'addreport', ['notify'=>$notify,'user'=>$user,'data'=>$dt, 'reg'=>$reg, 'procode'=>$procode, 'spd'=>$spd, 'status'=>$status],$type='');
         }else{
             redirect('Menu/main');
         }
@@ -2612,7 +2612,7 @@ $data=  ['notify'=>$notify,'user'=>$user,'data'=>$dt, 'reg'=>$reg, 'procode'=>$p
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
         if(!empty($user)){
-            $this->load->view($dep_name.'/TransitAssign', ['notify'=>$notify,'user'=>$user]);
+            $this->display($dep_name,'TransitAssign', ['notify'=>$notify,'user'=>$user],$type='');
         }else{
             redirect('Menu/main');
         }
@@ -2628,7 +2628,7 @@ $data=  ['notify'=>$notify,'user'=>$user,'data'=>$dt, 'reg'=>$reg, 'procode'=>$p
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
         if(!empty($user)){
-            $this->load->view($dep_name.'/maintenance-report', ['notify'=>$notify,'user'=>$user, 'reppc'=>$reppc]);
+            $this->display($dep_name,'maintenance-report', ['notify'=>$notify,'user'=>$user, 'reppc'=>$reppc],$type='');
         }else{
             redirect('Menu/main');
         }
@@ -11254,9 +11254,9 @@ public function TheAssigningProcess($rtype,$reqID){
     $getSPDRequest    = $this->Menu_model->GetBDRequestTimeSPDRequest($reqID);
     
     $dep_name       = $dt[0]->dep_name;
-   
+   $data = ['rtype'=>$rtype,'user'=>$user,'notify'=>$notify,'bdr'=>$bdr,'reqData'=>$reqData,'reqID'=>$reqID,'getSPDRequest'=>$getSPDRequest];
     if(!empty($user)){
-        $this->load->view($dep_name.'/TheAssigningProcess', ['rtype'=>$rtype,'user'=>$user,'notify'=>$notify,'bdr'=>$bdr,'reqData'=>$reqData,'reqID'=>$reqID,'getSPDRequest'=>$getSPDRequest]);
+        $this->display($dep_name,'TheAssigningProcess',$data,$type='');
     }else{
         redirect('Menu/main');
     }
@@ -11297,9 +11297,9 @@ public function BDREQUEST_DATA($rtype,$code){
     $bdrcount       = $this->Menu_model->get_bdrcount();
     $reqData        = $this->Menu_model->GetBDRequestALLInfoBYRequestCode($rtype);
     $dep_name       = $dt[0]->dep_name;
-   
+   $data = ['rtype'=>$rtype,'user'=>$user,'notify'=>$notify,'bdr'=>$bdr,'bdrcount'=>$bdrcount,'reqData'=>$reqData,'code'=>$code];
     if(!empty($user)){
-        $this->load->view($dep_name.'/BDREQUEST_DATA', ['rtype'=>$rtype,'user'=>$user,'notify'=>$notify,'bdr'=>$bdr,'bdrcount'=>$bdrcount,'reqData'=>$reqData,'code'=>$code]);
+        $this->display($dep_name,'BDREQUEST_DATA',$data,$type='');
     }else{
         redirect('Menu/main');
     }
@@ -12106,7 +12106,7 @@ public function TheAssigningProcessOfInstallationPersonCallOrVisitBDRequest($rty
     $dep_name       = $dt[0]->dep_name;
    
     if(!empty($user)){
-        $this->load->view($dep_name.'/TheAssigningProcessOfInstallationPersonCallOrVisitBDRequest', ['rtype'=>$rtype,'user'=>$user,'notify'=>$notify,'bdr'=>$bdr,'reqData'=>$reqData,'reqID'=>$reqID,'getSPDRequest'=>$getSPDRequest,'getDMLatterTask'=>$getDMLatterTask,'getSPDData'=>$getSPDData]);
+        $this->display($dep_name,'TheAssigningProcessOfInstallationPersonCallOrVisitBDRequest', ['rtype'=>$rtype,'user'=>$user,'notify'=>$notify,'bdr'=>$bdr,'reqData'=>$reqData,'reqID'=>$reqID,'getSPDRequest'=>$getSPDRequest,'getDMLatterTask'=>$getDMLatterTask,'getSPDData'=>$getSPDData],$type='');
     }else{
         redirect('Menu/main');
     }
