@@ -147,6 +147,22 @@
                       </div>
                     </div>
                   </div>
+                  <div class="col-md-3">
+                <div class="card">
+                   <div class="card">
+                   <?php 
+                        $user_day_planner  = $this->Menu_model->get_daystarted($uid,date("Y-m-d"));
+                        $pinitiate_time = $user_day_planner[0]->planner_initiate_time;
+                        $textmessage = $pinitiate_time == '' ? "Start" : "Resume";
+                    ?>
+                    <button type="button" class="btn btn-primary" onclick="handleReminderCreation()" fdprocessedid="5w4tuu">
+                    <i class="menu-icon tf-icons bx bx-calendar"></i> <?=$textmessage?> Planning 
+                      </button>
+                   </div>
+                   <hr>
+                  
+                </div>
+        </div>
                 </div>
               </div>
               <?php 
@@ -500,4 +516,45 @@
     });
 });
 </script>
-<?php // $this->load->view('footer'); ?>
+<script>
+  $(document).ready(function() {
+    // When an element with class 'taskperformaction' is clicked
+    $('.taskperformaction').on('click', function() {
+        var taskId = $(this).data('task_id'); // Retrieve the 'task_id' data
+        $('#modalCenter').modal('show');
+        $('#modalCenterTitle').text("Task ID IS = "+taskId);
+        // console.log(taskId); // Log the task ID or use it as needed
+        // alert(taskId);
+    });
+
+
+
+});
+function handleReminderCreation() {
+ 
+        $.ajax({
+            url: '<?=base_url();?>Menu/CheckTaskPlanningTime',
+            type: "POST",
+            data: {
+                'checkplantime': 'checkplantime'
+            },
+            cache: false,
+            success: function a(result) {
+                //	console.log(result);return false;
+                if (result == 'false') {
+                    var redURL = "<?=base_url();?>Menu/TaskPlanner2/<?= date("Y-m-d") ?>";
+                    window.location.href = redURL;
+                } else if (result == 'true') {
+
+                    <?php 
+          $todaydate = new DateTime();
+          $todaydate->modify('+1 day');
+          $tomorrowDate = $todaydate->format('Y-m-d');
+          ?>
+                    var redURL = "<?=base_url();?>Menu/TaskPlanner2/<?= $tomorrowDate; ?>";
+                    window.location.href = redURL;
+                }
+            }
+        });
+}
+</script>

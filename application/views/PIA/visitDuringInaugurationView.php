@@ -21,7 +21,7 @@
                     <input type="hidden" name="elapsed_time" id="elapsedTime">
                 </div>
             <!-- Two-Column Layout -->
-            <div class="row" id="visitDuringInstallation" style="display:none;">
+            <div class="row" id="visitDuringInauguration" style="display:none;">
                 <!-- Left Column -->
                 <div class="col-md-6">
                     <div class="mb-3">

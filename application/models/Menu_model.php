@@ -5925,7 +5925,6 @@ public function GetBDRequestALLInfoBYRequestCode($request_code){
 
 
 
-
     
 public function bdr_plansitask($uuid,$rid,$noofschool){
     $date = date('Y-m-d H:i:s');
@@ -5954,22 +5953,10 @@ public function GetBDRequestTaskByRequestID($reqID){
     return $query->result();
 }
 
-public function GetBDRequestTaskByRequestIDWithTaskID($reqID){
-    $query=$this->db->query("SELECT tblcallevents.task_action AS task_action_id, task_action.taskname, COUNT(task_action.taskname) AS task_count FROM tblcallevents LEFT JOIN task_action ON task_action.id = tblcallevents.task_action WHERE tblcallevents.bdrid = '$reqID' GROUP BY tblcallevents.task_action, task_action.taskname");
-    return $query->result();
-}
-
-
-// Call Start
-public function GetBDRequestTaskByRequestIDWithTaskIDS($reqID,$taskid){
-    $query=$this->db->query("SELECT tblcallevents.id as task_id, tblcallevents.rsid, tblcallevents.task_action AS task_action_id, task_action.taskname, spd_request.id as rspd_id, spd_request.sname, spd_request.call_visit, client_handover.client_name FROM tblcallevents LEFT JOIN task_action ON task_action.id = tblcallevents.task_action LEFT JOIN spd_request ON spd_request.id = tblcallevents.rsid LEFT JOIN client_handover ON client_handover.id = spd_request.ch_id WHERE tblcallevents.bdrid ='$reqID' AND tblcallevents.task_action = '$taskid'");
-    return $query->result();
-}
 public function GetBDRequestTaskByRequestIDWithTBLTaskIDS($reqID,$taskid){
     $query=$this->db->query("SELECT tblcallevents.id as task_id, tblcallevents.task_action AS task_action_id, task_action.taskname, spd_request.id as rspd_id, spd_request.sname, spd_request.call_visit, client_handover.client_name FROM tblcallevents LEFT JOIN task_action ON task_action.id = tblcallevents.task_action LEFT JOIN spd_request ON spd_request.id = tblcallevents.rsid LEFT JOIN client_handover ON client_handover.id = spd_request.ch_id WHERE tblcallevents.bdrid ='$reqID' AND tblcallevents.rsid = '$taskid'");
     return $query->result();
 }
-
 // Research Start
 public function GetBDRequestTaskByRequestIDWithTaskIDSResearch($reqID,$taskid){
     $query=$this->db->query("SELECT tblcallevents.id as task_id, tblcallevents.rsid, tblcallevents.task_action AS task_action_id, task_action.taskname, spd_request.id as rspd_id, spd_request.sname, spd_request.call_visit, client_handover.client_name FROM tblcallevents LEFT JOIN task_action ON task_action.id = tblcallevents.task_action LEFT JOIN spd_request ON spd_request.id = tblcallevents.rsid LEFT JOIN client_handover ON client_handover.id = spd_request.ch_id WHERE tblcallevents.bdrid ='$reqID' AND tblcallevents.task_action = '$taskid'");
@@ -5987,84 +5974,11 @@ public function GetBDRequestTimeSPDRequest($reqID){
     return $query->result();
 }
 
-
-
-public function GetTaskSequenceByBDRequestANDRSID($reqID,$reqSID){
-    $query=$this->db->query("WITH RECURSIVE TaskHierarchy AS (
-    -- Base Query: Get the starting record
-    SELECT 
-        tblcallevents.id AS task_id,
-        tblcallevents.task_action AS task_action_id,
-        task_action.taskname,
-        client_handover.client_name,
-        tblcallevents.aftertask
-    FROM 
-        tblcallevents
-    LEFT JOIN task_action ON task_action.id = tblcallevents.task_action
-    LEFT JOIN bdrequest ON bdrequest.id = tblcallevents.bdrid
-    LEFT JOIN client_handover ON client_handover.id = bdrequest.ch_id
-    WHERE 
-        tblcallevents.bdrid = '$reqID' 
-        AND tblcallevents.rsid = '$reqSID'
-
-    UNION ALL  
-
-    -- Recursive Query: Fetch records where task_id appears in aftertask
-    SELECT 
-        tblcallevents.id AS task_id,
-        tblcallevents.task_action AS task_action_id,
-        task_action.taskname,
-        client_handover.client_name,
-        tblcallevents.aftertask
-    FROM 
-        tblcallevents
-    LEFT JOIN task_action ON task_action.id = tblcallevents.task_action
-    LEFT JOIN bdrequest ON bdrequest.id = tblcallevents.bdrid
-    LEFT JOIN client_handover ON client_handover.id = bdrequest.ch_id
-    LEFT JOIN spd_request ON spd_request.id = tblcallevents.rsid
-    INNER JOIN TaskHierarchy ON FIND_IN_SET(TaskHierarchy.task_id, tblcallevents.aftertask) > 0
-)
-
-SELECT DISTINCT task_id, task_action_id, taskname, client_name 
-FROM TaskHierarchy");
+public function GetDMDEOLetterRequiredTaskByRID($reqID){
+    $query=$this->db->query("SELECT * FROM `tblcallevents` WHERE bdrid = '$reqID' AND task_action = 89 AND assigned_by = 0");
     return $query->result();
 }
 
-
-
-// WITH RECURSIVE TaskHierarchy AS (
-//     -- Base Query: Get the starting record
-//     SELECT 
-//         tblcallevents.id AS task_id,
-//         tblcallevents.task_action AS task_action_id,
-//         task_action.taskname,
-//         client_handover.client_name,
-//         tblcallevents.aftertask
-//     FROM 
-//         tblcallevents
-//     LEFT JOIN task_action ON task_action.id = tblcallevents.task_action
-//     LEFT JOIN bdrequest ON bdrequest.id = tblcallevents.bdrid
-//     LEFT JOIN client_handover ON client_handover.id = bdrequest.ch_id
-//     WHERE 
-//         tblcallevents.bdrid = '1329' 
-//         AND tblcallevents.id = '18920'
-
-//     UNION ALL  
-
-//     -- Recursive Query: Fetch records where task_id appears in aftertask
-//     SELECT 
-//         tblcallevents.id AS task_id,
-//         tblcallevents.task_action AS task_action_id,
-//         task_action.taskname,
-//         client_handover.client_name,
-//         tblcallevents.aftertask
-//     FROM 
-//         tblcallevents
-//     LEFT JOIN task_action ON task_action.id = tblcallevents.task_action
-//     LEFT JOIN bdrequest ON bdrequest.id = tblcallevents.bdrid
-//     LEFT JOIN client_handover ON client_handover.id = bdrequest.ch_id
-//     INNER JOIN TaskHierarchy ON FIND_IN_SET(TaskHierarchy.task_id, tblcallevents.aftertask) > 0
-// )
 
 // SELECT task_id, task_action_id, taskname, client_name FROM TaskHierarchy;
 
@@ -6123,6 +6037,7 @@ WHERE
 }
 
 
+
 public function GetSchoolIdentificationALLTask($taskid){
     $query=$this->db->query("WITH RECURSIVE TaskHierarchy AS (
     -- Base Query: Get the starting record
@@ -6160,28 +6075,58 @@ public function GetSchoolIdentificationALLTask($taskid){
 SELECT task_id, task_action_id, taskname, sname,task_status FROM TaskHierarchy");
     return $query->result();
 }
+
 public function GetTodaysAllTaskCountByUid($uid,$tdate,$perform){
-    $query = $this->db->query("SELECT `task_action`.`tasktype`, COUNT(`tblcallevents`.`id`) AS task_count FROM `task_action` 
-            LEFT JOIN `tblcallevents` ON `tblcallevents`.`task_action` = `task_action`.`id` 
-            AND DATE(`tblcallevents`.`appointment_datetime`) = '$tdate' AND `tblcallevents`.`task_status` = 0 AND `tblcallevents`.`user_id` = '$uid' WHERE `task_action`.`perform_by` = '$perform' 
-            GROUP BY `task_action`.`tasktype` ORDER BY `task_action`.`tasktype` ASC");
+
+
+    $perform_by = "(`task_action`.`perform_by` = '$perform' 
+    || `task_action`.`perform_by_2` = '$perform' 
+    || `task_action`.`perform_by_3` = '$perform' 
+    || `task_action`.`perform_by_4` = '$perform'
+    || `task_action`.`perform_by_5` = '$perform'
+    )";
+
+    $query=$this->db->query("SELECT `task_action`.`tasktype`, COUNT(`tblcallevents`.`id`) AS task_count FROM `task_action` LEFT JOIN `tblcallevents` ON `tblcallevents`.`task_action` = `task_action`.`id` AND DATE(`tblcallevents`.`appointment_datetime`) = '$tdate' AND `tblcallevents`.`task_status` = 0 AND `tblcallevents`.`user_id` = '$uid' WHERE $perform_by  GROUP BY `task_action`.`tasktype` ORDER BY `task_action`.`tasktype` ASC");
     return $query->result();
 }
 
+
 public function GetTodaysAllTaskByUid($uid,$tdate){
-    $query=$this->db->query("SELECT tblcallevents.id as task_id, spdr.sname, tblcallevents.task_action,tblcallevents.fwd_date, ta.tasktype,
-                             ta.taskname, tblcallevents.task_status, tblcallevents.appointment_datetime, tblcallevents.initiate_datetime, 
-                             tblcallevents.updated_datetime, tblcallevents.assigned_by, tblcallevents.bdrid, tblcallevents.comments,
-                             tblcallevents.project_code, tblcallevents.actontaken, tblcallevents.purpose_achieved, tblcallevents.cid_id, 
-                             tblcallevents.sales_cid, tblcallevents.sid, tblcallevents.bd_idetype, tblcallevents.target_date, 
-                             tblcallevents.exdate as expected_date 
-        FROM `tblcallevents` 
-        LEFT JOIN spd_request spdr ON spdr.id = tblcallevents.rsid 
-        LEFT JOIN task_action ta ON ta.id = tblcallevents.task_action 
-        WHERE CAST(appointment_datetime AS DATE) = '$tdate' AND user_id = '$uid' AND tblcallevents.task_status !=1");
-      //  echo $this->db->last_query();exit;
+    $query=$this->db->query("SELECT
+    tblcallevents.id AS task_id,
+    COALESCE(spdr.sname, spd.sname) AS sname, -- Use spdr.sname if available, otherwise use spd.sname
+    tblcallevents.task_action,
+    tblcallevents.fwd_date,
+    ta.tasktype,
+    ta.taskname,
+    tblcallevents.task_status,
+    tblcallevents.appointment_datetime,
+    tblcallevents.initiate_datetime,
+    tblcallevents.updated_datetime,
+    tblcallevents.assigned_by,
+    tblcallevents.bdrid,
+    tblcallevents.comments,
+    tblcallevents.project_code,
+    tblcallevents.actontaken,
+    tblcallevents.purpose_achieved,
+    tblcallevents.cid_id,
+    tblcallevents.sales_cid,
+    tblcallevents.sid,
+    tblcallevents.bd_idetype,
+    tblcallevents.target_date,
+    tblcallevents.exdate AS expected_date
+FROM
+    tblcallevents
+LEFT JOIN spd_request spdr ON spdr.id = tblcallevents.rsid
+LEFT JOIN spd ON spd.id = (tblcallevents.sid)
+LEFT JOIN task_action ta ON ta.id = tblcallevents.task_action
+WHERE
+    CAST(appointment_datetime AS DATE) = '$tdate' 
+    AND user_id = '$uid' AND task_status = '0';
+");
     return $query->result();
 }
+
 
 
 public function getTaskDetails($taskId,$taskactionId){
@@ -6342,5 +6287,168 @@ public function getTasksAllDetails($taskid){
     $result = $query->row_array();
     return $result;
 }
+// Deepak's COde
 
+public function GetBDRequestTaskByRequestIDWithTaskID($reqID){
+    $query=$this->db->query("SELECT tblcallevents.task_action AS task_action_id, task_action.taskname, COUNT(task_action.taskname) AS task_count FROM tblcallevents LEFT JOIN task_action ON task_action.id = tblcallevents.task_action WHERE tblcallevents.bdrid = '$reqID' GROUP BY tblcallevents.task_action, task_action.taskname");
+    return $query->result();
+}
+
+
+// Call Start
+public function GetBDRequestTaskByRequestIDWithTaskIDS($reqID,$taskid){
+    $query=$this->db->query("SELECT tblcallevents.id as task_id, tblcallevents.rsid, tblcallevents.task_action AS task_action_id, task_action.taskname, spd_request.id as rspd_id, spd_request.sname, spd_request.call_visit, client_handover.client_name FROM tblcallevents LEFT JOIN task_action ON task_action.id = tblcallevents.task_action LEFT JOIN spd_request ON spd_request.id = tblcallevents.rsid LEFT JOIN client_handover ON client_handover.id = spd_request.ch_id WHERE tblcallevents.bdrid ='$reqID' AND tblcallevents.task_action = '$taskid'");
+    return $query->result();
+}
+
+
+
+
+
+public function GetTaskSequenceByBDRequestANDRSID($reqID,$reqSID){
+    $query=$this->db->query("WITH RECURSIVE TaskHierarchy AS (
+    -- Base Query: Get the starting record
+    SELECT 
+        tblcallevents.id AS task_id,
+        tblcallevents.task_action AS task_action_id,
+        task_action.taskname,
+        client_handover.client_name,
+        tblcallevents.aftertask
+    FROM 
+        tblcallevents
+    LEFT JOIN task_action ON task_action.id = tblcallevents.task_action
+    LEFT JOIN bdrequest ON bdrequest.id = tblcallevents.bdrid
+    LEFT JOIN client_handover ON client_handover.id = bdrequest.ch_id
+    WHERE 
+        tblcallevents.bdrid = '$reqID' 
+        AND tblcallevents.rsid = '$reqSID'
+
+    UNION ALL  
+
+    -- Recursive Query: Fetch records where task_id appears in aftertask
+    SELECT 
+        tblcallevents.id AS task_id,
+        tblcallevents.task_action AS task_action_id,
+        task_action.taskname,
+        client_handover.client_name,
+        tblcallevents.aftertask
+    FROM 
+        tblcallevents
+    LEFT JOIN task_action ON task_action.id = tblcallevents.task_action
+    LEFT JOIN bdrequest ON bdrequest.id = tblcallevents.bdrid
+    LEFT JOIN client_handover ON client_handover.id = bdrequest.ch_id
+    LEFT JOIN spd_request ON spd_request.id = tblcallevents.rsid
+    INNER JOIN TaskHierarchy ON FIND_IN_SET(TaskHierarchy.task_id, tblcallevents.aftertask) > 0
+)
+
+SELECT DISTINCT task_id, task_action_id, taskname, client_name 
+FROM TaskHierarchy");
+    return $query->result();
+}
+
+
+
+
+// WITH RECURSIVE TaskHierarchy AS (
+//     -- Base Query: Get the starting record
+//     SELECT 
+//         tblcallevents.id AS task_id,
+//         tblcallevents.task_action AS task_action_id,
+//         task_action.taskname,
+//         client_handover.client_name,
+//         tblcallevents.aftertask
+//     FROM 
+//         tblcallevents
+//     LEFT JOIN task_action ON task_action.id = tblcallevents.task_action
+//     LEFT JOIN bdrequest ON bdrequest.id = tblcallevents.bdrid
+//     LEFT JOIN client_handover ON client_handover.id = bdrequest.ch_id
+//     WHERE 
+//         tblcallevents.bdrid = '1329' 
+//         AND tblcallevents.id = '18920'
+
+//     UNION ALL  
+
+//     -- Recursive Query: Fetch records where task_id appears in aftertask
+//     SELECT 
+//         tblcallevents.id AS task_id,
+//         tblcallevents.task_action AS task_action_id,
+//         task_action.taskname,
+//         client_handover.client_name,
+//         tblcallevents.aftertask
+//     FROM 
+//         tblcallevents
+//     LEFT JOIN task_action ON task_action.id = tblcallevents.task_action
+//     LEFT JOIN bdrequest ON bdrequest.id = tblcallevents.bdrid
+//     LEFT JOIN client_handover ON client_handover.id = bdrequest.ch_id
+//     INNER JOIN TaskHierarchy ON FIND_IN_SET(TaskHierarchy.task_id, tblcallevents.aftertask) > 0
+// )
+
+// SELECT task_id, task_action_id, taskname, client_name FROM TaskHierarchy;
+
+
+
+
+// WITH RECURSIVE TaskHierarchy AS (
+//     -- Base Query: Get the starting record
+//     SELECT 
+//         tblcallevents.id AS task_id,
+//         tblcallevents.task_action AS task_action_id,
+//         task_action.taskname,
+//         client_handover.client_name,
+//         tblcallevents.aftertask
+//     FROM 
+//         tblcallevents
+//     LEFT JOIN task_action ON task_action.id = tblcallevents.task_action
+//     LEFT JOIN bdrequest ON bdrequest.id = tblcallevents.bdrid
+//     LEFT JOIN client_handover ON client_handover.id = bdrequest.ch_id
+//     WHERE 
+//         tblcallevents.id = '19036'
+
+//     UNION ALL  
+
+//     -- Recursive Query: Fetch records where task_id appears in aftertask
+//     SELECT 
+//         tblcallevents.id AS task_id,
+//         tblcallevents.task_action AS task_action_id,
+//         task_action.taskname,
+//         client_handover.client_name,
+//         tblcallevents.aftertask
+//     FROM 
+//         tblcallevents
+//     LEFT JOIN task_action ON task_action.id = tblcallevents.task_action
+//     LEFT JOIN bdrequest ON bdrequest.id = tblcallevents.bdrid
+//     LEFT JOIN client_handover ON client_handover.id = bdrequest.ch_id
+//     INNER JOIN TaskHierarchy ON FIND_IN_SET(TaskHierarchy.task_id, tblcallevents.aftertask) > 0
+// )
+
+// SELECT task_id, task_action_id, taskname, client_name FROM TaskHierarchy;
+
+public function GetBDRLocationsByID($id){
+    $query=$this->db->query("SELECT * FROM `bdrequest_location` where id = '$id'");
+    return $query->result();
+}
+public function GetBDRLocations($bdr_id){
+    $query=$this->db->query("SELECT * FROM `bdrequest_location` where bdr_id = '$bdr_id'");
+    return $query->result();
+}
+public function GetBDRPreCallInaugurationTask($bdrid){
+    $query=$this->db->query("SELECT *  FROM `tblcallevents` WHERE `task_action` = 91 AND `bdrid` = '$bdrid' AND assigned_by='0'");
+    return $query->result();
+}
+public function GetBDRCallEventsTask($bdrid,$task_action_id){
+    $query=$this->db->query("SELECT *  FROM `tblcallevents` WHERE `task_action` = $task_action_id AND `bdrid` = '$bdrid'");
+    return $query->result();
+}
+public function getSPDDataByPCode($pcode){
+    $query=$this->db->query("SELECT * FROM `spd` WHERE project_code ='$pcode'");
+    return $query->result();
+}
+
+public function get_daystarted($uid,$tdate){
+    if($tdate ==''){
+        $tdate = date("Y-m-d");
+    }
+    $query=$this->db->query("SELECT * FROM user_day WHERE user_id='$uid' and cast(ustart as DATE)='$tdate' and uclose is null");
+    return $query->result();
+}
 }

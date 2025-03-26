@@ -1,655 +1,609 @@
-<nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="index3.html" class="nav-link">Home</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <button type="button" class="btn btn-primary ml-3" onclick="goBack()">Go Back</button>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <button type="button" class="btn btn-secondary ml-3" onclick="goForward()">Go Forward</button>
-      </li>
-    </ul>
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <!-- Navbar Search -->
+<!-- <!doctype html>
+<html
+  lang="en"
+  class="light-style layout-menu-fixed layout-compact"
+  dir="ltr"
+  data-theme="theme-default"
+  data-assets-path="<?= base_url() ?>assets/"
+  data-template="vertical-menu-template-free"
+  data-style="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
+    <title>Demo : Dashboard - Analytics | sneat - Bootstrap Dashboard PRO</title>
+    <meta name="description" content="" /> -->
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="<?= base_url() ?>assets/img/favicon/favicon.ico" />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
+      rel="stylesheet" />
       
-      <!-- Messages Dropdown Menu -->
-      <?php 
-        $user = $this->session->userdata('user');
-        $data['user'] = $user;$uid= $user['id'];
-        $uid= $user['id'];
-      ?>
-      <h4>HI!  <?=$user['fullname']?></h4>
-      <input type="hidden" id="ur_id" value="<?=$uid?>">
-      <li class="nav-item">
-        <a class="nav-link" href="<?=base_url();?>/Menu/Notification">
-          <i class="far fa-bell"></i>
-          <?php $notify=$this->Menu_model->get_notifybyid($uid);?>
-          <span class="badge badge-warning navbar-badge"><?=sizeof($notify);?></span>
-        </a> 
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-          <i class="fas fa-expand-arrows-alt"></i>
-        </a>
-      </li>
-    </ul>
-  </nav>
+      <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/fonts/boxicons.css" />
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/css/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/css/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="<?= base_url() ?>assets/css/demo.css" />
 
-  <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
-    <!-- Brand Logo -->
-    <img src="https://stemlearning.in/wp-content/uploads/2020/07/stem-new-logo-2-1.png" width="80%" class="p-3">
-    <center><h5 class="text-white"><b>STEM Operation</b></h5></center>
-    <hr>
-
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
-          <img src="<?=base_url();?>assets/image/user/Team.jpg" class="img-circle elevation-2" alt="User Image">
-        </div>
-        <div class="info">
-          <a href="#" class="d-block">User Name</a>
-        </div>
-      </div>
-      
-      
-      <?php $hjlink = $this->Menu_model->get_hjoinlink();
-        if($hjlink){
-        $meetlink = $hjlink[0]->meetlink;?>
-        <a href="<?=$meetlink?>" class="btn btn-primary" target="_blank">Handover Timeline Link</a>
-      <?php } ?>
-
-
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/Dashboard" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Dashboard</p>
-            </a>
-          </li>
-          
-          <!--
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/ChangeIDSPD" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Change Iden School</p>
-            </a>
-          </li>-->
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/CompetitionReport" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>NSP Report</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/Handovertoinsr/594" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Live Handover</p>
-            </a>
-          </li>
-          
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/CreateJoinCallHI" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Handover Time Line</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/ProgramTimeLine" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Program Time Line</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/BDRequestBox" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>BD Requests</p>
-            </a>
-          </li>
-          
-          <li class="nav-item menu-open">
-            <a href="<?=base_url();?>Menu/MeetingRequest" class="nav-link">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>Meeting Request</p>
-            </a>
-          </li>
-          
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/ParticalBPApr" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Partical Board Apr</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/PaymentApr" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Payment Apr</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/Mytarget" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>My Target</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/LiveVisitPIA" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Live Visit PIA</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/LiveVisitIMP" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Live Visit IMP</p>
-            </a>
-          </li>
-          
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/ReportVisitPIA" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Report Visit PIA</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/ReportVisitIMP" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Report Visit IMP</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/NextDayPlan" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Next Day Plan</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/SchoolReviewDetail" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>All School Review by PIA</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/ProgramReviewDetail" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>All Program Review by PIA</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/ShowAcademicCalendar" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Academic Calendar</p>
-            </a>
-          </li>
-          
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/TeamDailyReport/<?=date('Y-m-d')?>" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Team Daily Report</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/DayStartCheck" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Day Start Check</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/DayCloseCheck" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Day Close Check</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/AllReviewPlaing" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>All Review</p>
-            </a>
-          </li>
-          
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/reviewreport" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Review Report</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/PIAwiseSchoolDetail" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>PIA Wise Pending Detail</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/inspending" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Installation Pending</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/insreportpending" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Installation Report Pending</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/fttppending" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>FTTP Pending</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/fttpreportpending" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>FTTP Report Pending</p>
-            </a>
-          </li>
-          
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/utilisationpending" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Utilisation Pending</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/createtask" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Create Task</p>
-            </a>
-          </li>
-          
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/PIAwiseProgram" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>PIA wise Program</p>
-            </a>
-          </li>
-          
-          
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/CreateARTask" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Create Annual Review</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/CuriculumAssign" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Curiculum Assign</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/CuriculumAssignData" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Curiculum Assign Data</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/SchoolData" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>School Review</p>
-            </a>
-          </li>
-          
-          <!--<li class="nav-item">
-            <a href="<?=base_url();?>Menu/SchoolData" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>School Report</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/validateOldSPD" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Validate School</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/CreateTask" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Create Task</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/handoverDetail" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Handover Detail</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/SchoolWithPC" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Add School</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/dispatched" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Dispatched</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/Report" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Report</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>
-                Approval
-                <i class="fas fa-angle-left right"></i>
-              </p>
-            </a>
-           </li>
-              <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="<?=base_url();?>Menu/backdrop" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Backdrop</p>
-                </a>
-              </li>
-              </ul>
-          </li>-->
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/Total_Handover" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Handover Detail</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/programs" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Programs Detail</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/UserTaskDetail" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>User Task Detail</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/UserPendingTask" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>User Pending Task</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/handoverDetail" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Handover Process</p>
-            </a>
-          </li>
-          <!--<li class="nav-item">
-            <a href="<?=base_url();?>Menu/changeinsp" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Change Ins Person</p>
-            </a>
-          </li>-->
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/backdrop" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Artwork</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/MaintenanceReport" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Ins-Main Request</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/MBagR" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Bag Request</p>
-            </a>
-          </li>
-          
-          
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/BDRequestCBox" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>BDR Complete Box</p>
-            </a>
-          </li>
-          
-           <li class="nav-item">
-            <a href="<?=base_url();?>Menu/BDRequestPBox" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>BDR Pending Box</p>
-            </a>
-          </li>
-          
-          
-          
-          
-          
-           <li class="nav-item">
-            <a href="<?=base_url();?>Menu/AcademicCalenderApprove" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Academic Calender Approve</p>
-            </a>
-          </li>
-           <li class="nav-item">
-            <a href="<?=base_url();?>Menu/ShowPIAStatusWithAcadeCal" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>PIA Status With Academic Calender</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/StartProgrramReview" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Start Progrram Review</p>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/AnnualProgramReviewReport" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Annual Program Review Report</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/ProgramReviewWithPIADetails" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>School Review By PIA</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/AnnualReviewMeetingList" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Annual Program Review Meeting List</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/CheckProgramTimelineData" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Program Timeline Data</p>
-            </a>
-          </li>
-          
-          
-          
-          
-          
-          
-          
-           <li class="nav-item">
-            <a href="<?=base_url();?>Menu/editProfile" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Edit Profile</p>
-            </a>
-          </li>
-          
-          <li class="nav-item">
-            <a href="<?=base_url();?>Menu/logout" class="nav-link">
-              <i class="far fa-circle nav-icon"></i>
-              <p>Logout</p>
-            </a>
-          </li>
-          
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
-      
-      <hr><center><lable class="text-warning"><b>Alert!</b></lable></center><hr>
-          <span id="alsmss"></span>
-          <div class="alert alert-success" role="alert"><b><?=$notify[0]->msg;?></b></div>
-    </div>
-    <!-- /.sidebar -->
-  </aside>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script> 
-<script> 
-function handleGeolocationError() {
-   const bodyElement = document.querySelector("body");
-   bodyElement.style.display = "none";
-   alert('Error: Geolocation is not available or location services are turned off.');
-}
-function handleGeolocationSuccess(position) {
-    const latitude = position.coords.latitude;
-    const longitude = position.coords.longitude;
-    const contentDiv = document.getElementById("content");
-    contentDiv.style.display = "block";
-}
-function getLocation() {
-    if ("geolocation" in navigator) {
-        navigator.geolocation.getCurrentPosition(handleGeolocationSuccess, handleGeolocationError);
-    } else {
-        const errorMessage = document.getElementById("error-message");
-        errorMessage.style.display = "block";
-    }
-}
-window.onload = getLocation;
-
-
-function startCamera() {
-    navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function(stream) {
-        })
-        .catch(function(error) {
-             const bodyElement = document.querySelector("body");
-             bodyElement.style.display = "none";
-             alert('Error: Camera access permission denied.');
-        });
-}
-
-
-$(document).ready(function() {
-    trackLocation();
-});
-
-function trackLocation() {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(
-        function (position) {
-          var ur_id = document.getElementById("ur_id").value;
-          var latitude = position.coords.latitude;
-          var longitude = position.coords.longitude;
-            $.ajax({
-                url:'<?=base_url();?>Menu/store_location',
-                 method: 'post',
-                 data: {latitude: latitude, longitude: longitude, ur_id: ur_id},
-                 success: function(result){
-                }
-            });
-        },
-        function (error) {
-          console.error("Error getting location: " + error.message);
-        }
-      );
-    } 
-    else {console.error("Geolocation is not supported by this browser.");} 
-}
-
-function goBack() { window.history.back(); }
-function goForward() { window.history.forward(); }
-
-
-
-    var ur_id = document.getElementById("ur_id").value;;
-    $.ajax({
-    url:'<?=base_url();?>Menu/pmpopup',
-     method: 'post',
-     data: {ur_id: ur_id},
-     success: function(result){
-        var res = result;
-        $("#alsmss").html(res);
-    }
-    });
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
+    <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/libs/apex-charts/apex-charts.css" />
+    <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/libs/apex-charts/apex-charts.css" />
     
-</script>
-<style>
-.bg-light,.bg-light>a,.card.card-outline-tabs{box-shadow:inset 4px 4px 7px rgba(55,84,170,.15),inset -4px -4px 10px #fff,0 0 2px rgba(255,255,255,.2)}.card,.card.card-outline-tabs,.small-box>.inner,table{transition:box-shadow .2s ease-in-out;padding:10px;background:#fff8dc}.card.card-outline-tabs{border-top:0}.bg-light,.bg-light>a{border-radius:0;transition:box-shadow .2s ease-in-out}.card{box-shadow:none}.card,.main-footer,.navbar-white,.small-box>.inner,table{box-shadow:inset 4px 4px 7px rgba(55,84,170,.15),inset -4px -4px 10px #fff,0 0 2px rgba(255,255,255,.2)}.navbar-white{background:#fff8dc}[class*=sidebar-dark-]{background:#3b1818;background:conic-gradient(from 180deg at 50% 50%,#220c0c,#220c0c,#0f0c22,#0c2215,#140c22,#220c13);animation:20s linear infinite spinGradient;transition:.2s ease-in-out}.nav-sidebar>.nav-item{box-shadow:rgba(60,64,67,.3) 0 1px 2px 0,rgba(60,64,67,.15) 0 2px 6px 2px}.fa-circle:before,.nav-sidebar .nav-item>.nav-link{font-size:13px;margin:-2px}#alsmss,span#alsmss{font-size:13px}#alsmss h5{font-size:15px}aside #mainlogo{filter:drop-shadow(0 0 1rem blue);animation:5s linear infinite spinGradient_image;transition:.2s}@keyframes spinGradient_image{0%{filter:drop-shadow(0 0 1rem #ff0f7b)}25%{filter:drop-shadow(0 0 1rem #fff95b)}50%{filter:drop-shadow(0 0 1rem #e60b09)}75%{filter:drop-shadow(0 0 1rem #59d102)}100%{filter:drop-shadow(0 0 1rem #6bdfdb)}}@keyframes spinGradient{0%{background:conic-gradient(from 90deg at 50% 50%,#220c0c,#220c0c,#0f0c22,#0c2215,#140c22,#220c13)}25%{background:radial-gradient(circle,#220c0c,#0f0c22,#0c2215,#140c22,#220c13)}100%,50%{background:conic-gradient(from 180deg at 50% 50%,#220c0c,#0f0c22,#0c2215,#140c22,#220c13,#220c0c)}75%{background:conic-gradient(from 270deg at 50% 50%,#220c0c,#0f0c22,#0c2215,#140c22,#220c13,#220c0c)}}body::-webkit-scrollbar{width:15px}body::-webkit-scrollbar-track{box-shadow:inset 0 0 6px rgba(0,0,0,.3)}body::-webkit-scrollbar-thumb{border-radius:15px;border:none;outline:0;background:#a8f268;background:linear-gradient(90deg,#a8f268 0,#f7025c 100%);background:-moz-linear-gradient(90deg,#a8f268 0,#f7025c 100%);background:-webkit-linear-gradient(90deg,#a8f268 0,#f7025c 100%)}@keyframes gradientAnimation_thumn{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
-/*.card, .main-footer, .navbar-white, .small-box>.inner, table {*/
-/*    background-image: url("https://raw.githubusercontent.com/mobalti/open-props-interfaces/refs/heads/main/ai-hero-chat-popover/assets/bg-gradient.jpg");*/
-/*        background-position: center;*/
-/*        background-repeat: no-repeat;*/
-/*        background-size: cover;*/
-/*}*/
-.main-footer, .navbar-white,.card-body-addnewlead {
-    background-image: url("https://raw.githubusercontent.com/mobalti/open-props-interfaces/refs/heads/main/ai-hero-chat-popover/assets/bg-gradient.jpg");
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
+  
+
+    <!-- Page CSS -->
+
+    <!-- Helpers -->
+    <script src="<?= base_url() ?>assets/vendor/js/helpers.js"></script>
+    <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="<?= base_url() ?>assets/js/config.js"></script>
+      <link rel="stylesheet" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" />
+    <style>
+  thead.thead-dark {
+  background: black;
+  color: white !important;
+  }
+  thead.thead-dark tr th {
+  color: white !important;
+  }
+  .table:not(.table-borderless):not(.table-dark) > :not(caption) > *:not(.table-dark) > * {
+    font-weight: 700;
 }
-.card-body-addnewlead {
-    box-shadow: inset 4px 4px 7px rgba(55, 84, 170, 0.15), inset -4px -4px 10px white, 0px 0px 2px rgba(255, 255, 255, 0.2);
-    transition: box-shadow 0.2s ease-in-out;
-    border-radius: 20px;
-}
-.card-body-addnewlead:hover {
-    color: #000000!important;
-}
+.on-time { color: #28a745; /* Green text */ } .late { color: #dc3545; /* Red text */ }
 </style>
+<script>
+    function checkCountDownTime(first_date, givenid) {
+    var targetDate = new Date(first_date).getTime();
+
+    function updateTimer() {
+        var now = new Date().getTime();
+        var diff = targetDate - now;
+        var isPast = diff < 0; // Check if the date is in the past
+        diff = Math.abs(diff); // Always take absolute value for calculations
+
+        var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+        var countdownText = [];
+        if (days > 0) countdownText.push(days + " days");
+        if (hours > 0) countdownText.push(hours + " hours");
+        if (minutes > 0) countdownText.push(minutes + " minutes");
+        if (seconds > 0) countdownText.push(seconds + " seconds");
+
+        var countdownElement = document.getElementById("countdown" + givenid);
+        var statusElement = document.getElementById("status" + givenid);
+
+        if (isPast) {
+            countdownElement.textContent = countdownText.join(", ");
+            countdownElement.classList.add("late");
+            statusElement.textContent = "Late";
+            statusElement.classList.remove("on-time");
+            statusElement.classList.add("late");
+        } else {
+            countdownElement.textContent = countdownText.join(", ");
+            countdownElement.classList.add("on-time");
+            statusElement.textContent = "On Time";
+            statusElement.classList.remove("late");
+            statusElement.classList.add("on-time");
+        }
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+}
+
+        // Start the countdown/countup
+        // checkCountDownTime("2025-02-12 12:57:07",1);
+    </script>
+  </head>
+  <body>
+  <?php 
+
+  $dep_id = $user['dep_id'];
+  //dd($user);
+  ?>
+    <!-- Layout wrapper -->
+    <div class="layout-wrapper layout-content-navbar">
+       ,<div class="layout-container">
+        <!-- Menu -->
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+          <div class="app-brand demo">
+            <a href="<?=base_url().'Menu/Dashboard'?>" class="app-brand-link">
+              <span class="app-brand-logo demo">
+                <img class="img-fluid" style="width: 200px;" src="https://stemlearning.in/wp-content/uploads/2020/07/stem-new-logo-2-1.png" alt="">
+              </span>
+            </a>
+
+            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+              <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
+            </a>
+          </div>
+
+          <div class="menu-inner-shadow"></div>
+
+          <ul class="menu-inner py-1">
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Request</span></li>
+              <li class="menu-item">
+                <a href="<?=base_url().'Menu/BDREQUEST'?>" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-crown"></i>
+                  <div class="text-truncate" data-i18n="Boxicons">REQUEST</div>
+                </a>
+            </li>
+           
+            <li class="menu-header small text-uppercase"><span class="menu-header-text"></span></li>
+            <li class="menu-item">
+              <a href="Dashboard"
+               
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="CompetitionReport" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Dashboard">NSP Report</div>
+              </a>
+            </li>
+            <!-- <li class="menu-item">
+              <a href="MyNextDayPlan/<?=date('Y-m-d');?>"
+               
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Sharetodaysplan">Share You Today's Plan</div>
+              </a>
+            </li> -->
+            <li class="menu-item">
+              <a href="Handovertoinsr" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="AddTempPerson">Live Handover</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="CreateGoals"
+               
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="CreateGoals">Create Goals</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="CreateJoinCallHI" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Handover Time Line</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="ProgramTimeLine" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Program Time Line</div>
+              </a>
+            </li>
+             <li class="menu-item">
+              <a href="BDRequestBox" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">BD Requests</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="MeetingRequest" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Meeting Request</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="ParticalBPApr" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Partical Board Apr</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="MeetingRequest" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Meeting Request</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="PaymentApr" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Payment Apr</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="Mytarget" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">My Target</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="LiveVisitPIA" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Live Visit PIA</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="LiveVisitIMP" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Live Visit IMP</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="ReportVisitPIA" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Report Visit PIA</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="ReportVisitIMP" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Report Visit IMP</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="NextDayPlan" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Next Day Plan</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="SchoolReviewDetail" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">All School Review by PIA</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="ProgramReviewDetail" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">All Program Review by PIA</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="ShowAcademicCalendar" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Academic Calendar</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="TeamDailyReport" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Team Daily Report</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="DayStartCheck" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Day Start Check</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="DayCloseCheck" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Day Close Check</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="AllReviewPlaing" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">All Review</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="reviewreport" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Review Report</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="PIAwiseSchoolDetail" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">PIA Wise Pending Detail</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="inspending" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Installation Pending</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="insreportpending" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Installation Report Pending</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="<?=base_url();?>Menu/fttppending" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">FTTP Pending</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="fttpreportpending" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">FTTP Report Pending</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="utilisationpending" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Utilisation Pending</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="createtask" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Create Task</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="PIAwiseProgram" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">PIA wise Program</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="CreateARTask" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Create Annual Review</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="PIAwiseProgram" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">PIA Wise Program</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="PIAwiseProgram" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Curiculum Assign</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="CuriculumAssign" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">PIA wise Program</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="CuriculumAssignData" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Curiculum Assign Data</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="SchoolData" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">School Review</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="Total_Handover" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Handover Detail</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="programs" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Programs Detail</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="UserTaskDetail" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">User Task Detail</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="UserPendingTask" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">User Pending Task</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="handoverDetail" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Handover Process</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="backdrop" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Artwork</div>
+              </a>
+            </li>
+
+            <li class="menu-item">
+              <a href="MaintenanceReport" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Ins-Main Request</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="MBagR" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Bag Request</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="BDRequestCBox" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">BDR Complete Box</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="BDRequestPBox" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">BDR Pending Box</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="AcademicCalenderApprove" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Academic Calender Approve</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="ShowPIAStatusWithAcadeCal" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">PIA Status With Academic Calender</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="StartProgrramReview" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Start Progrram Review</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="AnnualProgramReviewReport" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Annual Program Review Report</div>
+              </a>
+            </li>
+
+            <!-- <li class="menu-item">
+              <a href="Mytarget"
+               
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="TransitProcess">My Target</div>
+              </a>
+            </li> -->
+            <li class="menu-item">
+              <a href="DayManagement"
+               
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="MyDayDetail">School Review By PIA</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="AnnualReviewMeetingList" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="MyDayDetail">Annual Program Review Meeting List</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="editProfile"
+               
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="MyDayDetail">Edit Profile</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="logout"
+               
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="MyDayDetail">Logout</div>
+              </a>
+            </li>
+          </ul>
+        </aside>
+        <!-- / Menu -->
+
+        <!-- Layout container -->
+        <div class="layout-page">
+          <!-- Navbar -->
+          <nav
+            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+            id="layout-navbar">
+            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-4 me-xl-0 d-xl-none">
+              <a class="nav-item nav-link px-0 me-xl-6" href="javascript:void(0)">
+                <i class="bx bx-menu bx-md"></i>
+              </a>
+            </div>
+
+            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+              <!-- Search -->
+              <!-- <div class="navbar-nav align-items-center">
+                <div class="nav-item d-flex align-items-center">
+                  <i class="bx bx-search bx-md"></i>
+                  <input
+                    type="text"
+                    class="form-control border-0 shadow-none ps-1 ps-sm-2"
+                    placeholder="Search..."
+                    aria-label="Search..." />
+                </div>
+              </div> -->
+              <!-- /Search -->
+
+              <ul class="navbar-nav flex-row align-items-center ms-auto">
+                <li class="nav-item lh-1 me-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bell" viewBox="0 0 16 16">
+                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2M8 1.918l-.797.161A4 4 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4 4 0 0 0-3.203-3.92zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5 5 0 0 1 13 6c0 .88.32 4.2 1.22 6"/>
+                </svg></li>
+                <!-- Place this tag where you want the button to render. -->
+                <li class="nav-item lh-1 me-4">
+                  <a class="github-button"  href="viewProfile" data-icon="octicon-star" data-size="large" data-show-count="true"
+                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub"
+                    ><?php echo $user['user_name'];?></a>
+                </li>
+
+                <!-- User -->
+                <li class="nav-item navbar-dropdown dropdown-user dropdown">
+                  <a
+                    class="nav-link dropdown-toggle hide-arrow p-0"
+                    href="javascript:void(0);"
+                    data-bs-toggle="dropdown">
+                    <div class="avatar avatar-online">
+                      <img src="<?= base_url() ?>assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                    </div>
+                  </a>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li>
+                      <a class="dropdown-item" href="#">
+                        <div class="d-flex">
+                          <div class="flex-shrink-0 me-3">
+                            <div class="avatar avatar-online">
+                              <img src="<?= base_url() ?>assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                            </div>
+                          </div>
+                          <div class="flex-grow-1">
+                            <h6 class="mb-0"><?=$user['fullname']?></h6>
+                            <small class="text-muted"><?php echo $dep_name;?></small>
+                          </div>
+                        </div>
+                        <?php // print_r($user['dep_id']); ?>
+                      </a>
+                    </li>
+                    <li>
+                      <div class="dropdown-divider my-1"></div>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="#">
+                        <i class="bx bx-user bx-md me-3"></i><span>My Profile</span>
+                      </a>
+                    </li>
+                    <!-- <li>
+                      <a class="dropdown-item" href="#"> <i class="bx bx-cog bx-md me-3"></i><span>Settings</span> </a>
+                    </li> -->
+                    <li>
+                      <div class="dropdown-divider my-1"></div>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="logout">
+                        <i class="bx bx-power-off bx-md me-3"></i><span>Log Out</span>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <!--/ User -->
+              </ul>
+            </div>
+          </nav>
+          <!-- / Navbar -->

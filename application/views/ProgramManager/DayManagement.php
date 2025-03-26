@@ -222,7 +222,7 @@
                 <div class="modal-body">
                 <p id="changemessage" class="text-danger text-center" ></p>
                 <hr>
-                <form action="<?=base_url();?>Management/SendRequestForDayStartChnage" method="post">
+                <!-- <form action="<?=base_url();?>Management/SendRequestForDayStartChnage" method="post">
                 <input type="hidden" id="user_want_start" name="user_want_start" class="form-control d-none" />
                 <div class="form-group">
                 <label>Write down why you want to change : </label>
@@ -231,7 +231,7 @@
                 <div class="form-group text-center">
                 <button type="submit" class="btn btn-primary">Send Request</button>
                 </div>
-                </form>
+                </form> -->
                 </div>
                 </div>
                 </div>
@@ -325,7 +325,7 @@
         }
     });
 
-    $('#wffo').on('change', function() {
+   /* $('#wffo').on('change', function() {
               var wffo = $('#wffo').val();
               $.ajax({
                 url:'<?=base_url();?>Menu/CheckuserDayAccardingPlanner',
@@ -365,47 +365,7 @@
                   }
                 }
                 });
-          });
+          }); */
       });
     </script>
-<script>
-
-$('#wffo').on('change', function() {
-        var wffo = $('#wffo').val();
-        var wffo_from_planner = $('#wffo_planner').val();
-       
-      
-            if(wffo !=wffo_from_planner){
-              var recnt = <?= sizeof($geturdata); ?>;
-              var recntapr = <?= empty($geturdata[0]->apr_status) ? 0 : $geturdata[0]->apr_status; ?>;
-              if(recnt == 0){
-              var selectedText = $('#wffo option:selected').text();
-              $("#user_want_start").val(wffo);
-              var result ='You planed to start their day : <b>'+ result+'</b>';
-              var selectedText = ' But You want to start : <b>'+selectedText+'</b>';
-              var message = result+selectedText;
-              $("#changemessage").html(message);
-              $('#submitButton').prop('disabled', true);
-              $('#exampleModalReminder').modal('show');
-              }else{
-                if(recntapr == 0 || recntapr ==''){
-                  $('#submitButton').prop('disabled', true);
-                  $('#goodmessage').text("* Please Wait !, While Your Request was Approved.").css('color', 'red');
-                }else if(recntapr == 1){
-                  $('#goodmessage').text("* You are able to change your day because your manager has approved your day change request.").css('color', 'green');
-                  $('#submitButton').prop('disabled', false);
-                }else if(recntapr == 2){
-                  $('#submitButton').prop('disabled', true);
-                  $('#goodmessage').text("* You are not able to change your day because your manager has reject your day change request.").css('color', 'red');
-                }
-              }
-            }else{
-              // $('#goodmessage').text("* Good Plan As Your Days According to Planner.").css('color', 'green');
-              $('#submitButton').prop('disabled', false);
-            }
-          
-         
-    });
-
-</script>
 <!-- ./wrapper -->

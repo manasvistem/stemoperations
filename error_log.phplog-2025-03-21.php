@@ -7851,3 +7851,775 @@ INFO - 2025-03-21 17:31:10 --> Helper loaded: common_helper
 INFO - 2025-03-21 17:31:10 --> File loaded: C:\wamp64\www\stemoppapp\application\views\InstandMaint/VisitDuringinstallationCheckListFromView.php
 INFO - 2025-03-21 17:31:10 --> Final output sent to browser
 DEBUG - 2025-03-21 17:31:10 --> Total execution time: 0.0703
+INFO - 2025-03-21 12:43:13 --> Config Class Initialized
+INFO - 2025-03-21 12:43:13 --> Hooks Class Initialized
+DEBUG - 2025-03-21 12:43:13 --> UTF-8 Support Enabled
+INFO - 2025-03-21 12:43:13 --> Utf8 Class Initialized
+INFO - 2025-03-21 12:43:13 --> URI Class Initialized
+INFO - 2025-03-21 12:43:13 --> Router Class Initialized
+INFO - 2025-03-21 12:43:13 --> Output Class Initialized
+INFO - 2025-03-21 12:43:13 --> Security Class Initialized
+DEBUG - 2025-03-21 12:43:13 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-21 12:43:13 --> Input Class Initialized
+INFO - 2025-03-21 12:43:13 --> Language Class Initialized
+INFO - 2025-03-21 18:13:13 --> Loader Class Initialized
+INFO - 2025-03-21 18:13:13 --> Helper loaded: url_helper
+INFO - 2025-03-21 18:13:13 --> Helper loaded: form_helper
+INFO - 2025-03-21 18:13:13 --> Helper loaded: file_helper
+INFO - 2025-03-21 18:13:13 --> Helper loaded: email_helper
+INFO - 2025-03-21 18:13:13 --> Helper loaded: cookie_helper
+INFO - 2025-03-21 18:13:13 --> Helper loaded: functiondd_helper
+INFO - 2025-03-21 18:13:13 --> Database Driver Class Initialized
+DEBUG - 2025-03-21 18:13:13 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-21 18:13:13 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-21 18:13:13 --> Controller Class Initialized
+INFO - 2025-03-21 18:13:13 --> Form Validation Class Initialized
+INFO - 2025-03-21 18:13:13 --> Model "Menu_model" initialized
+INFO - 2025-03-21 18:13:13 --> Helper loaded: common_helper
+INFO - 2025-03-21 12:43:14 --> Config Class Initialized
+INFO - 2025-03-21 12:43:14 --> Hooks Class Initialized
+DEBUG - 2025-03-21 12:43:14 --> UTF-8 Support Enabled
+INFO - 2025-03-21 12:43:14 --> Utf8 Class Initialized
+INFO - 2025-03-21 12:43:14 --> URI Class Initialized
+INFO - 2025-03-21 12:43:14 --> Router Class Initialized
+INFO - 2025-03-21 12:43:14 --> Output Class Initialized
+INFO - 2025-03-21 12:43:14 --> Security Class Initialized
+DEBUG - 2025-03-21 12:43:14 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-21 12:43:14 --> Input Class Initialized
+INFO - 2025-03-21 12:43:14 --> Language Class Initialized
+INFO - 2025-03-21 18:13:14 --> Loader Class Initialized
+INFO - 2025-03-21 18:13:14 --> Helper loaded: url_helper
+INFO - 2025-03-21 18:13:14 --> Helper loaded: form_helper
+INFO - 2025-03-21 18:13:14 --> Helper loaded: file_helper
+INFO - 2025-03-21 18:13:14 --> Helper loaded: email_helper
+INFO - 2025-03-21 18:13:14 --> Helper loaded: cookie_helper
+INFO - 2025-03-21 18:13:14 --> Helper loaded: functiondd_helper
+INFO - 2025-03-21 18:13:14 --> Database Driver Class Initialized
+DEBUG - 2025-03-21 18:13:14 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-21 18:13:14 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-21 18:13:14 --> Controller Class Initialized
+INFO - 2025-03-21 18:13:14 --> Form Validation Class Initialized
+INFO - 2025-03-21 18:13:14 --> Model "Menu_model" initialized
+INFO - 2025-03-21 18:13:14 --> Helper loaded: common_helper
+INFO - 2025-03-21 18:13:14 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/nav.php
+INFO - 2025-03-21 18:13:14 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/DayManagement.php
+INFO - 2025-03-21 18:13:14 --> File loaded: C:\wamp64\www\stemoppapp\application\views\templates/footer.php
+INFO - 2025-03-21 18:13:14 --> Final output sent to browser
+DEBUG - 2025-03-21 18:13:14 --> Total execution time: 0.8046
+INFO - 2025-03-21 12:43:37 --> Config Class Initialized
+INFO - 2025-03-21 12:43:37 --> Hooks Class Initialized
+DEBUG - 2025-03-21 12:43:37 --> UTF-8 Support Enabled
+INFO - 2025-03-21 12:43:37 --> Utf8 Class Initialized
+INFO - 2025-03-21 12:43:37 --> URI Class Initialized
+INFO - 2025-03-21 12:43:37 --> Router Class Initialized
+INFO - 2025-03-21 12:43:37 --> Output Class Initialized
+INFO - 2025-03-21 12:43:37 --> Security Class Initialized
+DEBUG - 2025-03-21 12:43:37 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-21 12:43:37 --> Input Class Initialized
+INFO - 2025-03-21 12:43:37 --> Language Class Initialized
+INFO - 2025-03-21 18:13:37 --> Loader Class Initialized
+INFO - 2025-03-21 18:13:37 --> Helper loaded: url_helper
+INFO - 2025-03-21 18:13:37 --> Helper loaded: form_helper
+INFO - 2025-03-21 18:13:37 --> Helper loaded: file_helper
+INFO - 2025-03-21 18:13:37 --> Helper loaded: email_helper
+INFO - 2025-03-21 18:13:37 --> Helper loaded: cookie_helper
+INFO - 2025-03-21 18:13:37 --> Helper loaded: functiondd_helper
+INFO - 2025-03-21 18:13:37 --> Database Driver Class Initialized
+DEBUG - 2025-03-21 18:13:37 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-21 18:13:37 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-21 18:13:37 --> Controller Class Initialized
+INFO - 2025-03-21 18:13:37 --> Form Validation Class Initialized
+INFO - 2025-03-21 18:13:37 --> Model "Menu_model" initialized
+INFO - 2025-03-21 18:13:37 --> Helper loaded: common_helper
+INFO - 2025-03-21 12:43:38 --> Config Class Initialized
+INFO - 2025-03-21 12:43:38 --> Hooks Class Initialized
+DEBUG - 2025-03-21 12:43:38 --> UTF-8 Support Enabled
+INFO - 2025-03-21 12:43:38 --> Utf8 Class Initialized
+INFO - 2025-03-21 12:43:38 --> URI Class Initialized
+INFO - 2025-03-21 12:43:38 --> Router Class Initialized
+INFO - 2025-03-21 12:43:38 --> Output Class Initialized
+INFO - 2025-03-21 12:43:38 --> Security Class Initialized
+DEBUG - 2025-03-21 12:43:38 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-21 12:43:38 --> Input Class Initialized
+INFO - 2025-03-21 12:43:38 --> Language Class Initialized
+INFO - 2025-03-21 18:13:38 --> Loader Class Initialized
+INFO - 2025-03-21 18:13:38 --> Helper loaded: url_helper
+INFO - 2025-03-21 18:13:38 --> Helper loaded: form_helper
+INFO - 2025-03-21 18:13:38 --> Helper loaded: file_helper
+INFO - 2025-03-21 18:13:38 --> Helper loaded: email_helper
+INFO - 2025-03-21 18:13:38 --> Helper loaded: cookie_helper
+INFO - 2025-03-21 18:13:38 --> Helper loaded: functiondd_helper
+INFO - 2025-03-21 18:13:38 --> Database Driver Class Initialized
+DEBUG - 2025-03-21 18:13:38 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-21 18:13:38 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-21 18:13:38 --> Controller Class Initialized
+INFO - 2025-03-21 18:13:38 --> Form Validation Class Initialized
+INFO - 2025-03-21 18:13:38 --> Model "Menu_model" initialized
+INFO - 2025-03-21 18:13:38 --> Helper loaded: common_helper
+INFO - 2025-03-21 18:13:38 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/nav.php
+INFO - 2025-03-21 12:43:38 --> Config Class Initialized
+INFO - 2025-03-21 18:13:38 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/DayManagement.php
+INFO - 2025-03-21 12:43:38 --> Hooks Class Initialized
+INFO - 2025-03-21 18:13:38 --> File loaded: C:\wamp64\www\stemoppapp\application\views\templates/footer.php
+DEBUG - 2025-03-21 12:43:38 --> UTF-8 Support Enabled
+INFO - 2025-03-21 18:13:38 --> Final output sent to browser
+INFO - 2025-03-21 12:43:38 --> Utf8 Class Initialized
+DEBUG - 2025-03-21 18:13:38 --> Total execution time: 0.4156
+INFO - 2025-03-21 12:43:38 --> URI Class Initialized
+INFO - 2025-03-21 12:43:38 --> Router Class Initialized
+INFO - 2025-03-21 12:43:38 --> Output Class Initialized
+INFO - 2025-03-21 12:43:38 --> Security Class Initialized
+DEBUG - 2025-03-21 12:43:38 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-21 12:43:38 --> Input Class Initialized
+INFO - 2025-03-21 12:43:38 --> Language Class Initialized
+INFO - 2025-03-21 18:13:38 --> Loader Class Initialized
+INFO - 2025-03-21 18:13:38 --> Helper loaded: url_helper
+INFO - 2025-03-21 18:13:38 --> Helper loaded: form_helper
+INFO - 2025-03-21 18:13:38 --> Helper loaded: file_helper
+INFO - 2025-03-21 18:13:38 --> Helper loaded: email_helper
+INFO - 2025-03-21 18:13:38 --> Helper loaded: cookie_helper
+INFO - 2025-03-21 18:13:38 --> Helper loaded: functiondd_helper
+INFO - 2025-03-21 18:13:38 --> Database Driver Class Initialized
+DEBUG - 2025-03-21 18:13:38 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-21 18:13:38 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-21 18:13:38 --> Controller Class Initialized
+INFO - 2025-03-21 18:13:38 --> Form Validation Class Initialized
+INFO - 2025-03-21 18:13:38 --> Model "Menu_model" initialized
+INFO - 2025-03-21 18:13:38 --> Helper loaded: common_helper
+INFO - 2025-03-21 12:43:39 --> Config Class Initialized
+INFO - 2025-03-21 12:43:39 --> Hooks Class Initialized
+DEBUG - 2025-03-21 12:43:39 --> UTF-8 Support Enabled
+INFO - 2025-03-21 12:43:39 --> Utf8 Class Initialized
+INFO - 2025-03-21 12:43:39 --> URI Class Initialized
+INFO - 2025-03-21 12:43:39 --> Router Class Initialized
+INFO - 2025-03-21 12:43:39 --> Output Class Initialized
+INFO - 2025-03-21 12:43:39 --> Security Class Initialized
+DEBUG - 2025-03-21 12:43:39 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-21 12:43:39 --> Input Class Initialized
+INFO - 2025-03-21 12:43:39 --> Language Class Initialized
+INFO - 2025-03-21 18:13:39 --> Loader Class Initialized
+INFO - 2025-03-21 18:13:39 --> Helper loaded: url_helper
+INFO - 2025-03-21 18:13:39 --> Helper loaded: form_helper
+INFO - 2025-03-21 18:13:39 --> Helper loaded: file_helper
+INFO - 2025-03-21 18:13:39 --> Helper loaded: email_helper
+INFO - 2025-03-21 18:13:39 --> Helper loaded: cookie_helper
+INFO - 2025-03-21 18:13:39 --> Helper loaded: functiondd_helper
+INFO - 2025-03-21 18:13:39 --> Database Driver Class Initialized
+DEBUG - 2025-03-21 18:13:39 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-21 18:13:39 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-21 18:13:39 --> Controller Class Initialized
+INFO - 2025-03-21 18:13:39 --> Form Validation Class Initialized
+INFO - 2025-03-21 18:13:39 --> Model "Menu_model" initialized
+INFO - 2025-03-21 18:13:39 --> Helper loaded: common_helper
+INFO - 2025-03-21 18:13:39 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/nav.php
+INFO - 2025-03-21 18:13:39 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/DayManagement.php
+INFO - 2025-03-21 18:13:39 --> File loaded: C:\wamp64\www\stemoppapp\application\views\templates/footer.php
+INFO - 2025-03-21 18:13:39 --> Final output sent to browser
+DEBUG - 2025-03-21 18:13:39 --> Total execution time: 0.3371
+INFO - 2025-03-21 12:43:51 --> Config Class Initialized
+INFO - 2025-03-21 12:43:51 --> Hooks Class Initialized
+DEBUG - 2025-03-21 12:43:51 --> UTF-8 Support Enabled
+INFO - 2025-03-21 12:43:51 --> Utf8 Class Initialized
+INFO - 2025-03-21 12:43:51 --> URI Class Initialized
+INFO - 2025-03-21 12:43:51 --> Router Class Initialized
+INFO - 2025-03-21 12:43:51 --> Output Class Initialized
+INFO - 2025-03-21 12:43:51 --> Security Class Initialized
+DEBUG - 2025-03-21 12:43:51 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-21 12:43:51 --> Input Class Initialized
+INFO - 2025-03-21 12:43:51 --> Language Class Initialized
+INFO - 2025-03-21 18:13:51 --> Loader Class Initialized
+INFO - 2025-03-21 18:13:51 --> Helper loaded: url_helper
+INFO - 2025-03-21 18:13:51 --> Helper loaded: form_helper
+INFO - 2025-03-21 18:13:51 --> Helper loaded: file_helper
+INFO - 2025-03-21 18:13:51 --> Helper loaded: email_helper
+INFO - 2025-03-21 18:13:51 --> Helper loaded: cookie_helper
+INFO - 2025-03-21 18:13:51 --> Helper loaded: functiondd_helper
+INFO - 2025-03-21 18:13:51 --> Database Driver Class Initialized
+DEBUG - 2025-03-21 18:13:51 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-21 18:13:51 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-21 18:13:51 --> Controller Class Initialized
+INFO - 2025-03-21 18:13:51 --> Form Validation Class Initialized
+INFO - 2025-03-21 18:13:51 --> Model "Menu_model" initialized
+INFO - 2025-03-21 18:13:51 --> Helper loaded: common_helper
+INFO - 2025-03-21 18:13:51 --> Upload Class Initialized
+INFO - 2025-03-21 12:43:52 --> Config Class Initialized
+INFO - 2025-03-21 12:43:52 --> Hooks Class Initialized
+DEBUG - 2025-03-21 12:43:52 --> UTF-8 Support Enabled
+INFO - 2025-03-21 12:43:52 --> Utf8 Class Initialized
+INFO - 2025-03-21 12:43:52 --> URI Class Initialized
+INFO - 2025-03-21 12:43:52 --> Router Class Initialized
+INFO - 2025-03-21 12:43:52 --> Output Class Initialized
+INFO - 2025-03-21 12:43:52 --> Security Class Initialized
+DEBUG - 2025-03-21 12:43:52 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-21 12:43:52 --> Input Class Initialized
+INFO - 2025-03-21 12:43:52 --> Language Class Initialized
+INFO - 2025-03-21 18:13:52 --> Loader Class Initialized
+INFO - 2025-03-21 18:13:52 --> Helper loaded: url_helper
+INFO - 2025-03-21 18:13:52 --> Helper loaded: form_helper
+INFO - 2025-03-21 18:13:52 --> Helper loaded: file_helper
+INFO - 2025-03-21 18:13:52 --> Helper loaded: email_helper
+INFO - 2025-03-21 18:13:52 --> Helper loaded: cookie_helper
+INFO - 2025-03-21 18:13:52 --> Helper loaded: functiondd_helper
+INFO - 2025-03-21 18:13:52 --> Database Driver Class Initialized
+DEBUG - 2025-03-21 18:13:52 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-21 18:13:52 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-21 18:13:52 --> Controller Class Initialized
+INFO - 2025-03-21 18:13:52 --> Form Validation Class Initialized
+INFO - 2025-03-21 18:13:52 --> Model "Menu_model" initialized
+INFO - 2025-03-21 18:13:52 --> Helper loaded: common_helper
+INFO - 2025-03-21 18:13:53 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/nav.php
+INFO - 2025-03-21 18:13:53 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/index.php
+INFO - 2025-03-21 18:13:53 --> File loaded: C:\wamp64\www\stemoppapp\application\views\templates/footer.php
+INFO - 2025-03-21 18:13:53 --> Final output sent to browser
+DEBUG - 2025-03-21 18:13:53 --> Total execution time: 0.9091
+INFO - 2025-03-21 12:44:08 --> Config Class Initialized
+INFO - 2025-03-21 12:44:08 --> Hooks Class Initialized
+DEBUG - 2025-03-21 12:44:08 --> UTF-8 Support Enabled
+INFO - 2025-03-21 12:44:08 --> Utf8 Class Initialized
+INFO - 2025-03-21 12:44:08 --> URI Class Initialized
+INFO - 2025-03-21 12:44:08 --> Router Class Initialized
+INFO - 2025-03-21 12:44:08 --> Output Class Initialized
+INFO - 2025-03-21 12:44:08 --> Security Class Initialized
+DEBUG - 2025-03-21 12:44:08 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-21 12:44:08 --> Input Class Initialized
+INFO - 2025-03-21 12:44:08 --> Language Class Initialized
+INFO - 2025-03-21 18:14:08 --> Loader Class Initialized
+INFO - 2025-03-21 18:14:08 --> Helper loaded: url_helper
+INFO - 2025-03-21 18:14:08 --> Helper loaded: form_helper
+INFO - 2025-03-21 18:14:08 --> Helper loaded: file_helper
+INFO - 2025-03-21 18:14:08 --> Helper loaded: email_helper
+INFO - 2025-03-21 18:14:08 --> Helper loaded: cookie_helper
+INFO - 2025-03-21 18:14:08 --> Helper loaded: functiondd_helper
+INFO - 2025-03-21 18:14:08 --> Database Driver Class Initialized
+DEBUG - 2025-03-21 18:14:08 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-21 18:14:08 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-21 18:14:08 --> Controller Class Initialized
+INFO - 2025-03-21 18:14:08 --> Form Validation Class Initialized
+INFO - 2025-03-21 18:14:08 --> Model "Menu_model" initialized
+INFO - 2025-03-21 18:14:08 --> Helper loaded: common_helper
+INFO - 2025-03-21 18:14:08 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/CallPreInterventionEnquiryView.php
+INFO - 2025-03-21 18:14:08 --> Final output sent to browser
+DEBUG - 2025-03-21 18:14:08 --> Total execution time: 0.1354
+INFO - 2025-03-21 12:44:10 --> Config Class Initialized
+INFO - 2025-03-21 12:44:10 --> Hooks Class Initialized
+DEBUG - 2025-03-21 12:44:10 --> UTF-8 Support Enabled
+INFO - 2025-03-21 12:44:10 --> Utf8 Class Initialized
+INFO - 2025-03-21 12:44:10 --> URI Class Initialized
+INFO - 2025-03-21 12:44:10 --> Router Class Initialized
+INFO - 2025-03-21 12:44:10 --> Output Class Initialized
+INFO - 2025-03-21 12:44:10 --> Security Class Initialized
+DEBUG - 2025-03-21 12:44:10 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-21 12:44:10 --> Input Class Initialized
+INFO - 2025-03-21 12:44:10 --> Language Class Initialized
+INFO - 2025-03-21 18:14:10 --> Loader Class Initialized
+INFO - 2025-03-21 18:14:10 --> Helper loaded: url_helper
+INFO - 2025-03-21 18:14:10 --> Helper loaded: form_helper
+INFO - 2025-03-21 18:14:10 --> Helper loaded: file_helper
+INFO - 2025-03-21 18:14:10 --> Helper loaded: email_helper
+INFO - 2025-03-21 18:14:10 --> Helper loaded: cookie_helper
+INFO - 2025-03-21 18:14:10 --> Helper loaded: functiondd_helper
+INFO - 2025-03-21 18:14:10 --> Database Driver Class Initialized
+DEBUG - 2025-03-21 18:14:10 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-21 18:14:10 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-21 18:14:10 --> Controller Class Initialized
+INFO - 2025-03-21 18:14:10 --> Form Validation Class Initialized
+INFO - 2025-03-21 18:14:10 --> Model "Menu_model" initialized
+INFO - 2025-03-21 18:14:10 --> Helper loaded: common_helper
+INFO - 2025-03-21 18:14:10 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/CallPreInterventionEnquiryView.php
+INFO - 2025-03-21 18:14:10 --> Final output sent to browser
+DEBUG - 2025-03-21 18:14:10 --> Total execution time: 0.0322
+INFO - 2025-03-21 12:44:11 --> Config Class Initialized
+INFO - 2025-03-21 12:44:11 --> Hooks Class Initialized
+DEBUG - 2025-03-21 12:44:11 --> UTF-8 Support Enabled
+INFO - 2025-03-21 12:44:11 --> Utf8 Class Initialized
+INFO - 2025-03-21 12:44:11 --> URI Class Initialized
+INFO - 2025-03-21 12:44:11 --> Router Class Initialized
+INFO - 2025-03-21 12:44:11 --> Output Class Initialized
+INFO - 2025-03-21 12:44:11 --> Security Class Initialized
+DEBUG - 2025-03-21 12:44:11 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-21 12:44:11 --> Input Class Initialized
+INFO - 2025-03-21 12:44:11 --> Language Class Initialized
+INFO - 2025-03-21 18:14:11 --> Loader Class Initialized
+INFO - 2025-03-21 18:14:11 --> Helper loaded: url_helper
+INFO - 2025-03-21 18:14:11 --> Helper loaded: form_helper
+INFO - 2025-03-21 18:14:11 --> Helper loaded: file_helper
+INFO - 2025-03-21 18:14:11 --> Helper loaded: email_helper
+INFO - 2025-03-21 18:14:11 --> Helper loaded: cookie_helper
+INFO - 2025-03-21 18:14:11 --> Helper loaded: functiondd_helper
+INFO - 2025-03-21 18:14:11 --> Database Driver Class Initialized
+DEBUG - 2025-03-21 18:14:11 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-21 18:14:11 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-21 18:14:11 --> Controller Class Initialized
+INFO - 2025-03-21 18:14:11 --> Form Validation Class Initialized
+INFO - 2025-03-21 18:14:11 --> Model "Menu_model" initialized
+INFO - 2025-03-21 18:14:11 --> Helper loaded: common_helper
+INFO - 2025-03-21 18:14:11 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/CallPreInterventionEnquiryView.php
+INFO - 2025-03-21 18:14:11 --> Final output sent to browser
+DEBUG - 2025-03-21 18:14:11 --> Total execution time: 0.0297
+INFO - 2025-03-21 12:44:13 --> Config Class Initialized
+INFO - 2025-03-21 12:44:13 --> Hooks Class Initialized
+DEBUG - 2025-03-21 12:44:13 --> UTF-8 Support Enabled
+INFO - 2025-03-21 12:44:13 --> Utf8 Class Initialized
+INFO - 2025-03-21 12:44:13 --> URI Class Initialized
+INFO - 2025-03-21 12:44:13 --> Router Class Initialized
+INFO - 2025-03-21 12:44:13 --> Output Class Initialized
+INFO - 2025-03-21 12:44:13 --> Security Class Initialized
+DEBUG - 2025-03-21 12:44:13 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-21 12:44:13 --> Input Class Initialized
+INFO - 2025-03-21 12:44:13 --> Language Class Initialized
+INFO - 2025-03-21 18:14:13 --> Loader Class Initialized
+INFO - 2025-03-21 18:14:13 --> Helper loaded: url_helper
+INFO - 2025-03-21 18:14:13 --> Helper loaded: form_helper
+INFO - 2025-03-21 18:14:13 --> Helper loaded: file_helper
+INFO - 2025-03-21 18:14:13 --> Helper loaded: email_helper
+INFO - 2025-03-21 18:14:13 --> Helper loaded: cookie_helper
+INFO - 2025-03-21 18:14:13 --> Helper loaded: functiondd_helper
+INFO - 2025-03-21 18:14:13 --> Database Driver Class Initialized
+DEBUG - 2025-03-21 18:14:13 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-21 18:14:13 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-21 18:14:13 --> Controller Class Initialized
+INFO - 2025-03-21 18:14:13 --> Form Validation Class Initialized
+INFO - 2025-03-21 18:14:13 --> Model "Menu_model" initialized
+INFO - 2025-03-21 18:14:13 --> Helper loaded: common_helper
+INFO - 2025-03-21 18:14:13 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/CallPreInterventionEnquiryView.php
+INFO - 2025-03-21 18:14:13 --> Final output sent to browser
+DEBUG - 2025-03-21 18:14:13 --> Total execution time: 0.0318
+INFO - 2025-03-21 12:44:14 --> Config Class Initialized
+INFO - 2025-03-21 12:44:14 --> Hooks Class Initialized
+DEBUG - 2025-03-21 12:44:14 --> UTF-8 Support Enabled
+INFO - 2025-03-21 12:44:14 --> Utf8 Class Initialized
+INFO - 2025-03-21 12:44:14 --> URI Class Initialized
+INFO - 2025-03-21 12:44:14 --> Router Class Initialized
+INFO - 2025-03-21 12:44:14 --> Output Class Initialized
+INFO - 2025-03-21 12:44:14 --> Security Class Initialized
+DEBUG - 2025-03-21 12:44:14 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-21 12:44:14 --> Input Class Initialized
+INFO - 2025-03-21 12:44:14 --> Language Class Initialized
+INFO - 2025-03-21 18:14:14 --> Loader Class Initialized
+INFO - 2025-03-21 18:14:14 --> Helper loaded: url_helper
+INFO - 2025-03-21 18:14:14 --> Helper loaded: form_helper
+INFO - 2025-03-21 18:14:14 --> Helper loaded: file_helper
+INFO - 2025-03-21 18:14:14 --> Helper loaded: email_helper
+INFO - 2025-03-21 18:14:14 --> Helper loaded: cookie_helper
+INFO - 2025-03-21 18:14:14 --> Helper loaded: functiondd_helper
+INFO - 2025-03-21 18:14:14 --> Database Driver Class Initialized
+DEBUG - 2025-03-21 18:14:14 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-21 18:14:14 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-21 18:14:14 --> Controller Class Initialized
+INFO - 2025-03-21 18:14:14 --> Form Validation Class Initialized
+INFO - 2025-03-21 18:14:14 --> Model "Menu_model" initialized
+INFO - 2025-03-21 18:14:14 --> Helper loaded: common_helper
+INFO - 2025-03-21 18:14:14 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/CallPreInterventionEnquiryView.php
+INFO - 2025-03-21 18:14:14 --> Final output sent to browser
+DEBUG - 2025-03-21 18:14:14 --> Total execution time: 0.0315
+INFO - 2025-03-21 12:44:15 --> Config Class Initialized
+INFO - 2025-03-21 12:44:15 --> Hooks Class Initialized
+DEBUG - 2025-03-21 12:44:15 --> UTF-8 Support Enabled
+INFO - 2025-03-21 12:44:15 --> Utf8 Class Initialized
+INFO - 2025-03-21 12:44:15 --> URI Class Initialized
+INFO - 2025-03-21 12:44:15 --> Router Class Initialized
+INFO - 2025-03-21 12:44:15 --> Output Class Initialized
+INFO - 2025-03-21 12:44:15 --> Security Class Initialized
+DEBUG - 2025-03-21 12:44:15 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-21 12:44:15 --> Input Class Initialized
+INFO - 2025-03-21 12:44:15 --> Language Class Initialized
+INFO - 2025-03-21 18:14:15 --> Loader Class Initialized
+INFO - 2025-03-21 18:14:15 --> Helper loaded: url_helper
+INFO - 2025-03-21 18:14:15 --> Helper loaded: form_helper
+INFO - 2025-03-21 18:14:15 --> Helper loaded: file_helper
+INFO - 2025-03-21 18:14:15 --> Helper loaded: email_helper
+INFO - 2025-03-21 18:14:15 --> Helper loaded: cookie_helper
+INFO - 2025-03-21 18:14:15 --> Helper loaded: functiondd_helper
+INFO - 2025-03-21 18:14:15 --> Database Driver Class Initialized
+DEBUG - 2025-03-21 18:14:15 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-21 18:14:15 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-21 18:14:15 --> Controller Class Initialized
+INFO - 2025-03-21 18:14:15 --> Form Validation Class Initialized
+INFO - 2025-03-21 18:14:15 --> Model "Menu_model" initialized
+INFO - 2025-03-21 18:14:15 --> Helper loaded: common_helper
+INFO - 2025-03-21 18:14:15 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/CallPreInterventionEnquiryView.php
+INFO - 2025-03-21 18:14:15 --> Final output sent to browser
+DEBUG - 2025-03-21 18:14:15 --> Total execution time: 0.0358
+INFO - 2025-03-21 12:44:18 --> Config Class Initialized
+INFO - 2025-03-21 12:44:18 --> Hooks Class Initialized
+DEBUG - 2025-03-21 12:44:18 --> UTF-8 Support Enabled
+INFO - 2025-03-21 12:44:18 --> Utf8 Class Initialized
+INFO - 2025-03-21 12:44:18 --> URI Class Initialized
+INFO - 2025-03-21 12:44:18 --> Router Class Initialized
+INFO - 2025-03-21 12:44:18 --> Output Class Initialized
+INFO - 2025-03-21 12:44:18 --> Security Class Initialized
+DEBUG - 2025-03-21 12:44:18 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-21 12:44:18 --> Input Class Initialized
+INFO - 2025-03-21 12:44:18 --> Language Class Initialized
+INFO - 2025-03-21 18:14:18 --> Loader Class Initialized
+INFO - 2025-03-21 18:14:18 --> Helper loaded: url_helper
+INFO - 2025-03-21 18:14:18 --> Helper loaded: form_helper
+INFO - 2025-03-21 18:14:18 --> Helper loaded: file_helper
+INFO - 2025-03-21 18:14:18 --> Helper loaded: email_helper
+INFO - 2025-03-21 18:14:18 --> Helper loaded: cookie_helper
+INFO - 2025-03-21 18:14:18 --> Helper loaded: functiondd_helper
+INFO - 2025-03-21 18:14:18 --> Database Driver Class Initialized
+DEBUG - 2025-03-21 18:14:18 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-21 18:14:18 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-21 18:14:18 --> Controller Class Initialized
+INFO - 2025-03-21 18:14:18 --> Form Validation Class Initialized
+INFO - 2025-03-21 18:14:18 --> Model "Menu_model" initialized
+INFO - 2025-03-21 18:14:18 --> Helper loaded: common_helper
+INFO - 2025-03-21 18:14:18 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/nav.php
+INFO - 2025-03-21 18:14:18 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/index.php
+INFO - 2025-03-21 18:14:18 --> File loaded: C:\wamp64\www\stemoppapp\application\views\templates/footer.php
+INFO - 2025-03-21 18:14:18 --> Final output sent to browser
+DEBUG - 2025-03-21 18:14:18 --> Total execution time: 0.4780
+INFO - 2025-03-21 12:44:22 --> Config Class Initialized
+INFO - 2025-03-21 12:44:22 --> Hooks Class Initialized
+DEBUG - 2025-03-21 12:44:22 --> UTF-8 Support Enabled
+INFO - 2025-03-21 12:44:22 --> Utf8 Class Initialized
+INFO - 2025-03-21 12:44:22 --> URI Class Initialized
+INFO - 2025-03-21 12:44:22 --> Router Class Initialized
+INFO - 2025-03-21 12:44:22 --> Output Class Initialized
+INFO - 2025-03-21 12:44:22 --> Security Class Initialized
+DEBUG - 2025-03-21 12:44:22 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-21 12:44:22 --> Input Class Initialized
+INFO - 2025-03-21 12:44:22 --> Language Class Initialized
+INFO - 2025-03-21 18:14:22 --> Loader Class Initialized
+INFO - 2025-03-21 18:14:22 --> Helper loaded: url_helper
+INFO - 2025-03-21 18:14:22 --> Helper loaded: form_helper
+INFO - 2025-03-21 18:14:22 --> Helper loaded: file_helper
+INFO - 2025-03-21 18:14:22 --> Helper loaded: email_helper
+INFO - 2025-03-21 18:14:22 --> Helper loaded: cookie_helper
+INFO - 2025-03-21 18:14:22 --> Helper loaded: functiondd_helper
+INFO - 2025-03-21 18:14:22 --> Database Driver Class Initialized
+DEBUG - 2025-03-21 18:14:22 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-21 18:14:22 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-21 18:14:22 --> Controller Class Initialized
+INFO - 2025-03-21 18:14:22 --> Form Validation Class Initialized
+INFO - 2025-03-21 18:14:22 --> Model "Menu_model" initialized
+INFO - 2025-03-21 18:14:22 --> Helper loaded: common_helper
+INFO - 2025-03-21 18:14:22 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/CallPreInterventionEnquiryView.php
+INFO - 2025-03-21 18:14:22 --> Final output sent to browser
+DEBUG - 2025-03-21 18:14:22 --> Total execution time: 0.0317
+INFO - 2025-03-21 13:05:37 --> Config Class Initialized
+INFO - 2025-03-21 13:05:37 --> Hooks Class Initialized
+DEBUG - 2025-03-21 13:05:37 --> UTF-8 Support Enabled
+INFO - 2025-03-21 13:05:37 --> Utf8 Class Initialized
+INFO - 2025-03-21 13:05:37 --> URI Class Initialized
+INFO - 2025-03-21 13:05:37 --> Router Class Initialized
+INFO - 2025-03-21 13:05:37 --> Output Class Initialized
+INFO - 2025-03-21 13:05:37 --> Security Class Initialized
+DEBUG - 2025-03-21 13:05:37 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-21 13:05:37 --> Input Class Initialized
+INFO - 2025-03-21 13:05:37 --> Language Class Initialized
+INFO - 2025-03-21 18:35:37 --> Loader Class Initialized
+INFO - 2025-03-21 18:35:37 --> Helper loaded: url_helper
+INFO - 2025-03-21 18:35:37 --> Helper loaded: form_helper
+INFO - 2025-03-21 18:35:37 --> Helper loaded: file_helper
+INFO - 2025-03-21 18:35:37 --> Helper loaded: email_helper
+INFO - 2025-03-21 18:35:37 --> Helper loaded: cookie_helper
+INFO - 2025-03-21 18:35:37 --> Helper loaded: functiondd_helper
+INFO - 2025-03-21 18:35:37 --> Database Driver Class Initialized
+DEBUG - 2025-03-21 18:35:37 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-21 18:35:37 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-21 18:35:37 --> Controller Class Initialized
+INFO - 2025-03-21 18:35:37 --> Form Validation Class Initialized
+INFO - 2025-03-21 18:35:37 --> Model "Menu_model" initialized
+INFO - 2025-03-21 18:35:37 --> Helper loaded: common_helper
+INFO - 2025-03-21 18:35:37 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/CallPreInaugurationView.php
+INFO - 2025-03-21 18:35:37 --> Final output sent to browser
+DEBUG - 2025-03-21 18:35:37 --> Total execution time: 0.5041
+INFO - 2025-03-21 13:05:38 --> Config Class Initialized
+INFO - 2025-03-21 13:05:38 --> Hooks Class Initialized
+DEBUG - 2025-03-21 13:05:38 --> UTF-8 Support Enabled
+INFO - 2025-03-21 13:05:38 --> Utf8 Class Initialized
+INFO - 2025-03-21 13:05:38 --> URI Class Initialized
+INFO - 2025-03-21 13:05:38 --> Router Class Initialized
+INFO - 2025-03-21 13:05:38 --> Output Class Initialized
+INFO - 2025-03-21 13:05:38 --> Security Class Initialized
+DEBUG - 2025-03-21 13:05:38 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-21 13:05:38 --> Input Class Initialized
+INFO - 2025-03-21 13:05:38 --> Language Class Initialized
+INFO - 2025-03-21 18:35:38 --> Loader Class Initialized
+INFO - 2025-03-21 18:35:38 --> Helper loaded: url_helper
+INFO - 2025-03-21 18:35:38 --> Helper loaded: form_helper
+INFO - 2025-03-21 18:35:38 --> Helper loaded: file_helper
+INFO - 2025-03-21 18:35:38 --> Helper loaded: email_helper
+INFO - 2025-03-21 18:35:38 --> Helper loaded: cookie_helper
+INFO - 2025-03-21 18:35:38 --> Helper loaded: functiondd_helper
+INFO - 2025-03-21 18:35:38 --> Database Driver Class Initialized
+DEBUG - 2025-03-21 18:35:38 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-21 18:35:38 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-21 18:35:38 --> Controller Class Initialized
+INFO - 2025-03-21 18:35:38 --> Form Validation Class Initialized
+INFO - 2025-03-21 18:35:38 --> Model "Menu_model" initialized
+INFO - 2025-03-21 18:35:38 --> Helper loaded: common_helper
+INFO - 2025-03-21 18:35:38 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/CallPreInaugurationView.php
+INFO - 2025-03-21 18:35:38 --> Final output sent to browser
+DEBUG - 2025-03-21 18:35:38 --> Total execution time: 0.1019
+INFO - 2025-03-21 13:05:39 --> Config Class Initialized
+INFO - 2025-03-21 13:05:39 --> Hooks Class Initialized
+DEBUG - 2025-03-21 13:05:39 --> UTF-8 Support Enabled
+INFO - 2025-03-21 13:05:39 --> Utf8 Class Initialized
+INFO - 2025-03-21 13:05:39 --> URI Class Initialized
+INFO - 2025-03-21 13:05:39 --> Router Class Initialized
+INFO - 2025-03-21 13:05:39 --> Output Class Initialized
+INFO - 2025-03-21 13:05:39 --> Security Class Initialized
+DEBUG - 2025-03-21 13:05:39 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-21 13:05:39 --> Input Class Initialized
+INFO - 2025-03-21 13:05:39 --> Language Class Initialized
+INFO - 2025-03-21 18:35:39 --> Loader Class Initialized
+INFO - 2025-03-21 18:35:39 --> Helper loaded: url_helper
+INFO - 2025-03-21 18:35:39 --> Helper loaded: form_helper
+INFO - 2025-03-21 18:35:39 --> Helper loaded: file_helper
+INFO - 2025-03-21 18:35:39 --> Helper loaded: email_helper
+INFO - 2025-03-21 18:35:39 --> Helper loaded: cookie_helper
+INFO - 2025-03-21 18:35:39 --> Helper loaded: functiondd_helper
+INFO - 2025-03-21 18:35:39 --> Database Driver Class Initialized
+DEBUG - 2025-03-21 18:35:39 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-21 18:35:39 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-21 18:35:39 --> Controller Class Initialized
+INFO - 2025-03-21 18:35:39 --> Form Validation Class Initialized
+INFO - 2025-03-21 18:35:39 --> Model "Menu_model" initialized
+INFO - 2025-03-21 18:35:39 --> Helper loaded: common_helper
+INFO - 2025-03-21 18:35:39 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/CallPreInaugurationView.php
+INFO - 2025-03-21 18:35:39 --> Final output sent to browser
+DEBUG - 2025-03-21 18:35:39 --> Total execution time: 0.0581
+INFO - 2025-03-21 13:12:20 --> Config Class Initialized
+INFO - 2025-03-21 13:12:20 --> Hooks Class Initialized
+DEBUG - 2025-03-21 13:12:20 --> UTF-8 Support Enabled
+INFO - 2025-03-21 13:12:20 --> Utf8 Class Initialized
+INFO - 2025-03-21 13:12:20 --> URI Class Initialized
+INFO - 2025-03-21 13:12:20 --> Router Class Initialized
+INFO - 2025-03-21 13:12:20 --> Output Class Initialized
+INFO - 2025-03-21 13:12:20 --> Security Class Initialized
+DEBUG - 2025-03-21 13:12:20 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-21 13:12:20 --> Input Class Initialized
+INFO - 2025-03-21 13:12:20 --> Language Class Initialized
+INFO - 2025-03-21 18:42:20 --> Loader Class Initialized
+INFO - 2025-03-21 18:42:20 --> Helper loaded: url_helper
+INFO - 2025-03-21 18:42:20 --> Helper loaded: form_helper
+INFO - 2025-03-21 18:42:20 --> Helper loaded: file_helper
+INFO - 2025-03-21 18:42:20 --> Helper loaded: email_helper
+INFO - 2025-03-21 18:42:20 --> Helper loaded: cookie_helper
+INFO - 2025-03-21 18:42:20 --> Helper loaded: functiondd_helper
+INFO - 2025-03-21 18:42:20 --> Database Driver Class Initialized
+DEBUG - 2025-03-21 18:42:21 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-21 18:42:21 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-21 18:42:21 --> Controller Class Initialized
+INFO - 2025-03-21 18:42:21 --> Form Validation Class Initialized
+INFO - 2025-03-21 18:42:21 --> Model "Menu_model" initialized
+INFO - 2025-03-21 18:42:21 --> Helper loaded: common_helper
+INFO - 2025-03-21 18:42:22 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/nav.php
+INFO - 2025-03-21 18:42:22 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/index.php
+INFO - 2025-03-21 18:42:22 --> File loaded: C:\wamp64\www\stemoppapp\application\views\templates/footer.php
+INFO - 2025-03-21 18:42:22 --> Final output sent to browser
+DEBUG - 2025-03-21 18:42:22 --> Total execution time: 1.6071
+INFO - 2025-03-21 13:12:26 --> Config Class Initialized
+INFO - 2025-03-21 13:12:26 --> Hooks Class Initialized
+DEBUG - 2025-03-21 13:12:26 --> UTF-8 Support Enabled
+INFO - 2025-03-21 13:12:26 --> Utf8 Class Initialized
+INFO - 2025-03-21 13:12:26 --> URI Class Initialized
+INFO - 2025-03-21 13:12:26 --> Router Class Initialized
+INFO - 2025-03-21 13:12:26 --> Output Class Initialized
+INFO - 2025-03-21 13:12:26 --> Security Class Initialized
+DEBUG - 2025-03-21 13:12:26 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-21 13:12:26 --> Input Class Initialized
+INFO - 2025-03-21 13:12:26 --> Language Class Initialized
+INFO - 2025-03-21 18:42:26 --> Loader Class Initialized
+INFO - 2025-03-21 18:42:26 --> Helper loaded: url_helper
+INFO - 2025-03-21 18:42:26 --> Helper loaded: form_helper
+INFO - 2025-03-21 18:42:26 --> Helper loaded: file_helper
+INFO - 2025-03-21 18:42:26 --> Helper loaded: email_helper
+INFO - 2025-03-21 18:42:26 --> Helper loaded: cookie_helper
+INFO - 2025-03-21 18:42:26 --> Helper loaded: functiondd_helper
+INFO - 2025-03-21 18:42:26 --> Database Driver Class Initialized
+DEBUG - 2025-03-21 18:42:26 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-21 18:42:26 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-21 18:42:26 --> Controller Class Initialized
+INFO - 2025-03-21 18:42:26 --> Form Validation Class Initialized
+INFO - 2025-03-21 18:42:26 --> Model "Menu_model" initialized
+INFO - 2025-03-21 18:42:26 --> Helper loaded: common_helper
+ERROR - 2025-03-21 18:42:26 --> Severity: Warning --> Invalid argument supplied for foreach() C:\wamp64\www\stemoppapp\application\views\PIA\VisitPreInaugurationView.php 63
+INFO - 2025-03-21 18:42:26 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/VisitPreInaugurationView.php
+INFO - 2025-03-21 18:42:26 --> Final output sent to browser
+DEBUG - 2025-03-21 18:42:26 --> Total execution time: 0.2529
+INFO - 2025-03-21 13:12:27 --> Config Class Initialized
+INFO - 2025-03-21 13:12:27 --> Hooks Class Initialized
+DEBUG - 2025-03-21 13:12:27 --> UTF-8 Support Enabled
+INFO - 2025-03-21 13:12:27 --> Utf8 Class Initialized
+INFO - 2025-03-21 13:12:27 --> URI Class Initialized
+INFO - 2025-03-21 13:12:27 --> Router Class Initialized
+INFO - 2025-03-21 13:12:27 --> Output Class Initialized
+INFO - 2025-03-21 13:12:27 --> Security Class Initialized
+DEBUG - 2025-03-21 13:12:27 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-21 13:12:27 --> Input Class Initialized
+INFO - 2025-03-21 13:12:27 --> Language Class Initialized
+INFO - 2025-03-21 18:42:27 --> Loader Class Initialized
+INFO - 2025-03-21 18:42:27 --> Helper loaded: url_helper
+INFO - 2025-03-21 18:42:27 --> Helper loaded: form_helper
+INFO - 2025-03-21 18:42:27 --> Helper loaded: file_helper
+INFO - 2025-03-21 18:42:27 --> Helper loaded: email_helper
+INFO - 2025-03-21 18:42:27 --> Helper loaded: cookie_helper
+INFO - 2025-03-21 18:42:27 --> Helper loaded: functiondd_helper
+INFO - 2025-03-21 18:42:27 --> Database Driver Class Initialized
+DEBUG - 2025-03-21 18:42:27 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-21 18:42:27 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-21 18:42:27 --> Controller Class Initialized
+INFO - 2025-03-21 18:42:27 --> Form Validation Class Initialized
+INFO - 2025-03-21 18:42:27 --> Model "Menu_model" initialized
+INFO - 2025-03-21 18:42:27 --> Helper loaded: common_helper
+INFO - 2025-03-21 18:42:27 --> Database Driver Class Initialized
+INFO - 2025-03-21 18:42:28 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/nav.php
+INFO - 2025-03-21 18:42:28 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/visitDuringInaugurationView.php
+INFO - 2025-03-21 18:42:28 --> File loaded: C:\wamp64\www\stemoppapp\application\views\templates/footer.php
+INFO - 2025-03-21 18:42:28 --> Final output sent to browser
+DEBUG - 2025-03-21 18:42:28 --> Total execution time: 0.2994
+INFO - 2025-03-21 13:12:39 --> Config Class Initialized
+INFO - 2025-03-21 13:12:39 --> Hooks Class Initialized
+DEBUG - 2025-03-21 13:12:39 --> UTF-8 Support Enabled
+INFO - 2025-03-21 13:12:39 --> Utf8 Class Initialized
+INFO - 2025-03-21 13:12:39 --> URI Class Initialized
+INFO - 2025-03-21 13:12:39 --> Router Class Initialized
+INFO - 2025-03-21 13:12:39 --> Output Class Initialized
+INFO - 2025-03-21 13:12:39 --> Security Class Initialized
+DEBUG - 2025-03-21 13:12:39 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-21 13:12:39 --> Input Class Initialized
+INFO - 2025-03-21 13:12:39 --> Language Class Initialized
+INFO - 2025-03-21 18:42:39 --> Loader Class Initialized
+INFO - 2025-03-21 18:42:39 --> Helper loaded: url_helper
+INFO - 2025-03-21 18:42:39 --> Helper loaded: form_helper
+INFO - 2025-03-21 18:42:39 --> Helper loaded: file_helper
+INFO - 2025-03-21 18:42:39 --> Helper loaded: email_helper
+INFO - 2025-03-21 18:42:39 --> Helper loaded: cookie_helper
+INFO - 2025-03-21 18:42:39 --> Helper loaded: functiondd_helper
+INFO - 2025-03-21 18:42:39 --> Database Driver Class Initialized
+DEBUG - 2025-03-21 18:42:39 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-21 18:42:39 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-21 18:42:39 --> Controller Class Initialized
+INFO - 2025-03-21 18:42:39 --> Form Validation Class Initialized
+INFO - 2025-03-21 18:42:39 --> Model "Menu_model" initialized
+INFO - 2025-03-21 18:42:39 --> Helper loaded: common_helper
+INFO - 2025-03-21 18:42:39 --> Database Driver Class Initialized
+INFO - 2025-03-21 18:42:39 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/nav.php
+INFO - 2025-03-21 18:42:39 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/visitDuringInaugurationView.php
+INFO - 2025-03-21 18:42:39 --> File loaded: C:\wamp64\www\stemoppapp\application\views\templates/footer.php
+INFO - 2025-03-21 18:42:39 --> Final output sent to browser
+DEBUG - 2025-03-21 18:42:39 --> Total execution time: 0.0529
+INFO - 2025-03-21 13:12:41 --> Config Class Initialized
+INFO - 2025-03-21 13:12:41 --> Hooks Class Initialized
+DEBUG - 2025-03-21 13:12:41 --> UTF-8 Support Enabled
+INFO - 2025-03-21 13:12:41 --> Utf8 Class Initialized
+INFO - 2025-03-21 13:12:41 --> URI Class Initialized
+INFO - 2025-03-21 13:12:41 --> Router Class Initialized
+INFO - 2025-03-21 13:12:41 --> Output Class Initialized
+INFO - 2025-03-21 13:12:41 --> Security Class Initialized
+DEBUG - 2025-03-21 13:12:41 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-21 13:12:41 --> Input Class Initialized
+INFO - 2025-03-21 13:12:41 --> Language Class Initialized
+INFO - 2025-03-21 18:42:41 --> Loader Class Initialized
+INFO - 2025-03-21 18:42:41 --> Helper loaded: url_helper
+INFO - 2025-03-21 18:42:41 --> Helper loaded: form_helper
+INFO - 2025-03-21 18:42:41 --> Helper loaded: file_helper
+INFO - 2025-03-21 18:42:41 --> Helper loaded: email_helper
+INFO - 2025-03-21 18:42:41 --> Helper loaded: cookie_helper
+INFO - 2025-03-21 18:42:41 --> Helper loaded: functiondd_helper
+INFO - 2025-03-21 18:42:41 --> Database Driver Class Initialized
+DEBUG - 2025-03-21 18:42:41 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-21 18:42:41 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-21 18:42:41 --> Controller Class Initialized
+INFO - 2025-03-21 18:42:41 --> Form Validation Class Initialized
+INFO - 2025-03-21 18:42:41 --> Model "Menu_model" initialized
+INFO - 2025-03-21 18:42:41 --> Helper loaded: common_helper
+INFO - 2025-03-21 18:42:41 --> Database Driver Class Initialized
+INFO - 2025-03-21 18:42:41 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/nav.php
+INFO - 2025-03-21 18:42:41 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/visitDuringInaugurationView.php
+INFO - 2025-03-21 18:42:41 --> File loaded: C:\wamp64\www\stemoppapp\application\views\templates/footer.php
+INFO - 2025-03-21 18:42:41 --> Final output sent to browser
+DEBUG - 2025-03-21 18:42:41 --> Total execution time: 0.0390
+INFO - 2025-03-21 13:12:49 --> Config Class Initialized
+INFO - 2025-03-21 13:12:49 --> Hooks Class Initialized
+DEBUG - 2025-03-21 13:12:49 --> UTF-8 Support Enabled
+INFO - 2025-03-21 13:12:49 --> Utf8 Class Initialized
+INFO - 2025-03-21 13:12:49 --> URI Class Initialized
+INFO - 2025-03-21 13:12:49 --> Router Class Initialized
+INFO - 2025-03-21 13:12:49 --> Output Class Initialized
+INFO - 2025-03-21 13:12:49 --> Security Class Initialized
+DEBUG - 2025-03-21 13:12:49 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-21 13:12:49 --> Input Class Initialized
+INFO - 2025-03-21 13:12:49 --> Language Class Initialized
+INFO - 2025-03-21 18:42:49 --> Loader Class Initialized
+INFO - 2025-03-21 18:42:49 --> Helper loaded: url_helper
+INFO - 2025-03-21 18:42:49 --> Helper loaded: form_helper
+INFO - 2025-03-21 18:42:49 --> Helper loaded: file_helper
+INFO - 2025-03-21 18:42:49 --> Helper loaded: email_helper
+INFO - 2025-03-21 18:42:49 --> Helper loaded: cookie_helper
+INFO - 2025-03-21 18:42:49 --> Helper loaded: functiondd_helper
+INFO - 2025-03-21 18:42:49 --> Database Driver Class Initialized
+DEBUG - 2025-03-21 18:42:49 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-21 18:42:49 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-21 18:42:49 --> Controller Class Initialized
+INFO - 2025-03-21 18:42:49 --> Form Validation Class Initialized
+INFO - 2025-03-21 18:42:49 --> Model "Menu_model" initialized
+INFO - 2025-03-21 18:42:49 --> Helper loaded: common_helper
+INFO - 2025-03-21 18:42:49 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/nav.php
+INFO - 2025-03-21 18:42:49 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/index.php
+INFO - 2025-03-21 18:42:49 --> File loaded: C:\wamp64\www\stemoppapp\application\views\templates/footer.php
+INFO - 2025-03-21 18:42:49 --> Final output sent to browser
+DEBUG - 2025-03-21 18:42:49 --> Total execution time: 0.6695
+INFO - 2025-03-21 13:12:53 --> Config Class Initialized
+INFO - 2025-03-21 13:12:53 --> Hooks Class Initialized
+DEBUG - 2025-03-21 13:12:53 --> UTF-8 Support Enabled
+INFO - 2025-03-21 13:12:53 --> Utf8 Class Initialized
+INFO - 2025-03-21 13:12:53 --> URI Class Initialized
+INFO - 2025-03-21 13:12:53 --> Router Class Initialized
+INFO - 2025-03-21 13:12:53 --> Output Class Initialized
+INFO - 2025-03-21 13:12:53 --> Security Class Initialized
+DEBUG - 2025-03-21 13:12:53 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-21 13:12:53 --> Input Class Initialized
+INFO - 2025-03-21 13:12:53 --> Language Class Initialized
+INFO - 2025-03-21 18:42:53 --> Loader Class Initialized
+INFO - 2025-03-21 18:42:53 --> Helper loaded: url_helper
+INFO - 2025-03-21 18:42:53 --> Helper loaded: form_helper
+INFO - 2025-03-21 18:42:53 --> Helper loaded: file_helper
+INFO - 2025-03-21 18:42:53 --> Helper loaded: email_helper
+INFO - 2025-03-21 18:42:53 --> Helper loaded: cookie_helper
+INFO - 2025-03-21 18:42:53 --> Helper loaded: functiondd_helper
+INFO - 2025-03-21 18:42:53 --> Database Driver Class Initialized
+DEBUG - 2025-03-21 18:42:53 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-21 18:42:53 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-21 18:42:53 --> Controller Class Initialized
+INFO - 2025-03-21 18:42:53 --> Form Validation Class Initialized
+INFO - 2025-03-21 18:42:53 --> Model "Menu_model" initialized
+INFO - 2025-03-21 18:42:53 --> Helper loaded: common_helper
+INFO - 2025-03-21 18:42:53 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/CallPreInaugurationView.php
+INFO - 2025-03-21 18:42:53 --> Final output sent to browser
+DEBUG - 2025-03-21 18:42:53 --> Total execution time: 0.0766
+INFO - 2025-03-21 13:18:10 --> Config Class Initialized
+INFO - 2025-03-21 13:18:10 --> Hooks Class Initialized
+DEBUG - 2025-03-21 13:18:10 --> UTF-8 Support Enabled
+INFO - 2025-03-21 13:18:10 --> Utf8 Class Initialized
+INFO - 2025-03-21 13:18:10 --> URI Class Initialized
+INFO - 2025-03-21 13:18:10 --> Router Class Initialized
+INFO - 2025-03-21 13:18:10 --> Output Class Initialized
+INFO - 2025-03-21 13:18:10 --> Security Class Initialized
+DEBUG - 2025-03-21 13:18:10 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-03-21 13:18:10 --> Input Class Initialized
+INFO - 2025-03-21 13:18:10 --> Language Class Initialized
+INFO - 2025-03-21 18:48:10 --> Loader Class Initialized
+INFO - 2025-03-21 18:48:10 --> Helper loaded: url_helper
+INFO - 2025-03-21 18:48:10 --> Helper loaded: form_helper
+INFO - 2025-03-21 18:48:10 --> Helper loaded: file_helper
+INFO - 2025-03-21 18:48:10 --> Helper loaded: email_helper
+INFO - 2025-03-21 18:48:10 --> Helper loaded: cookie_helper
+INFO - 2025-03-21 18:48:10 --> Helper loaded: functiondd_helper
+INFO - 2025-03-21 18:48:10 --> Database Driver Class Initialized
+DEBUG - 2025-03-21 18:48:10 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-03-21 18:48:10 --> Session: Class initialized using 'files' driver.
+INFO - 2025-03-21 18:48:10 --> Controller Class Initialized
+INFO - 2025-03-21 18:48:10 --> Form Validation Class Initialized
+INFO - 2025-03-21 18:48:10 --> Model "Menu_model" initialized
+INFO - 2025-03-21 18:48:10 --> Helper loaded: common_helper
+INFO - 2025-03-21 18:48:10 --> Database Driver Class Initialized
+INFO - 2025-03-21 18:48:10 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/nav.php
+INFO - 2025-03-21 18:48:10 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/visitDuringInaugurationView.php
+INFO - 2025-03-21 18:48:10 --> File loaded: C:\wamp64\www\stemoppapp\application\views\templates/footer.php
+INFO - 2025-03-21 18:48:10 --> Final output sent to browser
+DEBUG - 2025-03-21 18:48:10 --> Total execution time: 0.2158

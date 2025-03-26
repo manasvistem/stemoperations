@@ -220,7 +220,7 @@ class Menu extends CI_Controller {
         $data['notify'] =   $notify;
         $data['user']   =   $user;
         $data['uid']    =   $uid;
-        $this->display($dep_name,'TransitProcess',$data);
+        $this->display($dep_name,'TransitProcess',$data,$type='');
     }
     public function PIATASKDETAIL(){
         $user = $this->session->userdata('user');
@@ -244,7 +244,7 @@ class Menu extends CI_Controller {
         $data['notify'] =  $notify;
         $data['user']   =  $user;
         $data['uid']    =  $uid;
-        $this->display($dep_name,'CreateGoals',$data);
+        $this->display($dep_name,'CreateGoals',$data,$type='');
     }
     public function MediaDownload(){
         if(isset($_POST['sdate'])){
@@ -2558,9 +2558,9 @@ class Menu extends CI_Controller {
         $dt             =   $this->Menu_model->get_depatment_byid($id);
         $dep_name       =   $dt[0]->dep_name;
         $data['dt']     =   $this->Menu_model->get_depatment_byid($depid);
-
+$data=  ['notify'=>$notify,'user'=>$user,'data'=>$dt, 'reg'=>$reg, 'procode'=>$procode, 'spd'=>$spd, 'status'=>$status];
         if(!empty($user)){
-            $this->display($dep_name,'editprofile', ['notify'=>$notify,'user'=>$user,'data'=>$dt, 'reg'=>$reg, 'procode'=>$procode, 'spd'=>$spd, 'status'=>$status]);
+            $this->display($dep_name,'editprofile',$data,$type='');
         }else{
             redirect('Menu/main');
         }
@@ -4138,7 +4138,7 @@ class Menu extends CI_Controller {
         $assignto = $this->input->post('assignto');
         $remark   = $this->input->post('remark');
         $exdate   = $this->input->post('exdate');
-        
+        $this->load->model('Menu_model');
         $this->load->library('session');
         $id       = $this->Menu_model->bdr_assignto($uid,$tid,$assignto,$remark,$exdate);
         $this->session->set_flashdata('success_message','  Task Created Successfully !!');
@@ -7069,7 +7069,6 @@ class Menu extends CI_Controller {
         $data['getTodaysTaskCounts']    = $getTodaysTaskCounts;
         $data['getTodaysTasks']         = $getTodaysTasks;
 
-    // dd($data);
 
         if(empty($user_day) && count($user_day)<= 0){
             $this->session->set_flashdata('error_message','* Please Start Your Day');
@@ -7089,14 +7088,15 @@ class Menu extends CI_Controller {
             $data['bdrzh']      = $this->Menu_model->get_bdreqestzh($uid);
             $data['dep_name']   = $data['dt'][0]->dep_name;
             $dep_name           = $data['dep_name'];
-            if($data['dep_name'] == "ProgramManager"){
-                 //   $data['bdrequest']  =  $this->load->view('bdrequest_data');
-                  $data['bdrequest']  =   $this->display($dep_name,'bdrequest_data',$data,$type='');
-            }
-
-            $data['utype'] =  $data['dt'][0]->id;
-            if(!empty($user)){// echo $data['dep_name']; 
-                $this->display($dep_name,'index',$data,$type='');
+            $data['utype']      = $data['dt'][0]->id;
+           
+           if(!empty($user)){
+                if($data['dep_name'] == "ProgramManager"){
+                    $data['bdrequest']  =   $this->display($dep_name,'bdrequest_data',$data,$type='');
+                }
+                else{
+                    $this->display($dep_name,'index',$data,$type='');
+                }
             }else{
                 redirect('Menu/main');
             }
@@ -7125,12 +7125,25 @@ class Menu extends CI_Controller {
             $dep_name                       = $depnameData[0]->dep_name;
 
         //  $data['getFactoryModelList']  = $this->Menu_model->getFactoryModelList();
-
-      //  $viewname = "callInstallationWithPRO";
+      
+    //  echo $viewname; exit;
         $this->display($dep_name,$viewname,$data,$type='modal');
           //  $this->display($dep_name,$viewname,$data,$type='modal');
     }
 
+    public function visitDuringMaintenance(){
+
+        $user              = $this->session->userdata('user');
+        $uid               = $user['user_id'];
+        $uyid              = $user['type_id'];
+        $dep_id            = $user['dep_id'];
+        $dt                = $this->Menu_model->get_depatment_byid($dep_id);
+        $dep_name          = $dt[0]->dep_name;
+        $data['taskId']                 = $taskId;
+        $data['taskType']               = $taskType;
+        $data['getFactoryModelList']    = $this->Menu_model->getFactoryModelList();
+        $this->display($dep_name,'VisitDuringMaintenance',$data,$type='');
+    }
     public function Dashboard1(){
         date_default_timezone_set('Asia/Kolkata');
         if (isset($_POST['submit'])) {
@@ -7393,13 +7406,13 @@ public function updateTask($tasktypeid=''){
   
   public function display($dept_name,$viewname,$data,$type){
         if($type !='modal'){
-          // $this->load->view('templates/header');
-             $this->load->view($dept_name.'/nav',$data);
-             $this->load->view($dept_name."/".$viewname,$data);
-             $this->load->view('templates/footer');
+            // $this->load->view('templates/header');
+            $this->load->view($dept_name.'/nav',$data);
+            $this->load->view($dept_name."/".$viewname,$data);
+            $this->load->view('templates/footer');
         }
         else{
-            $this->load->view($dept_name."/".$viewname,$data);
+            $this->load->view($dept_name."/".$viewname,$data,$type='');
         }
   }
   
@@ -7421,7 +7434,6 @@ public function updateTask($tasktypeid=''){
         $bdr          = $this->Menu_model->get_bdreqest($uid);
         $bdrzh        = $this->Menu_model->get_bdreqestzh($uid);
         $dep_name     = $dt[0]->dep_name;
-
         if(!empty($user)){
             $this->load->view($dep_name.'/TeamDailyReport', ['zhspd'=>$zhspd,'bdrzh'=>$bdrzh,'spd'=>$spd, 'user'=>$user,'notify'=>$notify,'program'=>$program,'status'=>$status,'td'=>$td,'date'=>$date,'bdr'=>$bdr]);
         }else{
@@ -7557,13 +7569,15 @@ public function updateTask($tasktypeid=''){
             redirect('Menu/main');
         }
     }
+
+   
     public function allbdrequest(){
         $code = 1 ;
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $uid= $user['id'];
         $id =  $user['dep_id'];
-        
+        $this->load->model('Menu_model');
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $bdr=$this->Menu_model->get_bdrbyd($code);
@@ -11203,12 +11217,13 @@ public function AllBDRequestAssign($rtype,$code){
 }
 
 
+
 public function bdrassign($rtype,$code){
     $user           = $this->session->userdata('user');
     $data['user']   = $user;$uid= $user['id'];
     $uid            = $user['id'];
     $id             =  $user['dep_id'];
-    
+    $this->load->model('Menu_model');
     $notify         = $this->Menu_model->get_notifybyid($uid);
     $dt             = $this->Menu_model->get_depatment_byid($id);
     // $bdr            = $this->Menu_model->get_bdrbyd($code);
@@ -11223,7 +11238,6 @@ public function bdrassign($rtype,$code){
         redirect('Menu/main');
     }
 }
-
 
 public function TheAssigningProcess($rtype,$reqID){
     $user           = $this->session->userdata('user');
@@ -11256,14 +11270,15 @@ public function BDREQUEST(){
     $data['user']    = $user;$uid= $user['id'];
     $uid             = $user['id'];
     $id              =  $user['dep_id'];
-    
     $notify          = $this->Menu_model->get_notifybyid($uid);
     $dt              = $this->Menu_model->get_depatment_byid($id);
     $bdr             = $this->Menu_model->get_bdrbyd($code);
     $bdrcount        = $this->Menu_model->get_bdrcount();
     $dep_name        = $dt[0]->dep_name;
+    $data            = ['user'=>$user,'notify'=>$notify,'bdr'=>$bdr,'bdrcount'=>$bdrcount];
+  //dd($data);
     if(!empty($user)){
-        $this->load->view($dep_name.'/BDREQUEST', ['user'=>$user,'notify'=>$notify,'bdr'=>$bdr,'bdrcount'=>$bdrcount]);
+        $this->display($dep_name,'bdrequest',$data,$type ='');
     }else{
         redirect('Menu/main');
     }
@@ -11362,11 +11377,8 @@ public function GetTaskOnBDRequestTBLTaskIdResearch(){
     $data['user']   = $user;$uid= $user['id'];
     $uid            = $user['id'];
     $id             =  $user['dep_id'];
-    
-
     $selectedTaskId = $this->input->post('tbltaskId');
     $reqID          = $this->input->post('reqID');
-
     $taskDatas      = $this->Menu_model->GetBDRequestTaskByRequestIDWithTBLTaskIDSResearch($reqID,$selectedTaskId);
     // echo $this->db->last_query();
     // echo '<option value="">Select</option>';
@@ -11753,14 +11765,13 @@ public function updateVisitDuringInstallation(){
                             'status'       => 'active',
                             'tbe_id'       => $taskId
                           ];
-    $projectDetails         = $this->Menu_model->getTasksAllDetails($taskId);
+    $projectDetails       = $this->Menu_model->getTasksAllDetails($taskId);
 
     // foreach($projectDetails as $detailsKey=>$detailsVal){
     //     $nonworkingmodeldata['project']     = $detailsVal[''];
     //     $nonworkingmodeldata['school_name']    = $detailsVal[];
     //     $nonworkingmodeldata['address']       = $detailsVal[];
     // }
-
     
     $uploaded_files         = $_FILES;
     $file_array_key         = array_keys($uploaded_files);
@@ -11948,5 +11959,1539 @@ public function updateCallPreIntervention(){
 
     echo json_encode(["status" => "success"]);
 }
+
+public function updatePreMaintenance(){
+    dd($_POST);
+}
+public function visitDuringMaintenanceIM(){
+    dd($_POST);
+}
+
+
+
+
+// Deepak's code 
+
+public function BDRequestAssignToProcessOtherDepartmentCallorVisit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+
+    $this->load->model('Menu_model');
+
+    $reqID              = $this->input->post('reqID');
+    $request_code       = $this->input->post('request_code');
+    $task_ids           = $this->input->post('task_id');
+    $assignto           = $this->input->post('assignto');
+    $exdate             = $this->input->post('exdate');
+    $remark             = $this->input->post('remark');
+
+    $fwd_date               = $exdate;
+    $cretaeTaskLists        = $this->Menu_model->GetBDRCallEventsTaskBYBDRID($reqID);
+   
+    $exdate                 = date('Y-m-d H:i', strtotime($exdate));
+    $task_assigned_date     = date("Y-m-d H:i:s");
+    $k=0;
+    foreach($task_ids as $task_id){
+
+        $data = [
+            'user_id'                   => $assignto[$k],
+            'assigned_by'               => $uid,
+            'task_assigned_date'        => $task_assigned_date,
+            'appointment_datetime'      => $exdate,
+            'target_date'               => $exdate,
+            'exdate'                    => $exdate,
+            'comments'                  => $uid,
+            'comment_by'                => $remark
+        ];
+        
+        $this->db->where('id', $task_id);
+        $this->db->update('tblcallevents', $data);
+        $k++;
+    }
+
+    $data1 = [
+        'status'                => 1,
+        'assignstatus'          => 1,
+        'assign_by'             => $uid,
+        'assignid_date'         => $task_assigned_date,
+        'assigning_remarks'     => $remark
+    ];
+    
+    $this->db->where('id', $reqID);
+    $query = $this->db->update('bdrequest', $data1);
+
+    $this->load->library('session');
+    $this->session->set_flashdata('success_message',' Other Department Call or Visit Task Assigned Successfully !!');
+    redirect('Menu/BDRequestAssignToProcessOtherDepartment/'.$request_code.'/'.$reqID.'/');
+}
+
+public function BDRequestAssignToProcessInstallationPersonCallorVisit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+
+    $this->load->model('Menu_model');
+
+    $reqID              = $this->input->post('reqID');
+    $request_code       = $this->input->post('request_code');
+    $task_ids           = $this->input->post('task_id');
+    $assignto           = $this->input->post('assignto');
+    $exdate             = $this->input->post('exdate');
+    $remark             = $this->input->post('remark');
+
+    $fwd_date               = $exdate;
+    $cretaeTaskLists        = $this->Menu_model->GetBDRCallEventsTaskBYBDRID($reqID);
+   
+    $exdate                 = date('Y-m-d H:i', strtotime($exdate));
+    $task_assigned_date     = date("Y-m-d H:i:s");
+    $k=0;
+    foreach($task_ids as $task_id){
+
+        $data = [
+            'user_id'                   => $assignto[$k],
+            'assigned_by'               => $uid,
+            'task_assigned_date'        => $task_assigned_date,
+            'appointment_datetime'      => $exdate,
+            'target_date'               => $exdate,
+            'exdate'                    => $exdate,
+            'comments'                  => $uid,
+            'comment_by'                => $remark
+        ];
+        
+        $this->db->where('id', $task_id);
+        $this->db->update('tblcallevents', $data);
+        $k++;
+    }
+
+    $data1 = [
+        'status'                => 1,
+        'assignstatus'          => 1,
+        'assign_by'             => $uid,
+        'assignid_date'         => $task_assigned_date,
+        'assigning_remarks'     => $remark
+    ];
+    
+    $this->db->where('id', $reqID);
+    $query = $this->db->update('bdrequest', $data1);
+
+    $this->load->library('session');
+    $this->session->set_flashdata('success_message',' Installation Person Call or Visit Task Assigned Successfully !!');
+    redirect('Menu/TheAssigningProcessOfInstallationPersonCallOrVisitBDRequest/'.$request_code.'/'.$reqID.'/');
+}
+
+
+// Closed PIA Call or Visit
+// Start Installation Person Call or Visit
+public function TheAssigningProcessOfInstallationPersonCallOrVisitBDRequest($rtype,$reqID){
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $notify         = $this->Menu_model->get_notifybyid($uid);
+    $dt             = $this->Menu_model->get_depatment_byid($id);
+    $bdr            = $this->Menu_model->GetBDRequestByRequestID($reqID);
+    $reqData        = $this->Menu_model->GetBDRequestALLInfoBYRequestCode($rtype);
+
+    $getSPDRequest       = $this->Menu_model->GetBDRequestTimeSPDRequest($reqID);
+    $getDMLatterTask     = $this->Menu_model->GetDMDEOLetterRequiredTaskByRID($reqID);
+
+    $getSPDData          = $this->Menu_model->getSPDDataByPCode($bdr[0]->project_code);
+
+    $dep_name       = $dt[0]->dep_name;
+   
+    if(!empty($user)){
+        $this->load->view($dep_name.'/TheAssigningProcessOfInstallationPersonCallOrVisitBDRequest', ['rtype'=>$rtype,'user'=>$user,'notify'=>$notify,'bdr'=>$bdr,'reqData'=>$reqData,'reqID'=>$reqID,'getSPDRequest'=>$getSPDRequest,'getDMLatterTask'=>$getDMLatterTask,'getSPDData'=>$getSPDData]);
+    }else{
+        redirect('Menu/main');
+    }
+}
+public function BDRequestAssignToProcessPIACallorVisit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+
+    $this->load->model('Menu_model');
+
+    $reqID              = $this->input->post('reqID');
+    $request_code       = $this->input->post('request_code');
+    $task_ids           = $this->input->post('task_id');
+    $assignto           = $this->input->post('assignto');
+    $exdate             = $this->input->post('exdate');
+    $remark             = $this->input->post('remark');
+
+    $fwd_date               = $exdate;
+    $cretaeTaskLists        = $this->Menu_model->GetBDRCallEventsTaskBYBDRID($reqID);
+   
+    $exdate                 = date('Y-m-d H:i', strtotime($exdate));
+    $task_assigned_date     = date("Y-m-d H:i:s");
+    $k=0;
+    foreach($task_ids as $task_id){
+
+        $data = [
+            'user_id'                   => $assignto[$k],
+            'assigned_by'               => $uid,
+            'task_assigned_date'        => $task_assigned_date,
+            'appointment_datetime'      => $exdate,
+            'target_date'               => $exdate,
+            'exdate'                    => $exdate,
+            'comments'                  => $uid,
+            'comment_by'                => $remark
+        ];
+        
+        $this->db->where('id', $task_id);
+        $this->db->update('tblcallevents', $data);
+        $k++;
+    }
+
+    $data1 = [
+        'status'                => 1,
+        'assignstatus'          => 1,
+        'assign_by'             => $uid,
+        'assignid_date'         => $task_assigned_date,
+        'assigning_remarks'     => $remark
+    ];
+    
+    $this->db->where('id', $reqID);
+    $query = $this->db->update('bdrequest', $data1);
+
+    $this->load->library('session');
+    $this->session->set_flashdata('success_message',' PIA Call or Visit Task Assigned Successfully !!');
+    redirect('Menu/TheAssigningProcessOfPIACallOrVisitBDRequest/'.$request_code.'/'.$reqID.'/');
+}
+
+
+// Start PIA Call or Visit
+public function TheAssigningProcessOfPIACallOrVisitBDRequest($rtype,$reqID){
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $notify         = $this->Menu_model->get_notifybyid($uid);
+    $dt             = $this->Menu_model->get_depatment_byid($id);
+    $bdr            = $this->Menu_model->GetBDRequestByRequestID($reqID);
+    $reqData        = $this->Menu_model->GetBDRequestALLInfoBYRequestCode($rtype);
+
+    $getSPDRequest       = $this->Menu_model->GetBDRequestTimeSPDRequest($reqID);
+    $getDMLatterTask     = $this->Menu_model->GetDMDEOLetterRequiredTaskByRID($reqID);
+
+    $getSPDData          = $this->Menu_model->getSPDDataByPCode($bdr[0]->project_code);
+
+    $dep_name       = $dt[0]->dep_name;
+   
+    if(!empty($user)){
+        $this->load->view($dep_name.'/TheAssigningProcessOfPIACallOrVisitBDRequest', ['rtype'=>$rtype,'user'=>$user,'notify'=>$notify,'bdr'=>$bdr,'reqData'=>$reqData,'reqID'=>$reqID,'getSPDRequest'=>$getSPDRequest,'getDMLatterTask'=>$getDMLatterTask,'getSPDData'=>$getSPDData]);
+    }else{
+        redirect('Menu/main');
+    }
+}
+
+public function BDRequestAssignToProcessPMCallorVisit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+
+    $this->load->model('Menu_model');
+
+    $reqID              = $this->input->post('reqID');
+    $request_code       = $this->input->post('request_code');
+    $task_ids           = $this->input->post('task_id');
+    $assignto           = $this->input->post('assignto');
+    $exdate             = $this->input->post('exdate');
+    $remark             = $this->input->post('remark');
+
+    $fwd_date               = $exdate;
+    $cretaeTaskLists        = $this->Menu_model->GetBDRCallEventsTaskBYBDRID($reqID);
+   
+    $exdate                 = date('Y-m-d H:i', strtotime($exdate));
+    $task_assigned_date     = date("Y-m-d H:i:s");
+    $k=0;
+    foreach($task_ids as $task_id){
+
+        $data = [
+            'user_id'                   => $assignto[$k],
+            'assigned_by'               => $uid,
+            'task_assigned_date'        => $task_assigned_date,
+            'appointment_datetime'      => $exdate,
+            'target_date'               => $exdate,
+            'exdate'                    => $exdate,
+            'comments'                  => $uid,
+            'comment_by'                => $remark
+        ];
+        
+        $this->db->where('id', $task_id);
+        $this->db->update('tblcallevents', $data);
+        $k++;
+    }
+
+    $data1 = [
+        'status'                => 1,
+        'assignstatus'          => 1,
+        'assign_by'             => $uid,
+        'assignid_date'         => $task_assigned_date,
+        'assigning_remarks'     => $remark
+    ];
+    
+    $this->db->where('id', $reqID);
+    $query = $this->db->update('bdrequest', $data1);
+
+    $this->load->library('session');
+    $this->session->set_flashdata('success_message',' PM Call or Visit Task Assigned Successfully !!');
+    redirect('Menu/TheAssigningProcessOfPMCallOrVisitBDRequest/'.$request_code.'/'.$reqID.'/');
+}
+
+
+// Start PM Call or Visit
+public function TheAssigningProcessOfPMCallOrVisitBDRequest($rtype,$reqID){
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $notify         = $this->Menu_model->get_notifybyid($uid);
+    $dt             = $this->Menu_model->get_depatment_byid($id);
+    $bdr            = $this->Menu_model->GetBDRequestByRequestID($reqID);
+    $reqData        = $this->Menu_model->GetBDRequestALLInfoBYRequestCode($rtype);
+
+    $getSPDRequest       = $this->Menu_model->GetBDRequestTimeSPDRequest($reqID);
+    $getDMLatterTask     = $this->Menu_model->GetDMDEOLetterRequiredTaskByRID($reqID);
+
+    $getSPDData          = $this->Menu_model->getSPDDataByPCode($bdr[0]->project_code);
+
+    $dep_name       = $dt[0]->dep_name;
+   
+    if(!empty($user)){
+        $this->load->view($dep_name.'/TheAssigningProcessOfPMCallOrVisitBDRequest', ['rtype'=>$rtype,'user'=>$user,'notify'=>$notify,'bdr'=>$bdr,'reqData'=>$reqData,'reqID'=>$reqID,'getSPDRequest'=>$getSPDRequest,'getDMLatterTask'=>$getDMLatterTask,'getSPDData'=>$getSPDData]);
+    }else{
+        redirect('Menu/main');
+    }
+}
+
+
+public function BDRequestAssignToProcessCMCallorVisit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+
+    $this->load->model('Menu_model');
+
+    $reqID              = $this->input->post('reqID');
+    $request_code       = $this->input->post('request_code');
+    $task_ids           = $this->input->post('task_id');
+    $assignto           = $this->input->post('assignto');
+    $exdate             = $this->input->post('exdate');
+    $remark             = $this->input->post('remark');
+
+//   dd($_POST);
+
+    $fwd_date               = $exdate;
+    $cretaeTaskLists        = $this->Menu_model->GetBDRCallEventsTaskBYBDRID($reqID);
+   
+    $exdate                 = date('Y-m-d H:i', strtotime($exdate));
+    $task_assigned_date     = date("Y-m-d H:i:s");
+    $k=0;
+    foreach($task_ids as $task_id){
+
+        $data = [
+            'user_id'                   => $assignto[$k],
+            'assigned_by'               => $uid,
+            'task_assigned_date'        => $task_assigned_date,
+            'appointment_datetime'      => $exdate,
+            'target_date'               => $exdate,
+            'exdate'                    => $exdate,
+            'comments'                  => $uid,
+            'comment_by'                => $remark
+        ];
+        
+        $this->db->where('id', $task_id);
+        $this->db->update('tblcallevents', $data);
+        $k++;
+    }
+
+    $data1 = [
+        'status'                => 1,
+        'assignstatus'          => 1,
+        'assign_by'             => $uid,
+        'assignid_date'         => $task_assigned_date,
+        'assigning_remarks'     => $remark
+    ];
+    
+    $this->db->where('id', $reqID);
+    $query = $this->db->update('bdrequest', $data1);
+
+    $this->load->library('session');
+    $this->session->set_flashdata('success_message',' CM Call or Visit Task Assigned Successfully !!');
+    redirect('Menu/TheAssigningProcessOfCMCallOrVisitBDRequest/'.$request_code.'/'.$reqID.'/');
+}
+
+// Start CM Call or Visit
+public function TheAssigningProcessOfCMCallOrVisitBDRequest($rtype,$reqID){
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $notify         = $this->Menu_model->get_notifybyid($uid);
+    $dt             = $this->Menu_model->get_depatment_byid($id);
+    $bdr            = $this->Menu_model->GetBDRequestByRequestID($reqID);
+    $reqData        = $this->Menu_model->GetBDRequestALLInfoBYRequestCode($rtype);
+
+    $getSPDRequest       = $this->Menu_model->GetBDRequestTimeSPDRequest($reqID);
+    $getDMLatterTask     = $this->Menu_model->GetDMDEOLetterRequiredTaskByRID($reqID);
+
+    $getSPDData          = $this->Menu_model->getSPDDataByPCode($bdr[0]->project_code);
+
+    $dep_name       = $dt[0]->dep_name;
+   
+    if(!empty($user)){
+        $this->load->view($dep_name.'/TheAssigningProcessOfCMCallOrVisitBDRequest', ['rtype'=>$rtype,'user'=>$user,'notify'=>$notify,'bdr'=>$bdr,'reqData'=>$reqData,'reqID'=>$reqID,'getSPDRequest'=>$getSPDRequest,'getDMLatterTask'=>$getDMLatterTask,'getSPDData'=>$getSPDData]);
+    }else{
+        redirect('Menu/main');
+    }
+}
+public function BDRequestAssignToProcessReportCustmized(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+
+    $this->load->model('Menu_model');
+
+    $reqID              = $this->input->post('reqID');
+    $request_code       = $this->input->post('request_code');
+    $task_ids           = $this->input->post('task_id');
+    $assignto           = $this->input->post('assignto');
+    $exdate             = $this->input->post('exdate');
+    $remark             = $this->input->post('remark');
+
+  
+
+    $fwd_date               = $exdate;
+    $cretaeTaskLists        = $this->Menu_model->GetBDRCallEventsTaskBYBDRID($reqID);
+   
+    $exdate                 = date('Y-m-d H:i', strtotime($exdate));
+    $task_assigned_date     = date("Y-m-d H:i:s");
+    $k=0;
+    foreach($task_ids as $task_id){
+
+        $data = [
+            'user_id'                   => $assignto[$k],
+            'sid'                       => '',
+            'assigned_by'               => $uid,
+            'task_assigned_date'        => $task_assigned_date,
+            'appointment_datetime'      => $exdate,
+            'target_date'               => $exdate,
+            'exdate'                    => $exdate,
+            'comments'                  => $uid,
+            'comment_by'                => $remark
+        ];
+        
+        $this->db->where('id', $task_id);
+        $this->db->update('tblcallevents', $data);
+        $k++;
+    }
+
+    $data1 = [
+        'status'                => 1,
+        'assignstatus'          => 1,
+        'assign_by'             => $uid,
+        'assignid_date'         => $task_assigned_date,
+        'assigning_remarks'     => $remark
+    ];
+    
+    $this->db->where('id', $reqID);
+    $query = $this->db->update('bdrequest', $data1);
+
+    $this->load->library('session');
+    $this->session->set_flashdata('success_message',' Reports (any customized) Task Assigned Successfully !!');
+    redirect('Menu/TheAssigningProcessOfReportCustmizedBDRequest/'.$request_code.'/'.$reqID.'/');
+}
+// Start Custmized Report 
+public function TheAssigningProcessOfReportCustmizedBDRequest($rtype,$reqID){
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $notify         = $this->Menu_model->get_notifybyid($uid);
+    $dt             = $this->Menu_model->get_depatment_byid($id);
+    $bdr            = $this->Menu_model->GetBDRequestByRequestID($reqID);
+    $reqData        = $this->Menu_model->GetBDRequestALLInfoBYRequestCode($rtype);
+
+    $getSPDRequest       = $this->Menu_model->GetBDRequestTimeSPDRequest($reqID);
+    $getDMLatterTask     = $this->Menu_model->GetDMDEOLetterRequiredTaskByRID($reqID);
+
+    $getSPDData          = $this->Menu_model->getSPDDataByPCode($bdr[0]->project_code);
+
+    $dep_name       = $dt[0]->dep_name;
+   
+    if(!empty($user)){
+        $this->load->view($dep_name.'/TheAssigningProcessOfReportCustmizedBDRequest', ['rtype'=>$rtype,'user'=>$user,'notify'=>$notify,'bdr'=>$bdr,'reqData'=>$reqData,'reqID'=>$reqID,'getSPDRequest'=>$getSPDRequest,'getDMLatterTask'=>$getDMLatterTask,'getSPDData'=>$getSPDData]);
+    }else{
+        redirect('Menu/main');
+    }
+}
+
+public function BDRequestAssignToProcessOnBoardClientSchoolVisit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+
+    $this->load->model('Menu_model');
+
+    $reqID              = $this->input->post('reqID');
+    $request_code       = $this->input->post('request_code');
+    $task_ids           = $this->input->post('task_id');
+    $assignto           = $this->input->post('assignto');
+    $sid                = $this->input->post('sid');
+    $exdate             = $this->input->post('exdate');
+    $remark             = $this->input->post('remark');
+
+  
+
+    $fwd_date               = $exdate;
+    $cretaeTaskLists        = $this->Menu_model->GetBDRCallEventsTaskBYBDRID($reqID);
+   
+    $exdate                 = date('Y-m-d H:i', strtotime($exdate));
+    $task_assigned_date     = date("Y-m-d H:i:s");
+    $k=0;
+    foreach($task_ids as $task_id){
+
+        $data = [
+            'user_id'                   => $assignto[$k],
+            'sid'                       => $sid[$k],
+            'assigned_by'               => $uid,
+            'task_assigned_date'        => $task_assigned_date,
+            'appointment_datetime'      => $exdate,
+            'target_date'               => $exdate,
+            'exdate'                    => $exdate,
+            'comments'                  => $uid,
+            'comment_by'                => $remark
+        ];
+        
+        $this->db->where('id', $task_id);
+        $this->db->update('tblcallevents', $data);
+        $k++;
+    }
+
+    $data1 = [
+        'status'                => 1,
+        'assignstatus'          => 1,
+        'assign_by'             => $uid,
+        'assignid_date'         => $task_assigned_date,
+        'assigning_remarks'     => $remark
+    ];
+    
+    $this->db->where('id', $reqID);
+    $query = $this->db->update('bdrequest', $data1);
+
+    $this->load->library('session');
+    $this->session->set_flashdata('success_message',' On Board Client Visit Task Assigned Successfully !!');
+    redirect('Menu/TheAssigningProcessOfOnBoardClientVisitBDRequest/'.$request_code.'/'.$reqID.'/');
+}
+
+
+public function TheAssigningProcessOfOnBoardClientVisitBDRequest($rtype,$reqID){
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $notify         = $this->Menu_model->get_notifybyid($uid);
+    $dt             = $this->Menu_model->get_depatment_byid($id);
+    $bdr            = $this->Menu_model->GetBDRequestByRequestID($reqID);
+    $reqData        = $this->Menu_model->GetBDRequestALLInfoBYRequestCode($rtype);
+
+    $getSPDRequest       = $this->Menu_model->GetBDRequestTimeSPDRequest($reqID);
+    $getDMLatterTask     = $this->Menu_model->GetDMDEOLetterRequiredTaskByRID($reqID);
+
+    $getSPDData          = $this->Menu_model->getSPDDataByPCode($bdr[0]->project_code);
+
+    $dep_name       = $dt[0]->dep_name;
+   
+    if(!empty($user)){
+        $this->load->view($dep_name.'/TheAssigningProcessOfOnBoardClientVisitBDRequest', ['rtype'=>$rtype,'user'=>$user,'notify'=>$notify,'bdr'=>$bdr,'reqData'=>$reqData,'reqID'=>$reqID,'getSPDRequest'=>$getSPDRequest,'getDMLatterTask'=>$getDMLatterTask,'getSPDData'=>$getSPDData]);
+    }else{
+        redirect('Menu/main');
+    }
+}
+
+public function BDRequestAssignToProcessNewClientReport(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+
+    $this->load->model('Menu_model');
+
+    $reqID              = $this->input->post('reqID');
+    $request_code       = $this->input->post('request_code');
+    $task_ids           = $this->input->post('task_id');
+    $assignto           = $this->input->post('assignto');
+    $exdate             = $this->input->post('exdate');
+    $remark             = $this->input->post('remark');
+
+    $fwd_date               = $exdate;
+    $cretaeTaskLists        = $this->Menu_model->GetBDRCallEventsTaskBYBDRID($reqID);
+   
+    $exdate                 = date('Y-m-d H:i', strtotime($exdate));
+    $task_assigned_date     = date("Y-m-d H:i:s");
+    $k=0;
+    foreach($task_ids as $task_id){
+
+        $data = [
+            'user_id'                   => $assignto[$k],
+            'assigned_by'               => $uid,
+            'task_assigned_date'        => $task_assigned_date,
+            'appointment_datetime'      => $exdate,
+            'target_date'               => $exdate,
+            'exdate'                    => $exdate,
+            'comments'                  => $uid,
+            'comment_by'                => $remark
+        ];
+        
+        $this->db->where('id', $task_id);
+        $this->db->update('tblcallevents', $data);
+        $k++;
+    }
+
+    $data1 = [
+        'status'                => 1,
+        'assignstatus'          => 1,
+        'assign_by'             => $uid,
+        'assignid_date'         => $task_assigned_date,
+        'assigning_remarks'     => $remark
+    ];
+    
+    $this->db->where('id', $reqID);
+    $query = $this->db->update('bdrequest', $data1);
+
+    $this->load->library('session');
+    $this->session->set_flashdata('success_message',' New Client Report Task Assigned Successfully !!');
+    redirect('Menu/TheAssigningProcessOfNewClientReportBDRequest/'.$request_code.'/'.$reqID.'/');
+}
+// Start New Client Report BD Request
+public function TheAssigningProcessOfNewClientReportBDRequest($rtype,$reqID){
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $notify         = $this->Menu_model->get_notifybyid($uid);
+    $dt             = $this->Menu_model->get_depatment_byid($id);
+    $bdr            = $this->Menu_model->GetBDRequestByRequestID($reqID);
+    $reqData        = $this->Menu_model->GetBDRequestALLInfoBYRequestCode($rtype);
+
+    $getSPDRequest       = $this->Menu_model->GetBDRequestTimeSPDRequest($reqID);
+    $getDMLatterTask     = $this->Menu_model->GetDMDEOLetterRequiredTaskByRID($reqID);
+
+    $dep_name       = $dt[0]->dep_name;
+   
+    if(!empty($user)){
+        $this->load->view($dep_name.'/TheAssigningProcessOfNewClientReportBDRequest', ['rtype'=>$rtype,'user'=>$user,'notify'=>$notify,'bdr'=>$bdr,'reqData'=>$reqData,'reqID'=>$reqID,'getSPDRequest'=>$getSPDRequest,'getDMLatterTask'=>$getDMLatterTask]);
+    }else{
+        redirect('Menu/main');
+    }
+}
+
+public function BDRequestAssignToProcessOfflineDemo(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+
+    $this->load->model('Menu_model');
+
+    $reqID              = $this->input->post('reqID');
+    $request_code       = $this->input->post('request_code');
+    $task_ids           = $this->input->post('task_id');
+    $assignto           = $this->input->post('assignto');
+    $exdate             = $this->input->post('exdate');
+    $remark             = $this->input->post('remark');
+
+    $fwd_date               = $exdate;
+    $cretaeTaskLists        = $this->Menu_model->GetBDRCallEventsTaskBYBDRID($reqID);
+   
+    $exdate                 = date('Y-m-d H:i', strtotime($exdate));
+    $task_assigned_date     = date("Y-m-d H:i:s");
+    $k=0;
+    foreach($task_ids as $task_id){
+
+        $data = [
+            'user_id'                   => $assignto[$k],
+            'assigned_by'               => $uid,
+            'task_assigned_date'        => $task_assigned_date,
+            'appointment_datetime'      => $exdate,
+            'target_date'               => $exdate,
+            'exdate'                    => $exdate,
+            'comments'                  => $uid,
+            'comment_by'                => $remark
+        ];
+        
+        $this->db->where('id', $task_id);
+        $this->db->update('tblcallevents', $data);
+        $k++;
+    }
+
+    $data1 = [
+        'status'                => 1,
+        'assignstatus'          => 1,
+        'assign_by'             => $uid,
+        'assignid_date'         => $task_assigned_date,
+        'assigning_remarks'     => $remark
+    ];
+    
+    $this->db->where('id', $reqID);
+    $query = $this->db->update('bdrequest', $data1);
+
+    $this->load->library('session');
+    $this->session->set_flashdata('success_message',' Offline Demo Task Assigned Successfully !!');
+    redirect('Menu/TheAssigningProcessOfOfflineDemoBDRequest/'.$request_code.'/'.$reqID.'/');
+}
+
+public function TheAssigningProcessOfOfflineDemoBDRequest($rtype,$reqID){
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $notify         = $this->Menu_model->get_notifybyid($uid);
+    $dt             = $this->Menu_model->get_depatment_byid($id);
+    $bdr            = $this->Menu_model->GetBDRequestByRequestID($reqID);
+    $reqData        = $this->Menu_model->GetBDRequestALLInfoBYRequestCode($rtype);
+
+    $getSPDRequest       = $this->Menu_model->GetBDRequestTimeSPDRequest($reqID);
+    $getDMLatterTask     = $this->Menu_model->GetDMDEOLetterRequiredTaskByRID($reqID);
+
+    $dep_name       = $dt[0]->dep_name;
+   
+    if(!empty($user)){
+        $this->load->view($dep_name.'/TheAssigningProcessOfOfflineDemoBDRequest', ['rtype'=>$rtype,'user'=>$user,'notify'=>$notify,'bdr'=>$bdr,'reqData'=>$reqData,'reqID'=>$reqID,'getSPDRequest'=>$getSPDRequest,'getDMLatterTask'=>$getDMLatterTask]);
+    }else{
+        redirect('Menu/main');
+    }
+}
+
+public function BDRequestAssignToProcessOnlineDemo(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+
+    $this->load->model('Menu_model');
+
+    $reqID              = $this->input->post('reqID');
+    $request_code       = $this->input->post('request_code');
+    $task_ids           = $this->input->post('task_id');
+    $assignto           = $this->input->post('assignto');
+    $exdate             = $this->input->post('exdate');
+    $remark             = $this->input->post('remark');
+
+    $fwd_date               = $exdate;
+    $cretaeTaskLists        = $this->Menu_model->GetBDRCallEventsTaskBYBDRID($reqID);
+   
+    $exdate                 = date('Y-m-d H:i', strtotime($exdate));
+    $task_assigned_date     = date("Y-m-d H:i:s");
+    $k=0;
+    foreach($task_ids as $task_id){
+
+        $data = [
+            'user_id'                   => $assignto[$k],
+            'assigned_by'               => $uid,
+            'task_assigned_date'        => $task_assigned_date,
+            'appointment_datetime'      => $exdate,
+            'target_date'               => $exdate,
+            'exdate'                    => $exdate,
+            'comments'                  => $uid,
+            'comment_by'                => $remark
+        ];
+        
+        $this->db->where('id', $task_id);
+        $this->db->update('tblcallevents', $data);
+        $k++;
+    }
+
+    $data1 = [
+        'status'                => 1,
+        'assignstatus'          => 1,
+        'assign_by'             => $uid,
+        'assignid_date'         => $task_assigned_date,
+        'assigning_remarks'     => $remark
+    ];
+    
+    $this->db->where('id', $reqID);
+    $query = $this->db->update('bdrequest', $data1);
+
+    $this->load->library('session');
+    $this->session->set_flashdata('success_message',' Online Demo Task Assigned Successfully !!');
+    redirect('Menu/TheAssigningProcessOfOnlineDemoBDRequest/'.$request_code.'/'.$reqID.'/');
+}
+
+public function TheAssigningProcessOfOnlineDemoBDRequest($rtype,$reqID){
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $notify         = $this->Menu_model->get_notifybyid($uid);
+    $dt             = $this->Menu_model->get_depatment_byid($id);
+    $bdr            = $this->Menu_model->GetBDRequestByRequestID($reqID);
+    $reqData        = $this->Menu_model->GetBDRequestALLInfoBYRequestCode($rtype);
+
+    $getSPDRequest       = $this->Menu_model->GetBDRequestTimeSPDRequest($reqID);
+    $getDMLatterTask     = $this->Menu_model->GetDMDEOLetterRequiredTaskByRID($reqID);
+
+    $dep_name       = $dt[0]->dep_name;
+   
+    if(!empty($user)){
+        $this->load->view($dep_name.'/TheAssigningProcessOfOnlineDemoBDRequest', ['rtype'=>$rtype,'user'=>$user,'notify'=>$notify,'bdr'=>$bdr,'reqData'=>$reqData,'reqID'=>$reqID,'getSPDRequest'=>$getSPDRequest,'getDMLatterTask'=>$getDMLatterTask]);
+    }else{
+        redirect('Menu/main');
+    }
+}
+
+
+public function BDRequestAssignToProcessNewClientSchoolVisit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+
+    $this->load->model('Menu_model');
+
+    $reqID              = $this->input->post('reqID');
+    $request_code       = $this->input->post('request_code');
+    $task_ids           = $this->input->post('task_id');
+    $assignto           = $this->input->post('assignto');
+    $exdate             = $this->input->post('exdate');
+    $remark             = $this->input->post('remark');
+
+    $fwd_date               = $exdate;
+    $cretaeTaskLists        = $this->Menu_model->GetBDRCallEventsTaskBYBDRID($reqID);
+   
+    $exdate                 = date('Y-m-d H:i', strtotime($exdate));
+    $task_assigned_date     = date("Y-m-d H:i:s");
+    $k=0;
+    foreach($task_ids as $task_id){
+
+        $data = [
+            'user_id'                   => $assignto[$k],
+            'assigned_by'               => $uid,
+            'task_assigned_date'        => $task_assigned_date,
+            'appointment_datetime'      => $exdate,
+            'target_date'               => $exdate,
+            'exdate'                    => $exdate,
+            'comments'                  => $uid,
+            'comment_by'                => $remark
+        ];
+        
+        $this->db->where('id', $task_id);
+        $this->db->update('tblcallevents', $data);
+        $k++;
+    }
+
+    $data1 = [
+        'status'                => 1,
+        'assignstatus'          => 1,
+        'assign_by'             => $uid,
+        'assignid_date'         => $task_assigned_date,
+        'assigning_remarks'     => $remark
+    ];
+    
+    $this->db->where('id', $reqID);
+    $query = $this->db->update('bdrequest', $data1);
+
+    $this->load->library('session');
+    $this->session->set_flashdata('success_message',' New Client School Visit Task Assigned Successfully !!');
+    redirect('Menu/TheAssigningProcessOfNewClientSchoolVisitBDRequest/'.$request_code.'/'.$reqID.'/');
+}
+// Start New client school visit
+public function TheAssigningProcessOfNewClientSchoolVisitBDRequest($rtype,$reqID){
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $notify         = $this->Menu_model->get_notifybyid($uid);
+    $dt             = $this->Menu_model->get_depatment_byid($id);
+    $bdr            = $this->Menu_model->GetBDRequestByRequestID($reqID);
+    $reqData        = $this->Menu_model->GetBDRequestALLInfoBYRequestCode($rtype);
+
+    $getSPDRequest       = $this->Menu_model->GetBDRequestTimeSPDRequest($reqID);
+    $getDMLatterTask     = $this->Menu_model->GetDMDEOLetterRequiredTaskByRID($reqID);
+
+    $dep_name       = $dt[0]->dep_name;
+   
+    if(!empty($user)){
+        $this->load->view($dep_name.'/TheAssigningProcessOfNewClientSchoolVisitBDRequest', ['rtype'=>$rtype,'user'=>$user,'notify'=>$notify,'bdr'=>$bdr,'reqData'=>$reqData,'reqID'=>$reqID,'getSPDRequest'=>$getSPDRequest,'getDMLatterTask'=>$getDMLatterTask]);
+    }else{
+        redirect('Menu/main');
+    }
+}
+
+public function BDRequestAssignToProcessDIY(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+
+    $this->load->model('Menu_model');
+
+    $reqID              = $this->input->post('reqID');
+    $request_code       = $this->input->post('request_code');
+    $assignto           = $this->input->post('assignto');
+    $exdate             = $this->input->post('exdate');
+    $remark             = $this->input->post('remark');
+
+    $fwd_date               = $exdate;
+    $cretaeTaskLists        = $this->Menu_model->GetBDRCallEventsTaskBYBDRID($reqID);
+   
+    $exdate                 = date('Y-m-d H:i', strtotime($exdate));
+    $task_assigned_date     = date("Y-m-d H:i:s");
+    $k=0;
+    foreach($cretaeTaskLists as $tasklist){
+
+        $data = [
+            'user_id'                   => $assignto,
+            'assigned_by'               => $uid,
+            'task_assigned_date'        => $task_assigned_date,
+            'appointment_datetime'      => $exdate,
+            'target_date'               => $exdate,
+            'exdate'                    => $exdate,
+            'comments'                  => $uid,
+            'comment_by'                => $remark
+        ];
+        
+        $this->db->where('id', $tasklist->id);
+        $this->db->update('tblcallevents', $data);
+        $k++;
+    }
+
+    $data1 = [
+        'status'                => 1,
+        'assignstatus'          => 1,
+        'assign_by'             => $uid,
+        'assignid_date'         => $task_assigned_date,
+        'assigning_remarks'     => $remark
+    ];
+    
+    $this->db->where('id', $reqID);
+    $query = $this->db->update('bdrequest', $data1);
+
+    $this->load->library('session');
+    $this->session->set_flashdata('success_message',' DIY Task Assigned Successfully !!');
+    redirect('Menu/TheAssigningProcessOfDIYBDRequest/'.$request_code.'/'.$reqID.'/');
+}
+
+
+// START BD Request Assign To Process DIY
+public function TheAssigningProcessOfDIYBDRequest($rtype,$reqID){
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $notify         = $this->Menu_model->get_notifybyid($uid);
+    $dt             = $this->Menu_model->get_depatment_byid($id);
+    $bdr            = $this->Menu_model->GetBDRequestByRequestID($reqID);
+    $reqData        = $this->Menu_model->GetBDRequestALLInfoBYRequestCode($rtype);
+
+    $getSPDRequest       = $this->Menu_model->GetBDRequestTimeSPDRequest($reqID);
+    $getDMLatterTask     = $this->Menu_model->GetDMDEOLetterRequiredTaskByRID($reqID);
+
+    $dep_name       = $dt[0]->dep_name;
+   
+    if(!empty($user)){
+        $this->load->view($dep_name.'/TheAssigningProcessOfDIYBDRequest', ['rtype'=>$rtype,'user'=>$user,'notify'=>$notify,'bdr'=>$bdr,'reqData'=>$reqData,'reqID'=>$reqID,'getSPDRequest'=>$getSPDRequest,'getDMLatterTask'=>$getDMLatterTask]);
+    }else{
+        redirect('Menu/main');
+    }
+}
+
+public function BDRequestAssignToProcessRTTP(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+
+    $this->load->model('Menu_model');
+
+    $reqID              = $this->input->post('reqID');
+    $request_code       = $this->input->post('request_code');
+    $assignto           = $this->input->post('assignto');
+    $exdate             = $this->input->post('exdate');
+    $remark             = $this->input->post('remark');
+
+    $fwd_date               = $exdate;
+    $cretaeTaskLists        = $this->Menu_model->GetBDRCallEventsTaskBYBDRID($reqID);
+   
+    $exdate                 = date('Y-m-d H:i', strtotime($exdate));
+    $task_assigned_date     = date("Y-m-d H:i:s");
+    $k=0;
+    foreach($cretaeTaskLists as $tasklist){
+
+        $data = [
+            'user_id'                   => $assignto,
+            'assigned_by'               => $uid,
+            'task_assigned_date'        => $task_assigned_date,
+            'appointment_datetime'      => $exdate,
+            'target_date'               => $exdate,
+            'exdate'                    => $exdate,
+            'comments'                  => $uid,
+            'comment_by'                => $remark
+        ];
+        
+        $this->db->where('id', $tasklist->id);
+        $this->db->update('tblcallevents', $data);
+    }
+
+    $data1 = [
+        'status'                => 1,
+        'assignstatus'          => 1,
+        'assign_by'             => $uid,
+        'assignid_date'         => $task_assigned_date,
+        'assigning_remarks'     => $remark
+    ];
+    
+    $this->db->where('id', $reqID);
+    $query = $this->db->update('bdrequest', $data1);
+
+    $this->load->library('session');
+    $this->session->set_flashdata('success_message',' RTTP Task Assigned Successfully !!');
+    redirect('Menu/TheAssigningProcessOfRTTPBDRequest/'.$request_code.'/'.$reqID.'/');
+}
+
+// Start BD Request Assign To Process RTTP
+public function TheAssigningProcessOfRTTPBDRequest($rtype,$reqID){
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $notify         = $this->Menu_model->get_notifybyid($uid);
+    $dt             = $this->Menu_model->get_depatment_byid($id);
+    $bdr            = $this->Menu_model->GetBDRequestByRequestID($reqID);
+    $reqData        = $this->Menu_model->GetBDRequestALLInfoBYRequestCode($rtype);
+
+    $getSPDRequest       = $this->Menu_model->GetBDRequestTimeSPDRequest($reqID);
+    $getDMLatterTask     = $this->Menu_model->GetDMDEOLetterRequiredTaskByRID($reqID);
+
+    $dep_name       = $dt[0]->dep_name;
+   
+    if(!empty($user)){
+        $this->load->view($dep_name.'/TheAssigningProcessOfRTTPBDRequest', ['rtype'=>$rtype,'user'=>$user,'notify'=>$notify,'bdr'=>$bdr,'reqData'=>$reqData,'reqID'=>$reqID,'getSPDRequest'=>$getSPDRequest,'getDMLatterTask'=>$getDMLatterTask]);
+    }else{
+        redirect('Menu/main');
+    }
+}
+
+
+public function BDRequestAssignToProcessClientEngagement(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+
+    $this->load->model('Menu_model');
+
+    $reqID              = $this->input->post('reqID');
+    $request_code       = $this->input->post('request_code');
+    $assignto           = $this->input->post('assignto');
+    $exdate             = $this->input->post('exdate');
+    $remark             = $this->input->post('remark');
+
+    $fwd_date           = $exdate;
+
+    $task_action_id     = 81;
+    $cretaeTaskLists        = $this->Menu_model->GetBDRCallEventsTask($reqID,$task_action_id);
+    $exdate                 = date('Y-m-d H:i', strtotime($exdate));
+    $task_assigned_date     = date("Y-m-d H:i:s");
+    $k=0;
+    foreach($cretaeTaskLists as $tasklist){
+
+        $data = [
+            'user_id'                   => $assignto,
+            'assigned_by'               => $uid,
+            'task_assigned_date'        => $task_assigned_date,
+            'appointment_datetime'      => $exdate,
+            'target_date'               => $exdate,
+            'exdate'                    => $exdate,
+            'comments'                  => $uid,
+            'comment_by'                => $remark
+        ];
+        
+        $this->db->where('id', $tasklist->id);
+        $this->db->update('tblcallevents', $data);
+    }
+
+    $data1 = [
+        'status'                => 1,
+        'assignstatus'          => 1,
+        'assign_by'             => $uid,
+        'assignid_date'         => $task_assigned_date,
+        'assigning_remarks'     => $remark
+    ];
+    
+    $this->db->where('id', $reqID);
+    $query = $this->db->update('bdrequest', $data1);
+
+    $this->load->library('session');
+    $this->session->set_flashdata('success_message',' Inauguration Task Assigned Successfully !!');
+    redirect('Menu/BDRequestAssignToProcessClientEngagement/'.$request_code.'/'.$reqID.'/');
+}
+
+
+// Start BD Request Assign To Process Client Engagement
+public function TheAssigningProcessOfClientEngagementBDRequest($rtype,$reqID){
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $notify         = $this->Menu_model->get_notifybyid($uid);
+    $dt             = $this->Menu_model->get_depatment_byid($id);
+    $bdr            = $this->Menu_model->GetBDRequestByRequestID($reqID);
+    $reqData        = $this->Menu_model->GetBDRequestALLInfoBYRequestCode($rtype);
+
+    $getSPDRequest       = $this->Menu_model->GetBDRequestTimeSPDRequest($reqID);
+    $getDMLatterTask     = $this->Menu_model->GetDMDEOLetterRequiredTaskByRID($reqID);
+
+    $dep_name       = $dt[0]->dep_name;
+   
+    if(!empty($user)){
+        $this->load->view($dep_name.'/TheAssigningProcessOfClientEngagementBDRequest', ['rtype'=>$rtype,'user'=>$user,'notify'=>$notify,'bdr'=>$bdr,'reqData'=>$reqData,'reqID'=>$reqID,'getSPDRequest'=>$getSPDRequest,'getDMLatterTask'=>$getDMLatterTask]);
+    }else{
+        redirect('Menu/main');
+    }
+}
+
+public function BDRequestAssignToProcessInauguration(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+
+    $this->load->model('Menu_model');
+
+    $reqID              = $this->input->post('reqID');
+    $request_code       = $this->input->post('request_code');
+    $assignto           = $this->input->post('assignto');
+    $exdate             = $this->input->post('exdate');
+    $remark             = $this->input->post('remark');
+
+    $fwd_date           = $exdate;
+
+    $cretaeTaskLists        = $this->Menu_model->GetBDRPreCallInaugurationTask($reqID);
+
+    $exdate                 = date('Y-m-d H:i', strtotime($exdate));
+    $task_assigned_date     = date("Y-m-d H:i:s");
+    $k=0;
+    foreach($cretaeTaskLists as $tasklist){
+
+        $data = [
+            'user_id'                   => $assignto,
+            'assigned_by'               => $uid,
+            'task_assigned_date'        => $task_assigned_date,
+            'appointment_datetime'      => $exdate,
+            'target_date'               => $exdate,
+            'exdate'                    => $exdate,
+            'comments'                  => $uid,
+            'comment_by'                => $remark
+        ];
+        
+        $this->db->where('id', $tasklist->id);
+        $this->db->update('tblcallevents', $data);
+    }
+
+    $data1 = [
+        'status'                => 1,
+        'assignstatus'          => 1,
+        'assign_by'             => $uid,
+        'assignid_date'         => $task_assigned_date,
+        'assigning_remarks'     => $remark
+    ];
+    
+    $this->db->where('id', $reqID);
+    $query = $this->db->update('bdrequest', $data1);
+
+    $this->load->library('session');
+    $this->session->set_flashdata('success_message',' Inauguration Task Assigned Successfully !!');
+    redirect('Menu/TheAssigningProcessOfInaugurationBDRequest/'.$request_code.'/'.$reqID.'/');
+}
+
+// Start Inauguration
+public function TheAssigningProcessOfInaugurationBDRequest($rtype,$reqID){
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $notify         = $this->Menu_model->get_notifybyid($uid);
+    $dt             = $this->Menu_model->get_depatment_byid($id);
+    $bdr            = $this->Menu_model->GetBDRequestByRequestID($reqID);
+    $reqData        = $this->Menu_model->GetBDRequestALLInfoBYRequestCode($rtype);
+
+    $getSPDRequest       = $this->Menu_model->GetBDRequestTimeSPDRequest($reqID);
+    $getDMLatterTask     = $this->Menu_model->GetDMDEOLetterRequiredTaskByRID($reqID);
+
+    $dep_name       = $dt[0]->dep_name;
+   
+    if(!empty($user)){
+        $this->load->view($dep_name.'/TheAssigningProcessOfInaugurationBDRequest', ['rtype'=>$rtype,'user'=>$user,'notify'=>$notify,'bdr'=>$bdr,'reqData'=>$reqData,'reqID'=>$reqID,'getSPDRequest'=>$getSPDRequest,'getDMLatterTask'=>$getDMLatterTask]);
+    }else{
+        redirect('Menu/main');
+    }
+}
+
+public function ClosedBDRequestAssignToProcess(){
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+
+    $this->load->model('Menu_model');
+
+    $reqID              = $this->input->post('reqID');
+    $request_code       = $this->input->post('request_code');
+    $remark             = $this->input->post('remark');
+    $assignid_date      = date("Y-m-d H:i:s");
+    $data1 = [
+        'status'                => 1,
+        'assign_by'             => $uid,
+        'assignid_date'         => $assignid_date,
+        'assigning_remarks'     => $remark
+    ];
+    
+    $this->db->where('id', $reqID);
+    $query = $this->db->update('bdrequest', $data1);
+
+    $this->load->library('session');
+    $this->session->set_flashdata('success_message',' DM/DEO Letter Task Assigned Successfully !!');
+    redirect('Menu/TheAssigningProcess/'.$request_code.'/'.$reqID.'/');
+}
+
+public function BDRequestAssignToProcessDMLatter(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+
+    $this->load->model('Menu_model');
+
+    $reqID              = $this->input->post('reqID');
+    $request_code       = $this->input->post('request_code');
+    $bdr_location_id    = $this->input->post('bdr_location_id');
+    
+    $assignto           = $this->input->post('assignto');
+    $exdate             = $this->input->post('exdate');
+    $remark             = $this->input->post('remark');
+
+    $fwd_date           = $exdate;
+
+    $k=0;
+    foreach($bdr_location_id as $dmlocationid){
+        $dmlocations = $this->Menu_model->GetBDRLocationsByID($dmlocationid);
+        $dmlocations = $dmlocations[0]->location;
+
+        $dmlTasks = $this->Menu_model->GetBDRLocationsByRIDAndLName($reqID,$dmlocations);
+        $dmlTasks = $dmlTasks[0]->id;
+        
+        $data = [
+            'user_id'               => $assignto[$k],
+            'assigned_by'           => $uid,
+            'task_assigned_date'    => $fwd_date,
+            'appointment_datetime'  => $fwd_date,
+            'target_date'           => $exdate,
+            'exdate'                => $exdate,
+            'comments'              => $uid,
+            'comment_by'            => $remark
+        ];
+        
+        $this->db->where('id', $dmlTasks);
+        $this->db->update('tblcallevents', $data);
+
+        $data1 = [
+            'task_id'           => $dmlTasks,
+            'assign_to'         => $assignto[$k],
+            'assign_by'         => $uid,
+            'assign_status'     => 1
+        ];
+        
+        $this->db->where('id', $dmlocationid);
+        $this->db->update('bdrequest_location', $data1);
+
+        $k++;
+    }
+
+    $this->load->library('session');
+    $this->session->set_flashdata('success_message',' DM/DEO Letter Task Assigned Successfully !!');
+    redirect('Menu/TheAssigningProcess/'.$request_code.'/'.$reqID.'/');
+}
+
+public function TaskPlanner2($adate){
+        
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $dep_id         = $user['dep_id'];
+    
+
+    date_default_timezone_set("Asia/Calcutta");
+    
+    if(isset($_POST['adate'])){
+        $adate = $_POST['adate'];
+    }else{
+        $adate = $adate;
+    }
+    $tommrowdate =  date('Y-m-d', strtotime('tomorrow'));
+    $datetime1      = new DateTime($tommrowdate);
+    $datetime1_cur  = new DateTime(date("Y-m-d"));
+    $datetime2      = new DateTime($adate);
+
+
+
+if ($datetime1 < $datetime2) {
+        // $this->session->set_flashdata('error_message','* You Can Not Planned Task For This Date : '.$adate);
+        $adate11 = $adate;
+        // $adate = $tommrowdate;
+        $tommrowdate1 = $tommrowdate;
+        $tommrowdate = $adate11;
+        
+        $adate5 = $this->checkPlannerDate($tommrowdate1);
+
+        if ($adate > $adate5) {
+            redirect("Menu/TaskPlanner2/".$adate5);
+        }
+    }elseif ($datetime1_cur > $datetime2) {
+        $this->session->set_flashdata('error_message','* You Can Not Planned Task For This Date : '.$adate);
+        $adate = date("Y-m-d");
+        redirect("Menu/TaskPlanner2/".$adate);
+    }
+
+
+
+    $user = $this->session->userdata('user');
+    $data['user'] = $user;
+    $uid = $user['id'];
+    $uyid =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+    $dt=$this->Menu_model->get_department($uyid);
+    $tptime=$this->Menu_model->get_tptime($uid);
+ 
+  
+    $tptime = $tptime[0]->tptime;
+    $dep_name = $dt[0]->dep_name;
+    if($adate == date("Y-m-d")){
+        $aptime         = $this->Menu_model->GetTodaysAutoTaskANDPlanningTime($uid,date("Y-m-d"));
+        $aptimecnt      = sizeof($aptime);
+        if($aptimecnt > 0){
+            $givenTime   = $aptime[0]->start_tttpft;
+            $currentTime = date("H:i:s");
+            $timestamp1  = strtotime($givenTime);
+            $timestamp2  = strtotime($currentTime);
+            if ($timestamp2 >= $timestamp1) {
+                $this->session->set_flashdata('error_message',"* Today's time is up! Now plan your task for tomorrow.");
+                redirect("Menu/TaskPlanner2/".$tommrowdate); 
+            }
+        }
+    }
+    $planbutnotinited = $this->Menu_model->get_allcmp_planbutnotinited($uid);
+    
+    $user_day = $this->Menu_model->get_daydetail($uid,date("Y-m-d"));
+    if(sizeof($user_day) == 0){
+        $this->session->set_flashdata('error_message','* Please Start Your Day');
+        redirect('Menu/DayManagement');
+    }   
+    $pendingautotaskcmp = $this->Menu_model->get_PendingAutoTask($uid);
+   
+    $pendingautotaskcmpcnt = sizeof($pendingautotaskcmp);
+   
+    if($pendingautotaskcmpcnt > 0){
+        $this->session->set_flashdata('error_message','Total '. $pendingautotaskcmpcnt . ' Pending Auto Task, First Complete Your Pending Autotask Before Going Task Planner Page');
+        redirect('Menu/Dashboard2');
+    }
+    
+    $oldplanbutnotinited = $this->Menu_model->get_all_old_spd_planbutnotinited($uid);
+    $oldplanbutnotinitedcnt = sizeof($oldplanbutnotinited);
+    if($oldplanbutnotinitedcnt > 0){
+        $this->session->set_flashdata('error_message','Total '. $oldplanbutnotinitedcnt . ' Yesterday Pending Task.');
+        // redirect("Menu/TaskPlanner2/".$adate);
+    }   
+    $this->CheckPlannerTimeisReadyorNot($uid,$adate);
+ 
+    $planbutnotinitedcnt = sizeof($planbutnotinited);
+    $getreqData  =  $this->db->query("SELECT * FROM `task_plan_for_today` WHERE user_id =$uid and date='$adate'");
+    $getreqData =  $getreqData->result();
+    $getAutoTaskTime  =  $this->db->query("SELECT * FROM `autotask_time` WHERE user_id =$uid and date='$adate'");
+    $getAutoTaskTime =  $getAutoTaskTime->result();
+    $curdate = date("Y-m-d");
+    $getPendingAutoTask  =  $this->db->query("SELECT * FROM `tblcallevents` WHERE user_id = $uid AND task_status = 0 AND autotask = 1 AND cast(appointment_datetime AS DATE) != '$curdate'");
+    $getPendingTask =  $getPendingAutoTask->result();
+    $pcount = sizeof($getPendingTask);
+$getPendingTimeTask  =  $this->db->query("SELECT * FROM `tblcallevents` WHERE user_id = $uid  AND (task_status = 0 AND plan = 1 AND autotask = 1)");
+$getPendingTimeTask =  $getPendingTimeTask->result();
+$timecount = 0;
+foreach ($getPendingTimeTask as $taskmin){
+    $taskactiontime = $this->Menu_model->getTaskAction($taskmin->actiontype_id);
+    $timecount += $taskactiontime[0]->yest;
+}
+    $hours = floor($timecount / 60);
+    $minutes = $timecount % 60;
+    $mesaage = $hours ." Hours ".$minutes." Minutes Pending For Task Work";
+
+
+$getplandateindata  =  $this->db->query("SELECT * FROM `autotask_time` where user_id='$uid' AND date ='$adate'");
+$getplandateindata =  $getplandateindata->result();
+    if(!empty($user)){
+        $this->load->view('TaskPlanner2',['uid'=>$uid,'user'=>$user,'dep_id'=>$dep_id,'planbutnotinitedcnt'=>$planbutnotinitedcnt,'getplandt'=>$getplandateindata,'pendingtask'=>$pcount, 'mesaage'=>$mesaage,'adate'=>$adate,'tptime'=>$tptime,'getAutoTaskTime'=>$getAutoTaskTime,'getreqData'=>$getreqData,'oldPendTask'=>$oldplanbutnotinited,'type_id'=>$uyid]);
+    }else{
+        redirect('Menu/main');
+    }
+}
+
+
+
+
+public  function checkPlannerDate($date) {
+    // Get the user session details
+        $user = $this->session->userdata('user');
+        $uid = $user['id'];
+    
+    // Debug log to see the passed date and if it's valid or not
+        log_message('debug', "Initial date passed: $date, Is holiday or leave: " . ($this->isHolidayOrLeave($uid, $date) ? 'Yes' : 'No'));
+    
+         if (date('l', strtotime($date)) == 'Saturday') {
+            $weekOfMonth = ceil(date('j', strtotime($date)) / 7); // Calculate the week number of the month (1st, 2nd, etc.)
+            
+            if ($weekOfMonth == 2 || $weekOfMonth == 4) {
+                log_message('debug', "Date is a 2nd or 4th Saturday: $date");
+                $date = date('Y-m-d', strtotime($date . ' +2 day'));
+                // Perform actions for 2nd or 4th Saturday here
+            }
+        }
+    
+        // First, check if the given date is a Sunday and adjust to Monday if it is
+        if (date('l', strtotime($date)) == 'Sunday') {
+            log_message('debug', "Initial date is Sunday, adjusting to Monday: $date");
+            $date = date('Y-m-d', strtotime($date . ' +1 day')); // Set to Monday
+        }
+    
+    
+        // If the given date is valid (not holiday or leave), return it as is
+        if (!$this->isHolidayOrLeave($uid, $date)) {
+            // Debug log to confirm the given date is valid
+            log_message('debug', "Returning the original date: $date");
+            return $date;
+        }
+    
+    // Start by calculating the next date
+        $adate = getNextDate($date);
+    
+        // Check if the next date is Sunday, and adjust it to Monday if so
+        if (date('l', strtotime($adate)) == 'Sunday') {
+            log_message('debug', "Next date is Sunday, adjusting to Monday: $adate");
+            $adate = date('Y-m-d', strtotime($adate . ' +1 day')); // Set to Monday
+        }
+    
+    // Keep checking the next days until we find a valid date (not a holiday or leave)
+        while ($this->isHolidayOrLeave($uid, $adate)) {
+            // If the next date is a holiday or leave, get the next date
+            $adate = getNextDate($adate);
+    
+            // If the next date is Sunday, skip to Monday
+            if (date('l', strtotime($adate)) == 'Sunday') {
+                log_message('debug', "Next date is Sunday, adjusting to Monday: $adate");
+                $adate = date('Y-m-d', strtotime($adate . ' +1 day')); // Set to Monday
+            }
+    
+            // Debug log for each iteration
+            log_message('debug', "Checking date: $adate, Is holiday or leave: " . ($this->isHolidayOrLeave($uid, $adate) ? 'Yes' : 'No'));
+        }
+    
+        // Debug log to confirm the final date returned
+        log_message('debug', "Returning adjusted date: $adate");
+        // Return the final valid date
+        return $adate;
+    }
+    
+
+    public function CheckPlannerTimeisReadyorNot($uid,$adate){
+        
+        $this->load->model('Menu_model');
+        $this->load->library('session');
+        if($adate !== date("Y-m-d")){
+            $aptime = $this->Menu_model->GetTodaysAutoTaskANDPlanningTime($uid,date("Y-m-d"));
+            $aptimecnt = sizeof($aptime);
+            if($aptime > 0){
+                $start_tttpft = $aptime[0]->start_tttpft;
+                $end_tttpft = $aptime[0]->end_tttpft;
+                $current_time = date("H:i:s");
+                $current_date = date("Y-m-d");
+    
+                $start_time = new DateTime($start_tttpft);
+                $current_time_obj = new DateTime($current_time);
+                $interval = $current_time_obj->diff($start_time);
+                if ($current_time >= $start_tttpft) {
+                    // echo "The time has already passed.";
+                    
+                    $adate2 = $adate;
+                    $adate3 = $this->checkPlannerDate($adate);
+                    if($adate3 !== $adate2){
+                        $managecnt = $this->Menu_model->checkforHolidayManageCount($uid,$adate);
+                        if($managecnt > 0){
+                            redirect("Menu/TaskPlanner2/".$adate3);
+                        }else{
+                            $this->db->query("INSERT INTO `manage_leave`(`uid`, `planner_date`, `status`) VALUES ('$uid','$adate','1')");
+                            redirect("Menu/TaskPlanner2/".$adate3); 
+                        }
+                    }else{
+                        $adate = $adate2;
+                    }
+                } else {
+                    $this->session->set_flashdata('error_message_plan',"Time remaining to plan your next day:" . $interval->format('%H hours, %I minutes, and %S seconds'));
+                    redirect("Menu/TaskPlanner2/".$current_date); 
+                }  
+            }
+        }
+    }
+
+    private function isHolidayOrLeave($uid, $date) {
+        // Check if the date is a holiday
+        $checkforHoliday = checkforHoliday($date);
+        
+        // Check if the date has leave approved
+        $checkLeaveForDay = checkLeaveForDay($uid, $date);
+        
+        // Log the results of the checks for debugging
+        log_message('debug', "Checking date: $date, Holiday check: " . sizeof($checkforHoliday) . ", Leave check: " . (sizeof($checkLeaveForDay) > 0 ? 'Yes' : 'No'));
+        
+        // Return true if either is a holiday or the user has leave
+        return (sizeof($checkforHoliday) > 0 || sizeof($checkLeaveForDay) > 0);
+    }
 
 }

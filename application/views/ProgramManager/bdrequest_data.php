@@ -26,7 +26,13 @@
                 }
                 ?>
                     </div>
-    <hr>     <div class="table-responsive">
+    <hr>
+             
+              
+
+
+
+                                <div class="table-responsive">
                                   <?php if($rtype=="Demo"){?>
                                   <table id="example1" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead class="thead-dark">
@@ -108,6 +114,184 @@
                                     </tbody>
                                   </table>
                                   <?php } ?>
+
+
+                                  <?php if($rtype=="OnlineDemo"){?>
+                                  <table id="example1" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead class="thead-dark">
+                                      <tr>
+                                        <th>S No.</th>
+                                        <th>Request Date</th>
+                                        <th>Online Demo Date</th>
+                                        <th>Target Date</th>
+                                        <th>BD Name</th>
+                                        <th>Request Type</th>
+                                        <th>Remark</th>
+                                        <th>Company Name</th>
+                                        <th>CP Name</th>
+                                        <th>CP Mobile No</th>
+                                        <th>Meetings Links</th>
+                                        <th>Status</th>
+                                        <th>Total Logs</th>
+                                        <th>Logs Detail</th>
+                                        <th>Assign/Status/Logs</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <?php $i=1; foreach($bdr as $d){if($d->rysn==$rtype){
+                                        $tid = $d->id;
+                                        $logs=$this->Menu_model->get_bdrequestlog($tid);
+                                        $attech=$this->Menu_model->get_bdrequestattech($tid);
+                                        $j = sizeof($logs);
+                                        $j = $j-1;
+                                        ?>
+                                      <tr>
+                                        <td><?=$i?></td>
+                                        <td><?=$d->sdatet?></td>
+                                        <td><?=$d->fdate?></td>
+                                        <td><?=$d->targetd?></td>
+                                        <td><?=$d->bd_name?></td>
+                                        <td><?=$d->request_type?></td>
+                                        <td><?=$d->remark?></td>
+                                        <td><?=$d->cname?></td>
+                                        <td><?=$d->cpname?></td>
+                                        <td><?=$d->cpmo?></td>
+                                        <td><?php 
+                                        $pattern = '/(https?:\/\/[^\s]+)/';
+                                        $result_stirings = preg_replace($pattern, '<a href="$1" target="_blank">$1</a>', $d->meetings_links);
+                                       echo $result_stirings;
+                                       ?></td>
+                                        <td>
+                                          <?php 
+                                            if($d->status=='Open'){?>
+                                          <button formaction="<?=base_url();?>Menu/aclientp/<?=$d->id?>" class="form-control" type="submit">Assign</button>
+                                          <?php }else{echo $d->status; }?>
+                                        </td>
+                                        <th>Total <?=sizeof($logs)?> Logs</th>
+                                        <td>
+                                          <?php $olddate=''; foreach($logs as $log){
+                                            if($olddate==''){$olddate=$log->sdatet;}
+                                            $newddate = $log->sdatet;
+                                            $timed = $this->Menu_model->timediff($newddate, $olddate);
+                                            ?>
+                                          <b><?=is_numeric($log->tby)?$log->fullname:$log->tby?></b><br><?=$log->sdatet?><br>
+                                          <b><?=$timed?></b><br><b>Detail:</b> <?=$log->detail?>
+                                          <hr>
+                                          <?php $olddate=$newddate;} ?>
+                                        </td>
+                                        <td>
+                                          <?php 
+                                           
+                                            if($d->assignstatus=='0'){?>
+                                         <a class="btn btn-primary p-2" href="<?=base_url()?>Menu/TheAssigningProcessOfOnlineDemoBDRequest/<?=$rtype?>/<?=$tid?>">Assign</a>  <hr>
+                                          <?php }else{
+                                            if($d->status=='1'){ echo 'Request Closed'; }
+                                            else{
+                                                $rid = $d->id;
+                                                $logs = $this->Menu_model->get_bdrtotallogs($rid);
+                                            ?>
+                                          <a href="<?=base_url();?>Menu/bdrequestlogs/<?=$rid?>"> Total <?=sizeof($logs)?> Logs </a>
+                                          <?php }}?>
+                                          <button type="button" id="add_comment<?=$i?>" value="<?=$tid?>">Comment</button>
+                                        </td>
+                                      </tr>
+                                      <?php $i++;}} ?>
+                                    </tbody>
+                                  </table>
+                                  <?php } ?>
+
+
+                                  <?php if($rtype=="OfflineDemo"){?>
+                                  <table id="example1" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead class="thead-dark">
+                                      <tr>
+                                        <th>S No.</th>
+                                        <th>Request Date</th>
+                                        <th>Online Demo Date</th>
+                                        <th>Target Date</th>
+                                        <th>BD Name</th>
+                                        <th>Request Type</th>
+                                        <th>Remark</th>
+                                        <th>Company Name</th>
+                                        <th>CP Name</th>
+                                        <th>CP Mobile No</th>
+
+                                        <th>State</th>
+                                        <th>District</th>
+                                        <th>City</th>
+                                        <th>Venue</th>
+                                        <th>Status</th>
+
+                                        <th>Total Logs</th>
+                                        <th>Logs Detail</th>
+                                        <th>Assign/Status/Logs</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <?php $i=1; foreach($bdr as $d){if($d->rysn==$rtype){
+                                        $tid = $d->id;
+                                        $logs=$this->Menu_model->get_bdrequestlog($tid);
+                                        $attech=$this->Menu_model->get_bdrequestattech($tid);
+                                        $j = sizeof($logs);
+                                        $j = $j-1;
+                                        ?>
+                                      <tr>
+                                        <td><?=$i?></td>
+                                        <td><?=$d->sdatet?></td>
+                                        <td><?=$d->fdate?></td>
+                                        <td><?=$d->targetd?></td>
+                                        <td><?=$d->bd_name?></td>
+                                        <td><?=$d->request_type?></td>
+                                        <td><?=$d->remark?></td>
+                                        <td><?=$d->cname?></td>
+                                        <td><?=$d->cpname?></td>
+                                        <td><?=$d->cpmo?></td>
+
+                                        <td><?=$d->state?></td>
+                                        <td><?=$d->district?></td>
+                                        <td><?=$d->city?></td>
+                                        <td><?=$d->venue?></td>
+                                    
+                                        <td>
+                                          <?php 
+                                            if($d->status=='Open'){?>
+                                          <button formaction="<?=base_url();?>Menu/aclientp/<?=$d->id?>" class="form-control" type="submit">Assign</button>
+                                          <?php }else{echo $d->status; }?>
+                                        </td>
+                                        <th>Total <?=sizeof($logs)?> Logs</th>
+                                        <td>
+                                          <?php $olddate=''; foreach($logs as $log){
+                                            if($olddate==''){$olddate=$log->sdatet;}
+                                            $newddate = $log->sdatet;
+                                            $timed = $this->Menu_model->timediff($newddate, $olddate);
+                                            ?>
+                                          <b><?=is_numeric($log->tby)?$log->fullname:$log->tby?></b><br><?=$log->sdatet?><br>
+                                          <b><?=$timed?></b><br><b>Detail:</b> <?=$log->detail?>
+                                          <hr>
+                                          <?php $olddate=$newddate;} ?>
+                                        </td>
+                                        <td>
+                                          <?php 
+                                           
+                                            if($d->assignstatus=='0'){?>
+                                         <a class="btn btn-primary p-2" href="<?=base_url()?>Menu/TheAssigningProcessOfOfflineDemoBDRequest/<?=$rtype?>/<?=$tid?>">Assign</a>  <hr>
+                                          <?php }else{
+                                            if($d->status=='1'){ echo 'Request Closed'; }
+                                            else{
+                                                $rid = $d->id;
+                                                $logs = $this->Menu_model->get_bdrtotallogs($rid);
+                                            ?>
+                                          <a href="<?=base_url();?>Menu/bdrequestlogs/<?=$rid?>"> Total <?=sizeof($logs)?> Logs </a>
+                                          <?php }}?>
+                                          <button type="button" id="add_comment<?=$i?>" value="<?=$tid?>">Comment</button>
+                                        </td>
+                                      </tr>
+                                      <?php $i++;}} ?>
+                                    </tbody>
+                                  </table>
+                                  <?php } ?>
+
+
                                   <?php if($rtype=="Inauguration"){?>
                                   <table id="example1" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead class="thead-dark">
@@ -153,6 +337,7 @@
                                         <td><?=$d->expectation?></td>
                                         <td>
                                           <?php if($d->status=='Open'){?>
+                                            
                                           <button formaction="<?=base_url();?>Menu/aclientp/<?=$d->id?>" class="form-control" type="submit">Assign</button>
                                           <?php }else{echo $d->status; }?>
                                         </td>
@@ -169,8 +354,9 @@
                                           <?php $olddate=$newddate;} ?>
                                         </td>
                                         <td>
-                                          <?php if($d->assignstatus=='0'){?>
-                                          <button type="button" id="assign_to<?=$i?>" value="<?=$tid?>">Click</button>
+                                          <?php if($d->assignstatus=='0'){ ?>
+                                          <a class="btn btn-primary p-2" href="<?=base_url()?>Menu/TheAssigningProcessOfInaugurationBDRequest/<?=$rtype?>/<?=$tid?>">Assign</a>  <hr>
+
                                           <?php }else{
                                             if($d->status=='1'){ echo 'Request Closed'; }
                                             else{
@@ -179,7 +365,7 @@
                                             ?>
                                           <a href="<?=base_url();?>Menu/bdrequestlogs/<?=$rid?>"> Total <?=sizeof($logs)?> Logs </a>
                                           <?php }}?>
-                                          <button type="button" id="add_comment<?=$i?>" value="<?=$tid?>">Comment</button>
+                                          <!-- <button type="button" id="add_comment<?=$i?>" value="<?=$tid?>">Comment</button> -->
                                         </td>
                                       </tr>
                                       <?php $i++;}} ?>
@@ -248,7 +434,7 @@
                                         </td>
                                         <td>
                                           <?php if($d->assignstatus=='0'){?>
-                                          <button type="button" id="assign_to<?=$i?>" value="<?=$tid?>">Click</button>
+                                            <a class="btn btn-primary p-2" href="<?=base_url()?>Menu/TheAssigningProcessOfDIYBDRequest/<?=$rtype?>/<?=$tid?>">Assign</a>  <hr>
                                           <?php }else{
                                             if($d->status=='1'){ echo 'Request Closed'; }
                                             else{
@@ -287,7 +473,8 @@
                                       </tr>
                                     </thead>
                                     <tbody>
-                                      <?php $i=1; foreach($bdr as $d){if($d->rysn==$rtype){
+                                      <?php
+                                      $i=1; foreach($bdr as $d){if($d->rysn==$rtype){
                                         $tid = $d->id;
                                         $logs=$this->Menu_model->get_bdrequestlog($tid);
                                         $attech=$this->Menu_model->get_bdrequestattech($tid);
@@ -326,7 +513,8 @@
                                         </td>
                                         <td>
                                           <?php if($d->assignstatus=='0'){?>
-                                          <button type="button" id="assign_to<?=$i?>" value="<?=$tid?>">Click</button>
+                                   
+                                          <a class="btn btn-primary p-2" href="<?=base_url()?>Menu/TheAssigningProcessOfNewClientSchoolVisitBDRequest/<?=$rtype?>/<?=$tid?>">Assign</a>  <hr>
                                           <?php }else{
                                             if($d->status=='1'){ echo 'Request Closed'; }
                                             else{
@@ -348,16 +536,14 @@
                                       <tr>
                                         <th>S No.</th>
                                         <th>Request Date</th>
+                                        <th>New Client Report Date</th>
                                         <th>Target Date</th>
                                         <th>BD Name</th>
                                         <th>Request Type</th>
                                         <th>Remark</th>
                                         <th>Company Name</th>
-                                        <th>CP Name</th>
-                                        <th>CP Mobile No</th>
-                                        <th>Visit Date</th>
-                                        <th>Visite Location</th>
-                                        <th>Expectation</th>
+                                        <th>Client Remarks</th>
+                                        <th>Attachement (Optinal)</th>
                                         <th>Status</th>
                                         <th>Total Logs</th>
                                         <th>Logs Detail</th>
@@ -375,16 +561,20 @@
                                       <tr>
                                         <td><?=$i?></td>
                                         <td><?=$d->sdatet?></td>
+                                        <td><?=$d->fdate?></td>
                                         <td><?=$d->targetd?></td>
                                         <td><?=$d->bd_name?></td>
                                         <td><?=$d->request_type?></td>
                                         <td><?=$d->remark?></td>
                                         <td><?=$d->cname?></td>
-                                        <td><?=$d->cpname?></td>
-                                        <td><?=$d->cpmo?></td>
-                                        <td><?=$d->visitdate?></td>
-                                        <td><?=$d->vlocation?></td>
-                                        <td><?=$d->expectation?></td>
+                                        <td><?=$d->client_report_remarks?></td>
+                                        <td>
+                                          <?php if($d->report_attachement !==''){ ?>
+                                          <a href="<?= base_url().$d->report_attachement; ?>" target="_blank">View</a></td>
+                                          <?php }else{ ?>
+                                          <span>N/A</span>
+                                          <?php } ?>
+                         
                                         <td>
                                           <?php if($d->status=='Open'){?>
                                           <button formaction="<?=base_url();?>Menu/aclientp/<?=$d->id?>" class="form-control" type="submit">Assign</button>
@@ -404,7 +594,7 @@
                                         </td>
                                         <td>
                                           <?php if($d->assignstatus=='0'){?>
-                                          <button type="button" id="assign_to<?=$i?>" value="<?=$tid?>">Click</button>
+                                            <a class="btn btn-primary p-2" href="<?=base_url()?>Menu/TheAssigningProcessOfNewClientReportBDRequest/<?=$rtype?>/<?=$tid?>">Assign</a>  <hr>
                                           <?php }else{
                                             if($d->status=='1'){ echo 'Request Closed'; }
                                             else{
@@ -512,8 +702,8 @@
                                         <th>CP Name</th>
                                         <th>CP Mobile No</th>
                                         <th>Visit Date</th>
-                                        <th>Visite Location</th>
-                                        <th>Expectation</th>
+                                        <th>No of School</th>
+                                   
                                         <th>Status</th>
                                         <th>Total Logs</th>
                                         <th>Logs Detail</th>
@@ -539,8 +729,7 @@
                                         <td><?=$d->cpname?></td>
                                         <td><?=$d->cpmo?></td>
                                         <td><?=$d->visitdate?></td>
-                                        <td><?=$d->vlocation?></td>
-                                        <td><?=$d->expectation?></td>
+                                        <td><?=$d->noofschool?></td>
                                         <td>
                                           <?php if($d->status=='Open'){?>
                                           <button formaction="<?=base_url();?>Menu/aclientp/<?=$d->id?>" class="form-control" type="submit">Assign</button>
@@ -560,7 +749,7 @@
                                         </td>
                                         <td>
                                           <?php if($d->assignstatus=='0'){?>
-                                          <button type="button" id="assign_to<?=$i?>" value="<?=$tid?>">Click</button>
+                                            <a class="btn btn-primary p-2" href="<?=base_url()?>Menu/TheAssigningProcessOfOnBoardClientVisitBDRequest/<?=$rtype?>/<?=$tid?>">Assign</a>  <hr>
                                           <?php }else{
                                             if($d->status=='1'){ echo 'Request Closed'; }
                                             else{
@@ -576,6 +765,76 @@
                                     </tbody>
                                   </table>
                                   <?php } ?>
+
+
+                                  <?php if($rtype=="Reports_Customized"){?>
+                                  <table id="example1" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead class="thead-dark">
+                                      <tr>
+                                        <th>S No.</th>
+                                        <th>Request Date</th>
+                                        <th>Target Date</th>
+                                        <th>Complete Target Date</th>
+                                        <th>BD Name</th>
+                                        <th>Request Type</th>
+                                        <th>Remark</th>
+                                        <th>Company Name</th>
+                                        <th>Project Code</th>
+                                        <th>Total Logs</th>
+                                        <th>Logs Detail</th>
+                                        <th>Assign/Status/Logs</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <?php $i=1; foreach($bdr as $d){if($d->rysn==$rtype){
+                                        $tid = $d->id;
+                                        $logs=$this->Menu_model->get_bdrequestlog($tid);
+                                        $attech=$this->Menu_model->get_bdrequestattech($tid);
+                                        $j = sizeof($logs);
+                                        $j = $j-1;
+                                        ?>
+                                      <tr>
+                                        <td><?=$i?></td>
+                                        <td><?=$d->sdatet?></td>
+                                        <td><?=$d->fdate?></td>
+                                        <td><?=$d->targetd?></td>
+                                        <td><?=$d->bd_name?></td>
+                                        <td><?=$d->request_type?></td>
+                                        <td><?=$d->remark?></td>
+                                        <td><?=$d->cname?></td>
+                                        <td><?=$d->project_code?></td>
+                                       
+                                        <th>Total <?=sizeof($logs)?> Logs</th>
+                                        <td>
+                                          <?php $olddate=''; foreach($logs as $log){
+                                            if($olddate==''){$olddate=$log->sdatet;}
+                                            $newddate = $log->sdatet;
+                                            $timed = $this->Menu_model->timediff($newddate, $olddate);
+                                            ?>
+                                          <b><?=is_numeric($log->tby)?$log->fullname:$log->tby?></b><br><?=$log->sdatet?><br>
+                                          <b><?=$timed?></b><br><b>Detail:</b> <?=$log->detail?>
+                                          <hr>
+                                          <?php $olddate=$newddate;} ?>
+                                        </td>
+                                        <td>
+                                          <?php if($d->assignstatus=='0'){?>
+                                            <a class="btn btn-primary p-2" href="<?=base_url()?>Menu/TheAssigningProcessOfReportCustmizedBDRequest/<?=$rtype?>/<?=$tid?>">Assign</a>  <hr>
+                                          <?php }else{
+                                            if($d->status=='1'){ echo 'Request Closed'; }
+                                            else{
+                                                $rid = $d->id;
+                                                $logs = $this->Menu_model->get_bdrtotallogs($rid);
+                                            ?>
+                                          <a href="<?=base_url();?>Menu/bdrequestlogs/<?=$rid?>"> Total <?=sizeof($logs)?> Logs </a>
+                                          <?php }}?>
+                                          <button type="button" id="add_comment<?=$i?>" value="<?=$tid?>">Comment</button>
+                                        </td>
+                                      </tr>
+                                      <?php $i++;}} ?>
+                                    </tbody>
+                                  </table>
+                                  <?php } ?>
+
                                   <?php if($rtype=="Report"){?>
                                   <table id="example1" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead class="thead-dark">
@@ -651,6 +910,395 @@
                                     </tbody>
                                   </table>
                                   <?php } ?>
+
+
+
+                                  <?php if($rtype=="CM_Call_Or_Visit"){?>
+                                  <table id="example1" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead class="thead-dark">
+                                      <tr>
+                                        <th>S No.</th>
+                                        <th>Request Date</th>
+                                        <th>Target Date</th>
+                                        <th>Complete Target Date</th>
+                                        <th>BD Name</th>
+                                        <th>Request Type</th>
+                                        <th>Remark</th>
+                                        <th>Company Name</th>
+                                        <th>Project Code</th>
+                                        <th>School Name</th>
+                                        <th>Request Action</th>
+                      
+                                        <th>Total Logs</th>
+                                        <th>Logs Detail</th>
+                                        <th>Assign/Status/Logs</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <?php $i=1; foreach($bdr as $d){if($d->rysn==$rtype){
+                                        $tid = $d->id;
+                                        $logs=$this->Menu_model->get_bdrequestlog($tid);
+                                        $attech=$this->Menu_model->get_bdrequestattech($tid);
+                                        $j = sizeof($logs);
+                                        $j = $j-1;
+                                        ?>
+                                      <tr>
+                                        <td><?=$i?></td>
+                                        <td><?=$d->sdatet?></td>
+                                        <td><?=$d->fdate?></td>
+                                        <td><?=$d->targetd?></td>
+                                        <td><?=$d->bd_name?></td>
+                                        <td><?=$d->request_type?></td>
+                                        <td><?=$d->remark?></td>
+                                        <td><?=$d->cname?></td>
+                                        <td><?=$d->project_code?></td>
+                                        
+                                        <td><?php 
+                                        $schoolname = $this->Menu_model->get_school_detailbyid($d->sid)[0]->sname;
+                                        echo $schoolname;
+                                        
+                                        ?></td>
+                                       <td><?=$d->venue?></td>
+                                        <th>Total <?=sizeof($logs)?> Logs</th>
+                                        <td>
+                                          <?php $olddate=''; foreach($logs as $log){
+                                            if($olddate==''){$olddate=$log->sdatet;}
+                                            $newddate = $log->sdatet;
+                                            $timed = $this->Menu_model->timediff($newddate, $olddate);
+                                            ?>
+                                          <b><?=is_numeric($log->tby)?$log->fullname:$log->tby?></b><br><?=$log->sdatet?><br>
+                                          <b><?=$timed?></b><br><b>Detail:</b> <?=$log->detail?>
+                                          <hr>
+                                          <?php $olddate=$newddate;} ?>
+                                        </td>
+                                        <td>
+                                          <?php if($d->assignstatus=='0'){?>
+                                            <a class="btn btn-primary p-2" href="<?=base_url()?>Menu/TheAssigningProcessOfCMCallOrVisitBDRequest/<?=$rtype?>/<?=$tid?>">Assign</a>  <hr>
+                                          <?php }else{
+                                            if($d->status=='1'){ echo 'Request Closed'; }
+                                            else{
+                                                $rid = $d->id;
+                                                $logs = $this->Menu_model->get_bdrtotallogs($rid);
+                                            ?>
+                                          <a href="<?=base_url();?>Menu/bdrequestlogs/<?=$rid?>"> Total <?=sizeof($logs)?> Logs </a>
+                                          <?php }}?>
+                                          <button type="button" id="add_comment<?=$i?>" value="<?=$tid?>">Comment</button>
+                                        </td>
+                                      </tr>
+                                      <?php $i++;}} ?>
+                                    </tbody>
+                                  </table>
+                                  <?php } ?>
+
+
+
+                                  <?php if($rtype=="PM_Call_Or_Visit"){?>
+                                  <table id="example1" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead class="thead-dark">
+                                      <tr>
+                                        <th>S No.</th>
+                                        <th>Request Date</th>
+                                        <th>Target Date</th>
+                                        <th>Complete Target Date</th>
+                                        <th>BD Name</th>
+                                        <th>Request Type</th>
+                                        <th>Remark</th>
+                                        <th>Company Name</th>
+                                        <th>Project Code</th>
+                                        <th>School Name</th>
+                                        <th>Request Action</th>
+                      
+                                        <th>Total Logs</th>
+                                        <th>Logs Detail</th>
+                                        <th>Assign/Status/Logs</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <?php $i=1; foreach($bdr as $d){if($d->rysn==$rtype){
+                                        $tid = $d->id;
+                                        $logs=$this->Menu_model->get_bdrequestlog($tid);
+                                        $attech=$this->Menu_model->get_bdrequestattech($tid);
+                                        $j = sizeof($logs);
+                                        $j = $j-1;
+                                        ?>
+                                      <tr>
+                                        <td><?=$i?></td>
+                                        <td><?=$d->sdatet?></td>
+                                        <td><?=$d->fdate?></td>
+                                        <td><?=$d->targetd?></td>
+                                        <td><?=$d->bd_name?></td>
+                                        <td><?=$d->request_type?></td>
+                                        <td><?=$d->remark?></td>
+                                        <td><?=$d->cname?></td>
+                                        <td><?=$d->project_code?></td>
+                                        
+                                        <td><?php 
+                                        $schoolname = $this->Menu_model->get_school_detailbyid($d->sid)[0]->sname;
+                                        echo $schoolname;
+                                        
+                                        ?></td>
+                                       <td><?=$d->venue?></td>
+                                        <th>Total <?=sizeof($logs)?> Logs</th>
+                                        <td>
+                                          <?php $olddate=''; foreach($logs as $log){
+                                            if($olddate==''){$olddate=$log->sdatet;}
+                                            $newddate = $log->sdatet;
+                                            $timed = $this->Menu_model->timediff($newddate, $olddate);
+                                            ?>
+                                          <b><?=is_numeric($log->tby)?$log->fullname:$log->tby?></b><br><?=$log->sdatet?><br>
+                                          <b><?=$timed?></b><br><b>Detail:</b> <?=$log->detail?>
+                                          <hr>
+                                          <?php $olddate=$newddate;} ?>
+                                        </td>
+                                        <td>
+                                          <?php if($d->assignstatus=='0'){?>
+                                            <a class="btn btn-primary p-2" href="<?=base_url()?>Menu/TheAssigningProcessOfPMCallOrVisitBDRequest/<?=$rtype?>/<?=$tid?>">Assign</a>  <hr>
+                                          <?php }else{
+                                            if($d->status=='1'){ echo 'Request Closed'; }
+                                            else{
+                                                $rid = $d->id;
+                                                $logs = $this->Menu_model->get_bdrtotallogs($rid);
+                                            ?>
+                                          <a href="<?=base_url();?>Menu/bdrequestlogs/<?=$rid?>"> Total <?=sizeof($logs)?> Logs </a>
+                                          <?php }}?>
+                                          <button type="button" id="add_comment<?=$i?>" value="<?=$tid?>">Comment</button>
+                                        </td>
+                                      </tr>
+                                      <?php $i++;}} ?>
+                                    </tbody>
+                                  </table>
+                                  <?php } ?>
+                                  <?php if($rtype=="PIA_Call_Or_Visit"){?>
+                                  <table id="example1" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead class="thead-dark">
+                                      <tr>
+                                        <th>S No.</th>
+                                        <th>Request Date</th>
+                                        <th>Target Date</th>
+                                        <th>Complete Target Date</th>
+                                        <th>BD Name</th>
+                                        <th>Request Type</th>
+                                        <th>Remark</th>
+                                        <th>Company Name</th>
+                                        <th>Project Code</th>
+                                        <th>School Name</th>
+                                        <th>Request Action</th>
+                      
+                                        <th>Total Logs</th>
+                                        <th>Logs Detail</th>
+                                        <th>Assign/Status/Logs</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <?php $i=1; foreach($bdr as $d){if($d->rysn==$rtype){
+                                        $tid = $d->id;
+                                        $logs=$this->Menu_model->get_bdrequestlog($tid);
+                                        $attech=$this->Menu_model->get_bdrequestattech($tid);
+                                        $j = sizeof($logs);
+                                        $j = $j-1;
+                                        ?>
+                                      <tr>
+                                        <td><?=$i?></td>
+                                        <td><?=$d->sdatet?></td>
+                                        <td><?=$d->fdate?></td>
+                                        <td><?=$d->targetd?></td>
+                                        <td><?=$d->bd_name?></td>
+                                        <td><?=$d->request_type?></td>
+                                        <td><?=$d->remark?></td>
+                                        <td><?=$d->cname?></td>
+                                        <td><?=$d->project_code?></td>
+                                        
+                                        <td><?php 
+                                        $schoolname = $this->Menu_model->get_school_detailbyid($d->sid)[0]->sname;
+                                        echo $schoolname;
+                                        
+                                        ?></td>
+                                       <td><?=$d->venue?></td>
+                                        <th>Total <?=sizeof($logs)?> Logs</th>
+                                        <td>
+                                          <?php $olddate=''; foreach($logs as $log){
+                                            if($olddate==''){$olddate=$log->sdatet;}
+                                            $newddate = $log->sdatet;
+                                            $timed = $this->Menu_model->timediff($newddate, $olddate);
+                                            ?>
+                                          <b><?=is_numeric($log->tby)?$log->fullname:$log->tby?></b><br><?=$log->sdatet?><br>
+                                          <b><?=$timed?></b><br><b>Detail:</b> <?=$log->detail?>
+                                          <hr>
+                                          <?php $olddate=$newddate;} ?>
+                                        </td>
+                                        <td>
+                                          <?php if($d->assignstatus=='0'){?>
+                                            <a class="btn btn-primary p-2" href="<?=base_url()?>Menu/TheAssigningProcessOfPIACallOrVisitBDRequest/<?=$rtype?>/<?=$tid?>">Assign</a>  <hr>
+                                          <?php }else{
+                                            if($d->status=='1'){ echo 'Request Closed'; }
+                                            else{
+                                                $rid = $d->id;
+                                                $logs = $this->Menu_model->get_bdrtotallogs($rid);
+                                            ?>
+                                          <a href="<?=base_url();?>Menu/bdrequestlogs/<?=$rid?>"> Total <?=sizeof($logs)?> Logs </a>
+                                          <?php }}?>
+                                          <button type="button" id="add_comment<?=$i?>" value="<?=$tid?>">Comment</button>
+                                        </td>
+                                      </tr>
+                                      <?php $i++;}} ?>
+                                    </tbody>
+                                  </table>
+                                  <?php } ?>
+                                  <?php if($rtype=="Installation_Person_Call_Or_Visit"){?>
+                                  <table id="example1" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead class="thead-dark">
+                                      <tr>
+                                        <th>S No.</th>
+                                        <th>Request Date</th>
+                                        <th>Target Date</th>
+                                        <th>Complete Target Date</th>
+                                        <th>BD Name</th>
+                                        <th>Request Type</th>
+                                        <th>Remark</th>
+                                        <th>Company Name</th>
+                                        <th>Project Code</th>
+                                        <th>School Name</th>
+                                        <th>Request Action</th>
+                      
+                                        <th>Total Logs</th>
+                                        <th>Logs Detail</th>
+                                        <th>Assign/Status/Logs</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <?php $i=1; foreach($bdr as $d){if($d->rysn==$rtype){
+                                        $tid = $d->id;
+                                        $logs=$this->Menu_model->get_bdrequestlog($tid);
+                                        $attech=$this->Menu_model->get_bdrequestattech($tid);
+                                        $j = sizeof($logs);
+                                        $j = $j-1;
+                                        ?>
+                                      <tr>
+                                        <td><?=$i?></td>
+                                        <td><?=$d->sdatet?></td>
+                                        <td><?=$d->fdate?></td>
+                                        <td><?=$d->targetd?></td>
+                                        <td><?=$d->bd_name?></td>
+                                        <td><?=$d->request_type?></td>
+                                        <td><?=$d->remark?></td>
+                                        <td><?=$d->cname?></td>
+                                        <td><?=$d->project_code?></td>
+                                        
+                                        <td><?php 
+                                        $schoolname = $this->Menu_model->get_school_detailbyid($d->sid)[0]->sname;
+                                        echo $schoolname;
+                                        
+                                        ?></td>
+                                       <td><?=$d->venue?></td>
+                                        <th>Total <?=sizeof($logs)?> Logs</th>
+                                        <td>
+                                          <?php $olddate=''; foreach($logs as $log){
+                                            if($olddate==''){$olddate=$log->sdatet;}
+                                            $newddate = $log->sdatet;
+                                            $timed = $this->Menu_model->timediff($newddate, $olddate);
+                                            ?>
+                                          <b><?=is_numeric($log->tby)?$log->fullname:$log->tby?></b><br><?=$log->sdatet?><br>
+                                          <b><?=$timed?></b><br><b>Detail:</b> <?=$log->detail?>
+                                          <hr>
+                                          <?php $olddate=$newddate;} ?>
+                                        </td>
+                                        <td>
+                                          <?php if($d->assignstatus=='0'){?>
+                                            <a class="btn btn-primary p-2" href="<?=base_url()?>Menu/TheAssigningProcessOfInstallationPersonCallOrVisitBDRequest/<?=$rtype?>/<?=$tid?>">Assign</a>  <hr>
+                                          <?php }else{
+                                            if($d->status=='1'){ echo 'Request Closed'; }
+                                            else{
+                                                $rid = $d->id;
+                                                $logs = $this->Menu_model->get_bdrtotallogs($rid);
+                                            ?>
+                                          <a href="<?=base_url();?>Menu/bdrequestlogs/<?=$rid?>"> Total <?=sizeof($logs)?> Logs </a>
+                                          <?php }}?>
+                                          <button type="button" id="add_comment<?=$i?>" value="<?=$tid?>">Comment</button>
+                                        </td>
+                                      </tr>
+                                      <?php $i++;}} ?>
+                                    </tbody>
+                                  </table>
+                                  <?php } ?>
+                                  <?php if($rtype=="Other_Department_Call"){?>
+                                  <table id="example1" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead class="thead-dark">
+                                      <tr>
+                                        <th>S No.</th>
+                                        <th>Request Date</th>
+                                        <th>Target Date</th>
+                                        <th>Complete Target Date</th>
+                                        <th>BD Name</th>
+                                        <th>Request Type</th>
+                                        <th>Remark</th>
+                                        <th>Company Name</th>
+                                        <th>Project Code</th>
+                                        <th>School Name</th>
+                                        <th>Request Action</th>
+                      
+                                        <th>Total Logs</th>
+                                        <th>Logs Detail</th>
+                                        <th>Assign/Status/Logs</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <?php $i=1; foreach($bdr as $d){if($d->rysn==$rtype){
+                                        $tid = $d->id;
+                                        $logs=$this->Menu_model->get_bdrequestlog($tid);
+                                        $attech=$this->Menu_model->get_bdrequestattech($tid);
+                                        $j = sizeof($logs);
+                                        $j = $j-1;
+                                        ?>
+                                      <tr>
+                                        <td><?=$i?></td>
+                                        <td><?=$d->sdatet?></td>
+                                        <td><?=$d->fdate?></td>
+                                        <td><?=$d->targetd?></td>
+                                        <td><?=$d->bd_name?></td>
+                                        <td><?=$d->request_type?></td>
+                                        <td><?=$d->remark?></td>
+                                        <td><?=$d->cname?></td>
+                                        <td><?=$d->project_code?></td>
+                                        
+                                        <td><?php 
+                                        $schoolname = $this->Menu_model->get_school_detailbyid($d->sid)[0]->sname;
+                                        echo $schoolname;
+                                        
+                                        ?></td>
+                                       <td><?=$d->venue?></td>
+                                        <th>Total <?=sizeof($logs)?> Logs</th>
+                                        <td>
+                                          <?php $olddate=''; foreach($logs as $log){
+                                            if($olddate==''){$olddate=$log->sdatet;}
+                                            $newddate = $log->sdatet;
+                                            $timed = $this->Menu_model->timediff($newddate, $olddate);
+                                            ?>
+                                          <b><?=is_numeric($log->tby)?$log->fullname:$log->tby?></b><br><?=$log->sdatet?><br>
+                                          <b><?=$timed?></b><br><b>Detail:</b> <?=$log->detail?>
+                                          <hr>
+                                          <?php $olddate=$newddate;} ?>
+                                        </td>
+                                        <td>
+                                          <?php if($d->assignstatus=='0'){?>
+                                            <a class="btn btn-primary p-2" href="<?=base_url()?>Menu/BDRequestAssignToProcessOtherDepartment/<?=$rtype?>/<?=$tid?>">Assign</a>  <hr>
+                                          <?php }else{
+                                            if($d->status=='1'){ echo 'Request Closed'; }
+                                            else{
+                                                $rid = $d->id;
+                                                $logs = $this->Menu_model->get_bdrtotallogs($rid);
+                                            ?>
+                                          <a href="<?=base_url();?>Menu/bdrequestlogs/<?=$rid?>"> Total <?=sizeof($logs)?> Logs </a>
+                                          <?php }}?>
+                                          <button type="button" id="add_comment<?=$i?>" value="<?=$tid?>">Comment</button>
+                                        </td>
+                                      </tr>
+                                      <?php $i++;}} ?>
+                                    </tbody>
+                                  </table>
+                                  <?php } ?>
+
+
+
                                   <?php if($rtype=="SSCHOOLID"){?>
                                   <table id="example1" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead class="thead-dark">
@@ -821,6 +1469,85 @@
                                     </tbody>
                                   </table>
                                   <?php } ?>
+                                  <?php if($rtype=="ClientEngagement"){?>
+                                  <table id="example1" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                                    <thead class="thead-dark">
+                                      <tr>
+                                        <th>S No.</th>
+                                        <th>Request Date</th>
+                                        <th>Target Date</th>
+                                        <th>BD Name</th>
+                                        <th>Request Type</th>
+                                        <th>Remark</th>
+                                        <th>Company Name</th>
+                                        <th>noofschool</th>
+                                        <th>Location</th>
+                                        <th>Attachment</th>
+                                        <th>Total Logs</th>
+                                        <th>Logs Detail</th>
+                                        <th>Assign/Status/Logs</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <?php $i=1; foreach($bdr as $d){if($d->rysn==$rtype){
+                                        $tid = $d->id;
+                                        $logs=$this->Menu_model->get_bdrequestlog($tid);
+                                        $attech=$this->Menu_model->get_bdrequestattech($tid);
+                                        $j = sizeof($logs);
+                                        $j = $j-1;
+                                        ?>
+                                      <tr>
+                                        <td><?=$i?></td>
+                                        <td><?=$d->sdatet?></td>
+                                        <td><?=$d->targetd?></td>
+                                        <td><?=$d->bd_name?></td>
+                                        <td><?=$d->request_type?></td>
+                                        <td><?=$d->remark?></td>
+                                        <td><?=$d->cname?></td>
+                                        <td><?=$d->noofschool?></td>
+                                        <td><?=$d->vlocation?></td>
+                                        <td>
+                                          <?php if($attech[0]->att==''){echo 'Not Available';}
+                                            else{
+                                               $atte = $attech[0]->att;
+                                               $atte = preg_split ("/\,/", $atte);
+                                               $l=sizeof($atte);
+                                               for($k=1;$k<$l;$k++){?>
+                                          <a href="https://stemoppapp.in/<?=$atte[$k]?>" target="_blank">
+                                            <p>Download</p>
+                                          </a>
+                                          <?php }}?>
+                                        </td>
+                                        <th>Total <?=sizeof($logs)?> Logs</th>
+                                        <td>
+                                          <?php $olddate=''; foreach($logs as $log){
+                                            if($olddate==''){$olddate=$log->sdatet;}
+                                            $newddate = $log->sdatet;
+                                            $timed = $this->Menu_model->timediff($newddate, $olddate);
+                                            ?>
+                                          <b><?=is_numeric($log->tby)?$log->fullname:$log->tby?></b><br><?=$log->sdatet?><br>
+                                          <b><?=$timed?></b><br><b>Detail:</b> <?=$log->detail?>
+                                          <hr>
+                                          <?php $olddate=$newddate;} ?>
+                                        </td>
+                                        <td>
+                                          <?php if($d->assignstatus=='0'){?>
+                                          <a class="btn btn-primary p-2" href="<?=base_url()?>Menu/TheAssigningProcessOfClientEngagementBDRequest/<?=$rtype?>/<?=$tid?>">Assign</a>  <hr>
+                                          <?php }else{
+                                            if($d->status=='1'){ echo 'Request Closed'; }
+                                            else{
+                                                $rid = $d->id;
+                                                $logs = $this->Menu_model->get_bdrtotallogs($rid);
+                                            ?>
+                                          <a href="<?=base_url();?>Menu/bdrequestlogs/<?=$rid?>"> Total <?=sizeof($logs)?> Logs </a>
+                                          <?php }}?>
+                                          <button type="button" id="add_comment<?=$i?>" value="<?=$tid?>">Comment</button>
+                                        </td>
+                                      </tr>
+                                      <?php $i++;}} ?>
+                                    </tbody>
+                                  </table>
+                                  <?php } ?>
                                   <?php if($rtype=="RTTP"){?>
                                   <table id="example1" class="table table-striped table-bordered" cellspacing="0" width="100%">
                                     <thead class="thead-dark">
@@ -884,7 +1611,7 @@
                                         </td>
                                         <td>
                                           <?php if($d->assignstatus=='0'){?>
-                                          <button type="button" id="assign_to<?=$i?>" value="<?=$tid?>">Click</button>
+                                            <a class="btn btn-primary p-2" href="<?=base_url()?>Menu/TheAssigningProcessOfRTTPBDRequest/<?=$rtype?>/<?=$tid?>">Assign</a>  <hr>
                                           <?php }else{
                                             if($d->status=='1'){ echo 'Request Closed'; }
                                             else{

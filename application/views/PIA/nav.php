@@ -133,18 +133,18 @@
           <div class="menu-inner-shadow"></div>
 
           <ul class="menu-inner py-1">
-            <li class="menu-header small text-uppercase"><span class="menu-header-text">Request</span></li>
+            <!-- <li class="menu-header small text-uppercase"><span class="menu-header-text">Request</span></li>
               <li class="menu-item">
                 <a href="<?=base_url().'Menu/BDREQUEST'?>" class="menu-link">
                   <i class="menu-icon tf-icons bx bx-crown"></i>
                   <div class="text-truncate" data-i18n="Boxicons">REQUEST</div>
                 </a>
-            </li>
+            </li> -->
            
             <li class="menu-header small text-uppercase"><span class="menu-header-text"></span></li>
             <li class="menu-item">
               <a href="Dashboard"
-                target="_blank"
+               
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
@@ -152,7 +152,7 @@
             </li>
             <!-- <li class="menu-item">
               <a href="MyNextDayPlan/<?=date('Y-m-d');?>"
-                target="_blank"
+               
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Sharetodaysplan">Share You Today's Plan</div>
@@ -160,7 +160,7 @@
             </li> -->
             <li class="menu-item">
               <a href="AddTempPerson"
-                target="_blank"
+               
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="AddTempPerson">Add Temp Person</div>
@@ -168,27 +168,27 @@
             </li>
             <li class="menu-item">
               <a href="CreateGoals"
-                target="_blank"
+               
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="CreateGoals">Create Goals</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="MyProfile/<?=$uid?>" target="_blank" class="menu-link">
+              <a href="MyProfile/<?=$uid?>" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">My Profile</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="CMSCCC" target="_blank" class="menu-link">
+              <a href="CMSCCC" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Create Cluster for MSC Clean</div>
               </a>
             </li>
             <!-- <li class="menu-item">
               <a href="Mytarget"
-                target="_blank"
+               
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="TransitProcess">My Target</div>
@@ -196,7 +196,7 @@
             </li> -->
             <li class="menu-item">
               <a href="DayManagement"
-                target="_blank"
+               
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="MyDayDetail">Day Management</div>
@@ -204,7 +204,7 @@
             </li>
             <li class="menu-item">
               <a href="NextDayPlan"
-                target="_blank"
+               
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="NextDayPlan">Next Day Plan</div>
@@ -212,7 +212,7 @@
             </li>
             <li class="menu-item">
               <a href="LiveVisit"
-                target="_blank"
+               
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="NextDayPlan">Live Visit</div>
@@ -220,7 +220,7 @@
             </li>
             <!-- <li class="menu-item">
               <a href="CreateTask"
-                target="_blank"
+               
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="CreateTask">Create Task</div>
@@ -228,7 +228,7 @@
             </li> -->
             <li class="menu-item">
               <a href="AllReviewPlaing"
-                target="_blank"
+               
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="RequestAmount">All Review</div>
@@ -236,7 +236,7 @@
             </li>
             <li class="menu-item">
               <a href="reviewreport"
-                target="_blank"
+               
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="maintenanceBag">Review Report</div>
@@ -244,7 +244,7 @@
             </li>
             <li class="menu-item">
               <a href="PlanReportWriting"
-                target="_blank"
+               
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="editProfile">Plan Report Writing</div>
@@ -252,7 +252,7 @@
             </li>
             <li class="menu-item">
               <a href="StartReportWriting"
-                target="_blank"
+               
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="editProfile">Start Report Writing</div>
@@ -260,7 +260,7 @@
             </li>
             <li class="menu-item">
               <a href="CloseReportWriting"
-                target="_blank"
+               
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="editProfile">Close Report Writing</div>
@@ -268,7 +268,7 @@
             </li>
             <li class="menu-item">
               <a href="AcademicCalendar"
-                target="_blank"
+               
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="editProfile">Academic calendar</div>
@@ -276,7 +276,7 @@
             </li>
             <li class="menu-item">
               <a href="PlanReportWriting"
-                target="_blank"
+               
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="editProfile">Start School Review</div>
@@ -284,7 +284,7 @@
             </li>
             <li class="menu-item">
               <a href="PlanReportWriting"
-                target="_blank"
+               
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="editProfile">School Review Report</div>
@@ -292,7 +292,7 @@
             </li>
             <li class="menu-item">
               <a href="allbdrequest"
-                target="_blank"
+               
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="DailyReport">BD Request</div>
@@ -300,7 +300,7 @@
             </li>
             <li class="menu-item">
               <a href="PlanReportWriting"
-                target="_blank"
+               
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="PlanReportWriting">Daily Report</div>
@@ -308,14 +308,14 @@
             </li>
             <li class="menu-item">
               <a href="editProfile"
-                target="_blank"
+               
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="editProfile">Edit Profile</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="<?php echo base_url()?>/Menu/logout" target="_blank" class="menu-link">
+              <a href="<?php echo base_url()?>/Menu/logout" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Logout">Logout</div>
               </a>
@@ -338,7 +338,7 @@
 
             <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
               <!-- Search -->
-              <div class="navbar-nav align-items-center">
+              <!-- <div class="navbar-nav align-items-center">
                 <div class="nav-item d-flex align-items-center">
                   <i class="bx bx-search bx-md"></i>
                   <input
@@ -347,7 +347,7 @@
                     placeholder="Search..."
                     aria-label="Search..." />
                 </div>
-              </div>
+              </div> -->
               <!-- /Search -->
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">

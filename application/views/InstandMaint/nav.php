@@ -1,19 +1,3 @@
-<!-- <!doctype html>
-<html
-  lang="en"
-  class="light-style layout-menu-fixed layout-compact"
-  dir="ltr"
-  data-theme="theme-default"
-  data-assets-path="<?= base_url() ?>assets/"
-  data-template="vertical-menu-template-free"
-  data-style="light">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <title>Demo : Dashboard - Analytics | sneat - Bootstrap Dashboard PRO</title>
-    <meta name="description" content="" /> -->
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="<?= base_url() ?>assets/img/favicon/favicon.ico" />
@@ -35,8 +19,6 @@
     <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/libs/apex-charts/apex-charts.css" />
     <link rel="stylesheet" href="<?= base_url() ?>assets/vendor/libs/apex-charts/apex-charts.css" />
-    
-  
 
     <!-- Page CSS -->
 
@@ -144,178 +126,52 @@
             <li class="menu-header small text-uppercase"><span class="menu-header-text"></span></li>
             <li class="menu-item">
               <a href="Dashboard"
-                target="_blank"
+                
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
               </a>
             </li>
-            <!-- <li class="menu-item">
-              <a href="MyNextDayPlan/<?=date('Y-m-d');?>"
-                target="_blank"
-                class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Sharetodaysplan">Share You Today's Plan</div>
-              </a>
-            </li> -->
-            <li class="menu-item">
-              <a href="AddTempPerson"
-                target="_blank"
-                class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="AddTempPerson">Add Temp Person</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a href="CreateGoals"
-                target="_blank"
-                class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="CreateGoals">Create Goals</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a href="MyProfile/<?=$uid?>" target="_blank" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Myprofile">My Profile</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a href="CMSCCC" target="_blank" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="Myprofile">Create Cluster for MSC Clean</div>
-              </a>
-            </li>
-            <!-- <li class="menu-item">
-              <a href="Mytarget"
-                target="_blank"
-                class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="TransitProcess">My Target</div>
-              </a>
-            </li> -->
             <li class="menu-item">
               <a href="DayManagement"
-                target="_blank"
+                
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="MyDayDetail">Day Management</div>
+                <div class="text-truncate" data-i18n="Sharetodaysplan">Day Management</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="NextDayPlan"
-                target="_blank"
+              <a href="TransitProcess"
+                
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="NextDayPlan">Next Day Plan</div>
+                <div class="text-truncate" data-i18n="AddTempPerson">Transit Process</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="LiveVisit"
-                target="_blank"
+              <a href="RequestAmount"
+                
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="NextDayPlan">Live Visit</div>
-              </a>
-            </li>
-            <!-- <li class="menu-item">
-              <a href="CreateTask"
-                target="_blank"
-                class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="CreateTask">Create Task</div>
-              </a>
-            </li> -->
-            <li class="menu-item">
-              <a href="AllReviewPlaing"
-                target="_blank"
-                class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="RequestAmount">All Review</div>
+                <div class="text-truncate" data-i18n="CreateGoals">Request Amount</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="reviewreport"
-                target="_blank"
-                class="menu-link">
+              <a href="maintenanceBag"  class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="maintenanceBag">Review Report</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a href="PlanReportWriting"
-                target="_blank"
-                class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="editProfile">Plan Report Writing</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a href="StartReportWriting"
-                target="_blank"
-                class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="editProfile">Start Report Writing</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a href="CloseReportWriting"
-                target="_blank"
-                class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="editProfile">Close Report Writing</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a href="AcademicCalendar"
-                target="_blank"
-                class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="editProfile">Academic calendar</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a href="PlanReportWriting"
-                target="_blank"
-                class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="editProfile">Start School Review</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a href="PlanReportWriting"
-                target="_blank"
-                class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="editProfile">School Review Report</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a href="allbdrequest"
-                target="_blank"
-                class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="DailyReport">BD Request</div>
-              </a>
-            </li>
-            <li class="menu-item">
-              <a href="PlanReportWriting"
-                target="_blank"
-                class="menu-link">
-                <i class="menu-icon tf-icons bx bx-support"></i>
-                <div class="text-truncate" data-i18n="PlanReportWriting">Daily Report</div>
+                <div class="text-truncate" data-i18n="Myprofile">Maintenance Bag</div>
               </a>
             </li>
             <li class="menu-item">
               <a href="editProfile"
-                target="_blank"
+                
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="editProfile">Edit Profile</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="<?php echo base_url()?>/Menu/logout" target="_blank" class="menu-link">
+              <a href="<?php echo base_url()?>/Menu/logout"  class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Logout">Logout</div>
               </a>
@@ -337,8 +193,8 @@
             </div>
 
             <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-              <!-- Search -->
-              <div class="navbar-nav align-items-center">
+
+              <!-- <div class="navbar-nav align-items-center">
                 <div class="nav-item d-flex align-items-center">
                   <i class="bx bx-search bx-md"></i>
                   <input
@@ -347,8 +203,8 @@
                     placeholder="Search..."
                     aria-label="Search..." />
                 </div>
-              </div>
-              <!-- /Search -->
+              </div> -->
+             
 
               <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <li class="nav-item lh-1 me-4">
