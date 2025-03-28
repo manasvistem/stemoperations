@@ -161,9 +161,19 @@
           </div>
 
           <div class="menu-inner-shadow"></div>
-
+              <div class="text-center mt-3">
+                <span><?=$user['fullname'];?></span>
+              </div>
+            <hr class="bg-success">
           <ul class="menu-inner py-1">
             <!-- Dashboards -->
+
+            <li class="menu-item">
+                <a href="<?=base_url().'Menu/Dashboard'?>" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-home-smile"></i>
+                  <div class="text-truncate" data-i18n="Boxicons">Dashboards</div>
+                </a>
+              </li>
               <!-- <li class="menu-item active open">
                 <a href="javascript:void(0);" class="menu-link menu-toggle">
                   <i class="menu-icon tf-icons bx bx-home-smile"></i>
@@ -222,6 +232,56 @@
                   <div class="text-truncate" data-i18n="Boxicons">REQUEST</div>
                 </a>
               </li>
+              <li class="menu-item">
+                <a href="<?=base_url().'Menu/AcademicCalendar'?>" class="menu-link">
+                  <i class="menu-icon tf-icons bx bx-crown"></i>
+                  <div class="text-truncate" data-i18n="Boxicons">Academic Calendar</div>
+                </a>
+              </li>
+
+              <li class="menu-item" style="">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <div class="text-truncate" data-i18n="Form Elements">Check Time Line</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="<?=base_url().'Menu/CheckSchoolTimelineData'?>" class="menu-link">
+                    <div class="text-truncate" data-i18n="Input groups">School Timeline</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+              <?php endif; ?>
+
+              <?php if($dep_id == 11): ?>
+       
+            
+              <li class="menu-item" style="">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                  <i class="menu-icon tf-icons bx bx-detail"></i>
+                  <div class="text-truncate" data-i18n="Form Elements">Planner Management</div>
+                </a>
+                <ul class="menu-sub">
+                  <li class="menu-item">
+                    <a href="<?=base_url().'Menu/TodaysPlannerRequest'?>" class="menu-link">
+                      <div class="text-truncate" data-i18n="Input groups">Todays Planner Request</div>
+                    </a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="<?=base_url().'Menu/PendingTaskPlannerRequest'?>" class="menu-link">
+                      <div class="text-truncate" data-i18n="Input groups">Pending Task Planner Request</div>
+                    </a>
+                  </li>
+                  <li class="menu-item">
+                    <a href="<?=base_url().'Menu/PlannerTaskApprovalPage'?>" class="menu-link">
+                      <div class="text-truncate" data-i18n="Input groups">Planner Task Approval Page</div>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              
               <?php endif; ?>
 
 
@@ -236,12 +296,37 @@
                   <div class="text-truncate" data-i18n="Boxicons">BD REQUEST</div>
                 </a>
               </li>
+
+              <li class="menu-item" style="">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <div class="text-truncate" data-i18n="Form Elements">Check Time Line</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                <a href="<?=base_url().'Menu/CheckHandoverTimelinelineData'?>" class="menu-link">
+                    <div class="text-truncate" data-i18n="Basic Inputs">Handover Timeline</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="<?=base_url().'Menu/CheckProgramTimelineData'?>" class="menu-link">
+                    <div class="text-truncate" data-i18n="Input groups">Program Timeline</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+
               <li class="menu-item">
                 <a href="<?=base_url().'Menu/TaskPlannerManagement'?>" class="menu-link">
                   <i class="menu-icon tf-icons bx bx-crown"></i>
                   <div class="text-truncate" data-i18n="Boxicons">Task Management</div>
                 </a>
               </li>
+
+
+
+
               <?php endif; ?>
             <!-- Misc -->
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
@@ -299,12 +384,6 @@
               <ul class="navbar-nav flex-row align-items-center ms-auto">
                 <!-- Place this tag where you want the button to render. -->
                 <li class="nav-item lh-1 me-4">
-                  <a href="javascript:void(0)">
-                    <span class="shadow-none bg-transparent border border-primary p-2"><i class="bx bx-bell me-2 text-danger"></i> Send Reminder</span>
-                  </a>
-                </li>
-                <li class="nav-item lh-1 me-4">
-                
                   <a
                     class="github-button"
                     href="https://github.com/themeselection/sneat-html-admin-template-free"
@@ -362,6 +441,11 @@
                     <li>
                       <a class="dropdown-item" href="<?=base_url().'Menu/AccountSettings'?>">
                         <i class="bx bx-user bx-md me-3"></i><span>My Profile & Settings</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#basicModalSendReminder">
+                        <i class="bx bx-bell bx-md me-3"></i><span>Send Reminder</span>
                       </a>
                     </li>
                     <?php 

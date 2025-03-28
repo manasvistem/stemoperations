@@ -23,13 +23,19 @@
         </div>
         <?php endif; ?>
       </h5>
+
+      <div class="card text-center" style="background: aliceblue;">
+            <h3>Pending AutoTask</h3>
+      </div>
+      <hr>
+
       <div class="row">
         <div class="col-md-9">
           <!-- <h6 class="text-muted p-3">Filled Pills</h6> -->
           <div class="nav-align-top mb-6">
             <ul class="nav nav-pills mb-4 nav-fill" role="tablist">
               <?php  
-                $getTodaysTaskCounts = $this->Menu_model->GetTodaysAllTaskCountByUid($uid, date("Y-m-d"), $user['dep_id']);
+                $getTodaysTaskCounts = $this->Menu_model->GetTodaysAllPendingAutoTaskCountByUid($uid, date("Y-m-d"), $user['dep_id']);
                 $firstTab = true; // Track first tab
                 
                 foreach ($getTodaysTaskCounts as $getTodaysTaskCount):
@@ -74,7 +80,7 @@
             </ul>
             <div class="tab-content">
               <?php 
-                $getTodaysTasks = $this->Menu_model->GetTodaysAllTaskByUid($uid, date('Y-m-d'));
+                $getTodaysTasks = $this->Menu_model->GetTodaysAllPendingAutoTaskByUid($uid, date('Y-m-d'));
                 // echo $this->db->last_query();
                 $firstPane = true; // Track first tab content
                 
@@ -144,19 +150,7 @@
         </div>
         <div class="col-md-3">
                 <div class="card">
-                   <div class="card">
-                   <?php 
-                        $user_day_planner  = $this->Menu_model->get_daystarted($uid,date("Y-m-d"));
-                        $pinitiate_time = $user_day_planner[0]->planner_initiate_time;
-                        $textmessage = $pinitiate_time == '' ? "Start" : "Resume";
-                    ?>
-                    <button type="button" class="btn btn-primary" onclick="handleReminderCreation()" fdprocessedid="5w4tuu">
-                    <i class="menu-icon tf-icons bx bx-calendar"></i> <?=$textmessage?> Planning 
-                      </button>
-                   </div>
-                </div>
-                <div class="card mt-2">
-                    <img src="<?=base_url()?>assets/img/checklist-concept-illustration_114360-27941.avif" alt="">
+                    <img src="<?=base_url()?>assets/img/hand-drawn-business-planning-with-task-list_23-2149164275.avif" alt="">
                 </div>
         </div>
       </div>
@@ -207,32 +201,6 @@
         });
     });
 });
-function handleReminderCreation() {
- 
-        $.ajax({
-            url: '<?=base_url();?>Menu/CheckTaskPlanningTime',
-            type: "POST",
-            data: {
-                'checkplantime': 'checkplantime'
-            },
-            cache: false,
-            success: function a(result) {
-                //	console.log(result);return false;
-                if (result == 'false') {
-                    var redURL = "<?=base_url();?>Menu/TaskPlanner2/<?= date("Y-m-d") ?>";
-                    window.location.href = redURL;
-                } else if (result == 'true') {
 
-                    <?php 
-          $todaydate = new DateTime();
-          $todaydate->modify('+1 day');
-          $tomorrowDate = $todaydate->format('Y-m-d');
-          ?>
-                    var redURL = "<?=base_url();?>Menu/TaskPlanner2/<?= $tomorrowDate; ?>";
-                    window.location.href = redURL;
-                }
-            }
-        });
-}
 </script>
 <?php $this->load->view('footer'); ?>

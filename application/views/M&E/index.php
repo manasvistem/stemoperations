@@ -1,588 +1,255 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>STEM Oppration | WebAPP</title>
-
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Tempusdominus Bootstrap 4 -->
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/tempusdominus-bootstrap-4.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/icheck-bootstrap.min.css">
-  <!-- JQVMap -->
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/jqvmap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/adminlte.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/OverlayScrollbars.min.css">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/daterangepicker.css">
-  <!-- summernote -->
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/summernote-bs4.min.css">
-   <!-- DataTables -->
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/buttons.bootstrap4.min.css">
-  <style>
-      .scrollme {
-    overflow-x: auto;
-}
-  </style>
-  
-</head>
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
-
-  <!-- Preloader -->
-  
-
-  <!-- Navbar -->
-  <?php require('nav.php');?>
-  <!-- /.navbar -->
-<?php require('addlog.php');?>
-  
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">Dashboard</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-                  <h4>HI!  <?=$user['fullname']?> ( <?php $uid= $user['id']; $id = $user['dep_id']; $did=$this->Menu_model->get_dep_byid($id); echo $did[0]->dep_name;?> )</h4> 
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
-        <div class="row">
-          <div class="col-12">
-            <!-- Default box -->
-            
-            
-            <div class="card card-group-row__card card-shadow">
-            <div class="table-responsive">
-                            <div class="table-responsive">     
-                                <table class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                    <thead>
-                                        <tr>
-                                            
-                                            <th>Total School</th>
-                                            <th>New School</th>
-                                            <th>FTTP Done</th>
-                                            <th>Active School</th>
-                                            <th>Average School</th>
-                                            <th>Good School</th>
-                                            <th>Model School</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                <tr>
-                                    <td>10</td>
-                                    <td>5</td>
-                                    <td>2</td>
-                                    <td>4</td>
-                                    <td>6</td>
-                                    <td>4</td>
-                                    <td>6</td>
-                                </tr>
-                  </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        </div>
-                        
-                        
-                        
-                        
-                        <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
-        <div class="row">
-          
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-warning">
-              <div class="inner">
-                <h3>44</h3>
-
-                <p>New School To<br>FTTP Done</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-person-add"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger">
-              <div class="inner">
-                <h3>65</h3>
-
-                <p>FTTP Done To<br>Active School</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-pie-graph"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-info">
-              <div class="inner">
-                <h3>15</h3>
-
-                <p>Active School To<br>Average School</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-bag"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success">
-              <div class="inner">
-                <h3>31</h3>
-
-                <p>Average School To<br>Good School</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-stats-bars"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          <!-- ./col -->
-          
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-success">
-              <div class="inner">
-                <h3>31</h3>
-
-                <p>Good School To<br>Model School</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-stats-bars"></i>
-              </div>
-              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>
-          
-          <!-- ./col -->
-          
-          <!--<div class="col-lg-3 col-6">
-            <!-- small box -->
-            <!--<div class="small-box bg-success">
-              <div class="inner">
-                <h3>Request</h3>
-
-                <p>Total Request <br>Pending for Assign<br>Assign<br>Pending<br>Close</p>
-              </div>
-              <div class="icon">
-                <i class="ion ion-stats-bars"></i>
-              </div>
-              <a href="bdrapending" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-            </div>
-          </div>-->
-          
-          <!-- ./col -->
-            
-        <!-- /.row -->
-        
-        
-    
-            
-          </div>
-        <!-- /.row (main row) -->
-            
-            
-   
-<div class="row">
-          <div class="col-lg-8 col-sm">
-            <div class="card card-primary card-outline card-outline-tabs">
-                <h4 class="p-3">Today's Task</h4>
-              <div class="card-header p-0 border-bottom-0">
-                <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
-                  <li class="nav-item">
-                    <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home" aria-selected="true">
-                        All <span class="badge badge-success"><?php $dot=$this->Menu_model->get_plantask($uid); echo $all = sizeof($dot);?></span>
-                    </a>
-                    
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile" aria-selected="false">
-                        Visit <span class="badge badge-success"><?php $action = "Visit"; $dot=$this->Menu_model->get_task($action); echo $all = sizeof($dot);?></span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" id="custom-tabs-four-call-tab" data-toggle="pill" href="#custom-tabs-four-call" role="tab" aria-controls="custom-tabs-four-call" aria-selected="false">
-                        Call <span class="badge badge-success"><?php $action = "Call"; $dot=$this->Menu_model->get_task($action); echo $all = sizeof($dot);?></span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" id="custom-tabs-four-email-tab" data-toggle="pill" href="#custom-tabs-four-email" role="tab" aria-controls="custom-tabs-four-email" aria-selected="false">
-                        Email <span class="badge badge-success"><?php $action = "Email"; $dot=$this->Menu_model->get_task($action); echo $all = sizeof($dot);?></span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" id="custom-tabs-four-whatsapp-tab" data-toggle="pill" href="#custom-tabs-four-whatsapp" role="tab" aria-controls="custom-tabs-whatsapp" aria-selected="false">
-                        Whatsapp<span class="badge badge-success"><?php $action = "Whatsapp"; $dot=$this->Menu_model->get_task($action); echo $all = sizeof($dot);?></span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" id="custom-tabs-four-report-tab" data-toggle="pill" href="#custom-tabs-four-report" role="tab" aria-controls="custom-tabs-four-report" aria-selected="false">
-                        Report <span class="badge badge-success"><?php $action = "Report"; $dot=$this->Menu_model->get_task($action); echo $all = sizeof($dot);?></span>
-                    </a>
-                  </li>
-                  
-                </ul>
+<?php $this->load->view('nav'); ?>
+<style>
+  .card {
+    padding:10px;
+  }
+</style>
+<!-- Content wrapper -->
+<div class="content-wrapper">
+  <!-- Content -->
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="card">
+      <h5 class="card-header text-center">
+        <?php if ($this->session->flashdata('success_message')): ?>
+        <div class="alert alert-success alert-dismissible" role="alert">
+          <?= $this->session->flashdata('success_message'); ?>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php endif; ?>
+        <?php if ($this->session->flashdata('error_message')): ?>
+        <div class="alert alert-danger alert-dismissible" role="alert">
+          <?= $this->session->flashdata('error_message'); ?>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php endif; ?>
+      </h5>
+      <div class="row">
+        <div class="col-md-9">
+          <!-- <h6 class="text-muted p-3">Filled Pills</h6> -->
+          <div class="nav-align-top mb-6">
+            <ul class="nav nav-pills mb-4 nav-fill" role="tablist">
+              <?php  
+                $getTodaysTaskCounts = $this->Menu_model->GetTodaysAllTaskCountByUid($uid, date("Y-m-d"), $user['dep_id']);
+                $firstTab = true; // Track first tab
                 
-              </div>
-              <div class="card-body">
-                <div class="tab-content" id="custom-tabs-four-tabContent">
-                  <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
-                      <?php 
-                        $dot=$this->Menu_model->get_plantask($uid);
-                        $i=1;
-                        foreach($dot as $d){     
-                      ?>
-                      <div>
-                          <b><?=$i?>. <?=$d->spd_id?> <?=$d->taskid?></b>
-                          <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                          <hr>
-                      </div>
-                      
-                      <?php $i++;} ?>
-                  </div>
-                  <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">
-                      <?php 
-                        $action = "Visit";
-                        $i=1;
-                        $dot=$this->Menu_model->get_task($action);
-                        foreach($dot as $d){
-                      ?>
-                      <div>
-                          <b><?=$i?>. <?=$d->spd_id?> <?=$d->taskid?></b>
-                          <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                          <hr>
-                      </div>
-                      
-                      <?php $i++;} ?>
-                  </div>
-                  <div class="tab-pane fade" id="custom-tabs-four-call" role="tabpanel" aria-labelledby="custom-tabs-four-call-tab">
-                      <?php 
-                        $action = "Call";
-                        $i=1;
-                        $dot=$this->Menu_model->get_task($action);
-                        foreach($dot as $d){     
-                        
-                      ?>
-                      <div>
-                          <b><?=$i?>. <?=$d->spd_id?> <?=$d->taskid?></b>
-                          <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                          <hr>
-                      </div>
-                      
-                      <?php $i++;} ?>
-                  </div>
-                  <div class="tab-pane fade" id="custom-tabs-four-email" role="tabpanel" aria-labelledby="custom-tabs-four-email-tab">
-                      <?php 
-                        $action = "Email";
-                        $i=1;
-                        $dot=$this->Menu_model->get_task($action);
-                        foreach($dot as $d){     
-                      ?>
-                      <div>
-                          <b><?=$i?>. <?=$d->spd_id?> <?=$d->taskid?></b>
-                          <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                          <hr>
-                      </div>
-                      
-                      <?php $i++;} ?>
-                  </div>
-                  <div class="tab-pane fade" id="custom-tabs-four-whatsapp" role="tabpanel" aria-labelledby="custom-tabs-four-whatsapp-tab">
-                      <?php 
-                        $action = "Whatsapp";
-                        $i=1;
-                        $dot=$this->Menu_model->get_task($action);
-                        foreach($dot as $d){     
-                      ?>
-                      <div>
-                          <b><?=$i?>. <?=$d->spd_id?> <?=$d->taskid?></b>
-                          <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                          <hr>
-                      </div>
-                      
-                      <?php $i++;} ?>
-                  </div>
-                  
-                  <div class="tab-pane fade" id="custom-tabs-report" role="tabpanel" aria-labelledby="custom-tabs-four-report-tab">
-                      <?php 
-                        $action = "Report";
-                        $i=1;
-                        $dot=$this->Menu_model->get_task($action);
-                        foreach($dot as $d){     
-                      ?>
-                      <div>
-                          <b><?=$i?>. <?=$d->spd_id?> <?=$d->taskid?></b>
-                          <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                          <hr>
-                      </div>
-                      
-                      <?php $i++;} ?>
-                  </div>
-                  
-                  
-                  
-                </div>
-              </div>
-              <!-- /.card -->
-            </div>
-            
-            
-            
-            
-            
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">
-                  <i class="ion ion-clipboard mr-1"></i>
-                  To Do List
-                </h3>
-
-                <div class="card-tools">
-                  <ul class="pagination pagination-sm">
-                    <li class="page-item"><a href="#" class="page-link">&laquo;</a></li>
-                    <li class="page-item"><a href="#" class="page-link">1</a></li>
-                    <li class="page-item"><a href="#" class="page-link">2</a></li>
-                    <li class="page-item"><a href="#" class="page-link">3</a></li>
-                    <li class="page-item"><a href="#" class="page-link">&raquo;</a></li>
-                  </ul>
-                </div>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <ul class="todo-list" data-widget="todo-list">
-                    
-                    <?php 
-                        $i=1;
-                        $dot=$this->Menu_model->get_taskassign();
-                        foreach($dot as $d){ if($d->plan==0){
-                        $id = $d->from_user;
-                        $user=$this->Menu_model->get_user_byid($id);
-                      ?>
-                      <li>
-                            <span class="handle">
-                              <i class="fas fa-ellipsis-v"></i>
-                              <i class="fas fa-ellipsis-v"></i>
-                            </span>
-                          <span class="text"><b><?=$i?>. <?=$d->task_type?> <?=$d->comment?></b></span>
-                          <small class="badge badge-secondary"><i class="far fa-clock"></i> 1 month</small>
-                          <button type="button" id="other_action" class="btn btn-primary float-right" value="<?=$d->id?>">Plan Action</button>
-                      </li>
-                      
-                      <?php $i++;}} ?>
-                </ul>
-              </div>
-              <!-- /.card-body -->
-              <div class="card-footer clearfix">
+                foreach ($getTodaysTaskCounts as $getTodaysTaskCount):
+                    $formatted_string = preg_replace("/[ \/'-]+/", "_", $getTodaysTaskCount->tasktype);
+                ?>
+              <li class="nav-item mb-1 mb-sm-0" role="presentation">
+                <button type="button" 
+                  class="nav-link <?= $firstTab ? 'active' : '' ?>" 
+                  role="tab" 
+                  data-bs-toggle="tab" 
+                  data-bs-target="#<?= $formatted_string ?>" 
+                  aria-controls="<?= $formatted_string ?>" 
+                  aria-selected="<?= $firstTab ? 'true' : 'false' ?>" 
+                  tabindex="-1">
+                <span class="d-none d-sm-block">
+                <i class="tf-icons bx bx-home bx-sm me-1.5 align-text-bottom"></i> 
+                <?= $getTodaysTaskCount->tasktype ?>
+                <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-danger ms-1.5 pt-50">
+                <?= $getTodaysTaskCount->task_count ?>
+                </span>
+                </span>
+                <i class="bx bx-home bx-sm d-sm-none"></i>
+                </button>
+              </li>
+              <?php 
+                $firstTab = false; // Set to false after first iteration
+                endforeach; 
+                ?>
+              <!-- <li class="nav-item" role="presentation">
+                <button type="button" class="nav-link" role="tab" 
+                  data-bs-toggle="tab" 
+                  data-bs-target="#navs-pills-justified-messages" 
+                  aria-controls="navs-pills-justified-messages" 
+                  aria-selected="false" 
+                  tabindex="-1">
+                <span class="d-none d-sm-block">
+                <i class="tf-icons bx bx-message-square bx-sm me-1.5 align-text-bottom"></i> Messages
+                </span>
+                <i class="bx bx-message-square bx-sm d-sm-none"></i>
+                </button>
+              </li> -->
+            </ul>
+            <div class="tab-content">
+              <?php 
+                $getTodaysTasks = $this->Menu_model->GetTodaysAllTaskByUid($uid, date('Y-m-d'));
+                // echo $this->db->last_query();
+                $firstPane = true; // Track first tab content
                 
-              </div>
-            </div>
-            <!-- /.card -->
-            
-            
-            
-            
-            
-            
-            
-            </div>
-            <div class="col-lg-4 col-sm">
-            <div class="card card-primary card-outline card-outline-tabs">
-                <h5 class="p-3">Today's Task</h5><hr>
-              <div class="card-header p-0 border-bottom-0"> </div>
-              <div class="card-body">
-                <div class="tab-content" id="custom-tabs-four-tabContent">
-                    <div class="table-responsive">
-                            <div class="table-responsive">     
-                                <table id="example1" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                    <thead>
-                                        <tr><th>Task</th> </tr>
-                                    </thead>
-                                    <tbody>
-                  <?php 
-                    $dot=$this->Menu_model->get_plantask($uid);
-                    foreach($dot as $d){ if($d->tdone==0){
-                    
-                    ?>
-                    <tr><td><div><i class="fa fa-thumb-tack" aria-hidden="true"></i> <b><?=$d->id?></b></div><div class="text-right">Task assign by </div>
-                    
-                    </td></tr>
-                  <?php }} ?>
-                  </tbody>
-                                </table>
-                            </div>
-                        </div>
-                </div>
-              </div>
-              <!-- /.card -->
-            </div>
-            
-            <!-- Calendar -->
-            <div class="card bg-gradient-success">
-              <div class="card-header border-0">
+                foreach ($getTodaysTaskCounts as $getTodaysTaskCount):
+                    $slct_type_of_task = $getTodaysTaskCount->tasktype;
+                    $formatted_string = preg_replace("/[ \/'-]+/", "_", $getTodaysTaskCount->tasktype);
+                ?>
+              <div class="tab-pane fade <?= $firstPane ? 'show active' : '' ?>" 
+                id="<?= $formatted_string ?>" 
+                role="tabpanel">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <small class="text-light fw-medium"><?=$slct_type_of_task?> Task List</small>
+                    <div class="mt-4">
+                      <div class="list-group">
+                        <?php 
+                          $i=1;
+                          foreach($getTodaysTasks as $sctasklist){
+                            $task_id              = $sctasklist->task_id;
+                            $type_of_task         = $sctasklist->tasktype;
+                            $appointment_datetime = $sctasklist->appointment_datetime;
+                            $sname                = $sctasklist->sname;
+                            $tasktype             = $sctasklist->tasktype;
+                            $taskname             = $sctasklist->taskname;
+                            $comments             = $sctasklist->comments;
+                            $bd_idetype           = $sctasklist->bd_idetype;
+                            $target_date          = $sctasklist->target_date;
+                            $expected_date        = $sctasklist->expected_date;
+                            $fwd_date             = $sctasklist->fwd_date;
 
-                <h3 class="card-title">
-                  <i class="far fa-calendar-alt"></i>
-                  Calendar
-                </h3>
-                <!-- tools card -->
-                <div class="card-tools">
-                  <!-- button with a dropdown -->
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown" data-offset="-52">
-                      <i class="fas fa-bars"></i>
-                    </button>
-                    <div class="dropdown-menu" role="menu">
-                      <a href="#" class="dropdown-item">Add new event</a>
-                      <a href="#" class="dropdown-item">Clear events</a>
-                      <div class="dropdown-divider"></div>
-                      <a href="#" class="dropdown-item">View calendar</a>
+                          if($slct_type_of_task == $type_of_task){ ?>
+                        <a data-task_id="<?=$task_id;?>" href="javascript:void(0);" class="list-group-item list-group-item-action flex-column align-items-start active mb-1 taskperformaction" >
+                          <div class="d-flex justify-content-between w-100">
+                            <h5 class="mb-1"><?=$sname.' - '.$taskname ?></h5>
+                            <!-- <small> <span id="countdown1"></span> - <span id="status1"></span> </small> -->
+                          </div>
+                          <p class="mb-1">
+                            <?=$taskname ?> - <?=$comments ?>
+                          </p>
+                          <small> <span id="countdown<?=$task_id;?>"></span> - <span id="status<?=$task_id;?>"></span> </small>
+                        </a>
+                        <script> checkCountDownTime("<?=$appointment_datetime;?>",<?=$task_id;?>);</script>
+                        <?php $i++; }   } ?>
+                      </div>
                     </div>
                   </div>
-                  <button type="button" class="btn btn-success btn-sm" data-card-widget="collapse">
-                    <i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-success btn-sm" data-card-widget="remove">
-                    <i class="fas fa-times"></i>
-                  </button>
                 </div>
-                <!-- /. tools -->
               </div>
-              <!-- /.card-header -->
-              <div class="card-body pt-0">
-                <!--The calendar -->
-                <div id="calendar" style="width: 100%"></div>
-              </div>
-              
-              
+              <?php 
+                $firstPane = false; // Set to false after first iteration
+                endforeach; 
+                ?>
+              <!-- <div class="tab-pane fade" id="navs-pills-justified-messages" role="tabpanel">
+                <p>
+                  Oat cake chupa chups dragée donut toffee. Sweet cotton candy jelly beans macaroon gummies
+                  cupcake gummi bears cake chocolate.
+                </p>
+                <p class="mb-0">
+                  Cake chocolate bar cotton candy apple pie tootsie roll ice cream apple pie brownie cake. Sweet
+                  roll icing sesame snaps caramels danish toffee. Brownie biscuit dessert dessert. Pudding jelly
+                  jelly-o tart brownie jelly.
+                </p>
+              </div> -->
+            </div>
           </div>
         </div>
-</div>
- </div>
+        <div class="col-md-3">
+                <div class="card">
+                   <div class="card">
+                   <?php 
+                        $user_day_planner  = $this->Menu_model->get_daystarted($uid,date("Y-m-d"));
+                        $pinitiate_time = $user_day_planner[0]->planner_initiate_time;
+                        $textmessage = $pinitiate_time == '' ? "Start" : "Resume";
+                    ?>
+                    <button type="button" class="btn btn-primary" onclick="handleReminderCreation()" fdprocessedid="5w4tuu">
+                    <i class="menu-icon tf-icons bx bx-calendar"></i> <?=$textmessage?> Planning 
+                      </button>
+                   </div>
+                   <hr>
+                  
+                </div>
         </div>
-</div>
-        
-            
-            
-            
-        <!-- /.row (main row) -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2021-2022 <a href="<?=base_url();?>">Stemlearning</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 1.0
+      </div>
     </div>
-  </footer>
-
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
+  </div>
 </div>
-<!-- ./wrapper -->
+<div class="col-lg-4 col-md-6">
+  <!-- <small class="text-light fw-medium">Vertically centered</small> -->
+  <div class="mt-4">
+    <!-- Button trigger modal -->
+    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
+    Launch modal
+    </button> -->
+    <!-- Modal -->
+    <div class="modal fade" id="modalCenter" tabindex="-1" style="display: none;" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalCenterTitle">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <hr>
+          <div class="modal-body">
 
-<!-- jQuery -->
-<script src="<?=base_url();?>assets/js/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="<?=base_url();?>assets/js/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+            <div class="row">
+              <div class="col mb-6">
+                <label for="nameWithTitle" class="form-label">Name</label>
+                <input type="text" id="nameWithTitle" class="form-control" placeholder="Enter Name">
+              </div>
+            </div>
+            <div class="row g-6">
+              <div class="col mb-0">
+                <label for="emailWithTitle" class="form-label">Email</label>
+                <input type="email" id="emailWithTitle" class="form-control" placeholder="xxxx@xxx.xx">
+              </div>
+              <div class="col mb-0">
+                <label for="dobWithTitle" class="form-label">DOB</label>
+                <input type="date" id="dobWithTitle" class="form-control">
+              </div>
+            </div>
+            <hr>
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+            Close
+            </button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
-  $.widget.bridge('uibutton', $.ui.button)
+  $(document).ready(function() {
+    // When an element with class 'taskperformaction' is clicked
+    $('.taskperformaction').on('click', function() {
+        var taskId = $(this).data('task_id'); // Retrieve the 'task_id' data
+        $('#modalCenter').modal('show');
+        $('#modalCenterTitle').text("Task ID IS = "+taskId);
+        // console.log(taskId); // Log the task ID or use it as needed
+        // alert(taskId);
+    });
+
+
+
+});
+function handleReminderCreation() {
+ 
+        $.ajax({
+            url: '<?=base_url();?>Menu/CheckTaskPlanningTime',
+            type: "POST",
+            data: {
+                'checkplantime': 'checkplantime'
+            },
+            cache: false,
+            success: function a(result) {
+                //	console.log(result);return false;
+                if (result == 'false') {
+                    var redURL = "<?=base_url();?>Menu/TaskPlanner2/<?= date("Y-m-d") ?>";
+                    window.location.href = redURL;
+                } else if (result == 'true') {
+
+                    <?php 
+          $todaydate = new DateTime();
+          $todaydate->modify('+1 day');
+          $tomorrowDate = $todaydate->format('Y-m-d');
+          ?>
+                    var redURL = "<?=base_url();?>Menu/TaskPlanner2/<?= $tomorrowDate; ?>";
+                    window.location.href = redURL;
+                }
+            }
+        });
+}
 </script>
-<!-- Bootstrap 4 -->
-<script src="<?=base_url();?>assets/js/bootstrap.bundle.min.js"></script>
-<!-- ChartJS -->
-<script src="<?=base_url();?>assets/js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="<?=base_url();?>assets/js/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="<?=base_url();?>assets/js/jquery.vmap.min.js"></script>
-<script src="<?=base_url();?>assets/js/jquery.vmap.usa.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
-<script src="<?=base_url();?>assets/js/moment.min.js"></script>
-<script src="<?=base_url();?>assets/js/daterangepicker.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="<?=base_url();?>assets/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Summernote -->
-<script src="<?=base_url();?>assets/js/summernote-bs4.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="<?=base_url();?>assets/js/jquery.overlayScrollbars.min.js"></script>
-<!-- AdminLTE App -->
-<script src="<?=base_url();?>assets/js/adminlte.js"></script>
-
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?=base_url();?>assets/js/dashboard.js"></script>
-
-<!-- DataTables  & Plugins -->
-<script src="<?=base_url();?>assets/js/jquery.dataTables.min.js"></script>
-<script src="<?=base_url();?>assets/js/dataTables.bootstrap4.min.js"></script>
-<script src="<?=base_url();?>assets/js/dataTables.responsive.min.js"></script>
-<script src="<?=base_url();?>assets/js/responsive.bootstrap4.min.js"></script>
-<script src="<?=base_url();?>assets/js/dataTables.buttons.min.js"></script>
-<script src="<?=base_url();?>assets/js/buttons.bootstrap4.min.js"></script>
-<script src="<?=base_url();?>assets/js/jszip.min.js"></script>
-<script src="<?=base_url();?>assets/js/pdfmake.min.js"></script>
-<script src="<?=base_url();?>assets/js/vfs_fonts.js"></script>
-<script src="<?=base_url();?>assets/js/buttons.html5.min.js"></script>
-<script src="<?=base_url();?>assets/js/buttons.print.min.js"></script>
-<script src="<?=base_url();?>assets/js/buttons.colVis.min.js"></script>
-<!-- AdminLTE App -->
-<script src="<?=base_url();?>assets/js/adminlte.js"></script>
-
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?=base_url();?>assets/js/dashboard.js"></script>
-
-<script>
-    $("#example1").DataTable({
-      "responsive": false, "lengthChange": false, "autoWidth": false,
-      "buttons": ["excel", "pdf"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-</script>
-</body>
-</html>
+<?php $this->load->view('footer'); ?>

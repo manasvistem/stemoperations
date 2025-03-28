@@ -108,6 +108,12 @@
                   ]
               } );
 
+              $('#example2').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                          'copy', 'excelFlash', 'excel', 'pdf', 'print'
+                      ]
+                  });
 
             $(".close-notification").on("click", function(){
                 var notificationId = $(this).data("id");

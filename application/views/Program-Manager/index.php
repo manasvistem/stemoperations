@@ -1,4 +1,9 @@
 <?php $this->load->view('nav'); ?>
+<style>
+  .card {
+    padding:10px;
+  }
+</style>
 <!-- Content wrapper -->
 <div class="content-wrapper">
   <!-- Content -->
@@ -19,7 +24,7 @@
         <?php endif; ?>
       </h5>
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-9">
           <!-- <h6 class="text-muted p-3">Filled Pills</h6> -->
           <div class="nav-align-top mb-6">
             <ul class="nav nav-pills mb-4 nav-fill" role="tablist">
@@ -107,13 +112,12 @@
                             <!-- <small> <span id="countdown1"></span> - <span id="status1"></span> </small> -->
                           </div>
                           <p class="mb-1">
-                            <?=$taskname ?> ===== Donut dragée jelly pie halvah. Danish gingerbread bonbon cookie wafer candy oat cake ice
-                            cream. Gummies halvah tootsie roll muffin biscuit icing dessert gingerbread. Pastry ice cream
-                            cheesecake fruitcake.
+                            <?=$taskname ?> - <?=$comments ?>
                           </p>
                           <small> <span id="countdown<?=$task_id;?>"></span> - <span id="status<?=$task_id;?>"></span> </small>
+                          <small> <span class='text-danger' id="please_wait_<?=$task_id;?>"></span></small>
                         </a>
-                        <script> checkCountDownTime("<?=$fwd_date;?>",<?=$task_id;?>);</script>
+                        <script> checkCountDownTime("<?=$appointment_datetime;?>",<?=$task_id;?>);</script>
                         <?php $i++; }   } ?>
                       </div>
                     </div>
@@ -138,69 +142,124 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div class="col-lg-4 col-md-6">
-  <!-- <small class="text-light fw-medium">Vertically centered</small> -->
-  <div class="mt-4">
-    <!-- Button trigger modal -->
-    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
-    Launch modal
-    </button> -->
-    <!-- Modal -->
-    <div class="modal fade" id="modalCenter" tabindex="-1" style="display: none;" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="modalCenterTitle">Modal title</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <hr>
-          <div class="modal-body">
-
-            <div class="row">
-              <div class="col mb-6">
-                <label for="nameWithTitle" class="form-label">Name</label>
-                <input type="text" id="nameWithTitle" class="form-control" placeholder="Enter Name">
-              </div>
-            </div>
-            <div class="row g-6">
-              <div class="col mb-0">
-                <label for="emailWithTitle" class="form-label">Email</label>
-                <input type="email" id="emailWithTitle" class="form-control" placeholder="xxxx@xxx.xx">
-              </div>
-              <div class="col mb-0">
-                <label for="dobWithTitle" class="form-label">DOB</label>
-                <input type="date" id="dobWithTitle" class="form-control">
-              </div>
-            </div>
-            <hr>
-            
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-            Close
-            </button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
+        <div class="col-md-3">
+                <div class="card">
+                   <div class="card">
+                   <?php 
+                        $user_day_planner  = $this->Menu_model->get_daystarted($uid,date("Y-m-d"));
+                        $pinitiate_time = $user_day_planner[0]->planner_initiate_time;
+                        $textmessage = $pinitiate_time == '' ? "Start" : "Resume";
+                    ?>
+                    <button type="button" class="btn btn-primary" onclick="handleReminderCreation()" fdprocessedid="5w4tuu">
+                    <i class="menu-icon tf-icons bx bx-calendar"></i> <?=$textmessage?> Planning 
+                      </button>
+                   </div>
+                </div>
+                <div class="card mt-2">
+                    <img src="<?=base_url()?>assets/img/checklist-concept-illustration_114360-27941.avif" alt="">
+                </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+  <?php $this->load->view('TaskPopUp'); ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
   $(document).ready(function() {
     // When an element with class 'taskperformaction' is clicked
     $('.taskperformaction').on('click', function() {
         var taskId = $(this).data('task_id'); // Retrieve the 'task_id' data
-        $('#modalCenter').modal('show');
-        $('#modalCenterTitle').text("Task ID IS = "+taskId);
-        // console.log(taskId); // Log the task ID or use it as needed
-        // alert(taskId);
+        $('#please_wait_'+taskId).text("* Please Wait...");
+        
+          // Fetch New Timeline Settings
+          $.ajax({
+            url: '<?=base_url();?>Menu/FetchTaskDetailsUsingTaskID',
+            type: "POST",
+            data: { taskId: taskId },
+            cache: false,
+            success: function (result) {
+              $('#please_wait_'+taskId).text("");
+              var resultArray   = JSON.parse(result);
+              var project_code  = resultArray[0].project_code;
+              var task_action   = resultArray[0].task_action;
+              var tasktype      = resultArray[0].tasktype;
+              var tasktname     = resultArray[0].tasktname;
+              var appointment_datetime  = resultArray[0].appointment_datetime;
+              var initiate_datetime     = resultArray[0].initiate_datetime;
+              var updated_datetime      = resultArray[0].updated_datetime;
+              var autotask      = resultArray[0].autotask;
+              var exdate        = resultArray[0].exdate;
+              var comments      = resultArray[0].comments;
+              var aftertask     = resultArray[0].aftertask;
+
+              if(task_action == 119){
+              $.ajax({
+                  url: '<?=base_url();?>Menu/CheckTimeLineJoinOrNot',
+                  type: "POST",
+                  data: { taskId: taskId,task_action:task_action},
+                  cache: false,
+                  success: function (result) {
+                    if(result == 1){
+                        window.location.href = "<?=base_url()?>Menu/StartJoinCallForFactoryAndInstallationTimeLine/"+taskId;
+                    }else{
+                      $('#modalCenterTimeLine').modal('show');
+                      $('#time_line_task_id').val(taskId);
+                      $('#time_line_project_code').html("<option>"+project_code+"</option>");
+                    }
+                  }
+              });
+              }else if(task_action == 120){
+                $.ajax({
+                  url: '<?=base_url();?>Menu/CheckTimeLineJoinOrNot',
+                  type: "POST",
+                  data: { taskId: taskId,task_action:task_action},
+                  cache: false,
+                  success: function (result) {
+                    if(result == 1){
+                        window.location.href = "<?=base_url()?>Menu/StartProgramTimeLine/"+taskId;
+                    }else{
+                      $('#modalCenterProgramTimeLine').modal('show');
+                      $('#program_time_line_task_id').val(taskId);
+                      $('#program_time_line_project_code').html("<option>"+project_code+"</option>");
+                    }
+                  }
+              });
+              }else{
+                $('#modalCenter').modal('show');
+                $('#modalCenterTitle').text("Task ID IS = "+taskId);
+              }
+            }
+        });
     });
 });
+
+function handleReminderCreation() {
+ 
+        $.ajax({
+            url: '<?=base_url();?>Menu/CheckTaskPlanningTime',
+            type: "POST",
+            data: {
+                'checkplantime': 'checkplantime'
+            },
+            cache: false,
+            success: function a(result) {
+                //	console.log(result);return false;
+                if (result == 'false') {
+                    var redURL = "<?=base_url();?>Menu/TaskPlanner2/<?= date("Y-m-d") ?>";
+                    window.location.href = redURL;
+                } else if (result == 'true') {
+
+                    <?php 
+          $todaydate = new DateTime();
+          $todaydate->modify('+1 day');
+          $tomorrowDate = $todaydate->format('Y-m-d');
+          ?>
+                    var redURL = "<?=base_url();?>Menu/TaskPlanner2/<?= $tomorrowDate; ?>";
+                    window.location.href = redURL;
+                }
+            }
+        });
+}
 </script>
 <?php $this->load->view('footer'); ?>

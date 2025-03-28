@@ -1,4 +1,9 @@
 <?php $this->load->view('nav'); ?>
+<style>
+  .card {
+    padding:10px;
+  }
+</style>
 <!-- Content wrapper -->
 <div class="content-wrapper">
   <!-- Content -->
@@ -19,7 +24,7 @@
         <?php endif; ?>
       </h5>
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-9">
           <!-- <h6 class="text-muted p-3">Filled Pills</h6> -->
           <div class="nav-align-top mb-6">
             <ul class="nav nav-pills mb-4 nav-fill" role="tablist">
@@ -107,13 +112,11 @@
                             <!-- <small> <span id="countdown1"></span> - <span id="status1"></span> </small> -->
                           </div>
                           <p class="mb-1">
-                            <?=$taskname ?> ===== Donut dragée jelly pie halvah. Danish gingerbread bonbon cookie wafer candy oat cake ice
-                            cream. Gummies halvah tootsie roll muffin biscuit icing dessert gingerbread. Pastry ice cream
-                            cheesecake fruitcake.
+                            <?=$taskname ?> - <?=$comments ?>
                           </p>
                           <small> <span id="countdown<?=$task_id;?>"></span> - <span id="status<?=$task_id;?>"></span> </small>
                         </a>
-                        <script> checkCountDownTime("<?=$fwd_date;?>",<?=$task_id;?>);</script>
+                        <script> checkCountDownTime("<?=$appointment_datetime;?>",<?=$task_id;?>);</script>
                         <?php $i++; }   } ?>
                       </div>
                     </div>
@@ -137,6 +140,23 @@
               </div> -->
             </div>
           </div>
+        </div>
+        <div class="col-md-3">
+                <div class="card">
+                   <div class="card">
+                   <?php 
+                        $user_day_planner  = $this->Menu_model->get_daystarted($uid,date("Y-m-d"));
+                        $pinitiate_time = $user_day_planner[0]->planner_initiate_time;
+                        $textmessage = $pinitiate_time == '' ? "Start" : "Resume";
+                    ?>
+                    <button type="button" class="btn btn-primary" onclick="handleReminderCreation()" fdprocessedid="5w4tuu">
+                    <i class="menu-icon tf-icons bx bx-calendar"></i> <?=$textmessage?> Planning 
+                      </button>
+                   </div> 
+                </div>
+                <div class="card mt-2">
+                    <img src="<?=base_url()?>assets/img/checklist-concept-illustration_114360-27941.avif" alt="">
+                </div>
         </div>
       </div>
     </div>
@@ -201,6 +221,36 @@
         // console.log(taskId); // Log the task ID or use it as needed
         // alert(taskId);
     });
+
+
+
 });
+function handleReminderCreation() {
+ 
+        $.ajax({
+            url: '<?=base_url();?>Menu/CheckTaskPlanningTime',
+            type: "POST",
+            data: {
+                'checkplantime': 'checkplantime'
+            },
+            cache: false,
+            success: function a(result) {
+                //	console.log(result);return false;
+                if (result == 'false') {
+                    var redURL = "<?=base_url();?>Menu/TaskPlanner2/<?= date("Y-m-d") ?>";
+                    window.location.href = redURL;
+                } else if (result == 'true') {
+
+                    <?php 
+          $todaydate = new DateTime();
+          $todaydate->modify('+1 day');
+          $tomorrowDate = $todaydate->format('Y-m-d');
+          ?>
+                    var redURL = "<?=base_url();?>Menu/TaskPlanner2/<?= $tomorrowDate; ?>";
+                    window.location.href = redURL;
+                }
+            }
+        });
+}
 </script>
 <?php $this->load->view('footer'); ?>
