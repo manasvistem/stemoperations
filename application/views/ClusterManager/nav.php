@@ -179,6 +179,14 @@
               </a>
             </li>
             <li class="menu-item">
+            <a href="YesterDayDaysCloseRequest"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="MyDayDetail">Close Day Request</div>
+              </a>
+            </li>
+            <li class="menu-item">
               <a href="NextDayPlan"
                 target="_blank"
                 class="menu-link">

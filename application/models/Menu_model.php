@@ -6077,8 +6077,6 @@ SELECT task_id, task_action_id, taskname, sname,task_status FROM TaskHierarchy")
 }
 
 public function GetTodaysAllTaskCountByUid($uid,$tdate,$perform){
-
-
     $perform_by = "(`task_action`.`perform_by` = '$perform' 
     || `task_action`.`perform_by_2` = '$perform' 
     || `task_action`.`perform_by_3` = '$perform' 
@@ -6162,15 +6160,15 @@ public function getTaskDetails($taskId,$taskactionId){
    $data['created_date'] = date('Y-m-d');
    $insertQuery          = " INSERT INTO tblcallevents_attachments (task_id,attachment_link,remark,user_id,created_at) VALUES ( ";
     foreach($data as $key=>$val){
-        $key         =  strtolower($key);
-        $insertQuery .=   " `".$val."`,";
+        $key                =  strtolower($key);
+        $insertQuery        .=   " `".$val."`,";
     }
-    $insertQuery          =  substr($insertQuery,0,-1);
-    $insertQuery .= ")";
+    $insertQuery            =  substr($insertQuery,0,-1);
+    $insertQuery            .= ")";
     return true;
  }
 
- public function batch_insert_task_execution($data) {
+ public function batch_insert_task_execution($data){
     $this->db->insert_batch('task_execution_details', $data);
 }
 //  public function task_execution_details($data){
@@ -6232,8 +6230,10 @@ public function GetDayCloseRequestData($uid,$adate,$uyid){
 
     $getreqData  =  $this->db->query("SELECT *,close_your_day_request.id 
                     FROM close_your_day_request 
-                    LEFT JOIN user_detail ON close_your_day_request.id = user_detail.id 
+                    LEFT JOIN user_detail ON close_your_day_request.user_id = user_detail.id 
                     WHERE $text and DATE(req_date) ='$adate'");
+
+    //echo $this->db->last_query();
     $getreqData  =  $getreqData->result();
     return $getreqData;
 }
@@ -6273,13 +6273,27 @@ public function getModelMaterialList($modelname){
     return $result;
 }
 public function insertNonWorkingModelData($posted_data){
+    if(!isset($posted_data['material_name'])){ $posted_data['material_name'] = "NULL"; }
+    if(!isset($posted_data['part_name']))    { $posted_data['part_name'] = "NULL"; }
+
     $db2    = $this->load->database('db2',TRUE);
-    $query  = $db2->query("INSERT INTO repairmodel(model_name,part_name,material_name,user_id,task_type_id,updated_date) 
-                        VALUES(".$Model_name.",".$part_name.",".$material_name.", ".$user_id." , ".$task_type_id.",".date('Y-m-d h:i:s').")");
-   return $db2->last_insert_id();
+
+    $query1 = $db2->query(" INSERT INTO repairmodel(project,school_name,address,modelname,partname,material,type) 
+                           VALUES('".$posted_data['project']."','".$posted_data['school_name']."','".$posted_data['address']."','".$posted_data['model_name']."','".$posted_data['part_name']."','".$posted_data['material_name']."',
+                                  '".$posted_data['type']."')");
+
+    $query2 = $db2->query(" INSERT INTO nonworkingmodel(modelname,partname,material,user_id,task_id,task_type_id,updated_date) 
+                                  VALUES('".$posted_data['model_name']."','".$posted_data['part_name']."','".$posted_data['material_name']."','".$posted_data['user_id']."','".$posted_data['task_id']."','".$posted_data['task_type_id']."',
+                                         '".date('Y-m-d h:i:s')."')");
+    return TRUE;
+}
+public function GetTodaysAutoTaskANDPlanningTime($uid,$tdate){
+    $curdate = date("Y-m-d");
+    $query  =  $this->db->query("SELECT * FROM `autotask_time` where user_id='$uid' AND date ='$curdate'");
+    return $query->result();
 }
 public function getTasksAllDetails($taskid){
-    $query  = $this->db->query("SELECT tblcallevents.id,spd.id,spd.project_code,
+    $query  = $this->db->query("SELECT tblcallevents.id,spd.id,spd.project_code,spd.saddress,
                                 sid ,spd.sname,spd.clientname 
                                 FROM tblcallevents 
                                 LEFT JOIN spd ON spd.id = tblcallevents.sid 
@@ -6451,4 +6465,120 @@ public function get_daystarted($uid,$tdate){
     $query=$this->db->query("SELECT * FROM user_day WHERE user_id='$uid' and cast(ustart as DATE)='$tdate' and uclose is null");
     return $query->result();
 }
+
+public function getTaskInformation($taskId){
+    $query      =   $this->db->query(" SELECT task_action.tasktype,task_action.taskname,task_action.id as taskTypId
+                                FROM task_action 
+                                LEFT JOIN tblcallevents tbe 
+                                ON tbe.task_action = task_action.id 
+                                WHERE tbe.id = '".$taskId."' ");
+    $taskInfo   =   $query->row_array();
+
+    return $taskInfo;
+}
+public function get_department($department_id){
+    $query=$this->db->query("SELECT * FROM department WHERE id='$department_id'");
+    return $query->result();
+ }
+ public function get_tptime($uid){
+    $date  = date('Y-m-d');
+    $query = $this->db->query("SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(tptime))) AS tptime FROM tblcallevents WHERE user_id='$uid' and tptime is not null and cast(created_at as DATE)='$date'");
+    return $query->result();
+    }
+    public function get_allcmp_planbutnotinited($uid){
+
+        $query=$this->db->query("SELECT * FROM tblcallevents WHERE user_id = '$uid' AND 	task_action != '' AND autotask =0 and plan=1 AND task_status = 0 AND DATE(appointment_datetime ) = CURDATE() AND appointment_datetime  != '0000-00-00 00:00:00'");
+       
+    return $query->result();
+}
+public function get_PendingAutoTask($uid){
+    $query=$this->db->query("SELECT * FROM tblcallevents WHERE user_id = '$uid' AND task_action != '' AND task_status = 0 and autotask=1 and plan =1 AND DATE(appointment_datetime) < CURDATE() AND appointment_datetime != '0000-00-00 00:00:00'");
+    return $query->result();
+}
+
+public function get_all_old_spd_planbutnotinited($uid){
+    $query=$this->db->query("SELECT
+tblcallevents.*,
+task_action.tasktype,
+task_action.taskname,
+COALESCE(spd.sname, spdr.sname) AS sname,
+status.name as school_status
+FROM
+tblcallevents 
+LEFT JOIN task_action ON task_action.id = tblcallevents.task_action
+LEFT JOIN spd ON spd.id = tblcallevents.sid
+LEFT JOIN spd_request spdr ON spdr.id = tblcallevents.rsid
+LEFT JOIN status ON status.id = tblcallevents.status_id
+WHERE
+tblcallevents.user_id = '$uid' 
+AND tblcallevents.task_action != '' 
+AND tblcallevents.plan = 1 
+AND tblcallevents.task_status = 0 
+AND DATE(tblcallevents.appointment_datetime) < CURDATE() 
+AND tblcallevents.appointment_datetime != '0000-00-00 00:00:00'");
+return $query->result();
+}
+public function getAlltasktype($dep_id){
+
+    $perform_by = "(
+        `perform_by`  = '$dep_id' 
+    || `perform_by_2` = '$dep_id' 
+    || `perform_by_3` = '$dep_id' 
+    || `perform_by_4` = '$dep_id'
+    || `perform_by_5` = '$dep_id'
+    )";
+    $query=$this->db->query("SELECT DISTINCT(tasktype) FROM `task_action` WHERE $perform_by");
+
+    return $query->result();
+}
+
+public function getUserTotalTaskTimeForTodays($uid,$tdate){
+    $query=$this->db->query("SELECT
+   SUM(task_action.task_time) as ttime
+FROM
+    tblcallevents
+LEFT JOIN task_action on task_action.id = tblcallevents.task_action
+WHERE
+    tblcallevents.plan = '1' AND tblcallevents.user_id = '$uid' AND CAST(tblcallevents.appointment_datetime AS DATE) = '$tdate' AND tblcallevents.autotask = 0");
+    return $query->result();
+}
+
+public function GetTodaysPlannerRequest($uid){
+    $query=$this->db->query("SELECT * FROM `task_plan_for_today` WHERE user_id = '$uid' AND approvel_status = 'Approved' AND `date` = CURDATE() ORDER BY `id` DESC");
+    return $query->result();
+}
+
+public function checkHalfDayLeave($uid, $date){
+    $this->db->select('user_id, start_date, end_date, reason, status, is_halfday_leave, halfday_leaveType')
+             ->from('leave_requests')
+             ->where('user_id', $uid)
+             ->where('is_halfday_leave', 1)
+             ->where('status', 'approved')
+             ->where('CAST(start_date AS DATE) <=', $date)  // Leave starts before or on the date
+             ->where('CAST(end_date AS DATE) >=', $date);  // Leave ends after or on the date
+    $query = $this->db->get();
+    return $query->result();
+}
+public function get_utype($department_id){
+    $query=$this->db->query("SELECT * FROM department WHERE id='$department_id'");
+    return $query->result();
+ }
+ public function GetUserRequestForPendingTask($uid,$tdate){
+    
+    $tardate = date("Y-m-d");
+    if($tdate == $tardate){
+        $query = $this->db->query("SELECT * FROM `request_old_pend_task` WHERE user_id= '$uid' AND DATE(req_date) ='$tdate'");
+    }else{
+       
+        $date = new DateTime($tdate);
+        $date->modify('-1 day');
+        $yesterday_date = $date->format('Y-m-d');
+    
+        $query = $this->db->query("SELECT * FROM `request_old_pend_task` WHERE user_id= '$uid' AND DATE(req_date) ='$yesterday_date'");
+    }
+   
+    $data = $query->result();
+    return $data;
+}
+
 }

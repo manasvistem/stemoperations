@@ -19,7 +19,7 @@
 <!-- Content wrapper -->
 <div class="content-wrapper">
   <!-- Content -->
-  <div class="container-xxl flex-grow-1 container-p-y">
+  <div class="container flex-grow-1 container-p-y">
     <div class="card">
       <h5 class="card-header text-center">
         <?php if ($this->session->flashdata('success_message')): ?>
@@ -36,7 +36,7 @@
         <?php endif; ?>
       </h5>
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-9">
           <!-- <h6 class="text-muted p-3">Filled Pills</h6> -->
           <div class="nav-align-top mb-6">
             <ul class="nav nav-pills mb-4 nav-fill" role="tablist">
@@ -147,22 +147,7 @@
                       </div>
                     </div>
                   </div>
-                  <div class="col-md-3">
-                <div class="card">
-                   <div class="card">
-                   <?php 
-                        $user_day_planner  = $this->Menu_model->get_daystarted($uid,date("Y-m-d"));
-                        $pinitiate_time = $user_day_planner[0]->planner_initiate_time;
-                        $textmessage = $pinitiate_time == '' ? "Start" : "Resume";
-                    ?>
-                    <button type="button" class="btn btn-primary" onclick="handleReminderCreation()" fdprocessedid="5w4tuu">
-                    <i class="menu-icon tf-icons bx bx-calendar"></i> <?=$textmessage?> Planning 
-                      </button>
-                   </div>
-                   <hr>
                   
-                </div>
-        </div>
                 </div>
               </div>
               <?php 
@@ -172,6 +157,22 @@
                 ?>
               
             </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card">
+              <div class="card">
+              <?php 
+                  $user_day_planner   = $this->Menu_model->get_daystarted($uid,date("Y-m-d"));
+                  $pinitiate_time     = $user_day_planner[0]->planner_initiate_time;
+                  $textmessage        = $pinitiate_time == '' ? "Start" : "Resume";
+              ?>
+              <button type="button" class="btn btn-primary" onclick="handleReminderCreation()" fdprocessedid="5w4tuu">
+              <i class="menu-icon tf-icons bx bx-calendar"></i> <?=$textmessage?> Planning 
+                </button>
+              </div>
+              <hr>
+            
           </div>
         </div>
       </div>

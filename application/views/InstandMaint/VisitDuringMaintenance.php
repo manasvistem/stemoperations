@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <h4 class="text-center">Inauguration During Visit Task</h4>
     <!-- Form Section (Initially Hidden) -->
-    <form id="maintenanceForm"  enctype="multipart/form-data" method="POST">
+    <form id="maintenanceForm"  enctype="multipart/form-data" method="POST" action="updatevisitDuringMaintenanceIM">
         
         <h3 class="mt-4">Maintenance Checklist</h3>
         <!-- Selfie Upload with Timer -->
@@ -175,11 +175,9 @@ $(document).ready(function () {
             });
 
             // AJAX Form Submission
-            $("#maintenanceForm").submit(function (event) {
+           /* $("#maintenanceForm").submit(function (event) {
                 event.preventDefault();
-                
                 var formData = new FormData(this);
-
                 $.ajax({
                     url: "<?= base_url() ?>Menu/visitDuringMaintenanceIM",
                     type: "POST",
@@ -194,7 +192,7 @@ $(document).ready(function () {
                         $("#formMessage").html('<div class="alert alert-danger">Error submitting form. Please try again.</div>');
                     }
                 });
-            });
+            }); */
         });
     </script>
     

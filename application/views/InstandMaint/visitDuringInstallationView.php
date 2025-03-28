@@ -78,7 +78,7 @@
                         <?php } ?>
                     </select>
                     <div id="selectedModelsContainer"></div>
-                    <!-- <label><strong>Upload 80 Models Stickers</strong></label>
+                   <label><strong>Upload 80 Models Stickers</strong></label>
                     <input type="file" class="form-control" name="80_models_stickers[]" accept="image/*" multiple >
                     <label><strong>1 Training Manual Book? (Yes/No)</strong></label>
                     <select name="training_manual" class="form-control">
@@ -97,8 +97,8 @@
                         <option value="Yes">Yes</option>
                         <option value="No">No</option>
                     </select> 
-                </div>-->
-              <!--  <div class="col-md-6">
+                </div>
+               <div class="col-md-6">
                     <label><strong>After MSC Setup Photos</strong></label>
                     <input type="file" class="form-control" name="after_msc_photo_1" accept="image/*" >
                     <input type="file" class="form-control" name="after_msc_photo_2" accept="image/*" >
@@ -119,16 +119,14 @@
                             <input type="radio" name="actionCompleted" value="yes" id="actionYes"> <label for="actionYes">Yes</label>
                             <input type="radio" name="actionCompleted" value="no" id="actionNo"> <label for="actionNo">No</label>
                         </div>
-
                         <div class="mb-3" id="purposeSection" style="display: none;">
                             <label><strong>Purpose Completed?</strong></label><br>
                             <input type="radio" name="purposeCompleted" value="yes" id="purposeYes"> <label for="purposeYes">Yes</label>
                             <input type="radio" name="purposeCompleted" value="no" id="purposeNo"> <label for="purposeNo">No</label>
                         </div>
-                    
                         <label><strong>Completed My Task (Take Selfie with School)</strong></label>
                     <input type="file" class="form-control" name="completed_task_selfie" accept="image/*" >
-                </div> -->
+                </div> 
             </div>
             
             </div>
@@ -151,13 +149,11 @@
         $('#notWorkingModel option:selected').each(function () {
             let modelId   = $(this).val();
             let modelName = $(this).data('model');
-           
-
             if (modelId) {
                 let modelHtml = `
                 <div class="selected-model mb-2" data-id="${modelId}">
                     <strong><span id="modelname">${modelName}</span></strong>
-                        <select class="repair-replace form-control d-inline-block w-auto ml-2">
+                        <select class="repair-replace form-control d-inline-block w-auto ml-2" name="modelreturntype">
                             <option value="">Select Action</option>
                             <option value="repairpart">Repair Part</option>
                             <option value="repairmaterial">Repair Material</option>
