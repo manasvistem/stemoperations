@@ -88,8 +88,10 @@
         $idebypi          = $data->idebypi;
         $tampmpid         = $data->tampmpid;
         $sales_cid        = $data->sales_cid;
-        
-        //dd($spdcData);
+        $pi_name          = $data->pi_name;
+        $insta_name       = $data->insta_name;
+        $pro_name         = $data->pro_name;
+        $admin_name       = $data->admin_name;
         
         ?>
       <style>
@@ -98,6 +100,18 @@
         justify-content: center;
         display: flex;
         height: 100%;
+        }
+        .school-holder-card{
+        min-height: 240px;
+        }
+        p.card-text {
+        color: rebeccapurple!important;
+        }
+        .card-new-contact-details {
+        width: 100%;
+        align-items: right;
+        justify-content: right;
+        display: flex;
         }
       </style>
       <div class="row">
@@ -118,11 +132,7 @@
           <div class="school-logo">
             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#fullscreenModal">
                 Analysis
-              </button>
-              <!-- <br>
-              <span class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBoth" aria-controls="offcanvasBoth" style="width: 100px;" >
-                  Profile
-              </span> -->
+            </button>
           </div>
         </div>
       </div>
@@ -132,23 +142,24 @@
           <div class="col-md-4">
             <div class="card border border-info">
               <div class="card-body">
-                <h5 class="card-title text-center text-info">School Profile Details</h5> <hr>
+                <h5 class="card-title text-center text-info">School Profile Details</h5>
+                <hr>
                 <table class="table table-striped scchool-profile-table">
                   <tbody>
                     <tr>
-                      <th scope="col" class="text-info"> <i class='bx bxs-graduation' ></i> School Name</th>
+                      <th scope="col" class="text-info text-nowrap"> <i class='bx bxs-graduation' ></i> School Name</th>
                       <td><?=$sname;?></td>
                     </tr>
                     <tr>
-                      <th scope="col" class="text-info"><i class='bx bxs-crown' ></i> project code</th>
+                      <th scope="col" class="text-info text-nowrap"><i class='bx bxs-crown' ></i> project code</th>
                       <td><?=$project_code;?></td>
                     </tr>
                     <tr>
-                      <th scope="col" class="text-info"> <i class='bx bxs-crown' ></i> client name</th>
+                      <th scope="col" class="text-info text-nowrap"> <i class='bx bxs-crown' ></i> client name</th>
                       <td><?=$clientname;?></td>
                     </tr>
                     <tr>
-                      <th scope="col" class="text-info"><i class='bx bx-stats' ></i> School Status</th>
+                      <th scope="col" class="text-info  text-nowrap"><i class='bx bx-stats' ></i> School Status</th>
                       <td><?= $this->Menu_model->GetStatusByID($status)[0]->name;?></td>
                     </tr>
                   </tbody>
@@ -161,60 +172,66 @@
                         View More Details
                         </button>
                       </h2>
-                      <div id="accordionOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample" style="">
-                        <div class="accordion-body">
-                          <table class="table table-striped scchool-profile-table">
-                            <tbody>
-                              <tr>
-                                <th scope="col" class="text-info">standard</th>
-                                <td><?php if($std == ''){echo "N/A";}else{echo $std;} ?></td>
-                              </tr>
-                              <tr>
-                                <th scope="col" class="text-info" class="text-info">timing</th>
-                                <td><?php if($timing == ''){echo "N/A";}else{echo $timing;} ?></td>
-                              </tr>
-                              <tr>
-                                <th scope="col" class="text-info" class="text-info">website</th>
-                                <td><?php if($website == ''){echo "N/A";}else{echo $website;} ?></td>
-                              </tr>
-                              <tr>
-                                <th scope="col" class="text-info" class="text-info">Map Location</th>
-                                <td><a href="<?=$slocation;?>" target="_BLANK">view</a></td>
-                              </tr>
-                              <tr>
-                                <th scope="col" class="text-info" class="text-info">State</th>
-                                <td><?php if($sstate == ''){echo "N/A";}else{echo $sstate;} ?></td>
-                              </tr>
-                              <tr>
-                                <th scope="col" class="text-info" class="text-info">district</th>
-                                <td><?php if($sdistrict == ''){echo "N/A";}else{echo $sdistrict;} ?></td>
-                              </tr>
-                              <tr>
-                                <th scope="col" class="text-info">city</th>
-                                <td><?php if($scity == ''){echo "N/A";}else{echo $scity;} ?></td>
-                              </tr>
-                              <tr>
-                                <th scope="col" class="text-info">pin code</th>
-                                <td><?php if($spincode == ''){echo "N/A";}else{echo $spincode;} ?></td>
-                              </tr>
-                              <tr>
-                                <th scope="col" class="text-info">zone</th>
-                                <td><?php if($szone == ''){echo "N/A";}else{echo $szone;} ?></td>
-                              </tr>
-                              <tr>
-                                <th scope="col" class="text-info">Academic Year</th>
-                                <td><?php if($sayear == ''){echo "N/A";}else{echo $sayear;} ?></td>
-                              </tr>
-                              <tr>
-                                <th scope="col" class="text-info"> Whatsgroup Name</th>
-                                <td><a href="<?=$wanamelink;?>" target="_BLANK"> <i class='bx bxl-whatsapp'></i> <?=$waname?></a></td>
-                              </tr>
-                              <tr>
-                                <th scope="col" class="text-info">language</th>
-                                <td><?php if($slanguage == ''){echo "N/A";}else{echo $slanguage;} ?></td>
-                              </tr>
-                            </tbody>
-                          </table>
+                      <div id="accordionOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample" style="">
+                        <div class="accordion-body" style="padding: 0; margin: 0;">
+                          <div class="table-responsive text-nowrap">
+                            <table class="table table-striped scchool-profile-table">
+                              <tbody>
+                                <tr>
+                                  <th scope="col" class="text-info"><i class='bx bx-purchase-tag-alt'></i> standard</th>
+                                  <td><?php if($std == ''){echo "N/A";}else{echo $std;} ?></td>
+                                </tr>
+                                <tr>
+                                  <th scope="col" class="text-info" class="text-info"><i class='bx bxs-time'></i> timing</th>
+                                  <td><?php if($timing == ''){echo "N/A";}else{echo $timing;} ?></td>
+                                </tr>
+                                <tr>
+                                  <th scope="col" class="text-info" class="text-info"><i class='bx bxl-internet-explorer'></i> website</th>
+                                  <td><?php if($website == ''){echo "N/A";}else{echo $website;} ?></td>
+                                </tr>
+                                <tr>
+                                  <th scope="col" class="text-info" class="text-info"><i class='bx bx-map' ></i> Map Location</th>
+                                  <td><?php if($slocation == ''){echo "N/A";}else{ ?><a href="<?=$slocation;?>" target="_BLANK"> <i class='bx bx-map'></i> view</a> <?php } ?></td>
+                                </tr>
+                                <tr>
+                                  <th scope="col" class="text-info" class="text-info"><i class='bx bx-map-pin'></i> State</th>
+                                  <td><?php if($sstate == ''){echo "N/A";}else{echo $sstate;} ?></td>
+                                </tr>
+                                <tr>
+                                  <th scope="col" class="text-info" class="text-info"><i class='bx bx-map-pin'></i> district</th>
+                                  <td><?php if($sdistrict == ''){echo "N/A";}else{echo $sdistrict;} ?></td>
+                                </tr>
+                                <tr>
+                                  <th scope="col" class="text-info"><i class='bx bx-map-pin'></i> city</th>
+                                  <td><?php if($scity == ''){echo "N/A";}else{echo $scity;} ?></td>
+                                </tr>
+                                <tr>
+                                  <th scope="col" class="text-info"><i class='bx bx-pin' ></i> pin code</th>
+                                  <td><?php if($spincode == ''){echo "N/A";}else{echo $spincode;} ?></td>
+                                </tr>
+                                <tr>
+                                  <th scope="col" class="text-info"><i class='bx bx-map-alt'></i> zone</th>
+                                  <td><?php if($szone == ''){echo "N/A";}else{echo $szone;} ?></td>
+                                </tr>
+                                <tr>
+                                  <th scope="col" class="text-info"><i class='bx bx-timer' ></i> Academic Year</th>
+                                  <td><?php if($sayear == ''){echo "N/A";}else{echo $sayear;} ?></td>
+                                </tr>
+                                <tr>
+                                  <th scope="col" class="text-info"><i class='bx bxl-whatsapp'></i> Whatsgroup Name</th>
+                                  <td><?php if($wanamelink == ''){echo "N/A";}else{ ?><a href="<?=$wanamelink;?>" target="_BLANK"> <i class='bx bxl-whatsapp'></i> <?=$waname?></a> <?php } ?></td>
+                                </tr>
+                                <tr>
+                                  <th scope="col" class="text-info"><i class='bx bxs-leaf'></i> language</th>
+                                  <td><?php if($slanguage == ''){echo "N/A";}else{echo $slanguage;} ?></td>
+                                </tr>
+                                <tr>
+                                  <th scope="col" class="text-info"><i class='bx bxs-calendar' ></i> Create Date</th>
+                                  <td><?php if($sdate == ''){echo "N/A";}else{echo $sdate;} ?></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -235,7 +252,7 @@
                     <hr>
                     <h5 class="card-title text-info">Total Student</h5>
                     <p class="card-text">
-                        <?php if($total_students == ''){echo "N/A";}else{echo $total_students;} ?>
+                      <?php if($total_students == ''){echo "N/A";}else{echo $total_students;} ?>
                     </p>
                   </div>
                 </div>
@@ -250,9 +267,8 @@
                     <hr>
                     <h5 class="card-title text-info">Total Boys</h5>
                     <p class="card-text">
-                    <?php if($boys == ''){echo "N/A";}else{echo $boys;} ?>    
+                      <?php if($boys == ''){echo "N/A";}else{echo $boys;} ?>    
                     </p>
-                    
                   </div>
                 </div>
               </div>
@@ -266,7 +282,7 @@
                     <hr>
                     <h5 class="card-title text-info">Total Girls</h5>
                     <p class="card-text">
-                    <?php if($girls == ''){echo "N/A";}else{echo $girls;} ?>        
+                      <?php if($girls == ''){echo "N/A";}else{echo $girls;} ?>        
                     </p>
                   </div>
                 </div>
@@ -281,8 +297,63 @@
                     <hr>
                     <h5 class="card-title text-info">Total Teacher</h5>
                     <p class="card-text">
-                    <?php if($total_teachers == ''){echo "N/A";}else{echo $total_teachers;} ?>      
-                </p>
+                      <?php if($total_teachers == ''){echo "N/A";}else{echo $total_teachers;} ?>      
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12">
+                <hr>
+              </div>
+              <div class="col-md-3">
+                <div class="card text-center border border-info school-holder-card">
+                  <div class="card-body">
+                    <div class="school-logo">
+                      <img src="<?=base_url()?>assets/img/holding-banner.jpg" 
+                        alt="user-avatar" class="d-block w-px-50 h-px-50 rounded-circle imgpreviewPrf" id="item-img-output">
+                    </div>
+                    <hr>
+                    <h5 class="card-title text-info">PIA Name</h5>
+                    <p class="card-text"><?php if($pi_name == ''){echo "N/A";}else{echo $pi_name;} ?></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card text-center border border-info school-holder-card">
+                  <div class="card-body">
+                    <div class="school-logo">
+                      <img src="<?=base_url()?>assets/img/maintenance-concept-illustration_114360-30146.avif" 
+                        alt="user-avatar" class="d-block w-px-50 h-px-50 rounded-circle imgpreviewPrf" id="item-img-output">
+                    </div>
+                    <hr>
+                    <h5 class="card-title text-info">Installation Person</h5>
+                    <p class="card-text"><?php if($insta_name == ''){echo "N/A";}else{echo $insta_name;} ?></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card text-center border border-info school-holder-card">
+                  <div class="card-body">
+                    <div class="school-logo">
+                      <img src="<?=base_url()?>assets/img/successful-professional-business-man-with-crossed-arms-flat-illustration-on-white-background-free-vector.jpg" 
+                        alt="user-avatar" class="d-block w-px-50 h-px-50 rounded-circle imgpreviewPrf" id="item-img-output">
+                    </div>
+                    <hr>
+                    <h5 class="card-title text-info">PRO Name</h5>
+                    <p class="card-text"><?php if($pro_name == ''){echo "N/A";}else{echo $pro_name;} ?></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="card text-center border border-info school-holder-card">
+                  <div class="card-body">
+                    <div class="school-logo">
+                      <img src="<?=base_url()?>assets/img/admin-mens.avif" 
+                        alt="user-avatar" class="d-block w-px-50 h-px-50 rounded-circle imgpreviewPrf" id="item-img-output">
+                    </div>
+                    <hr>
+                    <h5 class="card-title text-info">ADMIN</h5>
+                    <p class="card-text"><?php if($admin_name == ''){echo "N/A";}else{echo $admin_name;} ?></p>
                   </div>
                 </div>
               </div>
@@ -291,35 +362,84 @@
                 <hr>
                 <div class="card shadow-none bg-transparent border border-info">
                   <div class="card-body">
-                    <h5 class="card-title text-info text-center">School Contact Details</h5>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <h5 class="card-title text-info text-center">School Contact Details</h5>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="card-new-contact-details">
+                          <span class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasBoth" aria-controls="offcanvasBoth">
+                          Add New Contact Details
+                          </span>
+                        </div>
+                      </div>
+                    </div>
                     <hr>
                     <div class="card">
-                      <table class="table table-striped" style="box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;">
-                        <thead class="thead-dark">
-                          <tr>
-                            <th>#</th>
-                            <th>Contact Name</th>
-                            <th>designation</th>
-                            <th>contact no</th>
-                            <th>email</th>
-                            <th>Main</th>
-                          </tr>
-                        </thead>
-                        <tbody class="table-border-bottom-0">
-                          <?php $i=1; foreach($spdcData as $cData){?>
-                          <tr>
-                            <td><?=$i;?></td>
-                            <td><?= $cData->contact_name; ?></td>
-                            <td><?= $cData->designation; ?></td>
-                            <td><?= $cData->contact_no; ?></td>
-                            <td><?php 
-                              if($cData->email == ''){echo "N/A";}else{echo $cData->email;}
-                              ?></td>
-                            <td><?= $cData->main; ?></td>
-                          </tr>
-                          <?php $i++; } ?>
-                        </tbody>
-                      </table>
+                      <div class="table-responsive text-nowrap">
+                        <table class="table table-striped" style="box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th>#</th>
+                              <th><i class='bx bxs-user-circle' ></i> Contact Name</th>
+                              <th><i class='bx bxl-sketch' ></i> designation</th>
+                              <th><i class='bx bxs-phone-call'></i> contact no</th>
+                              <th><i class='bx bxs-envelope' ></i> email</th>
+                              <th><i class='bx bxs-purchase-tag-alt' ></i> Main</th>
+                            </tr>
+                          </thead>
+                          <tbody class="table-border-bottom-0">
+                            <?php $i=1; foreach($spdcData as $cData){?>
+                            <tr>
+                              <td><?=$i;?></td>
+                              <td><?php  if($cData->contact_name == ''){echo "N/A";}else{echo $cData->contact_name;} ?></td>
+                              <td><?php  if($cData->designation == ''){echo "N/A";}else{echo $cData->designation;} ?></td>
+                              <td><?php  if($cData->contact_no == ''){echo "N/A";}else{echo $cData->contact_no;} ?></td>
+                              <td><?php  if($cData->email == ''){echo "N/A";}else{echo $cData->email;} ?></td>
+                              <td><?php 
+                                if($cData->main == 1){
+                                    echo "<span class='p-1 border border-success'>Main</span>";
+                                }else{
+                                    echo "<span class='p-1 border border-danger'>No</span>";
+                                }
+                                ?></td>
+                            </tr>
+                            <?php $i++; } ?>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-12 mt-2">
+                <div class="card border border-primary1">
+                  <div class="card-body">
+                    <h5 class="card-title text-info text-center">Recent Activity</h5>
+                    <hr>
+                    <div class="mt-4">
+                      <div class="list-group list-group-flush">
+                        <?php 
+                          $recenttaskDatascnt =  sizeof($recenttaskDatas);
+                          if($recenttaskDatascnt > 0){
+                          foreach($recenttaskDatas as $recenttaskData){?>
+                        <a href="javascript:void(0);" class="list-group-item list-group-item-action"><i class="bx bx-purchase-tag-alt me-3"></i>
+                        <span><?=$recenttaskData->tasktype;?></span> - 
+                        <?=$recenttaskData->taskname;?> - 
+                        <span>By - <?=$recenttaskData->task_username;?></span> -  
+                        <span><?=$recenttaskData->appointment_datetime;?></span> - 
+                        <?php if($recenttaskData->task_status == 0){
+                          echo "<span class='bg-warning p-1 text-white'>Pending<span>";
+                          }else if($recenttaskData->task_status == 1){
+                          echo "<span class='bg-success p-1 text-white'>Complete<span>";
+                          } ?>
+                        </a>
+                        <?php }}else{ ?>
+                        <a href="javascript:void(0);" class="list-group-item list-group-item-action">
+                        <i class="bx bx-purchase-tag-alt me-3"></i> No activity in this school.
+                        </a>
+                        <?php } ?>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -332,7 +452,7 @@
         <div class="card mb-6">
           <hr>
           <h3 class="card-header text-center text-info">Task Details</h3>
-          <div class="card-body">
+          <div class="card-body" style="background:#faebd75c;">
             <div class="row">
               <!-- Custom content with heading -->
               <div class="col-lg-12">
@@ -344,133 +464,136 @@
                   </div>
                   <div class="tab-content px-0 mt-0">
                     <div class="tab-pane fade" id="horizontal-home" role="tabpanel" aria-labelledby="home-list-item">
-                    <div class="card border border-info">
-                    <h3 class="card-title text-center text-info">All Task</h3> <hr>
-                    <table class="table table-striped" id="example">
-                        <thead class="thead-dark">
-                        <tr>
-                            <th>S No.</th>
-                            <th>School Name</th>
-                            <th>Task Type</th>
-                            <th>Task Name</th>
-                            <th>Task User</th>
-                            <th>Target Date</th>
-                            <th>Target Status</th>
-                            <th>Comments</th>
-                            <th>Task Status</th>
-                        </tr>
-                        </thead>
-                        <tbody class="table-border-bottom-0">
-                        <?php $i=1; foreach($taskDatas as $taskData){
-                            if($taskData->task_status == 1){continue;}
-                            ?>
-                        <tr>
-                            <td><?=$i?></td>
-                            <td><?=$taskData->sname?></td>
-                            <td><?=$taskData->tasktype?></td>
-                            <td><?=$taskData->taskname?></td>
-                            <td><?=$taskData->task_username?></td>
-                            <td><?=$taskData->target_date?></td>
-                            <td><?=$taskData->target_status?></td>
-                            <td><?=$taskData->comments?></td>
-                            <td><?php 
-                            if($taskData->task_status == 0){
-                            echo "<span class='bg-warning p-1 text-white'>Pending<span>";
-                            }else if($taskData->task_status == 1){
-                            echo "<span class='bg-success p-1 text-white'>Complete<span>";
-                            }
-                            ?></td>
-                        </tr>
-                        <?php $i++;} ?>
-                        </tbody>
-                    </table>
-                    </div>
+                      <div class="card border border-info">
+                        <h3 class="card-title text-center text-info">All Task</h3>
+                        <hr>
+                        <table class="table table-striped" id="example">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th>S No.</th>
+                              <th>School Name</th>
+                              <th>Task Type</th>
+                              <th>Task Name</th>
+                              <th>Task User</th>
+                              <th>Target Date</th>
+                              <th>Target Status</th>
+                              <th>Comments</th>
+                              <th>Task Status</th>
+                            </tr>
+                          </thead>
+                          <tbody class="table-border-bottom-0">
+                            <?php $i=1; foreach($taskDatas as $taskData){
+                              if($taskData->task_status == 1){continue;}
+                              ?>
+                            <tr>
+                              <td><?=$i?></td>
+                              <td><?=$taskData->sname?></td>
+                              <td><?=$taskData->tasktype?></td>
+                              <td><?=$taskData->taskname?></td>
+                              <td><?=$taskData->task_username?></td>
+                              <td><?=$taskData->target_date?></td>
+                              <td><?=$taskData->target_status?></td>
+                              <td><?=$taskData->comments?></td>
+                              <td><?php 
+                                if($taskData->task_status == 0){
+                                echo "<span class='bg-warning p-1 text-white'>Pending<span>";
+                                }else if($taskData->task_status == 1){
+                                echo "<span class='bg-success p-1 text-white'>Complete<span>";
+                                }
+                                ?></td>
+                            </tr>
+                            <?php $i++;} ?>
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                     <div class="tab-pane fade" id="horizontal-profile" role="tabpanel" aria-labelledby="profile-list-item">
-                    <div class="card border border-success">
-                    <h3 class="card-title text-center text-info">Complete Task</h3> <hr>
-                    <table class="table table-striped" id="example1">
-                        <thead class="thead-dark">
-                        <tr>
-                            <th>S No.</th>
-                            <th>School Name</th>
-                            <th>Task Type</th>
-                            <th>Task Name</th>
-                            <th>Task User</th>
-                            <th>Target Date</th>
-                            <th>Target Status</th>
-                            <th>Comments</th>
-                            <th>Task Status</th>
-                        </tr>
-                        </thead>
-                        <tbody class="table-border-bottom-0">
-                        <?php $i=1; foreach($taskDatas as $taskData){
-                            if($taskData->task_status == 0){continue;}
-                            ?>
-                        <tr>
-                            <td><?=$i?></td>
-                            <td><?=$taskData->sname?></td>
-                            <td><?=$taskData->tasktype?></td>
-                            <td><?=$taskData->taskname?></td>
-                            <td><?=$taskData->task_username?></td>
-                            <td><?=$taskData->target_date?></td>
-                            <td><?=$taskData->target_status?></td>
-                            <td><?=$taskData->comments?></td>
-                            <td><?php 
-                            if($taskData->task_status == 0){
-                            echo "<span class='bg-warning p-1 text-white'>Pending<span>";
-                            }else if($taskData->task_status == 1){
-                            echo "<span class='bg-success p-1 text-white'>Complete<span>";
-                            }
-                            ?></td>
-                        </tr>
-                        <?php $i++;} ?>
-                        </tbody>
-                    </table>
-                    </div>
+                      <div class="card border border-success">
+                        <h3 class="card-title text-center text-info">Complete Task</h3>
+                        <hr>
+                        <table class="table table-striped" id="example1">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th>S No.</th>
+                              <th>School Name</th>
+                              <th>Task Type</th>
+                              <th>Task Name</th>
+                              <th>Task User</th>
+                              <th>Target Date</th>
+                              <th>Target Status</th>
+                              <th>Comments</th>
+                              <th>Task Status</th>
+                            </tr>
+                          </thead>
+                          <tbody class="table-border-bottom-0">
+                            <?php $i=1; foreach($taskDatas as $taskData){
+                              if($taskData->task_status == 0){continue;}
+                              ?>
+                            <tr>
+                              <td><?=$i?></td>
+                              <td><?=$taskData->sname?></td>
+                              <td><?=$taskData->tasktype?></td>
+                              <td><?=$taskData->taskname?></td>
+                              <td><?=$taskData->task_username?></td>
+                              <td><?=$taskData->target_date?></td>
+                              <td><?=$taskData->target_status?></td>
+                              <td><?=$taskData->comments?></td>
+                              <td><?php 
+                                if($taskData->task_status == 0){
+                                echo "<span class='bg-warning p-1 text-white'>Pending<span>";
+                                }else if($taskData->task_status == 1){
+                                echo "<span class='bg-success p-1 text-white'>Complete<span>";
+                                }
+                                ?></td>
+                            </tr>
+                            <?php $i++;} ?>
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                     <div class="tab-pane fade active show" id="horizontal-messages" role="tabpanel" aria-labelledby="messages-list-item">
-                    <div class="card border border-info">
-                    <h3 class="card-title text-center text-info">Pending Task</h3> <hr>
-                    <table class="table table-striped" id="example2">
-                        <thead class="thead-dark">
-                        <tr>
-                            <th>S No.</th>
-                            <th>School Name</th>
-                            <th>Task Type</th>
-                            <th>Task Name</th>
-                            <th>Task User</th>
-                            <th>Target Date</th>
-                            <th>Target Status</th>
-                            <th>Comments</th>
-                            <th>Task Status</th>
-                        </tr>
-                        </thead>
-                        <tbody class="table-border-bottom-0">
-                        <?php $i=1; foreach($taskDatas as $taskData){
-                            if($taskData->task_status == 1){continue;}
-                            ?>
-                        <tr>
-                            <td><?=$i?></td>
-                            <td><?=$taskData->sname?></td>
-                            <td><?=$taskData->tasktype?></td>
-                            <td><?=$taskData->taskname?></td>
-                            <td><?=$taskData->task_username?></td>
-                            <td><?=$taskData->target_date?></td>
-                            <td><?=$taskData->target_status?></td>
-                            <td><?=$taskData->comments?></td>
-                            <td><?php 
-                            if($taskData->task_status == 0){
-                            echo "<span class='bg-warning p-1 text-white'>Pending<span>";
-                            }else if($taskData->task_status == 1){
-                            echo "<span class='bg-success p-1 text-white'>Complete<span>";
-                            }
-                            ?></td>
-                        </tr>
-                        <?php $i++;} ?>
-                        </tbody>
-                    </table>
-                    </div>
+                      <div class="card border border-info">
+                        <h3 class="card-title text-center text-info">Pending Task</h3>
+                        <hr>
+                        <table class="table table-striped" id="example2">
+                          <thead class="thead-dark">
+                            <tr>
+                              <th>S No.</th>
+                              <th>School Name</th>
+                              <th>Task Type</th>
+                              <th>Task Name</th>
+                              <th>Task User</th>
+                              <th>Target Date</th>
+                              <th>Target Status</th>
+                              <th>Comments</th>
+                              <th>Task Status</th>
+                            </tr>
+                          </thead>
+                          <tbody class="table-border-bottom-0">
+                            <?php $i=1; foreach($taskDatas as $taskData){
+                              if($taskData->task_status == 1){continue;}
+                              ?>
+                            <tr>
+                              <td><?=$i?></td>
+                              <td><?=$taskData->sname?></td>
+                              <td><?=$taskData->tasktype?></td>
+                              <td><?=$taskData->taskname?></td>
+                              <td><?=$taskData->task_username?></td>
+                              <td><?=$taskData->target_date?></td>
+                              <td><?=$taskData->target_status?></td>
+                              <td><?=$taskData->comments?></td>
+                              <td><?php 
+                                if($taskData->task_status == 0){
+                                echo "<span class='bg-warning p-1 text-white'>Pending<span>";
+                                }else if($taskData->task_status == 1){
+                                echo "<span class='bg-success p-1 text-white'>Complete<span>";
+                                }
+                                ?></td>
+                            </tr>
+                            <?php $i++;} ?>
+                          </tbody>
+                        </table>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -480,12 +603,6 @@
           </div>
         </div>
       </div>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
       <br>
       <br>
       <br>
@@ -603,45 +720,46 @@
         </div>
         <div class="offcanvas-body my-auto mx-0 flex-grow-0">
           <div class="text-center">
-            <img src="<?=base_url()?>assets/img/reset-password.avif" width="300" alt="pendingtasklist">
+            <img src="<?=base_url()?>assets/img/contact-center-abstract-concept_335657-3032.avif" width="300" alt="pendingtasklist">
           </div>
           <hr>
           <center>
-            <h5 id="offcanvasBothLabel" class="offcanvas-title">Change Password</h5>
+            <h5 id="offcanvasBothLabel" class="offcanvas-title">
+              Add New Contact Details
+            </h5>
           </center>
           <hr>
-          <form action="<?=base_url().'Menu/UpdatePassword'?>" method="post">
+          <form action="<?=base_url().'Menu/AddNewContactDetailsInSPD'?>" method="post">
             <div class="row">
               <div class="col-md-12">
-                <div class="form-password-toggle">
-                  <label class="form-label" for="basic-default-password32">Old Password</label>
-                  <div class="input-group input-group-merge">
-                    <input type="password" name="old_password" class="form-control" id="basic-default-password32" placeholder="············" aria-describedby="basic-default-password" required>
-                    <span class="input-group-text cursor-pointer" id="basic-default-password"><i class="bx bx-hide"></i></span>
-                  </div>
+                <input type="hidden" id="sid" name="sid" value="<?=$school_id?>">
+                <div>
+                  <label for="defaultFormControlInput1" class="form-label">Contact Name</label>
+                  <input type="text" name="contact_name" class="form-control" id="defaultFormControlInput1" placeholder="Name" aria-describedby="defaultFormControlHelp">
                 </div>
-              </div>
-              <div class="col-md-12">
-                <div class="form-password-toggle">
-                  <label class="form-label" for="basic-default-password32">New Password</label>
-                  <div class="input-group input-group-merge">
-                    <input type="password" class="form-control" name="new_password" id="basic-default-password32" placeholder="············" aria-describedby="basic-default-password" required>
-                    <span class="input-group-text cursor-pointer" id="basic-default-password"><i class="bx bx-hide"></i></span>
-                  </div>
+                <div>
+                  <label for="defaultFormControlInput2" class="form-label">Designation</label>
+                  <input type="text" class="form-control" name="designation" id="defaultFormControlInput2" placeholder="Principal / Teacher" aria-describedby="defaultFormControlHelp">
                 </div>
-              </div>
-              <div class="col-md-12">
-                <div class="form-password-toggle">
-                  <label class="form-label" for="basic-default-password32">Confirm New Password</label>
-                  <div class="input-group input-group-merge">
-                    <input type="password" class="form-control" name="confirm_new_password" id="basic-default-password32" placeholder="············" aria-describedby="basic-default-password" required>
-                    <span class="input-group-text cursor-pointer" id="basic-default-password"><i class="bx bx-hide"></i></span>
-                  </div>
+                <div>
+                  <label for="defaultFormControlInput3" class="form-label">Contact Number</label>
+                  <input type="text" class="form-control" name="contact_no" id="defaultFormControlInput3" placeholder="+91 ----------" aria-describedby="defaultFormControlHelp">
                 </div>
+                <div>
+                  <label for="defaultFormControlInput4" class="form-label">Email</label>
+                  <input type="email" class="form-control" name="email" id="defaultFormControlInput4" placeholder="email@mail.com" aria-describedby="defaultFormControlHelp"> 
+                </div>
+                <!-- <div class="mb-4">
+                  <label for="defaultSelect" class="form-label">Select Primary/Alternate</label>
+                  <select id="defaultSelect" name="main" class="form-select">
+                    <option value="1">Primary</option>
+                    <option value="0">Alternate</option>
+                  </select>
+                  </div> -->
               </div>
             </div>
             <hr>
-            <button type="submit" class="btn btn-primary mb-2 d-grid w-100">Change Password</button>
+            <button type="submit" class="btn btn-primary mb-2 d-grid w-100">Add New Contact</button>
           </form>
         </div>
       </div>
@@ -652,53 +770,34 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
   $(document).ready(function() {
-    $('#userslsctstate').on('change', function() {
-                  var userslsctstate = $(this).val();
-                  $.ajax({
-                          url:'<?=base_url();?>Menu/GetDistrictINState',
-                          type: "POST",
-                          data: {
-                              userslsctstate: userslsctstate
-                          },
-                          cache: false,
-                          success: function a(result){
-                              $('#select_district').html(result);
-                          }
-                          });
-                  });
-                  $('#select_district').on('change', function() {
-                  var selectdistrict = $(this).val();
-                  $.ajax({
-                          url:'<?=base_url();?>Menu/GetCityInDistrict',
-                          type: "POST",
-                          data: {
-                              selectdistrict: selectdistrict
-                          },
-                          cache: false,
-                          success: function a(result){
-                              $('#select_city').html(result);
-                          }
-                          });
-                  });
+      $('#userslsctstate').on('change', function() {
+          var userslsctstate = $(this).val();
+          $.ajax({
+              url: '<?=base_url();?>Menu/GetDistrictINState',
+              type: "POST",
+              data: {
+                  userslsctstate: userslsctstate
+              },
+              cache: false,
+              success: function a(result) {
+                  $('#select_district').html(result);
+              }
+          });
+      });
+      $('#select_district').on('change', function() {
+          var selectdistrict = $(this).val();
+          $.ajax({
+              url: '<?=base_url();?>Menu/GetCityInDistrict',
+              type: "POST",
+              data: {
+                  selectdistrict: selectdistrict
+              },
+              cache: false,
+              success: function a(result) {
+                  $('#select_city').html(result);
+              }
+          });
+      });
   });
-  
-  
-  $(document).ready(function() {
-    $("#upload").change(function(event) {
-        let file = event.target.files[0];
-        if (file) {
-            let reader = new FileReader();
-            reader.onload = function(e) {
-                $("#item-img-output").attr("src", e.target.result);
-            };
-            reader.readAsDataURL(file);
-        }
-    });
-    $("#reset-img").click(function() {
-        $("#upload").val(""); // Clear file input
-        $("#item-img-output").attr("src", "http://localhost/stemoperations/assets/assets/img/avatars/1.png");
-    });
-  });
-
 </script>
 <?php $this->load->view('footer'); ?>

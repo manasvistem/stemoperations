@@ -8099,6 +8099,132 @@ WHERE
     tblcallevents.sid ='$sid'");
     return $query->result();
 }
+public function GetRecentActivityBySID($sid){
+    $query=$this->db->query("SELECT
+   tblcallevents.id as task_id,
+    tblcallevents.fwd_date,
+    tblcallevents.project_code,
+    tblcallevents.appointment_datetime,
+    tblcallevents.initiate_datetime,
+    tblcallevents.updated_datetime,
+    tblcallevents.selectby,
+    tblcallevents.task_assigned_date,
+    tblcallevents.comments,
+     tblcallevents.comment_by,
+    tblcallevents.target_date,
+    tblcallevents.pi_target_date,
+    tblcallevents.targetstatus,
+    tblcallevents.task_status,
+   
+    ta.id as task_action_id,
+    ta.tasktype,
+    ta.taskname,
+    COALESCE(spdr.sname, spd.sname) AS sname,
+    u1.fullname as task_username,
+    u2.fullname as task_assigned_by,
+    s1.name as task_time_status,
+    s2.name as new_status,
+    s3.name as target_status
+FROM
+    `tblcallevents`
+LEFT JOIN task_action ta on ta.id = tblcallevents.task_action
+LEFT JOIN spd on spd.id = tblcallevents.sid
+LEFT JOIN spd_request spdr on spdr.id = tblcallevents.rsid
+
+LEFT JOIN user_detail u1 on u1.id = tblcallevents.user_id
+LEFT JOIN user_detail u2 on u2.id = tblcallevents.assigned_by
+
+LEFT JOIN status s1 on s1.id = tblcallevents.status_id
+LEFT JOIN status s2 on s2.id = tblcallevents.nstatus_id
+LEFT JOIN status s3 on s3.id = tblcallevents.targetstatus
+WHERE
+    tblcallevents.sid ='$sid' ORDER BY tblcallevents.id DESC limit 1,7");
+    return $query->result();
+}
+
+
+
+public function GetAllSchoolDetailsBySid($sid){
+    $query=$this->db->query("SELECT
+    spd.*,
+    u1.fullname as pi_name,
+    u2.fullname as insta_name,
+    u3.fullname as pro_name,
+    u4.fullname as admin_name
+FROM
+    `spd`
+LEFT JOIN user_detail u1 on u1.id = spd.pi_id
+LEFT JOIN user_detail u2 on u2.id = spd.ins_id
+LEFT JOIN user_detail u3 on u3.id = spd.pro_id
+LEFT JOIN user_detail u4 on u4.id = spd.admin_id
+WHERE
+    spd.id = '$sid'");
+    return $query->result();
+}
+
+
+
+
+public function AddNewContactinSchoolData($sid, $contact_name, $designation, $contact_no, $email, $uid,$main) {
+    // Fetch SPD details
+    $spd = $this->Menu_model->get_spdbyid($sid);
+
+    if (empty($spd)) {
+        return false; // Return false if no data found
+    }
+
+    $pi     = $spd[0]->pi_id;
+    $zh     = $spd[0]->zh_id;
+    $sname  = $spd[0]->sname;
+    $pcode  = $spd[0]->project_code;
+    $msg    = $pcode . " | " . $sname . " | New Contact Added";
+
+    // Prepare notification data
+    $notifications = [
+        ['msg' => $msg, 'userid' => $pi, 'sid'  => $sid],
+        ['msg' => $msg, 'userid' => $zh, 'sid'  => $sid],
+        ['msg' => $msg, 'userid' => 1, 'sid'    => $sid]
+    ];
+
+    // Insert notifications using batch insert
+    $this->db->insert_batch('notification', $notifications);
+
+    // Insert contact using query builder
+    $data = [
+        'sid'           => $sid,
+        'contact_name'  => $contact_name,
+        'designation'   => $designation,
+        'contact_no'    => $contact_no,
+        'email'         => $email,
+        'added_by'      => $uid,
+        'added_date'    => date("Y-m-d H:i:s")
+    ];
+    
+    $this->db->insert('spd_contact', $data);
+
+
+    $log_data = [
+        'user_id'       => $uid,
+        'to_user_id'    => $uid,
+        'type'          => "Adding New Contact",
+        'message'       => $msg
+    ];
+    $this->db->insert('user_log', $log_data);
+    
+    return $this->db->insert_id(); // Return last inserted ID
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

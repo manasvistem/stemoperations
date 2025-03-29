@@ -15344,22 +15344,47 @@ public function SchoolProfileDetails($sid){
 
     $uData          =  $this->Menu_model->get_user_byid($uid);
     $usersstates    =  $this->Menu_model->GetState();
-    $spdData        =  $this->Menu_model->get_school_detailbyid($sid);
+    $spdData        =  $this->Menu_model->GetAllSchoolDetailsBySid($sid);
     $spdcData       =  $this->Menu_model->GetSchoolContactDetailsBySid($sid);
     $taskDatas      =  $this->Menu_model->GetAllTaskBySID($sid);
+    $recenttaskDatas=  $this->Menu_model->GetRecentActivityBySID($sid);
 
-    
+   
    
     if(!empty($user)){
-        $this->load->view('SchoolProfileDetails', ['user'=>$user,'uid'=>$uid,'uData'=>$uData,'usersstates'=>$usersstates,'spdData'=>$spdData,'spdcData'=>$spdcData,'taskDatas'=>$taskDatas]);
+        $this->load->view('SchoolProfileDetails', ['user'=>$user,'uid'=>$uid,'uData'=>$uData,'usersstates'=>$usersstates,'spdData'=>$spdData,'spdcData'=>$spdcData,'taskDatas'=>$taskDatas,'recenttaskDatas'=>$recenttaskDatas]);
     }else{
         redirect('Menu/main');
     }
-
-
-
-
 }
+
+public function AddNewContactDetailsInSPD(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             = $user['dep_id'];
+
+    $this->load->model('Menu_model');
+
+    $sid            = $this->input->post('sid');
+    $contact_name   = $this->input->post('contact_name');
+    $designation    = $this->input->post('designation');
+    $contact_no     = $this->input->post('contact_no');
+    $email          = $this->input->post('email');
+    $main           = $this->input->post('main');
+
+    $success = $this->Menu_model->AddNewContactinSchoolData($sid,$contact_name,$designation,$contact_no,$email,$uid,$main);
+    if($success) {
+        $this->session->set_flashdata('success_message','* New Contact Details Added Successfully');
+        }else{
+            $this->session->set_flashdata('error_message','*Failed to Add New Contact Details');
+        }
+    redirect('Menu/SchoolProfileDetails/'.$sid);
+}
+
+
+
 // END School Profile Data
 
 
