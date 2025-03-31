@@ -90,13 +90,16 @@
 
         <!-- Dropdown Selection -->
         <div class="mb-3">
-            <label class="form-label">Select Not Working Model</label>
-            <select class="form-control" name="notWorkingModel" required>
-                <option value="">Select Model</option>
-                <option value="Model A">Model A</option>
-                <option value="Model B">Model B</option>
-                <option value="Model C">Model C</option>
-            </select>
+        <label><strong>Select Non Working Model</strong></label>
+                    <select name="NotWorkingModel[]" id="notWorkingModel" class="form-control" multiple>
+                        <option value="">Select Not Working Model</option>
+                            <?php foreach ($getFactoryModelList as $val) { ?>
+                                <option value="<?php echo $val['model_name']; ?>" data-model="<?php echo $val['model_name']; ?>">
+                            <?php echo $val['model_name']; ?>
+                                </option>
+                        <?php } ?>
+                    </select>
+                    <div id="selectedModelsContainer"></div>
         </div>
 
         <!-- Call with Reporting Manager -->

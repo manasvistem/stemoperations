@@ -109,7 +109,6 @@
                         <div class="list-group">
                         <?php 
                           $i=1;
-                         // dd($getTodaysTasks);
                           foreach($getTodaysTasks as $sctasklist){
                             $task_id              = $sctasklist->task_id;
                             $appointment_datetime = $sctasklist->appointment_datetime;
@@ -122,9 +121,7 @@
                             $target_date          = $sctasklist->target_date;
                             $expected_date        = $sctasklist->expected_date;
                             $fwd_date             = $sctasklist->fwd_date;
-                            // echo $slct_type_of_task;
-                            // echo "<br>";
-                            // echo $tasktype;
+                       
                           if($slct_type_of_task === $tasktype){ 
                             ?>
                           <a data-task_id="<?=$task_id;?>" class="list-group-item list-group-item-action flex-column align-items-start active mb-1 taskperformaction" >
@@ -483,7 +480,6 @@
             statusElement.classList.add("on-time");
         }
     }
-
     setInterval(updateTimer, 1000);
     updateTimer();
 }
@@ -523,16 +519,13 @@
     $('.taskperformaction').on('click', function() {
         var taskId = $(this).data('task_id'); // Retrieve the 'task_id' data
         $('#modalCenter').modal('show');
-        $('#modalCenterTitle').text("Task ID IS = "+taskId);
+       // $('#modalCenterTitle').text("Task ID IS = "+taskId);
+      //  / alert(taskId+"====");
         // console.log(taskId); // Log the task ID or use it as needed
         // alert(taskId);
     });
-
-
-
 });
 function handleReminderCreation() {
- 
         $.ajax({
             url: '<?=base_url();?>Menu/CheckTaskPlanningTime',
             type: "POST",

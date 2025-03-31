@@ -95,13 +95,13 @@
         <!-- Menu -->
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="<?=base_url().'Menu/Dashboard'?>" class="app-brand-link">
+            <a href="<?=base_url() ?>Menu/Dashboard" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <img class="img-fluid" style="width: 200px;" src="https://stemlearning.in/wp-content/uploads/2020/07/stem-new-logo-2-1.png" alt="">
               </span>
             </a>
 
-            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+            <a href="<?=base_url() ?>Menu/<?=base_url() ?>Menu/javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
               <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
             </a>
           </div>
@@ -111,7 +111,7 @@
           <ul class="menu-inner py-1">
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Request</span></li>
               <li class="menu-item">
-                <a href="<?=base_url().'Menu/BDREQUEST'?>" class="menu-link">
+                <a href="<?=base_url() ?>Menu/<?=base_url() ?>Menu/BDREQUEST" class="menu-link">
                   <i class="menu-icon tf-icons bx bx-crown"></i>
                   <div class="text-truncate" data-i18n="Boxicons">REQUEST</div>
                 </a>
@@ -119,7 +119,7 @@
            
             <li class="menu-header small text-uppercase"><span class="menu-header-text"></span></li>
             <li class="menu-item">
-              <a href="Dashboard"
+              <a href="<?=base_url() ?>Menu/<?=base_url() ?>Menu/Dashboard"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -127,7 +127,7 @@
               </a>
             </li>
             <!-- <li class="menu-item">
-              <a href="MyNextDayPlan/<?=date('Y-m-d');?>"
+              <a href="<?=base_url() ?>Menu/<?=base_url() ?>Menu/MyNextDayPlan/<?=date('Y-m-d');?>"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -135,7 +135,7 @@
               </a>
             </li> -->
             <li class="menu-item">
-              <a href="AddTempPerson"
+              <a href="<?=base_url() ?>Menu/<?=base_url() ?>Menu/AddTempPerson"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -143,7 +143,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="CreateGoals"
+              <a href="<?=base_url() ?>Menu/<?=base_url() ?>Menu/CreateGoals"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -151,19 +151,19 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="MyProfile/<?=$uid?>" target="_blank" class="menu-link">
+              <a href="<?=base_url() ?>Menu/<?=base_url() ?>Menu/MyProfile/<?=$uid?>" target="_blank" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">My Profile</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="CMSCCC" target="_blank" class="menu-link">
+              <a href="<?=base_url() ?>Menu/<?=base_url() ?>Menu/CMSCCC" target="_blank" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Create Cluster for MSC Clean</div>
               </a>
             </li>
             <!-- <li class="menu-item">
-              <a href="Mytarget"
+              <a href="<?=base_url() ?>Menu/Mytarget"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -171,7 +171,7 @@
               </a>
             </li> -->
             <li class="menu-item">
-              <a href="DayManagement"
+              <a href="<?=base_url() ?>Menu/DayManagement"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -179,7 +179,7 @@
               </a>
             </li>
             <li class="menu-item">
-            <a href="YesterDayDaysCloseRequest"
+            <a href="<?=base_url() ?>Menu/YesterDayDaysCloseRequest"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -187,7 +187,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="NextDayPlan"
+              <a href="<?=base_url() ?>Menu/NextDayPlan"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -195,7 +195,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="LiveVisit"
+              <a href="<?=base_url() ?>Menu/LiveVisit"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -203,7 +203,7 @@
               </a>
             </li>
             <!-- <li class="menu-item">
-              <a href="CreateTask"
+              <a href="<?=base_url() ?>Menu/CreateTask"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -211,7 +211,7 @@
               </a>
             </li> -->
             <li class="menu-item">
-              <a href="AllReviewPlaing"
+              <a href="<?=base_url() ?>Menu/AllReviewPlaing"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -219,7 +219,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="reviewreport"
+              <a href="<?=base_url() ?>Menu/reviewreport"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -227,7 +227,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="PlanReportWriting"
+              <a href="<?=base_url() ?>Menu/PlanReportWriting"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -235,7 +235,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="StartReportWriting"
+              <a href="<?=base_url() ?>Menu/StartReportWriting"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -243,7 +243,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="CloseReportWriting"
+              <a href="<?=base_url() ?>Menu/CloseReportWriting"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -251,7 +251,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="AcademicCalendar"
+              <a href="<?=base_url() ?>Menu/AcademicCalendar"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -259,7 +259,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="PlanReportWriting"
+              <a href="<?=base_url() ?>Menu/PlanReportWriting"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -267,7 +267,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="PlanReportWriting"
+              <a href="<?=base_url() ?>Menu/PlanReportWriting"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -275,7 +275,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="allbdrequest"
+              <a href="<?=base_url() ?>Menu/allbdrequest"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -283,7 +283,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="PlanReportWriting"
+              <a href="<?=base_url() ?>Menu/PlanReportWriting"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -291,7 +291,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="editProfile"
+              <a href="<?=base_url() ?>Menu/editProfile"
                 target="_blank"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -299,7 +299,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="<?php echo base_url()?>/Menu/logout" target="_blank" class="menu-link">
+              <a href="<?=base_url() ?>Menu/<?php echo base_url()?>/Menu/logout" target="_blank" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Logout">Logout</div>
               </a>

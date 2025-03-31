@@ -1,7 +1,6 @@
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="<?= base_url() ?>assets/img/favicon/favicon.ico" />
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -80,7 +79,6 @@
             statusElement.classList.add("on-time");
         }
     }
-
     setInterval(updateTimer, 1000);
     updateTimer();
 }
@@ -101,23 +99,20 @@
         <!-- Menu -->
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="<?=base_url().'Menu/Dashboard'?>" class="app-brand-link">
+           <a href="<?=base_url() ?>Menu/Dashboard" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <img class="img-fluid" style="width: 200px;" src="https://stemlearning.in/wp-content/uploads/2020/07/stem-new-logo-2-1.png" alt="">
               </span>
             </a>
-
-            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+           <a href="<?=base_url() ?>Menu/javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
               <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
             </a>
           </div>
-
           <div class="menu-inner-shadow"></div>
-
           <ul class="menu-inner py-1">
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Request</span></li>
               <li class="menu-item">
-                <a href="<?=base_url().'Menu/BDREQUEST'?>" class="menu-link">
+               <a href="<?=base_url() ?>Menu/<?=base_url().'Menu/BDREQUEST'?>" class="menu-link">
                   <i class="menu-icon tf-icons bx bx-crown"></i>
                   <div class="text-truncate" data-i18n="Boxicons">REQUEST</div>
                 </a>
@@ -125,7 +120,7 @@
            
             <li class="menu-header small text-uppercase"><span class="menu-header-text"></span></li>
             <li class="menu-item">
-              <a href="Dashboard"
+             <a href="<?=base_url() ?>Menu/Dashboard"
                 
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -133,7 +128,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="DayManagement"
+             <a href="<?=base_url() ?>Menu/DayManagement"
                 
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -141,7 +136,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="TransitProcess"
+             <a href="<?=base_url() ?>Menu/TransitProcess"
                 
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -149,7 +144,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="RequestAmount"
+             <a href="<?=base_url() ?>Menu/RequestAmount"
                 
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -157,13 +152,13 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="maintenanceBag"  class="menu-link">
+             <a href="<?=base_url() ?>Menu/maintenanceBag"  class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Maintenance Bag</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="editProfile"
+             <a href="<?=base_url() ?>Menu/editProfile"
                 
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -171,7 +166,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="<?php echo base_url()?>/Menu/logout"  class="menu-link">
+             <a href="<?=base_url() ?>Menu/logout"  class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Logout">Logout</div>
               </a>

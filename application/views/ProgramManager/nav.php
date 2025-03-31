@@ -119,13 +119,13 @@
         <!-- Menu -->
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="<?=base_url().'Menu/Dashboard'?>" class="app-brand-link">
+            <a href="<?=base_url() ?>Menu/Dashboard" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <img class="img-fluid" style="width: 200px;" src="https://stemlearning.in/wp-content/uploads/2020/07/stem-new-logo-2-1.png" alt="">
               </span>
             </a>
 
-            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+            <a href="<?=base_url() ?>Menu/javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
               <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
             </a>
           </div>
@@ -135,7 +135,7 @@
           <ul class="menu-inner py-1">
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Request</span></li>
               <li class="menu-item">
-                <a href="<?=base_url().'Menu/BDREQUEST'?>" class="menu-link">
+                <a href="<?=base_url() ?>Menu/BDREQUEST" class="menu-link">
                   <i class="menu-icon tf-icons bx bx-crown"></i>
                   <div class="text-truncate" data-i18n="Boxicons">REQUEST</div>
                 </a>
@@ -143,7 +143,7 @@
            
             <li class="menu-header small text-uppercase"><span class="menu-header-text"></span></li>
             <li class="menu-item">
-              <a href="Dashboard"
+              <a href="<?=base_url() ?>Menu/Dashboard"
                
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -151,13 +151,29 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="CompetitionReport" class="menu-link">
+              <a href="<?=base_url() ?>Menu/CompetitionReport" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Dashboard">NSP Report</div>
               </a>
             </li>
+            <li class="menu-item">
+              <a href="<?=base_url() ?>Menu/DayManagement"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="MyDayDetail">Day Management</div>
+              </a>
+            </li>
+            <li class="menu-item">
+            <a href="<?=base_url() ?>Menu/YesterDayDaysCloseRequest"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="MyDayDetail">Close Day Request</div>
+              </a>
+            </li>
             <!-- <li class="menu-item">
-              <a href="MyNextDayPlan/<?=date('Y-m-d');?>"
+              <a href="<?=base_url() ?>Menu/MyNextDayPlan/<?=date('Y-m-d');?>"
                
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -165,13 +181,13 @@
               </a>
             </li> -->
             <li class="menu-item">
-              <a href="Handovertoinsr" class="menu-link">
+              <a href="<?=base_url() ?>Menu/Handovertoinsr" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="AddTempPerson">Live Handover</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="CreateGoals"
+              <a href="<?=base_url() ?>Menu/CreateGoals"
                
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -179,303 +195,303 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="CreateJoinCallHI" class="menu-link">
+              <a href="<?=base_url() ?>Menu/CreateJoinCallHI" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Handover Time Line</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="ProgramTimeLine" class="menu-link">
+              <a href="<?=base_url() ?>Menu/ProgramTimeLine" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Program Time Line</div>
               </a>
             </li>
              <li class="menu-item">
-              <a href="BDRequestBox" class="menu-link">
+              <a href="<?=base_url() ?>Menu/BDRequestBox" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">BD Requests</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="MeetingRequest" class="menu-link">
+              <a href="<?=base_url() ?>Menu/MeetingRequest" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Meeting Request</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="ParticalBPApr" class="menu-link">
+              <a href="<?=base_url() ?>Menu/ParticalBPApr" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Partical Board Apr</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="MeetingRequest" class="menu-link">
+              <a href="<?=base_url() ?>Menu/MeetingRequest" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Meeting Request</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="PaymentApr" class="menu-link">
+              <a href="<?=base_url() ?>Menu/PaymentApr" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Payment Apr</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="Mytarget" class="menu-link">
+              <a href="<?=base_url() ?>Menu/Mytarget" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">My Target</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="LiveVisitPIA" class="menu-link">
+              <a href="<?=base_url() ?>Menu/LiveVisitPIA" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Live Visit PIA</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="LiveVisitIMP" class="menu-link">
+              <a href="<?=base_url() ?>Menu/LiveVisitIMP" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Live Visit IMP</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="ReportVisitPIA" class="menu-link">
+              <a href="<?=base_url() ?>Menu/ReportVisitPIA" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Report Visit PIA</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="ReportVisitIMP" class="menu-link">
+              <a href="<?=base_url() ?>Menu/ReportVisitIMP" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Report Visit IMP</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="NextDayPlan" class="menu-link">
+              <a href="<?=base_url() ?>Menu/NextDayPlan" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Next Day Plan</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="SchoolReviewDetail" class="menu-link">
+              <a href="<?=base_url() ?>Menu/SchoolReviewDetail" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">All School Review by PIA</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="ProgramReviewDetail" class="menu-link">
+              <a href="<?=base_url() ?>Menu/ProgramReviewDetail" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">All Program Review by PIA</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="ShowAcademicCalendar" class="menu-link">
+              <a href="<?=base_url() ?>Menu/ShowAcademicCalendar" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Academic Calendar</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="TeamDailyReport" class="menu-link">
+              <a href="<?=base_url() ?>Menu/TeamDailyReport" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Team Daily Report</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="DayStartCheck" class="menu-link">
+              <a href="<?=base_url() ?>Menu/DayStartCheck" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Day Start Check</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="DayCloseCheck" class="menu-link">
+              <a href="<?=base_url() ?>Menu/DayCloseCheck" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Day Close Check</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="AllReviewPlaing" class="menu-link">
+              <a href="<?=base_url() ?>Menu/AllReviewPlaing" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">All Review</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="reviewreport" class="menu-link">
+              <a href="<?=base_url() ?>Menu/reviewreport" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Review Report</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="PIAwiseSchoolDetail" class="menu-link">
+              <a href="<?=base_url() ?>Menu/PIAwiseSchoolDetail" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">PIA Wise Pending Detail</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="inspending" class="menu-link">
+              <a href="<?=base_url() ?>Menu/inspending" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Installation Pending</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="insreportpending" class="menu-link">
+              <a href="<?=base_url() ?>Menu/insreportpending" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Installation Report Pending</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="<?=base_url();?>Menu/fttppending" class="menu-link">
+              <a href="<?=base_url() ?>Menu/<?=base_url();?>Menu/fttppending" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">FTTP Pending</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="fttpreportpending" class="menu-link">
+              <a href="<?=base_url() ?>Menu/fttpreportpending" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">FTTP Report Pending</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="utilisationpending" class="menu-link">
+              <a href="<?=base_url() ?>Menu/utilisationpending" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Utilisation Pending</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="createtask" class="menu-link">
+              <a href="<?=base_url() ?>Menu/createtask" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Create Task</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="PIAwiseProgram" class="menu-link">
+              <a href="<?=base_url() ?>Menu/PIAwiseProgram" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">PIA wise Program</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="CreateARTask" class="menu-link">
+              <a href="<?=base_url() ?>Menu/CreateARTask" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Create Annual Review</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="PIAwiseProgram" class="menu-link">
+              <a href="<?=base_url() ?>Menu/PIAwiseProgram" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">PIA Wise Program</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="PIAwiseProgram" class="menu-link">
+              <a href="<?=base_url() ?>Menu/PIAwiseProgram" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Curiculum Assign</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="CuriculumAssign" class="menu-link">
+              <a href="<?=base_url() ?>Menu/CuriculumAssign" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">PIA wise Program</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="CuriculumAssignData" class="menu-link">
+              <a href="<?=base_url() ?>Menu/CuriculumAssignData" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Curiculum Assign Data</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="SchoolData" class="menu-link">
+              <a href="<?=base_url() ?>Menu/SchoolData" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">School Review</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="Total_Handover" class="menu-link">
+              <a href="<?=base_url() ?>Menu/Total_Handover" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Handover Detail</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="programs" class="menu-link">
+              <a href="<?=base_url() ?>Menu/programs" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Programs Detail</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="UserTaskDetail" class="menu-link">
+              <a href="<?=base_url() ?>Menu/UserTaskDetail" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">User Task Detail</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="UserPendingTask" class="menu-link">
+              <a href="<?=base_url() ?>Menu/UserPendingTask" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">User Pending Task</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="handoverDetail" class="menu-link">
+              <a href="<?=base_url() ?>Menu/handoverDetail" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Handover Process</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="backdrop" class="menu-link">
+              <a href="<?=base_url() ?>Menu/backdrop" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Artwork</div>
               </a>
             </li>
 
             <li class="menu-item">
-              <a href="MaintenanceReport" class="menu-link">
+              <a href="<?=base_url() ?>Menu/MaintenanceReport" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Ins-Main Request</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="MBagR" class="menu-link">
+              <a href="<?=base_url() ?>Menu/MBagR" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Bag Request</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="BDRequestCBox" class="menu-link">
+              <a href="<?=base_url() ?>Menu/BDRequestCBox" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">BDR Complete Box</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="BDRequestPBox" class="menu-link">
+              <a href="<?=base_url() ?>Menu/BDRequestPBox" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">BDR Pending Box</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="AcademicCalenderApprove" class="menu-link">
+              <a href="<?=base_url() ?>Menu/AcademicCalenderApprove" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Academic Calender Approve</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="ShowPIAStatusWithAcadeCal" class="menu-link">
+              <a href="<?=base_url() ?>Menu/ShowPIAStatusWithAcadeCal" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">PIA Status With Academic Calender</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="StartProgrramReview" class="menu-link">
+              <a href="<?=base_url() ?>Menu/StartProgrramReview" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Start Progrram Review</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="AnnualProgramReviewReport" class="menu-link">
+              <a href="<?=base_url() ?>Menu/AnnualProgramReviewReport" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Myprofile">Annual Program Review Report</div>
               </a>
             </li>
 
             <!-- <li class="menu-item">
-              <a href="Mytarget"
+              <a href="<?=base_url() ?>Menu/Mytarget"
                
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -483,7 +499,7 @@
               </a>
             </li> -->
             <li class="menu-item">
-              <a href="DayManagement"
+              <a href="<?=base_url() ?>Menu/DayManagement"
                
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -491,13 +507,13 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="AnnualReviewMeetingList" class="menu-link">
+              <a href="<?=base_url() ?>Menu/AnnualReviewMeetingList" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="MyDayDetail">Annual Program Review Meeting List</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="editProfile"
+              <a href="<?=base_url() ?>Menu/editProfile"
                
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -505,7 +521,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="logout"
+              <a href="<?=base_url() ?>Menu/logout"
                
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>

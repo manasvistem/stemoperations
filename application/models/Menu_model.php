@@ -6564,21 +6564,44 @@ public function get_utype($department_id){
     return $query->result();
  }
  public function GetUserRequestForPendingTask($uid,$tdate){
-    
     $tardate = date("Y-m-d");
     if($tdate == $tardate){
         $query = $this->db->query("SELECT * FROM `request_old_pend_task` WHERE user_id= '$uid' AND DATE(req_date) ='$tdate'");
     }else{
-       
         $date = new DateTime($tdate);
         $date->modify('-1 day');
         $yesterday_date = $date->format('Y-m-d');
     
         $query = $this->db->query("SELECT * FROM `request_old_pend_task` WHERE user_id= '$uid' AND DATE(req_date) ='$yesterday_date'");
     }
-   
     $data = $query->result();
     return $data;
 }
-
+public function GettodaysPlannerRequestData($userid,$date){
+    $query=$this->db->query("SELECT
+    task_plan_for_today.*,
+    user_detail.fullname,
+    task_plan_for_today.id AS nrid
+    FROM
+        `task_plan_for_today`
+    LEFT JOIN user_detail ON user_detail.id = task_plan_for_today.user_id 
+    WHERE
+    DATE = '$date'");
+    return $query->result();
+}
+public function TodaysPlannerSession($uid){
+    $query = $this->db->query("SELECT * FROM `session_plan_time` WHERE user_id = '$uid' AND DATE(psdatetime) = CURDATE() order by id DESC");
+    return $query->result();
+}
+public function TodaysTotalsPlannerSessioninMinute($uid){
+    $cdate = date("Y-m-d");
+    $query = $this->db->query("SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(totaltime))) AS total_time FROM `session_plan_time` WHERE user_id ='$uid' AND cast(psdatetime as DATE) = '$cdate'");
+    $data =  $query->result();
+    $totalminute = $data[0]->total_time;
+    return $totalminute;
+}
+public function getUserDayStartDetails($uid,$tdate){
+    $query=$this->db->query("SELECT * FROM user_day WHERE user_id='$uid' and cast(sdatet as DATE)='$tdate'");
+    return $query->result();
+}
 }

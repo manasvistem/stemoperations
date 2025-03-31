@@ -21,7 +21,7 @@
                 <label for="actionno"> No</label>
                 <input type="radio" id="ano" name="action" value="ano">
             </div>
-            <div class="form-check">I Purpose Achieved
+            <div class="form-check">Purpose Achieved
                 <label for="purposeachivedYes">Yes</label> 
                 <input type="radio" id="pyes" name="purpose" value="pyes">
                 <label for="purposeachivedNo">No</label> 
