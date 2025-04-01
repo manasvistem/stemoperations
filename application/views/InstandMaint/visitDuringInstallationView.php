@@ -202,7 +202,6 @@
             dataType: 'json',
             data : { model_name: selectedModel },
             success: function (data) {
-              
                 selectElement.empty().append('<option value="">Select Part</option>');
                     $.each(data, function (key, value) {
                     selectElement.append('<option value="' + value.part_name + '">' + value.part_name + '</option>');
@@ -225,7 +224,6 @@
             }
         });
     }
-
 });
 
       $(document).ready(function() {

@@ -48,7 +48,7 @@
                 $count = 0;
                 foreach ($getTodaysTaskCounts as $getTodaysTaskCount){
                     $formatted_string = preg_replace("/[ \/'-]+/", "_", $getTodaysTaskCount->tasktype);
-                   // if($getTodaysTaskCount->task_count !=0){
+                   if($getTodaysTaskCount->task_count !=0){
                 ?>
               <li class="nav-item mb-1 mb-sm-0" role="presentation">
                 <button type="button" 
@@ -71,7 +71,7 @@
               </li>
               <?php 
                 $firstTab = false; // Set to false after first iteration
-                // }
+                 }
                 // else{
                 //   $count ++;
                 // }
@@ -94,9 +94,8 @@
             <div class="tab-content">
               <?php 
                 $firstPane = true; // Track first tab content
-                foreach ($getTodaysTaskCounts as $getTodaysTaskCount){
+                foreach($getTodaysTaskCounts as $getTodaysTaskCount){
                     $slct_type_of_task = $getTodaysTaskCount->tasktype;
-                    //echo  $getTodaysTaskCount->tasktype."<br>";
                     $formatted_string = preg_replace("/[ \/'-]+/", "_", $getTodaysTaskCount->tasktype);
                 ?>
               <div class="tab-pane fade <?= $firstPane ? 'show active' : '' ?>" 
@@ -121,7 +120,6 @@
                             $target_date          = $sctasklist->target_date;
                             $expected_date        = $sctasklist->expected_date;
                             $fwd_date             = $sctasklist->fwd_date;
-                       
                           if($slct_type_of_task === $tasktype){ 
                             ?>
                           <a data-task_id="<?=$task_id;?>" class="list-group-item list-group-item-action flex-column align-items-start active mb-1 taskperformaction" >
@@ -148,11 +146,9 @@
                 </div>
               </div>
               <?php 
-              
                 $firstPane = false; // Set to false after first iteration
                       }
                 ?>
-              
             </div>
           </div>
         </div>
@@ -169,7 +165,6 @@
                 </button>
               </div>
               <hr>
-            
           </div>
         </div>
       </div>
@@ -196,12 +191,10 @@
         </div>
       </div>
     </div>
-
   </div>
 </div>
 <div class="card-body">
                 <div class="tab-content" id="custom-tabs-four-tabContent">
-                  
                   <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
                       <div class="card">
                             <div class="card-header bg-info" id="headingOne" data-toggle="collapse" data-target="#collapse0911" aria-expanded="true" aria-controls="collapse0911">
@@ -209,15 +202,13 @@
                                   Total Task 0 | Call(0) | Email(0) | Whatsapp(0) | Meeting(0) | Proposal(0) | Other(0)
                             </div>
                             <div id="collapse0911" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                              <div class="card-body">
-                                                                </div>
+                              <div class="card-body">       </div>
                             </div>
                           </div>
                     </div>
       </div>
       <div class="card-body">
                 <div class="tab-content" id="custom-tabs-four-tabContent">
-                  
                   <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
                       <div class="card">
                             <div class="card-header bg-light" id="headingOne" data-toggle="collapse" data-target="#collapse0911" aria-expanded="true" aria-controls="collapse0911">
@@ -265,7 +256,6 @@
       </div>
       <div class="card-body">
                 <div class="tab-content" id="custom-tabs-four-tabContent">
-                  
                   <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">
                       <div class="card">
                             <div class="card-header bg-info" id="headingOne" data-toggle="collapse" data-target="#collapse0911" aria-expanded="true" aria-controls="collapse0911">
@@ -273,8 +263,7 @@
                                   Total Task 0 | Call(0) | Email(0) | Whatsapp(0) | Meeting(0) | Proposal(0) | Other(0)
                             </div>
                             <div id="collapse0911" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                              <div class="card-body">
-                                                                </div>
+                              <div class="card-body">   </div>
                             </div>
                           </div>
                     </div>

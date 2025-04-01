@@ -1172,7 +1172,6 @@ class Menu extends CI_Controller {
         {
             $st         = $mdata[0]->ustart;
             $ct         = $mdata[0]->uclose;
-
             if($st!=''){$do=1;}
             if($ct!=''){$do=2;}
         }
@@ -1189,8 +1188,8 @@ class Menu extends CI_Controller {
         $yesterday           = date('Y-m-d', strtotime('-1 day', strtotime($tdate)));
         $isweekend           = isNotWeekend($yesterday);
         if(!$isweekend){
-            $yesterday           = date('Y-m-d', strtotime('-2 day', strtotime($tdate)));
-            $yestdata            = $this->Menu_model->get_Yestdaydetail($uid,$yesterday);
+            $yesterday       = date('Y-m-d', strtotime('-2 day', strtotime($tdate)));
+            $yestdata        = $this->Menu_model->get_Yestdaydetail($uid,$yesterday);
         }
         else{
             $yestdata            = $this->Menu_model->get_Yestdaydetail($uid,$yesterday);
@@ -11549,8 +11548,6 @@ public function visitPreInauguarationTask($taskId){
     $dt                 = $this->Menu_model->get_depatment_byid($dep_id);
     $dep_name           = $dt[0]->dep_name;
     $data['taskId']     = $taskId;
-  //  $this->display($dep_name,'visitPreInauguarationView',$taskId,$type='');
- // $this->display($dep_name,"/visitDuringInaugurationView",$data,$type="");
   $this->display($dep_name,"/preInterventionEnquiryView",$data,$type="");
 
 }
@@ -11893,7 +11890,7 @@ public function updateCallPreIntervention(){
     $taskTypeId      = $_POST['tasktypeid'];
     $user            = $_SESSION['user'];
    $taskperformedby  = $user['dep_id'];
-    //   $getTaskData     = $this->Menu_model->getTaskIds($taskTypeId,$taskperformedby);
+//  $getTaskData    = $this->Menu_model->getTaskIds($taskTypeId,$taskperformedby);
     $posted_data     = $_POST;
     $taskInsertArr1  = []; // Initialize array to store all rows
     $commonColumns   = [
@@ -12034,12 +12031,10 @@ public function BDRequestAssignToProcessOtherDepartmentCallorVisit(){
 }
 
 public function BDRequestAssignToProcessInstallationPersonCallorVisit(){
-
     $user           = $this->session->userdata('user');
     $data['user']   = $user;$uid= $user['id'];
     $uid            = $user['id'];
     $id             =  $user['dep_id'];
-
     $this->load->model('Menu_model');
 
     $reqID              = $this->input->post('reqID');
@@ -12117,7 +12112,6 @@ public function TheAssigningProcessOfInstallationPersonCallOrVisitBDRequest($rty
     }
 }
 public function BDRequestAssignToProcessPIACallorVisit(){
-
     $user           = $this->session->userdata('user');
     $data['user']   = $user;$uid= $user['id'];
     $uid            = $user['id'];
@@ -15915,12 +15909,25 @@ public function PendingTaskPlannerRequestApproved(){
 }
 
 public function updateSchoolIdentificationView(){
-    $posted_data = $_POST;
- //   dd($posted_data);
+    $taskType           = $_POST['taskType'];
+    $taskId             = $_POST['taskId'];
+    $taskTypeId         = $_POST['tasktypeid']; 
+    $posted_data        = $_POST;
+    $user               = $_SESSION['user'];
+    $taskperformedby    = $user['dep_id'];
+   
+    $commonColumns   = [
+        'performed_by' => $_SESSION['user']['id'],
+        'updated_at'   => date("Y-m-d H:i:s"),
+        'status'       => 'active',
+        'tbe_id'       => $taskId
+    ];
+ 
    /** Insert into task_Execution_details */
- foreach ($posted_data as $k => $val) {
-    if ($val != '' && !empty($val)){
+ foreach($posted_data as $k => $val){
+    if($val != '' && !empty($val)){
         // Assign main_Task_id based on the key
+        $remark = '';
         if($taskperformedby == '2'){
         switch ($k){
             case 'action_completed':                $main_Task_id = '611'; break;
@@ -15941,28 +15948,26 @@ public function updateSchoolIdentificationView(){
         }
        }
 
-       if(count($val)>1){
+       if(is_array($val) && count($val)>1){
            $val = implode('**',$val);
        }
         // Store data in array
         $taskInsertArr1[] = [
             'task_response' => $val,
             'main_Task_id'  => $main_Task_id,
-            'remark' =>  $remark
+            'remark' =>  $remark,
         ] + $commonColumns;
     }
-
 }
-  //dd($taskInsertArr1);
+
   $attachment_link = '';
 // Insert only if there's data
    $current_date =  date('Y-m-d h:i:s');
-
    if (!empty($taskInsertArr1)){
        $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
-    // $attachmentData = 'task_id'=>$taskId 'attachment_link'=>,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date;
-  //  $this->Menu_model->insertTasksWithAttachements(['task_id'=>$taskId ,'attachment_link'=>$attachment_link,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date]);
-}
+        // $attachmentData = 'task_id'=>$taskId 'attachment_link'=>,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date;
+        //  $this->Menu_model->insertTasksWithAttachements(['task_id'=>$taskId ,'attachment_link'=>$attachment_link,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date]);
+    }
    $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
    $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
 
@@ -15973,7 +15978,15 @@ public function updateSchoolIdentificationView(){
 
 public function updateSchoolVisitIdentification(){
     $posted_data = $_POST;
- //   dd($posted_data);
+    $user               = $_SESSION['user'];
+    $taskperformedby    = $user['dep_id'];
+    $commonColumns   = [
+                        'performed_by' => $_SESSION['user']['id'],
+                        'updated_at'   => date("Y-m-d H:i:s"),
+                        'status'       => 'active',
+                        'tbe_id'       => $taskId
+                     ];
+   dd($posted_data);
    /** Insert into task_Execution_details */
  foreach ($posted_data as $k => $val) {
     if ($val != '' && !empty($val)){
@@ -16013,13 +16026,91 @@ public function updateSchoolVisitIdentification(){
             'remark' =>  $remark
         ] + $commonColumns;
     }
-
 }
-  //dd($taskInsertArr1);
+
+  $attachment_link = '';
+
+// Insert only if there's data
+   $current_date =  date('Y-m-d h:i:s');
+   if (!empty($taskInsertArr1)){
+       $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+    // $attachmentData = 'task_id'=>$taskId 'attachment_link'=>,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date;
+  //  $this->Menu_model->insertTasksWithAttachements(['task_id'=>$taskId ,'attachment_link'=>$attachment_link,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date]);
+}
+
+   $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+   $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+
+   redirect('Menu/Dashboard');
+   /** */
+}
+public function visitDuringIdentification($taskId){
+    $user              = $this->session->userdata('user');
+    $uid               = $user['user_id'];
+    $uyid              = $user['type_id'];
+    $dep_id            = $user['dep_id'];
+    $dt                = $this->Menu_model->get_depatment_byid($dep_id);
+    $dep_name          = $dt[0]->dep_name;
+    $data['taskId']                 = $taskId;
+    $data['taskType']               = $taskType;
+    $this->display($dep_name,"visitDuringIdentificationView",$data,$type="");
+}
+
+public function updateVisitDuringIdentification(){
+    $posted_data        = $_POST;
+    $user               = $_SESSION['user'];
+    $taskperformedby    = $user['dep_id'];
+    $taskId = $posted_data['taskId'];
+    $commonColumns      = [
+                            'performed_by' => $_SESSION['user']['id'],
+                            'updated_at'   => date("Y-m-d H:i:s"),
+                            'status'       => 'active',
+                            'tbe_id'       => $taskId
+                         ];
+
+   /** Insert into task_Execution_details */
+ foreach ($posted_data as $k => $val) {
+    if ($val != '' && !empty($val)){
+        // Assign main_Task_id based on the key
+        if($taskperformedby == '2'){
+        switch ($k){
+         // case 'startYourjourney':                          $main_Task_id = '725'; break;
+            case 'selfie':                          $main_Task_id = '726'; break;
+            case 'sname':                           $main_Task_id = '727'; break;
+            case 'language':                        $main_Task_id = '728'; break;
+            case 'standard':                        $main_Task_id = '729'; break;
+            case 'teachers':                        $main_Task_id = '730'; break;
+            case 'students':                        $main_Task_id = '731'; break;
+            case 'boys':                            $main_Task_id = '732'; break;
+            case 'girls':                           $main_Task_id = '733'; break;
+            case 'address':                         $main_Task_id = '734'; break;
+            case 'pincode':                         $main_Task_id = '735'; break;
+            case 'city':                            $main_Task_id = '736'; break;
+            case 'state':                           $main_Task_id = '737'; break;
+            case 'principal':                       $main_Task_id = '738'; break;
+            case 'contact_no':                      $main_Task_id = '739'; break;
+            case 'do_dm_required':                  $main_Task_id = '740'; break;
+            case 'visit_required':                  $main_Task_id = '741'; break;
+            case 'any_other_information':           $main_Task_id = '742'; break;
+            default:
+            continue 2; // Skip unknown keys
+        }
+       }
+       if(count($val)>1){
+           $val = implode('**',$val);
+       }
+        // Store data in array
+        $taskInsertArr1[] = [
+            'task_response' => $val,
+            'main_Task_id'  => $main_Task_id,
+            'remark' =>  $remark
+        ] + $commonColumns;
+    }
+}
+//dd($taskInsertArr1);
   $attachment_link = '';
 // Insert only if there's data
    $current_date =  date('Y-m-d h:i:s');
-
    if (!empty($taskInsertArr1)){
        $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
     // $attachmentData = 'task_id'=>$taskId 'attachment_link'=>,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date;
@@ -16027,8 +16118,7 @@ public function updateSchoolVisitIdentification(){
 }
    $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
    $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
-
-   redirect('Menu/Dashboard');
-   /** */
+    redirect('Menu/Dashboard');
 }
+
 }

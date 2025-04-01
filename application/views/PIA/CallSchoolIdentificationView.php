@@ -4,12 +4,14 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <form name="schoolIdentificaion" action="updateSchoolIdentificationView" method="POST" >
+                        <input type="hidden" name="taskId" value="<?php echo $taskId; ?>"/>
+                        <input type="hidden" name="taskType" value="<?php echo $taskType; ?>"/>
+                        <input type="hidden" name="tasktypeid" value="<?php echo $tasktypeid; ?>"/>    
                         <div class="form-group">
                             <label>Action Completed?</label><br>
                             <input type="radio" name="action_completed" value="yes" id="action_yes"> Yes
                             <input type="radio" name="action_completed" value="no" id="action_no"> No
                         </div>
-                        
                         <div class="form-group" id="purpose_div" style="display: none;">
                             <label>Purpose Completed?</label><br>
                             <input type="radio" name="purpose_completed" value="yes" id="purpose_yes"> Yes
@@ -84,7 +86,7 @@
                             </div>
                             <div class="form-group">
                                 <label>Any Other Information</label>
-                                <textarea class="form-control"></textarea>
+                                <textarea class="form-control" name="any_other_information"></textarea>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
@@ -93,7 +95,6 @@
             </div>
         </div>
     </div>
-    
     <script>
         $(document).ready(function() {
             $('input[name="action_completed"]').change(function() {
