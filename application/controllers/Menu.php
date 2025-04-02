@@ -82,20 +82,18 @@ class Menu extends CI_Controller {
         $this->load->view($dep_name.'/CluserLinkTE',['notify'=>$notify,'user'=>$user,'piid'=>$uid]);
     }
     public function CMSCCC(){
-        $user = $this->session->userdata('user');
-        $data['user'] = $user;$uid= $user['id'];
-        $id =  $user['dep_id'];
-        
-        $notify=$this->Menu_model->get_notifybyid($uid);
-        $dt=$this->Menu_model->get_depatment_byid($id);
-        $dep_name = $dt[0]->dep_name;
-        $this->load->view($dep_name.'/CMSCCC',['notify'=>$notify,'user'=>$user,'uid'=>$uid]);
+        $user           = $this->session->userdata('user');
+        $data['user']   = $user;$uid= $user['id'];
+        $id             = $user['dep_id'];
+        $notify         = $this->Menu_model->get_notifybyid($uid);
+        $dt             = $this->Menu_model->get_depatment_byid($id);
+        $dep_name       = $dt[0]->dep_name;
+        $this->display($dep_name,'CMSCCC',['notify'=>$notify,'user'=>$user,'uid'=>$uid],$type='');
     }
     public function Success(){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7124,7 +7122,7 @@ class Menu extends CI_Controller {
             $depnameData                    = $this->Menu_model->get_depatment_byid($dept);
             $dep_name                       = $depnameData[0]->dep_name;
         //  $data['getFactoryModelList']    = $this->Menu_model->getFactoryModelList();
-      //  echo $viewname;exit;
+   //    echo $viewname;exit;
             $this->display($dep_name,$viewname,$data,$type='modal');
     }
 
@@ -7376,11 +7374,9 @@ public function updateTask($tasktypeid=''){
         // Generate a unique file name using the current timestamp and original file extension
         $extension                = pathinfo($data['name'], PATHINFO_EXTENSION); // Get file extension
         $uniqueFileName           = date("Y-m-d").time() . '_' . uniqid() . '.' . $extension; // Generate unique name
-       // $uploadPath               = 'uploads/Visit/';
         $config['upload_path']    = $uploadPath;
         $config['allowed_types']  = '*';
         $config['file_name']      = $uniqueFileName;
-        
         // Load the upload library and perform the upload
         $this->load->library('upload', $config);
         if ($this->upload->do_upload('file')){
@@ -15844,18 +15840,13 @@ public function PendingTaskPlannerRequest(){
     $data['user']   = $user;
     $uid            = $user['id'];
     $id             = $user['dep_id'];
- 
     $this->load->model('Menu_model');
     $notify         =  $this->Menu_model->get_notifybyid($uid);
     $dt             =  $this->Menu_model->get_depatment_byid($id);
-   
     $dep_name       =  $dt[0]->dep_name;
-    
     if(!empty($user)){
-
         $planner_date = date("Y-m-d");
         $getreqData = $this->Menu_model->GetAllTodaysCreatePlannerRequestByUser($uid,$planner_date);
-        
         $this->load->view($dep_name.'/PendingTaskPlannerRequest', ['uid'=>$uid,'user'=>$user,'getreqData'=>$getreqData,'planner_date'=>$planner_date]);
     }else{
         redirect('Menu/main');
@@ -16119,6 +16110,75 @@ public function updateVisitDuringIdentification(){
    $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
    $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
     redirect('Menu/Dashboard');
+}
+
+public function updatePreInterventionEnquiryFTTP(){
+    $posted_data = $_POST;
+    /** Insert Into task_execution_details  */
+    $posted_data        = $_POST;
+    $user               = $_SESSION['user'];
+    $taskperformedby    = $user['dep_id'];
+    $taskId = $posted_data['taskId'];
+    $commonColumns      = [
+                            'performed_by' => $_SESSION['user']['id'],
+                            'updated_at'   => date("Y-m-d H:i:s"),
+                            'status'       => 'active',
+                            'tbe_id'       => $taskId
+                         ];
+
+   /** Insert into task_Execution_details */
+ foreach($posted_data as $k => $val) {
+    if ($val != '' && !empty($val)){
+        // Assign main_Task_id based on the key
+        if($taskperformedby == '2'){
+        switch ($k){
+            case 'action_completed':                          $main_Task_id = '217'; break;
+            case 'purpose_completed':                         $main_Task_id = '218'; break;
+            case 'pre_ttp_video':                             $main_Task_id = '219'; break;
+            case 'ttp_agenda':                                $main_Task_id = '220'; break;
+            case 'training_certificate':                      $main_Task_id = '221'; break;
+            case 'training_date':                             $main_Task_id = '222'; break;
+            case 'travel_plan':                               $main_Task_id = '223'; break;
+            case 'training_language':                         $main_Task_id = '224'; break;
+            case 'final_remark':                              $main_Task_id = '225'; break;
+            default:
+            continue 2; // Skip unknown keys
+        }
+       }
+       if(count($val)>1){
+           $val = implode('**',$val);
+       }
+
+       if(isset($_FILES)){
+        $uploadPath                       = "uploads/call/";
+        $post_data['attachment_link']     = $this->uploadFile($_FILES[$taskname],$uploadPath);
+        // $updateQuery                   = $this->Menu_model->updateTasksById($taskid,$post_data); 
+        $file_data['task_id']             = $taskid;
+        $updateWithAttachemnts            = $this->Menu_model->insertTasksWithAttachements($file_data);
+    }
+        // Store data in array
+        $taskInsertArr1[] = [
+            'task_response' => $val,
+            'main_Task_id'  => $main_Task_id,
+            'remark'        =>  $remark
+        ] + $commonColumns;
+    }
+}
+  $attachment_link = '';
+
+// Insert only if there's data
+   $current_date =  date('Y-m-d h:i:s');
+
+   if (!empty($taskInsertArr1)){
+       $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+   //    $this->Menu_model->insertTasksWithAttachements(['task_id'=>$taskId ,'attachment_link'=>$attachment_link,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date]);
+
+    // $attachmentData = 'task_id'=>$taskId 'attachment_link'=>,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date;
+}
+
+   $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+   $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+
 }
 
 }

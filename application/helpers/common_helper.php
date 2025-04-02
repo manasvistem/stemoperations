@@ -39,7 +39,6 @@ if(!function_exists('isNotWeekend')){
 function isNotWeekend($date) {
     // Convert date to timestamp
     $timestamp = strtotime($date);
-    
     // Get day of the week (1 = Monday, 7 = Sunday)
     $dayOfWeek = date('N', $timestamp);
     
@@ -71,5 +70,15 @@ function isNotWeekend($date) {
     // If it's not Sunday, 2nd Saturday, or 4th Saturday, it's a working day
     return true;
 }
+}
+
+if(!function_exists('get_indian_languages')){
+    function get_indian_languages() {
+        $CI =& get_instance();
+        // Load the model if not already loaded
+        $CI->load->model('Menu_model');
+        $DataSet = $CI->Menu_model->get_indian_languages();
+        return $DataSet;
+    }
 }
 ?>

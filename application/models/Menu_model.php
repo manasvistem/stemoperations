@@ -6158,13 +6158,16 @@ public function getTaskDetails($taskId,$taskactionId){
  public function insertTasksWithAttachements($data){
    $data['status']       = 1;
    $data['created_date'] = date('Y-m-d');
-   $insertQuery          = " INSERT INTO tblcallevents_attachments (task_id,attachment_link,remark,user_id,created_at) VALUES ( ";
-    foreach($data as $key=>$val){
-        $key                =  strtolower($key);
-        $insertQuery        .=   " `".$val."`,";
-    }
-    $insertQuery            =  substr($insertQuery,0,-1);
-    $insertQuery            .= ")";
+   foreach($data as $key=>$val){
+        $insertQuery          = " INSERT INTO tblcallevents_attachments (task_id,attachment_link,remark,user_id,created_at) VALUES ( ";
+        foreach($data as $key=>$val){
+            $key                =  strtolower($key);
+            $insertQuery        .=   " `".$val."`,";
+        }
+        $insertQuery            =  substr($insertQuery,0,-1);
+        $insertQuery            .= ")";
+   }
+   
     return true;
  }
 
@@ -6603,5 +6606,11 @@ public function TodaysTotalsPlannerSessioninMinute($uid){
 public function getUserDayStartDetails($uid,$tdate){
     $query=$this->db->query("SELECT * FROM user_day WHERE user_id='$uid' and cast(sdatet as DATE)='$tdate'");
     return $query->result();
+}
+public function get_indian_languages(){
+    $query =  $this->db->query("SELECT language_name FROM indian_languages");
+  // dd($query->row_array());
+    return $query->row_array();
+
 }
 }

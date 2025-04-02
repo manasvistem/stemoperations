@@ -131,7 +131,7 @@ $("document").ready(function(){
                   //  $("#status").val("Updated"); // Update hidden field
                    // $("#dynamicStatus").text("Task Status: Updated"); // Update text
                     $("#modalCenter").hide();
-                    setTimeout(function () {
+                          setTimeout(function () {
                           location.reload(); // Reload the page to return to main view
                       }, 500);
                     } else {
