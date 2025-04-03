@@ -6156,19 +6156,14 @@ public function getTaskDetails($taskId,$taskactionId){
  }
 
  public function insertTasksWithAttachements($data){
-   $data['status']       = 1;
-   $data['created_date'] = date('Y-m-d');
-   foreach($data as $key=>$val){
-        $insertQuery          = " INSERT INTO tblcallevents_attachments (task_id,attachment_link,remark,user_id,created_at) VALUES ( ";
-        foreach($data as $key=>$val){
-            $key                =  strtolower($key);
-            $insertQuery        .=   " `".$val."`,";
-        }
-        $insertQuery            =  substr($insertQuery,0,-1);
-        $insertQuery            .= ")";
-   }
-   
-    return true;
+    $data['status']       = 1;
+    $data['created_date'] = date('Y-m-d');
+    $data['task_id'] = '1111';
+    $insertQuery          = "INSERT INTO tblcallevents_attachments (task_id,attachment_link,remark,user_id,created_at)
+                            VALUES(".$data['task_id'].",'".$data['attachment_link']."','".$data['remark']."',".$data['user_id'].",
+                            '".$data['created_at']."') ";
+      
+    return $this->db->last_insert_id;
  }
 
  public function batch_insert_task_execution($data){

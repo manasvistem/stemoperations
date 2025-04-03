@@ -1,72 +1,23 @@
 
 <div class="modal-body" id="MaintenanceModal">
-    <form id="schoolIdentificationVisit" method="post" action="">
+    <form id="maintenanceForm" method="post" action="updateDuringFTTPVisitPage">
         <input type="hidden" name="taskId" value="<?php echo $taskId; ?>"/>
         <input type="hidden" name="taskType" value="<?php echo $taskType; ?>"/>
         <input type="hidden" name="tasktypeid" value="<?php echo $tasktypeid; ?>"/>
         <input type="hidden" name="status" id="status" value="">
-    <div class="mb-3">
-        <label class="form-label">Start Your Journey</label>
-            <div class="form-check form-check-inline">
-                <a href="<?php echo base_url()?>Menu/visitDuringIdentification/<?php echo $taskId;?>" target="_blank" class="btn btn-primary" id="startyourjourney">
-                    <i class="bi bi-play-fill"></i> Start
-                </a>
-            </div>
+      <div class="mb-3">
+        <label class="form-label">Start Your Journey  : <?php echo date('d-m-y h:i:s');?></label>
+        <div class="form-check form-check-inline">
+        <a href="<?php echo base_url()?>Menu/duringFTTPVisitPage/<?php echo $taskId;?>" target="_blank" class="btn btn-primary" id="startyourjourney">
+           <i class="bi bi-play-fill"></i> Start 
+        </a>
+        </div>
+      </div>
     </div>
-      
-
-    <?php
-    /* foreach($formdata as $key=>$val){ 
-            foreach($val as $k=>$v){
-                if($k == 'taskaction' && $v=='Stage3'){ 
-                    ?>
-                    <div class="mb-3 form-check">
-                        <label class="form-check-label" for="requestNote"><?php echo $val['taskdetails'];?></label>
-                        <input class="form-check-input" type="checkbox" name="taskexe[]" id="requestNote" value="<?php echo $val['id']?>">
-                    </div>
-                    <?php
-                }
-            } 
-        }*/
-         ?>
-    </div>
-    
     </form>
   </div>
 </div>
 <script>
-   $(document).ready(function () {
-    $('#notWorkingModel').change(function () {
-        $('#selectedModelsContainer').empty(); // Clear previous selections
-        $('#notWorkingModel option:selected').each(function () {
-            let modelId   = $(this).val();
-            let modelName = $(this).data('model');
-            if (modelId) {
-                let modelHtml = `
-                <div class="selected-model mb-2" data-id="${modelId}">
-                    <strong><span id="modelname">${modelName}</span></strong>
-                        <select class="repair-replace form-control d-inline-block w-auto ml-2" name="modelreturntype">
-                            <option value="">Select Action</option>
-                            <option value="repairpart">Repair Part</option>
-                            <option value="repairmaterial">Repair Material</option>
-                            <option value="replace">Replace</option>
-                        </select>
-                        <div class="repair-part-options d-inline-block ml-2" style="display:none;">
-                                    <select class="model-parts form-control w-auto" name="part_name_${modelName}[]" multiple>
-                                    <option value="">Loading</option>
-                                    </select>
-                                    </div>
-                                     <div class="repair-material-options d-inline-block ml-2" style="display:none;">
-                                        <select class="model-material form-control w-auto" name="material_name_${modelName}[]" multiple>
-                                        <option value="">Loading</option>
-                                        </select>
-                                        </div>
-                </div>`;
-                $('#selectedModelsContainer').append(modelHtml);
-            }
-        });
-    });
-
     // Handle Repair/Replace selection
     $(document).on('change', '.repair-replace', function () {
         let selectedAction      = $(this).val();
@@ -85,7 +36,6 @@
                 parentDiv.find('.repair-options').hide();
             }
     });
-
     // Load model parts via AJAX
     function loadModelParts(selectElement,selectedModel) {
         $.ajax({
@@ -94,7 +44,6 @@
             dataType: 'json',
             data : { model_name: selectedModel },
             success: function (data) {
-              
                 selectElement.empty().append('<option value="">Select Part</option>');
                     $.each(data, function (key, value) {
                     selectElement.append('<option value="' + value.part_name + '">' + value.part_name + '</option>');

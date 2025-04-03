@@ -7122,7 +7122,7 @@ class Menu extends CI_Controller {
             $depnameData                    = $this->Menu_model->get_depatment_byid($dept);
             $dep_name                       = $depnameData[0]->dep_name;
         //  $data['getFactoryModelList']    = $this->Menu_model->getFactoryModelList();
-   //    echo $viewname;exit;
+           // echo $viewname;exit;
             $this->display($dep_name,$viewname,$data,$type='modal');
     }
 
@@ -7355,7 +7355,7 @@ public function updateTask($tasktypeid=''){
         $updateQuery                            = $this->Menu_model->updateTasksById($taskid,$post_data);
 
         if(isset($_FILES)){
-              $uploadPath                       = "uploads/Visit/";
+              $uploadPath                       = "uploads/visit";
               $post_data['attachment_link']     = $this->uploadFile($_FILES[$taskname],$uploadPath);
               // $updateQuery                   = $this->Menu_model->updateTasksById($taskid,$post_data); 
               $post_data['task_id']             = $taskid;
@@ -7370,7 +7370,6 @@ public function updateTask($tasktypeid=''){
         $_FILES['file']['tmp_name']  = $data['tmp_name'];
         $_FILES['file']['error']     = $data['error'];
         $_FILES['file']['size']      = $data['size'];
-
         // Generate a unique file name using the current timestamp and original file extension
         $extension                = pathinfo($data['name'], PATHINFO_EXTENSION); // Get file extension
         $uniqueFileName           = date("Y-m-d").time() . '_' . uniqid() . '.' . $extension; // Generate unique name
@@ -7379,6 +7378,7 @@ public function updateTask($tasktypeid=''){
         $config['file_name']      = $uniqueFileName;
         // Load the upload library and perform the upload
         $this->load->library('upload', $config);
+
         if ($this->upload->do_upload('file')){
             $uploadData = $this->upload->data(); // Uploaded file data
             $filename   = $uploadData['file_name'];
@@ -16051,7 +16051,7 @@ public function updateVisitDuringIdentification(){
     $posted_data        = $_POST;
     $user               = $_SESSION['user'];
     $taskperformedby    = $user['dep_id'];
-    $taskId = $posted_data['taskId'];
+    $taskId             = $posted_data['taskId'];
     $commonColumns      = [
                             'performed_by' => $_SESSION['user']['id'],
                             'updated_at'   => date("Y-m-d H:i:s"),
@@ -16165,19 +16165,97 @@ public function updatePreInterventionEnquiryFTTP(){
     }
 }
   $attachment_link = '';
-
 // Insert only if there's data
    $current_date =  date('Y-m-d h:i:s');
-
    if (!empty($taskInsertArr1)){
        $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
    //    $this->Menu_model->insertTasksWithAttachements(['task_id'=>$taskId ,'attachment_link'=>$attachment_link,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date]);
-
     // $attachmentData = 'task_id'=>$taskId 'attachment_link'=>,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date;
 }
-
    $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
    $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+}
+
+public function UpdateFTTPDuringVisit(){
+    /** Insert Into task_execution_details  */
+    $posted_data        = $_POST;
+    $user               = $_SESSION['user'];
+    $taskperformedby    = $user['dep_id'];
+    $taskId             = $posted_data['taskId'];
+    $commonColumns      = [
+                            'performed_by' => $_SESSION['user']['id'],
+                            'updated_at'   => date("Y-m-d H:i:s"),
+                            'status'       => 'active',
+                            'tbe_id'       => $taskId
+                         ];
+                         
+        if(isset($_FILES)){
+            foreach($_FILES as $filekey=>$fileval){
+            $uploadPath                       = "uploads/FTTP/visit/".date('Y-m-d')."/";
+            $status                           = $this->createDirectoryIfNotExists($uploadPath, $permissions = 0755);
+            $file_data['attachment_link']     = $this->uploadFile($_FILES[$filekey],$uploadPath);
+            $file_data['task_id']             = $taskId;
+            $file_data['user_id']             = $_SESSION['user']['id'];
+            $file_data['created_at']          = date('Y-m-d h:i:s');
+            $updateWithAttachemnts            = $this->Menu_model->insertTasksWithAttachements($file_data);
+            }
+        }
+    /** Insert into task_execution tasks */
+        foreach($posted_data as $k => $val) {
+            if($val != '' && !empty($val)){
+                // Assign main_Task_id based on the key
+                if($taskperformedby == '2'){
+                    switch ($k){
+                        case 'selfie':                            $main_Task_id = '227'; break;
+                        case 'sname':                             $main_Task_id = '228'; break;
+                        case isset($_FILES['session_1_file']):    $main_Task_id = '229';break;
+                        case isset($_FILES['session_2_file']):    $main_Task_id = '230'; break;
+                        case isset($_FILES['session_3_file']):    $main_Task_id = '231'; break;
+                        case isset($_FILES['session_4_file']):    $main_Task_id = '232'; break;
+                        case isset($_FILES['session_5_file']):    $main_Task_id = '233'; break;
+                        case 'teacher_review_1':                  $main_Task_id = '234'; break;
+                        case 'teacher_review_2':                  $main_Task_id = '235'; break;
+                        case 'teacher_review_3':                  $main_Task_id = '236'; break;
+                        // case isset($_FILES['attendance_sheet']):  $main_Task_id = '237'; break;
+                        // case isset($_FILES['completion_letter']): $main_Task_id = '238'; break;
+                        // case isset($_FILES['completed_selfie']):  $main_Task_id = '239'; break;
+                        // case isset($_FILES['additional_media']):  $main_Task_id = '240'; break;
+                        default:
+                        continue 2; // Skip unknown keys
+                    }
+                }
+                if(count($val)>1){
+                    $val = implode('**',$val);
+                }
+                // Store data in array
+                $taskInsertArr1[] = [
+                    'task_response' => $val,
+                    'main_Task_id'  => $main_Task_id,
+                    'remark'        => $remark
+                ] + $commonColumns;
+            }
+        } 
+        dd($taskInsertArr1);
+        if (!empty($taskInsertArr1)){
+            $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+        }
+
+        $current_date =  date('Y-m-d h:i:s');
+
+        $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+        $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+        redirect('Menu/Dashboard');
+}
+
+public function duringFTTPVisitPage($taskId){
+    $user               = $this->session->userdata('user');
+    $uid                = $user['user_id'];
+    $uyid               = $user['type_id'];
+    $dep_id             = $user['dep_id'];
+    $dt                 = $this->Menu_model->get_depatment_byid($dep_id);
+    $dep_name           = $dt[0]->dep_name;
+    $data['taskId']     = $taskId;
+    $this->display($dep_name,"DuringFTTPVisitFormPage",$data,$type="");
 
 }
 

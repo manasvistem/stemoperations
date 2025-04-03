@@ -1,113 +1,99 @@
 <style>
-        .container {
-            max-width: 600px;
-            margin: auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            background: #f9f9f9;
-        }
-        .form-group {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .form-group label {
-            width: 40%;
-            text-align: right;
-            padding-right: 10px;
-        }
-        .form-group input {
-            width: 55%;
-            padding: 5px;
-        }
-        .modal-footer {
-            text-align: center;
-            margin-top: 20px;
-        }
-    </style> 
-    <div class="container-fluid">
-        <h4 class="text-center">School Identification Visit Task</h4>
-        <form name="installationForm" action="<?= base_url();?>Menu/updateVisitDuringIdentification"  method="POST" >
-            <input type="hidden" name="taskId" value="<?php echo $taskId; ?>"/>
-            <input type="hidden" name="taskType" value="<?php echo $taskType; ?>"/>
-            <input type="hidden" name="tasktypeid" value="<?php echo $tasktypeid; ?>"/>    
+    .container {
+        max-width: 600px;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        background: #f9f9f9;
+    }
+</style>
+<div class="container-fluid">
+    <h4 class="text-center">During FTTP Visit Task</h4>
+    <form name="fttpVisitForm" action="<?= base_url();?>Menu/UpdateFTTPDuringVisit" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="taskId" value="<?php echo $taskId; ?>"/>
+        <!-- <input type="hidden" name="taskType" value="<?php echo $taskType; ?>"/>
+        <input type="hidden" name="tasktypeid" value="<?php echo $tasktypeid; ?>"/>   -->
         <!-- Image Upload Fields -->
-            <div class="row">
-                <div class="col-md-12 text-center mb-3">
-                    <label><strong>Take Selfie with School</strong></label>
-                    <input type="file" class="form-control" name="selfie" id="imgInp" accept="image/*" capture required >
-                    <input type="hidden" name="address" id="address">
-                    <p id="locationText" class="text-success mt-2"></p>
-                    <!-- Hidden Fields to Store Latitude & Longitude -->
-                    <input type="hidden" name="latitude" id="latitude">
-                    <input type="hidden" name="longitude" id="longitude">
+        <div class="row">
+            <div class="col-md-12 text-center mb-3">
+                <label><strong>Take Selfie with School</strong></label>
+                <input type="file" class="form-control" name="selfie" id="imgInp" accept="image/*" capture required>
+                <input type="hidden" name="address" id="address">
+                <p id="locationText" class="text-success mt-2"></p>
+                <input type="hidden" name="latitude" id="latitude">
+                <input type="hidden" name="longitude" id="longitude">
+            </div>
+        </div>
+        <!-- File Uploads for Sessions -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label"><strong>1st Session Upload</strong></label>
+                    <input type="file" class="form-control" name="session_1_file" accept="image/*">
                 </div>
-                <div class="col-md-12 text-center mb-3">
-                    <button type="button" class="btn btn-success" id="startTask">Start Task</button>
-                    <span id="timer" class="text-danger" style="font-size: 18px; margin-left: 10px; display: none;">00:00:00</span>
-                    <input type="hidden" name="elapsed_time" id="elapsedTime">
+                <div class="mb-3">
+                    <label class="form-label"><strong>2nd Session Upload</strong></label>
+                    <input type="file" class="form-control" name="session_2_file" accept="image/*">
+
                 </div>
-                <div class="row" id="visitDuringIdentification" style="display:none;">
-                <div class="col-md-6">
-                    <label><strong>School Name</strong></label>
-                    <input type="text" class="form-control" name="sname">
-                    <label><strong>Language</strong></label>
-                    <input type="text" class="form-control" name="language" >
-                    <label><strong>Standard</strong></label>
-                    <input type="text" class="form-control" name="standard" >
-                    <label><strong>Can we have a Number of the Peon?</strong></label>
-                    <input type="number" class="form-control" name="number" >
-                    <label for="total_teachers"><strong>Total Teachers:</strong></label>
+                <div class="mb-3">
+                    <label class="form-label"><strong>3rd Session Upload</strong></label>
+                    <input type="file" class="form-control" name="session_3_file" accept="image/*">
 
-                    <input type="number" class="form-control" name="teachers" id="total_teachers" min="1" required>
-                    <div id="teacher_fields"></div>
-
-                    <label><strong>Total Students</strong></label>
-                    <input type="number" class="form-control" name="total_students" >
-                    <label><strong>Boys</strong></label>
-                    <input type="number" class="form-control" name="boys">
-                    <label><strong>Girls</strong></label>
-                    <input type="text" class="form-control" name="girls" >
                 </div>
-                <div class="col-md-6">
-                    <label><strong>Address</strong></label>
-                    <input type="text" class="form-control" name="pincode">
-                    <label><strong>Pincode</strong></label>
-                    <input type="number" class="form-control" name="city">
-                    <label><strong>City</strong></label>
-                    <input type="text" class="form-control" name="state" >
-                    <label><strong>State</strong></label>
-                    <input type="text" class="form-control" name="principal" >
-
-                    <label><strong>School Principal Name</strong></label>
-                    <input type="text" class="form-control" name="principal">
-
-                    <label><strong>Contact No</strong></label>
-                    <input type="radio" name="do_dm_required" value="yes"> Yes
-                    <input type="radio" name="do_dm_required" value="no"> No
-
-                    <label>DO/DM Letter Required?</label>
-                    <input type="radio" name="visit_required" value="yes">Yes
-                    <input type="radio" name="visit_required" value="no"> No
-
-                    <label>Visit Required?</</label><br>
-                    <textarea class="form-control" name="any_other_information"></textarea>
-
-                    <div class="form-group">
-                        <label>Any Other Information</label><br>
-                        <textarea class="form-control" name="any_other_information"></textarea>
-                    </div>
+                <div class="mb-3">
+                    <label class="form-label"><strong>1st Teacher Review</strong></label>
+                    <textarea class="form-control" name="teacher_review_1" placeholder="Write your review here"></textarea>
+                    
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"><strong>2nd Teacher Review</strong></label>
+                    <textarea class="form-control" name="teacher_review_2" placeholder="Write your review here"></textarea>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"><strong>3rd Teacher Review</strong></label>
+                    <textarea class="form-control" name="teacher_review_3" placeholder="Write your review here"></textarea>
                 </div>
             </div>
-            <!-- Submit Button -->
-            <div class="modal-footer" style="align:center;width:20%">
-                <input type="submit" class="btn btn-primary w-100" value="Submit" id="submitButton">
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label class="form-label"><strong>4th Session Upload</strong></label>
+                    <input type="file" class="form-control" name="session_4_file" accept="image/*">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"><strong>5th Session Upload</strong></label>
+                    <input type="file" class="form-control" name="session_5_file" accept="image/*">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"><strong>Teachers Attendance Sheet (Add photo)</strong></label>
+                    <input type="file" class="form-control" name="attendance_sheet" accept="image/*">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label"><strong>FTTP Completion Letter</strong></label>
+                    <input type="file" class="form-control" name="completion_letter" accept=".pdf">
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label"><strong>Completed My Task (Take Selfie with School)</strong></label>
+                    <input type="file" class="form-control" name="completed_selfie" accept="image/*">
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label"><strong>Add More Media</strong></label>
+                    <input type="file" class="form-control" name="additional_media[]" accept="image/*" multiple>
+                </div>
             </div>
-        </form>
-    </div>
-    </div></div>
+        </div>
+        
+        <!-- Submit Button -->
+        <div class="modal-footer text-center">
+            <input type="submit" class="btn btn-primary w-100" value="Submit">
+        </div>
+    </form>
+</div>
+</div>
     </div></div>
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
