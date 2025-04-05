@@ -6618,15 +6618,15 @@ public function update_tbe_attachmentid($main_task_id,$task_id){
     return TRUE;
 }
 
-// public function getReportData($taskType){
-//     $query = $this->db->query("SELECT tblcallevents_attachment.* 
-//                                 FROM tblcallevents_attachment 
-//                                 LEFT JOIN tblcallevents ON tblcallevents.task_action 
-//                                 LEFT JOIN main_task ON main_task.id = tblcallevents_attachment.main_taskid
-//                                 WHERE task_action= '".$taskType."' ");
-//         return $query->result_array();
-//            // echo $this->db->last_query(); 
-//            // exit;
-// }
+public function getReportData($taskType){
+    $query = $this->db->query("SELECT tblcallevents_attachment.* 
+                                FROM tblcallevents_attachment 
+                                LEFT JOIN tblcallevents ON tblcallevents.task_action 
+                                LEFT JOIN main_task ON main_task.id = tblcallevents_attachment.main_taskid
+                                WHERE task_action= '".$taskType."' ");
+        return $query->result_array();
+           // echo $this->db->last_query(); 
+           // exit;
+}
 
 }

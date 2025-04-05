@@ -1,12 +1,15 @@
 <div class="container mt-4 mb-5 p-4 border rounded shadow bg-white">
     <h4 class="mb-4 fw-bold text-center">School M&E Activity Form</h4>
-
     <!-- Take Selfie with School -->
     <div class="mb-3">
         <label class="form-label fw-semibold">Take Selfie with School (with Location)</label>
         <input type="file" accept="image/*" capture="environment" class="form-control" name="selfie_location">
+                <!-- Hidden Fields to Store Latitude & Longitude -->
+            <input type="hidden" name="address" id="address">
+            <p id="locationText" class="text-success mt-2"></p>
+            <input type="hidden" name="latitude" id="latitude">
+            <input type="hidden" name="longitude" id="longitude">
     </div>
-
     <!-- Start My Task -->
     <div class="mb-3">
         <button type="button" class="btn btn-success" id="startTaskBtn">Start My Task</button>
@@ -14,7 +17,6 @@
 
     <!-- Task Content Fields -->
     <div id="taskContent" class="d-none mt-4">
-
         <div class="row g-3">
             <!-- Session Videos -->
             <div class="col-md-6">

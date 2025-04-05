@@ -7128,6 +7128,7 @@ class Menu extends CI_Controller {
             //     // $getData = $this->Menu_model->getReportData($tasktypeid,$user_id);
             //     // dd($getData);exit;
             // }
+          //  echo $viewname;exit;
             $this->display($dep_name,$viewname,$data,$type='modal');
     }
 
@@ -7141,7 +7142,6 @@ class Menu extends CI_Controller {
         $data['taskId']                 = $taskId;
         $data['taskType']               = $taskType;
         $data['getFactoryModelList']    = $this->Menu_model->getFactoryModelList();
-
         $this->display($dep_name,'VisitDuringMaintenance',$data,$type='');
     }
     public function Dashboard1(){
@@ -16416,14 +16416,72 @@ public function updateFTTPReviewCallZM(){
        if (!empty($taskInsertArr1)){
                $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
         }
-
-
        $updatetblcalleventsData    = ['initiate_datetime'=>isset($posted_data['elapsed_time']) ? $posted_data['elapsed_time']:date("Y-m-d h:i:s"),'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
        $updateQuery                =  $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
-
        redirect('Menu/Dashboard');
     /** task update  */
 }
 
+public function updateFTTPReportZTaskView(){
+    $posted_data = $_POST;
+    $taskId      =  $posted_data['taskId'];
+    dd($posted_data);
+    /** */
+}
+
+public function updateCallMnEBaseline(){
+    $posted_data    =  $_POST;
+    $taskId         =  $posted_data['taskId'];
+    unset($posted_data['taskId']);
+    $commonColumns      = [
+        'performed_by' => $_SESSION['user']['id'],
+        'updated_at'   => date("Y-m-d H:i:s"),
+        'status'       => 'active',
+        'tbe_id'       => $taskId
+     ];
+
+     foreach($posted_data as $k => $val) {
+        if ($val != '' && !empty($val)){
+            // Assign main_Task_id based on the key
+            if($taskperformedby == '11'){
+            switch ($k){
+                case 'action_completed':               $main_Task_id = '247'; break;
+                case 'purpose_completed':              $main_Task_id = '248'; break;
+                case 'ttp_duration':                   $main_Task_id = '249'; break;
+                case 'concerns_msc':                   $main_Task_id = '250'; break;
+                case 'resolve_question':               $main_Task_id = '251'; break;
+                case 'quality_photos':                 $main_Task_id = '252'; break;
+                case 'rapport':                        $main_Task_id = '253'; break;
+                case 'report_48hrs':                   $main_Task_id = '254'; break;
+                case 'testimonials':                   $main_Task_id = '255'; break;
+                case 'training_quality':               $main_Task_id = '256'; break;
+                case 'whatsapp_group':                 $main_Task_id = '257'; break;
+                case 'final_remark':                   $main_Task_id = '257'; break;
+                default:
+                continue 2; // Skip unknown keys
+            }
+           }
+            // Store data in array
+            $taskInsertArr1[] = [
+                'task_response' => $val,
+                'main_Task_id'  => $main_Task_id,
+                'remark'        =>  $remark
+            ] + $commonColumns;
+        }
+    }
+    // Insert only if there's data
+       $current_date =  date('Y-m-d h:i:s');
+       if (!empty($taskInsertArr1)){
+               $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+        }
+       $updatetblcalleventsData    = ['initiate_datetime'=>isset($posted_data['elapsed_time']) ? $posted_data['elapsed_time']:date("Y-m-d h:i:s"),'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+       $updateQuery                =  $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+       redirect('Menu/Dashboard');
+    /**tblcallevents */
+}
+
+public function updateVisitDuringInaugurationView(){
+    
+}
 
 }

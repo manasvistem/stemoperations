@@ -1,5 +1,5 @@
 <div class="container">
-        <form actio>
+        <form action="updateCallM&EBaseline" method="POST" name="baselineMnE">
             <div class="mb-3">
                 <label class="form-label">Action Completed?</label><br>
                 <input type="radio" name="action_completed" value="yes"> Yes
@@ -82,3 +82,41 @@
             <button type="submit" class="btn btn-primary w-100">Submit</button>
         </form>
     </div>
+    <script>
+$(document).ready(function () {
+    // Initially hide all conditional fields
+    let allFollowingFields = $("input[name='ttp_duration'], input[name='concerns_msc'], #resolve_question, select, input[name='training_quality'], textarea[name='final_remark']").closest('.mb-3');
+    let purposeSection = $("input[name='purpose_completed']").closest('.mb-3');
+
+    purposeSection.hide();
+    allFollowingFields.hide();
+
+    // Show/hide Purpose based on Action Completed
+    $("input[name='action_completed']").change(function () {
+        if ($(this).val() === "yes") {
+            purposeSection.show();
+        } else {
+            purposeSection.hide();
+            allFollowingFields.hide();
+        }
+    });
+
+    // Show other fields based on Purpose Completed
+    $("input[name='purpose_completed']").change(function () {
+        if ($(this).val() === "yes") {
+            allFollowingFields.show();
+        } else {
+            allFollowingFields.hide();
+        }
+    });
+
+    // If concerns_msc is Yes, show "Resolved?" section
+    $("input[name='concerns_msc']").change(function () {
+        if ($(this).val() === "yes") {
+            $("#resolve_question").show();
+        } else {
+            $("#resolve_question").hide();
+        }
+    });
+});
+</script>
