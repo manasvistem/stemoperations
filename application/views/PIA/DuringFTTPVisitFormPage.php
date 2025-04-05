@@ -69,7 +69,6 @@
                     <label class="form-label"><strong>Teachers Attendance Sheet (Add photo)</strong></label>
                     <input type="file" class="form-control" name="attendance_sheet" accept="image/*">
                 </div>
-
                 <div class="mb-3">
                     <label class="form-label"><strong>FTTP Completion Letter</strong></label>
                     <input type="file" class="form-control" name="completion_letter" accept=".pdf">
@@ -79,17 +78,15 @@
                     <label class="form-label"><strong>Completed My Task (Take Selfie with School)</strong></label>
                     <input type="file" class="form-control" name="completed_selfie" accept="image/*">
                 </div>
-
                 <div class="mb-3">
                     <label class="form-label"><strong>Add More Media</strong></label>
                     <input type="file" class="form-control" name="additional_media[]" accept="image/*" multiple>
                 </div>
             </div>
         </div>
-        
         <!-- Submit Button -->
         <div class="modal-footer text-center">
-            <input type="submit" class="btn btn-primary w-100" value="Submit">
+            <center><input type="submit" class="btn btn-primary w-100" value="Submit"></center>
         </div>
     </form>
 </div>

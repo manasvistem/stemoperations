@@ -5,6 +5,8 @@
 
     <div class="container">
         <form class="needs-validation" novalidate action="<?php echo base_url()?>Menu/updateFTTPReviewCallZM" method="POST" >
+        <input type="hidden" name="taskId" value="<?php echo $taskId; ?>"/>
+
             <div class="mb-3">
                 <label class="form-label">Action Completed?</label><br>
                 <input type="radio" name="action_completed" value="yes" id="action_yes"> Yes
@@ -90,10 +92,6 @@
         </form>
     </div>
 
-    <!-- External Footer -->
-    <footer class="bg-dark text-white text-center py-3 mt-4">
-        <p>&copy; 2025 TTP Training Program</p>
-    </footer>
 
     <script>
         $(document).ready(function() {
@@ -123,5 +121,4 @@
             });
         });
     </script>
-</body>
-</html>
+

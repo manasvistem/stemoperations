@@ -6158,17 +6158,23 @@ public function getTaskDetails($taskId,$taskactionId){
  public function insertTasksWithAttachements($data){
     $data['status']       = 1;
     $data['created_date'] = date('Y-m-d');
-    $data['task_id'] = '1111';
-    $insertQuery          = "INSERT INTO tblcallevents_attachments (task_id,attachment_link,remark,user_id,created_at)
-                            VALUES(".$data['task_id'].",'".$data['attachment_link']."','".$data['remark']."',".$data['user_id'].",
-                            '".$data['created_at']."') ";
-      
-    return $this->db->last_insert_id;
+    $insertQuery          = "INSERT INTO tblcallevents_attachments (task_id,main_task_id,attachment_link,remark,user_id,created_at)
+                             VALUES(".$data['task_id'].",".$data['main_task_id'].",'".$data['attachment_link']."','".$data['remark']."',".$data['user_id'].",
+                             '".$data['created_at']."') ";
+    $result               = $this->db->query($insertQuery);
+    return $this->db->insert_id();
  }
 
  public function batch_insert_task_execution($data){
     $this->db->insert_batch('task_execution_details', $data);
 }
+
+public function insert_task_execution($data){
+    
+    $this->db->insert('task_execution_details', $data);
+    echo $this->db->last_query();exit;
+}
+
 //  public function task_execution_details($data){
 //      $insertQuery =   $this->db->query("INSERT INTO task_execution_details(main_task_id,task_response,tbe_attachment_id,remark,tbe_id,performed_by,updated_at,status) 
 //                  VALUES(".$data['task_id'].",".$data['user_role'].",".$data['user_id'].",".$data['question_id'].",
@@ -6604,8 +6610,23 @@ public function getUserDayStartDetails($uid,$tdate){
 }
 public function get_indian_languages(){
     $query =  $this->db->query("SELECT language_name FROM indian_languages");
-  // dd($query->row_array());
     return $query->row_array();
-
 }
+
+public function update_tbe_attachmentid($main_task_id,$task_id){
+    $query = $this->db->query("UPDATE task_execution_details SET tbe_attachement_id = '(SELECT id FROM tblcallevents_attachments WHERE main_task_id ='".$main_task_id."' AND task_id = '".$task_id."' LIMIT 1)' LIMIT 1");
+    return TRUE;
+}
+
+// public function getReportData($taskType){
+//     $query = $this->db->query("SELECT tblcallevents_attachment.* 
+//                                 FROM tblcallevents_attachment 
+//                                 LEFT JOIN tblcallevents ON tblcallevents.task_action 
+//                                 LEFT JOIN main_task ON main_task.id = tblcallevents_attachment.main_taskid
+//                                 WHERE task_action= '".$taskType."' ");
+//         return $query->result_array();
+//            // echo $this->db->last_query(); 
+//            // exit;
+// }
+
 }
