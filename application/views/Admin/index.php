@@ -1,361 +1,667 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>STEM Oppration | WebAPP</title>
-
-  <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/all.min.css">
-  <!-- Ionicons -->
-  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-  <!-- Tempusdominus Bootstrap 4 -->
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/tempusdominus-bootstrap-4.min.css">
-  <!-- iCheck -->
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/icheck-bootstrap.min.css">
-  <!-- JQVMap -->
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/jqvmap.min.css">
-  <!-- Theme style -->
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/adminlte.min.css">
-  <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/OverlayScrollbars.min.css">
-  <!-- Daterange picker -->
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/daterangepicker.css">
-  <!-- summernote -->
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/summernote-bs4.min.css">
-   <!-- DataTables -->
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/dataTables.bootstrap4.min.css">
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/responsive.bootstrap4.min.css">
-  <link rel="stylesheet" href="<?=base_url();?>assets/css/buttons.bootstrap4.min.css">
-  <style>
-      .scrollme {
-    overflow-x: auto;
-}
-  </style>
-  
-</head>
-<body class="hold-transition sidebar-mini layout-fixed">
-<div class="wrapper">
-
-  <!-- Preloader -->
-  
-
-  <!-- Navbar -->
-  <?php require('nav.php');?>
-  <!-- /.navbar -->
-
-  
-
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0">Dashboard</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-                  <h4>HI! <?=$user['fullname']?> ( <?php $id = $user['dep_id']; $did=$this->Menu_model->get_dep_byid($id); echo $did[0]->dep_name;?> )</h4> 
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <!-- Small boxes (Stat box) -->
-        <div class="row">
-          <div class="col-12">
-            <!-- Default box -->
-            
-            
-    <div class="row card-group-row">
-        <div class="col-lg-12 col-sm m-5">
-            <form method="post" style="float:left;"><input type="date" min="" name="from" value=""> <input type="date" name="to" min="" value="" > <input type="submit" value="Filter" class=" btn-primary" ></form>
+<?php $this->load->view('nav'); ?>
+<style>
+  .card {
+    padding:10px;
+  }
+</style>
+<!-- Content wrapper -->
+<div class="content-wrapper">
+  <!-- Content -->
+  <div class="container-xxl flex-grow-1 container-p-y">
+    <div class="card">
+      <h5 class="card-header text-center">
+        <?php if ($this->session->flashdata('success_message')): ?>
+        <div class="alert alert-success alert-dismissible" role="alert">
+          <?= $this->session->flashdata('success_message'); ?>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
-        
-        <!-- Col Close -->
-        
-        
-        <!-- Col Close -->
-        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-3 card-group-row__col">
-            <div class="card card-group-row__card card-shadow">
-                <div class="p-2 d-flex flex-row align-items-center">
-                    <div class="p-2">
-                        <span class="border rounded-circle p-2 " style="font-size: 25px;"> 
-                            <i class="fa-solid fa-book fa-fw"></i>
-                        </span>
-                    </div>
-                    <a href="conversion_details" target="_blank" class="text-dark">
-                        <strong>New School To FTTP Done
-                        <span class="badge badge-success p-1">40</span>
-                        </strong>
-                    </a>
-                </div>
-            </div>
-        </div><!-- Col Close -->
-        
-        <!-- Col Close -->
-        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-3 card-group-row__col">
-            <div class="card card-group-row__card card-shadow">
-                <div class="p-2 d-flex flex-row align-items-center">
-                    <div class="p-2">
-                        <span class="border rounded-circle p-2 " style="font-size: 25px;"> 
-                            <i class="fa-solid fa-book fa-fw"></i>
-                        </span>
-                    </div>
-                    <a href="conversion_details" target="_blank" class="text-dark">
-                        <strong>FTTP Done To Active School
-                        <span class="badge badge-success p-1">10</span>
-                        </strong>
-                    </a>
-                </div>
-            </div>
-        </div><!-- Col Close -->
-        
-        <!-- Col Close -->
-        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-3 card-group-row__col">
-            <div class="card card-group-row__card card-shadow">
-                <div class="p-2 d-flex flex-row align-items-center">
-                    <div class="p-2">
-                        <span class="border rounded-circle p-2 " style="font-size: 25px;"> 
-                            <i class="fa-solid fa-book fa-fw"></i>
-                        </span>
-                    </div>
-                    <a href="conversion_details" target="_blank" class="text-dark">
-                        <strong>Active School To Average School
-                        <span class="badge badge-success p-1">20</span>
-                        </strong>
-                    </a>
-                </div>
-            </div>
-        </div><!-- Col Close -->
-        
-         <!-- Col Close -->
-        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-3 card-group-row__col">
-            <div class="card card-group-row__card card-shadow">
-                <div class="p-2 d-flex flex-row align-items-center">
-                    <div class="p-2">
-                        <span class="border rounded-circle p-2 " style="font-size: 25px;"> 
-                            <i class="fa-solid fa-book fa-fw"></i>
-                        </span>
-                    </div>
-                    <a href="conversion_details" target="_blank" class="text-dark">
-                        <strong>Average School To Good School
-                        <span class="badge badge-success p-1">30</span>
-                        </strong>
-                    </a>
-                </div>
-            </div>
-        </div><!-- Col Close -->
-        
-         <!-- Col Close -->
-        <div class="col-lg-3 col-md-3 col-xs-12 col-sm-3 card-group-row__col">
-            <div class="card card-group-row__card card-shadow">
-                <div class="p-2 d-flex flex-row align-items-center">
-                    <div class="p-2">
-                        <span class="border rounded-circle p-2 " style="font-size: 25px;"> 
-                            <i class="fa-solid fa-book fa-fw"></i>
-                        </span>
-                    </div>
-                    <a href="conversion_details" target="_blank" class="text-dark">
-                        <strong>Good School To Model School
-                        <span class="badge badge-success p-1">1</span>
-                        </strong>
-                    </a>
-                </div>
-            </div>
-        </div><!-- Col Close -->
-        
-    </div>
-</div>
+        <?php endif; ?>
+        <?php if ($this->session->flashdata('error_message')): ?>
+        <div class="alert alert-danger alert-dismissible" role="alert">
+          <?= $this->session->flashdata('error_message'); ?>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php endif; ?>
+      </h5>
+      <div class="row">
+        <div class="col-md-9">
+          <!-- <h6 class="text-muted p-3">Filled Pills</h6> -->
+          <div class="nav-align-top mb-6">
+            <ul class="nav nav-pills mb-4 nav-fill" role="tablist">
+              <?php  
+                $getTodaysTaskCounts = $this->Menu_model->GetTodaysAllTaskCountByUid($uid, date("Y-m-d"), $user['dep_id']);
+                $firstTab = true; // Track first tab
+                
+                foreach ($getTodaysTaskCounts as $getTodaysTaskCount):
+                    $formatted_string = preg_replace("/[ \/'-]+/", "_", $getTodaysTaskCount->tasktype);
+                ?>
+              <li class="nav-item mb-1 mb-sm-0" role="presentation">
+                <button type="button" 
+                  class="nav-link <?= $firstTab ? 'active' : '' ?>" 
+                  role="tab" 
+                  data-bs-toggle="tab" 
+                  data-bs-target="#<?= $formatted_string ?>" 
+                  aria-controls="<?= $formatted_string ?>" 
+                  aria-selected="<?= $firstTab ? 'true' : 'false' ?>" 
+                  tabindex="-1">
+                <span class="d-none d-sm-block">
+                <i class="tf-icons bx bx-home bx-sm me-1.5 align-text-bottom"></i> 
+                <?= $getTodaysTaskCount->tasktype ?>
+                <span class="badge rounded-pill badge-center h-px-20 w-px-20 bg-danger ms-1.5 pt-50">
+                <?= $getTodaysTaskCount->task_count ?>
+                </span>
+                </span>
+                <i class="bx bx-home bx-sm d-sm-none"></i>
+                </button>
+              </li>
+              <?php 
+                $firstTab = false; // Set to false after first iteration
+                endforeach; 
+                ?>
+              <!-- <li class="nav-item" role="presentation">
+                <button type="button" class="nav-link" role="tab" 
+                  data-bs-toggle="tab" 
+                  data-bs-target="#navs-pills-justified-messages" 
+                  aria-controls="navs-pills-justified-messages" 
+                  aria-selected="false" 
+                  tabindex="-1">
+                <span class="d-none d-sm-block">
+                <i class="tf-icons bx bx-message-square bx-sm me-1.5 align-text-bottom"></i> Messages
+                </span>
+                <i class="bx bx-message-square bx-sm d-sm-none"></i>
+                </button>
+              </li> -->
+            </ul>
+            <div class="tab-content">
+              <?php 
+                $getTodaysTasks = $this->Menu_model->GetTodaysAllTaskByUid($uid, date('Y-m-d'));
+                // echo $this->db->last_query();
+                $firstPane = true; // Track first tab content
+                
+                foreach ($getTodaysTaskCounts as $getTodaysTaskCount):
+                    $slct_type_of_task = $getTodaysTaskCount->tasktype;
+                    $formatted_string = preg_replace("/[ \/'-]+/", "_", $getTodaysTaskCount->tasktype);
+                ?>
+              <div class="tab-pane fade <?= $firstPane ? 'show active' : '' ?>" 
+                id="<?= $formatted_string ?>" 
+                role="tabpanel">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <small class="text-light fw-medium"><?=$slct_type_of_task?> Task List</small>
+                    <div class="mt-4">
+                      <div class="list-group">
+                        <?php 
+                          $i=1;
+                          foreach($getTodaysTasks as $sctasklist){
+                            $task_id              = $sctasklist->task_id;
+                            $type_of_task         = $sctasklist->tasktype;
+                            $appointment_datetime = $sctasklist->appointment_datetime;
+                            $sname                = $sctasklist->sname;
+                            $tasktype             = $sctasklist->tasktype;
+                            $taskname             = $sctasklist->taskname;
+                            $comments             = $sctasklist->comments;
+                            $bd_idetype           = $sctasklist->bd_idetype;
+                            $target_date          = $sctasklist->target_date;
+                            $expected_date        = $sctasklist->expected_date;
+                            $fwd_date             = $sctasklist->fwd_date;
 
-</div>
-<div class="row">
-         
-          <div class="col-lg-8 col-sm">
-            <div class="card card-primary card-outline card-outline-tabs">
-                <h4 class="p-3">Today's Task</h4>
-              <div class="card-header p-0 border-bottom-0">
-                <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
-                  <li class="nav-item">
-                    <a class="nav-link active" id="custom-tabs-four-home-tab" data-toggle="pill" href="#custom-tabs-four-home" role="tab" aria-controls="custom-tabs-four-home" aria-selected="true">
-                        All <span class="badge badge-success">11</span>
-                    </a>
-                    
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" id="custom-tabs-four-profile-tab" data-toggle="pill" href="#custom-tabs-four-profile" role="tab" aria-controls="custom-tabs-four-profile" aria-selected="false">
-                        Visit <span class="badge badge-success">2</span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" id="custom-tabs-four-messages-tab" data-toggle="pill" href="#custom-tabs-four-messages" role="tab" aria-controls="custom-tabs-four-messages" aria-selected="false">
-                        Calls <span class="badge badge-success">5</span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" id="custom-tabs-four-settings-tab" data-toggle="pill" href="#custom-tabs-four-settings" role="tab" aria-controls="custom-tabs-four-settings" aria-selected="false">
-                        Email <span class="badge badge-success">2</span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" id="custom-tabs-four-other" data-toggle="pill" href="#custom-tabs-four-other" role="tab" aria-controls="custom-tabs-other" aria-selected="false">
-                        Whatsapp<span class="badge badge-success">1</span>
-                    </a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" id="custom-tabs-four-whatsapp-tab" data-toggle="pill" href="#custom-tabs-four-whatsapp" role="tab" aria-controls="custom-tabs-four-whatsapp" aria-selected="false">
-                        Other <span class="badge badge-success">1</span>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div class="card-body">
-                <div class="tab-content" id="custom-tabs-four-tabContent">
-                  <div class="tab-pane fade show active" id="custom-tabs-four-home" role="tabpanel" aria-labelledby="custom-tabs-four-home-tab">ABCD</div>
-                  <div class="tab-pane fade" id="custom-tabs-four-profile" role="tabpanel" aria-labelledby="custom-tabs-four-profile-tab">EFG</div>
-                  <div class="tab-pane fade" id="custom-tabs-four-messages" role="tabpanel" aria-labelledby="custom-tabs-four-messages-tab">HIJ</div>
-                  <div class="tab-pane fade" id="custom-tabs-four-settings" role="tabpanel" aria-labelledby="custom-tabs-four-settings-tab">
-                      KLM
-                  </div>
-                  <div class="tab-pane fade" id="custom-tabs-other" role="tabpanel" aria-labelledby="custom-tabs-four-other">
-                      QRS
-                  </div>
-                  <div class="tab-pane fade" id="custom-tabs-four-whatsapp" role="tabpanel" aria-labelledby="custom-tabs-four-whatsapp-tab">
-                     
+                          if($slct_type_of_task == $type_of_task){ ?>
+                        <a data-task_id="<?=$task_id;?>" href="javascript:void(0);" class="list-group-item list-group-item-action flex-column align-items-start active mb-1 taskperformaction" >
+                          <div class="d-flex justify-content-between w-100">
+                            <h5 class="mb-1"><?=$sname.' - '.$taskname ?></h5>
+                            <!-- <small> <span id="countdown1"></span> - <span id="status1"></span> </small> -->
+                          </div>
+                          <p class="mb-1">
+                            <?=$taskname ?> - <?=$comments ?>
+                          </p>
+                          <small> <span id="countdown<?=$task_id;?>"></span> - <span id="status<?=$task_id;?>"></span> </small>
+                        </a>
+                        <script> checkCountDownTime("<?=$appointment_datetime;?>",<?=$task_id;?>);</script>
+                        <?php $i++; }   } ?>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <!-- /.card -->
-            </div>
-            </div>
-            <div class="col-lg-4 col-sm">
-            <div class="card card-primary card-outline card-outline-tabs">
-                <h5 class="p-3">Other Activity</h5><hr>
-              <div class="card-header p-0 border-bottom-0"> </div>
-              <div class="card-body">
-                <div class="tab-content" id="custom-tabs-four-tabContent">
-                    <div class="table-responsive">
-                            <div class="table-responsive">     
-                                <table id="example1" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                                    <thead>
-                                        <tr><th>Sr Number</th> </tr>
-                                    </thead>
-                                    <tbody>
-                  <?php 
-                    $dot=$this->Menu_model->get_otask();
-                    foreach($dot as $d){ 
-                    $id = $d->from_user;
-                    $user=$this->Menu_model->get_user_byid($id);
-                    ?>
-                    <tr><td><div><i class="fa fa-thumb-tack" aria-hidden="true"></i> <b>   <?=$d->remark?></b></div><div class="text-right">Task assign by <?=$user[0]->fullname;?></div>
-                    <div><?=$d->tdate?></div>
-                    </td></tr>
-                  <?php } ?>
-                  </tbody>
-                                </table>
-                            </div>
-                        </div>
-                </div>
-              </div>
-              <!-- /.card -->
+              <?php 
+                $firstPane = false; // Set to false after first iteration
+                endforeach; 
+                ?>
+              <!-- <div class="tab-pane fade" id="navs-pills-justified-messages" role="tabpanel">
+                <p>
+                  Oat cake chupa chups dragée donut toffee. Sweet cotton candy jelly beans macaroon gummies
+                  cupcake gummi bears cake chocolate.
+                </p>
+                <p class="mb-0">
+                  Cake chocolate bar cotton candy apple pie tootsie roll ice cream apple pie brownie cake. Sweet
+                  roll icing sesame snaps caramels danish toffee. Brownie biscuit dessert dessert. Pudding jelly
+                  jelly-o tart brownie jelly.
+                </p>
+              </div> -->
             </div>
           </div>
         </div>
-</div>
-            
-            
-            
-            
-          </div>
-        <!-- /.row (main row) -->
-      </div><!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
+        <div class="col-md-3">
+                <div class="card">
+                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ut, illum.
+                </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2021-2022 <a href="<?=base_url();?>">Stemlearning</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 1.0
-    </div>
-  </footer>
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
+
+
+
+
+
+
+  <div class="container-xxl flex-grow-1 container-p-y">
+              <div class="row">
+                <div class="col-xxl-8 mb-6 order-0">
+                  <div class="card">
+                    <div class="d-flex align-items-start row">
+                      <div class="col-sm-7">
+                        <div class="card-body">
+                          <h5 class="card-title text-primary mb-3">Congratulations John! 🎉</h5>
+                          <p class="mb-6">
+                            You have done 72% more sales today.<br />Check your new badge in your profile.
+                          </p>
+
+                          <a href="javascript:;" class="btn btn-sm btn-outline-primary">View Badges</a>
+                        </div>
+                      </div>
+                      <div class="col-sm-5 text-center text-sm-left">
+                        <div class="card-body pb-0 px-0 px-md-6">
+                          <img
+                            src="<?=base_url().'assets/img/man-with-laptop.png'?>"
+                            height="175"
+                            class="scaleX-n1-rtl"
+                            alt="View Badge User" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-4 col-md-4 order-1">
+                  <div class="row">
+                    <div class="col-lg-6 col-md-12 col-6 mb-6">
+                      <div class="card h-100">
+                        <div class="card-body">
+                          <div class="card-title d-flex align-items-start justify-content-between mb-4">
+                            <div class="avatar flex-shrink-0">
+                              <img
+                                src="<?=base_url().'assets/img/chart-success.png'?>"
+                                alt="chart success"
+                                class="rounded" />
+                            </div>
+                            <div class="dropdown">
+                              <button
+                                class="btn p-0"
+                                type="button"
+                                id="cardOpt3"
+                                data-bs-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="bx bx-dots-vertical-rounded text-muted"></i>
+                              </button>
+                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt3">
+                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                              </div>
+                            </div>
+                          </div>
+                          <p class="mb-1">Profit</p>
+                          <h4 class="card-title mb-3">$12,628</h4>
+                          <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +72.80%</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-6 mb-6">
+                      <div class="card h-100">
+                        <div class="card-body">
+                          <div class="card-title d-flex align-items-start justify-content-between mb-4">
+                            <div class="avatar flex-shrink-0">
+                           
+                              <img
+                                src="<?=base_url().'assets/img/wallet-info.png'?>"
+                                alt="wallet info"
+                                class="rounded" />
+                            </div>
+                            <div class="dropdown">
+                              <button
+                                class="btn p-0"
+                                type="button"
+                                id="cardOpt6"
+                                data-bs-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="bx bx-dots-vertical-rounded text-muted"></i>
+                              </button>
+                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt6">
+                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                              </div>
+                            </div>
+                          </div>
+                          <p class="mb-1">Sales</p>
+                          <h4 class="card-title mb-3">$4,679</h4>
+                          <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Total Revenue -->
+                <div class="col-12 col-xxl-8 order-2 order-md-3 order-xxl-2 mb-6">
+                  <div class="card">
+                    <div class="row row-bordered g-0">
+                      <div class="col-lg-8">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                          <div class="card-title mb-0">
+                            <h5 class="m-0 me-2">Total Revenue</h5>
+                          </div>
+                          <div class="dropdown">
+                            <button
+                              class="btn p-0"
+                              type="button"
+                              id="totalRevenue"
+                              data-bs-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false">
+                              <i class="bx bx-dots-vertical-rounded bx-lg text-muted"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="totalRevenue">
+                              <a class="dropdown-item" href="javascript:void(0);">Select All</a>
+                              <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
+                              <a class="dropdown-item" href="javascript:void(0);">Share</a>
+                            </div>
+                          </div>
+                        </div>
+                        <div id="totalRevenueChart" class="px-3"></div>
+                      </div>
+                      <div class="col-lg-4 d-flex align-items-center">
+                        <div class="card-body px-xl-9">
+                          <div class="text-center mb-6">
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-outline-primary">
+                                <script>
+                                  document.write(new Date().getFullYear() - 1);
+                                </script>
+                              </button>
+                              <button
+                                type="button"
+                                class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                <span class="visually-hidden">Toggle Dropdown</span>
+                              </button>
+                              <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="javascript:void(0);">2021</a></li>
+                                <li><a class="dropdown-item" href="javascript:void(0);">2020</a></li>
+                                <li><a class="dropdown-item" href="javascript:void(0);">2019</a></li>
+                              </ul>
+                            </div>
+                          </div>
+
+                          <div id="growthChart"></div>
+                          <div class="text-center fw-medium my-6">62% Company Growth</div>
+
+                          <div class="d-flex gap-3 justify-content-between">
+                            <div class="d-flex">
+                              <div class="avatar me-2">
+                                <span class="avatar-initial rounded-2 bg-label-primary"
+                                  ><i class="bx bx-dollar bx-lg text-primary"></i
+                                ></span>
+                              </div>
+                              <div class="d-flex flex-column">
+                                <small>
+                                  <script>
+                                    document.write(new Date().getFullYear() - 1);
+                                  </script>
+                                </small>
+                                <h6 class="mb-0">$32.5k</h6>
+                              </div>
+                            </div>
+                            <div class="d-flex">
+                              <div class="avatar me-2">
+                                <span class="avatar-initial rounded-2 bg-label-info"
+                                  ><i class="bx bx-wallet bx-lg text-info"></i
+                                ></span>
+                              </div>
+                              <div class="d-flex flex-column">
+                                <small>
+                                  <script>
+                                    document.write(new Date().getFullYear() - 2);
+                                  </script>
+                                </small>
+                                <h6 class="mb-0">$41.2k</h6>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--/ Total Revenue -->
+                <div class="col-12 col-md-8 col-lg-12 col-xxl-4 order-3 order-md-2">
+                  <div class="row">
+                    <div class="col-6 mb-6">
+                      <div class="card h-100">
+                        <div class="card-body">
+                          <div class="card-title d-flex align-items-start justify-content-between mb-4">
+                            <div class="avatar flex-shrink-0">
+                              <img src="<?=base_url().'assets/img/paypal.png'?>" alt="paypal" class="rounded" />
+                            </div>
+                            <div class="dropdown">
+                              <button
+                                class="btn p-0"
+                                type="button"
+                                id="cardOpt4"
+                                data-bs-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="bx bx-dots-vertical-rounded text-muted"></i>
+                              </button>
+                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="cardOpt4">
+                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                              </div>
+                            </div>
+                          </div>
+                          <p class="mb-1">Payments</p>
+                          <h4 class="card-title mb-3">$2,456</h4>
+                          <small class="text-danger fw-medium"><i class="bx bx-down-arrow-alt"></i> -14.82%</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-6 mb-6">
+                      <div class="card h-100">
+                        <div class="card-body">
+                          <div class="card-title d-flex align-items-start justify-content-between mb-4">
+                            <div class="avatar flex-shrink-0">
+                              <img src="<?=base_url().'assets/img/cc-primary.png'?>" alt="Credit Card" class="rounded" />
+                            </div>
+                            <div class="dropdown">
+                              <button
+                                class="btn p-0"
+                                type="button"
+                                id="cardOpt1"
+                                data-bs-toggle="dropdown"
+                                aria-haspopup="true"
+                                aria-expanded="false">
+                                <i class="bx bx-dots-vertical-rounded text-muted"></i>
+                              </button>
+                              <div class="dropdown-menu" aria-labelledby="cardOpt1">
+                                <a class="dropdown-item" href="javascript:void(0);">View More</a>
+                                <a class="dropdown-item" href="javascript:void(0);">Delete</a>
+                              </div>
+                            </div>
+                          </div>
+                          <p class="mb-1">Transactions</p>
+                          <h4 class="card-title mb-3">$14,857</h4>
+                          <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +28.14%</small>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 mb-6">
+                      <div class="card">
+                        <div class="card-body">
+                          <div class="d-flex justify-content-between align-items-center flex-sm-row flex-column gap-10">
+                            <div class="d-flex flex-sm-column flex-row align-items-start justify-content-between">
+                              <div class="card-title mb-6">
+                                <h5 class="text-nowrap mb-1">Profile Report</h5>
+                                <span class="badge bg-label-warning">YEAR 2022</span>
+                              </div>
+                              <div class="mt-sm-auto">
+                                <span class="text-success text-nowrap fw-medium"
+                                  ><i class="bx bx-up-arrow-alt"></i> 68.2%</span
+                                >
+                                <h4 class="mb-0">$84,686k</h4>
+                              </div>
+                            </div>
+                            <div id="profileReportChart"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <!-- Order Statistics -->
+                <div class="col-md-6 col-lg-4 col-xl-4 order-0 mb-6">
+                  <div class="card h-100">
+                    <div class="card-header d-flex justify-content-between">
+                      <div class="card-title mb-0">
+
+                      <?php $spdCountDataByRoles = $this->Menu_model->GetSPDCountByRolesID($id);
+                        // [name] => Total Schools
+                        // [status_id] => total
+                        // [total_count] => 2604
+
+                        $total_counts = [];
+
+                        foreach ($spdCountDataByRoles as $item) {
+                            $total_counts[] = $item->total_count;
+                        }
+                        $total_count_wth_status  =  implode(',', $total_counts);
+
+                      ?>
+
+                        <h5 class="mb-1 me-2">School Details</h5>
+                      </div>
+                      <div class="dropdown">
+                        <button
+                          class="btn text-muted p-0"
+                          type="button"
+                          id="orederStatistics"
+                          data-bs-toggle="dropdown"
+                          aria-haspopup="true"
+                          aria-expanded="false">
+                          <i class="bx bx-dots-vertical-rounded bx-lg"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-end" aria-labelledby="orederStatistics">
+                          <a class="dropdown-item" href="javascript:void(0);">Select All</a>
+                          <a class="dropdown-item" href="javascript:void(0);">Refresh</a>
+                          <a class="dropdown-item" href="javascript:void(0);">Share</a>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between align-items-center mb-6">
+                        <div class="d-flex flex-column align-items-center gap-1">
+                          <h3 class="mb-1"><?=$spdCountDataByRoles[0]->total_count?></h3>
+                          <small><?=$spdCountDataByRoles[0]->name?></small>
+                        </div>
+                        <div id="orderStatisticsChart11">
+                        <canvas id="schoolChart"></canvas>
+                        </div>
+                      </div>
+                      <ul class="p-0 m-0">
+                       
+
+                        <?php foreach($spdCountDataByRoles as $spdCountDataByRole){ ?>
+                        <li class="d-flex align-items-center mb-5">
+                          <div class="avatar flex-shrink-0 me-3">
+                            <span class="avatar-initial rounded bg-label-success"><i class="bx bx-closet"></i></span>
+                          </div>
+                          <div class="d-flex w-100 flex-wrap align-items-center justify-content-between gap-2">
+                            <div class="me-2">
+                              <h6 class="mb-0" style="color: #315808 !important;"><?=$spdCountDataByRole->name?></h6>
+                              <!-- <small>T-shirt, Jeans, Shoes</small> -->
+                            </div>
+                            <div class="user-progress">
+                            <a href="<?=base_url().'Menu/SPD_Details_Data/'.$spdCountDataByRole->status_id;?>"> 
+                              <h6 class="mb-0" style="color: #f700a6 !important;">
+                              <?=$spdCountDataByRole->total_count?>
+                              </h6>
+                              </a>
+                            </div>
+                          </div>
+                        </li>
+                        <?php } ?>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <!--/ Order Statistics -->
+
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </div>
-<!-- ./wrapper -->
+<div class="col-lg-4 col-md-6">
+  <!-- <small class="text-light fw-medium">Vertically centered</small> -->
+  <div class="mt-4">
+    <!-- Button trigger modal -->
+    <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalCenter">
+    Launch modal
+    </button> -->
+    <!-- Modal -->
+    <div class="modal fade" id="modalCenter" tabindex="-1" style="display: none;" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalCenterTitle">Modal title</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <hr>
+          <div class="modal-body">
 
-<!-- jQuery -->
-<script src="<?=base_url();?>assets/js/jquery.min.js"></script>
-<!-- jQuery UI 1.11.4 -->
-<script src="<?=base_url();?>assets/js/jquery-ui.min.js"></script>
-<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-<script>
-  $.widget.bridge('uibutton', $.ui.button)
-</script>
-<!-- Bootstrap 4 -->
-<script src="<?=base_url();?>assets/js/bootstrap.bundle.min.js"></script>
-<!-- ChartJS -->
-<script src="<?=base_url();?>assets/js/Chart.min.js"></script>
-<!-- Sparkline -->
-<script src="<?=base_url();?>assets/js/sparkline.js"></script>
-<!-- JQVMap -->
-<script src="<?=base_url();?>assets/js/jquery.vmap.min.js"></script>
-<script src="<?=base_url();?>assets/js/jquery.vmap.usa.js"></script>
-<!-- jQuery Knob Chart -->
-<script src="plugins/jquery-knob/jquery.knob.min.js"></script>
-<!-- daterangepicker -->
-<script src="<?=base_url();?>assets/js/moment.min.js"></script>
-<script src="<?=base_url();?>assets/js/daterangepicker.js"></script>
-<!-- Tempusdominus Bootstrap 4 -->
-<script src="<?=base_url();?>assets/js/tempusdominus-bootstrap-4.min.js"></script>
-<!-- Summernote -->
-<script src="<?=base_url();?>assets/js/summernote-bs4.min.js"></script>
-<!-- overlayScrollbars -->
-<script src="<?=base_url();?>assets/js/jquery.overlayScrollbars.min.js"></script>
-<!-- AdminLTE App -->
-<script src="<?=base_url();?>assets/js/adminlte.js"></script>
+            <div class="row">
+              <div class="col mb-6">
+                <label for="nameWithTitle" class="form-label">Name</label>
+                <input type="text" id="nameWithTitle" class="form-control" placeholder="Enter Name">
+              </div>
+            </div>
+            <div class="row g-6">
+              <div class="col mb-0">
+                <label for="emailWithTitle" class="form-label">Email</label>
+                <input type="email" id="emailWithTitle" class="form-control" placeholder="xxxx@xxx.xx">
+              </div>
+              <div class="col mb-0">
+                <label for="dobWithTitle" class="form-label">DOB</label>
+                <input type="date" id="dobWithTitle" class="form-control">
+              </div>
+            </div>
+            <hr>
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+            Close
+            </button>
+            <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?=base_url();?>assets/js/dashboard.js"></script>
 
-<!-- DataTables  & Plugins -->
-<script src="<?=base_url();?>assets/js/jquery.dataTables.min.js"></script>
-<script src="<?=base_url();?>assets/js/dataTables.bootstrap4.min.js"></script>
-<script src="<?=base_url();?>assets/js/dataTables.responsive.min.js"></script>
-<script src="<?=base_url();?>assets/js/responsive.bootstrap4.min.js"></script>
-<script src="<?=base_url();?>assets/js/dataTables.buttons.min.js"></script>
-<script src="<?=base_url();?>assets/js/buttons.bootstrap4.min.js"></script>
-<script src="<?=base_url();?>assets/js/jszip.min.js"></script>
-<script src="<?=base_url();?>assets/js/pdfmake.min.js"></script>
-<script src="<?=base_url();?>assets/js/vfs_fonts.js"></script>
-<script src="<?=base_url();?>assets/js/buttons.html5.min.js"></script>
-<script src="<?=base_url();?>assets/js/buttons.print.min.js"></script>
-<script src="<?=base_url();?>assets/js/buttons.colVis.min.js"></script>
-<!-- AdminLTE App -->
-<script src="<?=base_url();?>assets/js/adminlte.js"></script>
-
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="<?=base_url();?>assets/js/dashboard.js"></script>
 
 <script>
-    $("#example1").DataTable({
-      "responsive": false, "lengthChange": false, "autoWidth": false,
-      "buttons": ["excel", "pdf"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        const ctx = document.getElementById('schoolChart').getContext('2d');
+        
+        const data = {
+            labels: [
+                "Total Schools", "Pending Schools", "New School", "TTP Done", "Utilization Initiated", 
+                "Average School", "Good School", "Model School", "Inactive", "Client Readiness"
+            ],
+            datasets: [{
+                label: 'School Status Distribution',
+                data: [<?=$total_count_wth_status?>],
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(255, 206, 86, 0.6)',
+                    'rgba(75, 192, 192, 0.6)',
+                    'rgba(153, 102, 255, 0.6)',
+                    'rgba(255, 159, 64, 0.6)',
+                    'rgba(201, 203, 207, 0.6)',
+                    'rgba(0, 128, 128, 0.6)',
+                    'rgba(128, 0, 128, 0.6)',
+                    'rgba(0, 255, 255, 0.6)'
+                ],
+                borderWidth: 1
+            }]
+        };
+        
+        new Chart(ctx, {
+            type: 'doughnut',
+            data: data,
+            options: {
+                responsive: true
+            }
+        });
+    </script>
+
+
+
+
+
+
+
+<script>
+  $(document).ready(function() {
+    // When an element with class 'taskperformaction' is clicked
+    $('.taskperformaction').on('click', function() {
+        var taskId = $(this).data('task_id'); // Retrieve the 'task_id' data
+        $('#modalCenter').modal('show');
+        $('#modalCenterTitle').text("Task ID IS = "+taskId);
+        // console.log(taskId); // Log the task ID or use it as needed
+        // alert(taskId);
+    });
+
+
+
+});
+function handleReminderCreation() {
+ 
+        $.ajax({
+            url: '<?=base_url();?>Menu/CheckTaskPlanningTime',
+            type: "POST",
+            data: {
+                'checkplantime': 'checkplantime'
+            },
+            cache: false,
+            success: function a(result) {
+                //	console.log(result);return false;
+                if (result == 'false') {
+                    var redURL = "<?=base_url();?>Menu/TaskPlanner2/<?= date("Y-m-d") ?>";
+                    window.location.href = redURL;
+                } else if (result == 'true') {
+
+                    <?php 
+          $todaydate = new DateTime();
+          $todaydate->modify('+1 day');
+          $tomorrowDate = $todaydate->format('Y-m-d');
+          ?>
+                    var redURL = "<?=base_url();?>Menu/TaskPlanner2/<?= $tomorrowDate; ?>";
+                    window.location.href = redURL;
+                }
+            }
+        });
+}
 </script>
-</body>
-</html>
+<?php $this->load->view('footer'); ?>

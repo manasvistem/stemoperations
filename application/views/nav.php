@@ -254,6 +254,28 @@
             </li>
               <?php endif; ?>
 
+
+              <?php 
+              
+              // dd($spdCountDataByRoles);
+              
+              if($dep_id == 27){ ?>
+                <li class="menu-item" style="">
+                <a href="javascript:void(0);" class="menu-link menu-toggle">
+                  <i class="menu-icon tf-icons bx bx-detail"></i>
+                  <div class="text-truncate" data-i18n="Form Elements">School Details</div>
+                </a>
+                <ul class="menu-sub">
+                  <li class="menu-item">
+                    <a href="<?=base_url().'Menu/SPD_Details/'?>" class="menu-link">
+                      <div class="text-truncate" data-i18n="Input groups">School List</div>
+                    </a>
+                  </li>
+                </ul>
+              </li>
+
+              <?php } ?>
+
               <?php if($dep_id == 11): ?>
        
             

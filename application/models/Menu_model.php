@@ -1454,15 +1454,57 @@ LEFT JOIN
         return $query->result();
     }
     public function get_spdsbypi($uid){
-        $query=$this->db->query("SELECT COUNT(*) as a,count(CASE WHEN status=1 THEN status end) as b,count(CASE WHEN status=2 THEN status end) as c,count(CASE WHEN status=3 THEN status end) as d,count(CASE WHEN status=4 THEN status end) as e,count(CASE WHEN status=5 THEN status end) as f,count(CASE WHEN status=6 THEN status end) as g,count(CASE WHEN status=7 THEN status end) as h,count(CASE WHEN status=8 THEN status end) as i FROM `spd` WHERE pi_id='$uid' and pm_apr='1'");
+        $query=$this->db->query("SELECT 
+    COUNT(*) AS a,
+    COUNT(CASE WHEN status = 1 THEN status END) AS b,
+    COUNT(CASE WHEN status = 2 THEN status END) AS c,
+    COUNT(CASE WHEN status = 3 THEN status END) AS d,
+    COUNT(CASE WHEN status = 4 THEN status END) AS e,
+    COUNT(CASE WHEN status = 5 THEN status END) AS f,
+    COUNT(CASE WHEN status = 6 THEN status END) AS g,
+    COUNT(CASE WHEN status = 7 THEN status END) AS h,
+    COUNT(CASE WHEN status = 8 THEN status END) AS i
+FROM 
+    `spd`
+WHERE 
+    pi_id = '$uid' 
+    AND pm_apr = '1'");
         return $query->result();
     }
     public function get_spdsbyzh($uid){
-        $query=$this->db->query("SELECT count(CASE WHEN pm_apr='0' THEN pm_apr end) as ab,count(CASE WHEN pm_apr='1' THEN pm_apr end) as a,count(CASE WHEN status=1 and pm_apr='1' THEN status end) as b,count(CASE WHEN status=2 and pm_apr='1' THEN status end) as c,count(CASE WHEN status=3 and pm_apr='1' THEN status end) as d,count(CASE WHEN status=4 and pm_apr='1' THEN status end) as e,count(CASE WHEN status=5 and pm_apr='1' THEN status end) as f,count(CASE WHEN status=6 and pm_apr='1' THEN status end) as g,count(CASE WHEN status=7 and pm_apr='1' THEN status end) as h,count(CASE WHEN status=8 and pm_apr='1' THEN status end) as i FROM `spd` WHERE zh_id='$uid'");
+        $query=$this->db->query("SELECT 
+    COUNT(CASE WHEN pm_apr = '0' THEN pm_apr END) AS ab,
+    COUNT(CASE WHEN pm_apr = '1' THEN pm_apr END) AS a,
+    COUNT(CASE WHEN status = 1 AND pm_apr = '1' THEN status END) AS b,
+    COUNT(CASE WHEN status = 2 AND pm_apr = '1' THEN status END) AS c,
+    COUNT(CASE WHEN status = 3 AND pm_apr = '1' THEN status END) AS d,
+    COUNT(CASE WHEN status = 4 AND pm_apr = '1' THEN status END) AS e,
+    COUNT(CASE WHEN status = 5 AND pm_apr = '1' THEN status END) AS f,
+    COUNT(CASE WHEN status = 6 AND pm_apr = '1' THEN status END) AS g,
+    COUNT(CASE WHEN status = 7 AND pm_apr = '1' THEN status END) AS h,
+    COUNT(CASE WHEN status = 8 AND pm_apr = '1' THEN status END) AS i
+FROM 
+    `spd`
+WHERE 
+    zh_id = '$uid'");
         return $query->result();
     }
     public function get_spdsbypm(){
-        $query=$this->db->query("SELECT count(CASE WHEN pm_apr='0' THEN pm_apr end) as ab,count(CASE WHEN pm_apr='1' THEN pm_apr end) as a,count(CASE WHEN status=1 and pm_apr='1' THEN status end) as b,count(CASE WHEN status=2 and pm_apr='1' THEN status end) as c,count(CASE WHEN status=3 and pm_apr='1' THEN status end) as d,count(CASE WHEN status=4 and pm_apr='1' THEN status end) as e,count(CASE WHEN status=5 and pm_apr='1' THEN status end) as f,count(CASE WHEN status=6 and pm_apr='1' THEN status end) as g,count(CASE WHEN status=7 and pm_apr='1' THEN status end) as h,count(CASE WHEN status=8 and pm_apr='1' THEN status end) as i FROM `spd` WHERE pi_id!=''");
+        $query=$this->db->query("SELECT 
+    COUNT(CASE WHEN pm_apr = '0' THEN pm_apr END) AS ab,
+    COUNT(CASE WHEN pm_apr = '1' THEN pm_apr END) AS a,
+    COUNT(CASE WHEN STATUS = 1 AND pm_apr = '1' THEN STATUS END) AS b,
+    COUNT(CASE WHEN STATUS = 2 AND pm_apr = '1' THEN STATUS END) AS c,
+    COUNT(CASE WHEN STATUS = 3 AND pm_apr = '1' THEN STATUS END) AS d,
+    COUNT(CASE WHEN STATUS = 4 AND pm_apr = '1' THEN STATUS END) AS e,
+    COUNT(CASE WHEN STATUS = 5 AND pm_apr = '1' THEN STATUS END) AS f,
+    COUNT(CASE WHEN STATUS = 6 AND pm_apr = '1' THEN STATUS END) AS g,
+    COUNT(CASE WHEN STATUS = 7 AND pm_apr = '1' THEN STATUS END) AS h,
+    COUNT(CASE WHEN STATUS = 8 AND pm_apr = '1' THEN STATUS END) AS i
+FROM 
+    `spd`
+WHERE 
+    pi_id != ''");
         return $query->result();
     }
     public function get_daydetail($uid,$tdate){
@@ -7475,11 +7517,12 @@ public function CreateNewTaskUsingTimeLinePlanning(
     $project_code, $task_action, $sid, $user_id, $assigned_by, $fwd_date,
     $appointment_datetime, $autotask, $status_id, $selectby, $filter_by,
     $task_assigned_date, $aftertask, $comments, $target_date, $targetstatus,
-    $time_line_id
+    $time_line_id,$academic_year
 ) {
     // Data to be inserted into the table
     $data = [
         'project_code'        => $project_code,
+        'academic_year'       => $academic_year,
         'task_action'         => $task_action,
         'sid'                 => $sid,
         'user_id'             => $user_id,
@@ -8218,14 +8261,109 @@ public function AddNewContactinSchoolData($sid, $contact_name, $designation, $co
 
 
 
+public function GetSPDCountByRolesID($roles){
+    $query=$this->db->query("SELECT 
+    s.name,
+    s.id AS status_id,
+    COUNT(spd.id) AS total_count
+FROM 
+    status s
+LEFT JOIN spd ON s.id = spd.status 
+    AND spd.pi_id != '' 
+    AND spd.pm_apr = '1'
+GROUP BY s.id
+
+UNION ALL
+
+SELECT 
+    'Total Schools' AS name,
+    'total' AS status_id,
+    COUNT(spd.id) AS total_count
+FROM spd 
+WHERE spd.pi_id != '' 
+AND spd.pm_apr = '1'
+
+UNION ALL
+
+SELECT 
+    'Pending Schools' AS name,
+    'Pending' AS status_id,
+    COUNT(spd.id) AS total_count
+FROM spd 
+WHERE spd.pi_id != '' 
+AND spd.pm_apr = '0'
+
+ORDER BY 
+    CASE 
+        WHEN name = 'Total Schools' THEN 0   -- Ensures 'Total Schools' is first
+        WHEN name = 'Pending Schools' THEN 1 -- Ensures 'Pending Schools' is second
+        ELSE 2 
+    END, 
+    status_id ASC");
+return $query->result();
+}
 
 
 
+public function GetSPDByRolesID($roles,$types){
+
+    if($types == 'total'){
+        $filter = "AND spd.pm_apr = '1'";
+    }else if($types == 'Pending'){
+        $filter = "AND spd.pm_apr = '0'";
+    }else{
+        $filter = "AND spd.pm_apr = '1' AND spd.status = '$types'";
+    }
 
 
+    $query=$this->db->query("SELECT
+    spd.*,
+    u1.fullname as pi_name,
+    u2.fullname as insta_name,
+    u3.fullname as pro_name,
+    u4.fullname as admin_name,
+    s1.name as school_status_name
+FROM
+    `spd`
+LEFT JOIN user_detail u1 on u1.id = spd.pi_id
+LEFT JOIN user_detail u2 on u2.id = spd.ins_id
+LEFT JOIN user_detail u3 on u3.id = spd.pro_id
+LEFT JOIN user_detail u4 on u4.id = spd.admin_id
+LEFT JOIN status s1 on s1.id = spd.status
+WHERE spd.pi_id != '' $filter
+");
+return $query->result();
+}
 
 
+public function GetSPDByRolesIDUseForGraph($roles,$types){
 
+    if($types == 'total'){
+        $filter = "AND spd.pm_apr = '1'";
+    }else if($types == 'Pending'){
+        $filter = "AND spd.pm_apr = '0'";
+    }else{
+        $filter = "AND spd.pm_apr = '1' AND spd.status = '$types'";
+    }
+
+    $query=$this->db->query("SELECT
+    spd.*,
+    u1.fullname as pi_name,
+    u2.fullname as insta_name,
+    u3.fullname as pro_name,
+    u4.fullname as admin_name,
+    s1.name as school_status_name
+FROM
+    `spd`
+LEFT JOIN user_detail u1 on u1.id = spd.pi_id
+LEFT JOIN user_detail u2 on u2.id = spd.ins_id
+LEFT JOIN user_detail u3 on u3.id = spd.pro_id
+LEFT JOIN user_detail u4 on u4.id = spd.admin_id
+LEFT JOIN status s1 on s1.id = spd.status
+WHERE spd.pi_id != '' $filter
+");
+return $query->result();
+}
 
 
 }

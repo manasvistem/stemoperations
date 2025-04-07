@@ -6854,10 +6854,11 @@ class Menu extends CI_Controller {
         $program=$this->Menu_model->get_handover();
         $bdr=$this->Menu_model->get_bdreqest($uid);
         $bdrzh=$this->Menu_model->get_bdreqestzh($uid);
+        $spdCountDataByRoles = $this->Menu_model->GetSPDCountByRolesID($id);
         $dep_name = $dt[0]->dep_name;
        
         if(!empty($user)){
-            $this->load->view($dep_name.'/index', ['pmspd'=>$pmspd,'zhspd'=>$zhspd,'bdrzh'=>$bdrzh,'spd'=>$spd, 'user'=>$user,'notify'=>$notify,'program'=>$program,'status'=>$status,'td'=>$td,'tdate'=>$tdate,'bdr'=>$bdr,'uid'=>$uid]);
+            $this->load->view($dep_name.'/index', ['pmspd'=>$pmspd,'zhspd'=>$zhspd,'bdrzh'=>$bdrzh,'spd'=>$spd, 'user'=>$user,'notify'=>$notify,'program'=>$program,'status'=>$status,'td'=>$td,'tdate'=>$tdate,'bdr'=>$bdr,'uid'=>$uid,'spdCountDataByRoles'=>$spdCountDataByRoles]);
         }else{
             redirect('Menu/main');
         }
@@ -14226,7 +14227,7 @@ if($pi_dep_id == 2){  // PIA
                         $taskId = $this->Menu_model->CreateNewTaskUsingTimeLinePlanning($project_code, $task_action_id, $sid, $taskuser, $assigned_by, $fwd_date,
                         $appointment_datetime, $autotask, $status_id, $selectby, $filter_by,
                         $task_assigned_date, $aftertask, $comments, $target_date, $targetstatus,
-                        $time_line_id);
+                        $time_line_id,$academic_year);
 
                         $k++;
                     }
@@ -14263,7 +14264,7 @@ if($pi_dep_id == 2){  // PIA
                     $taskId = $this->Menu_model->CreateNewTaskUsingTimeLinePlanning($project_code, $task_action_id, $sid, $taskuser, $assigned_by, $fwd_date,
                     $appointment_datetime, $autotask, $status_id, $selectby, $filter_by,
                     $task_assigned_date, $aftertask, $comments, $target_date, $targetstatus,
-                    $time_line_id);
+                    $time_line_id,$academic_year);
                 
                     $k++;
                 }
@@ -14291,7 +14292,7 @@ if($pi_dep_id == 2){  // PIA
     $taskId = $this->Menu_model->CreateNewTaskUsingTimeLinePlanning($project_code, $task_action_id, $sid, $taskuser, $assigned_by, $fwd_date,
     $appointment_datetime, $autotask, $status_id, $selectby, $filter_by,
     $task_assigned_date, $aftertask, $comments, $target_date, $targetstatus,
-    $time_line_id);
+    $time_line_id,$academic_year);
 }
 
 
@@ -14339,7 +14340,7 @@ if($insta_dep_id == 4){ // Inst-&-Maint
                 $taskId = $this->Menu_model->CreateNewTaskUsingTimeLinePlanning($project_code, $task_action_id, $sid, $taskuser, $assigned_by, $fwd_date,
                 $appointment_datetime, $autotask, $status_id, $selectby, $filter_by,
                 $task_assigned_date, $aftertask, $comments, $target_date, $targetstatus,
-                $time_line_id);
+                $time_line_id,$academic_year);
               
                 $k++;
             }
@@ -14391,7 +14392,7 @@ if($zh_dep_id == 11){   // Zones-Head
                 $taskId = $this->Menu_model->CreateNewTaskUsingTimeLinePlanning($project_code, $task_action_id, $sid, $taskuser, $assigned_by, $fwd_date,
                 $appointment_datetime, $autotask, $status_id, $selectby, $filter_by,
                 $task_assigned_date, $aftertask, $comments, $target_date, $targetstatus,
-                $time_line_id);
+                $time_line_id,$academic_year);
               
                 $k++;
             }
@@ -14435,7 +14436,7 @@ if($zh_dep_id == 11){   // Zones-Head
                 $taskId = $this->Menu_model->CreateNewTaskUsingTimeLinePlanning($project_code, $task_action_id, $sid, $taskuser, $assigned_by, $fwd_date,
                 $appointment_datetime, $autotask, $status_id, $selectby, $filter_by,
                 $task_assigned_date, $aftertask, $comments, $target_date, $targetstatus,
-                $time_line_id);
+                $time_line_id,$academic_year);
               
                 $k++;
             }
@@ -14485,7 +14486,7 @@ if($pro_dep_id == 20){    // PRO
                 $taskId = $this->Menu_model->CreateNewTaskUsingTimeLinePlanning($project_code, $task_action_id, $sid, $taskuser, $assigned_by, $fwd_date,
                 $appointment_datetime, $autotask, $status_id, $selectby, $filter_by,
                 $task_assigned_date, $aftertask, $comments, $target_date, $targetstatus,
-                $time_line_id);
+                $time_line_id,$academic_year);
               
                 $k++;
             }
@@ -14538,7 +14539,7 @@ if($pm_dep_id == 12){    // Program-Manager
                         $taskId = $this->Menu_model->CreateNewTaskUsingTimeLinePlanning($project_code, $task_action_id, $sid, $taskuser, $assigned_by, $fwd_date,
                         $appointment_datetime, $autotask, $status_id, $selectby, $filter_by,
                         $task_assigned_date, $aftertask, $comments, $target_date, $targetstatus,
-                        $time_line_id);
+                        $time_line_id,$academic_year);
                       
                         $k++;
                     }
@@ -14576,7 +14577,7 @@ if($pm_dep_id == 12){    // Program-Manager
                     $taskId = $this->Menu_model->CreateNewTaskUsingTimeLinePlanning($project_code, $task_action_id, $sid, $taskuser, $assigned_by, $fwd_date,
                     $appointment_datetime, $autotask, $status_id, $selectby, $filter_by,
                     $task_assigned_date, $aftertask, $comments, $target_date, $targetstatus,
-                    $time_line_id);
+                    $time_line_id,$academic_year);
                   
                     $k++;
                 }
@@ -14637,7 +14638,7 @@ if($pm_dep_id == 12){    // Program-Manager
                 $taskId = $this->Menu_model->CreateNewTaskUsingTimeLinePlanning($project_code, $task_action_id, $sid, $taskuser, $assigned_by, $fwd_date,
                 $appointment_datetime, $autotask, $status_id, $selectby, $filter_by,
                 $task_assigned_date, $aftertask, $comments, $target_date, $targetstatus,
-                $time_line_id);
+                $time_line_id,$academic_year);
             }
         }
     }
@@ -15381,6 +15382,64 @@ public function AddNewContactDetailsInSPD(){
             $this->session->set_flashdata('error_message','*Failed to Add New Contact Details');
         }
     redirect('Menu/SchoolProfileDetails/'.$sid);
+}
+
+
+
+
+
+public function SPD_Details(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+
+    $this->load->model('Menu_model');
+
+    $notify         = $this->Menu_model->get_notifybyid($uid);
+    $dt             = $this->Menu_model->get_depatment_byid($id);
+    $dep_name       = $dt[0]->dep_name;
+
+    $uData          =  $this->Menu_model->get_user_byid($uid);
+
+    $spdCountDataByRoles = $this->Menu_model->GetSPDCountByRolesID($id);
+
+   
+
+    if(!empty($user)){
+        $this->load->view($dep_name.'/SPD_Details', ['user'=>$user,'uid'=>$uid,'uData'=>$uData,'spdCountDataByRoles'=>$spdCountDataByRoles]);
+    }else{
+        redirect('Menu/main');
+    }
+}
+public function SPD_Details_Data($types){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;$uid= $user['id'];
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+
+    $this->load->model('Menu_model');
+
+    $notify         = $this->Menu_model->get_notifybyid($uid);
+    $dt             = $this->Menu_model->get_depatment_byid($id);
+    $dep_name       = $dt[0]->dep_name;
+
+    $uData          =  $this->Menu_model->get_user_byid($uid);
+
+    $spdDataByRoles = $this->Menu_model->GetSPDByRolesID($id,$types);
+
+   
+    // $spdDataByRoles = $this->Menu_model->GetSPDByRolesIDUseForGraph($id,'total');
+
+    
+
+    if(!empty($user)){
+        $this->load->view($dep_name.'/SPD_Details_Data', ['user'=>$user,'uid'=>$uid,'uData'=>$uData,'spdDataByRoles'=>$spdDataByRoles]);
+    }else{
+        redirect('Menu/main');
+    }
 }
 
 
