@@ -16891,11 +16891,7 @@ public function AddNewContactDetailsInSPD(){
 }
 
 
-
-
-
 public function SPD_Details(){
-
     $user           = $this->session->userdata('user');
     $data['user']   = $user;$uid= $user['id'];
     $uid            = $user['id'];
@@ -16908,10 +16904,8 @@ public function SPD_Details(){
     $dep_name       = $dt[0]->dep_name;
 
     $uData          =  $this->Menu_model->get_user_byid($uid);
-
     $spdCountDataByRoles = $this->Menu_model->GetSPDCountByRolesID($id);
 
-   
 
     if(!empty($user)){
         $this->load->view($dep_name.'/SPD_Details', ['user'=>$user,'uid'=>$uid,'uData'=>$uData,'spdCountDataByRoles'=>$spdCountDataByRoles]);
@@ -16925,13 +16919,10 @@ public function SPD_Details_Data($types){
     $data['user']   = $user;$uid= $user['id'];
     $uid            = $user['id'];
     $id             =  $user['dep_id'];
-
     $this->load->model('Menu_model');
-
     $notify         = $this->Menu_model->get_notifybyid($uid);
     $dt             = $this->Menu_model->get_depatment_byid($id);
     $dep_name       = $dt[0]->dep_name;
-
     $uData          =  $this->Menu_model->get_user_byid($uid);
 
     $spdDataByRoles = $this->Menu_model->GetSPDByRolesID($id,$types);

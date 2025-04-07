@@ -2745,3 +2745,917 @@ ERROR - 2025-04-07 14:24:20 --> Query error: You have an error in your SQL synta
                     LEFT JOIN user_detail ON close_your_day_request.user_id = user_detail.id 
                     WHERE  and DATE(req_date) ='2025-04-07'
 ERROR - 2025-04-07 14:24:20 --> Severity: error --> Exception: Call to a member function result() on bool C:\wamp64\www\stemoppapp\application\models\Menu_model.php 6241
+INFO - 2025-04-07 09:18:18 --> Config Class Initialized
+INFO - 2025-04-07 09:18:18 --> Hooks Class Initialized
+DEBUG - 2025-04-07 09:18:18 --> UTF-8 Support Enabled
+INFO - 2025-04-07 09:18:18 --> Utf8 Class Initialized
+INFO - 2025-04-07 09:18:18 --> URI Class Initialized
+INFO - 2025-04-07 09:18:18 --> Router Class Initialized
+INFO - 2025-04-07 09:18:18 --> Output Class Initialized
+INFO - 2025-04-07 09:18:18 --> Security Class Initialized
+DEBUG - 2025-04-07 09:18:18 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 09:18:18 --> Input Class Initialized
+INFO - 2025-04-07 09:18:18 --> Language Class Initialized
+INFO - 2025-04-07 14:48:18 --> Loader Class Initialized
+INFO - 2025-04-07 14:48:18 --> Helper loaded: url_helper
+INFO - 2025-04-07 14:48:18 --> Helper loaded: form_helper
+INFO - 2025-04-07 14:48:18 --> Helper loaded: file_helper
+INFO - 2025-04-07 14:48:18 --> Helper loaded: email_helper
+INFO - 2025-04-07 14:48:18 --> Helper loaded: cookie_helper
+INFO - 2025-04-07 14:48:18 --> Helper loaded: functiondd_helper
+INFO - 2025-04-07 14:48:18 --> Database Driver Class Initialized
+DEBUG - 2025-04-07 14:48:18 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-04-07 14:48:18 --> Session: Class initialized using 'files' driver.
+INFO - 2025-04-07 14:48:18 --> Controller Class Initialized
+INFO - 2025-04-07 14:48:18 --> Form Validation Class Initialized
+INFO - 2025-04-07 14:48:18 --> Model "Menu_model" initialized
+INFO - 2025-04-07 14:48:18 --> Helper loaded: common_helper
+INFO - 2025-04-07 14:48:18 --> Helper loaded: taskplanner_helper
+INFO - 2025-04-07 09:18:18 --> Config Class Initialized
+INFO - 2025-04-07 09:18:18 --> Hooks Class Initialized
+DEBUG - 2025-04-07 09:18:18 --> UTF-8 Support Enabled
+INFO - 2025-04-07 09:18:18 --> Utf8 Class Initialized
+INFO - 2025-04-07 09:18:18 --> URI Class Initialized
+INFO - 2025-04-07 09:18:18 --> Router Class Initialized
+INFO - 2025-04-07 09:18:18 --> Output Class Initialized
+INFO - 2025-04-07 09:18:18 --> Security Class Initialized
+DEBUG - 2025-04-07 09:18:18 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 09:18:18 --> Input Class Initialized
+INFO - 2025-04-07 09:18:18 --> Language Class Initialized
+INFO - 2025-04-07 14:48:18 --> Loader Class Initialized
+INFO - 2025-04-07 14:48:18 --> Helper loaded: url_helper
+INFO - 2025-04-07 14:48:18 --> Helper loaded: form_helper
+INFO - 2025-04-07 14:48:18 --> Helper loaded: file_helper
+INFO - 2025-04-07 14:48:18 --> Helper loaded: email_helper
+INFO - 2025-04-07 14:48:18 --> Helper loaded: cookie_helper
+INFO - 2025-04-07 14:48:18 --> Helper loaded: functiondd_helper
+INFO - 2025-04-07 14:48:18 --> Database Driver Class Initialized
+DEBUG - 2025-04-07 14:48:18 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-04-07 14:48:18 --> Session: Class initialized using 'files' driver.
+INFO - 2025-04-07 14:48:18 --> Controller Class Initialized
+INFO - 2025-04-07 14:48:18 --> Form Validation Class Initialized
+INFO - 2025-04-07 14:48:18 --> Model "Menu_model" initialized
+INFO - 2025-04-07 14:48:18 --> Helper loaded: common_helper
+INFO - 2025-04-07 14:48:18 --> Helper loaded: taskplanner_helper
+INFO - 2025-04-07 09:18:18 --> Config Class Initialized
+INFO - 2025-04-07 09:18:18 --> Hooks Class Initialized
+DEBUG - 2025-04-07 09:18:18 --> UTF-8 Support Enabled
+INFO - 2025-04-07 09:18:18 --> Utf8 Class Initialized
+INFO - 2025-04-07 09:18:18 --> URI Class Initialized
+INFO - 2025-04-07 09:18:18 --> Router Class Initialized
+INFO - 2025-04-07 09:18:18 --> Output Class Initialized
+INFO - 2025-04-07 09:18:18 --> Security Class Initialized
+DEBUG - 2025-04-07 09:18:18 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 09:18:18 --> Input Class Initialized
+INFO - 2025-04-07 09:18:18 --> Language Class Initialized
+INFO - 2025-04-07 14:48:18 --> Loader Class Initialized
+INFO - 2025-04-07 14:48:18 --> Helper loaded: url_helper
+INFO - 2025-04-07 14:48:18 --> Helper loaded: form_helper
+INFO - 2025-04-07 14:48:18 --> Helper loaded: file_helper
+INFO - 2025-04-07 14:48:18 --> Helper loaded: email_helper
+INFO - 2025-04-07 14:48:18 --> Helper loaded: cookie_helper
+INFO - 2025-04-07 14:48:18 --> Helper loaded: functiondd_helper
+INFO - 2025-04-07 14:48:18 --> Database Driver Class Initialized
+DEBUG - 2025-04-07 14:48:18 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-04-07 14:48:18 --> Session: Class initialized using 'files' driver.
+INFO - 2025-04-07 14:48:18 --> Controller Class Initialized
+INFO - 2025-04-07 14:48:18 --> Form Validation Class Initialized
+INFO - 2025-04-07 14:48:18 --> Model "Menu_model" initialized
+INFO - 2025-04-07 14:48:18 --> Helper loaded: common_helper
+INFO - 2025-04-07 14:48:18 --> Helper loaded: taskplanner_helper
+INFO - 2025-04-07 14:48:19 --> File loaded: C:\wamp64\www\stemoppapp\application\views\ProgramManager/nav.php
+INFO - 2025-04-07 14:48:19 --> File loaded: C:\wamp64\www\stemoppapp\application\views\ProgramManager/close_day_page.php
+INFO - 2025-04-07 14:48:19 --> File loaded: C:\wamp64\www\stemoppapp\application\views\templates/footer.php
+INFO - 2025-04-07 14:48:19 --> Final output sent to browser
+DEBUG - 2025-04-07 14:48:19 --> Total execution time: 1.0267
+INFO - 2025-04-07 09:19:23 --> Config Class Initialized
+INFO - 2025-04-07 09:19:23 --> Hooks Class Initialized
+DEBUG - 2025-04-07 09:19:23 --> UTF-8 Support Enabled
+INFO - 2025-04-07 09:19:23 --> Utf8 Class Initialized
+INFO - 2025-04-07 09:19:23 --> URI Class Initialized
+INFO - 2025-04-07 09:19:23 --> Router Class Initialized
+INFO - 2025-04-07 09:19:23 --> Output Class Initialized
+INFO - 2025-04-07 09:19:23 --> Security Class Initialized
+DEBUG - 2025-04-07 09:19:23 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 09:19:23 --> Input Class Initialized
+INFO - 2025-04-07 09:19:23 --> Language Class Initialized
+INFO - 2025-04-07 14:49:23 --> Loader Class Initialized
+INFO - 2025-04-07 14:49:23 --> Helper loaded: url_helper
+INFO - 2025-04-07 14:49:23 --> Helper loaded: form_helper
+INFO - 2025-04-07 14:49:23 --> Helper loaded: file_helper
+INFO - 2025-04-07 14:49:23 --> Helper loaded: email_helper
+INFO - 2025-04-07 14:49:23 --> Helper loaded: cookie_helper
+INFO - 2025-04-07 14:49:23 --> Helper loaded: functiondd_helper
+INFO - 2025-04-07 14:49:23 --> Database Driver Class Initialized
+DEBUG - 2025-04-07 14:49:23 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-04-07 14:49:23 --> Session: Class initialized using 'files' driver.
+INFO - 2025-04-07 14:49:23 --> Controller Class Initialized
+INFO - 2025-04-07 14:49:23 --> Form Validation Class Initialized
+INFO - 2025-04-07 14:49:23 --> Model "Menu_model" initialized
+INFO - 2025-04-07 14:49:23 --> Helper loaded: common_helper
+INFO - 2025-04-07 14:49:23 --> Helper loaded: taskplanner_helper
+INFO - 2025-04-07 14:49:23 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/nav.php
+INFO - 2025-04-07 14:49:23 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/index.php
+INFO - 2025-04-07 14:49:23 --> File loaded: C:\wamp64\www\stemoppapp\application\views\templates/footer.php
+INFO - 2025-04-07 14:49:23 --> Final output sent to browser
+DEBUG - 2025-04-07 14:49:23 --> Total execution time: 0.6362
+INFO - 2025-04-07 09:19:37 --> Config Class Initialized
+INFO - 2025-04-07 09:19:37 --> Hooks Class Initialized
+DEBUG - 2025-04-07 09:19:37 --> UTF-8 Support Enabled
+INFO - 2025-04-07 09:19:37 --> Utf8 Class Initialized
+INFO - 2025-04-07 09:19:37 --> URI Class Initialized
+INFO - 2025-04-07 09:19:37 --> Router Class Initialized
+INFO - 2025-04-07 09:19:37 --> Output Class Initialized
+INFO - 2025-04-07 09:19:37 --> Security Class Initialized
+DEBUG - 2025-04-07 09:19:37 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 09:19:37 --> Input Class Initialized
+INFO - 2025-04-07 09:19:37 --> Language Class Initialized
+INFO - 2025-04-07 14:49:37 --> Loader Class Initialized
+INFO - 2025-04-07 14:49:37 --> Helper loaded: url_helper
+INFO - 2025-04-07 14:49:37 --> Helper loaded: form_helper
+INFO - 2025-04-07 14:49:37 --> Helper loaded: file_helper
+INFO - 2025-04-07 14:49:37 --> Helper loaded: email_helper
+INFO - 2025-04-07 14:49:37 --> Helper loaded: cookie_helper
+INFO - 2025-04-07 14:49:37 --> Helper loaded: functiondd_helper
+INFO - 2025-04-07 14:49:37 --> Database Driver Class Initialized
+DEBUG - 2025-04-07 14:49:37 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-04-07 14:49:37 --> Session: Class initialized using 'files' driver.
+INFO - 2025-04-07 14:49:37 --> Controller Class Initialized
+INFO - 2025-04-07 14:49:37 --> Form Validation Class Initialized
+INFO - 2025-04-07 14:49:37 --> Model "Menu_model" initialized
+INFO - 2025-04-07 14:49:37 --> Helper loaded: common_helper
+INFO - 2025-04-07 14:49:37 --> Helper loaded: taskplanner_helper
+INFO - 2025-04-07 14:49:37 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/VisitSchoolIdentificationView.php
+INFO - 2025-04-07 14:49:37 --> Final output sent to browser
+DEBUG - 2025-04-07 14:49:37 --> Total execution time: 0.1355
+INFO - 2025-04-07 09:19:38 --> Config Class Initialized
+INFO - 2025-04-07 09:19:38 --> Hooks Class Initialized
+DEBUG - 2025-04-07 09:19:38 --> UTF-8 Support Enabled
+INFO - 2025-04-07 09:19:38 --> Utf8 Class Initialized
+INFO - 2025-04-07 09:19:38 --> URI Class Initialized
+INFO - 2025-04-07 09:19:38 --> Router Class Initialized
+INFO - 2025-04-07 09:19:38 --> Output Class Initialized
+INFO - 2025-04-07 09:19:38 --> Security Class Initialized
+DEBUG - 2025-04-07 09:19:38 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 09:19:38 --> Input Class Initialized
+INFO - 2025-04-07 09:19:38 --> Language Class Initialized
+INFO - 2025-04-07 14:49:38 --> Loader Class Initialized
+INFO - 2025-04-07 14:49:38 --> Helper loaded: url_helper
+INFO - 2025-04-07 14:49:38 --> Helper loaded: form_helper
+INFO - 2025-04-07 14:49:38 --> Helper loaded: file_helper
+INFO - 2025-04-07 14:49:38 --> Helper loaded: email_helper
+INFO - 2025-04-07 14:49:38 --> Helper loaded: cookie_helper
+INFO - 2025-04-07 14:49:38 --> Helper loaded: functiondd_helper
+INFO - 2025-04-07 14:49:38 --> Database Driver Class Initialized
+DEBUG - 2025-04-07 14:49:38 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-04-07 14:49:38 --> Session: Class initialized using 'files' driver.
+INFO - 2025-04-07 14:49:38 --> Controller Class Initialized
+INFO - 2025-04-07 14:49:38 --> Form Validation Class Initialized
+INFO - 2025-04-07 14:49:38 --> Model "Menu_model" initialized
+INFO - 2025-04-07 14:49:38 --> Helper loaded: common_helper
+INFO - 2025-04-07 14:49:38 --> Helper loaded: taskplanner_helper
+INFO - 2025-04-07 14:49:38 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/nav.php
+INFO - 2025-04-07 14:49:38 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/visitDuringIdentificationView.php
+INFO - 2025-04-07 14:49:38 --> File loaded: C:\wamp64\www\stemoppapp\application\views\templates/footer.php
+INFO - 2025-04-07 14:49:38 --> Final output sent to browser
+DEBUG - 2025-04-07 14:49:38 --> Total execution time: 0.1316
+INFO - 2025-04-07 09:19:46 --> Config Class Initialized
+INFO - 2025-04-07 09:19:46 --> Hooks Class Initialized
+DEBUG - 2025-04-07 09:19:46 --> UTF-8 Support Enabled
+INFO - 2025-04-07 09:19:46 --> Utf8 Class Initialized
+INFO - 2025-04-07 09:19:46 --> URI Class Initialized
+INFO - 2025-04-07 09:19:46 --> Router Class Initialized
+INFO - 2025-04-07 09:19:46 --> Output Class Initialized
+INFO - 2025-04-07 09:19:46 --> Security Class Initialized
+DEBUG - 2025-04-07 09:19:46 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 09:19:46 --> Input Class Initialized
+INFO - 2025-04-07 09:19:46 --> Language Class Initialized
+INFO - 2025-04-07 14:49:46 --> Loader Class Initialized
+INFO - 2025-04-07 14:49:46 --> Helper loaded: url_helper
+INFO - 2025-04-07 14:49:46 --> Helper loaded: form_helper
+INFO - 2025-04-07 14:49:46 --> Helper loaded: file_helper
+INFO - 2025-04-07 14:49:46 --> Helper loaded: email_helper
+INFO - 2025-04-07 14:49:46 --> Helper loaded: cookie_helper
+INFO - 2025-04-07 14:49:46 --> Helper loaded: functiondd_helper
+INFO - 2025-04-07 14:49:46 --> Database Driver Class Initialized
+DEBUG - 2025-04-07 14:49:46 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-04-07 14:49:46 --> Session: Class initialized using 'files' driver.
+INFO - 2025-04-07 14:49:46 --> Controller Class Initialized
+INFO - 2025-04-07 14:49:46 --> Form Validation Class Initialized
+INFO - 2025-04-07 14:49:46 --> Model "Menu_model" initialized
+INFO - 2025-04-07 14:49:46 --> Helper loaded: common_helper
+INFO - 2025-04-07 14:49:46 --> Helper loaded: taskplanner_helper
+INFO - 2025-04-07 14:49:46 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/nav.php
+INFO - 2025-04-07 14:49:46 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/index.php
+INFO - 2025-04-07 14:49:46 --> File loaded: C:\wamp64\www\stemoppapp\application\views\templates/footer.php
+INFO - 2025-04-07 14:49:46 --> Final output sent to browser
+DEBUG - 2025-04-07 14:49:46 --> Total execution time: 0.4728
+INFO - 2025-04-07 10:09:51 --> Config Class Initialized
+INFO - 2025-04-07 10:09:51 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:09:51 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:09:51 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:09:51 --> URI Class Initialized
+INFO - 2025-04-07 10:09:51 --> Router Class Initialized
+INFO - 2025-04-07 10:09:51 --> Output Class Initialized
+INFO - 2025-04-07 10:09:51 --> Security Class Initialized
+DEBUG - 2025-04-07 10:09:51 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:09:51 --> Input Class Initialized
+INFO - 2025-04-07 10:09:51 --> Language Class Initialized
+INFO - 2025-04-07 10:10:10 --> Config Class Initialized
+INFO - 2025-04-07 10:10:10 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:10:10 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:10:10 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:10:10 --> URI Class Initialized
+INFO - 2025-04-07 10:10:10 --> Router Class Initialized
+INFO - 2025-04-07 10:10:10 --> Output Class Initialized
+INFO - 2025-04-07 10:10:10 --> Security Class Initialized
+DEBUG - 2025-04-07 10:10:10 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:10:10 --> Input Class Initialized
+INFO - 2025-04-07 10:10:10 --> Language Class Initialized
+INFO - 2025-04-07 10:10:22 --> Config Class Initialized
+INFO - 2025-04-07 10:10:22 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:10:22 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:10:22 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:10:22 --> URI Class Initialized
+INFO - 2025-04-07 10:10:22 --> Router Class Initialized
+INFO - 2025-04-07 10:10:22 --> Output Class Initialized
+INFO - 2025-04-07 10:10:22 --> Security Class Initialized
+DEBUG - 2025-04-07 10:10:22 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:10:22 --> Input Class Initialized
+INFO - 2025-04-07 10:10:22 --> Language Class Initialized
+INFO - 2025-04-07 10:10:34 --> Config Class Initialized
+INFO - 2025-04-07 10:10:34 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:10:34 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:10:34 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:10:34 --> URI Class Initialized
+INFO - 2025-04-07 10:10:34 --> Router Class Initialized
+INFO - 2025-04-07 10:10:34 --> Output Class Initialized
+INFO - 2025-04-07 10:10:34 --> Security Class Initialized
+DEBUG - 2025-04-07 10:10:34 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:10:34 --> Input Class Initialized
+INFO - 2025-04-07 10:10:34 --> Language Class Initialized
+INFO - 2025-04-07 10:10:47 --> Config Class Initialized
+INFO - 2025-04-07 10:10:47 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:10:47 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:10:47 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:10:47 --> URI Class Initialized
+INFO - 2025-04-07 10:10:47 --> Router Class Initialized
+INFO - 2025-04-07 10:10:47 --> Output Class Initialized
+INFO - 2025-04-07 10:10:47 --> Security Class Initialized
+DEBUG - 2025-04-07 10:10:47 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:10:47 --> Input Class Initialized
+INFO - 2025-04-07 10:10:47 --> Language Class Initialized
+INFO - 2025-04-07 10:10:58 --> Config Class Initialized
+INFO - 2025-04-07 10:10:58 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:10:58 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:10:58 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:10:58 --> URI Class Initialized
+INFO - 2025-04-07 10:10:58 --> Router Class Initialized
+INFO - 2025-04-07 10:10:58 --> Output Class Initialized
+INFO - 2025-04-07 10:10:58 --> Security Class Initialized
+DEBUG - 2025-04-07 10:10:58 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:10:58 --> Input Class Initialized
+INFO - 2025-04-07 10:10:58 --> Language Class Initialized
+INFO - 2025-04-07 10:11:14 --> Config Class Initialized
+INFO - 2025-04-07 10:11:14 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:11:14 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:11:14 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:11:14 --> URI Class Initialized
+INFO - 2025-04-07 10:11:14 --> Router Class Initialized
+INFO - 2025-04-07 10:11:14 --> Output Class Initialized
+INFO - 2025-04-07 10:11:14 --> Security Class Initialized
+DEBUG - 2025-04-07 10:11:14 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:11:14 --> Input Class Initialized
+INFO - 2025-04-07 10:11:14 --> Language Class Initialized
+INFO - 2025-04-07 10:11:35 --> Config Class Initialized
+INFO - 2025-04-07 10:11:35 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:11:35 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:11:35 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:11:35 --> URI Class Initialized
+INFO - 2025-04-07 10:11:35 --> Router Class Initialized
+INFO - 2025-04-07 10:11:35 --> Output Class Initialized
+INFO - 2025-04-07 10:11:35 --> Security Class Initialized
+DEBUG - 2025-04-07 10:11:35 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:11:35 --> Input Class Initialized
+INFO - 2025-04-07 10:11:35 --> Language Class Initialized
+INFO - 2025-04-07 10:11:50 --> Config Class Initialized
+INFO - 2025-04-07 10:11:50 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:11:50 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:11:50 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:11:50 --> URI Class Initialized
+INFO - 2025-04-07 10:11:50 --> Router Class Initialized
+INFO - 2025-04-07 10:11:50 --> Output Class Initialized
+INFO - 2025-04-07 10:11:50 --> Security Class Initialized
+DEBUG - 2025-04-07 10:11:50 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:11:50 --> Input Class Initialized
+INFO - 2025-04-07 10:11:50 --> Language Class Initialized
+INFO - 2025-04-07 10:13:01 --> Config Class Initialized
+INFO - 2025-04-07 10:13:01 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:13:01 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:13:01 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:13:01 --> URI Class Initialized
+INFO - 2025-04-07 10:13:01 --> Router Class Initialized
+INFO - 2025-04-07 10:13:01 --> Output Class Initialized
+INFO - 2025-04-07 10:13:01 --> Security Class Initialized
+DEBUG - 2025-04-07 10:13:01 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:13:01 --> Input Class Initialized
+INFO - 2025-04-07 10:13:01 --> Language Class Initialized
+INFO - 2025-04-07 10:13:12 --> Config Class Initialized
+INFO - 2025-04-07 10:13:12 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:13:12 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:13:12 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:13:12 --> URI Class Initialized
+INFO - 2025-04-07 10:13:12 --> Router Class Initialized
+INFO - 2025-04-07 10:13:12 --> Output Class Initialized
+INFO - 2025-04-07 10:13:12 --> Security Class Initialized
+DEBUG - 2025-04-07 10:13:12 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:13:12 --> Input Class Initialized
+INFO - 2025-04-07 10:13:12 --> Language Class Initialized
+INFO - 2025-04-07 10:13:26 --> Config Class Initialized
+INFO - 2025-04-07 10:13:26 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:13:26 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:13:26 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:13:26 --> URI Class Initialized
+INFO - 2025-04-07 10:13:26 --> Router Class Initialized
+INFO - 2025-04-07 10:13:26 --> Output Class Initialized
+INFO - 2025-04-07 10:13:26 --> Security Class Initialized
+DEBUG - 2025-04-07 10:13:26 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:13:26 --> Input Class Initialized
+INFO - 2025-04-07 10:13:26 --> Language Class Initialized
+INFO - 2025-04-07 10:13:41 --> Config Class Initialized
+INFO - 2025-04-07 10:13:41 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:13:41 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:13:41 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:13:41 --> URI Class Initialized
+INFO - 2025-04-07 10:13:41 --> Router Class Initialized
+INFO - 2025-04-07 10:13:41 --> Output Class Initialized
+INFO - 2025-04-07 10:13:41 --> Security Class Initialized
+DEBUG - 2025-04-07 10:13:41 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:13:41 --> Input Class Initialized
+INFO - 2025-04-07 10:13:41 --> Language Class Initialized
+INFO - 2025-04-07 10:13:51 --> Config Class Initialized
+INFO - 2025-04-07 10:13:51 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:13:51 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:13:51 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:13:51 --> URI Class Initialized
+INFO - 2025-04-07 10:13:51 --> Router Class Initialized
+INFO - 2025-04-07 10:13:51 --> Output Class Initialized
+INFO - 2025-04-07 10:13:51 --> Security Class Initialized
+DEBUG - 2025-04-07 10:13:51 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:13:51 --> Input Class Initialized
+INFO - 2025-04-07 10:13:51 --> Language Class Initialized
+INFO - 2025-04-07 10:14:07 --> Config Class Initialized
+INFO - 2025-04-07 10:14:07 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:14:07 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:14:07 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:14:07 --> URI Class Initialized
+INFO - 2025-04-07 10:14:07 --> Router Class Initialized
+INFO - 2025-04-07 10:14:07 --> Output Class Initialized
+INFO - 2025-04-07 10:14:07 --> Security Class Initialized
+DEBUG - 2025-04-07 10:14:07 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:14:07 --> Input Class Initialized
+INFO - 2025-04-07 10:14:07 --> Language Class Initialized
+INFO - 2025-04-07 10:14:23 --> Config Class Initialized
+INFO - 2025-04-07 10:14:23 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:14:23 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:14:23 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:14:23 --> URI Class Initialized
+INFO - 2025-04-07 10:14:23 --> Router Class Initialized
+INFO - 2025-04-07 10:14:23 --> Output Class Initialized
+INFO - 2025-04-07 10:14:23 --> Security Class Initialized
+DEBUG - 2025-04-07 10:14:23 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:14:23 --> Input Class Initialized
+INFO - 2025-04-07 10:14:23 --> Language Class Initialized
+ERROR - 2025-04-07 10:14:23 --> Severity: error --> Exception: syntax error, unexpected '/', expecting function (T_FUNCTION) or const (T_CONST) C:\wamp64\www\stemoppapp\application\controllers\Menu.php 14196
+INFO - 2025-04-07 10:14:26 --> Config Class Initialized
+INFO - 2025-04-07 10:14:26 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:14:26 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:14:26 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:14:26 --> URI Class Initialized
+INFO - 2025-04-07 10:14:26 --> Router Class Initialized
+INFO - 2025-04-07 10:14:26 --> Output Class Initialized
+INFO - 2025-04-07 10:14:26 --> Security Class Initialized
+DEBUG - 2025-04-07 10:14:26 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:14:26 --> Input Class Initialized
+INFO - 2025-04-07 10:14:26 --> Language Class Initialized
+INFO - 2025-04-07 10:14:42 --> Config Class Initialized
+INFO - 2025-04-07 10:14:42 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:14:42 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:14:42 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:14:42 --> URI Class Initialized
+INFO - 2025-04-07 10:14:42 --> Router Class Initialized
+INFO - 2025-04-07 10:14:42 --> Output Class Initialized
+INFO - 2025-04-07 10:14:42 --> Security Class Initialized
+DEBUG - 2025-04-07 10:14:42 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:14:42 --> Input Class Initialized
+INFO - 2025-04-07 10:14:42 --> Language Class Initialized
+INFO - 2025-04-07 10:15:00 --> Config Class Initialized
+INFO - 2025-04-07 10:15:00 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:15:00 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:15:00 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:15:00 --> URI Class Initialized
+INFO - 2025-04-07 10:15:00 --> Router Class Initialized
+INFO - 2025-04-07 10:15:00 --> Output Class Initialized
+INFO - 2025-04-07 10:15:00 --> Security Class Initialized
+DEBUG - 2025-04-07 10:15:00 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:15:00 --> Input Class Initialized
+INFO - 2025-04-07 10:15:00 --> Language Class Initialized
+INFO - 2025-04-07 10:15:12 --> Config Class Initialized
+INFO - 2025-04-07 10:15:12 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:15:12 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:15:12 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:15:12 --> URI Class Initialized
+INFO - 2025-04-07 10:15:12 --> Router Class Initialized
+INFO - 2025-04-07 10:15:12 --> Output Class Initialized
+INFO - 2025-04-07 10:15:12 --> Security Class Initialized
+DEBUG - 2025-04-07 10:15:12 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:15:12 --> Input Class Initialized
+INFO - 2025-04-07 10:15:12 --> Language Class Initialized
+INFO - 2025-04-07 10:15:25 --> Config Class Initialized
+INFO - 2025-04-07 10:15:25 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:15:25 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:15:25 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:15:25 --> URI Class Initialized
+INFO - 2025-04-07 10:15:25 --> Router Class Initialized
+INFO - 2025-04-07 10:15:25 --> Output Class Initialized
+INFO - 2025-04-07 10:15:25 --> Security Class Initialized
+DEBUG - 2025-04-07 10:15:25 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:15:25 --> Input Class Initialized
+INFO - 2025-04-07 10:15:25 --> Language Class Initialized
+INFO - 2025-04-07 10:19:24 --> Config Class Initialized
+INFO - 2025-04-07 10:19:24 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:19:24 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:19:24 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:19:24 --> URI Class Initialized
+INFO - 2025-04-07 10:19:24 --> Router Class Initialized
+INFO - 2025-04-07 10:19:24 --> Output Class Initialized
+INFO - 2025-04-07 10:19:24 --> Security Class Initialized
+DEBUG - 2025-04-07 10:19:24 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:19:24 --> Input Class Initialized
+INFO - 2025-04-07 10:19:24 --> Language Class Initialized
+INFO - 2025-04-07 10:19:44 --> Config Class Initialized
+INFO - 2025-04-07 10:19:44 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:19:44 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:19:44 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:19:44 --> URI Class Initialized
+INFO - 2025-04-07 10:19:44 --> Router Class Initialized
+INFO - 2025-04-07 10:19:44 --> Output Class Initialized
+INFO - 2025-04-07 10:19:44 --> Security Class Initialized
+DEBUG - 2025-04-07 10:19:44 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:19:44 --> Input Class Initialized
+INFO - 2025-04-07 10:19:44 --> Language Class Initialized
+INFO - 2025-04-07 10:19:56 --> Config Class Initialized
+INFO - 2025-04-07 10:19:56 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:19:56 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:19:56 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:19:56 --> URI Class Initialized
+INFO - 2025-04-07 10:19:56 --> Router Class Initialized
+INFO - 2025-04-07 10:19:56 --> Output Class Initialized
+INFO - 2025-04-07 10:19:56 --> Security Class Initialized
+DEBUG - 2025-04-07 10:19:56 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:19:56 --> Input Class Initialized
+INFO - 2025-04-07 10:19:56 --> Language Class Initialized
+INFO - 2025-04-07 10:20:08 --> Config Class Initialized
+INFO - 2025-04-07 10:20:08 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:20:08 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:20:08 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:20:08 --> URI Class Initialized
+INFO - 2025-04-07 10:20:08 --> Router Class Initialized
+INFO - 2025-04-07 10:20:08 --> Output Class Initialized
+INFO - 2025-04-07 10:20:08 --> Security Class Initialized
+DEBUG - 2025-04-07 10:20:08 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:20:08 --> Input Class Initialized
+INFO - 2025-04-07 10:20:08 --> Language Class Initialized
+INFO - 2025-04-07 10:21:14 --> Config Class Initialized
+INFO - 2025-04-07 10:21:14 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:21:14 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:21:14 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:21:14 --> URI Class Initialized
+INFO - 2025-04-07 10:21:14 --> Router Class Initialized
+INFO - 2025-04-07 10:21:14 --> Output Class Initialized
+INFO - 2025-04-07 10:21:14 --> Security Class Initialized
+DEBUG - 2025-04-07 10:21:14 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:21:14 --> Input Class Initialized
+INFO - 2025-04-07 10:21:14 --> Language Class Initialized
+INFO - 2025-04-07 10:21:39 --> Config Class Initialized
+INFO - 2025-04-07 10:21:39 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:21:39 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:21:39 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:21:39 --> URI Class Initialized
+INFO - 2025-04-07 10:21:39 --> Router Class Initialized
+INFO - 2025-04-07 10:21:39 --> Output Class Initialized
+INFO - 2025-04-07 10:21:39 --> Security Class Initialized
+DEBUG - 2025-04-07 10:21:39 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:21:39 --> Input Class Initialized
+INFO - 2025-04-07 10:21:39 --> Language Class Initialized
+INFO - 2025-04-07 10:21:54 --> Config Class Initialized
+INFO - 2025-04-07 10:21:54 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:21:54 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:21:54 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:21:54 --> URI Class Initialized
+INFO - 2025-04-07 10:21:54 --> Router Class Initialized
+INFO - 2025-04-07 10:21:54 --> Output Class Initialized
+INFO - 2025-04-07 10:21:54 --> Security Class Initialized
+DEBUG - 2025-04-07 10:21:54 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:21:54 --> Input Class Initialized
+INFO - 2025-04-07 10:21:54 --> Language Class Initialized
+INFO - 2025-04-07 10:22:02 --> Config Class Initialized
+INFO - 2025-04-07 10:22:02 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:22:02 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:22:02 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:22:02 --> URI Class Initialized
+INFO - 2025-04-07 10:22:02 --> Router Class Initialized
+INFO - 2025-04-07 10:22:02 --> Output Class Initialized
+INFO - 2025-04-07 10:22:02 --> Security Class Initialized
+DEBUG - 2025-04-07 10:22:02 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:22:02 --> Input Class Initialized
+INFO - 2025-04-07 10:22:02 --> Language Class Initialized
+INFO - 2025-04-07 10:22:11 --> Config Class Initialized
+INFO - 2025-04-07 10:22:11 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:22:11 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:22:11 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:22:11 --> URI Class Initialized
+INFO - 2025-04-07 10:22:11 --> Router Class Initialized
+INFO - 2025-04-07 10:22:11 --> Output Class Initialized
+INFO - 2025-04-07 10:22:11 --> Security Class Initialized
+DEBUG - 2025-04-07 10:22:11 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:22:11 --> Input Class Initialized
+INFO - 2025-04-07 10:22:11 --> Language Class Initialized
+INFO - 2025-04-07 10:22:26 --> Config Class Initialized
+INFO - 2025-04-07 10:22:26 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:22:26 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:22:26 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:22:26 --> URI Class Initialized
+INFO - 2025-04-07 10:22:26 --> Router Class Initialized
+INFO - 2025-04-07 10:22:26 --> Output Class Initialized
+INFO - 2025-04-07 10:22:26 --> Security Class Initialized
+DEBUG - 2025-04-07 10:22:26 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:22:26 --> Input Class Initialized
+INFO - 2025-04-07 10:22:26 --> Language Class Initialized
+INFO - 2025-04-07 10:23:08 --> Config Class Initialized
+INFO - 2025-04-07 10:23:08 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:23:08 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:23:08 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:23:08 --> URI Class Initialized
+INFO - 2025-04-07 10:23:08 --> Router Class Initialized
+INFO - 2025-04-07 10:23:08 --> Output Class Initialized
+INFO - 2025-04-07 10:23:08 --> Security Class Initialized
+DEBUG - 2025-04-07 10:23:08 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:23:08 --> Input Class Initialized
+INFO - 2025-04-07 10:23:08 --> Language Class Initialized
+INFO - 2025-04-07 10:25:13 --> Config Class Initialized
+INFO - 2025-04-07 10:25:13 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:25:13 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:25:13 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:25:13 --> URI Class Initialized
+INFO - 2025-04-07 10:25:13 --> Router Class Initialized
+INFO - 2025-04-07 10:25:13 --> Output Class Initialized
+INFO - 2025-04-07 10:25:13 --> Security Class Initialized
+DEBUG - 2025-04-07 10:25:13 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:25:13 --> Input Class Initialized
+INFO - 2025-04-07 10:25:13 --> Language Class Initialized
+INFO - 2025-04-07 10:25:39 --> Config Class Initialized
+INFO - 2025-04-07 10:25:39 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:25:39 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:25:39 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:25:39 --> URI Class Initialized
+INFO - 2025-04-07 10:25:39 --> Router Class Initialized
+INFO - 2025-04-07 10:25:39 --> Output Class Initialized
+INFO - 2025-04-07 10:25:39 --> Security Class Initialized
+DEBUG - 2025-04-07 10:25:39 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:25:39 --> Input Class Initialized
+INFO - 2025-04-07 10:25:39 --> Language Class Initialized
+ERROR - 2025-04-07 15:55:39 --> 404 Page Not Found: Menu/visitDuringBaselineME
+INFO - 2025-04-07 10:25:44 --> Config Class Initialized
+INFO - 2025-04-07 10:25:44 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:25:44 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:25:44 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:25:44 --> URI Class Initialized
+INFO - 2025-04-07 10:25:44 --> Router Class Initialized
+INFO - 2025-04-07 10:25:44 --> Output Class Initialized
+INFO - 2025-04-07 10:25:44 --> Security Class Initialized
+DEBUG - 2025-04-07 10:25:44 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:25:44 --> Input Class Initialized
+INFO - 2025-04-07 10:25:44 --> Language Class Initialized
+ERROR - 2025-04-07 15:55:44 --> 404 Page Not Found: Menu/index
+INFO - 2025-04-07 10:25:47 --> Config Class Initialized
+INFO - 2025-04-07 10:25:47 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:25:47 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:25:47 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:25:47 --> URI Class Initialized
+INFO - 2025-04-07 10:25:47 --> Router Class Initialized
+INFO - 2025-04-07 10:25:47 --> Output Class Initialized
+INFO - 2025-04-07 10:25:47 --> Security Class Initialized
+DEBUG - 2025-04-07 10:25:47 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:25:47 --> Input Class Initialized
+INFO - 2025-04-07 10:25:47 --> Language Class Initialized
+INFO - 2025-04-07 15:55:47 --> Loader Class Initialized
+INFO - 2025-04-07 15:55:47 --> Helper loaded: url_helper
+INFO - 2025-04-07 15:55:47 --> Helper loaded: form_helper
+INFO - 2025-04-07 15:55:47 --> Helper loaded: file_helper
+INFO - 2025-04-07 15:55:47 --> Helper loaded: email_helper
+INFO - 2025-04-07 15:55:47 --> Helper loaded: cookie_helper
+INFO - 2025-04-07 15:55:47 --> Helper loaded: functiondd_helper
+INFO - 2025-04-07 15:55:47 --> Database Driver Class Initialized
+DEBUG - 2025-04-07 15:55:47 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-04-07 15:55:47 --> Session: Class initialized using 'files' driver.
+INFO - 2025-04-07 15:55:47 --> Controller Class Initialized
+INFO - 2025-04-07 15:55:47 --> Form Validation Class Initialized
+INFO - 2025-04-07 15:55:47 --> Model "Menu_model" initialized
+INFO - 2025-04-07 15:55:47 --> Helper loaded: common_helper
+INFO - 2025-04-07 15:55:47 --> Helper loaded: taskplanner_helper
+INFO - 2025-04-07 15:55:47 --> File loaded: C:\wamp64\www\stemoppapp\application\views\index.php
+INFO - 2025-04-07 15:55:47 --> Final output sent to browser
+DEBUG - 2025-04-07 15:55:47 --> Total execution time: 0.3049
+INFO - 2025-04-07 10:25:47 --> Config Class Initialized
+INFO - 2025-04-07 10:25:47 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:25:47 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:25:47 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:25:47 --> URI Class Initialized
+INFO - 2025-04-07 10:25:47 --> Router Class Initialized
+INFO - 2025-04-07 10:25:47 --> Output Class Initialized
+INFO - 2025-04-07 10:25:47 --> Security Class Initialized
+DEBUG - 2025-04-07 10:25:47 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:25:47 --> Input Class Initialized
+INFO - 2025-04-07 10:25:47 --> Language Class Initialized
+ERROR - 2025-04-07 15:55:47 --> 404 Page Not Found: Menu/js
+INFO - 2025-04-07 10:25:47 --> Config Class Initialized
+INFO - 2025-04-07 10:25:47 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:25:47 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:25:47 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:25:47 --> URI Class Initialized
+INFO - 2025-04-07 10:25:47 --> Router Class Initialized
+INFO - 2025-04-07 10:25:47 --> Output Class Initialized
+INFO - 2025-04-07 10:25:47 --> Security Class Initialized
+DEBUG - 2025-04-07 10:25:47 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:25:47 --> Input Class Initialized
+INFO - 2025-04-07 10:25:47 --> Language Class Initialized
+ERROR - 2025-04-07 15:55:47 --> 404 Page Not Found: Menu/js
+INFO - 2025-04-07 10:25:47 --> Config Class Initialized
+INFO - 2025-04-07 10:25:47 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:25:47 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:25:47 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:25:47 --> URI Class Initialized
+INFO - 2025-04-07 10:25:47 --> Router Class Initialized
+INFO - 2025-04-07 10:25:47 --> Output Class Initialized
+INFO - 2025-04-07 10:25:47 --> Security Class Initialized
+DEBUG - 2025-04-07 10:25:47 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:25:47 --> Input Class Initialized
+INFO - 2025-04-07 10:25:47 --> Language Class Initialized
+ERROR - 2025-04-07 15:55:47 --> 404 Page Not Found: Menu/js
+INFO - 2025-04-07 10:25:48 --> Config Class Initialized
+INFO - 2025-04-07 10:25:48 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:25:48 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:25:48 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:25:48 --> URI Class Initialized
+INFO - 2025-04-07 10:25:48 --> Router Class Initialized
+INFO - 2025-04-07 10:25:48 --> Output Class Initialized
+INFO - 2025-04-07 10:25:48 --> Security Class Initialized
+DEBUG - 2025-04-07 10:25:48 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:25:48 --> Input Class Initialized
+INFO - 2025-04-07 10:25:48 --> Language Class Initialized
+ERROR - 2025-04-07 10:25:48 --> 404 Page Not Found: Assets/webfonts
+INFO - 2025-04-07 10:25:48 --> Config Class Initialized
+INFO - 2025-04-07 10:25:48 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:25:48 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:25:48 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:25:48 --> URI Class Initialized
+INFO - 2025-04-07 10:25:48 --> Router Class Initialized
+INFO - 2025-04-07 10:25:48 --> Output Class Initialized
+INFO - 2025-04-07 10:25:48 --> Security Class Initialized
+DEBUG - 2025-04-07 10:25:48 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:25:48 --> Input Class Initialized
+INFO - 2025-04-07 10:25:48 --> Language Class Initialized
+ERROR - 2025-04-07 10:25:48 --> 404 Page Not Found: Assets/webfonts
+INFO - 2025-04-07 10:25:48 --> Config Class Initialized
+INFO - 2025-04-07 10:25:48 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:25:48 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:25:48 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:25:48 --> URI Class Initialized
+INFO - 2025-04-07 10:25:48 --> Router Class Initialized
+INFO - 2025-04-07 10:25:48 --> Output Class Initialized
+INFO - 2025-04-07 10:25:48 --> Security Class Initialized
+DEBUG - 2025-04-07 10:25:48 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:25:48 --> Input Class Initialized
+INFO - 2025-04-07 10:25:48 --> Language Class Initialized
+ERROR - 2025-04-07 10:25:48 --> 404 Page Not Found: Assets/webfonts
+INFO - 2025-04-07 10:25:49 --> Config Class Initialized
+INFO - 2025-04-07 10:25:49 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:25:49 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:25:49 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:25:49 --> URI Class Initialized
+INFO - 2025-04-07 10:25:49 --> Router Class Initialized
+INFO - 2025-04-07 10:25:49 --> Output Class Initialized
+INFO - 2025-04-07 10:25:49 --> Security Class Initialized
+DEBUG - 2025-04-07 10:25:49 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:25:49 --> Input Class Initialized
+INFO - 2025-04-07 10:25:49 --> Language Class Initialized
+INFO - 2025-04-07 15:55:49 --> Loader Class Initialized
+INFO - 2025-04-07 15:55:49 --> Helper loaded: url_helper
+INFO - 2025-04-07 15:55:49 --> Helper loaded: form_helper
+INFO - 2025-04-07 15:55:49 --> Helper loaded: file_helper
+INFO - 2025-04-07 15:55:49 --> Helper loaded: email_helper
+INFO - 2025-04-07 15:55:49 --> Helper loaded: cookie_helper
+INFO - 2025-04-07 15:55:49 --> Helper loaded: functiondd_helper
+INFO - 2025-04-07 15:55:49 --> Database Driver Class Initialized
+DEBUG - 2025-04-07 15:55:49 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-04-07 15:55:49 --> Session: Class initialized using 'files' driver.
+INFO - 2025-04-07 15:55:49 --> Controller Class Initialized
+INFO - 2025-04-07 15:55:49 --> Form Validation Class Initialized
+INFO - 2025-04-07 15:55:49 --> Model "Menu_model" initialized
+INFO - 2025-04-07 15:55:49 --> Helper loaded: common_helper
+INFO - 2025-04-07 15:55:49 --> Helper loaded: taskplanner_helper
+INFO - 2025-04-07 10:25:49 --> Config Class Initialized
+INFO - 2025-04-07 10:25:49 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:25:49 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:25:49 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:25:49 --> URI Class Initialized
+INFO - 2025-04-07 10:25:49 --> Router Class Initialized
+INFO - 2025-04-07 10:25:49 --> Output Class Initialized
+INFO - 2025-04-07 10:25:49 --> Security Class Initialized
+DEBUG - 2025-04-07 10:25:49 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:25:49 --> Input Class Initialized
+INFO - 2025-04-07 10:25:49 --> Language Class Initialized
+INFO - 2025-04-07 15:55:49 --> Loader Class Initialized
+INFO - 2025-04-07 15:55:49 --> Helper loaded: url_helper
+INFO - 2025-04-07 15:55:49 --> Helper loaded: form_helper
+INFO - 2025-04-07 15:55:49 --> Helper loaded: file_helper
+INFO - 2025-04-07 15:55:49 --> Helper loaded: email_helper
+INFO - 2025-04-07 15:55:49 --> Helper loaded: cookie_helper
+INFO - 2025-04-07 15:55:49 --> Helper loaded: functiondd_helper
+INFO - 2025-04-07 15:55:49 --> Database Driver Class Initialized
+DEBUG - 2025-04-07 15:55:49 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-04-07 15:55:49 --> Session: Class initialized using 'files' driver.
+INFO - 2025-04-07 15:55:49 --> Controller Class Initialized
+INFO - 2025-04-07 15:55:49 --> Form Validation Class Initialized
+INFO - 2025-04-07 15:55:49 --> Model "Menu_model" initialized
+INFO - 2025-04-07 15:55:49 --> Helper loaded: common_helper
+INFO - 2025-04-07 15:55:49 --> Helper loaded: taskplanner_helper
+ERROR - 2025-04-07 15:55:49 --> Severity: Notice --> Undefined index: utype C:\wamp64\www\stemoppapp\application\controllers\Menu.php 7068
+INFO - 2025-04-07 15:55:50 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/nav.php
+ERROR - 2025-04-07 15:55:50 --> Severity: Notice --> Undefined variable: type_of_task C:\wamp64\www\stemoppapp\application\views\PIA\index.php 138
+ERROR - 2025-04-07 15:55:50 --> Severity: Notice --> Undefined variable: type_of_task C:\wamp64\www\stemoppapp\application\views\PIA\index.php 138
+ERROR - 2025-04-07 15:55:50 --> Severity: Notice --> Undefined variable: type_of_task C:\wamp64\www\stemoppapp\application\views\PIA\index.php 138
+ERROR - 2025-04-07 15:55:50 --> Severity: Notice --> Undefined variable: type_of_task C:\wamp64\www\stemoppapp\application\views\PIA\index.php 138
+ERROR - 2025-04-07 15:55:50 --> Severity: Notice --> Undefined variable: type_of_task C:\wamp64\www\stemoppapp\application\views\PIA\index.php 138
+ERROR - 2025-04-07 15:55:50 --> Severity: Notice --> Undefined variable: type_of_task C:\wamp64\www\stemoppapp\application\views\PIA\index.php 138
+INFO - 2025-04-07 15:55:50 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/index.php
+INFO - 2025-04-07 15:55:50 --> File loaded: C:\wamp64\www\stemoppapp\application\views\templates/footer.php
+INFO - 2025-04-07 10:26:33 --> Config Class Initialized
+INFO - 2025-04-07 10:26:33 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:26:33 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:26:33 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:26:33 --> URI Class Initialized
+INFO - 2025-04-07 10:26:33 --> Router Class Initialized
+INFO - 2025-04-07 10:26:33 --> Output Class Initialized
+INFO - 2025-04-07 10:26:33 --> Security Class Initialized
+DEBUG - 2025-04-07 10:26:33 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:26:33 --> Input Class Initialized
+INFO - 2025-04-07 10:26:33 --> Language Class Initialized
+INFO - 2025-04-07 15:56:33 --> Loader Class Initialized
+INFO - 2025-04-07 15:56:33 --> Helper loaded: url_helper
+INFO - 2025-04-07 15:56:33 --> Helper loaded: form_helper
+INFO - 2025-04-07 15:56:33 --> Helper loaded: file_helper
+INFO - 2025-04-07 15:56:33 --> Helper loaded: email_helper
+INFO - 2025-04-07 15:56:33 --> Helper loaded: cookie_helper
+INFO - 2025-04-07 15:56:33 --> Helper loaded: functiondd_helper
+INFO - 2025-04-07 15:56:33 --> Database Driver Class Initialized
+DEBUG - 2025-04-07 15:56:33 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-04-07 15:56:33 --> Session: Class initialized using 'files' driver.
+INFO - 2025-04-07 15:56:33 --> Controller Class Initialized
+INFO - 2025-04-07 15:56:33 --> Form Validation Class Initialized
+INFO - 2025-04-07 15:56:33 --> Model "Menu_model" initialized
+INFO - 2025-04-07 15:56:33 --> Helper loaded: common_helper
+INFO - 2025-04-07 15:56:33 --> Helper loaded: taskplanner_helper
+ERROR - 2025-04-07 15:56:33 --> Severity: Notice --> Undefined index: utype C:\wamp64\www\stemoppapp\application\controllers\Menu.php 7065
+INFO - 2025-04-07 15:56:33 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/nav.php
+ERROR - 2025-04-07 15:56:33 --> Severity: Notice --> Undefined variable: type_of_task C:\wamp64\www\stemoppapp\application\views\PIA\index.php 138
+ERROR - 2025-04-07 15:56:33 --> Severity: Notice --> Undefined variable: type_of_task C:\wamp64\www\stemoppapp\application\views\PIA\index.php 138
+ERROR - 2025-04-07 15:56:33 --> Severity: Notice --> Undefined variable: type_of_task C:\wamp64\www\stemoppapp\application\views\PIA\index.php 138
+ERROR - 2025-04-07 15:56:33 --> Severity: Notice --> Undefined variable: type_of_task C:\wamp64\www\stemoppapp\application\views\PIA\index.php 138
+ERROR - 2025-04-07 15:56:33 --> Severity: Notice --> Undefined variable: type_of_task C:\wamp64\www\stemoppapp\application\views\PIA\index.php 138
+ERROR - 2025-04-07 15:56:33 --> Severity: Notice --> Undefined variable: type_of_task C:\wamp64\www\stemoppapp\application\views\PIA\index.php 138
+INFO - 2025-04-07 15:56:33 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/index.php
+INFO - 2025-04-07 15:56:33 --> File loaded: C:\wamp64\www\stemoppapp\application\views\templates/footer.php
+INFO - 2025-04-07 15:56:33 --> Final output sent to browser
+DEBUG - 2025-04-07 15:56:33 --> Total execution time: 0.4810
+INFO - 2025-04-07 10:27:38 --> Config Class Initialized
+INFO - 2025-04-07 10:27:38 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:27:38 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:27:38 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:27:38 --> URI Class Initialized
+INFO - 2025-04-07 10:27:38 --> Router Class Initialized
+INFO - 2025-04-07 10:27:38 --> Output Class Initialized
+INFO - 2025-04-07 10:27:38 --> Security Class Initialized
+DEBUG - 2025-04-07 10:27:38 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:27:38 --> Input Class Initialized
+INFO - 2025-04-07 10:27:38 --> Language Class Initialized
+INFO - 2025-04-07 15:57:38 --> Loader Class Initialized
+INFO - 2025-04-07 15:57:38 --> Helper loaded: url_helper
+INFO - 2025-04-07 15:57:38 --> Helper loaded: form_helper
+INFO - 2025-04-07 15:57:38 --> Helper loaded: file_helper
+INFO - 2025-04-07 15:57:38 --> Helper loaded: email_helper
+INFO - 2025-04-07 15:57:38 --> Helper loaded: cookie_helper
+INFO - 2025-04-07 15:57:38 --> Helper loaded: functiondd_helper
+INFO - 2025-04-07 15:57:38 --> Database Driver Class Initialized
+DEBUG - 2025-04-07 15:57:38 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-04-07 15:57:38 --> Session: Class initialized using 'files' driver.
+INFO - 2025-04-07 15:57:38 --> Controller Class Initialized
+INFO - 2025-04-07 15:57:38 --> Form Validation Class Initialized
+INFO - 2025-04-07 15:57:38 --> Model "Menu_model" initialized
+INFO - 2025-04-07 15:57:38 --> Helper loaded: common_helper
+INFO - 2025-04-07 15:57:38 --> Helper loaded: taskplanner_helper
+INFO - 2025-04-07 15:57:39 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/nav.php
+INFO - 2025-04-07 15:57:39 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/index.php
+INFO - 2025-04-07 15:57:39 --> File loaded: C:\wamp64\www\stemoppapp\application\views\templates/footer.php
+INFO - 2025-04-07 15:57:39 --> Final output sent to browser
+DEBUG - 2025-04-07 15:57:39 --> Total execution time: 0.4979
+INFO - 2025-04-07 10:27:41 --> Config Class Initialized
+INFO - 2025-04-07 10:27:41 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:27:41 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:27:41 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:27:41 --> URI Class Initialized
+INFO - 2025-04-07 10:27:41 --> Router Class Initialized
+INFO - 2025-04-07 10:27:41 --> Output Class Initialized
+INFO - 2025-04-07 10:27:41 --> Security Class Initialized
+DEBUG - 2025-04-07 10:27:41 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:27:41 --> Input Class Initialized
+INFO - 2025-04-07 10:27:41 --> Language Class Initialized
+INFO - 2025-04-07 15:57:41 --> Loader Class Initialized
+INFO - 2025-04-07 15:57:41 --> Helper loaded: url_helper
+INFO - 2025-04-07 15:57:41 --> Helper loaded: form_helper
+INFO - 2025-04-07 15:57:41 --> Helper loaded: file_helper
+INFO - 2025-04-07 15:57:41 --> Helper loaded: email_helper
+INFO - 2025-04-07 15:57:41 --> Helper loaded: cookie_helper
+INFO - 2025-04-07 15:57:41 --> Helper loaded: functiondd_helper
+INFO - 2025-04-07 15:57:41 --> Database Driver Class Initialized
+DEBUG - 2025-04-07 15:57:41 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-04-07 15:57:41 --> Session: Class initialized using 'files' driver.
+INFO - 2025-04-07 15:57:41 --> Controller Class Initialized
+INFO - 2025-04-07 15:57:41 --> Form Validation Class Initialized
+INFO - 2025-04-07 15:57:41 --> Model "Menu_model" initialized
+INFO - 2025-04-07 15:57:41 --> Helper loaded: common_helper
+INFO - 2025-04-07 15:57:41 --> Helper loaded: taskplanner_helper
+INFO - 2025-04-07 15:57:41 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/VisitDuringBaselineMEView.php
+INFO - 2025-04-07 15:57:41 --> Final output sent to browser
+DEBUG - 2025-04-07 15:57:41 --> Total execution time: 0.0589
+INFO - 2025-04-07 10:27:42 --> Config Class Initialized
+INFO - 2025-04-07 10:27:42 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:27:42 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:27:42 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:27:42 --> URI Class Initialized
+INFO - 2025-04-07 10:27:42 --> Router Class Initialized
+INFO - 2025-04-07 10:27:42 --> Output Class Initialized
+INFO - 2025-04-07 10:27:42 --> Security Class Initialized
+DEBUG - 2025-04-07 10:27:42 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:27:42 --> Input Class Initialized
+INFO - 2025-04-07 10:27:42 --> Language Class Initialized
+INFO - 2025-04-07 15:57:42 --> Loader Class Initialized
+INFO - 2025-04-07 15:57:42 --> Helper loaded: url_helper
+INFO - 2025-04-07 15:57:42 --> Helper loaded: form_helper
+INFO - 2025-04-07 15:57:42 --> Helper loaded: file_helper
+INFO - 2025-04-07 15:57:42 --> Helper loaded: email_helper
+INFO - 2025-04-07 15:57:42 --> Helper loaded: cookie_helper
+INFO - 2025-04-07 15:57:42 --> Helper loaded: functiondd_helper
+INFO - 2025-04-07 15:57:42 --> Database Driver Class Initialized
+DEBUG - 2025-04-07 15:57:42 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-04-07 15:57:42 --> Session: Class initialized using 'files' driver.
+INFO - 2025-04-07 15:57:42 --> Controller Class Initialized
+INFO - 2025-04-07 15:57:42 --> Form Validation Class Initialized
+INFO - 2025-04-07 15:57:42 --> Model "Menu_model" initialized
+INFO - 2025-04-07 15:57:42 --> Helper loaded: common_helper
+INFO - 2025-04-07 15:57:42 --> Helper loaded: taskplanner_helper
+INFO - 2025-04-07 15:57:42 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/nav.php
+INFO - 2025-04-07 15:57:42 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/visitDuringBaselineMEViewPage.php
+INFO - 2025-04-07 15:57:42 --> File loaded: C:\wamp64\www\stemoppapp\application\views\templates/footer.php
+INFO - 2025-04-07 15:57:42 --> Final output sent to browser
+DEBUG - 2025-04-07 15:57:42 --> Total execution time: 0.0397
+INFO - 2025-04-07 10:50:07 --> Config Class Initialized
+INFO - 2025-04-07 10:50:07 --> Hooks Class Initialized
+DEBUG - 2025-04-07 10:50:07 --> UTF-8 Support Enabled
+INFO - 2025-04-07 10:50:07 --> Utf8 Class Initialized
+INFO - 2025-04-07 10:50:08 --> URI Class Initialized
+INFO - 2025-04-07 10:50:08 --> Router Class Initialized
+INFO - 2025-04-07 10:50:08 --> Output Class Initialized
+INFO - 2025-04-07 10:50:08 --> Security Class Initialized
+DEBUG - 2025-04-07 10:50:08 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-07 10:50:08 --> Input Class Initialized
+INFO - 2025-04-07 10:50:08 --> Language Class Initialized
+INFO - 2025-04-07 16:20:08 --> Loader Class Initialized
+INFO - 2025-04-07 16:20:08 --> Helper loaded: url_helper
+INFO - 2025-04-07 16:20:08 --> Helper loaded: form_helper
+INFO - 2025-04-07 16:20:08 --> Helper loaded: file_helper
+INFO - 2025-04-07 16:20:08 --> Helper loaded: email_helper
+INFO - 2025-04-07 16:20:08 --> Helper loaded: cookie_helper
+INFO - 2025-04-07 16:20:08 --> Helper loaded: functiondd_helper
+INFO - 2025-04-07 16:20:08 --> Database Driver Class Initialized
+DEBUG - 2025-04-07 16:20:08 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-04-07 16:20:08 --> Session: Class initialized using 'files' driver.
+INFO - 2025-04-07 16:20:08 --> Controller Class Initialized
+INFO - 2025-04-07 16:20:08 --> Form Validation Class Initialized
+INFO - 2025-04-07 16:20:08 --> Model "Menu_model" initialized
+INFO - 2025-04-07 16:20:08 --> Helper loaded: common_helper
+INFO - 2025-04-07 16:20:08 --> Helper loaded: taskplanner_helper
+INFO - 2025-04-07 16:20:08 --> File loaded: C:\wamp64\www\stemoppapp\application\views\PIA/VisitDuringBaselineMEView.php
+INFO - 2025-04-07 16:20:08 --> Final output sent to browser
+DEBUG - 2025-04-07 16:20:08 --> Total execution time: 0.1031
