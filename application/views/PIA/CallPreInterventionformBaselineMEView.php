@@ -1,5 +1,7 @@
 <div class="container mt-4 mb-5 p-4 border rounded">
   <form action="updateCallMnEBaseline" method="POST" id="meForm">
+  <input type="hidden" name="taskId" value="<?php echo $taskId; ?>"/>
+
     <!-- Action Completed -->
     <div class="mb-3">
       <label class="form-label fw-bold">Action Completed?</label><br>
