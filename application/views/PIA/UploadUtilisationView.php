@@ -1,5 +1,6 @@
 <div class="container my-5">
-        <form id="mscForm" enctype="multipart/form-data">
+<form name="uploadUtilisation" action="<?php echo base_url();?>Menu/updateUploadutilisationData" method="POST" enctype="multipart/form-data" >
+    <input type="hidden" name="taskId" value="<?php echo $taskId;?>" >
             <div class="row g-4">
                 <!-- Date Picker -->
                 <div class="col-md-6">
@@ -12,28 +13,21 @@
                     <label for="utilisationUpload" class="form-label">Upload Utilisation</label>
                     <input type="file" class="form-control" id="utilisationUpload" name="utilisationImage" accept="image/*" required>
                 </div>
-<div class="col-md-6">
-    <label for="classSelect" class="form-label">Select Class</label>
-    <select class="form-select" id="classSelect" name="class" required>
-        <option value="">-- Select Class --</option>
-        <?php for ($i = 1; $i <= 10; $i++) { ?>
-            <option value="<?php echo $i; ?>">Class <?php echo $i; ?></option>
-        <?php } ?>
-    </select>
-</div>
-                <!-- Model Multi-Select -->
-                <div class="col-md-6">
-                    <label for="modelSelect" class="form-label">Select Model</label>
-                    <select class="form-select" id="modelSelect" name="models[]" multiple="multiple" required>
-                    <?php foreach ($getFactoryModelList as $val) { ?>
-                                <option value="<?php echo $val['model_name']; ?>" data-model="<?php echo $val['model_name']; ?>">
-                            <?php echo $val['model_name']; ?>
-                                </option>
-                        <?php } ?>
-                        <!-- Add more options as needed -->
-                    </select>
-                </div>
 
+                <!-- Model Multi-Select -->
+                <div class="row g-4">
+    <?php for ($class = 1; $class <= 10; $class++) { ?>
+        <div class="col-md-6">
+            <label for="modelSelect_<?php echo $class; ?>" class="form-label">Class <?php echo $class; ?> - Select Models</label>
+            <select class="form-select model-select" id="modelSelect_<?php echo $class; ?>" name="models[<?php echo $class; ?>][]" multiple="multiple">
+            <?php foreach ($getFactoryModelList as $val) { ?>
+                        <option value="<?php echo $val['model_name']; ?>"><?php echo $val['model_name']; ?></option>
+                    
+                <?php } ?>
+            </select>
+        </div>
+    <?php } ?>
+</div>
                 <!-- Teacher Dropdown -->
                 <div class="col-md-6">
                     <label for="teacherSelect" class="form-label">Select Teacher</label>
@@ -77,29 +71,16 @@
     <script>
         $(document).ready(function () {
             // Show/hide textarea based on "Other" remark
-            // $('#remarkSelect').on('change', function () {
-            //     if ($(this).val() === 'Other') {
-            //         $('#otherRemarkBox').slideDown();
-            //         $('#otherRemark').attr('required', true);
-            //     } else {
-            //         $('#otherRemarkBox').slideUp();
-            //         $('#otherRemark').removeAttr('required');
-            //     }
-            // });
-
-
             $('#remarkSelect').on('change', function () {
-        if ($(this).val() === 'Other') {
-            $('#otherRemarkBox').slideDown();
-            $('#otherRemark').attr('required', true);
-        } else {
-            $('#otherRemarkBox').slideUp();
-            $('#otherRemark').removeAttr('required');
-        }
-    });
-
+                if ($(this).val() === 'Other') {
+                    $('#otherRemarkBox').slideDown();
+                    $('#otherRemark').attr('required', true);
+                } else {
+                    $('#otherRemarkBox').slideUp();
+                    $('#otherRemark').removeAttr('required');
+                }
+            });
         });
-
         $(document).ready(function () {
             // Populate Teacher Dropdown from API
             $.ajax({
@@ -115,29 +96,6 @@
                 }
             });
 
-$('#classSelect').on('change', function () {
-        var selectedClass = $(this).val();
-        if (selectedClass) {
-            $.ajax({
-                url: '<?php echo base_url(); ?>Menu/getModelsByClass/' + selectedClass,
-                method: 'GET',
-                dataType: 'json',
-                success: function (response) {
-                    var modelSelect = $('#modelSelect');
-                    modelSelect.empty();
-                    if (response.length > 0) {
-                        $.each(response, function (i, item) {
-                            modelSelect.append(
-                                `<option value="${item.model_name}" data-model="${item.model_name}">${item.model_name}</option>`
-                            );
-                        });
-                    } else {
-                        modelSelect.append('<option value="">No models found</option>');
-                    }
-                }
-            });
-        }
-    });
     // Existing Select2 + Other Remark logic
     
 });

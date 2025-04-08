@@ -76,13 +76,11 @@
                 <option value="no">No</option>
             </select>
         </div>
-
         <!-- Image Uploads -->
         <div class="mb-3">
             <label class="form-label">Gate Banner Logo with straight angle and visibility Photo</label>
             <input type="file" class="form-control" name="gateBanner" accept="image/*" required>
         </div>
-
         <div class="mb-3">
             <label class="form-label">Safety Measures Backdrop Photo</label>
             <input type="file" class="form-control" name="safetyPhoto" accept="image/*" required>

@@ -7381,7 +7381,6 @@ public function updateTask($tasktypeid=''){
         $config['file_name']      = $uniqueFileName;
         // Load the upload library and perform the upload
         $this->load->library('upload', $config);
-
         if ($this->upload->do_upload('file')){
             $uploadData = $this->upload->data(); // Uploaded file data
             $filename   = $uploadData['file_name'];
@@ -15406,7 +15405,6 @@ public function updateVisitDuringME(){
             // $taskInsertArr1[]                 = ['tbe_attachment_id'=>$tbe_attachement_id];
             }
         }
-
                  $i=0;
                  foreach($file_array_keys as $file_key=>$file_values){
                     if($file_key == 'selfie'){
@@ -17100,6 +17098,74 @@ public function getFTTPTeacherData($taskId){
         }
     }
     echo json_encode($teacherNames);
+}
+
+public function updateUploadutilisationData(){
+    $posted_data        = $_POST;
+    $user               = $_SESSION['user'];
+    $taskperformedby    = $user['dep_id'];
+    $taskId             =  $posted_data['taskId'];
+    $commonColumns      = [
+        'performed_by' => $_SESSION['user']['id'],
+        'updated_at'   => date("Y-m-d H:i:s"),
+        'status'       => 'active',
+        'tbe_id'       => $taskId
+     ];
+//    echo "<pre>";print_r($_FILES);
+     if(isset($_FILES)){
+        foreach($_FILES as $filekey=>$fileval){
+            $uploadPath                       = "uploads/Utilisation/upload/".date('Y-m-d')."/";
+            $status                           = $this->createDirectoryIfNotExists($uploadPath, $permissions = 0755);
+            $file_data['attachment_link']     = $this->uploadFile($_FILES[$filekey],$uploadPath);
+            $file_data['task_id']             = $taskId;
+            $file_data['user_id']             = $_SESSION['user']['id'];
+            $file_data['created_at']          = date('Y-m-d h:i:s');
+            $file_data['main_task_id']        = '44';
+            $tbe_attachement_id               = $this->Menu_model->insertTasksWithAttachements($file_data);
+        // $taskInsertArr1[]                 = ['tbe_attachment_id'=>$tbe_attachement_id];
+        }
+    }
+    foreach ($posted_data as $k => $val) {
+        if ($val != '' && !empty($val)){
+            // Assign main_Task_id based on the key
+            if($taskperformedby == '2'){
+            switch ($k){
+                case 'selectDate':              $main_Task_id = '43'; break;
+                case 'utilisationImage':        $main_Task_id = '44'; break;
+                case 'models':                  $main_Task_id = '45';    $val   = json_encode($posted_data['models']);
+                break;
+                case 'teacher':                 $main_Task_id = '46'; break;
+                case 'remark':                  $main_Task_id = '47'; break;
+                case 'otherRemark':              $main_Task_id = '47'; break;
+
+                default:
+                continue 2; // Skip unknown keys
+            }
+           
+           }
+        //    if(count($val)>1){
+        //        $val = implode('**',$val);
+        //    }
+            // Store data in array
+            $taskInsertArr1[] = [
+                'task_response' => $val,
+                'main_Task_id'  => $main_Task_id,
+                'remark' =>  $remark
+            ] + $commonColumns;
+            }
+        }
+       
+       $attachment_link = '';
+    // Insert only if there's data
+       $current_date =  date('Y-m-d h:i:s');
+            if(!empty($taskInsertArr1)){
+                $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+                // $attachmentData = 'task_id'=>$taskId 'attachment_link'=>,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date;
+            //  $this->Menu_model->insertTasksWithAttachements(['task_id'=>$taskId ,'attachment_link'=>$attachment_link,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date]);
+            }
+       $updatetblcalleventsData    = ['initiate_datetime'=>isset($posted_data['elapsed_time']) ? $posted_data['elapsed_time'] : "",'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+       $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+       redirect('Menu/Dashboard');
 }
 
 
