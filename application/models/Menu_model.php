@@ -6172,7 +6172,7 @@ public function getTaskDetails($taskId,$taskactionId){
 public function insert_task_execution($data){
     
     $this->db->insert('task_execution_details', $data);
-    echo $this->db->last_query();exit;
+   
 }
 
 //  public function task_execution_details($data){
@@ -7205,7 +7205,6 @@ public function StoreProgramTimelineData($projectcode,$uid,$bdid,$wmessage,$comm
 
 public function set_ph_timeline($pcode, $dud, $dad, $pd, $pbpd, $pad, $disd, $insd, $insrd, $rrd, $remark,$task_id,$join_call_id,$delivery_date,$transit_process,$pre_install_call) {
     $cdate = date('Y-m-d H:i:s');
-
     // Prepare data for update
     $updateData = [
         'cremark' => $remark,
@@ -7247,6 +7246,14 @@ ORDER BY
 DESC");
     return $query->result();
 }
+public function getFTTPTeacherData($taskId){
+
+    $query = $this->db->query("SELECT task_response FROM task_execution_details WHERE tbe_id = '".$taskId."' ORDER BY id DESC LIMIT 1 ");
+    $data  = $query->row_array();
+    return json_decode($data['task_response']);
+}
+
+
 
 
 }

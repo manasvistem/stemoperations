@@ -7122,12 +7122,13 @@ class Menu extends CI_Controller {
             $data['formdata']               = $this->Menu_model->getViewFormData($tasktypeid,$dept);
             $depnameData                    = $this->Menu_model->get_depatment_byid($dept);
             $dep_name                       = $depnameData[0]->dep_name;
-        //  $data['getFactoryModelList']    = $this->Menu_model->getFactoryModelList();
+            $data['getFactoryModelList']    = $this->Menu_model->getFactoryModelList();
+
             // if($tasktypeid == '30' && $dept == '12'){
             //     // $getData = $this->Menu_model->getReportData($tasktypeid,$user_id);
             //     // dd($getData);exit;
             // }
-         
+      //   echo $taskId; exit;
             $this->display($dep_name,$viewname,$data,$type='modal');
     }
 
@@ -15220,6 +15221,7 @@ public function duringFTTPVisitPage($taskId){
 
 public function updateTeacherInformationFTTP(){
     $posted_data     = $_POST;
+    $taskId          = $posted_data['taskId'];
     $jsonData        = json_encode($posted_data);
     $taskInsertArr   =  [
                         'performed_by'  => $_SESSION['user']['id'],
@@ -15229,14 +15231,17 @@ public function updateTeacherInformationFTTP(){
                         'task_response' => $jsonData,
                         'main_Task_id'  => "241",
                         'remark'        => ""
-                    ];        
+                    ];   
+                   
     if (!empty($taskInsertArr)) {
-        $this->Menu_model->insert_task_execution($taskInsertArr);
+      $last_inserted_id_insert_id =  $this->Menu_model->insert_task_execution($taskInsertArr);
+      //  echo $last_insert_id;exit;
     }
+
     $current_date               = date('Y-m-d h:i:s');
-    $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+    $updatetblcalleventsData    = ['initiate_datetime'=>isset($posted_data['elapsed_time']) ? $posted_data['elapsed_time']:"0000-00-00 00:00",'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
     $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
-    reload('Menu/Dashboard');
+    redirect('Menu/Dashboard');
 }
 
 public function updateFTTPReviewCallZM(){
@@ -17068,20 +17073,36 @@ public function updateBaselineMEReportReview(){
             'main_Task_id'  => $main_Task_id,
             'remark' =>  $remark
         ] + $commonColumns;
+        }
     }
-}
   $attachment_link = '';
 // Insert only if there's data
    $current_date =  date('Y-m-d h:i:s');
-   if (!empty($taskInsertArr1)){
-       $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
-    // $attachmentData = 'task_id'=>$taskId 'attachment_link'=>,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date;
-  //  $this->Menu_model->insertTasksWithAttachements(['task_id'=>$taskId ,'attachment_link'=>$attachment_link,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date]);
-}
+        if (!empty($taskInsertArr1)){
+            $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+            // $attachmentData = 'task_id'=>$taskId 'attachment_link'=>,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date;
+        //  $this->Menu_model->insertTasksWithAttachements(['task_id'=>$taskId ,'attachment_link'=>$attachment_link,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date]);
+        }
    $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
    $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
    redirect('Menu/Dashboard');
 }
+
+/** FTTP teacher data on utilisation page 08-04-2025 */
+public function getFTTPTeacherData($taskId){
+    $data           = $this->Menu_model->getFTTPTeacherData($taskId);
+    $teacher_count  = $data->teacher_count; 
+    $teacherNames   = [];
+    for ($i = 1; $i <= $data->teacher_count; $i++) {
+        $key = "teacher_name_$i";
+        if (!empty($data->$key)) {
+            $teacherNames[] = $data->$key;
+        }
+    }
+    echo json_encode($teacherNames);
+}
+
+
 
 
 
