@@ -7552,7 +7552,7 @@ public function updateTask($tasktypeid=''){
         $data['user']    = $user;$uid= $user['id'];
         $uid             = $user['id'];
         $id              =  $user['dep_id'];
-        $this->load->model('Menu_model');
+        
         $notify          = $this->Menu_model->get_notifybyid($uid);
         $dt              = $this->Menu_model->get_depatment_byid($id);
         $bdr             = $this->Menu_model->get_bdrbyd($code);
@@ -7564,6 +7564,7 @@ public function updateTask($tasktypeid=''){
             redirect('Menu/main');
         }
     }
+
    
     public function allbdrequest(){
         $code = 1 ;
@@ -11215,6 +11216,8 @@ public function AllBDRequestAssign($rtype,$code){
     }
 }
 
+
+
 public function bdrassign($rtype,$code){
     $user           = $this->session->userdata('user');
     $data['user']   = $user;$uid= $user['id'];
@@ -12750,7 +12753,9 @@ public function BDRequestAssignToProcessOnlineDemo(){
     redirect('Menu/TheAssigningProcessOfOnlineDemoBDRequest/'.$request_code.'/'.$reqID.'/');
 }
 
-public function TheAssigningProcessOfOnlineDemoBDRequest($rtype,$reqID){
+
+// Start CM Call or Visit
+public function TheAssigningProcessOfCMCallOrVisitBDRequest($rtype,$reqID){
     $user           = $this->session->userdata('user');
     $data['user']   = $user;$uid= $user['id'];
     $uid            = $user['id'];
@@ -12764,10 +12769,12 @@ public function TheAssigningProcessOfOnlineDemoBDRequest($rtype,$reqID){
     $getSPDRequest       = $this->Menu_model->GetBDRequestTimeSPDRequest($reqID);
     $getDMLatterTask     = $this->Menu_model->GetDMDEOLetterRequiredTaskByRID($reqID);
 
+    $getSPDData          = $this->Menu_model->getSPDDataByPCode($bdr[0]->project_code);
+
     $dep_name       = $dt[0]->dep_name;
    
     if(!empty($user)){
-        $this->load->view($dep_name.'/TheAssigningProcessOfOnlineDemoBDRequest', ['rtype'=>$rtype,'user'=>$user,'notify'=>$notify,'bdr'=>$bdr,'reqData'=>$reqData,'reqID'=>$reqID,'getSPDRequest'=>$getSPDRequest,'getDMLatterTask'=>$getDMLatterTask]);
+        $this->load->view($dep_name.'/TheAssigningProcessOfCMCallOrVisitBDRequest', ['rtype'=>$rtype,'user'=>$user,'notify'=>$notify,'bdr'=>$bdr,'reqData'=>$reqData,'reqID'=>$reqID,'getSPDRequest'=>$getSPDRequest,'getDMLatterTask'=>$getDMLatterTask,'getSPDData'=>$getSPDData]);
     }else{
         redirect('Menu/main');
     }

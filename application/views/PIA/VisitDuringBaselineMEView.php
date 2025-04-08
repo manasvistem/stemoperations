@@ -10,8 +10,6 @@
                 </a>
             </div>
     </div>
-      
-
     <?php
     /* foreach($formdata as $key=>$val){ 
             foreach($val as $k=>$v){
@@ -27,7 +25,6 @@
         }*/
          ?>
     </div>
-    
     </form>
   </div>
 </div>

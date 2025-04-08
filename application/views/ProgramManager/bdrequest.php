@@ -1,3 +1,4 @@
+<?php $this->load->view('nav'); ?>
 <!-- Content wrapper -->
 <div class="content-wrapper">
 <!-- Content -->
@@ -54,3 +55,4 @@
     </div>
   </div>
 </div>
+<?php $this->load->view('footer'); ?>

@@ -6666,21 +6666,18 @@ public function CreateNewTaskUsingTimeLinePlanning(
     // Insert the data into the 'tblcallevents' table
     $this->db->insert('tblcallevents', $data);
     $insert_id = $this->db->insert_id();
-
     if ($insert_id) {
         // Insert in Log
         $sname = $this->get_school_detailbyid($sid)[0]->sname;
         $task_action_data = $this->getTaskAction($task_action);
         $tasktype = $task_action_data[0]->tasktype;
         $taskname = $task_action_data[0]->taskname;
-
         $log_data = [
             'user_id'       => $assigned_by,
             'to_user_id'    => $user_id,
             'type'          => "Task Assign Using a Program Time Line Setting for a $tasktype",
             'message'       => "$sname - $tasktype - $taskname - Task planned successfully for this date: $fwd_date, and the filter used for planning this task: $selectby."
         ];
-
         $this->db->insert('user_log', $log_data);
         return $insert_id;
     } else {

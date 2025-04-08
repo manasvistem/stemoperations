@@ -13,7 +13,6 @@
             <input type="hidden" name="latitude" id="latitude">
             <input type="hidden" name="longitude" id="longitude">
         </div>
-
         <!-- Start My Task -->
         <div class="mb-3">
             <button type="button" class="btn btn-success" id="startTaskBtn">Start My Task</button>
@@ -106,7 +105,6 @@
 </form>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
 <script>
     $(document).ready(function () {
         $('#startTaskBtn').on('click', function () {

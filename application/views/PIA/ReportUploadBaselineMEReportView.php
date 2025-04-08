@@ -1,5 +1,5 @@
 <div class="container mt-4 mb-5 p-4 border rounded shadow-sm bg-light">
-  <form action="submitBaselineMEReport" method="POST" enctype="multipart/form-data" name="BaselineMEReport">
+  <form action="<?php echo base_url()?>Menu/updateBaselineMEReport" method="POST" enctype="multipart/form-data" name="BaselineMEReport">
     <!-- Report Initiated Screenshot Upload -->
     <div class="mb-4">
       <label class="form-label fw-semibold">Share Report Initiated First Page Screenshot</label>
