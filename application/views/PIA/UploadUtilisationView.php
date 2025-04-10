@@ -1,11 +1,8 @@
 <div class="container my-5">
     
 <form name="uploadUtilisation" action="<?php echo base_url();?>Menu/updateUploadutilisationData" method="POST" enctype="multipart/form-data" >
-
-<input type="text" name="taskId" id="taskId" value="<?php echo $taskId;?>" >
- <input type="text" name="tasktypeid" id="tasktypeid" value="<?php echo $tasktypeid;?>" >
-
-
+<input type="hidden" name="taskId" id="taskId" value="<?php echo $taskId;?>" >
+<input type="hidden" name="tasktypeid" id="tasktypeid" value="<?php echo $tasktypeid;?>" >
             <div class="row g-4">
                 <!-- Date Picker -->
                 <div class="col-md-6">
@@ -41,7 +38,6 @@
                         <!-- Add more teachers as needed -->
                     </select>
                 </div>
-
                 <!-- Remark Dropdown -->
                 <div class="col-md-6">
                     <label for="remarkSelect" class="form-label">Remark</label>

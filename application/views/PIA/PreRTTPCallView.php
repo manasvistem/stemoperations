@@ -1,8 +1,10 @@
 <!-- External header.php should be included before this -->
 
 <div class="container mt-4">
-  <form id="rttpForm" name="rttpForm" method="POST" action="<?php echo base_url();?>Menu/submit_rttp_form">
-    
+  <form id="rttpForm" name="rttpForm" method="POST" action="<?php echo base_url();?>Menu/updateRTTPCall">
+        <input type="hidden" name="taskId" value="<?php echo $taskId; ?>"/>
+        <input type="hidden" name="taskType" value="<?php echo $taskType; ?>"/>
+        <input type="hidden" name="tasktypeid" value="<?php echo $tasktypeid; ?>"/>
     <!-- Action Completed -->
     <div class="mb-3">
       <label class="form-label fw-bold">Action Completed?</label><br>
@@ -17,17 +19,20 @@
     </div>
 
     <!-- Purpose Completed (shown if action is Yes) -->
-    <div class="mb-3 d-none" id="purposeSection">
-      <label class="form-label fw-bold">Purpose Completed?</label><br>
-      <select class="form-select" name="purpose_completed" id="purposeCompleted">
-        <option value="">Select</option>
-        <option value="yes">Yes</option>
-        <option value="no">No</option>
-      </select>
-    </div>
+    <div id="purposeSection" class="mb-3" style="display: none;">
+                <label class="form-label">Purpose Completed?</label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="purpose_completed" value="yes" id="purpose_yes">
+                    <label class="form-check-label" for="purpose_yes">Yes</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="purpose_completed" value="no" id="purpose_no">
+                    <label class="form-check-label" for="purpose_no">No</label>
+                </div>
+            </div>
 
     <!-- Full Form (shown if purpose is Yes) -->
-    <div id="mainForm" class="d-none">
+    <div id="rttpMain" style="display: none;">
 
       <div class="mb-3">
         <label class="form-label">1. When can RTTP be scheduled?</label>
@@ -62,8 +67,7 @@
         <select class="form-select" name="teachers_best_practice">
           <option value="">Select</option>
           <option value="in_class">In Class</option>
-          <option value="outside_class">Outside Class</option>
-          <option value="school">School</option>
+          <option value="outside_class">Outside Class/School</option>
           <option value="msc">MSC</option>
           <option value="other">Other</option>
         </select>
@@ -145,20 +149,19 @@
   $('input[name="action_completed"]').change(function () {
     const actionVal = $(this).val();
     if (actionVal === 'yes') {
-      $('#purposeSection').removeClass('d-none');
+      $('#purposeSection').show();
     } else {
-      $('#purposeSection').addClass('d-none');
-      $('#mainForm').addClass('d-none');
+      $('#purposeSection').hide();
+      $('#mainForm').hide();
     }
   });
 
   // Show Main Form based on Purpose Completed
-  $('#purposeCompleted').change(function () {
-    const purposeVal = $(this).val();
-    if (purposeVal === 'yes') {
-      $('#mainForm').removeClass('d-none');
-    } else {
-      $('#mainForm').addClass('d-none');
-    }
-  });
+  $('input[name="purpose_completed"]').change(function() {
+        if ($('#purpose_yes').is(':checked')) {
+            $('#rttpMain').show();
+        } else {
+            $('#rttpMain').hide();
+        }
+    });
 </script>

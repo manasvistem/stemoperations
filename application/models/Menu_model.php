@@ -6161,7 +6161,6 @@ public function getTaskDetails($taskId,$taskactionId){
     $insertQuery          = "INSERT INTO tblcallevents_attachments (task_id,main_task_id,attachment_link,remark,user_id,created_at)
                              VALUES('".$data['task_id']."','".$data['main_task_id']."','".$data['attachment_link']."','".$data['remark']."','".$data['user_id']."',
                              '".$data['created_at']."') ";
-    echo $insertQuery;exit;
     $result               = $this->db->query($insertQuery);
     return $this->db->insert_id();
  }
