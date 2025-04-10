@@ -11,10 +11,22 @@
         <button type="button" onclick="downloadFile('rttp_report.pdf')">Download</button>
     </div>
     
-    <div>
+    <!-- Star Rating -->
+    <div class="mb-3">
+      <label class="form-label">Ratings to Utilization</label>
+      <div>
         <label>Star Rating to PIA</label>
         <input type="number" name="pia_rating" min="1" max="5">
     </div>
+    
+    </div>
+
+    <!-- PIA Remark -->
+    <div class="mb-3">
+      <label for="pia_remark" class="form-label">PIA Remark</label>
+      <textarea class="form-control" id="pia_remark" name="pia_remark" rows="3" placeholder=""></textarea>
+    </div>
+
     
     <button type="submit">Submit</button>
 </form>

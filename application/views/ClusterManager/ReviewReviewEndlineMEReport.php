@@ -1,5 +1,6 @@
-<form name="reviewReportBaselineME" class="container mt-4 p-4 border rounded shadow bg-white" action="<?php echo base_url();?>Menu/updateBaselineMEreview">
+<form name="reviewReportEndlineME" class="container mt-4 p-4 border rounded shadow bg-white" action="<?php echo base_url();?>Menu/updateEndlineMEreview">
   <h4 class="mb-4 fw-bold text-center">M&E Report Review</h4>
+
   <!-- View Photos/Videos/M&E Letter -->
   <div class="mb-3">
     <label class="form-label fw-semibold">View (Photos / Videos / M&E Letter)</label>
@@ -18,7 +19,7 @@
 
   <!-- Correction Needed -->
   <div class="mb-3">
-    <label class="form-label fw-semibold">Is Baseline M&E Report need to be corrected?</label>
+    <label class="form-label fw-semibold">IsEndline M&E Report need to be corrected? If Yes , then reassign report task to PIA</label>
     <select class="form-select" name="correction_required">
       <option value="">Select</option>
       <option value="yes">Yes (Reassign task to PIA)</option>

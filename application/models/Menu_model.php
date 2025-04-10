@@ -6159,8 +6159,9 @@ public function getTaskDetails($taskId,$taskactionId){
     $data['status']       = 1;
     $data['created_date'] = date('Y-m-d');
     $insertQuery          = "INSERT INTO tblcallevents_attachments (task_id,main_task_id,attachment_link,remark,user_id,created_at)
-                             VALUES(".$data['task_id'].",".$data['main_task_id'].",'".$data['attachment_link']."','".$data['remark']."',".$data['user_id'].",
+                             VALUES('".$data['task_id']."','".$data['main_task_id']."','".$data['attachment_link']."','".$data['remark']."','".$data['user_id']."',
                              '".$data['created_at']."') ";
+    echo $insertQuery;exit;
     $result               = $this->db->query($insertQuery);
     return $this->db->insert_id();
  }
@@ -7252,7 +7253,51 @@ public function getFTTPTeacherData($taskId){
     $data  = $query->row_array();
     return json_decode($data['task_response']);
 }
+public function getPIAremarkByTaskId($taskId,$main_task_id){
+    $query  =  $this->db->query("SELECT task_response FROM task_execution_details 
+                                 WHERE tbe_id ='".$taskId."' 
+                                AND main_task_id='".$main_task_id."'");
+    $result  =  $this->row_array();
+    return $result;
+}
 
+public function createUtilizationReportReviewTask($taskId,$user_id){
+    $query     = $this->db->query(" SELECT * FROM tblcallevents WHERE id = '".$taskId."' ");
+    $data      = $query->row_array();
+    $finalData = array();
+    foreach($data as $key=>$val){
+        if($key == 'user_id')
+        {
+           $userData                = $this->get_CMbyUserID($user_id);
+           $finalData['user_id']    = $userData['adminid'];
+        }
+        else if($key == 'aftertask')
+        {
+            $finalData['aftertask'] = $taskId;
+        }
+        else if($key == 'task_status')
+        {
+            $finalData['task_status'] = 0;
+        }
+        else if($key == "appointment_datetime" )
+        {
+            $finalData['appointment_datetime'] = date("Y-m-d h:i:s");
+        }
+        else
+        {
+            $finalData[$key] =  $val;
+        }
+    }
+     unset($finalData['id']);
+    $query   = $this->db->insert("tblcallevents",$finalData);
+    return true;
+}
+
+public function get_CMbyUserID($userId){
+    $query      =  $this->db->query("SELECT * FROM user_detail WHERE id = '".$userId."' ");
+    $data       = $query->row_array();
+    return $data;
+}
 
 
 

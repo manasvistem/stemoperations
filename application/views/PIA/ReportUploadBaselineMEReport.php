@@ -1,5 +1,7 @@
 <div class="container mt-4 mb-5 p-4 border rounded shadow-sm bg-light">
-  <form action="submitBaselineMEReport" method="POST" enctype="multipart/form-data" name="BaselineMEReport">
+  <form action="<?php base_url()?>Menu/updateBaselineMEReport" method="POST" enctype="multipart/form-data" name="BaselineMEReport">
+  <input type="hidden" value="<?php echo $taskId;?>" name="taskId">
+
     <!-- Report Initiated Screenshot Upload -->
     <div class="mb-4">
       <label class="form-label fw-semibold">Share Report Initiated First Page Screenshot</label>
@@ -9,8 +11,8 @@
     <!-- View Media from M&E Visit -->
     <div class="mb-4">
       <label class="form-label fw-semibold">View (Letter, Photos and Other Media during M&E Visit)</label><br>
-      <a href="path_to_media.zip" class="btn btn-sm btn-primary me-2" download>Download</a>
-      <a href="path_to_media.zip" class="btn btn-sm btn-secondary" target="_blank">View</a>
+      <a href="#" class="btn btn-sm btn-primary me-2" download>Download</a>
+      <a href="#"  class="btn btn-sm btn-secondary" target="_blank">View</a>
     </div>
 
     <!-- Second Status Screenshot Upload -->
@@ -22,7 +24,7 @@
     <!-- Report PDF Upload -->
     <div class="mb-4">
       <label class="form-label fw-semibold">Upload Report (PDF)</label>
-      <input type="file" class="form-control" name="pdf_report" accept="application/pdf" required>
+      <input type="file" class="form-control" name="baseline_ME_pdf_report" accept="application/pdf" required>
     </div>
 
     <!-- Final Remark -->

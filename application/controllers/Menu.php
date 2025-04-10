@@ -7123,12 +7123,11 @@ class Menu extends CI_Controller {
             $depnameData                    = $this->Menu_model->get_depatment_byid($dept);
             $dep_name                       = $depnameData[0]->dep_name;
             $data['getFactoryModelList']    = $this->Menu_model->getFactoryModelList();
-
             // if($tasktypeid == '30' && $dept == '12'){
             //     // $getData = $this->Menu_model->getReportData($tasktypeid,$user_id);
             //     // dd($getData);exit;
             // }
-      //   echo $taskId; exit;
+       // echo $viewname; exit;
             $this->display($dep_name,$viewname,$data,$type='modal');
     }
 
@@ -15304,8 +15303,8 @@ public function updateFTTPReportZTaskView(){
 public function updateCallMnEBaseline(){
     $posted_data    =  $_POST;
     $taskId         =  $posted_data['taskId'];
+
     unset($posted_data['taskId']);
-  
     $taskperformedby = $_SESSION['user']['dep_id'];
     
     $commonColumns      = [
@@ -15314,7 +15313,9 @@ public function updateCallMnEBaseline(){
         'status'       => 'active',
         'tbe_id'       => $taskId
      ];
-     foreach($posted_data as $k => $val) {
+
+
+     foreach($posted_data as $k => $val){
         if ($val != '' && !empty($val)){
             // Assign main_Task_id based on the key
             if($taskperformedby == '2'){
@@ -15339,7 +15340,7 @@ public function updateCallMnEBaseline(){
             ] + $commonColumns;
         }
     }
-
+   
   
     // Insert only if there's data
        $current_date =  date('Y-m-d h:i:s');
@@ -15391,6 +15392,7 @@ public function updateVisitDuringME(){
             }
             $file_array_keys1[$k]['main_task_id'] = $main_task_id;
         }
+        dd($file_array_keys1);exit;
 
         if(isset($_FILES)){
             foreach($_FILES as $filekey=>$fileval){
@@ -16964,62 +16966,97 @@ public function updateBaselineMEReport(){
     $user               = $_SESSION['user'];
     $taskperformedby    = $user['dep_id'];
     $commonColumns      = [
-                        'performed_by' => $_SESSION['user']['id'],
-                        'updated_at'   => date("Y-m-d H:i:s"),
-                        'status'       => 'active',
-                        'tbe_id'       => $taskId
-                     ];
-
-   /** Insert into task_Execution_details */
- foreach ($posted_data as $k => $val) {
-    if ($val != '' && !empty($val)){
-        // Assign main_Task_id based on the key
-        if($taskperformedby == '2'){
-        switch ($k){
-            case 'action_completed':                $main_Task_id = '611'; break;
-            case 'purpose_completed':               $main_Task_id = '612'; break;
-            case 'sname':                           $main_Task_id = '613'; break;
-            case 'language':                        $main_Task_id = '614'; break;
-            case 'standard':                        $main_Task_id = '615'; break;
-            case 'teachers':                        $main_Task_id = '616'; break;
-            case 'students':                        $main_Task_id = '617'; break;
-            case 'boys':                            $main_Task_id = '618'; break;
-            case 'girls':                           $main_Task_id = '619'; break;
-            case 'address':                         $main_Task_id = '620'; break;
-            case 'pincode':                         $main_Task_id = '621'; break;
-            case 'city':                            $main_Task_id = '622'; break;
-            case 'state':                           $main_Task_id = '623'; break;
-            case 'principal':                       $main_Task_id = '624'; break;
-            case 'contact_no':                      $main_Task_id = '625'; break;
-            case 'do_dm_required':                  $main_Task_id = '626'; break;
-            case 'visit_required':                  $main_Task_id = '627'; break;
-            case 'any_other_information':           $main_Task_id = '628'; break;
-            default:
-            continue 2; // Skip unknown keys
+                            'performed_by' => $_SESSION['user']['id'],
+                            'updated_at'   => date("Y-m-d H:i:s"),
+                            'status'       => 'active',
+                            'tbe_id'       => $taskId
+                         ];
+        $file_array_keys      =  array_keys($_FILES);
+        $file_array_keys      =  array_flip($file_array_keys);
+        foreach($file_array_keys as $k=>$v){
+            switch($k){
+                case "report_initiated_screenshot"  :     $main_task_id = "102";break;
+                case "second_status_screenshot"     :     $file_array_keys[$k]["main_task_id"]= $main_task_id = "104";break;
+                case "pdf_report"                   :     $file_array_keys[$k]["main_task_id"] = $main_task_id = "105";break;
+            }
+            $file_array_keys1[$k]['main_task_id'] = $main_task_id;
         }
-       }
-       if(count($val)>1){
-           $val = implode('**',$val);
-       }
-        // Store data in array
-        $taskInsertArr1[] = [
-            'task_response' => $val,
-            'main_Task_id'  => $main_Task_id,
-            'remark' =>  $remark
-        ] + $commonColumns;
-    }
-}
-  $attachment_link = '';
-// Insert only if there's data
-   $current_date =  date('Y-m-d h:i:s');
-   if (!empty($taskInsertArr1)){
-       $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
-    // $attachmentData = 'task_id'=>$taskId 'attachment_link'=>,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date;
-  //  $this->Menu_model->insertTasksWithAttachements(['task_id'=>$taskId ,'attachment_link'=>$attachment_link,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date]);
-}
-   $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
-   $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
-   redirect('Menu/Dashboard');
+
+        if(isset($_FILES)){
+            foreach($_FILES as $filekey=>$fileval){
+                $uploadPath                       = "uploads/BaselineME/report/".date('Y-m-d')."/";
+                $status                           = $this->createDirectoryIfNotExists($uploadPath, $permissions = 0755);
+                $file_data['attachment_link']     = $this->uploadFile($_FILES[$filekey],$uploadPath);
+                $file_data['task_id']             = $taskId;
+                $file_data['user_id']             = $_SESSION['user']['id'];
+                $file_data['created_at']          = date('Y-m-d h:i:s');
+                $file_data['main_task_id']        = $file_array_keys1[$filekey]['main_task_id'];
+                $tbe_attachement_id               = $this->Menu_model->insertTasksWithAttachements($file_data);
+            // $taskInsertArr1[]                  = ['tbe_attachment_id'=>$tbe_attachement_id];
+            }
+        }
+                 $i=0;
+                 foreach($file_array_keys1 as $file_key=>$file_values){
+                    if($file_key == 'report_initiated_screenshot'){
+                        $taskInsertArr1[]=[
+                            'task_response' => "yes",
+                            'main_Task_id'  => $file_values,
+                            'remark'        => ""
+                        ] + $commonColumns;
+                    }
+                    else if($file_key == 'second_status_screenshot'){
+                         $taskInsertArr1[]=[
+                             'task_response' => "yes",
+                             'main_Task_id'  => $file_values,
+                             'remark'        => ""
+                         ] + $commonColumns;
+                     }
+                     else if($file_key == 'pdf_report'){
+                         $taskInsertArr1[]=[
+                             'task_response' => "yes",
+                             'main_Task_id'  => $file_values,
+                             'remark'        => ""
+                         ] + $commonColumns;
+                     }
+                     $i++;
+                 }
+                 
+                 /** Insert into task_execution tasks */
+        foreach($posted_data as $k => $val){
+            if($val != '' && !empty($val)){
+                // Assign main_Task_id based on the key
+                if($taskperformedby == '2'){
+                    switch ($k){
+                        case 'report_initiated_screenshot':  $main_Task_id = '227'; 
+                                        break;
+                        case 'second_status_screenshot':   $main_Task_id = '228'; 
+                                        break;
+                        case 'pdf_report':                  
+                                        $main_Task_id = '234'; 
+                                        break;
+                        default:
+                        continue 2; // Skip unknown keys
+                    }
+                }
+                if(count($val)>1){
+                    $val = implode('**',$val);
+                }
+                // Store data in array
+                $taskInsertArr1[] = [
+                    'task_response' => $val,
+                    'main_Task_id'  => $main_Task_id,
+                    'remark'        => $remark
+                ] + $commonColumns;
+                $this->Menu_model->update_tbe_attachmentid($main_Task_id,$taskId);
+            }
+        } 
+        if (!empty($taskInsertArr1)){
+            $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+        }
+        $current_date               = date('Y-m-d h:i:s');
+        $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+        $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+        redirect("Menu/Dashboard");
 }
 
 /** Task execution by ZM/CM */
@@ -17111,7 +17148,7 @@ public function updateUploadutilisationData(){
         'status'       => 'active',
         'tbe_id'       => $taskId
      ];
-//    echo "<pre>";print_r($_FILES);
+   
      if(isset($_FILES)){
         foreach($_FILES as $filekey=>$fileval){
             $uploadPath                       = "uploads/Utilisation/upload/".date('Y-m-d')."/";
@@ -17125,6 +17162,7 @@ public function updateUploadutilisationData(){
         // $taskInsertArr1[]                 = ['tbe_attachment_id'=>$tbe_attachement_id];
         }
     }
+
     foreach ($posted_data as $k => $val) {
         if ($val != '' && !empty($val)){
             // Assign main_Task_id based on the key
@@ -17165,11 +17203,511 @@ public function updateUploadutilisationData(){
             }
        $updatetblcalleventsData    = ['initiate_datetime'=>isset($posted_data['elapsed_time']) ? $posted_data['elapsed_time'] : "",'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
        $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+       $createReviewTasks          = $this->Menu_model->createUtilizationReportReviewTask($taskId,$user['id']);
+       //dd($createReviewTasks);
        redirect('Menu/Dashboard');
+}
+
+public function updateReviewUtilization(){
+    $posted_data = $_POST;
+    $user               = $_SESSION['user'];
+    $taskperformedby    = $user['dep_id'];
+    $taskId             = $posted_data['taskId'];
+
+    $commonColumns      = [
+        'performed_by' => $_SESSION['user']['id'],
+        'updated_at'   => date("Y-m-d H:i:s"),
+        'status'       => 'active',
+        'tbe_id'       => $taskId
+     ];
+
+     foreach ($posted_data as $k => $val) {
+        if ($val != '' && !empty($val)){
+            // Assign main_Task_id based on the key
+            if($taskperformedby == '2'){
+            switch ($k){
+                case 'selectDate':              $main_Task_id = '43'; break;
+                case 'utilisationImage':        $main_Task_id = '44'; break;
+                case 'models':                  $main_Task_id = '45';$val   = json_encode($posted_data['models']);
+                break;
+                case 'teacher':                 $main_Task_id = '46'; break;
+                case 'remark':                  $main_Task_id = '47'; break;
+                case 'otherRemark':              $main_Task_id = '47'; break;
+                default:
+                continue 2; // Skip unknown keys
+            }
+           }
+            // Store data in array
+            $taskInsertArr1[] = [
+                'task_response' => $val,
+                'main_Task_id'  => $main_Task_id,
+                'remark' =>  $remark
+            ] + $commonColumns;
+            }
+        }
+       $attachment_link = '';
+    // Insert only if there's data
+       $current_date =  date('Y-m-d h:i:s');
+            if(!empty($taskInsertArr1)){
+                $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+                // $attachmentData = 'task_id'=>$taskId 'attachment_link'=>,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date;
+                //  $this->Menu_model->insertTasksWithAttachements(['task_id'=>$taskId ,'attachment_link'=>$attachment_link,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date]);
+            }
+       $updatetblcalleventsData    = ['initiate_datetime'=>isset($posted_data['elapsed_time']) ? $posted_data['elapsed_time'] : "",'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+       $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+       /** Create Task For RM  */
+     
+       redirect('Menu/Dashboard');
+}
+
+public function getPIARemark(){
+    $taskId             = $_POST['task_id'];
+    
+    $PIAremarkByTaskId  = $this->Menu_model->getPIAremarkByTaskId($taskId,'47');
+
+    dd($PIAremarkByTaskId); 
+    exit;
+    echo json_encode($PIAremarkByTaskId);
+
+}
+public function updateCallMEEndline(){
+    $posted_data = $_POST;
+    $user = $_SESSION['user'];
+    $taskperformedby    = $user['dep_id'];
+    $taskId             = $posted_data['taskId'];
+    $commonColumns      = [
+        'performed_by' => $_SESSION['user']['id'],
+        'updated_at'   => date("Y-m-d H:i:s"),
+        'status'       => 'active',
+        'tbe_id'       => $taskId
+     ];
+   
+    //  if(isset($_FILES)){
+    //     foreach($_FILES as $filekey=>$fileval){
+    //         $uploadPath                       = "uploads/Utilisation/upload/".date('Y-m-d')."/";
+    //         $status                           = $this->createDirectoryIfNotExists($uploadPath, $permissions = 0755);
+    //         $file_data['attachment_link']     = $this->uploadFile($_FILES[$filekey],$uploadPath);
+    //         $file_data['task_id']             = $taskId;
+    //         $file_data['user_id']             = $_SESSION['user']['id'];
+    //         $file_data['created_at']          = date('Y-m-d h:i:s');
+    //         $file_data['main_task_id']        = '64';
+    //         $tbe_attachement_id               = $this->Menu_model->insertTasksWithAttachements($file_data);
+    //     // $taskInsertArr1[]                 = ['tbe_attachment_id'=>$tbe_attachement_id];
+    //     }
+    // }
+    foreach ($posted_data as $k => $val) {
+        if ($val != '' && !empty($val)){
+            // Assign main_Task_id based on the key
+            if($taskperformedby == '2'){
+            switch ($k){
+                // case 'action_completed':        $main_Task_id = '60'; break;
+                // case 'purpose_completed':       $main_Task_id = '61'; break;
+                case 'q1':                      $main_Task_id = '60'; break;
+                case 'q2':                      $main_Task_id = '61'; break;
+                case 'q3':                      $main_Task_id = '62'; break;
+                case 'q4':                      $main_Task_id = '63'; break;
+                case 'q5_letter_ready':         $main_Task_id = '64'; break;
+                case 'final_remark':            $main_Task_id = '65'; break;
+                default:
+                continue 2; // Skip unknown keys
+            }
+           }
+            // Store data in array
+                $taskInsertArr1[] = [
+                    'task_response' => $val,
+                    'main_Task_id'  => $main_Task_id,
+                    'remark'        =>  $remark
+                ] + $commonColumns;
+            }
+        }
+       $attachment_link = '';
+
+    // Insert only if there's data
+            $current_date =  date('Y-m-d h:i:s');
+            if(!empty($taskInsertArr1)){
+                $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+                // $attachmentData = 'task_id'=>$taskId 'attachment_link'=>,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date;
+            //  $this->Menu_model->insertTasksWithAttachements(['task_id'=>$taskId ,'attachment_link'=>$attachment_link,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date]);
+            }
+       $updatetblcalleventsData    = ['initiate_datetime'=>isset($posted_data['elapsed_time']) ? $posted_data['elapsed_time'] : "",'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+       $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+       //dd($createReviewTasks);
+       redirect('Menu/Dashboard');
+}
+public function visitMEEndlineView(){
+    $user               = $this->session->userdata('user');
+    $uid                = $user['user_id'];
+    $uyid               = $user['type_id'];
+    $dep_id             = $user['dep_id'];
+    $dt                 = $this->Menu_model->get_depatment_byid($dep_id);
+    $dep_name           = $dt[0]->dep_name;
+    $data['taskId']     = $taskId;
+    $this->display($dep_name,"visitDuringEndlineMEViewPage",$data,$type="");
+}
+public function updateVisitDuringMEEndline(){
+    $posted_data        = $_POST;
+    $user               = $_SESSION['user'];
+    $taskperformedby    = $user['dep_id'];
+    $taskId             = $posted_data['taskId'];
+    $commonColumns      = [
+                            'performed_by' => $_SESSION['user']['id'],
+                            'updated_at'   => date("Y-m-d H:i:s"),
+                            'status'       => 'active',
+                            'tbe_id'       => $taskId
+                         ];
+
+        $file_array_keys      =  array_keys($_FILES);
+        $file_array_keys      =  array_flip($file_array_keys);
+        foreach($file_array_keys as $k=>$v){
+            switch($k){
+                case "selfie" :             $main_task_id = "102";break;
+                case "session_1_file" :     $file_array_keys[$k]["main_task_id"]= $main_task_id = "104";break;
+                case "session_2_file" :     $file_array_keys[$k]["main_task_id"] = $main_task_id = "105";break;
+                case "session_3_file" :     $file_array_keys[$k]["main_task_id"] =$main_task_id =  "106";break;
+                case "session_4_file" :     $file_array_keys[$k]["main_task_id"] = $main_task_id = "107";break;
+                case "session_5_file" :     $file_array_keys[$k]["main_task_id"] = $main_task_id = "108";break;
+                case "baseline_letter" :    $file_array_keys[$k]["main_task_id"] = $main_task_id = "109";break;
+                case "completed_selfie" :   $file_array_keys[$k]["main_task_id"] =$main_task_id =  "110";break;
+                case "additional_media" :   $file_array_keys[$k]["main_task_id"] = $main_task_id = "111";break;
+            }
+            $file_array_keys1[$k]['main_task_id'] = $main_task_id;
+        }
+
+        if(isset($_FILES)){
+            foreach($_FILES as $filekey=>$fileval){
+                $uploadPath                       = "uploads/FTTP/visit/".date('Y-m-d')."/";
+                $status                           = $this->createDirectoryIfNotExists($uploadPath, $permissions = 0755);
+                $file_data['attachment_link']     = $this->uploadFile($_FILES[$filekey],$uploadPath);
+                $file_data['task_id']             = $taskId;
+                $file_data['user_id']             = $_SESSION['user']['id'];
+                $file_data['created_at']          = date('Y-m-d h:i:s');
+                $file_data['main_task_id']        = $file_array_keys1[$filekey]['main_task_id'];
+                $tbe_attachement_id               = $this->Menu_model->insertTasksWithAttachements($file_data);
+            // $taskInsertArr1[]                 = ['tbe_attachment_id'=>$tbe_attachement_id];
+            }
+        }
+                 $i=0;
+                 foreach($file_array_keys as $file_key=>$file_values){
+                    if($file_key == 'selfie'){
+                        $taskInsertArr1[]=[
+                            'task_response' => "yes",
+                            'main_Task_id'  => $file_values,
+                            'remark'        => ""
+                        ] + $commonColumns;
+                    }
+                    else if($file_key == 'session1'){
+                         $taskInsertArr1[]=[
+                             'task_response' => "yes",
+                             'main_Task_id'  => $file_values,
+                             'remark'        => ""
+                         ] + $commonColumns;
+                     }
+                     else if($file_key == 'session2'){
+                         $taskInsertArr1[]=[
+                             'task_response' => "yes",
+                             'main_Task_id'  => $file_values,
+                             'remark'        => ""
+                         ] + $commonColumns;
+                     }
+                     else if($file_key == 'session3'){
+                         $taskInsertArr1[]=[
+                             'task_response' => "yes",
+                             'main_Task_id'  => $file_values,
+                             'remark'        => ""
+                         ] + $commonColumns;
+                     }
+                     else if($file_key == 'session4'){
+                         $taskInsertArr1[]=[
+                             'task_response' => "yes",
+                             'main_Task_id'  => $file_values,
+                             'remark'        => ""
+                         ] + $commonColumns;
+                     }
+                     else if($file_key == 'session5'){
+                         $taskInsertArr1[]=[
+                             'task_response' => "yes",
+                             'main_Task_id'  => $file_values,
+                             'remark'        => ""
+                         ] + $commonColumns;
+                     }
+                     else if($file_key == 'baseline_letter'){
+                         $taskInsertArr1[]=[
+                             'task_response' => "yes",
+                             'main_Task_id'  => $file_values,
+                             'remark'        => ""
+                         ] + $commonColumns;
+                     }
+                     else if($file_key == 'completed_selfie'){
+                         $taskInsertArr1[]=[
+                             'task_response' => "yes",
+                             'main_Task_id'  => $file_values,
+                             'remark'        => ""
+                         ] + $commonColumns;
+                     }
+                     else if($file_key == 'completed_selfie'){
+                         $taskInsertArr1[]=[
+                             'task_response' => "yes",
+                             'main_Task_id'  => $file_values,
+                             'remark'        => ""
+                         ] + $commonColumns;
+                     }
+                     else if($file_key == 'additional_media'){
+                         $taskInsertArr1[]=[
+                             'task_response' => "yes",
+                             'main_Task_id'  => $file_values,
+                             'remark'        => ""
+                         ] + $commonColumns;
+                     }
+                     $i++;
+                 }
+               
+                     /** Insert into task_execution tasks */
+                         foreach($posted_data as $k => $val){
+                             if($val != '' && !empty($val)){
+                                 // Assign main_Task_id based on the key
+                                 if($taskperformedby == '2'){
+                                     switch ($k){
+                                         case 'selfie':  $main_Task_id = '67'; 
+                                                         break;
+                                        case 'selfie_location' :$main_Task_id ='67';break;
+                                         case 'teacher_review1':                  
+                                                         $main_Task_id = '109'; 
+                                                         break;
+                                         case 'teacher_review2':                
+                                                         $main_Task_id = '110'; 
+                                                         break;
+                                         case 'teacher_review3':
+                                                         $main_Task_id = '111'; 
+                                                         break;
+                                         case 'student_review1':                  
+                                                            $main_Task_id = '112'; 
+                                                            break;
+                                        case 'student_review2':                
+                                                            $main_Task_id = '113'; 
+                                                            break;
+                                        case 'student_review3':
+                                                            $main_Task_id = '114'; 
+                                                            break;
+                                         default:
+                                         continue 2; // Skip unknown keys
+                                     }
+                                 }
+                        if(count($val)>1){
+                            $val = implode('**',$val);
+                        }
+                                 // Store data in array
+                                 $taskInsertArr1[] = [
+                                     'task_response' => $val,
+                                     'main_Task_id'  => $main_Task_id,
+                                     'remark'        => $remark
+                                 ] + $commonColumns;
+                                 $this->Menu_model->update_tbe_attachmentid($main_Task_id,$taskId);
+                             }
+                         } 
+                      //   dd($taskInsertArr1);
+                         if (!empty($taskInsertArr1)){
+                             $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+                         }
+                         $current_date               = date('Y-m-d h:i:s');
+                         $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+                         $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+    redirect("Menu/Dashboard");           
+}
+public function updateEndlineMEreport(){
+    $posted_data        = $_POST;
+    $user               = $_SESSION['user'];
+    $taskperformedby    = $user['dep_id'];
+    $commonColumns      = [
+                            'performed_by' => $_SESSION['user']['id'],
+                            'updated_at'   => date("Y-m-d H:i:s"),
+                            'status'       => 'active',
+                            'tbe_id'       => $taskId
+                         ];
+        $file_array_keys      =  array_keys($_FILES);
+        $file_array_keys      =  array_flip($file_array_keys);
+
+
+        foreach($file_array_keys as $k=>$v){
+            switch($k){
+                case "initial_screenshot"  :     $main_task_id = "83";break;
+                case "second_screenshot"     :     $file_array_keys[$k]["main_task_id"]= $main_task_id = "85";break;
+                case "final_report"                   :     $file_array_keys[$k]["main_task_id"] = $main_task_id = "86";break;
+            }
+            $file_array_keys1[$k]['main_task_id'] = $main_task_id;
+        }
+        if(isset($_FILES)){
+            foreach($_FILES as $filekey=>$fileval){
+                $uploadPath                       = "uploads/BaselineME/report/".date('Y-m-d')."/";
+                $status                           = $this->createDirectoryIfNotExists($uploadPath, $permissions = 0755);
+                $file_data['attachment_link']     = $this->uploadFile($_FILES[$filekey],$uploadPath);
+                $file_data['task_id']             = $taskId;
+                $file_data['user_id']             = $_SESSION['user']['id'];
+                $file_data['created_at']          = date('Y-m-d h:i:s');
+                $file_data['main_task_id']        = $file_array_keys1[$filekey]['main_task_id'];
+                $tbe_attachement_id               = $this->Menu_model->insertTasksWithAttachements($file_data);
+            // $taskInsertArr1[]                  = ['tbe_attachment_id'=>$tbe_attachement_id];
+            }
+        }
+                 $i=0;
+                 foreach($file_array_keys1 as $file_key=>$file_values){
+                    if($file_key == 'initial_screenshot'){
+                        $taskInsertArr1[]=[
+                            'task_response' => "yes",
+                            'main_Task_id'  => "83",
+                            'remark'        => ""
+                        ] + $commonColumns;
+                    }
+                    else if($file_key == 'second_screenshot'){
+                         $taskInsertArr1[]=[
+                             'task_response' => "yes",
+                             'main_Task_id'  => "85",
+                             'remark'        => ""
+                         ] + $commonColumns;
+                     }
+                     else if($file_key == 'final_report'){
+                         $taskInsertArr1[]=[
+                             'task_response' => "yes",
+                             'main_Task_id'  => "86",
+                             'remark'        => ""
+                         ] + $commonColumns;
+                     }
+                     $i++;
+                 }
+                 
+                 /** Insert into task_execution tasks */
+        foreach($posted_data as $k => $val){
+            if($val != '' && !empty($val)){
+                // Assign main_Task_id based on the key
+                if($taskperformedby == '2'){
+                    switch ($k){
+                        case 'final_remark':  $main_Task_id = '87'; 
+                                        break;
+                        default:
+                        continue 2; // Skip unknown keys
+                    }
+                }
+                if(count($val)>1){
+                    $val = implode('**',$val);
+                }
+                // Store data in array
+                $taskInsertArr1[] = [
+                    'task_response' => $val,
+                    'main_Task_id'  => $main_Task_id,
+                    'remark'        => $remark
+                ] + $commonColumns;
+                $this->Menu_model->update_tbe_attachmentid($main_Task_id,$taskId);
+            }
+        } 
+      
+        if (!empty($taskInsertArr1)){
+            $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+        }
+
+        $current_date               = date('Y-m-d h:i:s');
+        $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+        $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+        redirect("Menu/Dashboard");
+}
+
+public function updateEndlineMEreview(){
+    $posted_data        = $_POST;
+    $user               = $_SESSION['user'];
+    $taskperformedby    = $user['dep_id'];
+    $commonColumns      = [
+                            'performed_by' => $_SESSION['user']['id'],
+                            'updated_at'   => date("Y-m-d H:i:s"),
+                            'status'       => 'active',
+                            'tbe_id'       => $taskId
+                         ];
+ /** Insert into task_execution tasks */
+ foreach($posted_data as $k => $val){
+    if($val != '' && !empty($val)){
+        // Assign main_Task_id based on the key
+        if($taskperformedby == '2'){
+            switch ($k){
+                case 'correction_required':  $main_Task_id = '90'; 
+                                break;
+          
+                case 'star_rating':                  
+                                $main_Task_id = '91'; 
+                                break;
+                case 'final_remark':                
+                                $main_Task_id = '92'; 
+                                break;
+                default:
+                continue 2; // Skip unknown keys
+            }
+        }
+
+if(count($val)>1){
+   $val = implode('**',$val);
+}
+        // Store data in array
+        $taskInsertArr1[] = [
+            'task_response' => $val,
+            'main_Task_id'  => $main_Task_id,
+            'remark'        => $remark
+        ] + $commonColumns;
+    }
+} 
+        //   dd($taskInsertArr1);
+        if (!empty($taskInsertArr1)){
+            $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+        }
+        $current_date               = date('Y-m-d h:i:s');
+        $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+        $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+        redirect("Menu/Dashboard");   
 }
 
 
 
+public function updateBaselineMEreview(){
+    $posted_data        = $_POST;
+    $user               = $_SESSION['user'];
+    $taskperformedby    = $user['dep_id'];
+    $commonColumns      = [
+                            'performed_by' => $_SESSION['user']['id'],
+                            'updated_at'   => date("Y-m-d H:i:s"),
+                            'status'       => 'active',
+                            'tbe_id'       => $taskId
+                         ];
+ /** Insert into task_execution tasks */
+ foreach($posted_data as $k => $val){
+    if($val != '' && !empty($val)){
+        // Assign main_Task_id based on the key
+        if($taskperformedby == '2'){
+            switch ($k){
+                case 'correction_required':  $main_Task_id = '126'; 
+                                break;
+          
+                case 'star_rating':                  
+                                $main_Task_id = '127'; 
+                                break;
+                case 'final_remark':                
+                                $main_Task_id = '128'; 
+                                break;
+                default:
+                continue 2; // Skip unknown keys
+            }
+        }
+        // Store data in array
+        $taskInsertArr1[] = [
+            'task_response' => $val,
+            'main_Task_id'  => $main_Task_id,
+            'remark'        => $remark
+        ] + $commonColumns;
+    }
+} 
+        //   dd($taskInsertArr1);
+        if (!empty($taskInsertArr1)){
+            $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+        }
+        $current_date               = date('Y-m-d h:i:s');
+        $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+        $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+        redirect("Menu/Dashboard");   
+}
 
 
 }

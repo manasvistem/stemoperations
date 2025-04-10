@@ -81,4 +81,13 @@ if(!function_exists('get_indian_languages')){
         return $DataSet;
     }
 }
+
+if(!function_exists('get_CMbyUserID')){
+    function get_CMbyUserID($user_id) {
+        $CI =& get_instance();
+        $CI->load->model('Menu_model');
+        $DataSet = $CI->Menu_model->get_CMbyUserID($user_id);
+        return $DataSet;
+    }
+}
 ?>

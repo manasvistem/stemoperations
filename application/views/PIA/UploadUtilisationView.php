@@ -1,6 +1,11 @@
 <div class="container my-5">
+    
 <form name="uploadUtilisation" action="<?php echo base_url();?>Menu/updateUploadutilisationData" method="POST" enctype="multipart/form-data" >
-    <input type="hidden" name="taskId" value="<?php echo $taskId;?>" >
+
+<input type="text" name="taskId" id="taskId" value="<?php echo $taskId;?>" >
+ <input type="text" name="tasktypeid" id="tasktypeid" value="<?php echo $tasktypeid;?>" >
+
+
             <div class="row g-4">
                 <!-- Date Picker -->
                 <div class="col-md-6">
@@ -31,7 +36,7 @@
                 <!-- Teacher Dropdown -->
                 <div class="col-md-6">
                     <label for="teacherSelect" class="form-label">Select Teacher</label>
-                    <select class="form-select" id="teacherSelect" name="teacher" required>
+                    <select class="form-select" id="teacherSelect" name="teacher">
                         <option value="">-- Select --</option>
                         <!-- Add more teachers as needed -->
                     </select>
@@ -81,6 +86,7 @@
                 }
             });
         });
+
         $(document).ready(function () {
             // Populate Teacher Dropdown from API
             $.ajax({
