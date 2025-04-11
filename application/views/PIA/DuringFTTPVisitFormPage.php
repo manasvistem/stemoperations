@@ -106,7 +106,6 @@
             alert("Total students should match the sum of boys and girls!");
         }
     }
-
     $("#total_students, #boys, #girls").on("input", validateStudentCount);
 });
       $(document).ready(function() {
@@ -207,7 +206,6 @@ $(document).ready(function () {
                     $("#longitude").val(lon);
                     // Call Google Maps API to get address
                     var geocodeUrl = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lon}&key=YOUR_GOOGLE_MAPS_API_KEY`;
-
                     $.getJSON(geocodeUrl, function (data) {
                         if (data.status === "OK") {
                             var address = data.results[0].formatted_address;
