@@ -1,18 +1,21 @@
+<stryle>
+    .bold-input {
+    font-weight: bold;
+}</style>
 <div class="container mt-5">
     <h3 class="text-center mb-4"><?php // echo $taskstatus ?>Call Pre-Inauguration Task</h3>
-    
     <form action="<?php echo base_url()?>Menu/PreInaugurationCallUpdate" enctype="multipart/form-data"  method="post" name="preInauguration" id="preInauguration">
         <div class="mb-3">
             <label class="form-label fw-bold">Project Code</label>
-            <input type="text" class="form-control" placeholder="Enter Project Code" value="<?php echo $taskDetails['project_code'];?>" disabled required>
+            <input type="text" class="form-control bold-input" placeholder="Enter Project Code" value="<?php echo $taskDetails['project_code'];?>" disabled required>
         </div>
         <div class="mb-3">
             <label class="form-label fw-bold">School Name</label>
-            <input type="text" class="form-control" placeholder="Enter School Name" value="<?php echo $taskDetails['sname'];?>" disabled required>
+            <input type="text" class="form-control bold-input" placeholder="Enter School Name" value="<?php echo $taskDetails['sname'];?>" disabled required>
         </div>
         <div class="mb-3">
             <label class="form-label fw-bold">Address</label>
-            <textarea class="form-control" rows="3" placeholder="Enter Address" disabled required><?php echo $taskDetails['saddress'];?></textarea>
+            <textarea class="form-control bold-input" rows="3" placeholder="Enter Address" disabled required><?php echo $taskDetails['saddress'];?></textarea>
         </div>
         <div class="mb-3">
             <div class="form-check">Action Taken 
@@ -126,6 +129,7 @@ $("document").ready(function(){
             type: "POST",
             data: $(this).serialize(), // Serialize form data
             success: function (response) {
+                alert(response);
                 if (response.status == 'success') {
                     alert("Task updated successfully!");
                   //  $("#status").val("Updated"); // Update hidden field

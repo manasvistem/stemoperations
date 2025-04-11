@@ -7127,8 +7127,8 @@ class Menu extends CI_Controller {
             //     // $getData = $this->Menu_model->getReportData($tasktypeid,$user_id);
             //     // dd($getData);exit;
             // }
-          
-        //echo $viewname; exit;
+          //  echo $taskId;exit;
+           // echo $viewname; exit;
             $this->display($dep_name,$viewname,$data,$type='modal');
     }
 
@@ -7184,7 +7184,8 @@ class Menu extends CI_Controller {
         $taskId                     = $_POST['taskId'];
         $insertData['taskType']     = $_POST['taskType'];
         $insertData['tasktypeid']   = $_POST['tasktypeid'];
-        dd($post_data);
+
+        dd($_POST);
         foreach ($post_data as $key => $val){  
             if($key == "eventDate"){
                 $main_task_id               = "567";
@@ -11958,7 +11959,7 @@ public function updateCallPreIntervention(){
  if (!empty($taskInsertArr1)){
      $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
  }
-    $updatetblcalleventsData    = ['updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+    $updatetblcalleventsData    = ['updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1,'actontaken'=>$post_data['actontaken'],'purpose_achieved'=>$post_data['purpose_achieved ']];
     $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
     echo json_encode(["status" => "success"]);
 }
@@ -11967,7 +11968,6 @@ public function updatePreMaintenance(){
     dd($_POST);
 }
 public function updatevisitDuringMaintenanceIM(){
-
     dd($_POST);
 }
 
