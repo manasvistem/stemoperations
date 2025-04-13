@@ -2,7 +2,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0">Dashboard</h1>
+            <h2 class="m-0">Dashboard</h2>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -41,12 +41,11 @@
           <div class="nav-align-top mb-6">
             <ul class="nav nav-pills mb-4 nav-fill" role="tablist">
               <?php  
-           
                // $getTodaysTaskCounts = $this->Menu_model->GetTodaysAllTaskCountByUid($uid, date("Y-m-d"), $utype);
                // dd($getTodaysTaskCounts);
                 $firstTab = true; // Track first tab
-                $count = 0;
-                foreach ($getTodaysTaskCounts as $getTodaysTaskCount){
+                $count    = 0;
+                foreach($getTodaysTaskCounts as $getTodaysTaskCount){
                     $formatted_string = preg_replace("/[ \/'-]+/", "_", $getTodaysTaskCount->tasktype);
                    // if($getTodaysTaskCount->task_count !=0){
                 ?>
@@ -109,7 +108,6 @@
                         <div class="list-group">
                         <?php 
                           $i=1;
-                         // dd($getTodaysTasks);
                           foreach($getTodaysTasks as $sctasklist){
                             $task_id              = $sctasklist->task_id;
                             $appointment_datetime = $sctasklist->appointment_datetime;
@@ -122,9 +120,6 @@
                             $target_date          = $sctasklist->target_date;
                             $expected_date        = $sctasklist->expected_date;
                             $fwd_date             = $sctasklist->fwd_date;
-                            // echo $slct_type_of_task;
-                            // echo "<br>";
-                            // echo $tasktype;
                           if($slct_type_of_task === $tasktype){ 
                             ?>
                           <a data-task_id="<?=$task_id;?>" class="list-group-item list-group-item-action flex-column align-items-start active mb-1 taskperformaction" >
@@ -134,9 +129,6 @@
                             <h5 class="mb-1"><?=$sname.' - '.$taskname; ?></h5>
                            <small> <span id="countdown1"></span> - <span id="status1"></span> </small> 
                             </div>
-                          <?php 
-                         // dd($data);
-                          ?>
                         <small> <span id="countdown<?=$task_id;?>"></span> - <span id="status<?=$task_id;?>"></span>  
                         </small>
                         </a>
@@ -160,17 +152,14 @@
                       </button>
                    </div>
                    <hr>
-                  
-                </div>
-        </div>
                 </div>
               </div>
+            </div>
+              </div>
               <?php 
-              
                 $firstPane = false; // Set to false after first iteration
                       }
                 ?>
-              
             </div>
           </div>
         </div>

@@ -1,14 +1,11 @@
 
-<div class="modal-body" id="MaintenanceModal">
-    <form id="schoolIdentificationVisit" method="post" action="">
+<div class="modal-body" id="visitDuringBaseline">
+    <form id="BaselineMEvisit" method="post" action="">
         <input type="hidden" name="taskId" value="<?php echo $taskId; ?>"/>
-        <input type="hidden" name="taskType" value="<?php echo $taskType; ?>"/>
-        <input type="hidden" name="tasktypeid" value="<?php echo $tasktypeid; ?>"/>
-        <input type="hidden" name="status" id="status" value="">
     <div class="mb-3">
         <label class="form-label">Start Your Journey</label>
             <div class="form-check form-check-inline">
-                <a href="<?php echo base_url()?>Menu/visitDuringIdentification/<?php echo $taskId;?>" target="_blank" class="btn btn-primary" id="startyourjourney">
+                <a href="<?php echo base_url()?>Menu/visitDuringBaselineME/<?php echo $taskId;?>" target="_blank" class="btn btn-primary" id="startyourjourney">
                     <i class="bi bi-play-fill"></i> Start
                 </a>
             </div>
@@ -28,7 +25,6 @@
         }*/
          ?>
     </div>
-    
     </form>
   </div>
 </div>

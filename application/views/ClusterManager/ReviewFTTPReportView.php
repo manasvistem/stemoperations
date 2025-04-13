@@ -18,16 +18,12 @@
         <label>Star Rating to PIA</label>
         <input type="number" name="pia_rating" min="1" max="5">
     </div>
-    
     </div>
-
     <!-- PIA Remark -->
     <div class="mb-3">
       <label for="pia_remark" class="form-label">PIA Remark</label>
       <textarea class="form-control" id="pia_remark" name="pia_remark" rows="3" placeholder=""></textarea>
     </div>
-
-    
     <button type="submit">Submit</button>
 </form>
 
@@ -36,24 +32,24 @@ function downloadFile(filename) {
     window.location.href = filename;
 }
 
-$(document).ready(function() {
-    $('#reviewForm').submit(function(e) {
-        e.preventDefault();
-        var formData = $(this).serialize();
+// $(document).ready(function() {
+//     $('#reviewForm').submit(function(e) {
+//         e.preventDefault();
+//         var formData = $(this).serialize();
         
-        $.ajax({
-            url: 'submit_review.php',
-            type: 'POST',
-            data: formData,
-            success: function(response) {
-                alert('Form submitted successfully!');
-                $('#reviewForm')[0].reset();
-                location.reload();
-            },
-            error: function() {
-                alert('Error submitting form');
-            }
-        });
-    });
-});
+//         $.ajax({
+//             url: 'submit_review.php',
+//             type: 'POST',
+//             data: formData,
+//             success: function(response) {
+//                 alert('Form submitted successfully!');
+//                 $('#reviewForm')[0].reset();
+//                 location.reload();
+//             },
+//             error: function() {
+//                 alert('Error submitting form');
+//             }
+//         });
+//     });
+// });
 </script>

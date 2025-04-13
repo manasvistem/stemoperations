@@ -70,9 +70,18 @@
                   <form action="<?=base_url();?>Menu/StoreProgramTimelinePlanning" method="post">
                       <input type="hidden" name="projectcode" value="<?=$project_code;?>">
                       <input type="hidden" name="task_id" value="<?=$task_id;?>">
-                    <div class="was-validated">
+                      <div class="was-validated">
+
+                      <div class="form-group" id="b4">
+                          <label class="form-label">Select Academic Year</label>
+                          <select class="form-control" name="academic_year" required>
+                              <option value="<?=date('Y').'-'.date('Y', strtotime('+1 year'));?>"><?=date('Y').'-'.date('Y', strtotime('+1 year'));?></option>
+                          </select>
+                      </div>
+
+
                     <div class="card p-2 mt-2">
-                      <div class="from-group" id="b1">
+                      <div class="from-group m-2" id="b1">
                         <lable class="form-label">WelCome Message*</lable>
                         <?php foreach ($week as $weekNumber => $month) {?>
                         <?php } ?>
@@ -80,27 +89,27 @@
                       </div>
                       </div>
                       <div class="card p-2 mt-2">
-                      <div class="from-group" id="b2">
+                      <div class="from-group m-2" id="b2">
                         <lable class="form-label">1st 5 Communication*</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="communication1"  id="communication1" required="">
                       </div>
-                      <div class="from-group" id="b2">
+                      <div class="from-group m-2" id="b2">
                         <lable class="form-label">2nd 5 Communication*</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="communication2"  id="communication2" required="">
                       </div>
-                      <div class="from-group" id="b2">
+                      <div class="from-group m-2" id="b2">
                         <lable class="form-label">3rd 5 Communication*</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="communication3"  id="communication3" required="">
                       </div>
                       </div>
 
                       <div class="card p-2 mt-2">
-                      <div class="from-group" id="b3">
+                      <div class="from-group m-2" id="b3">
                         <lable class="form-label">1st 5 Calls for Utilisation*</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="callsfu1" id="callsfu1" required="">
                       </div>
 
-                      <div class="from-group" id="b3">
+                      <div class="from-group m-2" id="b3">
                         <lable class="form-label">2nd 5 Calls for Utilisation*</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="callsfu2" id="callsfu2" required="">
                       </div>
@@ -109,7 +118,7 @@
 
                       <div class="card p-2 mt-2">
 
-                      <div class="from-group" id="b4">
+                      <div class="from-group m-2" id="b4">
                         <lable class="form-label">Report Type*</lable>
                         <select class="form-control"  name="reporttype" required="">
                             <option value="">select</option>
@@ -118,15 +127,15 @@
                             <option value="1">Yearly</option>
                         </select>
                       </div>
-                      <div class="from-group" id="b5">
+                      <div class="from-group m-2" id="b5">
                         <lable class="form-label">FTTP</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="fttp" required="">
                        </div>
-                      <div class="from-group" id="b6">
+                      <div class="from-group m-2" id="b6">
                         <lable class="form-label">RTTP*</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="rttp" required="">
                       </div>
-                      <div class="from-group" id="b5">
+                      <div class="from-group m-2" id="b5">
                         <lable class="form-label">Replacement</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="replacement" required="">
                      </div>
@@ -134,21 +143,21 @@
 
                     
                      <div class="card p-2 mt-2">
-                      <div class="from-group" id="b8">
+                      <div class="from-group m-2" id="b8">
                         <lable class="form-label">Maintenance*</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="maintenance" required="">
                       </div>
                       
-                      <div class="from-group" id="b10">
+                      <div class="from-group m-2" id="b10">
                         <lable class="form-label">Base Line M&E</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="blmne" required="">
                       </div>
-                      <div class="from-group" id="b11">
+                      <div class="from-group m-2" id="b11">
                         <lable class="form-label">End Line M&E</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="elmne" required="">
                       </div>
                      
-                      <div class="from-group" id="b12">
+                      <div class="from-group m-2" id="b12">
                         <lable class="form-label">NSP</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="nsp" >
                       </div>
@@ -156,24 +165,24 @@
 
 
                       <!-- <div class="card p-2 mt-2">
-                      <div class="from-group">
+                      <div class="from-group m-2">
                         <lable class="form-label">ZM Visit 10% each</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" min="<?= date("Y-m-d") ?>" class="form-control" name="zmvisit" id="zmvisit" required>
                       </div>
 
-                      <div class="from-group" id="b14">
+                      <div class="from-group m-2" id="b14">
                         <lable class="form-label">PM Visit 10% each</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" min="<?= date("Y-m-d") ?>" class="form-control" id="pmvisit" name="pmvisit" required="">
                       </div>
                       </div>
 
                       <div class="card p-2 mt-2">
-                      <div class="from-group">
+                      <div class="from-group m-2">
                         <lable class="form-label">Other Department Call</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" min="<?= date("Y-m-d") ?>" class="form-control" name="otherdepartmentcall" id="otherdepartmentcall" required>
                       </div>
 
-                      <div class="from-group" id="b17">
+                      <div class="from-group m-2" id="b17">
                         <lable class="form-label">Review with BD*</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" min="<?= date("Y-m-d") ?>" class="form-control" name="bdreview" id="bdreview" required="">
                       </div>
@@ -183,64 +192,64 @@
 
 
                       <div class="card p-2 mt-2">
-                        <div class="from-group" id="b13">
+                        <div class="from-group m-2" id="b13">
                           <lable class="form-label">1st 5 Utilisation*</lable>
                           <input type="date" min="<?= date("Y-m-d") ?>" id="utilisation1" class="form-control" name="utilisation1" required="">
                         </div>
-                        <div class="from-group" id="b13">
+                        <div class="from-group m-2" id="b13">
                           <lable class="form-label">2nd 5 Utilisation*</lable>
                           <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" id="utilisation2" name="utilisation2" required="">
                         </div>
-                        <div class="from-group" id="b13">
+                        <div class="from-group m-2" id="b13">
                           <lable class="form-label">3rd 5 Utilisation*</lable>
                           <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" id="utilisation3" name="utilisation3" required="">
                         </div>
                       </div>
                       <div class="card p-2 mt-2">
-                      <div class="from-group" id="b15">
+                      <div class="from-group m-2" id="b15">
                         <lable class="form-label">Other Department Call*</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" class="form-control"  name="otherdcall" required="">
                       </div>
                       </div>
                       <div class="card p-2 mt-2">
-                        <div class="from-group" id="b16">
+                        <div class="from-group m-2" id="b16">
                           <lable class="form-label">1st 4 OutBond Communication*</lable>
                           <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="outbondc1" id="outbondc1" required="">
                         </div>
-                        <div class="from-group" id="b16">
+                        <div class="from-group m-2" id="b16">
                           <lable class="form-label">2nd 4 OutBond Communication*</lable>
                           <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="outbondc2" id="outbondc2" required="">
                         </div>
-                        <div class="from-group" id="b16">
+                        <div class="from-group m-2" id="b16">
                           <lable class="form-label">3rd 4 OutBond Communication*</lable>
                           <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="outbondc3" id="outbondc3" required="">
                         </div>
                       </div>
                       <div class="card p-2 mt-2">
-                      <div class="from-group" id="b17">
+                      <div class="from-group m-2" id="b17">
                         <lable class="form-label">Review with BD*</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="bdreview" required="">
                       </div>
                       </div>
                       
                       <div class="card p-2 mt-2">
-                      <div class="from-group" id="b7">
+                      <div class="from-group m-2" id="b7">
                         <lable class="form-label">CaseStudy*</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="casestudy" required="">
                       </div>
                       
-                      <div class="from-group" id="b9">
+                      <div class="from-group m-2" id="b9">
                         <lable class="form-label">DIY</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="diy" required="">
                       </div>
-                      <div class="from-group" id="b18">
+                      <div class="from-group m-2" id="b18">
                         <lable class="form-label">Client Engagement*</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="cengagement" required="">
                       </div>
                       </div>
                     
                       <div class="card p-2 mt-2">
-                      <div class="from-group">
+                      <div class="from-group m-2">
                         <lable class="form-label">Expected Status</lable>
                         <select class="form-control" name="status" required>
                             <option value="">Select Status</option>
@@ -249,36 +258,36 @@
                             <?php } ?>
                         </select>
                       </div>
-                      <div class="from-group">
+                      <div class="from-group m-2">
                         <lable class="form-label">Expected Status Date</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="exstatusdt" required>
                       </div>
                       </div>
                       <div class="card p-2 mt-2">
-                      <div class="from-group" id="b14">
+                      <div class="from-group m-2" id="b14">
                         <lable class="form-label">ZM Visit 10% each</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="zmvisit" required="">
                       </div>
-                      <div class="from-group" id="b14">
+                      <div class="from-group m-2" id="b14">
                         <lable class="form-label">PM Visit 10% each</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="pmvisit" required="">
                       </div>
                       </div>
                       
                      <div class="card p-2 mt-2">
-                     <div class="from-group" id="b17">
+                     <div class="from-group m-2" id="b17">
                         <lable class="form-label">Summer Activity</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="summeractivity" id="summeractivity" required="">
                       </div>
-                      <div class="from-group" id="b17">
+                      <div class="from-group m-2" id="b17">
                         <lable class="form-label">winter activity</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="winteractivity" id="winteractivity" required="">
                       </div>
-                      <div class="from-group" id="b17">
+                      <div class="from-group m-2" id="b17">
                         <lable class="form-label">Online Activity</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="onlineactivity" id="onlineactivity" required="">
                       </div>
-                      <div class="from-group" id="b17">
+                      <div class="from-group m-2" id="b17">
                         <lable class="form-label">Webinar</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="webinar" id="webinar" required="">
                       </div>
@@ -286,19 +295,19 @@
                      
                      
                     <div class="card p-2 mt-2">
-                     <div class="from-group" id="b17">
+                     <div class="from-group m-2" id="b17">
                         <lable class="form-label">Set Date for First Social Media Post</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="socialMediaPost1" required="">
                       </div>
-                      <div class="from-group" id="b17">
+                      <div class="from-group m-2" id="b17">
                         <lable class="form-label">Set Date for Second Social Media Post</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="socialMediaPost2" required="">
                       </div>
-                      <div class="from-group" id="b17">
+                      <div class="from-group m-2" id="b17">
                         <lable class="form-label">Set Date for Third Social Media Post</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="socialMediaPost3" required="">
                       </div>
-                      <div class="from-group" id="b17">
+                      <div class="from-group m-2" id="b17">
                         <lable class="form-label">Set Date for Fourth Social Media Post</lable>
                         <input type="date" min="<?= date("Y-m-d") ?>" class="form-control" name="socialMediaPost4"  required="">
                       </div>

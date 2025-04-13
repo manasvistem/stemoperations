@@ -19,7 +19,6 @@
     <!-- Hidden Form Section (Shown Only When Both Are YES) -->
     <div id="taskForm" style="display: none;">
         <h5 class="mt-3">Additional Details</h5>
-
         <!-- School Location Type -->
         <div class="mb-3">
             <label><strong>School is in:</strong></label><br>
