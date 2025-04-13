@@ -2846,7 +2846,7 @@ class Menu extends CI_Controller {
     public function main(){
         $msg = '';
         $dep   =   $this->Menu_model->get_depatment();
-        
+        //dd($dep);
         $this->load->view('index', ['dep'=>$dep,'msg'=>$msg]);
     }
 
@@ -7053,6 +7053,7 @@ class Menu extends CI_Controller {
     }
     public function Dashboard(){
         date_default_timezone_set('Asia/Kolkata');
+       // dd($_POST);
         if (isset($_POST['submit'])) {
             $tdate = $_POST['filterdate'];
         }else{
@@ -7068,6 +7069,8 @@ class Menu extends CI_Controller {
         $getTodaysTasks                 = $this->Menu_model->GetTodaysAllTaskByUid($uid, date('Y-m-d'));
         $data['getTodaysTaskCounts']    = $getTodaysTaskCounts;
         $data['getTodaysTasks']         = $getTodaysTasks;
+
+        dd($data);
         if(empty($user_day) && count($user_day)<= 0){
             $this->session->set_flashdata('error_message','* Please Start Your Day');
             redirect('Menu/DayManagement');
@@ -16235,7 +16238,7 @@ public function UpdateFTTPDuringVisit(){
                 ] + $commonColumns;
             }
         } 
-        dd($taskInsertArr1);
+      //  dd($taskInsertArr1);
         if (!empty($taskInsertArr1)){
             $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
         }

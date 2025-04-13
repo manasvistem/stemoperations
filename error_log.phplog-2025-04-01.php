@@ -4757,3 +4757,247 @@ INFO - 2025-04-01 18:08:16 --> Form Validation Class Initialized
 INFO - 2025-04-01 18:08:16 --> Model "Menu_model" initialized
 INFO - 2025-04-01 18:08:16 --> Helper loaded: common_helper
 INFO - 2025-04-01 18:08:16 --> Helper loaded: taskplanner_helper
+INFO - 2025-04-01 18:23:40 --> Config Class Initialized
+INFO - 2025-04-01 18:23:40 --> Hooks Class Initialized
+DEBUG - 2025-04-01 18:23:40 --> UTF-8 Support Enabled
+INFO - 2025-04-01 18:23:40 --> Utf8 Class Initialized
+INFO - 2025-04-01 18:23:40 --> URI Class Initialized
+INFO - 2025-04-01 18:23:40 --> Router Class Initialized
+INFO - 2025-04-01 18:23:40 --> Output Class Initialized
+INFO - 2025-04-01 18:23:40 --> Security Class Initialized
+DEBUG - 2025-04-01 18:23:40 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-01 18:23:40 --> Input Class Initialized
+INFO - 2025-04-01 18:23:40 --> Language Class Initialized
+INFO - 2025-04-01 23:53:40 --> Loader Class Initialized
+INFO - 2025-04-01 23:53:40 --> Helper loaded: url_helper
+INFO - 2025-04-01 23:53:40 --> Helper loaded: form_helper
+INFO - 2025-04-01 23:53:40 --> Helper loaded: file_helper
+INFO - 2025-04-01 23:53:40 --> Helper loaded: email_helper
+INFO - 2025-04-01 23:53:40 --> Helper loaded: cookie_helper
+INFO - 2025-04-01 23:53:40 --> Helper loaded: functiondd_helper
+INFO - 2025-04-01 23:53:40 --> Database Driver Class Initialized
+DEBUG - 2025-04-01 23:53:40 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-04-01 23:53:40 --> Session: Class initialized using 'files' driver.
+INFO - 2025-04-01 23:53:40 --> Controller Class Initialized
+INFO - 2025-04-01 23:53:40 --> Form Validation Class Initialized
+INFO - 2025-04-01 23:53:40 --> Model "Menu_model" initialized
+INFO - 2025-04-01 23:53:40 --> Helper loaded: common_helper
+INFO - 2025-04-01 23:53:40 --> Helper loaded: taskplanner_helper
+INFO - 2025-04-01 23:53:40 --> File loaded: C:\wamp64\www\stemoppapp\application\views\index.php
+INFO - 2025-04-01 23:53:40 --> Final output sent to browser
+DEBUG - 2025-04-01 23:53:40 --> Total execution time: 0.2511
+INFO - 2025-04-01 18:23:40 --> Config Class Initialized
+INFO - 2025-04-01 18:23:40 --> Hooks Class Initialized
+DEBUG - 2025-04-01 18:23:40 --> UTF-8 Support Enabled
+INFO - 2025-04-01 18:23:40 --> Utf8 Class Initialized
+INFO - 2025-04-01 18:23:40 --> URI Class Initialized
+INFO - 2025-04-01 18:23:40 --> Config Class Initialized
+INFO - 2025-04-01 18:23:40 --> Config Class Initialized
+INFO - 2025-04-01 18:23:40 --> Hooks Class Initialized
+INFO - 2025-04-01 18:23:40 --> Hooks Class Initialized
+INFO - 2025-04-01 18:23:40 --> Router Class Initialized
+DEBUG - 2025-04-01 18:23:40 --> UTF-8 Support Enabled
+DEBUG - 2025-04-01 18:23:40 --> UTF-8 Support Enabled
+INFO - 2025-04-01 18:23:40 --> Output Class Initialized
+INFO - 2025-04-01 18:23:40 --> Utf8 Class Initialized
+INFO - 2025-04-01 18:23:40 --> Utf8 Class Initialized
+INFO - 2025-04-01 18:23:40 --> URI Class Initialized
+INFO - 2025-04-01 18:23:40 --> Security Class Initialized
+DEBUG - 2025-04-01 18:23:40 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-01 18:23:40 --> URI Class Initialized
+INFO - 2025-04-01 18:23:40 --> Router Class Initialized
+INFO - 2025-04-01 18:23:40 --> Input Class Initialized
+INFO - 2025-04-01 18:23:40 --> Router Class Initialized
+INFO - 2025-04-01 18:23:40 --> Output Class Initialized
+INFO - 2025-04-01 18:23:40 --> Output Class Initialized
+INFO - 2025-04-01 18:23:40 --> Language Class Initialized
+INFO - 2025-04-01 18:23:40 --> Security Class Initialized
+INFO - 2025-04-01 18:23:40 --> Security Class Initialized
+DEBUG - 2025-04-01 18:23:40 --> Global POST, GET and COOKIE data sanitized
+ERROR - 2025-04-01 23:53:40 --> 404 Page Not Found: Menu/js
+DEBUG - 2025-04-01 18:23:40 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-01 18:23:40 --> Input Class Initialized
+INFO - 2025-04-01 18:23:40 --> Input Class Initialized
+INFO - 2025-04-01 18:23:40 --> Language Class Initialized
+INFO - 2025-04-01 18:23:40 --> Language Class Initialized
+ERROR - 2025-04-01 23:53:40 --> 404 Page Not Found: Menu/js
+ERROR - 2025-04-01 23:53:40 --> 404 Page Not Found: Menu/js
+INFO - 2025-04-01 18:23:40 --> Config Class Initialized
+INFO - 2025-04-01 18:23:40 --> Hooks Class Initialized
+DEBUG - 2025-04-01 18:23:40 --> UTF-8 Support Enabled
+INFO - 2025-04-01 18:23:40 --> Utf8 Class Initialized
+INFO - 2025-04-01 18:23:40 --> URI Class Initialized
+INFO - 2025-04-01 18:23:40 --> Router Class Initialized
+INFO - 2025-04-01 18:23:40 --> Output Class Initialized
+INFO - 2025-04-01 18:23:40 --> Security Class Initialized
+DEBUG - 2025-04-01 18:23:40 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-01 18:23:40 --> Input Class Initialized
+INFO - 2025-04-01 18:23:40 --> Language Class Initialized
+ERROR - 2025-04-01 18:23:40 --> 404 Page Not Found: Assets/webfonts
+INFO - 2025-04-01 18:23:40 --> Config Class Initialized
+INFO - 2025-04-01 18:23:40 --> Hooks Class Initialized
+DEBUG - 2025-04-01 18:23:40 --> UTF-8 Support Enabled
+INFO - 2025-04-01 18:23:40 --> Utf8 Class Initialized
+INFO - 2025-04-01 18:23:40 --> URI Class Initialized
+INFO - 2025-04-01 18:23:40 --> Router Class Initialized
+INFO - 2025-04-01 18:23:40 --> Output Class Initialized
+INFO - 2025-04-01 18:23:40 --> Security Class Initialized
+DEBUG - 2025-04-01 18:23:40 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-01 18:23:40 --> Input Class Initialized
+INFO - 2025-04-01 18:23:40 --> Language Class Initialized
+ERROR - 2025-04-01 18:23:40 --> 404 Page Not Found: Assets/webfonts
+INFO - 2025-04-01 18:23:40 --> Config Class Initialized
+INFO - 2025-04-01 18:23:40 --> Hooks Class Initialized
+DEBUG - 2025-04-01 18:23:40 --> UTF-8 Support Enabled
+INFO - 2025-04-01 18:23:40 --> Utf8 Class Initialized
+INFO - 2025-04-01 18:23:40 --> URI Class Initialized
+INFO - 2025-04-01 18:23:40 --> Router Class Initialized
+INFO - 2025-04-01 18:23:40 --> Output Class Initialized
+INFO - 2025-04-01 18:23:40 --> Security Class Initialized
+DEBUG - 2025-04-01 18:23:40 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-01 18:23:40 --> Input Class Initialized
+INFO - 2025-04-01 18:23:40 --> Language Class Initialized
+ERROR - 2025-04-01 18:23:40 --> 404 Page Not Found: Assets/webfonts
+INFO - 2025-04-01 18:25:38 --> Config Class Initialized
+INFO - 2025-04-01 18:25:38 --> Hooks Class Initialized
+DEBUG - 2025-04-01 18:25:38 --> UTF-8 Support Enabled
+INFO - 2025-04-01 18:25:38 --> Utf8 Class Initialized
+INFO - 2025-04-01 18:25:38 --> URI Class Initialized
+INFO - 2025-04-01 18:25:38 --> Router Class Initialized
+INFO - 2025-04-01 18:25:38 --> Output Class Initialized
+INFO - 2025-04-01 18:25:38 --> Security Class Initialized
+DEBUG - 2025-04-01 18:25:38 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-01 18:25:38 --> Input Class Initialized
+INFO - 2025-04-01 18:25:38 --> Language Class Initialized
+INFO - 2025-04-01 23:55:38 --> Loader Class Initialized
+INFO - 2025-04-01 23:55:38 --> Helper loaded: url_helper
+INFO - 2025-04-01 23:55:38 --> Helper loaded: form_helper
+INFO - 2025-04-01 23:55:38 --> Helper loaded: file_helper
+INFO - 2025-04-01 23:55:38 --> Helper loaded: email_helper
+INFO - 2025-04-01 23:55:38 --> Helper loaded: cookie_helper
+INFO - 2025-04-01 23:55:38 --> Helper loaded: functiondd_helper
+INFO - 2025-04-01 23:55:38 --> Database Driver Class Initialized
+DEBUG - 2025-04-01 23:55:38 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-04-01 23:55:38 --> Session: Class initialized using 'files' driver.
+INFO - 2025-04-01 23:55:38 --> Controller Class Initialized
+INFO - 2025-04-01 23:55:38 --> Form Validation Class Initialized
+INFO - 2025-04-01 23:55:38 --> Model "Menu_model" initialized
+INFO - 2025-04-01 23:55:38 --> Helper loaded: common_helper
+INFO - 2025-04-01 23:55:38 --> Helper loaded: taskplanner_helper
+INFO - 2025-04-01 18:25:38 --> Config Class Initialized
+INFO - 2025-04-01 18:25:38 --> Hooks Class Initialized
+DEBUG - 2025-04-01 18:25:38 --> UTF-8 Support Enabled
+INFO - 2025-04-01 18:25:38 --> Utf8 Class Initialized
+INFO - 2025-04-01 18:25:38 --> URI Class Initialized
+INFO - 2025-04-01 18:25:38 --> Router Class Initialized
+INFO - 2025-04-01 18:25:38 --> Output Class Initialized
+INFO - 2025-04-01 18:25:38 --> Security Class Initialized
+DEBUG - 2025-04-01 18:25:38 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-01 18:25:38 --> Input Class Initialized
+INFO - 2025-04-01 18:25:38 --> Language Class Initialized
+INFO - 2025-04-01 23:55:38 --> Loader Class Initialized
+INFO - 2025-04-01 23:55:38 --> Helper loaded: url_helper
+INFO - 2025-04-01 23:55:38 --> Helper loaded: form_helper
+INFO - 2025-04-01 23:55:38 --> Helper loaded: file_helper
+INFO - 2025-04-01 23:55:38 --> Helper loaded: email_helper
+INFO - 2025-04-01 23:55:38 --> Helper loaded: cookie_helper
+INFO - 2025-04-01 23:55:38 --> Helper loaded: functiondd_helper
+INFO - 2025-04-01 23:55:38 --> Database Driver Class Initialized
+DEBUG - 2025-04-01 23:55:38 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-04-01 23:55:38 --> Session: Class initialized using 'files' driver.
+INFO - 2025-04-01 23:55:38 --> Controller Class Initialized
+INFO - 2025-04-01 23:55:38 --> Form Validation Class Initialized
+INFO - 2025-04-01 23:55:38 --> Model "Menu_model" initialized
+INFO - 2025-04-01 23:55:38 --> Helper loaded: common_helper
+INFO - 2025-04-01 23:55:38 --> Helper loaded: taskplanner_helper
+ERROR - 2025-04-01 23:55:38 --> Severity: Warning --> Undefined array key "utype" C:\wamp64\www\stemoppapp\application\controllers\Menu.php 7067
+INFO - 2025-04-01 18:25:38 --> Config Class Initialized
+INFO - 2025-04-01 18:25:38 --> Hooks Class Initialized
+DEBUG - 2025-04-01 18:25:38 --> UTF-8 Support Enabled
+INFO - 2025-04-01 18:25:38 --> Utf8 Class Initialized
+INFO - 2025-04-01 18:25:38 --> URI Class Initialized
+INFO - 2025-04-01 18:25:38 --> Router Class Initialized
+INFO - 2025-04-01 18:25:38 --> Output Class Initialized
+INFO - 2025-04-01 18:25:38 --> Security Class Initialized
+DEBUG - 2025-04-01 18:25:38 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-01 18:25:38 --> Input Class Initialized
+INFO - 2025-04-01 18:25:38 --> Language Class Initialized
+INFO - 2025-04-01 23:55:38 --> Loader Class Initialized
+INFO - 2025-04-01 23:55:38 --> Helper loaded: url_helper
+INFO - 2025-04-01 23:55:38 --> Helper loaded: form_helper
+INFO - 2025-04-01 23:55:38 --> Helper loaded: file_helper
+INFO - 2025-04-01 23:55:38 --> Helper loaded: email_helper
+INFO - 2025-04-01 23:55:38 --> Helper loaded: cookie_helper
+INFO - 2025-04-01 23:55:38 --> Helper loaded: functiondd_helper
+INFO - 2025-04-01 23:55:38 --> Database Driver Class Initialized
+DEBUG - 2025-04-01 23:55:38 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+INFO - 2025-04-01 23:55:38 --> Session: Class initialized using 'files' driver.
+INFO - 2025-04-01 23:55:38 --> Controller Class Initialized
+INFO - 2025-04-01 23:55:38 --> Form Validation Class Initialized
+INFO - 2025-04-01 23:55:38 --> Model "Menu_model" initialized
+INFO - 2025-04-01 23:55:38 --> Helper loaded: common_helper
+INFO - 2025-04-01 23:55:38 --> Helper loaded: taskplanner_helper
+ERROR - 2025-04-01 23:55:40 --> Severity: error --> Exception: Table 'stem_operation.close_your_day_request' doesn't exist C:\wamp64\www\stemoppapp\system\database\drivers\mysqli\mysqli_driver.php 309
+INFO - 2025-04-01 18:26:09 --> Config Class Initialized
+INFO - 2025-04-01 18:26:09 --> Hooks Class Initialized
+DEBUG - 2025-04-01 18:26:09 --> UTF-8 Support Enabled
+INFO - 2025-04-01 18:26:09 --> Utf8 Class Initialized
+INFO - 2025-04-01 18:26:09 --> URI Class Initialized
+INFO - 2025-04-01 18:26:09 --> Router Class Initialized
+INFO - 2025-04-01 18:26:09 --> Output Class Initialized
+INFO - 2025-04-01 18:26:09 --> Security Class Initialized
+DEBUG - 2025-04-01 18:26:09 --> Global POST, GET and COOKIE data sanitized
+INFO - 2025-04-01 18:26:09 --> Input Class Initialized
+INFO - 2025-04-01 18:26:09 --> Language Class Initialized
+ERROR - 2025-04-01 23:56:09 --> Severity: 8192 --> Creation of dynamic property Menu::$benchmark is deprecated C:\wamp64\www\stemoppapp\system\core\Controller.php 82
+ERROR - 2025-04-01 23:56:09 --> Severity: 8192 --> Creation of dynamic property Menu::$hooks is deprecated C:\wamp64\www\stemoppapp\system\core\Controller.php 82
+ERROR - 2025-04-01 23:56:09 --> Severity: 8192 --> Creation of dynamic property Menu::$config is deprecated C:\wamp64\www\stemoppapp\system\core\Controller.php 82
+ERROR - 2025-04-01 23:56:09 --> Severity: 8192 --> Creation of dynamic property Menu::$log is deprecated C:\wamp64\www\stemoppapp\system\core\Controller.php 82
+ERROR - 2025-04-01 23:56:09 --> Severity: 8192 --> Creation of dynamic property Menu::$utf8 is deprecated C:\wamp64\www\stemoppapp\system\core\Controller.php 82
+ERROR - 2025-04-01 23:56:09 --> Severity: 8192 --> Creation of dynamic property Menu::$uri is deprecated C:\wamp64\www\stemoppapp\system\core\Controller.php 82
+ERROR - 2025-04-01 23:56:09 --> Severity: 8192 --> Creation of dynamic property Menu::$router is deprecated C:\wamp64\www\stemoppapp\system\core\Controller.php 82
+ERROR - 2025-04-01 23:56:09 --> Severity: 8192 --> Creation of dynamic property Menu::$output is deprecated C:\wamp64\www\stemoppapp\system\core\Controller.php 82
+ERROR - 2025-04-01 23:56:09 --> Severity: 8192 --> Creation of dynamic property Menu::$security is deprecated C:\wamp64\www\stemoppapp\system\core\Controller.php 82
+ERROR - 2025-04-01 23:56:09 --> Severity: 8192 --> Creation of dynamic property Menu::$input is deprecated C:\wamp64\www\stemoppapp\system\core\Controller.php 82
+ERROR - 2025-04-01 23:56:09 --> Severity: 8192 --> Creation of dynamic property Menu::$lang is deprecated C:\wamp64\www\stemoppapp\system\core\Controller.php 82
+INFO - 2025-04-01 23:56:09 --> Loader Class Initialized
+INFO - 2025-04-01 23:56:09 --> Helper loaded: url_helper
+INFO - 2025-04-01 23:56:09 --> Helper loaded: form_helper
+INFO - 2025-04-01 23:56:09 --> Helper loaded: file_helper
+INFO - 2025-04-01 23:56:09 --> Helper loaded: email_helper
+INFO - 2025-04-01 23:56:09 --> Helper loaded: cookie_helper
+INFO - 2025-04-01 23:56:09 --> Helper loaded: functiondd_helper
+ERROR - 2025-04-01 23:56:09 --> Severity: 8192 --> Creation of dynamic property Menu::$db is deprecated C:\wamp64\www\stemoppapp\system\core\Loader.php 396
+INFO - 2025-04-01 23:56:09 --> Database Driver Class Initialized
+ERROR - 2025-04-01 23:56:09 --> Severity: 8192 --> Return type of CI_Session_files_driver::open($save_path, $name) should either be compatible with SessionHandlerInterface::open(string $path, string $name): bool, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice C:\wamp64\www\stemoppapp\system\libraries\Session\drivers\Session_files_driver.php 132
+ERROR - 2025-04-01 23:56:09 --> Severity: 8192 --> Return type of CI_Session_files_driver::close() should either be compatible with SessionHandlerInterface::close(): bool, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice C:\wamp64\www\stemoppapp\system\libraries\Session\drivers\Session_files_driver.php 294
+ERROR - 2025-04-01 23:56:09 --> Severity: 8192 --> Return type of CI_Session_files_driver::read($session_id) should either be compatible with SessionHandlerInterface::read(string $id): string|false, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice C:\wamp64\www\stemoppapp\system\libraries\Session\drivers\Session_files_driver.php 168
+ERROR - 2025-04-01 23:56:09 --> Severity: 8192 --> Return type of CI_Session_files_driver::write($session_id, $session_data) should either be compatible with SessionHandlerInterface::write(string $id, string $data): bool, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice C:\wamp64\www\stemoppapp\system\libraries\Session\drivers\Session_files_driver.php 237
+ERROR - 2025-04-01 23:56:09 --> Severity: 8192 --> Return type of CI_Session_files_driver::destroy($session_id) should either be compatible with SessionHandlerInterface::destroy(string $id): bool, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice C:\wamp64\www\stemoppapp\system\libraries\Session\drivers\Session_files_driver.php 317
+ERROR - 2025-04-01 23:56:09 --> Severity: 8192 --> Return type of CI_Session_files_driver::gc($maxlifetime) should either be compatible with SessionHandlerInterface::gc(int $max_lifetime): int|false, or the #[\ReturnTypeWillChange] attribute should be used to temporarily suppress the notice C:\wamp64\www\stemoppapp\system\libraries\Session\drivers\Session_files_driver.php 358
+ERROR - 2025-04-01 23:56:09 --> Severity: Warning --> ini_set(): Session ini settings cannot be changed after headers have already been sent C:\wamp64\www\stemoppapp\system\libraries\Session\Session.php 282
+ERROR - 2025-04-01 23:56:09 --> Severity: Warning --> session_set_cookie_params(): Session cookie parameters cannot be changed after headers have already been sent C:\wamp64\www\stemoppapp\system\libraries\Session\Session.php 289
+ERROR - 2025-04-01 23:56:09 --> Severity: Warning --> ini_set(): Session ini settings cannot be changed after headers have already been sent C:\wamp64\www\stemoppapp\system\libraries\Session\Session.php 304
+ERROR - 2025-04-01 23:56:09 --> Severity: Warning --> ini_set(): Session ini settings cannot be changed after headers have already been sent C:\wamp64\www\stemoppapp\system\libraries\Session\Session.php 314
+ERROR - 2025-04-01 23:56:09 --> Severity: Warning --> ini_set(): Session ini settings cannot be changed after headers have already been sent C:\wamp64\www\stemoppapp\system\libraries\Session\Session.php 315
+ERROR - 2025-04-01 23:56:09 --> Severity: Warning --> ini_set(): Session ini settings cannot be changed after headers have already been sent C:\wamp64\www\stemoppapp\system\libraries\Session\Session.php 316
+ERROR - 2025-04-01 23:56:09 --> Severity: Warning --> ini_set(): Session ini settings cannot be changed after headers have already been sent C:\wamp64\www\stemoppapp\system\libraries\Session\Session.php 317
+ERROR - 2025-04-01 23:56:09 --> Severity: Warning --> ini_set(): Session ini settings cannot be changed after headers have already been sent C:\wamp64\www\stemoppapp\system\libraries\Session\Session.php 375
+DEBUG - 2025-04-01 23:56:09 --> Session: "sess_save_path" is empty; using "session.save_path" value from php.ini.
+ERROR - 2025-04-01 23:56:09 --> Severity: Warning --> session_set_save_handler(): Session save handler cannot be changed after headers have already been sent C:\wamp64\www\stemoppapp\system\libraries\Session\Session.php 110
+ERROR - 2025-04-01 23:56:09 --> Severity: Warning --> session_start(): Session cannot be started after headers have already been sent C:\wamp64\www\stemoppapp\system\libraries\Session\Session.php 143
+INFO - 2025-04-01 23:56:09 --> Session: Class initialized using 'files' driver.
+ERROR - 2025-04-01 23:56:09 --> Severity: 8192 --> Creation of dynamic property Menu::$session is deprecated C:\wamp64\www\stemoppapp\system\core\Loader.php 1283
+INFO - 2025-04-01 23:56:09 --> Controller Class Initialized
+INFO - 2025-04-01 23:56:09 --> Form Validation Class Initialized
+ERROR - 2025-04-01 23:56:09 --> Severity: 8192 --> Creation of dynamic property Menu::$form_validation is deprecated C:\wamp64\www\stemoppapp\system\core\Loader.php 1283
+ERROR - 2025-04-01 23:56:09 --> Severity: 8192 --> Creation of dynamic property Menu::$Menu_model is deprecated C:\wamp64\www\stemoppapp\system\core\Loader.php 358
+INFO - 2025-04-01 23:56:09 --> Model "Menu_model" initialized
+INFO - 2025-04-01 23:56:09 --> Helper loaded: common_helper
+INFO - 2025-04-01 23:56:09 --> Helper loaded: taskplanner_helper
+ERROR - 2025-04-01 23:56:09 --> Severity: Warning --> Trying to access array offset on null C:\wamp64\www\stemoppapp\application\controllers\Menu.php 1165
+ERROR - 2025-04-01 23:56:09 --> Severity: Warning --> Trying to access array offset on null C:\wamp64\www\stemoppapp\application\controllers\Menu.php 1166
+ERROR - 2025-04-01 23:56:09 --> Severity: Warning --> Undefined array key 0 C:\wamp64\www\stemoppapp\application\controllers\Menu.php 1169
+ERROR - 2025-04-01 23:56:09 --> Severity: Warning --> Attempt to read property "dep_name" on null C:\wamp64\www\stemoppapp\application\controllers\Menu.php 1169
+ERROR - 2025-04-01 23:56:09 --> Severity: error --> Exception: Table 'stem_operation.close_your_day_request' doesn't exist C:\wamp64\www\stemoppapp\system\database\drivers\mysqli\mysqli_driver.php 309
+ERROR - 2025-04-01 23:56:09 --> Severity: Warning --> Cannot modify header information - headers already sent by (output started at C:\wamp64\www\stemoppapp\system\core\Exceptions.php:271) C:\wamp64\www\stemoppapp\system\core\Common.php 570
