@@ -7298,6 +7298,28 @@ public function get_CMbyUserID($userId){
     return $data;
 }
 
+public function getSchoolsWithZones($pro_id){
+    return $this->db->select('spd.id, sname, szone, region.name as szone_name')
+                    ->from('spd')
+                    ->join('region', 'region.id = spd.szone', 'LEFT')
+                    ->where('pro_id',$pro_id)
+                    ->where('sname !=','')
+                    ->get()
+                    ->result();
+  }
 
+  public function getTeachersBySchool($school_id) {
+    return $this->db->select('contact_name, contact_no')
+                    ->from('spd_contact')
+                    ->where('sid', $school_id)
+                    ->get()
+                    ->result();
+  }
+  public function getClusterData($user_id){
+        $query = $this->db->query("SELECT * FROM clusterFormationApprovalData  cfd LEFT JOIN user_details ud ON ud.id = cfd.request_raised_by  WHERE ud.admin_id = ".$user_id." ");
+        $result =$query->result_array();
+        return $result;
+  }
+  
 
 }

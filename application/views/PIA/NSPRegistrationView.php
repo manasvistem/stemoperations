@@ -1,5 +1,4 @@
 <!-- Bootstrap CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 <style>
   .whatsapp-icon {
@@ -15,7 +14,9 @@
   }
 </style>
 
-<form id="nspForm" method="POST" action="<?php echo base_url();?>Menu/submitNspSharing">
+<!-- NSP Registration Sharing Form -->
+<form id="nspForm" method="POST" action="<?= base_url(); ?>Menu/submitNspinfomation">
+    <input type="hidden" name="taskId" value="<?php echo $taskId;?>">
   <!-- Share NSP link -->
   <div class="mb-3">
     <label class="form-label">Can you share NSP registration link with teachers?</label>
@@ -26,76 +27,95 @@
     </select>
   </div>
 
-  <!-- NSP Registration list (Zone-wise schools) -->
+  <label class="form-label">NSP Registration Link</label>
+  <!-- School Dropdown -->
   <div class="mb-3" id="schoolSelection" style="display: none;">
-    <label class="form-label">Select School (PIA Zone Wise)</label>
+    <label class="form-label">Select School</label>
     <select class="form-select" name="school_id" id="schoolSelect" required>
-      <option value="">-- Select School --</option>
-      <option value="school1">Alpha Public School (Zone 1)</option>
-      <option value="school2">Beta High School (Zone 2)</option>
-      <option value="school3">Gamma Academy (Zone 3)</option>
+      <option value="">-- Loading Schools --</option>
     </select>
   </div>
 
-  <!-- Teacher Info (dynamic based on school selection) -->
+  <!-- Teacher Info -->
   <div id="teacherInfo" class="teacher-info d-none">
     <h6>Teacher Details</h6>
-    <ul class="list-group" id="teacherList">
-      <!-- Filled by JS -->
-    </ul>
+    <ul class="list-group" id="teacherList"></ul>
   </div>
-  <!-- Submit Button -->
-  <button type="submit" class="btn btn-primary mt-4">Submit</button>
+
+  <button type="submit" class="btn btn-primary mt-3">Submit</button>
 </form>
 
-<!-- jQuery for dynamic behavior -->
+<!-- jQuery -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
 <script>
-  const teacherData = {
-    school1: [
-      { name: "Mr. Rajesh", phone: "9876543210" },
-      { name: "Ms. Neha", phone: "9123456789" }
-    ],
-    school2: [
-      { name: "Mr. Amit", phone: "9001122334" }
-    ],
-    school3: [
-      { name: "Ms. Pooja", phone: "9810012345" },
-      { name: "Mr. Arjun", phone: "8899007766" }
-    ]
-  };
+  $(document).ready(function () {
+    // On change of "can share" dropdown
+    $('#canShare').change(function () {
+      const val = $(this).val();
+      if (val === 'yes') {
+        $('#schoolSelection').slideDown();
+        loadSchools();
+      } else {
+        $('#schoolSelection').slideUp();
+        $('#teacherInfo').addClass('d-none');
+      }
+    });
 
-  $('#canShare').change(function () {
-    if ($(this).val() === 'yes') {
-      $('#schoolSelection').slideDown();
-    } else {
-      $('#schoolSelection').slideUp();
-      $('#teacherInfo').addClass('d-none');
-    }
-  });
-
-  $('#schoolSelect').change(function () {
-    const schoolId = $(this).val();
-    const teachers = teacherData[schoolId] || [];
-
-    if (teachers.length) {
-      $('#teacherList').html('');
-      teachers.forEach(t => {
-        $('#teacherList').append(`
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            <div>
-              <strong>${t.name}</strong><br>
-              <small>${t.phone}</small>
-            </div>
-            <a href="https://wa.me/91${t.phone}" target="_blank" class="whatsapp-icon">
-              <i class="bi bi-whatsapp"></i>
-            </a>
-          </li>
-        `);
+    // Load schools via AJAX
+    function loadSchools() {
+      $.ajax({
+        url: '<?= base_url(); ?>Menu/getSchoolsForNsp',
+        type: 'GET',
+        dataType: 'json',
+        success: function (schools) {
+          let options = `<option value="">-- Select School --</option>`;
+          schools.forEach(s => {
+            options += `<option value="${s.id}">${s.sname} (${s.szone_name})</option>`;
+          });
+          $('#schoolSelect').html(options);
+        },
+        error: function () {
+          alert("Failed to load schools");
+        }
       });
-      $('#teacherInfo').removeClass('d-none');
-    } else {
-      $('#teacherInfo').addClass('d-none');
     }
+
+    // On school selection, load teachers
+    $('#schoolSelect').change(function () {
+      const schoolId = $(this).val();
+      if (schoolId) {
+        $.ajax({
+          url: '<?= base_url(); ?>Menu/getTeachersBySchool/' + schoolId,
+          type: 'GET',
+          dataType: 'json',
+          success: function (teachers) {
+            if (teachers.length) {
+              $('#teacherList').html('');
+              teachers.forEach(t => {
+                $('#teacherList').append(`
+                  <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <div>
+                      <strong>${t.contact_name}</strong><br>
+                      <small>${t.contact_no}</small>
+                    </div>
+                    <a href="https://wa.me/91${t.contact_no}" target="_blank" class="whatsapp-icon">
+                      <i class="bi bi-whatsapp" style="color:#25D366; font-size: 1.4rem;"></i>
+                    </a>
+                  </li>
+                `);
+              });
+              $('#teacherInfo').removeClass('d-none');
+            } else {
+              $('#teacherInfo').addClass('d-none');
+            }
+          },
+          error: function () {
+            alert("Unable to load teachers");
+          }
+        });
+      }
+    });
+
   });
 </script>

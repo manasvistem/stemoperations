@@ -18224,6 +18224,7 @@ public function UpdateZMCallforUtilization(){
                             'status'       => 'active',
                             'tbe_id'       => $taskId
                         ];
+                        
 /** Insert into task_Execution_details */
 foreach ($posted_data as $k => $val) {
     if($val != '' && !empty($val)){
@@ -18349,6 +18350,135 @@ public function updateReviewSessionMessage(){
         $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
         redirect('Menu/Dashboard');
     }
+
+    // Load schools list
+public function getSchoolsForNsp(){
+    $user_session  =  $_SESSION['user'];
+    $pro_id        =  $user_session['id'];
+    $schools       =  $this->Menu_model->getSchoolsWithZones($pro_id);
+    echo json_encode($schools);
+  }
+
+  // Get teachers by school ID
+  public function getTeachersBySchool($school_id) {
+    $teachers = $this->Menu_model->getTeachersBySchool($school_id);
+    echo json_encode($teachers);
+  }
+
+  public function submitNspinfomation(){
+    $posted_data        = $_POST;
+    $user               = $_SESSION['user'];
+    $taskperformedby    = $user['dep_id'];
+    $taskId             = $posted_data['taskId'];
+    $commonColumns      = [
+                            'performed_by' => $_SESSION['user']['id'],
+                            'updated_at'   => date("Y-m-d H:i:s"),
+                            'status'       => 'active',
+                            'tbe_id'       => $taskId
+                          ];
+                       
+    /** Insert into task_Execution_details */
+    foreach ($posted_data as $k => $val) {
+        if($val != '' && !empty($val)){
+        // Assign main_Task_id based on the key
+        if($taskperformedby == '2'){
+            switch ($k){
+                case 'can_share':                    $main_Task_id = '455'; break;
+                case 'school_id':                    $main_Task_id = '456'; break;
+                default :  
+                continue 2;
+                }
+        }
+            // Store data in array
+            $taskInsertArr1[] = [
+            'task_response' => $val,
+            'main_Task_id'  => $main_Task_id,
+            'remark'        => $remark
+            ] + $commonColumns;
+        }
+    }   
+        
+    // Insert only if there's data
+        $current_date =  date('Y-m-d h:i:s');
+        if(!empty($taskInsertArr1)){
+            $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+        }
+        $updatetblcalleventsData    = ['initiate_datetime'=>isset($posted_data['elapsed_time'])?$posted_data['elapsed_time']:$current_date,'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+        $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+        redirect('Menu/Dashboard');
+  }
+
+  public function sendClusterApproval(){
+  $posted_data        = $_POST;
+  $user               = $_SESSION['user'];
+  $taskperformedby    = $user['dep_id'];
+  $taskId             = $posted_data['taskId'];
+  $commonColumns      = [
+                          'performed_by' => $_SESSION['user']['id'],
+                          'updated_at'   => date("Y-m-d H:i:s"),
+                          'status'       => 'active',
+                          'tbe_id'       => $taskId
+                        ];
+
+  /** Insert into task_Execution_details */
+  foreach ($posted_data as $k => $val) {
+      if($val != '' && !empty($val)){
+      // Assign main_Task_id based on the key
+      if($taskperformedby == '2'){
+          switch ($k){
+              case 'can_share':                    $main_Task_id = '455'; break;
+              case 'school_id':                    $main_Task_id = '456'; break;
+              default :  
+              continue 2;
+              }
+      }
+          // Store data in array
+          $taskInsertArr1[] = [
+          'task_response' => $val,
+          'main_Task_id'  => $main_Task_id,
+          'remark'        => $remark
+          ] + $commonColumns;
+      }
+  }    
+  // Insert only if there's data
+      $current_date =  date('Y-m-d h:i:s');
+      if(!empty($taskInsertArr1)){
+          $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+      }
+      $updatetblcalleventsData    = ['initiate_datetime'=>isset($posted_data['elapsed_time'])?$posted_data['elapsed_time']:$current_date,'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+      $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+      redirect('Menu/Dashboard');
+}
+
+public function checkClusterFormationApproval(){
+    $user        = $_SESSION['user'];
+    $clusterData = $this->Menu_model->getClusterData($user_id);
+    $this->display($dep_name,'NSPClusterFormationApproval',$data,$type='');
+}
+
+public function loadNSPClusterRoundForm($taskId){
+    $user           = $_SESSION['user'];
+    $posted_data    = $_POST;
+    $dep_id         = $user['dep_id'];
+    $dt             = $this->Menu_model->get_depatment_byid($dep_id);
+    $dep_name       = $dt[0]->dep_name;
+    $data['taskId'] = $taskId;
+    $this->display($dep_name,'NSPClusterRoundFormPageView',$data,$model='');
+}
+public function submitClusterRoundData(){
+    $posted_data        = $_POST;
+    $user               = $_SESSION['user'];
+    $taskperformedby    = $user['dep_id'];
+    $taskId             = $posted_data['taskId'];
+    $commonColumns      = [
+                            'performed_by' => $_SESSION['user']['id'],
+                            'updated_at'   => date("Y-m-d H:i:s"),
+                            'status'       => 'active',
+                            'tbe_id'       => $taskId
+                          ];
+    
+
+}
 }
 
 
