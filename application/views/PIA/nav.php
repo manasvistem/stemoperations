@@ -312,7 +312,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="<?=base_url() ?>Menu/<?php echo base_url()?>/Menu/logout" class="menu-link">
+              <a href="<?=base_url() ?>Menu/logout" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="Logout">Logout</div>
               </a>

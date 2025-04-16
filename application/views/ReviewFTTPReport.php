@@ -4,7 +4,6 @@
         <a href="fttp_letter_page.php" target="_blank">Go to Page</a>
         <button type="button" onclick="downloadFile('fttp_letter.pdf')">Download</button>
     </div>
-    
     <div>
         <label>View RTTP Report (Downloadable and Can Be Sent for Corrections)</label>
         <a href="rttp_report_page.php" target="_blank">Go to Page</a>

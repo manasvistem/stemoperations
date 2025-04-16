@@ -5,7 +5,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 
 class Competition extends CI_Controller {
-
     public function registration(){
         $this->load->view('competition/register'); 
     }

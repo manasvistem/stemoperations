@@ -1157,6 +1157,7 @@ class Menu extends CI_Controller {
    
     public function DayManagement(){
         date_default_timezone_set("Asia/Calcutta"); 
+
         $tdate          = date('Y-m-d');
         $user           = $this->session->userdata('user');
         $data['user']   = $user;
@@ -1193,9 +1194,7 @@ class Menu extends CI_Controller {
             $yestdata            = $this->Menu_model->get_Yestdaydetail($uid,$yesterday);
         }
         $yestdatacnt= 0;
-
     //   $getDayCloseRequest = $this->Menu_model->GetDayCloseRequest($uid,$tdate);
-
         if(empty($yestdata)){
             //no records found for the srat day a well as close on non weekend day;
         }
@@ -1228,7 +1227,6 @@ class Menu extends CI_Controller {
         }
     }
     public function SendRequestForDayStartChnage(){
-    
         $user   = $this->session->userdata('user');
         $uid    = $user['user_id'];
         $uyid   = $user['type_id'];
@@ -7065,9 +7063,11 @@ class Menu extends CI_Controller {
         $utype                          = $user['utype'];
         $user_day                       = $this->Menu_model->get_daydetail($uid,date("Y-m-d"));
         $getTodaysTaskCounts            = $this->Menu_model->GetTodaysAllTaskCountByUid($uid, date("Y-m-d"), $depid);
+      
         $getTodaysTasks                 = $this->Menu_model->GetTodaysAllTaskByUid($uid, date('Y-m-d'));
         $data['getTodaysTaskCounts']    = $getTodaysTaskCounts;
         $data['getTodaysTasks']         = $getTodaysTasks;
+       
         if(empty($user_day) && count($user_day)<= 0){
             $this->session->set_flashdata('error_message','* Please Start Your Day');
             redirect('Menu/DayManagement');
@@ -7127,9 +7127,9 @@ class Menu extends CI_Controller {
             //     // $getData = $this->Menu_model->getReportData($tasktypeid,$user_id);
             //     // dd($getData);exit;
             // }
-          //  echo $taskId;exit;
-           // echo $viewname; exit;
-            $this->display($dep_name,$viewname,$data,$type='modal');
+        //  echo $taskId;exit;
+        // echo $viewname;exit;
+        $this->display($dep_name,$viewname,$data,$type='modal');
     }
 
     public function visitDuringMaintenance(){
@@ -17287,8 +17287,7 @@ public function getPIARemark(){
     
     $PIAremarkByTaskId  = $this->Menu_model->getPIAremarkByTaskId($taskId,'47');
 
-    dd($PIAremarkByTaskId); 
-    exit;
+   
     echo json_encode($PIAremarkByTaskId);
 
 }
@@ -18121,20 +18120,235 @@ public function UpdateRTTPreport(){
    $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
    $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
     redirect('Menu/Dashboard');
-
-
 }
 public function UpdateRTTPReviewtask(){
-    $posted_data = $_POST;
-
+    $posted_data        = $_POST;
+    $user = $_SESSION['user'];
+    $taskperformedby    = $user['dep_id'];
+    $taskId             = $posted_data['taskId'];
+    $commonColumns      = [
+                            'performed_by' => $_SESSION['user']['id'],
+                            'updated_at'   => date("Y-m-d H:i:s"),
+                            'status'       => 'active',
+                            'tbe_id'       => $taskId
+                         ];
+   /** Insert into task_Execution_details */
+ foreach ($posted_data as $k => $val) {
+    if ($val != '' && !empty($val)){
+        // Assign main_Task_id based on the key
+        if($taskperformedby == '11'){
+            switch ($k){
+                case 'view_document_remark':                            $main_Task_id = '322'; break;
+                case 'RTTP_report_feedback':                            $main_Task_id = '323'; break;
+                case 'pia_rating':                                      $main_Task_id = '324'; break;
+                default:
+                continue 2; // Skip unknown keys
+            }
+       }
+        // Store data in array
+        $taskInsertArr1[] = [
+            'task_response' => $val,
+            'main_Task_id'  => $main_Task_id,
+            'remark'        => $remark
+        ] + $commonColumns;
+    }
 }
+// Insert only if there's data
+   $current_date =  date('Y-m-d h:i:s');
+   if (!empty($taskInsertArr1)){
+       $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+    // $attachmentData = 'task_id'=>$taskId 'attachment_link'=>,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date;
+  //  $this->Menu_model->insertTasksWithAttachements(['task_id'=>$taskId ,'attachment_link'=>$attachment_link,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date]);
+}
+   $updatetblcalleventsData    = ['initiate_datetime'=>isset($posted_data['elapsed_time'])?$posted_data['elapsed_time']:$current_date,'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+   $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+    redirect('Menu/Dashboard');
+}
+
 public function UpdateCallforUtilisation(){
-    $posted_data = $_POST;
-
+    $posted_data        = $_POST;
+    $user               = $_SESSION['user'];
+    $taskperformedby    = $user['dep_id'];
+    $taskId             = $posted_data['taskId'];
+    $commonColumns      = [
+        'performed_by' => $_SESSION['user']['id'],
+        'updated_at'   => date("Y-m-d H:i:s"),
+        'status'       => 'active',
+        'tbe_id'       => $taskId
+     ];
+/** Insert into task_Execution_details */
+foreach ($posted_data as $k => $val) {
+    if($val != '' && !empty($val)){
+    // Assign main_Task_id based on the key
+    if($taskperformedby == '12'){
+        switch ($k){
+            case 'action_taken':                    $main_Task_id = '422'; break;
+            case 'purpose_completed':               $main_Task_id = '423'; break;
+            case 'mscUsageComment':                 $main_Task_id = '424'; break;
+            case 'agreeConceptHelp':                $main_Task_id = '425'; break;
+            case 'agreeAttention':                  $main_Task_id = '426'; break;
+            case 'trainingChallenges':              $main_Task_id = '427'; break;
+            case 'modelSchoolVideos':               $main_Task_id = '428'; break;
+            case 'start_sharing_date':              $main_Task_id = '429'; break;
+            case 'maintenance_date':                $main_Task_id = '430'; break;
+                default :  
+                continue 2;
+            }
+    }
+        // Store data in array
+        $taskInsertArr1[] = [
+        'task_response' => $val,
+        'main_Task_id'  => $main_Task_id,
+        'remark'        => $remark
+        ] + $commonColumns;
+    }
 }
+// Insert only if there's data
+    $current_date =  date('Y-m-d h:i:s');
+    if(!empty($taskInsertArr1)){
+        $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+    }
+    $updatetblcalleventsData    = ['initiate_datetime'=>isset($posted_data['elapsed_time'])?$posted_data['elapsed_time']:$current_date,'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+    $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+    redirect('Menu/Dashboard');
+}
+
 public function UpdateZMCallforUtilization(){
-    $posted_data = $_POST;
+    $posted_data        = $_POST;
+    $user               = $_SESSION['user'];
+    $taskperformedby    = $user['dep_id'];
+    $taskId             = $posted_data['taskId'];
+    $commonColumns      = [
+                            'performed_by' => $_SESSION['user']['id'],
+                            'updated_at'   => date("Y-m-d H:i:s"),
+                            'status'       => 'active',
+                            'tbe_id'       => $taskId
+                        ];
+/** Insert into task_Execution_details */
+foreach ($posted_data as $k => $val) {
+    if($val != '' && !empty($val)){
+    // Assign main_Task_id based on the key
+    if($taskperformedby == '11'){
+        switch ($k){
+            case 'action_taken':                    $main_Task_id = '431'; break;
+            case 'purpose_completed':               $main_Task_id = '432'; break;
+            case 'utilization_comment':             $main_Task_id = '433'; break;
+            case 'refresh_training':                $main_Task_id = '434'; break;
+            case 'msc_benefits':                    $main_Task_id = '435'; break;
+            case 'model_school_support':            $main_Task_id = '436'; break;
+            case 'model_school_parameters':         $main_Task_id = '437'; break;
+            case 'volunteer_schedule':              $main_Task_id = '438'; break;
+            case 'monthly_utilization':             $main_Task_id = '390'; break;
+            case 'msc_practices':                   $main_Task_id = '440'; break;
+            case 'use_exhibits':                    $main_Task_id = '441'; break;
+            default :  
+            continue 2;
+            }
+    }
+        // Store data in array
+        $taskInsertArr1[] = [
+        'task_response' => $val,
+        'main_Task_id'  => $main_Task_id,
+        'remark'        => $remark
+        ] + $commonColumns;
+    }
+}
+ 
+// Insert only if there's data
+    $current_date =  date('Y-m-d h:i:s');
+    if(!empty($taskInsertArr1)){
+        $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+    }
+    $updatetblcalleventsData    = ['initiate_datetime'=>isset($posted_data['elapsed_time'])?$posted_data['elapsed_time']:$current_date,'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+    $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+    redirect('Menu/Dashboard');
+}
+public function updateNewSessionMessage(){
+    $posted_data        = $_POST;
+    $user               = $_SESSION['user'];
+    $taskperformedby    = $user['dep_id'];
+    $taskId             = $posted_data['taskId'];
+    $commonColumns      = [
+                            'performed_by' => $_SESSION['user']['id'],
+                            'updated_at'   => date("Y-m-d H:i:s"),
+                            'status'       => 'active',
+                            'tbe_id'       => $taskId
+                        ];
+    /** Insert into task_Execution_details */
+        foreach ($posted_data as $k => $val) {
+            if($val != '' && !empty($val)){
+            // Assign main_Task_id based on the key
+            if($taskperformedby == '2'){
+                switch ($k){
+                    case 'selected_date':              $main_Task_id = '261'; break;
+                    case 'pia_creative':               $main_Task_id = '262'; break;
+                    case 'pia_file':                   $main_Task_id = '263'; break;
+                    case 'stem_creative':              $main_Task_id = '264'; break;
+                    case 'stem_file':                  $main_Task_id = '265'; break;
+                    case 'screenshot_file':            $main_Task_id = '266'; break;
+                    default :  
+                    continue 2;
+                    }
+            }
+                // Store data in array
+                $taskInsertArr1[] = [
+                'task_response' => $val,
+                'main_Task_id'  => $main_Task_id,
+                'remark'        => $remark
+                ] + $commonColumns;
+            }
+        }   
+        // Insert only if there's data
+            $current_date =  date('Y-m-d h:i:s');
+            if(!empty($taskInsertArr1)){
+                $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+            }
+            $updatetblcalleventsData    = ['initiate_datetime'=>isset($posted_data['elapsed_time'])?$posted_data['elapsed_time']:$current_date,'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+            $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+            redirect('Menu/Dashboard');
+}
+
+public function updateReviewSessionMessage(){
+    $posted_data        = $_POST;
+    $user               = $_SESSION['user'];
+    $taskperformedby    = $user['dep_id'];
+    $taskId             = $posted_data['taskId'];
+    $commonColumns      = [
+                            'performed_by' => $_SESSION['user']['id'],
+                            'updated_at'   => date("Y-m-d H:i:s"),
+                            'status'       => 'active',
+                            'tbe_id'       => $taskId
+                          ];
+    /** Insert into task_Execution_details */
+    foreach ($posted_data as $k => $val) {
+        if($val != '' && !empty($val)){
+        // Assign main_Task_id based on the key
+        if($taskperformedby == '11'){
+            switch ($k){
+                case 'pia_message_file':                    $main_Task_id = '265'; break;
+                case 'message_appropriate':                 $main_Task_id = '266'; break;
+                case 'pia_extra_effort':                    $main_Task_id = '267'; break;
+                default :  
+                continue 2;
+                }
+        }
+            // Store data in array
+            $taskInsertArr1[] = [
+            'task_response' => $val,
+            'main_Task_id'  => $main_Task_id,
+            'remark'        => $remark
+            ] + $commonColumns;
+        }
+    }             
+    // Insert only if there's data
+        $current_date =  date('Y-m-d h:i:s');
+        if(!empty($taskInsertArr1)){
+            $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+        }
+        $updatetblcalleventsData    = ['initiate_datetime'=>isset($posted_data['elapsed_time'])?$posted_data['elapsed_time']:$current_date,'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+        $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+        redirect('Menu/Dashboard');
+    }
 }
 
 
-}

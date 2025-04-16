@@ -1,4 +1,4 @@
-<form action="your_controller/your_function" method="post" enctype="multipart/form-data">
+<form action="Menu/UpdateRTTPReport" method="post" enctype="multipart/form-data">
   <div class="container mt-4">
     <h5 class="mb-3">Share Report</h5>
 

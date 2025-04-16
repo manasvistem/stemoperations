@@ -57,16 +57,8 @@
                 
                 <div class="mb-3">
                     <label class="form-label">6. What is the preferred language for training?</label>
-                    <?php
-                           // $get_indian_languages       =  get_indian_languages();
-                            //dd($get_indian_languages);
-                            // foreach($get_indian_languages as $key=>$val){
-                            //     dd($val);
-                            // }
-                    ?>
                     <input type="text" class="form-control" name="training_language">
                 </div>
-                
                 <div class="mb-3">
                     <label class="form-label">Final Remark</label>
                     <textarea class="form-control" name="final_remark"></textarea>
@@ -76,7 +68,6 @@
         </form>
     </div>
 </div>
-
 <script>
 $(document).ready(function() {
     $('input[name="action_completed"]').change(function() {

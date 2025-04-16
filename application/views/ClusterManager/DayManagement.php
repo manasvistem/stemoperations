@@ -12,7 +12,7 @@
                   <h3 class="text-center">Manage Your Day</h3>
                   <hr>
                   <form action="<?=base_url();?>Menu/daysc" method="post" enctype="multipart/form-data">
-                    <input type ="hidden" id="wffo_planner" value="<?php echo $user_day_start_from->userworkfrom;?>"/>
+                    <input type ="hidden" id="wffo_planner" value="<?php echo isset($user_day_start_from->userworkfrom)?$user_day_start_from->userworkfrom:'';?>"/>
                     <div class="form-group">
                         <input type="hidden" name="user_id" value="<?=$uid?>">
                         <center><b class="text-info">Today's Date : <?=date('d-m-Y');?> </b>

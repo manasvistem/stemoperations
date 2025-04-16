@@ -3,7 +3,6 @@
 
 <div class="container mt-4">
   <h4 class="mb-3">MSC Teacher Feedback Form</h4>
-
   <!-- Action Completed Radio -->
    <form name="" action="<?php echo base_url()?>Menu/UpdatePostRTTPVisit" method="POST">
   <div class="form-group">
@@ -17,7 +16,6 @@
       <label class="form-check-label" for="actionNo">No</label>
     </div>
   </div>
-
   <!-- Purpose Completed Radio -->
   <div class="form-group">
     <label>Purpose Completed?</label><br>

@@ -47,7 +47,6 @@ class ComposerAutoloaderInitc14a871a3ccfcb90904832fc33a785de
                 $loader->addClassMap($classMap);
             }
         }
-
         $loader->register(true);
 
         return $loader;
