@@ -1,4 +1,8 @@
 <form method="POST" action="<?php echo base_url(); ?>Menu/sendClusterApproval" class="p-4 bg-white shadow rounded" id="clusterForm">
+    <input type="hidden" name="taskId" value="<?php echo $taskId;?>">
+    <input type="hidden" name="tasktype" value="<?php echo $tasktype;?>">
+    <input type="hidden" name="tasktype_id" value="<?php echo $tasktype_id;?>">
+
   <!-- Name of Cluster -->
   <div class="mb-3">
     <label class="form-label fw-bold">Name of Cluster</label>
@@ -14,22 +18,85 @@
       <?php endforeach; ?>
     </select>
     <small class="text-muted">Hold Ctrl or Cmd to select multiple schools</small>
+    <div id="schoolAddresses" class="mt-2 text-muted"></div>
+
   </div>
   <!-- Cluster Venue -->
-  <div class="mb-3 position-relative">
-    <label class="form-label fw-bold">Cluster Venue Address</label>
-    <input type="text" class="form-control" id="venueInput" name="cluster_venue" placeholder="Start typing venue..." autocomplete="off" required>
-    <div id="venueSuggestions" class="list-group position-absolute w-100 z-3 shadow" style="display: none;"></div>
-  </div>
-
+  <div class="mb-3 mt-3">
+  <label for="clusterLocation" class="form-label fw-bold">Cluster Location</label>
+  <input type="text" id="clusterLocation" name="cluster_location" class="form-control" readonly>
+</div>
   <!-- Submit Button -->
   <div class="text-end">
-    <button type="submit" class="btn btn-success">Send for Approval</button>
+    <input type="hidden" name="sendForApproval" value="yes">
+    <button type="submit"  class="btn btn-success">Send for Approval</button>
   </div>
 </form>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+  let schoolMap = {};
+
+  $(document).ready(function () {
+    function loadSchoolsByTaskId(taskId) {
+      $.ajax({
+        url: "<?= base_url('Menu/getSchoolListByTaskId') ?>/" + taskId,
+        type: "GET",
+        dataType: "json",
+        success: function (response) {
+          let schoolSelect = $('#schoolSelect');
+          schoolSelect.empty();
+          schoolMap = {};
+
+          $.each(response, function (index, school) {
+            schoolMap[school.sid] = school;
+            schoolSelect.append(
+              $('<option>', {
+                value: school.sid,
+                text: school.sname + ' (' + school.szone + ')'
+              })
+            );
+          });
+        }
+      });
+    }
+
+    // Set your dynamic taskId here
+    const taskId = '<?php echo $taskId;?>';
+    loadSchoolsByTaskId(taskId);
+
+    // On change of selection
+    $('#schoolSelect').on('change', function () {
+      let selectedIds = $(this).val();
+      let output = '';
+
+      if (selectedIds && selectedIds.length > 0) {
+        selectedIds.forEach(function (sid, index) {
+          let school = schoolMap[sid];
+          if (school) {
+            output += `
+              <div class="form-check">
+                <input class="form-check-input" type="radio" name="cluster_school" id="cluster_${sid}" value="${sid}" data-cluster="${school.sname}, ${school.saddress}, ${school.scity}, ${school.sstate}">
+                <label class="form-check-label" for="cluster_${sid}">
+                  <strong>${school.sname}</strong>: ${school.saddress}, ${school.scity}, ${school.sstate}
+                </label>
+              </div>
+            `;
+          }
+        });
+      }
+
+      $('#schoolAddresses').html(output);
+    });
+
+    // On selecting a radio button, autofill the Cluster Location
+    $(document).on('change', 'input[name="cluster_school"]', function () {
+      const clusterValue = $(this).data('cluster');
+      $('#clusterLocation').val(clusterValue);
+    });
+
+  });
+
+
 $(document).ready(function () {
   $('#venueInput').on('input', function () {
     const query = $(this).val();
@@ -51,7 +118,6 @@ $(document).ready(function () {
       $('#venueSuggestions').hide();
     }
   });
-
   $(document).on('click', '#venueSuggestions a', function (e) {
     e.preventDefault();
     $('#venueInput').val($(this).text());

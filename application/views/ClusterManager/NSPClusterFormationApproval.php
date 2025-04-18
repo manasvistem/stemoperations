@@ -4,24 +4,26 @@
       Cluster Approval Request
     </div>
     <div class="card-body">
-
       <!-- Cluster Name -->
       <div class="mb-3">
         <label class="form-label fw-bold">Cluster Name:</label>
-        <p class="form-control-plaintext"><?= $cluster_name; ?></p>
+        <p class="form-control-plaintext"><?= $taskDetails->cluster_name; ?></p>
       </div>
 
       <!-- Venue -->
       <div class="mb-3">
         <label class="form-label fw-bold">Cluster Venue:</label>
-        <p class="form-control-plaintext"><?= $cluster_venue; ?></p>
+        <p class="form-control-plaintext"><?= $taskDetails>cluster_venue; ?></p>
       </div>
 
       <!-- School List -->
       <div class="mb-3">
-        <label class="form-label fw-bold">Schools in this Cluster:</label>
+        <label class="form-label fw-bold">Schools in this Cluster:</label->
         <ul class="list-group">
-          <?php foreach($schools as $school): ?>
+          <?php 
+          $schoolList = getSchoolListByTaskID($userId,$taskId);
+
+          foreach($schools as $school): ?>
             <li class="list-group-item"><?= $school->sname; ?></li>
           <?php endforeach; ?>
         </ul>

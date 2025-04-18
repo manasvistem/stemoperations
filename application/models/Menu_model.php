@@ -6125,22 +6125,29 @@ WHERE
     return $query->result();
 }
 
-
-
 public function getTaskDetails($taskId,$taskactionId){
-    $query =  $this->db->query("SELECT tbe.id as taskId, tbe.*,spd.*
+    if($taskactionId == "63"){
+        $query =  $this->db->query("SELECT clusterformationapprovaldata.* 
+                    FROM  clusterformationapprovaldata  
+                    WHERE clusterformationapprovaldata.tbe_id = '".$taskId."' 
+                    AND clusterformationapprovaldata.task_id= '".$taskactionId."'");
+                    $resultArr =  $query->result_array();
+    }
+    else{
+        $query =  $this->db->query("SELECT tbe.id as taskId, tbe.*,spd.*
                                  FROM tblcallevents tbe 
                                  LEFT JOIN spd ON spd.id = tbe.sid 
                                 /*LEFT JOIN spd_contact spdc ON spdc.sid= spd.id */
                                  WHERE tbe.id = '".$taskId."' AND tbe.task_action= '".$taskactionId."' ");
- //echo $this->db->last_query();exit;
-     $resultArr =  $query->result_array();
+                                  $resultArr =  $query->result_array();
+    }
+     // dd($resultArr);
      return $resultArr;
  }
 
  public function getTasktypeName($taskTypeId){
      $query  =  $this->db->query("SELECT tasktype,taskname FROM task_action WHERE id =  '".$taskTypeId."'");
-     $result = $query->row_array();
+     $result =  $query->row_array();
      return $result;
  }
 
@@ -6242,11 +6249,11 @@ public function GetDayCloseRequestData($uid,$adate,$uyid){
     return $getreqData;
 }
 
-public function insertIntoInauguration($data){
-    $insertQuery =   $this->db->query("INSERT INTO inauguration(task_id,user_role,user_id,question_id,question_val,created_date,updated_date) 
-                     VALUES(".$data['task_id'].",".$data['user_role'].",".$data['user_id'].",".$data['question_id'].",
-                    ".$data['question_val'].",".$data['created_date'].",".$data['update_date'].")");  
-}
+// public function insertIntoInauguration($data){
+//     $insertQuery =   $this->db->query("INSERT INTO inauguration(task_id,user_role,user_id,question_id,question_val,created_date,updated_date) 
+//                      VALUES(".$data['task_id'].",".$data['user_role'].",".$data['user_id'].",".$data['question_id'].",
+//                     ".$data['question_val'].",".$data['created_date'].",".$data['update_date'].")");  
+// }
 
 public function updateVisitDuringIngurationTask(){
     $insertQuery = $this->db->query("INSERT INTO task_execution ");
@@ -7246,12 +7253,13 @@ ORDER BY
 DESC");
     return $query->result();
 }
-public function getFTTPTeacherData($taskId){
 
+public function getFTTPTeacherData($taskId){
     $query = $this->db->query("SELECT task_response FROM task_execution_details WHERE tbe_id = '".$taskId."' ORDER BY id DESC LIMIT 1 ");
     $data  = $query->row_array();
     return json_decode($data['task_response']);
 }
+
 public function getPIAremarkByTaskId($taskId,$main_task_id){
     $query  =  $this->db->query("SELECT task_response FROM task_execution_details 
                                  WHERE tbe_id ='".$taskId."' 
@@ -7260,7 +7268,7 @@ public function getPIAremarkByTaskId($taskId,$main_task_id){
     return $result;
 }
 
-public function createUtilizationReportReviewTask($taskId,$user_id){
+public function createNewTask($taskId,$user_id){
     $query     = $this->db->query(" SELECT * FROM tblcallevents WHERE id = '".$taskId."' ");
     $data      = $query->row_array();
     $finalData = array();
@@ -7278,7 +7286,17 @@ public function createUtilizationReportReviewTask($taskId,$user_id){
         {
             $finalData['task_status'] = 0;
         }
-        else if($key == "appointment_datetime" )
+        else if($key == 'auto_task')
+        {
+            $finalData['auto_task'] = 1;
+        }
+        else if($key == 'selectby' || $key == 'filter_by'){
+            $finalData['selectby'] = $finalData['filter_by'] = "autotask";
+        }
+        else if($key == "created_at"){
+            $finalData['created_at'] = date("Y-m-d h:i:s");
+        }
+        else if($key == "appointment_datetime")
         {
             $finalData['appointment_datetime'] = date("Y-m-d h:i:s");
         }
@@ -7287,8 +7305,9 @@ public function createUtilizationReportReviewTask($taskId,$user_id){
             $finalData[$key] =  $val;
         }
     }
-     unset($finalData['id']);
+    unset($finalData['id']);
     $query   = $this->db->insert("tblcallevents",$finalData);
+   // echo $this->db->last_query();exit;
     return true;
 }
 
@@ -7307,7 +7326,6 @@ public function getSchoolsWithZones($pro_id){
                     ->get()
                     ->result();
   }
-
   public function getTeachersBySchool($school_id) {
     return $this->db->select('contact_name, contact_no')
                     ->from('spd_contact')
@@ -7320,6 +7338,29 @@ public function getSchoolsWithZones($pro_id){
         $result =$query->result_array();
         return $result;
   }
-  
+
+  public function getSchoolListByTaskID($user_id,$taskId){
+    $query1 = $this->db->query("SELECT tbe.cid_id FROM tblcallevents tbe 
+                             WHERE tbe.id = '".$taskId."'");
+    $queryRow = $query1->row_array();
+    $cid      = $queryRow['cid_id'];
+
+    if(!empty($cid)){
+        $query    = $this->db->query("SELECT spd.* FROM spd 
+                    WHERE cid = '".$cid."'");
+        return $query->result_array();
+    }
+    else{
+        return 0;
+    }
+  }
+
+  public function approveRejectApproval($taskId,$action){
+    if($action == 'Reject'){
+        /** Recreate the cluster approval task for PIA */
+
+    }
+    $this->db->query("UPDATE clusterformationapprovaldata SET approval_status ='.$action.' , approved_by ='".$user_id."' WHERE tbe_id = ".$taskId." ");
+  }
 
 }

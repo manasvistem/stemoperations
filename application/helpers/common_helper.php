@@ -90,4 +90,13 @@ if(!function_exists('get_CMbyUserID')){
         return $DataSet;
     }
 }
+
+if(!function_exists('getSchoolListByTaskID')){
+    function getSchoolListByTaskID($user_id,$taskId){
+        $CI = &get_instance();
+        $CI->load->model('Menu_model');
+        $DataSet = $CI->Menu_model->getSchoolListByTaskID($user_id,$taskId);
+        return $DataSet;
+    }
+}
 ?>

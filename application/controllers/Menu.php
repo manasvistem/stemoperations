@@ -7063,7 +7063,6 @@ class Menu extends CI_Controller {
         $utype                          = $user['utype'];
         $user_day                       = $this->Menu_model->get_daydetail($uid,date("Y-m-d"));
         $getTodaysTaskCounts            = $this->Menu_model->GetTodaysAllTaskCountByUid($uid, date("Y-m-d"), $depid);
-      
         $getTodaysTasks                 = $this->Menu_model->GetTodaysAllTaskByUid($uid, date('Y-m-d'));
         $data['getTodaysTaskCounts']    = $getTodaysTaskCounts;
         $data['getTodaysTasks']         = $getTodaysTasks;
@@ -7101,7 +7100,6 @@ class Menu extends CI_Controller {
             }
         }
     }
-    
     public function taskExecution(){
             $taskId                         = $_POST['taskId'];
             $taskType                       = $_POST['tasktype'];
@@ -7116,6 +7114,7 @@ class Menu extends CI_Controller {
             $taskname                       = $tasknameData['taskname'];
             $cleanString                    = preg_replace('/[^a-zA-Z0-9]/', '', $taskname);
             $viewname                       = $cleanString."View";
+            $data['userId']                = $user_id;
             $data['taskId']                 = $taskId;
             $data['taskType']               = $taskType;
             $data['tasktypeid']             = $tasktypeid;
@@ -7123,13 +7122,9 @@ class Menu extends CI_Controller {
             $depnameData                    = $this->Menu_model->get_depatment_byid($dept);
             $dep_name                       = $depnameData[0]->dep_name;
             $data['getFactoryModelList']    = $this->Menu_model->getFactoryModelList();
-            // if($tasktypeid == '30' && $dept == '12'){
-            //     // $getData = $this->Menu_model->getReportData($tasktypeid,$user_id);
-            //     // dd($getData);exit;
-            // }
         //  echo $taskId;exit;
         // echo $viewname;exit;
-        $this->display($dep_name,$viewname,$data,$type='modal');
+           $this->display($dep_name,$viewname,$data,$type='modal');
     }
 
     public function visitDuringMaintenance(){
@@ -7152,7 +7147,8 @@ class Menu extends CI_Controller {
            $tdate = date("Y-m-d");
         }
         $user = $this->session->userdata('user');
-        $data['user'] = $user;$uid= $user['id'];
+        $data['user'] = $user;
+        $uid         = $user['id'];
         $uid       = $user['id'];
         $id        =  $user['dep_id'];
         $notify    =   $this->Menu_model->get_notifybyid($uid);
@@ -7173,6 +7169,7 @@ class Menu extends CI_Controller {
             redirect('Menu/main');
         }
     }
+
     public function PreInaugurationVisitUpdate(){
 //dd($_POST);
     }
@@ -7184,7 +7181,6 @@ class Menu extends CI_Controller {
         $taskId                     = $_POST['taskId'];
         $insertData['taskType']     = $_POST['taskType'];
         $insertData['tasktypeid']   = $_POST['tasktypeid'];
-
         dd($_POST);
         foreach ($post_data as $key => $val){  
             if($key == "eventDate"){
@@ -17201,7 +17197,6 @@ public function updateUploadutilisationData(){
                 default:
                 continue 2; // Skip unknown keys
             }
-           
            }
         //    if(count($val)>1){
         //        $val = implode('**',$val);
@@ -17225,8 +17220,7 @@ public function updateUploadutilisationData(){
             }
        $updatetblcalleventsData    = ['initiate_datetime'=>isset($posted_data['elapsed_time']) ? $posted_data['elapsed_time'] : "",'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
        $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
-       $createReviewTasks          = $this->Menu_model->createUtilizationReportReviewTask($taskId,$user['id']);
-       //dd($createReviewTasks);
+       $createReviewTasks          = $this->Menu_model->createNewTask($taskId,$user['id']);
        redirect('Menu/Dashboard');
 }
 
@@ -18254,7 +18248,6 @@ foreach ($posted_data as $k => $val) {
         ] + $commonColumns;
     }
 }
- 
 // Insert only if there's data
     $current_date =  date('Y-m-d h:i:s');
     if(!empty($taskInsertArr1)){
@@ -18396,8 +18389,7 @@ public function getSchoolsForNsp(){
             'remark'        => $remark
             ] + $commonColumns;
         }
-    }   
-        
+    }
     // Insert only if there's data
         $current_date =  date('Y-m-d h:i:s');
         if(!empty($taskInsertArr1)){
@@ -18413,24 +18405,40 @@ public function getSchoolsForNsp(){
   $user               = $_SESSION['user'];
   $taskperformedby    = $user['dep_id'];
   $taskId             = $posted_data['taskId'];
+  $taskType           = $posted_data['tasktype_id'];
   $commonColumns      = [
                           'performed_by' => $_SESSION['user']['id'],
                           'updated_at'   => date("Y-m-d H:i:s"),
                           'status'       => 'active',
                           'tbe_id'       => $taskId
                         ];
-
+                        unset($posted_data['taskId']);
+                        unset($posted_data['cluster_school']);
+ //  dd($_POST);
   /** Insert into task_Execution_details */
   foreach ($posted_data as $k => $val) {
       if($val != '' && !empty($val)){
       // Assign main_Task_id based on the key
       if($taskperformedby == '2'){
-          switch ($k){
-              case 'can_share':                    $main_Task_id = '455'; break;
-              case 'school_id':                    $main_Task_id = '456'; break;
-              default :  
-              continue 2;
-              }
+        if($k == 'cluster_name'){
+            $main_Task_id = '457';
+            $task_response= $val;
+        }
+        else if($k == 'selected_schools'){
+            $main_Task_id = '458';
+            if(count($val)>1){
+                $val = implode('**',$val);
+            }
+            $task_response= $val;
+        }
+        else if($k == 'cluster_location' || $k=='cluster_school'){
+            $main_Task_id = '459';
+            $task_response= $val;
+        }
+        else if($k=='sendForApproval'){
+            $main_Task_id = '460';
+            $task_response= 'yes';
+        }     
       }
           // Store data in array
           $taskInsertArr1[] = [
@@ -18439,7 +18447,8 @@ public function getSchoolsForNsp(){
           'remark'        => $remark
           ] + $commonColumns;
       }
-  }    
+  }   
+
   // Insert only if there's data
       $current_date =  date('Y-m-d h:i:s');
       if(!empty($taskInsertArr1)){
@@ -18447,6 +18456,7 @@ public function getSchoolsForNsp(){
       }
       $updatetblcalleventsData    = ['initiate_datetime'=>isset($posted_data['elapsed_time'])?$posted_data['elapsed_time']:$current_date,'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
       $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+      $createTasks                = $this->Menu_model->createNewTask($taskId,$user['id']);    /** Create Approval Task For CM/ZM */
       redirect('Menu/Dashboard');
 }
 
@@ -18456,15 +18466,17 @@ public function checkClusterFormationApproval(){
     $this->display($dep_name,'NSPClusterFormationApproval',$data,$type='');
 }
 
-public function loadNSPClusterRoundForm($taskId){
+public function loadNSPClusterRoundForm($taskId,$taskactionId){
     $user           = $_SESSION['user'];
     $posted_data    = $_POST;
     $dep_id         = $user['dep_id'];
     $dt             = $this->Menu_model->get_depatment_byid($dep_id);
     $dep_name       = $dt[0]->dep_name;
     $data['taskId'] = $taskId;
+    $taskDetails    = $this->Menu_model->getTaskDetails($taskId,$taskactionId);
     $this->display($dep_name,'NSPClusterRoundFormPageView',$data,$model='');
 }
+
 public function submitClusterRoundData(){
     $posted_data        = $_POST;
     $user               = $_SESSION['user'];
@@ -18476,9 +18488,247 @@ public function submitClusterRoundData(){
                             'status'       => 'active',
                             'tbe_id'       => $taskId
                           ];
-    
 
+    $file_array_keys      =  array_keys($_FILES);
+    $file_array_keys      =  array_flip($file_array_keys);
+
+        foreach($file_array_keys as $k=>$v){
+            switch($k){
+                case "selfie"             :     $main_task_id = "463";  break;
+                case "diy_photo_1"        :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "464";break;
+                case "diy_photo_2"        :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "465";break;
+                case "tinker_photo_1"     :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "466";break;
+                case "tinker_photo_2"     :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "467";break;
+                case "ongoing_photo_1"    :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "469";break;
+                case "ongoing_photo_2"    :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "470";break;
+                case "diy_winner_1"       :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "475";break;
+                case "diy_winner_2"       :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "476";break;
+                case "diy_winner_3"       :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "477";break;
+                case "tinker_winner_1"    :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "480";break;
+                case "tinker_winner_2"    :     $file_array_keys[$k]["main_task_id"]    = $main_task_id =  "481";break;
+                case "tinker_winner_3"    :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "482";break;
+                case "additional_media"   :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "484";break;
+            }
+            $file_array_keys1[$k]['main_task_id'] = $main_task_id;
+        }
+                      
+                              if(isset($_FILES)){
+                                  foreach($_FILES as $filekey=>$fileval){
+                                  $uploadPath                       = "uploads/NSP/ClusterRound/".date('Y-m')."/";
+                                  $status                           = $this->createDirectoryIfNotExists($uploadPath, $permissions = 0755);
+                                  $file_data['attachment_link']     = $this->uploadFile($_FILES[$filekey],$uploadPath);
+                                  $file_data['task_id']             = $taskId;
+                                  $file_data['user_id']             = $_SESSION['user']['id'];
+                                  $file_data['created_at']          = date('Y-m-d h:i:s');
+                                  $file_data['main_task_id']        = $file_array_keys1[$filekey]['main_task_id'];
+                                  $tbe_attachement_id               = $this->Menu_model->insertTasksWithAttachements($file_data);
+                                 // $taskInsertArr1[]                 = ['tbe_attachment_id'=>$tbe_attachement_id];
+                                  }
+                              }
+                    
+                      $i=0;
+
+                      foreach($file_array_keys as $file_key=>$file_values){
+                          if($file_key == 'selfie'){
+                              $taskInsertArr1[]=[
+                                  'task_response' => "yes",
+                                  'main_Task_id'  => $file_values,
+                                  'remark'        => ""
+                              ] + $commonColumns;
+                          }
+                          else if($file_key == 'session_2_file'){
+                              $taskInsertArr1[]=[
+                                  'task_response' => "yes",
+                                  'main_Task_id'  => $file_values,
+                                  'remark'        => ""
+                              ] + $commonColumns;
+                          }
+                          else if($file_key == 'session_3_file'){
+                              $taskInsertArr1[]=[
+                                  'task_response' => "yes",
+                                  'main_Task_id'  => $file_values,
+                                  'remark'        => ""
+                              ] + $commonColumns;
+                          }
+                          else if($file_key == 'session_4_file'){
+                              $taskInsertArr1[]=[
+                                  'task_response' => "yes",
+                                  'main_Task_id'  => $file_values,
+                                  'remark'        => ""
+                              ] + $commonColumns;
+                          }
+                          else if($file_key == 'session_5_file'){
+                              $taskInsertArr1[]=[
+                                  'task_response' => "yes",
+                                  'main_Task_id'  => $file_values,
+                                  'remark'        => ""
+                              ] + $commonColumns;
+                          }
+                          else if($file_key == 'attendance_sheet'){
+                              $taskInsertArr1[]=[
+                                  'task_response' => "yes",
+                                  'main_Task_id'  => $file_values,
+                                  'remark'        => ""
+                              ] + $commonColumns;
+                          }
+                          else if($file_key == 'completion_letter'){
+                              $taskInsertArr1[]=[
+                                  'task_response' => "yes",
+                                  'main_Task_id'  => $file_values,
+                                  'remark'        => ""
+                              ] + $commonColumns;
+                          }
+                          else if($file_key == 'completed_selfie'){
+                              $taskInsertArr1[]=[
+                                  'task_response' => "yes",
+                                  'main_Task_id'  => $file_values,
+                                  'remark'        => ""
+                              ] + $commonColumns;
+                          }
+                          else if($file_key == 'additional_media'){
+                              $taskInsertArr1[]=[
+                                  'task_response' => "yes",
+                                  'main_Task_id'  => $file_values,
+                                  'remark'        => ""
+                              ] + $commonColumns;
+                          }
+                          $i++;
+                      }
+
+                          /** Insert into task_execution tasks */
+                              foreach($posted_data as $k => $val){
+                                  if($val != '' && !empty($val)){
+                                      // Assign main_Task_id based on the key
+                                      if($taskperformedby == '2'){
+                                          switch ($k){
+                                              case 'selfie':  $main_Task_id = '227'; 
+                                                              break;
+                                              case 'sname':   $main_Task_id = '228'; 
+                                                              break;
+                                              case 'teacher_review_1':                  
+                                                              $main_Task_id = '234'; 
+                                                              break;
+                                              case 'teacher_review_2':                
+                                                              $main_Task_id = '235'; 
+                                                              break;
+                                              case 'teacher_review_3':
+                                                              $main_Task_id = '236'; 
+                                                              break;
+                                              default:
+                                              continue 2; // Skip unknown keys
+                                          }
+                                      }
+                                      if(count($val)>1){
+                                          $val = implode('**',$val);
+                                      }
+                                      // Store data in array
+                                      $taskInsertArr1[] = [
+                                          'task_response' => $val,
+                                          'main_Task_id'  => $main_Task_id,
+                                          'remark'        => $remark
+                                      ] + $commonColumns;
+                                      $this->Menu_model->update_tbe_attachmentid($main_Task_id,$taskId);
+                                  }
+                              } 
+                              if (!empty($taskInsertArr1)){
+                                  $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+                              }
+                              $current_date               = date('Y-m-d h:i:s');
+                              $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+                              $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+                              redirect('Menu/Dashboard');
 }
+
+public function submitZonalRoundData(){
+    $posted_data        = $_POST;
+    $user               = $_SESSION['user'];
+    $taskperformedby    = $user['dep_id'];
+    $taskId             = $posted_data['taskId'];
+    $commonColumns      = [
+                            'performed_by' => $_SESSION['user']['id'],
+                            'updated_at'   => date("Y-m-d H:i:s"),
+                            'status'       => 'active',
+                            'tbe_id'       => $taskId
+                          ];
+}
+
+public function submitFinalRoundData(){
+    $posted_data        = $_POST;
+    $user               = $_SESSION['user'];
+    $taskperformedby    = $user['dep_id'];
+    $taskId             = $posted_data['taskId'];
+    $commonColumns      = [
+                            'performed_by' => $_SESSION['user']['id'],
+                            'updated_at'   => date("Y-m-d H:i:s"),
+                            'status'       => 'active',
+                            'tbe_id'       => $taskId
+                          ];
+}
+
+public function getSchoolListByTaskId($taskId){
+    $user           = $_SESSION['user'];
+    $user_id        = $user['id'];
+    $schoolData     = $this->Menu_model->getSchoolListByTaskID($user_id,$taskId);
+    foreach($schoolData as $key=>$val){
+        $schooldata['sid']      = $val['id'];
+        $schooldata['sname']    = $val['sname'];
+        $schooldata['saddress'] = $val['saddress'];
+        $schooldata['scity']    = $val['scity'];
+        $schooldata['sstate']   = $val['sstate'];
+        $finalData[]            = $schooldata;
+    }
+    echo json_encode($finalData);
+}
+
+public function submitClusterApproval()
+{
+    $posted_data        = $_POST;
+    $user               = $_SESSION['user'];
+    $taskperformedby    = $user['dep_id'];
+    $taskId             = $posted_data['taskId'];
+    $taskId             = $posted_data('task_id');
+    $action             = $posted_data('action_type');
+    $cluster            = $posted_data('cluster_name');
+    $location           = $posted_data('cluster_location');
+    $this->Menu_model->approveRejectApproval($taskId,$action);
+    $commonColumns      = [
+                            'performed_by' => $_SESSION['user']['id'],
+                            'updated_at'   => date("Y-m-d H:i:s"),
+                            'status'       => 'active',
+                            'tbe_id'       => $taskId
+                          ];
+
+    /** Insert into task_Execution_details */
+    foreach ($posted_data as $k => $val) {
+        if($val != '' && !empty($val)){
+        // Assign main_Task_id based on the key
+        if($taskperformedby == '11'){
+            switch ($k){
+                case 'action_type':                    $main_Task_id = '461'; break;
+                default :  
+                continue 2;
+                }
+        }
+            // Store data in array
+            $taskInsertArr1[] = [
+            'task_response' => $val,
+            'main_Task_id'  => $main_Task_id,
+            'remark'        => $remark
+            ] + $commonColumns;
+        }
+    }   
+    // Insert only if there's data
+        $current_date =  date('Y-m-d h:i:s');
+        if(!empty($taskInsertArr1)){
+            $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+        }
+        $updatetblcalleventsData    = ['initiate_datetime'=>isset($posted_data['elapsed_time'])?$posted_data['elapsed_time']:$current_date,'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+        $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData); 
+        redirect('Menu/Dashboard');
+}
+
+
+
 }
 
 

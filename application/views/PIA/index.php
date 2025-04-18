@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
 <div class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
@@ -122,19 +124,29 @@
                             $fwd_date             = $sctasklist->fwd_date;
                           if($slct_type_of_task === $tasktype){ 
                             ?>
-                          <a data-task_id="<?=$task_id;?>" class="list-group-item list-group-item-action flex-column align-items-start active mb-1 taskperformaction" >
-                            <div class="d-flex justify-content-between w-100">
-                            <input type="hidden" id="tasktype_<?=$task_id;?>"  name="tasktype" value="<?=$tasktype?>"/>
-                            <input type="hidden" id="tasktype_id_<?=$task_id;?>" name="tasktype_id" value="<?= $task_action?>"/>
-                            <h5 class="mb-1"><?=$sname.' - '.$taskname; ?></h5>
-                           <small> <span id="countdown1"></span> - <span id="status1"></span> </small> 
-                            </div>
-                          <?php 
-                         // dd($data);
-                          ?>
-                        <small> <span id="countdown<?=$task_id;?>"></span> - <span id="status<?=$task_id;?>"></span>  
-                        </small>
-                        </a>
+
+<a class="list-group-item list-group-item-action flex-column align-items-start mb-1">
+  <div class="d-flex justify-content-between w-100 align-items-center">
+    <!-- Task Info -->
+    <div>
+      <input type="hidden" id="tasktype_<?= $task_id; ?>" name="tasktype" value="<?= $tasktype ?>" />
+      <input type="hidden" id="tasktype_id_<?= $task_id; ?>" name="tasktype_id" value="<?= $task_action ?>" />
+      <h5 class="mb-1"><?= $sname . ' - ' . $taskname; ?></h5>
+      <small><span id="countdown<?= $task_id; ?>"></span> - <span id="status<?= $task_id; ?>"></span></small>
+    </div>
+
+    <!-- Play Button -->
+    <button type="button"
+      class="btn btn-sm btn-outline-primary play-task-btn"
+      data-task_id="<?= $task_id; ?>"
+      data-tasktype="<?= $tasktype; ?>"
+      data-tasktype_id="<?= $task_action; ?>"
+      title="Start Task">
+      <i class="bi bi-play-circle-fill"></i>
+    </button>
+  </div>
+</a>
+
                        <script> //  checkCountDownTime("<?=$fwd_date;?>",<?=$type_of_task;?>);</script> 
                         <?php $i++;
                           }
@@ -184,8 +196,8 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="modalCenterTitle"></h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+           </div>
            <div class="modal-body" id="taskModal">
            </div>
         </div>
@@ -430,11 +442,13 @@
               <!-- /.card -->
             </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- ✅ jQuery (required by Bootstrap) -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- ✅ Bootstrap Bundle JS (includes Popper) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  
   function checkCountDownTime(first_date, givenid) {
     var targetDate = new Date(first_date).getTime();
-
     function updateTimer() {
         var now = new Date().getTime();
         var diff = targetDate - now;
@@ -445,7 +459,6 @@
         var hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         var minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         var seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
         var countdownText = [];
         if (days > 0) countdownText.push(days + " days");
         if (hours > 0) countdownText.push(hours + " hours");
@@ -472,48 +485,76 @@
     setInterval(updateTimer, 1000);
     updateTimer();
 }
-  $(document).ready(function() {
-    // When an element with class 'taskperformaction' is clicked
-    // alert($(this).val());
-    // return false;
-    $("#modalCenterTitle").html();
-    $('.taskperformaction').on('click', function() {
-        var taskId      = $(this).data('task_id'); // Retrieve the 'task_id' data
-        var tasktype    = $("#tasktype_"+taskId).val();
-        var tasktype_id = $("#tasktype_id_"+taskId).val();
-        //alert(taskId+"=="+tasktype+"=="+tasktype_id);return false;
-        $.ajax({
-                         url: '<?=base_url();?>Menu/taskExecution/',
-                        type: "POST",
-                        data: {
-                               taskId       : taskId ,
-                               tasktype     : tasktype,
-                               tasktype_id  : tasktype_id
-                              },
-                        cache: false,
-                        success: function (response){
-                     // alert(response);
-                          $('#modalCenter').modal('show');
-                          $("#taskModal").html(response);
-                        }
-                });
-       // $('#maintenanceModal').modal('show');
-       // $('#modalCenterTitle').text("Task ID IS = "+taskId);
+
+
+$(document).ready(function () {
+  // Use delegation to bind click to dynamically added elements
+  $(document).on('click', '.play-task-btn', function (e) {
+    e.preventDefault();  // Prevent default action
+    e.stopPropagation(); // Prevent bubbling
+
+    let taskId      = $(this).data('task_id');
+    let tasktype    = $(this).data('tasktype');
+    let tasktype_id = $(this).data('tasktype_id');
+
+    $.ajax({
+      url: '<?= base_url(); ?>Menu/taskExecution/',
+      type: 'POST',
+      data: {
+        taskId: taskId,
+        tasktype: tasktype,
+        tasktype_id: tasktype_id
+      },
+      cache: false,
+      success: function (response) {
+        $('#taskModal').html(response);
+        $('#modalCenterTitle').text('Task Execution');
+        $('#modalCenter').modal('show'); // ensure this triggers the Bootstrap modal
+      },
+      error: function () {
+        alert('Failed to load task content.');
+      }
+    });
+  });
+});
+
+
+/*
+$(document).ready(function () {
+  
+    $('.taskperformaction').on('click', function () {
+        var taskId      = $(this).data('task_id');
+        var tasktype    = $("#tasktype_" + taskId).val();
+        var tasktype_id = $("#tasktype_id_" + taskId).val();
+
+        // Remove 'active' from others and clear modal content
+        $('.taskperformaction').removeClass('active');
+        $(this).addClass('active');
+        $('#taskModal').html('');
+        $('#modalCenterTitle').html('');
+        $('#modalCenter').modal('hide');
+
+        // Delay ensures the modal gets hidden before showing again
+        setTimeout(function () {
+            $.ajax({
+                url: '<?= base_url(); ?>Menu/taskExecution/',
+                type: "POST",
+                data: {
+                    taskId: taskId,
+                    tasktype: tasktype,
+                    tasktype_id: tasktype_id
+                },
+                cache: false,
+                success: function (response) {
+                    $('#taskModal').html(response);
+                    $('#modalCenter').modal('show');
+                }
+            });
+        }, 300);
     });
 });
-</script>
-<script>
-  $(document).ready(function() {
-    // When an element with class 'taskperformaction' is clicked
-    $('.taskperformaction').on('click', function() {
-        var taskId = $(this).data('task_id'); // Retrieve the 'task_id' data
-        $('#modalCenter').modal('show');
-       // $('#modalCenterTitle').text("Task ID IS = "+taskId);
-      //  / alert(taskId+"====");
-        // console.log(taskId); // Log the task ID or use it as needed
-        // alert(taskId);
-    });
-});
+*/
+
 function handleReminderCreation() {
         $.ajax({
             url: '<?=base_url();?>Menu/CheckTaskPlanningTime',
@@ -541,3 +582,4 @@ function handleReminderCreation() {
         });
 }
 </script>
+

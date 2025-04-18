@@ -26,7 +26,7 @@
 </style>
 
 <div class="container my-4">
-  <form method="POST" action="<?= base_url();?>Menu/submitClusterRoundData" name="NSPClusterRound" enctype="multipart/form-data" >
+  <form method="POST" action="<?= base_url();?>Menu/submitClusterRoundData" enctype="multipart/form-data" name="NSPClusterRound" >
       <input type="hidden" name="taskId" value="<?php echo $taskId;?>" />
     <div class="card shadow border-0">
       <div class="card-body">
@@ -49,7 +49,7 @@
             <input type="file" class="form-control" name="diy_photo_1" required>
           </div>
           <div class="col-md-6">
-            <input type="file" class="form-control" name="diy_photo_2">
+            <input type="file" class="form-control" name="diy_photo_2" required>
           </div>
         </div>
 
@@ -57,10 +57,10 @@
         <label class="form-label fw-semibold">Pre-Event Preparation Photos - Tinker</label>
         <div class="mb-3 row g-3">
           <div class="col-md-6">
-            <input type="file" class="form-control" name="tinker_photo_1">
+            <input type="file" class="form-control" name="tinker_photo_1" required>
           </div>
           <div class="col-md-6">
-            <input type="file" class="form-control" name="tinker_photo_2">
+            <input type="file" class="form-control" name="tinker_photo_2" required>
           </div>
         </div>
 
@@ -79,10 +79,10 @@
         <label class="form-label fw-semibold">Ongoing NSP Photos</label>
         <div class="mb-3 row g-3">
           <div class="col-md-6">
-            <input type="file" class="form-control" name="ongoing_photo_1">
+            <input type="file" class="form-control" name="ongoing_photo_1" required>
           </div>
           <div class="col-md-6">
-            <input type="file" class="form-control" name="ongoing_photo_2" >
+            <input type="file" class="form-control" name="ongoing_photo_2" required>
           </div>
         </div>
 
@@ -103,7 +103,7 @@
         <!-- Category Selection -->
         <div class="mb-3">
           <label class="form-label">Select Category</label>
-          <select class="form-select" name="category">
+          <select class="form-select" name="category" required>
             <option value="">-- Select Category --</option>
             <option value="All">All</option>
             <option value="DIY">DIY</option>
@@ -150,12 +150,12 @@
         <!-- Add More Photos -->
         <div class="mt-4">
           <label class="form-label">Add More Photos</label>
-          <input type="file" class="form-control" name="additional_media[]" multiple>
+          <input type="file" class="form-control" name="extra_photos[]" multiple>
         </div>
 
         <!-- Submit Button -->
         <div class="mt-4 d-flex justify-content-center">
-        <button type="submit" class="btn btn-primary w-25">Submit</button>
+        <button type="submit" class="btn btn-primary w-25">Complete My Task</button>
         </div>
       </div>
     </div>
@@ -164,6 +164,7 @@
 </div>
 
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
    $(document).ready(function () {
