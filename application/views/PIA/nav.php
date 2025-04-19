@@ -157,7 +157,7 @@
                 <div class="text-truncate" data-i18n="Sharetodaysplan">Share You Today's Plan</div>
               </a>
             </li> -->
-            <li class="menu-item">
+            <!-- <li class="menu-item">
               <a href="<?=base_url() ?>Menu/AddTempPerson"
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
@@ -169,6 +169,13 @@
                 class="menu-link">
                 <i class="menu-icon tf-icons bx bx-support"></i>
                 <div class="text-truncate" data-i18n="CreateGoals">Create Goals</div>
+              </a>
+            </li> -->
+            <li class="menu-item">
+              <a href="<?=base_url() ?>Menu/projectReport" 
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="projectreport">Project Report</div>
               </a>
             </li>
             <li class="menu-item">
@@ -191,6 +198,7 @@
                 <div class="text-truncate" data-i18n="TransitProcess">My Target</div>
               </a>
             </li> -->
+
             <li class="menu-item">
               <a href="<?=base_url() ?>Menu/DayManagement"
                

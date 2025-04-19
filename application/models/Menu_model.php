@@ -7359,7 +7359,7 @@ public function getSchoolsWithZones($pro_id){
   public function approveRejectApproval($taskId,$action){
     if($action == 'Reject'){
         /** Recreate the cluster approval task for PIA */
-
+        
     }
     $this->db->query("UPDATE clusterformationapprovaldata SET approval_status ='.$action.' , approved_by ='".$user_id."' WHERE tbe_id = ".$taskId." ");
   }
@@ -7370,6 +7370,10 @@ public function getSchoolsWithZones($pro_id){
                                     WHERE ud.id = '".$user_id."' ");
         $result =  $query->row_array();
         return result['contact_no'];
+  }
+  public function getProjectDetails(){
+        $query = $this->db->query("SELECT DISTINCT(projectcode),client_name,noofschool,bd_id,status,created_at FROM client_handover");
+        return $query->result_array();
   }
 
 }
