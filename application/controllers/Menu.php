@@ -18473,8 +18473,29 @@ public function loadNSPClusterRoundForm($taskId,$taskactionId){
     $dt             = $this->Menu_model->get_depatment_byid($dep_id);
     $dep_name       = $dt[0]->dep_name;
     $data['taskId'] = $taskId;
+    $data['user_id'] = $user['id'];
     $taskDetails    = $this->Menu_model->getTaskDetails($taskId,$taskactionId);
     $this->display($dep_name,'NSPClusterRoundFormPageView',$data,$model='');
+}
+public function loadNSPZonalRoundForm($taskId,$taskactionId){
+    $user           = $_SESSION['user'];
+    $posted_data    = $_POST;
+    $dep_id         = $user['dep_id'];
+    $dt             = $this->Menu_model->get_depatment_byid($dep_id);
+    $dep_name       = $dt[0]->dep_name;
+    $data['taskId'] = $taskId;
+    $taskDetails    = $this->Menu_model->getTaskDetails($taskId,$taskactionId);
+    $this->display($dep_name,'NSPZonalRoundFormPageView',$data,$model='');
+}
+public function loadNSPFinalRoundForm($taskId,$taskactionId){
+    $user           = $_SESSION['user'];
+    $posted_data    = $_POST;
+    $dep_id         = $user['dep_id'];
+    $dt             = $this->Menu_model->get_depatment_byid($dep_id);
+    $dep_name       = $dt[0]->dep_name;
+    $data['taskId'] = $taskId;
+    $taskDetails    = $this->Menu_model->getTaskDetails($taskId,$taskactionId);
+    $this->display($dep_name,'NSPFinalRoundFormPageView',$data,$model='');
 }
 
 public function submitClusterRoundData(){
@@ -18488,155 +18509,112 @@ public function submitClusterRoundData(){
                             'status'       => 'active',
                             'tbe_id'       => $taskId
                           ];
-
-    $file_array_keys      =  array_keys($_FILES);
-    $file_array_keys      =  array_flip($file_array_keys);
-
-        foreach($file_array_keys as $k=>$v){
-            switch($k){
-                case "selfie"             :     $main_task_id = "463";  break;
-                case "diy_photo_1"        :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "464";break;
-                case "diy_photo_2"        :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "465";break;
-                case "tinker_photo_1"     :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "466";break;
-                case "tinker_photo_2"     :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "467";break;
-                case "ongoing_photo_1"    :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "469";break;
-                case "ongoing_photo_2"    :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "470";break;
-                case "diy_winner_1"       :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "475";break;
-                case "diy_winner_2"       :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "476";break;
-                case "diy_winner_3"       :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "477";break;
-                case "tinker_winner_1"    :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "480";break;
-                case "tinker_winner_2"    :     $file_array_keys[$k]["main_task_id"]    = $main_task_id =  "481";break;
-                case "tinker_winner_3"    :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "482";break;
-                case "additional_media"   :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "484";break;
-            }
-            $file_array_keys1[$k]['main_task_id'] = $main_task_id;
+        $file_array_keys      =  array_keys($_FILES);
+        $file_array_keys      =  array_flip($file_array_keys);
+        foreach ($file_array_keys as $key => $value){
+            $new_file_array_keys[$key] = 'Yes';
         }
-                      
-                              if(isset($_FILES)){
-                                  foreach($_FILES as $filekey=>$fileval){
-                                  $uploadPath                       = "uploads/NSP/ClusterRound/".date('Y-m')."/";
-                                  $status                           = $this->createDirectoryIfNotExists($uploadPath, $permissions = 0755);
-                                  $file_data['attachment_link']     = $this->uploadFile($_FILES[$filekey],$uploadPath);
-                                  $file_data['task_id']             = $taskId;
-                                  $file_data['user_id']             = $_SESSION['user']['id'];
-                                  $file_data['created_at']          = date('Y-m-d h:i:s');
-                                  $file_data['main_task_id']        = $file_array_keys1[$filekey]['main_task_id'];
-                                  $tbe_attachement_id               = $this->Menu_model->insertTasksWithAttachements($file_data);
-                                 // $taskInsertArr1[]                 = ['tbe_attachment_id'=>$tbe_attachement_id];
-                                  }
-                              }
-                    
-                      $i=0;
+      $form_file_array =  array_merge($posted_data,$new_file_array_keys);
+      foreach($file_array_keys as $k=>$v){
+            switch ($k){
+                case 'selfie':                $file_array_keys[$k]["main_task_id"]    =  $main_Task_id = '463'; break;
+                case 'diy_photo_1':           $file_array_keys[$k]["main_task_id"]    =  $main_Task_id = '464'; break;
+                case 'diy_photo_2':           $file_array_keys[$k]["main_task_id"]    =  $main_Task_id = '465'; break;
+                case 'tinker_photo_1':        $file_array_keys[$k]["main_task_id"]    =  $main_Task_id = '466'; break;
+                case 'tinker_photo_2':        $file_array_keys[$k]["main_task_id"]    =  $main_Task_id = '467'; break;
+                case 'ongoing_photo_1':       $file_array_keys[$k]["main_task_id"]    =  $main_Task_id = '469'; break;
+                case 'ongoing_photo_2':       $file_array_keys[$k]["main_task_id"]    =  $main_Task_id = '470'; break;
+                case 'diy_winner_1':          $file_array_keys[$k]["main_task_id"]    =  $main_Task_id = '475'; break;
+                case 'diy_winner_2':          $file_array_keys[$k]["main_task_id"]    =  $main_Task_id = '476'; break;
+                case 'diy_winner_3':          $file_array_keys[$k]["main_task_id"]    =  $main_Task_id = '477'; break;
+                case 'tinker_winner_1':       $file_array_keys[$k]["main_task_id"]    =  $main_Task_id = '480'; break;
+                case 'tinker_winner_2':       $file_array_keys[$k]["main_task_id"]    =  $main_Task_id = '481'; break;
+                case 'tinker_winner_3':       $file_array_keys[$k]["main_task_id"]    =  $main_Task_id = '482'; break;
+                case 'additional_media':      $file_array_keys[$k]["main_task_id"]    =  $main_Task_id = '484'; break;
+                default :  
+                continue 2;
+            }
+        $file_array_keys1[$k]['main_task_id'] = $main_Task_id;
+    }
 
-                      foreach($file_array_keys as $file_key=>$file_values){
-                          if($file_key == 'selfie'){
-                              $taskInsertArr1[]=[
-                                  'task_response' => "yes",
-                                  'main_Task_id'  => $file_values,
-                                  'remark'        => ""
-                              ] + $commonColumns;
-                          }
-                          else if($file_key == 'session_2_file'){
-                              $taskInsertArr1[]=[
-                                  'task_response' => "yes",
-                                  'main_Task_id'  => $file_values,
-                                  'remark'        => ""
-                              ] + $commonColumns;
-                          }
-                          else if($file_key == 'session_3_file'){
-                              $taskInsertArr1[]=[
-                                  'task_response' => "yes",
-                                  'main_Task_id'  => $file_values,
-                                  'remark'        => ""
-                              ] + $commonColumns;
-                          }
-                          else if($file_key == 'session_4_file'){
-                              $taskInsertArr1[]=[
-                                  'task_response' => "yes",
-                                  'main_Task_id'  => $file_values,
-                                  'remark'        => ""
-                              ] + $commonColumns;
-                          }
-                          else if($file_key == 'session_5_file'){
-                              $taskInsertArr1[]=[
-                                  'task_response' => "yes",
-                                  'main_Task_id'  => $file_values,
-                                  'remark'        => ""
-                              ] + $commonColumns;
-                          }
-                          else if($file_key == 'attendance_sheet'){
-                              $taskInsertArr1[]=[
-                                  'task_response' => "yes",
-                                  'main_Task_id'  => $file_values,
-                                  'remark'        => ""
-                              ] + $commonColumns;
-                          }
-                          else if($file_key == 'completion_letter'){
-                              $taskInsertArr1[]=[
-                                  'task_response' => "yes",
-                                  'main_Task_id'  => $file_values,
-                                  'remark'        => ""
-                              ] + $commonColumns;
-                          }
-                          else if($file_key == 'completed_selfie'){
-                              $taskInsertArr1[]=[
-                                  'task_response' => "yes",
-                                  'main_Task_id'  => $file_values,
-                                  'remark'        => ""
-                              ] + $commonColumns;
-                          }
-                          else if($file_key == 'additional_media'){
-                              $taskInsertArr1[]=[
-                                  'task_response' => "yes",
-                                  'main_Task_id'  => $file_values,
-                                  'remark'        => ""
-                              ] + $commonColumns;
-                          }
-                          $i++;
-                      }
-
-                          /** Insert into task_execution tasks */
-                              foreach($posted_data as $k => $val){
-                                  if($val != '' && !empty($val)){
-                                      // Assign main_Task_id based on the key
-                                      if($taskperformedby == '2'){
-                                          switch ($k){
-                                              case 'selfie':  $main_Task_id = '227'; 
-                                                              break;
-                                              case 'sname':   $main_Task_id = '228'; 
-                                                              break;
-                                              case 'teacher_review_1':                  
-                                                              $main_Task_id = '234'; 
-                                                              break;
-                                              case 'teacher_review_2':                
-                                                              $main_Task_id = '235'; 
-                                                              break;
-                                              case 'teacher_review_3':
-                                                              $main_Task_id = '236'; 
-                                                              break;
-                                              default:
-                                              continue 2; // Skip unknown keys
-                                          }
-                                      }
-                                      if(count($val)>1){
-                                          $val = implode('**',$val);
-                                      }
-                                      // Store data in array
-                                      $taskInsertArr1[] = [
-                                          'task_response' => $val,
-                                          'main_Task_id'  => $main_Task_id,
-                                          'remark'        => $remark
-                                      ] + $commonColumns;
-                                      $this->Menu_model->update_tbe_attachmentid($main_Task_id,$taskId);
-                                  }
-                              } 
-                              if (!empty($taskInsertArr1)){
-                                  $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
-                              }
-                              $current_date               = date('Y-m-d h:i:s');
-                              $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
-                              $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
-                              redirect('Menu/Dashboard');
+    if (isset($_FILES)) {
+        foreach ($_FILES as $filekey => $fileval) {
+            // Create upload directory
+            $uploadPath = "uploads/NSP/ClusterRound/" . date('Y-m') . "/";
+            $this->createDirectoryIfNotExists($uploadPath, 0755);
+            // Handle multi-file (like additional_media)
+            if ($filekey == "additional_media") {
+                $fileCount = count($fileval['name']);
+                for ($i = 0; $i < $fileCount; $i++) {
+                    // Create a new array for each file
+                    $singleFile = [
+                        'name' => $fileval['name'][$i],
+                        'type' => $fileval['type'][$i],
+                        'tmp_name' => $fileval['tmp_name'][$i],
+                        'error' => $fileval['error'][$i],
+                        'size' => $fileval['size'][$i]
+                    ];
+                    $file_data['attachment_link'] = $this->uploadFile($singleFile, $uploadPath);
+                    $file_data['task_id']         = $taskId;
+                    $file_data['user_id']         = $_SESSION['user']['id'];
+                    $file_data['created_at']      = date('Y-m-d h:i:s');
+                    $file_data['main_task_id']    = $file_array_keys1[$filekey]['main_task_id'];
+                    $this->Menu_model->insertTasksWithAttachements($file_data);
+                }
+            } else {
+                // Handle regular single file uploads
+                $file_data['attachment_link'] = $this->uploadFile($fileval, $uploadPath);
+                $file_data['task_id']         = $taskId;
+                $file_data['user_id']         = $_SESSION['user']['id'];
+                $file_data['created_at']      = date('Y-m-d h:i:s');
+                $file_data['main_task_id']    = $file_array_keys1[$filekey]['main_task_id'];
+                $this->Menu_model->insertTasksWithAttachements($file_data);
+            }
+        }
+    }
+      foreach($form_file_array as $k=>$val){
+        if($val != '' && !empty($val)){
+            // Assign main_Task_id based on the key
+                if($taskperformedby == '2'){
+                    switch ($k){
+                            case 'selfie':                $main_Task_id = '463'; break;
+                            case 'start_time':            $main_Task_id = '468'; break;
+                            case 'category':              $main_Task_id = '472'; break;
+                            case 'diy_photo_1':           $main_Task_id = '464'; break;
+                            case 'diy_photo_2':           $main_Task_id = '465'; break;
+                            case 'tinker_photo_1':        $main_Task_id = '466'; break;
+                            case 'tinker_photo_2':        $main_Task_id = '467'; break;
+                            case 'ongoing_photo_1':       $main_Task_id = '469'; break;
+                            case 'ongoing_photo_2':       $main_Task_id = '470'; break;
+                            case 'diy_winner_1':          $main_Task_id = '475'; break;
+                            case 'diy_winner_2':          $main_Task_id = '476'; break;
+                            case 'diy_winner_3':          $main_Task_id = '477'; break;
+                            case 'tinker_winner_1':       $main_Task_id = '480'; break;
+                            case 'tinker_winner_2':       $main_Task_id = '481'; break;
+                            case 'tinker_winner_3':       $main_Task_id = '482'; break;
+                            case 'call_with_rm':          $main_Task_id = '483'; break;
+                            case 'additional_media':      $main_Task_id = '484'; break;
+                            case 'task_completed':        $main_Task_id = '485'; break;
+                            default :  
+                            continue 2;
+                        }
+                }
+                // Store data in array
+                $taskInsertArr1[] = [
+                'task_response' => $val,
+                'main_Task_id'  => $main_Task_id,
+                'remark'        => $remark
+                ] + $commonColumns;
+                $this->Menu_model->update_tbe_attachmentid($main_Task_id,$taskId);
+            }
+      }
+      if(!empty($taskInsertArr1)){
+            $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+      }
+    $current_date               = date('Y-m-d h:i:s');
+    $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+    $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+    redirect('Menu/Dashboard');
 }
 
 public function submitZonalRoundData(){
@@ -18650,6 +18628,95 @@ public function submitZonalRoundData(){
                             'status'       => 'active',
                             'tbe_id'       => $taskId
                           ];
+        $file_array_keys      =  array_keys($_FILES);
+        $file_array_keys      =  array_flip($file_array_keys);
+        foreach ($file_array_keys as $key => $value){
+            $new_file_array_keys[$key] = 'Yes';
+        }
+
+      $form_file_array =  array_merge($posted_data,$new_file_array_keys);
+
+      foreach($file_array_keys as $k=>$v){
+        switch ($k){
+            case 'selfie':                $file_array_keys[$k]["main_task_id"]     =  $main_Task_id = '487'; break;
+            case 'diy_photo_1':           $file_array_keys[$k]["main_task_id"]     =  $main_Task_id = '488'; break;
+            case 'diy_photo_2':           $file_array_keys[$k]["main_task_id"]     =  $main_Task_id = '489'; break;
+            case 'tinker_photo_1':        $file_array_keys[$k]["main_task_id"]     =  $main_Task_id = '490'; break;
+            case 'tinker_photo_2':        $file_array_keys[$k]["main_task_id"]     =  $main_Task_id = '491'; break;
+            case 'ongoing_photo_1':       $file_array_keys[$k]["main_task_id"]     =  $main_Task_id = '493'; break;
+            case 'ongoing_photo_2':       $file_array_keys[$k]["main_task_id"]     =  $main_Task_id = '494'; break;
+            case 'diy_winner_1':          $file_array_keys[$k]["main_task_id"]     =  $main_Task_id = '499'; break;
+            case 'diy_winner_2':          $file_array_keys[$k]["main_task_id"]     =  $main_Task_id = '500'; break;
+            case 'diy_winner_3':          $file_array_keys[$k]["main_task_id"]     =  $main_Task_id = '501'; break;
+            case 'tinker_winner_1':       $file_array_keys[$k]["main_task_id"]     =  $main_Task_id = '504'; break;
+            case 'tinker_winner_2':       $file_array_keys[$k]["main_task_id"]     =  $main_Task_id = '505'; break;
+            case 'tinker_winner_3':       $file_array_keys[$k]["main_task_id"]     =  $main_Task_id = '506'; break;
+            case 'additional_media':      $file_array_keys[$k]["main_task_id"]     =  $main_Task_id = '508'; break;
+            default :  
+            continue 2;
+        }
+        $file_array_keys1[$k]['main_task_id'] = $main_Task_id;
+    }
+
+      if(isset($_FILES)){
+        foreach($_FILES as $filekey=>$fileval){
+            $uploadPath                       = "uploads/NSP/ZonalRound/".date('Y-m')."/";
+            $status                           = $this->createDirectoryIfNotExists($uploadPath, $permissions = 0755);
+            $file_data['attachment_link']     = $this->uploadFile($_FILES[$filekey],$uploadPath);
+            $file_data['task_id']             = $taskId;
+            $file_data['user_id']             = $_SESSION['user']['id'];
+            $file_data['created_at']          = date('Y-m-d h:i:s');
+            $file_data['main_task_id']        =  $file_array_keys1[$filekey]['main_task_id'];
+            $tbe_attachement_id               = $this->Menu_model->insertTasksWithAttachements($file_data);
+        // $taskInsertArr1[]                  = ['tbe_attachment_id'=>$tbe_attachement_id];
+        }
+    }
+
+      foreach($form_file_array as $k=>$val){
+        if($val != '' && !empty($val)){
+            // Assign main_Task_id based on the key
+                if($taskperformedby == '2'){
+                    switch ($k){
+                            case 'selfie':                $main_Task_id = '487'; break;
+                            case 'nsp_start_time':        $main_Task_id = '492'; break;
+                            case 'category':              $main_Task_id = '496'; break;
+                            case 'diy_photo_1':           $main_Task_id = '488'; break;
+                            case 'diy_photo_2':           $main_Task_id = '489'; break;
+                            case 'tinker_photo_1':        $main_Task_id = '490'; break;
+                            case 'tinker_photo_2':        $main_Task_id = '491'; break;
+                            case 'ongoing_photo_1':       $main_Task_id = '493'; break;
+                            case 'ongoing_photo_2':       $main_Task_id = '494'; break;
+                            case 'diy_winner_1':          $main_Task_id = '499'; break;
+                            case 'diy_winner_2':          $main_Task_id = '500'; break;
+                            case 'diy_winner_3':          $main_Task_id = '501'; break;
+                            case 'tinker_winner_1':       $main_Task_id = '504'; break;
+                            case 'tinker_winner_2':       $main_Task_id = '505'; break;
+                            case 'tinker_winner_3':       $main_Task_id = '506'; break;
+                            case 'call_with_rm':          $main_Task_id = '507'; break;
+                            case 'additional_media':      $main_Task_id = '508'; break;
+                            case 'task_completed':        $main_Task_id = '509'; break;
+                            default :  
+                            continue 2;
+                        }
+                }
+                
+                // Store data in array
+                $taskInsertArr1[] = [
+                'task_response' => $val,
+                'main_Task_id'  => $main_Task_id,
+                'remark'        => $remark
+                ] + $commonColumns;
+                $this->Menu_model->update_tbe_attachmentid($main_Task_id,$taskId);
+            }
+      }
+
+      if(!empty($taskInsertArr1)){
+            $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+      }
+    $current_date               = date('Y-m-d h:i:s');
+    $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+    $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+    redirect('Menu/Dashboard');
 }
 
 public function submitFinalRoundData(){
@@ -18663,6 +18730,96 @@ public function submitFinalRoundData(){
                             'status'       => 'active',
                             'tbe_id'       => $taskId
                           ];
+
+        $file_array_keys      =  array_keys($_FILES);
+        $file_array_keys      =  array_flip($file_array_keys);
+
+        foreach ($file_array_keys as $key => $value){
+            $new_file_array_keys[$key] = 'Yes';
+        }
+      $form_file_array =  array_merge($posted_data,$new_file_array_keys);
+
+      foreach($file_array_keys as $k=>$v){
+        switch ($k){
+            case 'selfie':                $file_array_keys[$k]["main_task_id"]    =  $main_Task_id = '511'; break;
+            case 'diy_photo_1':           $file_array_keys[$k]["main_task_id"]    =  $main_Task_id = '512'; break;
+            case 'diy_photo_2':           $file_array_keys[$k]["main_task_id"]    =  $main_Task_id = '513'; break;
+            case 'tinker_photo_1':        $file_array_keys[$k]["main_task_id"]    =  $main_Task_id = '514'; break;
+            case 'tinker_photo_2':        $file_array_keys[$k]["main_task_id"]    =  $main_Task_id = '515'; break;
+            case 'ongoing_photo_1':       $file_array_keys[$k]["main_task_id"]    =  $main_Task_id = '517'; break;
+            case 'ongoing_photo_2':       $file_array_keys[$k]["main_task_id"]    =  $main_Task_id = '518'; break;
+            case 'diy_winner_1':          $file_array_keys[$k]["main_task_id"]    =  $main_Task_id = '523'; break;
+            case 'diy_winner_2':          $file_array_keys[$k]["main_task_id"]    =  $main_Task_id = '524'; break;
+            case 'diy_winner_3':          $file_array_keys[$k]["main_task_id"]    =  $main_Task_id = '525'; break;
+            case 'tinker_winner_1':       $file_array_keys[$k]["main_task_id"]    =  $main_Task_id = '528'; break;
+            case 'tinker_winner_2':       $file_array_keys[$k]["main_task_id"]    =  $main_Task_id = '529'; break;
+            case 'tinker_winner_3':       $file_array_keys[$k]["main_task_id"]    =  $main_Task_id = '530'; break;
+            case 'additional_media':      $file_array_keys[$k]["main_task_id"]    =  $main_Task_id = '532'; break;
+            default :  
+            continue 2;
+        }
+        $file_array_keys1[$k]['main_task_id'] = $main_Task_id;
+    }
+
+      if(isset($_FILES)){
+        foreach($_FILES as $filekey=>$fileval){
+            $uploadPath                       = "uploads/NSP/FinalRound/".date('Y-m')."/";
+            $status                           = $this->createDirectoryIfNotExists($uploadPath, $permissions = 0755);
+            $file_data['attachment_link']     = $this->uploadFile($_FILES[$filekey],$uploadPath);
+            $file_data['task_id']             = $taskId;
+            $file_data['user_id']             = $_SESSION['user']['id'];
+            $file_data['created_at']          = date('Y-m-d h:i:s');
+            $file_data['main_task_id']        = $file_array_keys1[$filekey]['main_task_id'];
+            $tbe_attachement_id               = $this->Menu_model->insertTasksWithAttachements($file_data);
+            // $taskInsertArr1[]              = ['tbe_attachment_id'=>$tbe_attachement_id];
+        }
+    }
+
+      foreach($form_file_array as $k=>$val){
+        if($val != '' && !empty($val)){
+            // Assign main_Task_id based on the key
+                if($taskperformedby == '2'){
+                    switch ($k){
+                            case 'selfie':                $main_Task_id = '511'; break;
+                            case 'nsp_start_time':        $main_Task_id = '492'; break;
+                            case 'category':              $main_Task_id = '496'; break;
+                            case 'diy_photo_1':           $main_Task_id = '512'; break;
+                            case 'diy_photo_2':           $main_Task_id = '513'; break;
+                            case 'tinker_photo_1':        $main_Task_id = '514'; break;
+                            case 'tinker_photo_2':        $main_Task_id = '515'; break;
+                            case 'ongoing_photo_1':       $main_Task_id = '517'; break;
+                            case 'ongoing_photo_2':       $main_Task_id = '518'; break;
+                            case 'diy_winner_1':          $main_Task_id = '523'; break;
+                            case 'diy_winner_2':          $main_Task_id = '524'; break;
+                            case 'diy_winner_3':          $main_Task_id = '525'; break;
+                            case 'tinker_winner_1':       $main_Task_id = '528'; break;
+                            case 'tinker_winner_2':       $main_Task_id = '529'; break;
+                            case 'tinker_winner_3':       $main_Task_id = '530'; break;
+                            case 'call_with_rm':          $main_Task_id = '531'; break;
+                            case 'additional_media':        $main_Task_id = '532'; break;
+                            case 'task_completed':      $main_Task_id = '533'; break;
+                            default :  
+                            continue 2;
+                        }
+                }
+                
+                // Store data in array
+                $taskInsertArr1[] = [
+                'task_response' => $val,
+                'main_Task_id'  => $main_Task_id,
+                'remark'        => $remark
+                ] + $commonColumns;
+                $this->Menu_model->update_tbe_attachmentid($main_Task_id,$taskId);
+            }
+      }
+
+      if(!empty($taskInsertArr1)){
+            $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+      }
+    $current_date               = date('Y-m-d h:i:s');
+    $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+    $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+    redirect('Menu/Dashboard');
 }
 
 public function getSchoolListByTaskId($taskId){
@@ -18686,10 +18843,10 @@ public function submitClusterApproval()
     $user               = $_SESSION['user'];
     $taskperformedby    = $user['dep_id'];
     $taskId             = $posted_data['taskId'];
-    $taskId             = $posted_data('task_id');
-    $action             = $posted_data('action_type');
-    $cluster            = $posted_data('cluster_name');
-    $location           = $posted_data('cluster_location');
+    $taskId             = $posted_data['task_id'];
+    $action             = $posted_data['action_type'];
+    $cluster            = $posted_data['cluster_name'];
+    $location           = $posted_data['cluster_location'];
     $this->Menu_model->approveRejectApproval($taskId,$action);
     $commonColumns      = [
                             'performed_by' => $_SESSION['user']['id'],
@@ -18713,7 +18870,7 @@ public function submitClusterApproval()
             $taskInsertArr1[] = [
             'task_response' => $val,
             'main_Task_id'  => $main_Task_id,
-            'remark'        => $remark
+            'remark'        => 'Approved'
             ] + $commonColumns;
         }
     }   
@@ -18726,9 +18883,6 @@ public function submitClusterApproval()
         $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData); 
         redirect('Menu/Dashboard');
 }
-
-
-
 }
 
 

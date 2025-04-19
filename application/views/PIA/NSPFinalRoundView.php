@@ -8,7 +8,7 @@
       <div class="mb-3">
         <label class="form-label">Start Your Journey</label>
         <div class="form-check form-check-inline">
-          <a href="<?php echo base_url()?>/Menu/loadNSPClusterRoundForm/<?php echo $taskId;?>/<?php echo $tasktypeid;?>" class="btn btn-primary" id="startyourjourney">
+          <a href="<?php echo base_url()?>/Menu/loadNSPFinalRoundForm/<?php echo $taskId;?>/<?php echo $tasktypeid;?>" class="btn btn-primary" id="startyourjourney">
               <i class="bi bi-play-fill"></i> Start Your Journey
           </a>
         </div>
@@ -39,11 +39,6 @@
             $("#faq_maint").hide();
         }
       });
-   
-
-$("#startyourjourney").click(function(){
-
-})
 })
 </script>
 

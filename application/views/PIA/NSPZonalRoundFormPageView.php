@@ -24,9 +24,8 @@
     font-size: 0.85rem;
   }
 </style>
-
 <div class="container my-4">
-  <form method="POST" action="<?= base_url();?>Menu/submitClusterRoundData" enctype="multipart/form-data" name="NSPClusterRound" >
+  <form method="POST" action="<?= base_url();?>Menu/submitZonalRoundData" enctype="multipart/form-data" name="NSPClusterRound" >
       <input type="hidden" name="taskId" value="<?php echo $taskId;?>" />
     <div class="card shadow border-0">
       <div class="card-body">
@@ -66,15 +65,13 @@
 
         <!-- Start NSP Time -->
         <div class="mb-3">
-  <label class="form-label">NSP Started At:</label><br>  <input type="text" id="nspStartTime" class="form-control mt-2 d-none" name="start_time" readonly>
+  <label class="form-label">NSP Started At:</label><br>  <input type="text" id="nspStartTime" class="form-control mt-2 d-none" name="nsp_start_time" readonly>
 
   <button type="button" id="startNSPBtn" class="btn btn-success">Start NSP</button>
   <p id="timer" class="text-primary fw-bold mt-2"></p>
 </div>
 <div id="nspFields" style="display: none;">
   <!-- All the rest of the fields go here, wrap them inside this div -->
-
-
         <!-- Ongoing NSP Photos -->
         <label class="form-label fw-semibold">Ongoing NSP Photos</label>
         <div class="mb-3 row g-3">
@@ -85,7 +82,6 @@
             <input type="file" class="form-control" name="ongoing_photo_2" required>
           </div>
         </div>
-
         <!-- School Selection -->
         <div class="mb-3">
           <label class="form-label">Select Participated School</label>
@@ -97,9 +93,7 @@
                 }
                 echo "</ul>";
             ?>
-         
         </div>
-
         <!-- Category Selection -->
         <div class="mb-3">
           <label class="form-label">Select Category</label>
@@ -110,20 +104,22 @@
             <option value="Tinker">Tinker</option>
           </select>
         </div>
-
         <!-- Judging Photos -->
         <label class="form-label fw-semibold">Winners & Judging Panel Photos</label>
         <div class="row g-3">
           <!-- DIY Winners -->
-          <div class="col-md-6">
+          <div class="col-md-4">
             <label class="form-label">DIY - 1st Place</label>
             <input type="file" class="form-control" name="diy_winner_1">
           </div>
-          <div class="col-md-6">
+          <div class="col-md-4">
             <label class="form-label">DIY - 2nd Place</label>
             <input type="file" class="form-control" name="diy_winner_2">
           </div>
-
+          <div class="col-md-4">
+            <label class="form-label">DIY - 3rd Place</label>
+            <input type="file" class="form-control" name="diy_winner_3">
+          </div>
           <!-- Tinker Winners -->
           <div class="col-md-4">
             <label class="form-label">Tinker - 1st Place</label>
@@ -138,23 +134,22 @@
             <input type="file" class="form-control" name="tinker_winner_3">
           </div>
         </div>
-
         <!-- Call with Reporting Manager -->
         <div class="mt-4 d-flex align-items-center">
           <label class="form-label me-3 mb-0 fw-semibold">Call with Reporting Manager:</label>
-          <a href="tel:<?= $rm_phone ?>" class="btn btn-outline-success">
+          <a href="tel:<?= getRMcontact($user_id); ?>" class="btn btn-outline-success" name='call_with_rm'>
             <i class="bi bi-telephone-fill"></i> <?= $rm_phone ?>
           </a>
         </div>
-
         <!-- Add More Photos -->
         <div class="mt-4">
           <label class="form-label">Add More Photos</label>
           <input type="file" class="form-control" name="extra_photos[]" multiple>
         </div>
-
         <!-- Submit Button -->
         <div class="mt-4 d-flex justify-content-center">
+        <input type="hidden" name="task_completed" value="<?php echo date('Y-m-d h:i:s');?>">
+
         <button type="submit" class="btn btn-primary w-25">Complete My Task</button>
         </div>
       </div>
@@ -162,8 +157,6 @@
   </form>
 </div>
 </div>
-
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">

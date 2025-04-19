@@ -6126,6 +6126,7 @@ WHERE
 }
 
 public function getTaskDetails($taskId,$taskactionId){
+    
     if($taskactionId == "63"){
         $query =  $this->db->query("SELECT clusterformationapprovaldata.* 
                     FROM  clusterformationapprovaldata  
@@ -6622,6 +6623,7 @@ public function get_indian_languages(){
 
 public function update_tbe_attachmentid($main_task_id,$task_id){
     $query = $this->db->query("UPDATE task_execution_details SET tbe_attachement_id = '(SELECT id FROM tblcallevents_attachments WHERE main_task_id ='".$main_task_id."' AND task_id = '".$task_id."' LIMIT 1)' LIMIT 1");
+    //echo $this->db->last_query();exit;
     return TRUE;
 }
 
@@ -7354,13 +7356,20 @@ public function getSchoolsWithZones($pro_id){
         return 0;
     }
   }
-
   public function approveRejectApproval($taskId,$action){
     if($action == 'Reject'){
         /** Recreate the cluster approval task for PIA */
 
     }
     $this->db->query("UPDATE clusterformationapprovaldata SET approval_status ='.$action.' , approved_by ='".$user_id."' WHERE tbe_id = ".$taskId." ");
+  }
+
+  public function getRMcontact($user_id){
+        $query = $this->db->query("SELECT phoneno as contact_no FROM user_details ud 
+                                    JOIN user_details ud1 ON ud.admin_id = ud1.id 
+                                    WHERE ud.id = '".$user_id."' ");
+        $result =  $query->row_array();
+        return result['contact_no'];
   }
 
 }

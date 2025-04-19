@@ -26,7 +26,7 @@
 </style>
 
 <div class="container my-4">
-  <form method="POST" action="<?= base_url();?>Menu/submitClusterRoundData" enctype="multipart/form-data" name="NSPClusterRound" >
+  <form method="POST" action="<?= base_url();?>Menu/submitFinalRoundData" enctype="multipart/form-data" name="NSPClusterRound" >
       <input type="hidden" name="taskId" value="<?php echo $taskId;?>" />
     <div class="card shadow border-0">
       <div class="card-body">
@@ -142,7 +142,7 @@
         <!-- Call with Reporting Manager -->
         <div class="mt-4 d-flex align-items-center">
           <label class="form-label me-3 mb-0 fw-semibold">Call with Reporting Manager:</label>
-          <a href="tel:<?= $rm_phone ?>" class="btn btn-outline-success">
+          <a href="tel:<?= getRMcontact($user_id); ?>" class="btn btn-outline-success" name='call_with_rm'>
             <i class="bi bi-telephone-fill"></i> <?= $rm_phone ?>
           </a>
         </div>
@@ -155,6 +155,7 @@
 
         <!-- Submit Button -->
         <div class="mt-4 d-flex justify-content-center">
+        <input type="hidden" name="task_completed" value="<?php echo date('Y-m-d h:i:s');?>">
         <button type="submit" class="btn btn-primary w-25">Complete My Task</button>
         </div>
       </div>

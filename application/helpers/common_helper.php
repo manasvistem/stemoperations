@@ -99,4 +99,13 @@ if(!function_exists('getSchoolListByTaskID')){
         return $DataSet;
     }
 }
+
+if(!function_exists('getRMcontact')){
+    function getRMcontact($user_id){
+        $CI = &get_instance();
+        $CI->load->model('Menu_model');
+        $DataSet = $CI->Menu_model->getRMcontact($user_id);
+        return $DataSet;
+    }
+}
 ?>
