@@ -7371,9 +7371,35 @@ public function getSchoolsWithZones($pro_id){
         $result =  $query->row_array();
         return result['contact_no'];
   }
+
   public function getProjectDetails(){
-        $query = $this->db->query("SELECT DISTINCT(projectcode),client_name,noofschool,bd_id,status,created_at FROM client_handover");
+        $query = $this->db->query("SELECT * FROM client_handover WHERE client_name !='' ORDER BY client_name ASC");
         return $query->result_array();
   }
+
+  public function getSchooldetails($projectcodeid){
+    $query =    $this->db->query(" SELECT SPD.*,count(tblcallevents.id) as total_tasks FROM spd 
+                    LEFT JOIN tblcallevents ON tblcallevents.sid=spd.id
+                    LEFt JOIN client_handover ch ON ch.projectcode = spd.project_code
+                    WHERE ch.projectcode_id ='".$projectcodeid."' GROUP BY spd.id ");
+                    //echo $this->db->last_query();exit;
+    return $query->result_array();
+  }
+
+  public function getSchoolWiseTasksDetails($sid){
+    $query  = $this->db->query("SELECT tblcallevents.*,ta.taskname,ta.tasktype 
+                        FROM tblcallevents LEFT JOIN task_action ta ON ta.id = tblcallevents.task_action
+                WHERE tblcallevents.sid = '".$sid."' ");
+    return $query->result_array();
+  }
+
+  public function getTaskDetailedReport($taskId){
+    $query = $this->db->query(" SELECT tbe.* FROM tblcallevents tbe LEFT JOIN tblcallevents_attachments t_a ON t_a.task_id =tbe.id 
+                             WHERE tbe.id='".$taskId."' ");
+                             echo $this->db->last_query();exit;
+    return $query->result_array();
+
+  }
+
 
 }

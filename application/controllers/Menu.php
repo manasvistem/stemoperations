@@ -18888,27 +18888,39 @@ public function submitClusterApproval()
 public function projectReport(){
     $user                = $_SESSION['user'];
     $taskperformedby     = $user['dep_id'];
-    $dt                  = $this->Menu_model->get_depatment_byid($$taskperformedby);
+    $dt                  = $this->Menu_model->get_depatment_byid($taskperformedby);
     $dep_name            = $dt[0]->dep_name;
     $data['projectData'] = $this->Menu_model->getProjectDetails();
+   // dd($data['projectData']);
     $this->display($dep_name,'projectReportView',$data,$type='');
 }
 
-public function schoolList($projectCode){
-    $user                = $_SESSION['user'];
+public function schoolList($projectCodeId){
     $user                = $_SESSION['user'];
     $taskperformedby     = $user['dep_id'];
-    $dt                  = $this->Menu_model->get_depatment_byid($$taskperformedby);
+    $dt                  = $this->Menu_model->get_depatment_byid($taskperformedby);
     $dep_name            = $dt[0]->dep_name;
-    $data['projectData'] = $this->Menu_model->getSchooldetails($projectcode);
+    $data['schoolData']  = $this->Menu_model->getSchooldetails($projectCodeId);
     $this->display($dep_name,'schoollistView',$data,$type='');
 }
 public function schoolWiseTaskList($spdId){
-    $user                = $_SESSION['user'];
-    $user                = $_SESSION['user'];
-    $taskperformedby     = $user['dep_id'];
-    $dt                  = $this->Menu_model->get_depatment_byid($$taskperformedby);
-    $dep_name            = $dt[0]->dep_name;
+    $user                   = $_SESSION['user'];
+    $taskperformedby        = $user['dep_id'];
+    $dt                     = $this->Menu_model->get_depatment_byid($taskperformedby);
+    $dep_name               = $dt[0]->dep_name;
+    $data['SchoolTaskList'] = $this->Menu_model->getSchoolWiseTasksDetails($spdId);
+   // dd($data['SchoolTaskList']);
+    $this->display($dep_name,'taskListView',$data,$type='');
+}
+
+public function taskDetails(){
+    $user                   = $_SESSION['user'];
+    $taskperformedby        = $user['dep_id'];
+    $dt                     = $this->Menu_model->get_depatment_byid($taskperformedby);
+    $dep_name               = $dt[0]->dep_name;
+    $data['TaskDetails']    = $this->Menu_model->getTaskDetailedReport($spdId);
+   //  dd($data['TaskDetails']);
+    $this->display($dep_name,'tasklistView',$data,$type='');
 }
 
 }
