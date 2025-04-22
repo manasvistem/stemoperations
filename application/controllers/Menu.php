@@ -15418,7 +15418,6 @@ public function updateVisitDuringME(){
             }
             $file_array_keys1[$k]['main_task_id'] = $main_task_id;
         }
-      //  dd($file_array_keys1);exit;
 
         if(isset($_FILES)){
             foreach($_FILES as $filekey=>$fileval){
@@ -18909,18 +18908,28 @@ public function schoolWiseTaskList($spdId){
     $dt                     = $this->Menu_model->get_depatment_byid($taskperformedby);
     $dep_name               = $dt[0]->dep_name;
     $data['SchoolTaskList'] = $this->Menu_model->getSchoolWiseTasksDetails($spdId);
-   // dd($data['SchoolTaskList']);
+   // dd($data);
     $this->display($dep_name,'taskListView',$data,$type='');
 }
 
-public function taskDetails(){
+public function taskDetails($taskId){
     $user                   = $_SESSION['user'];
     $taskperformedby        = $user['dep_id'];
     $dt                     = $this->Menu_model->get_depatment_byid($taskperformedby);
     $dep_name               = $dt[0]->dep_name;
-    $data['TaskDetails']    = $this->Menu_model->getTaskDetailedReport($spdId);
-   //  dd($data['TaskDetails']);
-    $this->display($dep_name,'tasklistView',$data,$type='');
+    $data['taskId']         = $taskId;
+    $data['TaskDetails']    = $this->Menu_model->getTaskDetailedReport($taskId,$type='tasklist');
+    $this->display($dep_name,'taskListView',$data,$type='');
+}
+
+public function taskExecutionImages($taskId)
+{
+    $user                     = $_SESSION['user'];
+    $taskperformedby          = $user['dep_id'];
+    $dt                       = $this->Menu_model->get_depatment_byid($taskperformedby);
+    $dep_name                 = $dt[0]->dep_name;
+    $data['TaskDetailMaster'] = $this->Menu_model->getTaskDetailedReport($taskId,$type='allImages');
+    $this->display($dep_name,'taskExecutionImagesView',$data,$type='');
 }
 
 }

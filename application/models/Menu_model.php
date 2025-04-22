@@ -7389,17 +7389,33 @@ public function getSchoolsWithZones($pro_id){
   public function getSchoolWiseTasksDetails($sid){
     $query  = $this->db->query("SELECT tblcallevents.*,ta.taskname,ta.tasktype 
                         FROM tblcallevents LEFT JOIN task_action ta ON ta.id = tblcallevents.task_action
-                WHERE tblcallevents.sid = '".$sid."' ");
+                        WHERE tblcallevents.sid = '".$sid."' ");
     return $query->result_array();
   }
 
-  public function getTaskDetailedReport($taskId){
-    $query = $this->db->query(" SELECT tbe.* FROM tblcallevents tbe LEFT JOIN tblcallevents_attachments t_a ON t_a.task_id =tbe.id 
-                             WHERE tbe.id='".$taskId."' ");
-                             echo $this->db->last_query();exit;
-    return $query->result_array();
-
+  public function getTaskDetailedReport($taskId,$type){
+    if($type == 'tasklist'){
+        $query = $this->db->query("SELECT t_a.*,tbe.project_code,task_action.tasktype,task_action.taskname,main_task.taskaction FROM tblcallevents tbe 
+        LEFT JOIN tblcallevents_attachments t_a ON t_a.task_id =tbe.id 
+        LEFT JOIN main_task ON main_task.id = t_a.main_task_id
+        LEFT JOIN task_action ON task_action.id = main_task.tasktype
+        WHERE tbe.id='".$taskId."' ");
+        $result = $query->result_array();
+        return $result;
+    }
+    else if($type= 'allImages'){
+        $query = $this->db->query("SELECT t_a.*,tbe.project_code,task_action.tasktype,task_action.taskname,main_task.taskaction FROM tblcallevents tbe 
+        LEFT JOIN tblcallevents_attachments t_a ON t_a.task_id =tbe.id 
+        LEFT JOIN main_task ON main_task.id = t_a.main_task_id
+        LEFT JOIN task_action ON task_action.id = main_task.tasktype
+        WHERE tbe.id='".$taskId."' ");
+        $result = $query->result_array();
+            foreach($result as $key=>$val){
+            if($val['taskaction'] != ''){
+                $newarray[$val['project_code']][$val['taskaction']][] = $val;
+            }
+        }
+        return $newarray;
+    }
   }
-
-
 }

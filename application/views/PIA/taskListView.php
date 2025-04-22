@@ -1,11 +1,8 @@
 <!-- Include Bootstrap & DataTables CSS -->
 <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
 <div class="container mt-4">
-
     <!-- Button to Show Tasks -->
- 
     <!-- Task Table (Initially Hidden) -->
     <div id="taskListContainer" >
         <h4 class="mb-3">Task List</h4>
@@ -24,12 +21,11 @@
                 </tr>
             </thead>
             <tbody>
-                <?php $i=1;
-              // dd($SchoolTaskList);
+                <?php $i=1;  //dd($SchoolTaskList);
                 foreach ($SchoolTaskList as $task): ?>
                     <tr>
                         <td><?php echo $i; ?></td>
-                        <td><a href="<?= base_url('Menu/taskDetails/' . $task['id']) ?>" class="text-primary">
+                        <td><a href="<?= base_url('Menu/taskExecutionImages/' . $task['id']) ?>" class="text-primary">
                                 <?= htmlspecialchars($task['taskname']) ?> </a></td>
                         <td><?php echo htmlspecialchars($task['tasktype']); ?></td>
                         <td><?= $task['user_id'] ?></td>
@@ -38,7 +34,6 @@
                         <td><?= htmlspecialchars($task['task_assigned_date']) ?></td>
                         <td><?= htmlspecialchars($task['target_date']) ?></td>
                         <td><?= $task['appointment_datetime'];?></td>
-
                     </tr>
                 <?php $i++; endforeach; ?>
             </tbody>

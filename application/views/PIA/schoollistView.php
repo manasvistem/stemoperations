@@ -1,6 +1,5 @@
 <!-- Include DataTables CSS -->
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-
 <div class="container mt-4">
     <?php if (!empty($schoolData)): ?>
         <?php
@@ -26,7 +25,7 @@
             </tr>
         </thead>
         <tbody>
-            <?php   //dd($schoolData);
+            <?php   
             foreach ($schoolData as $school): ?>
                 <tr>
                 <td><?= htmlspecialchars($school['id']) ?></td>
@@ -45,12 +44,10 @@
         <p class="text-danger">No school data available.</p>
     <?php endif; ?>
 </div>
-
 <!-- Include jQuery -->
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <!-- Include DataTables JS -->
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-
 <!-- Initialize DataTables -->
 <script>
 $(document).ready(function() {
