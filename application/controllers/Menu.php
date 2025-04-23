@@ -7123,7 +7123,7 @@ class Menu extends CI_Controller {
             $dep_name                       = $depnameData[0]->dep_name;
             $data['getFactoryModelList']    = $this->Menu_model->getFactoryModelList();
         //  echo $taskId;exit;
-        // echo $viewname;exit;
+       //  echo $viewname;exit;
            $this->display($dep_name,$viewname,$data,$type='modal');
     }
 

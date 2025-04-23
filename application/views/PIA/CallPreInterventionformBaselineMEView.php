@@ -1,7 +1,6 @@
 <div class="container mt-4 mb-5 p-4 border rounded">
   <form action="updateCallMnEBaseline" method="POST" id="meForm">
   <input type="hidden" name="taskId" value="<?php echo $taskId; ?>"/>
-
     <!-- Action Completed -->
     <div class="mb-3">
       <label class="form-label fw-bold">Action Completed?</label><br>
@@ -81,7 +80,6 @@
         <textarea class="form-control" name="final_remark" rows="3"></textarea>
       </div>
     </div>
-
     <!-- Submit Button -->
     <button type="submit" class="btn btn-primary w-100">Submit</button>
   </form>
