@@ -15240,7 +15240,6 @@ public function updateFTTPReviewCallZM(){
     $user               = $_SESSION['user'];
     $taskperformedby    = $user['dep_id'];
     unset($posted_data['taskId']);
-
     $commonColumns      = [
         'performed_by' => $_SESSION['user']['id'],
         'updated_at'   => date("Y-m-d H:i:s"),
@@ -18931,6 +18930,3937 @@ public function taskExecutionImages($taskId)
     $data['TaskDetailMaster'] = $this->Menu_model->getTaskDetailedReport($taskId,$type='allImages');
     $this->display($dep_name,'taskExecutionImagesView',$data,$type='');
 }
+
+// PM VISIT BY DEEPAK
+
+public function PMSchoolVisitSubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                 = $this->input->post('taskId');
+    $main_task_id           = $this->input->post('main_task_id');
+    $stage_message          = $this->input->post('stage_message');
+
+    $currentStagesDatas         = $this->Menu_model->CheckTaskCurrentStagesByID($main_task_id);
+    $currentStagesData          = $currentStagesDatas[0];
+    $currentStages_taskname     = $currentStagesData->taskname;
+    $currentStages_taskdetails  = $currentStagesData->taskdetails;
+    $currentStages_stage        = $currentStagesData->taskaction;
+
+    $uploadPath = "uploads/PM_SCHOOL_VISIT/".date("Y").'/'.date('m');
+
+    if($stage_message == 'No'){
+
+        if($main_task_id == 5 || $main_task_id == 6 || $main_task_id == 7 || $main_task_id == 8 || $main_task_id == 9 || $main_task_id == 10 || $main_task_id == 11){
+
+            $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+
+            $data_attachment = array(
+                'task_id'           => $taskId,
+                'main_task_id'      => $main_task_id,
+                'attachment_link'   => $file_path,
+                'user_id'           => $uid,
+                'status'            => 1
+            );
+    
+            $this->db->insert('tblcallevents_attachments', $data_attachment);
+            $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+    
+            $data_task_execution = array(
+                'main_task_id'      => $main_task_id,
+                'task_response'     => "Success",
+                'tbe_attachment_id' => $attachment_id,
+                'tbe_id'            => $taskId,
+                'performed_by'      => $uid,
+                'status'            => 1
+            );
+    
+            $this->db->insert('task_execution_details', $data_task_execution);
+            $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        }else if($main_task_id == 12){
+            
+            $file_paths_Data = $this->Menu_model->upload_multiple_files_common('start_jaurney',$uploadPath);
+            foreach($file_paths_Data as $file_path_data){
+                $file_path =  $file_path_data['file_path'];
+
+                $data_attachment = array(
+                    'task_id'           => $taskId,
+                    'main_task_id'      => $main_task_id,
+                    'attachment_link'   => $file_path,
+                    'user_id'           => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('tblcallevents_attachments', $data_attachment);
+                $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+        
+                $data_task_execution = array(
+                    'main_task_id'      => $main_task_id,
+                    'tbe_attachment_id' => $attachment_id,
+                    'tbe_id'            => $taskId,
+                    'performed_by'      => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('task_execution_details', $data_task_execution);
+                $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+                
+             }
+        }
+        
+        if($main_task_id == 5){
+            $data = array(
+                'initiate_datetime' => date("Y-m-d H:i:s")
+            );
+            $this->db->where('id', $taskId);
+            $this->db->update('tblcallevents', $data);
+        }
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+        
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - complete  Successfully !!");
+
+    }else if($stage_message == 'Yes'){
+     
+        $final_remark          = $this->input->post('final_remark');
+
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+        
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'task_response'     => $final_remark,
+            'tbe_attachment_id' => 0,
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "$final_remark",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+        $check_task_action_id           = 2; // PM Visit Feedback;
+        $checkAutoTaskExistsOrNot       = $this->Menu_model->CheckAffterThisAutoTaskISExistsOrNot($taskId,$check_task_action_id);
+        $checkAutoTaskExistsOrNotcnt    = sizeof($checkAutoTaskExistsOrNot);
+
+        if($checkAutoTaskExistsOrNotcnt == 0){
+
+            $data = array(
+                'project_code'      => "$project_code",
+                'task_action'       => $check_task_action_id,
+                'sid'               => "$sid",
+                'rsid'              => "0",
+                'user_id'           => $uid,
+                'autotask'          => 1,
+                'plan'              => 1,
+                'status_id'         => "$status_id",
+                'approved_status'   => 1,
+                'approved_by'       => $uid,
+                'approved_datetime' => date("Y-m-d H:i:s"),
+                'appointment_datetime' => date("Y-m-d H:i:s"),
+                'fwd_date'          => date("Y-m-d H:i:s"),
+                'task_assigned_date'=> date("Y-m-d"),
+                'comments'          => "This is Auto Task",
+                'aftertask'         => $taskId,
+            );
+            
+            $insert_id = $this->Menu_model->insertCallEvent($data);
+
+        }
+
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
+
+    }
+
+    redirect('Menu/Dashboard');
+ 
+}
+public function ZMSchoolVisitSubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                 = $this->input->post('taskId');
+    $main_task_id           = $this->input->post('main_task_id');
+    $stage_message          = $this->input->post('stage_message');
+
+    $currentStagesDatas         = $this->Menu_model->CheckTaskCurrentStagesByID($main_task_id);
+    $currentStagesData          = $currentStagesDatas[0];
+    $currentStages_taskname     = $currentStagesData->taskname;
+    $currentStages_taskdetails  = $currentStagesData->taskdetails;
+    $currentStages_stage        = $currentStagesData->taskaction;
+
+    $uploadPath = "uploads/PM_SCHOOL_VISIT/".date("Y").'/'.date('m');
+
+    if($stage_message == 'No'){
+
+        if($main_task_id == 26 || $main_task_id == 27 || $main_task_id == 28 || $main_task_id == 29 || $main_task_id == 30 || $main_task_id == 31 || $main_task_id == 32){
+
+            $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+
+            $data_attachment = array(
+                'task_id'           => $taskId,
+                'main_task_id'      => $main_task_id,
+                'attachment_link'   => $file_path,
+                'user_id'           => $uid,
+                'status'            => 1
+            );
+    
+            $this->db->insert('tblcallevents_attachments', $data_attachment);
+            $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+    
+            $data_task_execution = array(
+                'main_task_id'      => $main_task_id,
+                'task_response'     => "Success",
+                'tbe_attachment_id' => $attachment_id,
+                'tbe_id'            => $taskId,
+                'performed_by'      => $uid,
+                'status'            => 1
+            );
+    
+            $this->db->insert('task_execution_details', $data_task_execution);
+            $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        }else if($main_task_id == 33){
+            
+            $file_paths_Data = $this->Menu_model->upload_multiple_files_common('start_jaurney',$uploadPath);
+            foreach($file_paths_Data as $file_path_data){
+                $file_path =  $file_path_data['file_path'];
+
+                $data_attachment = array(
+                    'task_id'           => $taskId,
+                    'main_task_id'      => $main_task_id,
+                    'attachment_link'   => $file_path,
+                    'user_id'           => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('tblcallevents_attachments', $data_attachment);
+                $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+        
+                $data_task_execution = array(
+                    'main_task_id'      => $main_task_id,
+                    'tbe_attachment_id' => $attachment_id,
+                    'tbe_id'            => $taskId,
+                    'performed_by'      => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('task_execution_details', $data_task_execution);
+                $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+                
+             }
+        }
+        
+        if($main_task_id == 26){
+            $data = array(
+                'initiate_datetime' => date("Y-m-d H:i:s")
+            );
+            $this->db->where('id', $taskId);
+            $this->db->update('tblcallevents', $data);
+        }
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+        
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - complete  Successfully !!");
+
+    }else if($stage_message == 'Yes'){
+     
+        $final_remark          = $this->input->post('final_remark');
+
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+        
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'task_response'     => $final_remark,
+            'tbe_attachment_id' => 0,
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "$final_remark",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+        $check_task_action_id           = 4; // PM Visit Feedback;
+        $checkAutoTaskExistsOrNot       = $this->Menu_model->CheckAffterThisAutoTaskISExistsOrNot($taskId,$check_task_action_id);
+        $checkAutoTaskExistsOrNotcnt    = sizeof($checkAutoTaskExistsOrNot);
+
+        if($checkAutoTaskExistsOrNotcnt == 0){
+
+            $data = array(
+                'project_code'      => "$project_code",
+                'task_action'       => $check_task_action_id,
+                'sid'               => "$sid",
+                'rsid'              => "0",
+                'user_id'           => $uid,
+                'autotask'          => 1,
+                'plan'              => 1,
+                'status_id'         => "$status_id",
+                'approved_status'   => 1,
+                'approved_by'       => $uid,
+                'approved_datetime' => date("Y-m-d H:i:s"),
+                'appointment_datetime' => date("Y-m-d H:i:s"),
+                'fwd_date'          => date("Y-m-d H:i:s"),
+                'task_assigned_date'=> date("Y-m-d"),
+                'comments'          => "This is Auto Task",
+                'aftertask'         => $taskId,
+            );
+            
+            $insert_id = $this->Menu_model->insertCallEvent($data);
+
+        }
+
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
+
+    }
+
+    redirect('Menu/Dashboard');
+ 
+}
+
+
+public function PMVisitFeedbackSubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                     = $this->input->post('taskId');
+    $main_task_ids              = $this->input->post('main_task_id');
+    $main_task_remarks          = $this->input->post('main_task_remarks');
+
+    $i = 0;
+    foreach($main_task_ids as $main_task_id){
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'tbe_attachment_id' => 0,
+            'task_response'     => $main_task_remarks[$i],
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $i++;
+    }
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $taskname,
+            'message'    => "$sname -$taskname - Task Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+        $this->session->set_flashdata('success_message',"$sname -$taskname - Task Complete  Successfully !!");
+        redirect('Menu/Dashboard');
+}
+
+
+public function ZMVisitFeedbackSubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                     = $this->input->post('taskId');
+    $main_task_ids              = $this->input->post('main_task_id');
+    $main_task_remarks          = $this->input->post('main_task_remarks');
+
+    $i = 0;
+    foreach($main_task_ids as $main_task_id){
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'tbe_attachment_id' => 0,
+            'task_response'     => $main_task_remarks[$i],
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $i++;
+    }
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $taskname,
+            'message'    => "$sname -$taskname - Task Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+        $this->session->set_flashdata('success_message',"$sname -$taskname - Task Complete  Successfully !!");
+        redirect('Menu/Dashboard');
+}
+
+// Start Pre- RTTP Call
+public function PreRTTPCallSubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                     = $this->input->post('taskId');
+    $main_task_ids              = $this->input->post('main_task_id');
+    $main_task_remarks          = $this->input->post('main_task_remarks');
+
+    $tbl_taskId                 =  $taskId;
+
+    // Initialize the new array
+    $mappedArray = array();
+
+    // Loop through the main_task_id array
+    foreach ($_POST['main_task_id'] as $taskId) {
+        // Construct the key for the task value
+        $taskKey = 'task-' . $taskId;
+
+        // Add the task ID and its corresponding value to the new array
+        $mappedArray[$taskId] = $_POST[$taskKey];
+    }
+
+    $actiontaken        = $mappedArray[268];
+    $purpose_achoved    = $mappedArray[269];
+
+if($actiontaken == 'yes' && $purpose_achoved == 'yes'){
+    $i = 0;
+    foreach($mappedArray as $main_task_id=>$response){
+
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'tbe_attachment_id' => 0,
+            'task_response'     => $response,
+            'tbe_id'            => $tbl_taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $i++;
+    }
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $tbl_taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($tbl_taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $taskname,
+            'message'    => "$sname - $taskname - Task Completed Successfully!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+        $this->session->set_flashdata('success_message',"$sname -$taskname - Task Complete  Successfully !!");
+
+    }else{
+
+        foreach($mappedArray as $main_task_id=>$response){
+            if($response !== ''){
+                $data_task_execution = array(
+                    'main_task_id'      => $main_task_id,
+                    'tbe_attachment_id' => 0,
+                    'task_response'     => $response,
+                    'tbe_id'            => $tbl_taskId,
+                    'performed_by'      => $uid,
+                    'status'            => 1
+                );
+
+                $this->db->insert('task_execution_details', $data_task_execution);
+                $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+            }
+        }
+
+        if($actiontaken == 'yes'){
+            $message_remarks = '';
+        }else{
+            $message_remarks = 'Task Updated with No action taken';
+        }
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => $actiontaken,
+            'purpose_achieved'  => $purpose_achoved,
+            'remarks'           => "$message_remarks",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $tbl_taskId);
+        $this->db->update('tblcallevents', $data);
+
+        // if($actiontaken == 'yes' && $purpose_achoved == 'yes'){
+        
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($tbl_taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $task_action_id = $taskDetails[0]->task_action;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $cid_id         = $taskDetails[0]->cid_id;
+        $sales_cid      = $taskDetails[0]->sales_cid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+        $appointment_datetime      = $taskDetails[0]->appointment_datetime;
+
+        $data = array(
+            'project_code'      => "$project_code",
+            'task_action'       => $task_action_id,
+            'sid'               => "$sid",
+            'rsid'              => "$rsid",
+            'user_id'           => $uid,
+            'autotask'          => 1,
+            'plan'              => 1,
+            'status_id'         => "$status_id",
+            'approved_status'   => 1,
+            'approved_by'       => $uid,
+            'approved_datetime' => date("Y-m-d H:i:s"),
+            'appointment_datetime' => date("Y-m-d H:i:s"),
+            'fwd_date'          => date("Y-m-d H:i:s"),
+            'task_assigned_date'=> date("Y-m-d"),
+            'comments'          => "Task Creaate After No action taken - $actiontaken and purpose achoved - $purpose_achoved",
+            'aftertask'         => $tbl_taskId,
+        );
+        
+        $insert_id = $this->Menu_model->insertCallEvent($data);
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $taskname,
+            'message'    => "$sname - $taskname - Task Completed Successfully! But one more task was created because user action taken - $actiontaken and purpose achieved - $purpose_achoved."
+        ];
+        $this->db->insert('user_log', $log_data);
+
+        $this->session->set_flashdata('success_message',"$sname - $taskname - Task Completed Successfully! But one more task was created because user action taken - $actiontaken and purpose achieved - $purpose_achoved.");
+
+    }
+
+        redirect('Menu/Dashboard');
+}
+
+// Closed Pre- RTTP Call
+
+// Start Post Intervention RTTP
+public function PostInterventionRTTPSubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                     = $this->input->post('taskId');
+    $main_task_ids              = $this->input->post('main_task_id');
+    $main_task_remarks          = $this->input->post('main_task_remarks');
+
+    $teacherName                = $this->input->post('teacherName');
+    $mobileNo                   = $this->input->post('mobileNo');
+    $emailId                    = $this->input->post('emailId');
+
+    $tbl_taskId                 =  $taskId;
+
+    // Initialize the new array
+    $mappedArray = array();
+
+    // Loop through the main_task_id array
+    foreach ($_POST['main_task_id'] as $taskId) {
+        // Construct the key for the task value
+        $taskKey = 'task-' . $taskId;
+
+        // Add the task ID and its corresponding value to the new array
+        $mappedArray[$taskId] = $_POST[$taskKey];
+    }
+
+    $actiontaken        = $mappedArray[301];
+    $purpose_achoved    = $mappedArray[302];
+
+
+if($actiontaken == 'yes' && $purpose_achoved == 'yes'){
+    $i = 0;
+    foreach($mappedArray as $main_task_id=>$response){
+
+        if($main_task_id == 316){
+            $response = $teacherName." - ".$mobileNo." - ".$emailId;
+        }
+
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'tbe_attachment_id' => 0,
+            'task_response'     => $response,
+            'tbe_id'            => $tbl_taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $i++;
+    }
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $tbl_taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($tbl_taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $taskname,
+            'message'    => "$sname - $taskname - Task Completed Successfully!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+
+
+        $check_task_action_id           = 37; // RTTP report;
+        $checkAutoTaskExistsOrNot       = $this->Menu_model->CheckAffterThisAutoTaskISExistsOrNot($taskId,$check_task_action_id);
+        $checkAutoTaskExistsOrNotcnt    = sizeof($checkAutoTaskExistsOrNot);
+
+        if($checkAutoTaskExistsOrNotcnt == 0){
+
+            $data = array(
+                'project_code'      => "$project_code",
+                'task_action'       => $check_task_action_id,
+                'sid'               => "$sid",
+                'rsid'              => "0",
+                'user_id'           => $uid,
+                'autotask'          => 1,
+                'plan'              => 1,
+                'status_id'         => "$status_id",
+                'approved_status'   => 1,
+                'approved_by'       => $uid,
+                'approved_datetime' => date("Y-m-d H:i:s"),
+                'appointment_datetime' => date("Y-m-d H:i:s"),
+                'fwd_date'          => date("Y-m-d H:i:s"),
+                'task_assigned_date'=> date("Y-m-d"),
+                'comments'          => "This is Auto Task",
+                'aftertask'         => $taskId,
+            );
+            
+            $insert_id = $this->Menu_model->insertCallEvent($data);
+
+        $this->session->set_flashdata('success_message',"$sname -$taskname - Task Complete  Successfully !!");
+
+    }else{
+
+        foreach($mappedArray as $main_task_id=>$response){
+            if($response !== ''){
+                $data_task_execution = array(
+                    'main_task_id'      => $main_task_id,
+                    'tbe_attachment_id' => 0,
+                    'task_response'     => $response,
+                    'tbe_id'            => $tbl_taskId,
+                    'performed_by'      => $uid,
+                    'status'            => 1
+                );
+
+                $this->db->insert('task_execution_details', $data_task_execution);
+                $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+            }
+        }
+
+        if($actiontaken == 'yes'){
+            $message_remarks = '';
+        }else{
+            $message_remarks = 'Task Updated with No action taken';
+        }
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => "$actiontaken",
+            'purpose_achieved'  => "$purpose_achoved",
+            'remarks'           => "$message_remarks",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $tbl_taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($tbl_taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $task_action_id = $taskDetails[0]->task_action;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $cid_id         = $taskDetails[0]->cid_id;
+        $sales_cid      = $taskDetails[0]->sales_cid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+        $appointment_datetime      = $taskDetails[0]->appointment_datetime;
+
+        $data = array(
+            'project_code'      => "$project_code",
+            'task_action'       => $task_action_id,
+            'sid'               => "$sid",
+            'rsid'              => "$rsid",
+            'user_id'           => $uid,
+            'autotask'          => 1,
+            'plan'              => 1,
+            'status_id'         => "$status_id",
+            'approved_status'   => 1,
+            'approved_by'       => $uid,
+            'approved_datetime' => date("Y-m-d H:i:s"),
+            'appointment_datetime' => date("Y-m-d H:i:s"),
+            'fwd_date'          => date("Y-m-d H:i:s"),
+            'task_assigned_date'=> date("Y-m-d"),
+            'comments'          => "Task Creaate After No action taken - $actiontaken and purpose achoved - $purpose_achoved",
+            'aftertask'         => $tbl_taskId,
+        );
+        
+        $insert_id = $this->Menu_model->insertCallEvent($data);
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $taskname,
+            'message'    => "$sname - $taskname - Task Completed Successfully! But one more task was created because user action taken - $actiontaken and purpose achieved - $purpose_achoved."
+        ];
+        $this->db->insert('user_log', $log_data);
+
+        $this->session->set_flashdata('success_message',"$sname - $taskname - Task Completed Successfully! But one more task was created because user action taken - $actiontaken and purpose achieved - $purpose_achoved.");
+
+    }
+
+        redirect('Menu/Dashboard');
+}
+
+// Closed Post Intervention RTTP
+
+}
+
+
+
+// START RTTP report
+public function RTTPreportViewSubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                 = $this->input->post('taskId');
+    $main_task_id           = $this->input->post('main_task_id');
+    $stage_message          = $this->input->post('stage_message');
+
+    $currentStagesDatas         = $this->Menu_model->CheckTaskCurrentStagesByID($main_task_id);
+    $currentStagesData          = $currentStagesDatas[0];
+    $currentStages_taskname     = $currentStagesData->taskname;
+    $currentStages_taskdetails  = $currentStagesData->taskdetails;
+    $currentStages_stage        = $currentStagesData->taskaction;
+
+
+    $uploadPath = "uploads/RTTPreport/".date("Y").'/'.date('m');
+
+    if($stage_message == 'No'){
+
+        if($main_task_id == 317 || $main_task_id == 319 || $main_task_id == 320){
+
+            $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+
+            $data_attachment = array(
+                'task_id'           => $taskId,
+                'main_task_id'      => $main_task_id,
+                'attachment_link'   => $file_path,
+                'user_id'           => $uid,
+                'status'            => 1
+            );
+    
+            $this->db->insert('tblcallevents_attachments', $data_attachment);
+            $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+    
+            $data_task_execution = array(
+                'main_task_id'      => $main_task_id,
+                'task_response'     => "Success",
+                'tbe_attachment_id' => $attachment_id,
+                'tbe_id'            => $taskId,
+                'performed_by'      => $uid,
+                'status'            => 1
+            );
+    
+            $this->db->insert('task_execution_details', $data_task_execution);
+            $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        }
+        
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+        
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - complete  Successfully !!");
+
+    }else if($stage_message == 'Yes'){
+     
+
+        $final_remark          = $this->input->post('final_remark');
+
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+        
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'task_response'     => $final_remark,
+            'tbe_attachment_id' => 0,
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "$final_remark",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
+
+    }
+
+    redirect('Menu/Dashboard');
+ 
+}
+
+// Closed RTTP report
+
+// START Online Activity
+public function OnlineActivitySubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                 = $this->input->post('taskId');
+    $main_task_id           = $this->input->post('main_task_id');
+    $stage_message          = $this->input->post('stage_message');
+
+
+    $currentStagesDatas         = $this->Menu_model->CheckTaskCurrentStagesByID($main_task_id);
+    $currentStagesData          = $currentStagesDatas[0];
+    $currentStages_taskname     = $currentStagesData->taskname;
+    $currentStages_taskdetails  = $currentStagesData->taskdetails;
+    $currentStages_stage        = $currentStagesData->taskaction;
+
+
+    $uploadPath = "uploads/OnlineActivity/".date("Y").'/'.date('m');
+
+    if($stage_message == 'No'){
+
+        if($main_task_id == 360){
+
+            $data_task_execution = array(
+                'main_task_id'      => $main_task_id,
+                'task_response'     => $this->input->post('meetings_links'),
+                'tbe_attachment_id' => 0,
+                'tbe_id'            => $taskId,
+                'performed_by'      => $uid,
+                'status'            => 1
+            );
+    
+            $this->db->insert('task_execution_details', $data_task_execution);
+            $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        }else{
+            if($main_task_id == 361 || $main_task_id == 362 || $main_task_id == 363 || $main_task_id == 364){
+
+                $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+                $data_attachment = array(
+                    'task_id'           => $taskId,
+                    'main_task_id'      => $main_task_id,
+                    'attachment_link'   => $file_path,
+                    'user_id'           => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('tblcallevents_attachments', $data_attachment);
+                $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+        
+                $data_task_execution = array(
+                    'main_task_id'      => $main_task_id,
+                    'task_response'      => "Success",
+                    'tbe_attachment_id' => $attachment_id,
+                    'tbe_id'            => $taskId,
+                    'performed_by'      => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('task_execution_details', $data_task_execution);
+                $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+    
+            }
+        }
+
+       
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+        
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - complete  Successfully !!");
+
+    }else if($stage_message == 'Yes'){
+     
+
+        $final_remark          = $this->input->post('final_remark');
+
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+        
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'task_response'     => $final_remark,
+            'tbe_attachment_id' => 0,
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "$final_remark",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
+
+    }
+
+    redirect('Menu/Dashboard');
+ 
+}
+
+// Closed Online Activity
+
+// START Online Activity report
+public function OnlineActivityreportSubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                 = $this->input->post('taskId');
+    $main_task_id           = $this->input->post('main_task_id');
+    $stage_message          = $this->input->post('stage_message');
+
+
+    $currentStagesDatas         = $this->Menu_model->CheckTaskCurrentStagesByID($main_task_id);
+    $currentStagesData          = $currentStagesDatas[0];
+    $currentStages_taskname     = $currentStagesData->taskname;
+    $currentStages_taskdetails  = $currentStagesData->taskdetails;
+    $currentStages_stage        = $currentStagesData->taskaction;
+
+
+    $uploadPath = "uploads/OnlineActivityReport/".date("Y").'/'.date('m');
+
+    if($stage_message == 'No'){
+
+      
+            if($main_task_id == 367 || $main_task_id == 368 || $main_task_id == 369 || $main_task_id == 364){
+
+                $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+                $data_attachment = array(
+                    'task_id'           => $taskId,
+                    'main_task_id'      => $main_task_id,
+                    'attachment_link'   => $file_path,
+                    'user_id'           => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('tblcallevents_attachments', $data_attachment);
+                $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+        
+                $data_task_execution = array(
+                    'main_task_id'      => $main_task_id,
+                    'task_response'      => "Success",
+                    'tbe_attachment_id' => $attachment_id,
+                    'tbe_id'            => $taskId,
+                    'performed_by'      => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('task_execution_details', $data_task_execution);
+                $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+    
+            }
+        
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - $currentStages_stage - Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+        
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - complete  Successfully !!");
+
+    }else if($stage_message == 'Yes'){
+     
+        $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+        $data_attachment = array(
+            'task_id'           => $taskId,
+            'main_task_id'      => $main_task_id,
+            'attachment_link'   => $file_path,
+            'user_id'           => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('tblcallevents_attachments', $data_attachment);
+        $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'task_response'      => "Success",
+            'tbe_attachment_id' => $attachment_id,
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "Online Activity Final Report Submited Successfull !",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
+
+    }
+
+    redirect('Menu/Dashboard');
+ 
+}
+
+// Closed Online Activity report
+
+
+// START Webinar
+public function WebinarActivitySubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                 = $this->input->post('taskId');
+    $main_task_id           = $this->input->post('main_task_id');
+    $stage_message          = $this->input->post('stage_message');
+
+
+    $currentStagesDatas         = $this->Menu_model->CheckTaskCurrentStagesByID($main_task_id);
+    $currentStagesData          = $currentStagesDatas[0];
+    $currentStages_taskname     = $currentStagesData->taskname;
+    $currentStages_taskdetails  = $currentStagesData->taskdetails;
+    $currentStages_stage        = $currentStagesData->taskaction;
+
+
+    $uploadPath = "uploads/Webinar/".date("Y").'/'.date('m');
+
+    if($stage_message == 'No'){
+
+        if($main_task_id == 345){
+
+            $data_task_execution = array(
+                'main_task_id'      => $main_task_id,
+                'task_response'     => $this->input->post('meetings_links'),
+                'tbe_attachment_id' => 0,
+                'tbe_id'            => $taskId,
+                'performed_by'      => $uid,
+                'status'            => 1
+            );
+    
+            $this->db->insert('task_execution_details', $data_task_execution);
+            $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        }else{
+            if($main_task_id == 346 || $main_task_id == 347 || $main_task_id == 348 || $main_task_id == 349){
+
+                $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+                $data_attachment = array(
+                    'task_id'           => $taskId,
+                    'main_task_id'      => $main_task_id,
+                    'attachment_link'   => $file_path,
+                    'user_id'           => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('tblcallevents_attachments', $data_attachment);
+                $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+        
+                $data_task_execution = array(
+                    'main_task_id'      => $main_task_id,
+                    'task_response'      => "Success",
+                    'tbe_attachment_id' => $attachment_id,
+                    'tbe_id'            => $taskId,
+                    'performed_by'      => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('task_execution_details', $data_task_execution);
+                $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+    
+            }
+        }
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+        
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - complete  Successfully !!");
+
+    }else if($stage_message == 'Yes'){
+     
+
+        $final_remark          = $this->input->post('final_remark');
+
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+        
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'task_response'     => $final_remark,
+            'tbe_attachment_id' => 0,
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "$final_remark",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
+
+    }
+
+    redirect('Menu/Dashboard');
+ 
+}
+
+// Closed Webinar
+
+
+// START Webinar Activity report
+public function WebinarActivityreportSubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                 = $this->input->post('taskId');
+    $main_task_id           = $this->input->post('main_task_id');
+    $stage_message          = $this->input->post('stage_message');
+
+
+    $currentStagesDatas         = $this->Menu_model->CheckTaskCurrentStagesByID($main_task_id);
+    $currentStagesData          = $currentStagesDatas[0];
+    $currentStages_taskname     = $currentStagesData->taskname;
+    $currentStages_taskdetails  = $currentStagesData->taskdetails;
+    $currentStages_stage        = $currentStagesData->taskaction;
+
+    $uploadPath = "uploads/WebinarReport/".date("Y").'/'.date('m');
+
+    if($stage_message == 'No'){
+
+      
+            if($main_task_id == 352 || $main_task_id == 353 || $main_task_id == 354){
+
+                $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+                $data_attachment = array(
+                    'task_id'           => $taskId,
+                    'main_task_id'      => $main_task_id,
+                    'attachment_link'   => $file_path,
+                    'user_id'           => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('tblcallevents_attachments', $data_attachment);
+                $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+        
+                $data_task_execution = array(
+                    'main_task_id'      => $main_task_id,
+                    'task_response'      => "Success",
+                    'tbe_attachment_id' => $attachment_id,
+                    'tbe_id'            => $taskId,
+                    'performed_by'      => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('task_execution_details', $data_task_execution);
+                $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+    
+            }
+        
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - $currentStages_stage - Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+        
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - complete  Successfully !!");
+
+    }else if($stage_message == 'Yes'){
+     
+        $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+        $data_attachment = array(
+            'task_id'           => $taskId,
+            'main_task_id'      => $main_task_id,
+            'attachment_link'   => $file_path,
+            'user_id'           => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('tblcallevents_attachments', $data_attachment);
+        $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'task_response'      => "Success",
+            'tbe_attachment_id' => $attachment_id,
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "Online Activity Final Report Submited Successfull !",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
+
+    }
+
+    redirect('Menu/Dashboard');
+ 
+}
+
+// Closed Webnar Activity report
+
+
+
+
+
+// START Winter Activity
+public function WinterActivitySubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                 = $this->input->post('taskId');
+    $main_task_id           = $this->input->post('main_task_id');
+    $stage_message          = $this->input->post('stage_message');
+
+
+    $currentStagesDatas         = $this->Menu_model->CheckTaskCurrentStagesByID($main_task_id);
+    $currentStagesData          = $currentStagesDatas[0];
+    $currentStages_taskname     = $currentStagesData->taskname;
+    $currentStages_taskdetails  = $currentStagesData->taskdetails;
+    $currentStages_stage        = $currentStagesData->taskaction;
+
+
+    $uploadPath = "uploads/OnlineActivity/".date("Y").'/'.date('m');
+
+    if($stage_message == 'No'){
+
+        if($main_task_id == 375){
+
+            $data_task_execution = array(
+                'main_task_id'      => $main_task_id,
+                'task_response'     => $this->input->post('meetings_links'),
+                'tbe_attachment_id' => 0,
+                'tbe_id'            => $taskId,
+                'performed_by'      => $uid,
+                'status'            => 1
+            );
+    
+            $this->db->insert('task_execution_details', $data_task_execution);
+            $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        }else{
+            if($main_task_id == 376 || $main_task_id == 377 || $main_task_id == 378 || $main_task_id == 379){
+
+                $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+                $data_attachment = array(
+                    'task_id'           => $taskId,
+                    'main_task_id'      => $main_task_id,
+                    'attachment_link'   => $file_path,
+                    'user_id'           => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('tblcallevents_attachments', $data_attachment);
+                $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+        
+                $data_task_execution = array(
+                    'main_task_id'      => $main_task_id,
+                    'task_response'      => "Success",
+                    'tbe_attachment_id' => $attachment_id,
+                    'tbe_id'            => $taskId,
+                    'performed_by'      => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('task_execution_details', $data_task_execution);
+                $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+    
+            }
+        }
+
+       
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+        
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - complete  Successfully !!");
+
+    }else if($stage_message == 'Yes'){
+     
+
+        $final_remark          = $this->input->post('final_remark');
+
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+        
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'task_response'     => $final_remark,
+            'tbe_attachment_id' => 0,
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "$final_remark",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
+
+    }
+
+    redirect('Menu/Dashboard');
+ 
+}
+
+// Closed Winter Activity
+
+
+// START Winter Activity report
+public function WinterActivityreportSubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                 = $this->input->post('taskId');
+    $main_task_id           = $this->input->post('main_task_id');
+    $stage_message          = $this->input->post('stage_message');
+
+
+    $currentStagesDatas         = $this->Menu_model->CheckTaskCurrentStagesByID($main_task_id);
+    $currentStagesData          = $currentStagesDatas[0];
+    $currentStages_taskname     = $currentStagesData->taskname;
+    $currentStages_taskdetails  = $currentStagesData->taskdetails;
+    $currentStages_stage        = $currentStagesData->taskaction;
+
+
+    $uploadPath = "uploads/WinterActivityReport/".date("Y").'/'.date('m');
+
+    if($stage_message == 'No'){
+
+      
+            if($main_task_id == 382 || $main_task_id == 383 || $main_task_id == 384){
+
+                $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+                $data_attachment = array(
+                    'task_id'           => $taskId,
+                    'main_task_id'      => $main_task_id,
+                    'attachment_link'   => $file_path,
+                    'user_id'           => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('tblcallevents_attachments', $data_attachment);
+                $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+        
+                $data_task_execution = array(
+                    'main_task_id'      => $main_task_id,
+                    'task_response'      => "Success",
+                    'tbe_attachment_id' => $attachment_id,
+                    'tbe_id'            => $taskId,
+                    'performed_by'      => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('task_execution_details', $data_task_execution);
+                $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+    
+            }
+        
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - $currentStages_stage - Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+        
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - complete  Successfully !!");
+
+    }else if($stage_message == 'Yes'){
+     
+        $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+        $data_attachment = array(
+            'task_id'           => $taskId,
+            'main_task_id'      => $main_task_id,
+            'attachment_link'   => $file_path,
+            'user_id'           => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('tblcallevents_attachments', $data_attachment);
+        $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'task_response'      => "Success",
+            'tbe_attachment_id' => $attachment_id,
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "Online Activity Final Report Submited Successfull !",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
+
+    }
+
+    redirect('Menu/Dashboard');
+ 
+}
+
+// Closed Winter Activity Report
+
+
+
+// START Case Study Report Submit
+public function CaseStudyReportSubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                 = $this->input->post('taskId');
+    $main_task_id           = $this->input->post('main_task_id');
+    $stage_message          = $this->input->post('stage_message');
+
+
+    $currentStagesDatas         = $this->Menu_model->CheckTaskCurrentStagesByID($main_task_id);
+    $currentStagesData          = $currentStagesDatas[0];
+    $currentStages_taskname     = $currentStagesData->taskname;
+    $currentStages_taskdetails  = $currentStagesData->taskdetails;
+    $currentStages_stage        = $currentStagesData->taskaction;
+
+    $uploadPath = "uploads/CaseStudyReport/".date("Y").'/'.date('m');
+
+   if($stage_message == 'Yes'){
+     
+        $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+        $data_attachment = array(
+            'task_id'           => $taskId,
+            'main_task_id'      => $main_task_id,
+            'attachment_link'   => $file_path,
+            'user_id'           => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('tblcallevents_attachments', $data_attachment);
+        $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'task_response'      => "Success",
+            'tbe_attachment_id' => $attachment_id,
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "Online Activity Final Report Submited Successfull !",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
+
+    }
+
+    redirect('Menu/Dashboard');
+ 
+}
+
+// Closed Case Study Report Submit
+
+
+
+
+
+// START Summer Activity
+public function SummerActivitySubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                 = $this->input->post('taskId');
+    $main_task_id           = $this->input->post('main_task_id');
+    $stage_message          = $this->input->post('stage_message');
+
+
+    $currentStagesDatas         = $this->Menu_model->CheckTaskCurrentStagesByID($main_task_id);
+    $currentStagesData          = $currentStagesDatas[0];
+    $currentStages_taskname     = $currentStagesData->taskname;
+    $currentStages_taskdetails  = $currentStagesData->taskdetails;
+    $currentStages_stage        = $currentStagesData->taskaction;
+
+
+    $uploadPath = "uploads/SummerActivity/".date("Y").'/'.date('m');
+
+    if($stage_message == 'No'){
+
+        if($main_task_id == 390){
+
+            $data_task_execution = array(
+                'main_task_id'      => $main_task_id,
+                'task_response'     => $this->input->post('meetings_links'),
+                'tbe_attachment_id' => 0,
+                'tbe_id'            => $taskId,
+                'performed_by'      => $uid,
+                'status'            => 1
+            );
+    
+            $this->db->insert('task_execution_details', $data_task_execution);
+            $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        }else{
+            if($main_task_id == 391 || $main_task_id == 392 || $main_task_id == 393 || $main_task_id == 394 || $main_task_id == 395){
+
+                $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+                $data_attachment = array(
+                    'task_id'           => $taskId,
+                    'main_task_id'      => $main_task_id,
+                    'attachment_link'   => $file_path,
+                    'user_id'           => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('tblcallevents_attachments', $data_attachment);
+                $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+        
+                $data_task_execution = array(
+                    'main_task_id'      => $main_task_id,
+                    'task_response'      => "Success",
+                    'tbe_attachment_id' => $attachment_id,
+                    'tbe_id'            => $taskId,
+                    'performed_by'      => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('task_execution_details', $data_task_execution);
+                $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+    
+            }
+        }
+
+       
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+        
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - complete  Successfully !!");
+
+    }else if($stage_message == 'Yes'){
+     
+
+        $final_remark          = $this->input->post('final_remark');
+
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+        
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'task_response'     => $final_remark,
+            'tbe_attachment_id' => 0,
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "$final_remark",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+
+
+        $check_task_action_id           = 52; // Summer Activity report
+        $checkAutoTaskExistsOrNot       = $this->Menu_model->CheckAffterThisAutoTaskISExistsOrNot($taskId,$check_task_action_id);
+        $checkAutoTaskExistsOrNotcnt    = sizeof($checkAutoTaskExistsOrNot);
+
+        if($checkAutoTaskExistsOrNotcnt == 0){
+
+            $data = array(
+                'project_code'      => "$project_code",
+                'task_action'       => $check_task_action_id,
+                'sid'               => "$sid",
+                'rsid'              => "0",
+                'user_id'           => $uid,
+                'autotask'          => 1,
+                'plan'              => 1,
+                'status_id'         => "$status_id",
+                'approved_status'   => 1,
+                'approved_by'       => $uid,
+                'approved_datetime' => date("Y-m-d H:i:s"),
+                'appointment_datetime' => date("Y-m-d H:i:s"),
+                'fwd_date'          => date("Y-m-d H:i:s"),
+                'task_assigned_date'=> date("Y-m-d"),
+                'comments'          => "This is Auto Task",
+                'aftertask'         => $taskId,
+            );
+            
+            $insert_id = $this->Menu_model->insertCallEvent($data);
+
+        }
+
+
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
+
+    }
+
+    redirect('Menu/Dashboard');
+ 
+}
+
+// Closed Summer Activity
+
+
+
+// START Summer Activity Report
+public function SummerActivityReportSubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                 = $this->input->post('taskId');
+    $main_task_id           = $this->input->post('main_task_id');
+    $stage_message          = $this->input->post('stage_message');
+
+
+    $currentStagesDatas         = $this->Menu_model->CheckTaskCurrentStagesByID($main_task_id);
+    $currentStagesData          = $currentStagesDatas[0];
+    $currentStages_taskname     = $currentStagesData->taskname;
+    $currentStages_taskdetails  = $currentStagesData->taskdetails;
+    $currentStages_stage        = $currentStagesData->taskaction;
+
+
+    $uploadPath = "uploads/SummerActivityReport/".date("Y").'/'.date('m');
+
+    if($stage_message == 'No'){
+
+      
+            if($main_task_id == 398 || $main_task_id == 399 || $main_task_id == 400){
+
+                $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+                $data_attachment = array(
+                    'task_id'           => $taskId,
+                    'main_task_id'      => $main_task_id,
+                    'attachment_link'   => $file_path,
+                    'user_id'           => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('tblcallevents_attachments', $data_attachment);
+                $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+        
+                $data_task_execution = array(
+                    'main_task_id'      => $main_task_id,
+                    'task_response'      => "Success",
+                    'tbe_attachment_id' => $attachment_id,
+                    'tbe_id'            => $taskId,
+                    'performed_by'      => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('task_execution_details', $data_task_execution);
+                $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+    
+            }
+        
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - $currentStages_stage - Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+        
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - complete  Successfully !!");
+
+    }else if($stage_message == 'Yes'){
+     
+        $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+        $data_attachment = array(
+            'task_id'           => $taskId,
+            'main_task_id'      => $main_task_id,
+            'attachment_link'   => $file_path,
+            'user_id'           => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('tblcallevents_attachments', $data_attachment);
+        $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'task_response'      => "Success",
+            'tbe_attachment_id' => $attachment_id,
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "Summer Activity Final Report Submited Successfull !",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
+
+    }
+
+    redirect('Menu/Dashboard');
+ 
+}
+
+// Closed Summer Activity Report
+
+
+// Start Call(Pre - Intervention Enquiry for DIY)
+public function CallPreInterventionEnquiryforDIYSubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                     = $this->input->post('taskId');
+    $main_task_ids              = $this->input->post('main_task_id');
+    $main_task_remarks          = $this->input->post('main_task_remarks');
+
+    $i = 0;
+    foreach($main_task_ids as $main_task_id){
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'tbe_attachment_id' => 0,
+            'task_response'     => $main_task_remarks[$i],
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $i++;
+    }
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $taskname,
+            'message'    => "$sname -$taskname - Task Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+        $this->session->set_flashdata('success_message',"$sname -$taskname - Task Complete  Successfully !!");
+        redirect('Menu/Dashboard');
+}
+// Closed Call(Pre - Intervention Enquiry for DIY)
+
+
+
+// START Visit(During - DIY Model Making Activity)
+public function VisitDuringDIYModelMakingActivitySubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                 = $this->input->post('taskId');
+    $main_task_id           = $this->input->post('main_task_id');
+    $stage_message          = $this->input->post('stage_message');
+
+    $currentStagesDatas         = $this->Menu_model->CheckTaskCurrentStagesByID($main_task_id);
+    $currentStagesData          = $currentStagesDatas[0];
+    $currentStages_taskname     = $currentStagesData->taskname;
+    $currentStages_taskdetails  = $currentStagesData->taskdetails;
+    $currentStages_stage        = $currentStagesData->taskaction;
+
+    $uploadPath = "uploads/VisitDuringDIYModelMakingActivity/".date("Y").'/'.date('m');
+
+    if($stage_message == 'No'){
+
+        if($main_task_id == 141 || $main_task_id == 142 || $main_task_id == 152 || $main_task_id == 154){
+
+            $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+
+            $data_attachment = array(
+                'task_id'           => $taskId,
+                'main_task_id'      => $main_task_id,
+                'attachment_link'   => $file_path,
+                'user_id'           => $uid,
+                'status'            => 1
+            );
+    
+            $this->db->insert('tblcallevents_attachments', $data_attachment);
+            $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+    
+            $data_task_execution = array(
+                'main_task_id'      => $main_task_id,
+                'task_response'     => "Success",
+                'tbe_attachment_id' => $attachment_id,
+                'tbe_id'            => $taskId,
+                'performed_by'      => $uid,
+                'status'            => 1
+            );
+    
+            $this->db->insert('task_execution_details', $data_task_execution);
+            $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        }else if($main_task_id == 144 || $main_task_id == 145 || $main_task_id == 146 || $main_task_id == 147 || $main_task_id == 148 || $main_task_id == 153){
+            
+            $file_paths_Data = $this->Menu_model->upload_multiple_files_common('start_jaurney',$uploadPath);
+            foreach($file_paths_Data as $file_path_data){
+                $file_path =  $file_path_data['file_path'];
+
+                $data_attachment = array(
+                    'task_id'           => $taskId,
+                    'main_task_id'      => $main_task_id,
+                    'attachment_link'   => $file_path,
+                    'user_id'           => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('tblcallevents_attachments', $data_attachment);
+                $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+        
+                $data_task_execution = array(
+                    'main_task_id'      => $main_task_id,
+                    'tbe_attachment_id' => $attachment_id,
+                    'tbe_id'            => $taskId,
+                    'performed_by'      => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('task_execution_details', $data_task_execution);
+                $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+                
+             }
+        }else if($main_task_id == 149 || $main_task_id == 150 || $main_task_id == 151){
+
+            $final_remark          = $this->input->post('final_remark');
+
+            $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
+            $taskname       = $taskDetails[0]->taskname;
+            $sname          = $taskDetails[0]->sname;
+            $sid            = $taskDetails[0]->sid;
+            $rsid           = $taskDetails[0]->rsid;
+            $project_code   = $taskDetails[0]->project_code;
+            $status_id      = $taskDetails[0]->status_id;
+            
+            $data_task_execution = array(
+                'main_task_id'      => $main_task_id,
+                'task_response'     => $final_remark,
+                'tbe_attachment_id' => 0,
+                'tbe_id'            => $taskId,
+                'performed_by'      => $uid,
+                'status'            => 1
+            );
+
+            $this->db->insert('task_execution_details', $data_task_execution);
+            $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        }
+        
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+        
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - complete  Successfully !!");
+
+    }else if($stage_message == 'Yes'){
+
+
+        $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+
+        $data_attachment = array(
+            'task_id'           => $taskId,
+            'main_task_id'      => $main_task_id,
+            'attachment_link'   => $file_path,
+            'user_id'           => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('tblcallevents_attachments', $data_attachment);
+        $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'task_response'     => "Success",
+            'tbe_attachment_id' => $attachment_id,
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $final_remark          = "Task Completed Successfully!";
+
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+    
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "$final_remark",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
+
+    }
+
+    redirect('Menu/Dashboard');
+ 
+}
+// CLOSE  Visit(During - DIY Model Making Activity)
+
+
+
+// Start Post-installation PIA activity check-list From
+public function PostInstallationPIAActivityChecklistSubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                     = $this->input->post('taskId');
+    $main_task_ids              = $this->input->post('main_task_id');
+    $main_task_remarks          = $this->input->post('main_task_remarks');
+
+    $i = 0;
+    foreach($main_task_ids as $main_task_id){
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'tbe_attachment_id' => 0,
+            'task_response'     => $main_task_remarks[$i],
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $i++;
+    }
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $taskname,
+            'message'    => "$sname -$taskname - Task Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+        $this->session->set_flashdata('success_message',"$sname -$taskname - Task Complete  Successfully !!");
+        redirect('Menu/Dashboard');
+}
+// Closed Post-installation PIA activity check-list From
+
+
+
+// START Upload DIY Report
+public function UploadDIYReportViewSubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                 = $this->input->post('taskId');
+    $main_task_id           = $this->input->post('main_task_id');
+    $stage_message          = $this->input->post('stage_message');
+
+
+    $currentStagesDatas         = $this->Menu_model->CheckTaskCurrentStagesByID($main_task_id);
+    $currentStagesData          = $currentStagesDatas[0];
+    $currentStages_taskname     = $currentStagesData->taskname;
+    $currentStages_taskdetails  = $currentStagesData->taskdetails;
+    $currentStages_stage        = $currentStagesData->taskaction;
+
+    $uploadPath = "uploads/DIYReport/".date("Y").'/'.date('m');
+
+    if($stage_message == 'No'){
+
+      
+            if($main_task_id == 167 || $main_task_id == 168 || $main_task_id == 169){
+
+                $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+                $data_attachment = array(
+                    'task_id'           => $taskId,
+                    'main_task_id'      => $main_task_id,
+                    'attachment_link'   => $file_path,
+                    'user_id'           => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('tblcallevents_attachments', $data_attachment);
+                $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+        
+                $data_task_execution = array(
+                    'main_task_id'      => $main_task_id,
+                    'task_response'      => "Success",
+                    'tbe_attachment_id' => $attachment_id,
+                    'tbe_id'            => $taskId,
+                    'performed_by'      => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('task_execution_details', $data_task_execution);
+                $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+    
+            }
+        
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - $currentStages_stage - Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+        
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - complete  Successfully !!");
+
+    }else if($stage_message == 'Yes'){
+     
+        $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+        $data_attachment = array(
+            'task_id'           => $taskId,
+            'main_task_id'      => $main_task_id,
+            'attachment_link'   => $file_path,
+            'user_id'           => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('tblcallevents_attachments', $data_attachment);
+        $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'task_response'      => "Success",
+            'tbe_attachment_id' => $attachment_id,
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "Online Activity Final Report Submited Successfull !",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
+
+    }
+
+    redirect('Menu/Dashboard');
+ 
+}
+
+// Closed Upload DIY Report
+
+
+
+
+
+
+// START Offline Demo Visit 
+public function OfflineDemoVisitSubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                 = $this->input->post('taskId');
+    $main_task_id           = $this->input->post('main_task_id');
+    $stage_message          = $this->input->post('stage_message');
+
+
+    $currentStagesDatas         = $this->Menu_model->CheckTaskCurrentStagesByID($main_task_id);
+    $currentStagesData          = $currentStagesDatas[0];
+    $currentStages_taskname     = $currentStagesData->taskname;
+    $currentStages_taskdetails  = $currentStagesData->taskdetails;
+    $currentStages_stage        = $currentStagesData->taskaction;
+
+
+    $uploadPath = "uploads/OfflineDemoVisit/".date("Y").'/'.date('m');
+
+    if($stage_message == 'No'){
+
+     
+            if($main_task_id == 747 || $main_task_id == 748 || $main_task_id == 749 || $main_task_id == 750 || $main_task_id == 751){
+
+                $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+                $data_attachment = array(
+                    'task_id'           => $taskId,
+                    'main_task_id'      => $main_task_id,
+                    'attachment_link'   => $file_path,
+                    'user_id'           => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('tblcallevents_attachments', $data_attachment);
+                $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+        
+                $data_task_execution = array(
+                    'main_task_id'      => $main_task_id,
+                    'task_response'      => "Success",
+                    'tbe_attachment_id' => $attachment_id,
+                    'tbe_id'            => $taskId,
+                    'performed_by'      => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('task_execution_details', $data_task_execution);
+                $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+    
+            }
+        
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+        
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - Complete  Successfully !!");
+
+    }else if($stage_message == 'Yes'){
+     
+
+
+        $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+        $data_attachment = array(
+            'task_id'           => $taskId,
+            'main_task_id'      => $main_task_id,
+            'attachment_link'   => $file_path,
+            'user_id'           => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('tblcallevents_attachments', $data_attachment);
+        $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+        
+        $final_remark   = "Success";
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+        
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'task_response'     => $final_remark,
+            'tbe_attachment_id' => $attachment_id,
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "$final_remark",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $check_task_action_id           = 100; // Summer Activity report
+        $checkAutoTaskExistsOrNot       = $this->Menu_model->CheckAffterThisAutoTaskISExistsOrNot($taskId,$check_task_action_id);
+        $checkAutoTaskExistsOrNotcnt    = sizeof($checkAutoTaskExistsOrNot);
+
+        if($checkAutoTaskExistsOrNotcnt == 0){
+
+            $data = array(
+                'project_code'      => "$project_code",
+                'task_action'       => $check_task_action_id,
+                'sid'               => "$sid",
+                'rsid'              => "0",
+                'user_id'           => $uid,
+                'autotask'          => 1,
+                'plan'              => 1,
+                'status_id'         => "$status_id",
+                'approved_status'   => 1,
+                'approved_by'       => $uid,
+                'approved_datetime' => date("Y-m-d H:i:s"),
+                'appointment_datetime' => date("Y-m-d H:i:s"),
+                'fwd_date'          => date("Y-m-d H:i:s"),
+                'task_assigned_date'=> date("Y-m-d"),
+                'comments'          => "This is Auto Task",
+                'aftertask'         => $taskId,
+            );
+            
+            $insert_id = $this->Menu_model->insertCallEvent($data);
+
+        }
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
+
+    }
+
+    redirect('Menu/Dashboard');
+ 
+}
+
+// Closed Offline Demo Visit 
+
+// Start Offline Demo Feedback
+public function OfflineDemoFeedbackSubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                     = $this->input->post('taskId');
+    $main_task_ids              = $this->input->post('main_task_id');
+    $main_task_remarks          = $this->input->post('main_task_remarks');
+
+    $i = 0;
+    foreach($main_task_ids as $main_task_id){
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'tbe_attachment_id' => 0,
+            'task_response'     => $main_task_remarks[$i],
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $i++;
+    }
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $taskname,
+            'message'    => "$sname -$taskname - Task Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+        $this->session->set_flashdata('success_message',"$sname -$taskname - Task Complete  Successfully !!");
+        redirect('Menu/Dashboard');
+}
+
+// Closed Offline Demo Feedback
+
+
+
+
+// START Online Demo
+public function OnlineDemoSubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                 = $this->input->post('taskId');
+    $main_task_id           = $this->input->post('main_task_id');
+    $stage_message          = $this->input->post('stage_message');
+
+
+    $currentStagesDatas         = $this->Menu_model->CheckTaskCurrentStagesByID($main_task_id);
+    $currentStagesData          = $currentStagesDatas[0];
+    $currentStages_taskname     = $currentStagesData->taskname;
+    $currentStages_taskdetails  = $currentStagesData->taskdetails;
+    $currentStages_stage        = $currentStagesData->taskaction;
+
+
+    $uploadPath = "uploads/OnlineDemo/".date("Y").'/'.date('m');
+
+    if($stage_message == 'No'){
+
+     
+        if($main_task_id == 758){
+
+            $data_task_execution = array(
+                'main_task_id'      => $main_task_id,
+                'task_response'     => $this->input->post('meetings_links'),
+                'tbe_attachment_id' => 0,
+                'tbe_id'            => $taskId,
+                'performed_by'      => $uid,
+                'status'            => 1
+            );
+    
+            $this->db->insert('task_execution_details', $data_task_execution);
+            $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        }else{
+            if($main_task_id == 759 || $main_task_id == 760){
+
+                $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+                $data_attachment = array(
+                    'task_id'           => $taskId,
+                    'main_task_id'      => $main_task_id,
+                    'attachment_link'   => $file_path,
+                    'user_id'           => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('tblcallevents_attachments', $data_attachment);
+                $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+        
+                $data_task_execution = array(
+                    'main_task_id'      => $main_task_id,
+                    'task_response'      => "Success",
+                    'tbe_attachment_id' => $attachment_id,
+                    'tbe_id'            => $taskId,
+                    'performed_by'      => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('task_execution_details', $data_task_execution);
+                $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+    
+            }
+
+        }
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+        
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - Complete  Successfully !!");
+
+    }else if($stage_message == 'Yes'){
+     
+
+        $final_remark          = $this->input->post('final_remark');
+
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+        
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'task_response'     => $final_remark,
+            'tbe_attachment_id' => 0,
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "$final_remark",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $check_task_action_id           = 98; // Summer Activity report
+        $checkAutoTaskExistsOrNot       = $this->Menu_model->CheckAffterThisAutoTaskISExistsOrNot($taskId,$check_task_action_id);
+        $checkAutoTaskExistsOrNotcnt    = sizeof($checkAutoTaskExistsOrNot);
+
+        if($checkAutoTaskExistsOrNotcnt == 0){
+
+            $data = array(
+                'project_code'      => "$project_code",
+                'task_action'       => $check_task_action_id,
+                'sid'               => "$sid",
+                'rsid'              => "0",
+                'user_id'           => $uid,
+                'autotask'          => 1,
+                'plan'              => 1,
+                'status_id'         => "$status_id",
+                'approved_status'   => 1,
+                'approved_by'       => $uid,
+                'approved_datetime' => date("Y-m-d H:i:s"),
+                'appointment_datetime' => date("Y-m-d H:i:s"),
+                'fwd_date'          => date("Y-m-d H:i:s"),
+                'task_assigned_date'=> date("Y-m-d"),
+                'comments'          => "This is Auto Task",
+                'aftertask'         => $taskId,
+            );
+            
+            $insert_id = $this->Menu_model->insertCallEvent($data);
+
+        }
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
+
+    }
+
+    redirect('Menu/Dashboard');
+ 
+}
+
+// Closed Online Demo
+
+// Start Online Demo Feedback
+public function OnlineDemoFeedbackSubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                     = $this->input->post('taskId');
+    $main_task_ids              = $this->input->post('main_task_id');
+    $main_task_remarks          = $this->input->post('main_task_remarks');
+
+    $i = 0;
+    foreach($main_task_ids as $main_task_id){
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'tbe_attachment_id' => 0,
+            'task_response'     => $main_task_remarks[$i],
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $i++;
+    }
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $taskname,
+            'message'    => "$sname -$taskname - Task Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+        $this->session->set_flashdata('success_message',"$sname -$taskname - Task Complete  Successfully !!");
+        redirect('Menu/Dashboard');
+}
+
+// Closed Online Demo Feedback
+
+
+
+// START Social Media Post
+public function SocialMediaPostSubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                 = $this->input->post('taskId');
+    $main_task_id           = $this->input->post('main_task_id');
+    $stage_message          = $this->input->post('stage_message');
+
+
+    $currentStagesDatas         = $this->Menu_model->CheckTaskCurrentStagesByID($main_task_id);
+    $currentStagesData          = $currentStagesDatas[0];
+    $currentStages_taskname     = $currentStagesData->taskname;
+    $currentStages_taskdetails  = $currentStagesData->taskdetails;
+    $currentStages_stage        = $currentStagesData->taskaction;
+
+
+    $uploadPath = "uploads/SocialMediaPost/".date("Y").'/'.date('m');
+
+    if($stage_message == 'No'){
+
+            // if($main_task_id == 546 || $main_task_id == 547 || $main_task_id == 548){
+
+                $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+                $data_attachment = array(
+                    'task_id'           => $taskId,
+                    'main_task_id'      => $main_task_id,
+                    'attachment_link'   => $file_path,
+                    'user_id'           => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('tblcallevents_attachments', $data_attachment);
+                $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+        
+                $data_task_execution = array(
+                    'main_task_id'      => $main_task_id,
+                    'task_response'      => "Success",
+                    'tbe_attachment_id' => $attachment_id,
+                    'tbe_id'            => $taskId,
+                    'performed_by'      => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('task_execution_details', $data_task_execution);
+                $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+    
+            // }
+
+        
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+        
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - Complete  Successfully !!");
+
+    }else if($stage_message == 'Yes'){
+     
+        $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+                $data_attachment = array(
+                    'task_id'           => $taskId,
+                    'main_task_id'      => $main_task_id,
+                    'attachment_link'   => $file_path,
+                    'user_id'           => $uid,
+                    'status'            => 1
+                );
+        
+    $this->db->insert('tblcallevents_attachments', $data_attachment);
+    $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+    $final_remark = 'Successs;';
+
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+        
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'task_response'     => $final_remark,
+            'tbe_attachment_id' => $attachment_id,
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "$final_remark",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
+
+    }
+
+    redirect('Menu/Dashboard');
+ 
+}
+
+// Closed Social Media Post
+
+
+
+// START Outbond Communication
+public function OutbondCommunicationSubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                 = $this->input->post('taskId');
+    $main_task_id           = $this->input->post('main_task_id');
+    $stage_message          = $this->input->post('stage_message');
+    $creative_done_by_PIA   = $this->input->post('creative_done_by_PIA');
+
+
+    $currentStagesDatas         = $this->Menu_model->CheckTaskCurrentStagesByID($main_task_id);
+    $currentStagesData          = $currentStagesDatas[0];
+    $currentStages_taskname     = $currentStagesData->taskname;
+    $currentStages_taskdetails  = $currentStagesData->taskdetails;
+    $currentStages_stage        = $currentStagesData->taskaction;
+
+
+    $uploadPath = "uploads/OutbondCommunication/".date("Y").'/'.date('m');
+
+
+    if($stage_message == 'No'){
+
+            if($main_task_id == 406 || $main_task_id == 407){
+
+                if($creative_done_by_PIA == 'Yes'){
+
+                    $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+                    $data_attachment = array(
+                        'task_id'           => $taskId,
+                        'main_task_id'      => $main_task_id,
+                        'attachment_link'   => $file_path,
+                        'user_id'           => $uid,
+                        'status'            => 1
+                    );
+            
+                    $this->db->insert('tblcallevents_attachments', $data_attachment);
+                    $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+
+                }else  if($creative_done_by_PIA == 'No'){
+                    $attachment_id = 0;
+                }
+
+
+                $data_task_execution = array(
+                    'main_task_id'      => $main_task_id,
+                    'task_response'      => $creative_done_by_PIA,
+                    'tbe_attachment_id' => $attachment_id,
+                    'tbe_id'            => $taskId,
+                    'performed_by'      => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('task_execution_details', $data_task_execution);
+                $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+    
+            }else if($main_task_id == 408){
+
+                $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+                $data_attachment = array(
+                    'task_id'           => $taskId,
+                    'main_task_id'      => $main_task_id,
+                    'attachment_link'   => $file_path,
+                    'user_id'           => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('tblcallevents_attachments', $data_attachment);
+                $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+
+                $data_task_execution = array(
+                    'main_task_id'      => $main_task_id,
+                    'task_response'     => "Success",
+                    'tbe_attachment_id' => $attachment_id,
+                    'tbe_id'            => $taskId,
+                    'performed_by'      => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('task_execution_details', $data_task_execution);
+                $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+            }
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+        
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - Complete  Successfully !!");
+
+    }else if($stage_message == 'Yes'){
+     
+        $final_remark          = $this->input->post('final_remark');
+
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+        
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'task_response'     => $final_remark,
+            'tbe_attachment_id' => 0,
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "$final_remark",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
+
+    }
+
+    redirect('Menu/Dashboard');
+ 
+}
+
+// Closed Outbond Communication
+
+
+
+// START Communication
+public function CommunicationSubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                 = $this->input->post('taskId');
+    $main_task_id           = $this->input->post('main_task_id');
+    $stage_message          = $this->input->post('stage_message');
+
+
+    $currentStagesDatas         = $this->Menu_model->CheckTaskCurrentStagesByID($main_task_id);
+    $currentStagesData          = $currentStagesDatas[0];
+    $currentStages_taskname     = $currentStagesData->taskname;
+    $currentStages_taskdetails  = $currentStagesData->taskdetails;
+    $currentStages_stage        = $currentStagesData->taskaction;
+
+
+    $uploadPath = "uploads/Communication/".date("Y").'/'.date('m');
+
+    if($stage_message == 'No'){
+
+            // if($main_task_id == 546 || $main_task_id == 547 || $main_task_id == 548){
+
+                $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+                $data_attachment = array(
+                    'task_id'           => $taskId,
+                    'main_task_id'      => $main_task_id,
+                    'attachment_link'   => $file_path,
+                    'user_id'           => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('tblcallevents_attachments', $data_attachment);
+                $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+        
+                $data_task_execution = array(
+                    'main_task_id'      => $main_task_id,
+                    'task_response'      => "Success",
+                    'tbe_attachment_id' => $attachment_id,
+                    'tbe_id'            => $taskId,
+                    'performed_by'      => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('task_execution_details', $data_task_execution);
+                $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+    
+            // }
+
+        
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+        
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - Complete  Successfully !!");
+
+    }else if($stage_message == 'Yes'){
+     
+        $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+                $data_attachment = array(
+                    'task_id'           => $taskId,
+                    'main_task_id'      => $main_task_id,
+                    'attachment_link'   => $file_path,
+                    'user_id'           => $uid,
+                    'status'            => 1
+                );
+        
+    $this->db->insert('tblcallevents_attachments', $data_attachment);
+    $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+    $final_remark = 'Successs;';
+
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+        
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'task_response'     => $final_remark,
+            'tbe_attachment_id' => $attachment_id,
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "$final_remark",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
+
+    }
+
+    redirect('Menu/Dashboard');
+ 
+}
+
+// Closed Communication
+
+
+
+// START Report (Monthly/Quaterly/half yearly/ Annual )
+public function MonthlyReportSubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                 = $this->input->post('taskId');
+    $main_task_id           = $this->input->post('main_task_id');
+    $stage_message          = $this->input->post('stage_message');
+
+
+    $currentStagesDatas         = $this->Menu_model->CheckTaskCurrentStagesByID($main_task_id);
+    $currentStagesData          = $currentStagesDatas[0];
+    $currentStages_taskname     = $currentStagesData->taskname;
+    $currentStages_taskdetails  = $currentStagesData->taskdetails;
+    $currentStages_stage        = $currentStagesData->taskaction;
+
+
+    $uploadPath = "uploads/MonthlyReport/".date("Y").'/'.date('m');
+
+    if($stage_message == 'No'){
+
+            // if($main_task_id == 546 || $main_task_id == 547 || $main_task_id == 548){
+
+                $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+                $data_attachment = array(
+                    'task_id'           => $taskId,
+                    'main_task_id'      => $main_task_id,
+                    'attachment_link'   => $file_path,
+                    'user_id'           => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('tblcallevents_attachments', $data_attachment);
+                $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+        
+                $data_task_execution = array(
+                    'main_task_id'      => $main_task_id,
+                    'task_response'      => "Success",
+                    'tbe_attachment_id' => $attachment_id,
+                    'tbe_id'            => $taskId,
+                    'performed_by'      => $uid,
+                    'status'            => 1
+                );
+        
+                $this->db->insert('task_execution_details', $data_task_execution);
+                $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+    
+            // }
+
+        
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+        
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - Complete  Successfully !!");
+
+    }else if($stage_message == 'Yes'){
+     
+        $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+                $data_attachment = array(
+                    'task_id'           => $taskId,
+                    'main_task_id'      => $main_task_id,
+                    'attachment_link'   => $file_path,
+                    'user_id'           => $uid,
+                    'status'            => 1
+                );
+        
+    $this->db->insert('tblcallevents_attachments', $data_attachment);
+    $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+    $final_remark = 'Successs;';
+
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+        
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'task_response'     => $final_remark,
+            'tbe_attachment_id' => $attachment_id,
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "$final_remark",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
+
+    }
+
+    redirect('Menu/Dashboard');
+ 
+}
+
+// Closed Report (Monthly/Quaterly/half yearly/ Annual )
+
+
+// START Quaterly Report)
+public function QuaterlyReportSubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                 = $this->input->post('taskId');
+    $main_task_id           = $this->input->post('main_task_id');
+    $stage_message          = $this->input->post('stage_message');
+
+
+    $currentStagesDatas         = $this->Menu_model->CheckTaskCurrentStagesByID($main_task_id);
+    $currentStagesData          = $currentStagesDatas[0];
+    $currentStages_taskname     = $currentStagesData->taskname;
+    $currentStages_taskdetails  = $currentStagesData->taskdetails;
+    $currentStages_stage        = $currentStagesData->taskaction;
+
+    $uploadPath = "uploads/QuaterlyReport/".date("Y").'/'.date('m');
+
+        $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+                $data_attachment = array(
+                    'task_id'           => $taskId,
+                    'main_task_id'      => $main_task_id,
+                    'attachment_link'   => $file_path,
+                    'user_id'           => $uid,
+                    'status'            => 1
+                );
+        
+    $this->db->insert('tblcallevents_attachments', $data_attachment);
+    $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+    $final_remark = 'Successs;';
+
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+        
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'task_response'     => $final_remark,
+            'tbe_attachment_id' => $attachment_id,
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "$final_remark",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
+
+    redirect('Menu/Dashboard');
+ 
+}
+
+// Closed Quaterly Report
+// START Half Yearly Report
+public function HalfYearlyReportSubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                 = $this->input->post('taskId');
+    $main_task_id           = $this->input->post('main_task_id');
+    $stage_message          = $this->input->post('stage_message');
+
+
+    $currentStagesDatas         = $this->Menu_model->CheckTaskCurrentStagesByID($main_task_id);
+    $currentStagesData          = $currentStagesDatas[0];
+    $currentStages_taskname     = $currentStagesData->taskname;
+    $currentStages_taskdetails  = $currentStagesData->taskdetails;
+    $currentStages_stage        = $currentStagesData->taskaction;
+
+    $uploadPath = "uploads/HalfYearlyReport/".date("Y").'/'.date('m');
+
+        $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+                $data_attachment = array(
+                    'task_id'           => $taskId,
+                    'main_task_id'      => $main_task_id,
+                    'attachment_link'   => $file_path,
+                    'user_id'           => $uid,
+                    'status'            => 1
+                );
+        
+    $this->db->insert('tblcallevents_attachments', $data_attachment);
+    $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+    $final_remark = 'Successs;';
+
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+        
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'task_response'     => $final_remark,
+            'tbe_attachment_id' => $attachment_id,
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "$final_remark",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
+
+    redirect('Menu/Dashboard');
+ 
+}
+
+// Closed Half Yearly Report
+// START Annual Report
+public function AnnualReportSubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                 = $this->input->post('taskId');
+    $main_task_id           = $this->input->post('main_task_id');
+    $stage_message          = $this->input->post('stage_message');
+
+
+    $currentStagesDatas         = $this->Menu_model->CheckTaskCurrentStagesByID($main_task_id);
+    $currentStagesData          = $currentStagesDatas[0];
+    $currentStages_taskname     = $currentStagesData->taskname;
+    $currentStages_taskdetails  = $currentStagesData->taskdetails;
+    $currentStages_stage        = $currentStagesData->taskaction;
+
+    $uploadPath = "uploads/AnnualReport/".date("Y").'/'.date('m');
+
+        $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+                $data_attachment = array(
+                    'task_id'           => $taskId,
+                    'main_task_id'      => $main_task_id,
+                    'attachment_link'   => $file_path,
+                    'user_id'           => $uid,
+                    'status'            => 1
+                );
+        
+    $this->db->insert('tblcallevents_attachments', $data_attachment);
+    $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+    $final_remark = 'Successs;';
+
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+        
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'task_response'     => $final_remark,
+            'tbe_attachment_id' => $attachment_id,
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "$final_remark",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
+
+    redirect('Menu/Dashboard');
+ 
+}
+
+// Closed Annual Report
+// START New Client Report
+public function NewClientReportSubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                 = $this->input->post('taskId');
+    $main_task_id           = $this->input->post('main_task_id');
+    $stage_message          = $this->input->post('stage_message');
+
+
+    $currentStagesDatas         = $this->Menu_model->CheckTaskCurrentStagesByID($main_task_id);
+    $currentStagesData          = $currentStagesDatas[0];
+    $currentStages_taskname     = $currentStagesData->taskname;
+    $currentStages_taskdetails  = $currentStagesData->taskdetails;
+    $currentStages_stage        = $currentStagesData->taskaction;
+
+    $uploadPath = "uploads/NewClientReport/".date("Y").'/'.date('m');
+
+        $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+                $data_attachment = array(
+                    'task_id'           => $taskId,
+                    'main_task_id'      => $main_task_id,
+                    'attachment_link'   => $file_path,
+                    'user_id'           => $uid,
+                    'status'            => 1
+                );
+        
+    $this->db->insert('tblcallevents_attachments', $data_attachment);
+    $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+    $final_remark = 'Successs;';
+
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+        
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'task_response'     => $final_remark,
+            'tbe_attachment_id' => $attachment_id,
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "$final_remark",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
+
+    redirect('Menu/Dashboard');
+ 
+}
+
+// Closed New Client Report
+// START Customized Reports Submit
+public function CustomizedReportsSubmit(){
+
+    $user           = $this->session->userdata('user');
+    $data['user']   = $user;
+    $uid            = $user['id'];
+    $id             =  $user['dep_id'];
+    $this->load->model('Menu_model');
+    $this->load->library('session');
+
+    $taskId                 = $this->input->post('taskId');
+    $main_task_id           = $this->input->post('main_task_id');
+    $stage_message          = $this->input->post('stage_message');
+
+
+    $currentStagesDatas         = $this->Menu_model->CheckTaskCurrentStagesByID($main_task_id);
+    $currentStagesData          = $currentStagesDatas[0];
+    $currentStages_taskname     = $currentStagesData->taskname;
+    $currentStages_taskdetails  = $currentStagesData->taskdetails;
+    $currentStages_stage        = $currentStagesData->taskaction;
+
+    $uploadPath = "uploads/CustomizedReports/".date("Y").'/'.date('m');
+
+        $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    
+                $data_attachment = array(
+                    'task_id'           => $taskId,
+                    'main_task_id'      => $main_task_id,
+                    'attachment_link'   => $file_path,
+                    'user_id'           => $uid,
+                    'status'            => 1
+                );
+        
+    $this->db->insert('tblcallevents_attachments', $data_attachment);
+    $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
+    $final_remark = 'Successs;';
+
+        $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
+        $taskname       = $taskDetails[0]->taskname;
+        $sname          = $taskDetails[0]->sname;
+        $sid            = $taskDetails[0]->sid;
+        $rsid           = $taskDetails[0]->rsid;
+        $project_code   = $taskDetails[0]->project_code;
+        $status_id      = $taskDetails[0]->status_id;
+        
+        $data_task_execution = array(
+            'main_task_id'      => $main_task_id,
+            'task_response'     => $final_remark,
+            'tbe_attachment_id' => $attachment_id,
+            'tbe_id'            => $taskId,
+            'performed_by'      => $uid,
+            'status'            => 1
+        );
+
+        $this->db->insert('task_execution_details', $data_task_execution);
+        $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
+
+        $data = array(
+            'updated_datetime'  => date("Y-m-d H:i:s"),
+            'actontaken'        => 'yes',
+            'purpose_achieved'  => 'yes',
+            'remarks'           => "$final_remark",
+            'task_status'       => 1
+        );
+        $this->db->where('id', $taskId);
+        $this->db->update('tblcallevents', $data);
+
+        $log_data = [
+            'user_id'    => $uid,
+            'type'       => $currentStages_taskname,
+            'message'    => "$currentStages_taskname - $currentStages_taskdetails - Complete  Successfully !!"
+        ];
+        $this->db->insert('user_log', $log_data);
+
+        $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
+
+    redirect('Menu/Dashboard');
+ 
+}
+
+// Closed Customized Reports Submit
+
 
 }
 

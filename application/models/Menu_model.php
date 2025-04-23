@@ -1497,10 +1497,7 @@ LEFT JOIN
         }
         return $query->result();
     }
-    public function userworkfrom(){
-        $query=$this->db->query("SELECT * FROM `userworkfrom`");
-        return $query->result();
-    }
+    
     public function get_daydbyad($tdate){
         $query=$this->db->query("SELECT (SELECT count(*) FROM user_detail) a, COUNT(*) b, COUNT(case when wffo=1 then wffo end) c, COUNT(case when wffo=2 then wffo end) d, COUNT(case when wffo=3 then wffo end) e FROM user_day LEFT JOIN user_detail ON user_detail.id=user_day.user_id WHERE cast(ustart as DATE)='$tdate'");
         return $query->result();
@@ -6530,19 +6527,6 @@ AND DATE(tblcallevents.appointment_datetime) < CURDATE()
 AND tblcallevents.appointment_datetime != '0000-00-00 00:00:00'");
 return $query->result();
 }
-public function getAlltasktype($dep_id){
-
-    $perform_by = "(
-        `perform_by`  = '$dep_id' 
-    || `perform_by_2` = '$dep_id' 
-    || `perform_by_3` = '$dep_id' 
-    || `perform_by_4` = '$dep_id'
-    || `perform_by_5` = '$dep_id'
-    )";
-    $query=$this->db->query("SELECT DISTINCT(tasktype) FROM `task_action` WHERE $perform_by");
-
-    return $query->result();
-}
 
 public function getUserTotalTaskTimeForTodays($uid,$tdate){
     $query=$this->db->query("SELECT
@@ -7418,4 +7402,1557 @@ public function getSchoolsWithZones($pro_id){
         return $newarray;
     }
   }
+  /** CODE BY DEEPAK */
+
+
+
+  public function get_OLDPendingTask($uid){
+    $query=$this->db->query("SELECT * FROM tblcallevents WHERE user_id = '$uid' AND task_action != '' AND task_status = 0 and plan =1 AND DATE(appointment_datetime) < CURDATE() AND appointment_datetime != '0000-00-00 00:00:00'");
+    // $query=$this->db->query("SELECT * FROM tblcallevents WHERE assignedto_id = '$uid' AND actiontype_id != '' AND nextCFID = 0 and autotask=1 and plan =1 AND DATE(appointmentdatetime) < CURDATE()");
+    return $query->result();
+}
+
+
+
+public function get_OLDPendingTaskType($uid){
+    $query=$this->db->query("SELECT
+    ta.id as task_action_id,
+    ta.tasktype,
+    ta.taskname,
+    count(tblcallevents.id) as task_count
+FROM
+    tblcallevents
+LEFT JOIN task_action ta on ta.id = tblcallevents.task_action
+WHERE
+    user_id = '$uid' 
+    AND task_action != '' 
+    AND task_status = 0 
+    AND plan = 1 
+    AND DATE(appointment_datetime) < CURDATE() 
+    AND appointment_datetime != '0000-00-00 00:00:00' 
+GROUP BY  ta.tasktype");
+    return $query->result();
+}
+
+
+
+
+
+
+public function getTodaysPendingTaskType($uid){
+    $query=$this->db->query("SELECT
+    ta.id as task_action_id,
+    ta.tasktype,
+    ta.taskname,
+    count(tblcallevents.id) as task_count
+FROM
+    tblcallevents
+LEFT JOIN task_action ta on ta.id = tblcallevents.task_action
+WHERE
+    user_id = '$uid' 
+    AND task_action != '' 
+    AND task_status = 0 
+    AND plan = 1 
+    AND DATE(appointment_datetime) = CURDATE() 
+    AND appointment_datetime != '0000-00-00 00:00:00' 
+GROUP BY  ta.tasktype");
+    return $query->result();
+}
+
+public function get_OLDPendingTaskTypeList($uid,$task_action_name){
+    $query=$this->db->query("SELECT
+	tblcallevents.id as task_id,
+    ta.id as task_action_id,
+    ta.tasktype,
+    ta.taskname,
+    COALESCE(spdr.sname, spd.sname) AS sname
+FROM
+    tblcallevents
+LEFT JOIN task_action ta on ta.id = tblcallevents.task_action
+LEFT JOIN spd on spd.id = tblcallevents.sid
+LEFT JOIN spd_request spdr on spdr.id = tblcallevents.rsid
+WHERE
+    user_id = '$uid' 
+    AND task_action != '' 
+    AND task_status = 0 
+    AND plan = 1 
+    AND DATE(appointment_datetime) < CURDATE() 
+    AND appointment_datetime != '0000-00-00 00:00:00' 
+    AND ta.tasktype = '$task_action_name'");
+    return $query->result();
+}
+public function get_TodaysOLDPendingTaskTypeList($uid,$task_action_name){
+    $query=$this->db->query("SELECT
+	tblcallevents.id as task_id,
+    ta.id as task_action_id,
+    ta.tasktype,
+    ta.taskname,
+    COALESCE(spdr.sname, spd.sname) AS sname
+FROM
+    tblcallevents
+LEFT JOIN task_action ta on ta.id = tblcallevents.task_action
+LEFT JOIN spd on spd.id = tblcallevents.sid
+LEFT JOIN spd_request spdr on spdr.id = tblcallevents.rsid
+WHERE
+    user_id = '$uid' 
+    AND task_action != '' 
+    AND task_status = 0 
+    AND plan = 1 
+    AND DATE(appointment_datetime) = CURDATE() 
+    AND appointment_datetime != '0000-00-00 00:00:00' 
+    AND ta.tasktype = '$task_action_name'");
+    return $query->result();
+}
+
+public function GetCreatePlannerRequestByUser($uid,$type,$adate){
+    $query=$this->db->query("SELECT * FROM `create_planner_request` WHERE request_user_id = '$uid' and request_type = '$type' AND cast(created_at as date) = '$adate'");
+    return $query->result();
+}
+
+
+public function GetAllTodaysPlannerLogByUid($uid,$tdate){
+
+    $query=$this->db->query("SELECT
+    plog.init_id,
+    company_master.id AS cid,
+    company_master.compname AS company_name,
+    plog.to_user,
+    plog.task_id,
+    tbc.actiontype_id,
+    ACTION.name AS task_name,
+    init_call.cstatus,
+    init_call.mainbd,
+    init_call.apst,
+    init_call.clm_id,
+STATUS
+    .name,
+    MIN(plog.org_task_date) AS org_task_date,
+    plog.remarks,
+    (
+    SELECT
+        IFNULL(
+            MAX(plog1.re_created_at),
+            plog.re_created_at
+        )
+    FROM
+        planner_log plog1
+    WHERE
+        plog1.task_id = plog.task_id AND plog1.to_user = plog.to_user AND plog1.re_created_at > MIN(plog.re_created_at)
+) AS last_create_date,
+(
+    SELECT
+        COUNT(*)
+    FROM
+        planner_log plog3
+    WHERE
+        plog3.task_id = plog.task_id
+) AS duplicate_count,
+CONCAT(
+    TIMESTAMPDIFF(
+        DAY,
+        MIN(plog.org_task_date),
+        (
+        SELECT
+            IFNULL(
+                MAX(plog1.re_created_at),
+                plog.re_created_at
+            )
+        FROM
+            planner_log plog1
+        WHERE
+            plog1.init_id = plog.init_id AND plog1.to_user = plog.to_user AND plog1.re_created_at > MIN(plog.re_created_at)
+    )
+    ),
+    ' days ',
+    MOD(
+        TIMESTAMPDIFF(
+            HOUR,
+            MIN(plog.org_task_date),
+            (
+            SELECT
+                IFNULL(
+                    MAX(plog1.re_created_at),
+                    plog.re_created_at
+                )
+            FROM
+                planner_log plog1
+            WHERE
+                plog1.init_id = plog.init_id AND plog1.to_user = plog.to_user AND plog1.re_created_at > MIN(plog.org_task_date)
+        )
+        ),
+        24
+    ),
+    ' hours ',
+    MOD(
+        TIMESTAMPDIFF(
+            MINUTE,
+            MIN(plog.org_task_date),
+            (
+            SELECT
+                IFNULL(
+                    MAX(plog1.re_created_at),
+                    plog.re_created_at
+                )
+            FROM
+                planner_log plog1
+            WHERE
+                plog1.init_id = plog.init_id AND plog1.to_user = plog.to_user AND plog1.re_created_at > MIN(plog.org_task_date)
+        )
+        ),
+        60
+    ),
+    ' minutes'
+) AS time_difference,
+u1.name AS to_user_name
+FROM
+    planner_log plog
+LEFT JOIN tblcallevents tbc ON
+    tbc.id = plog.task_id
+LEFT JOIN ACTION ON ACTION
+    .id = tbc.actiontype_id
+LEFT JOIN user_details u1 ON
+    u1.user_id = plog.to_user
+LEFT JOIN spd ON spd.id = plog.init_id
+LEFT JOIN company_master ON company_master.id = init_call.cmpid_id
+LEFT JOIN status ON status
+    .id = spd.status
+WHERE
+    DATE(plog.re_created_at) = '$tdate' AND tbc.nextCFID = 0 AND org_task_date != '0000-00-00 00:00:00' AND u1.user_id = '$uid'
+GROUP BY
+    plog.task_id
+HAVING
+    duplicate_count >= 2");
+
+    return $query->result();
+}
+
+
+public function GetPlannerSession($uid){
+    $query = $this->db->query("SELECT * FROM `session_plan_time` WHERE user_id = '$uid' AND (pctime is NULL and pcdatetime is NULL)");
+    return $query->result();
+}
+
+
+
+
+
+public function checkforHoliday($date){
+    $this->db->select('holiday_date, holiday_name')
+             ->from('holidaylist')
+             ->where('CAST(holiday_date AS DATE) =', $date); // Check for exact match with the date
+    $query = $this->db->get();
+    return $query->result();
+}
+
+
+public function checkLeaveForDay($uid, $date){
+    $this->db->select('user_id, start_date, end_date, reason, status, is_halfday_leave, halfday_leaveType')
+             ->from('leave_requests')
+             ->where('user_id', $uid)
+             ->where('status', 'approved')
+             ->where('CAST(start_date AS DATE) <=', $date)  // Leave starts before or on the date
+             ->where('CAST(end_date AS DATE) >=', $date);  // Leave ends after or on the date
+    $query = $this->db->get();
+  
+    return $query->result();
+}
+
+
+public function StorePlannerSessionStart($uid,$psdatetime,$pstime){
+    $this->db->query("INSERT INTO `session_plan_time`(`user_id`, `psdatetime`, `pstime`) VALUES ('$uid','$psdatetime','$pstime')");
+}
+public function get_userName($uid){
+    $this->db->query("SELECT * FROM `user_detail` WHERE id ='$uid' ");
+}
+
+public function StorePlannerSessionClose($uid,$pcdatetime,$pctime,$totaltime){
+    $this->db->query("UPDATE `session_plan_time` SET`pctime`='$pctime',`pcdatetime`= '$pcdatetime',`totaltime`= '$totaltime' WHERE user_id = $uid AND (pctime is NULL and pcdatetime is NULL)");
+}
+
+// Pending For  Add Date Filter
+public function get_TodaysTaskTypes($uid,$tdate){
+    $query=$this->db->query("SELECT 
+    task_action.tasktype,
+    COUNT(tblc.id) AS event_count
+FROM 
+    `tblcallevents` tblc
+LEFT JOIN user_detail u1 ON u1.id = tblc.user_id
+LEFT JOIN task_action ON task_action.id = tblc.task_action
+LEFT JOIN spd ON spd.id = tblc.sid
+LEFT JOIN spd_request spdr ON spdr.id = tblc.rsid
+WHERE 
+    tblc.user_id = '$uid' 
+    AND cast(tblc.appointment_datetime as date) = '$tdate'
+GROUP BY 
+    task_action.tasktype;");
+    return $query->result();
+}
+public function get_TodaysTaskTypesAction($uid,$tdate){
+    $query=$this->db->query("SELECT 
+    task_action.taskname,
+    COUNT(tblc.id) AS event_count
+FROM 
+    `tblcallevents` tblc
+LEFT JOIN user_detail u1 ON u1.id = tblc.user_id
+LEFT JOIN task_action ON task_action.id = tblc.task_action
+LEFT JOIN spd ON spd.id = tblc.sid
+LEFT JOIN spd_request spdr ON spdr.id = tblc.rsid
+WHERE 
+    tblc.user_id = '$uid' AND cast(tblc.appointment_datetime as date) = '$tdate'
+GROUP BY 
+    task_action.taskname");
+    return $query->result();
+}
+public function get_TodaysTaskStatus($uid,$tdate){
+    $query=$this->db->query("SELECT 
+    status.name,
+    COUNT(tblc.id) AS event_count
+FROM 
+    `tblcallevents` tblc
+LEFT JOIN status ON status.id = tblc.status_id
+WHERE 
+    tblc.user_id = '$uid' AND cast(tblc.appointment_datetime as date) = '$tdate'
+GROUP BY 
+    status.id");
+    return $query->result();
+}
+
+
+public function get_taskActionBetweenTime($uid,$tdate,$t1,$t2){
+
+    $query=$this->db->query("SELECT 
+    task_action.taskname,
+    COUNT(tblc.id) AS event_count
+FROM 
+    `tblcallevents` tblc
+LEFT JOIN user_detail u1 ON u1.id = tblc.user_id
+LEFT JOIN task_action ON task_action.id = tblc.task_action
+LEFT JOIN spd ON spd.id = tblc.sid
+LEFT JOIN spd_request spdr ON spdr.id = tblc.rsid
+WHERE 
+    tblc.user_id = '$uid'
+     AND CAST(tblc.appointment_datetime AS DATE) = '$tdate' 
+     AND cast(tblc.appointment_datetime  AS TIME) BETWEEN '$t1' and '$t2'
+GROUP BY 
+    task_action.taskname ORDER BY `tblc`.`id` ASC");
+
+
+    return $query->result();
+}
+public function get_taskStatusBetweenTime($uid,$tdate,$t1,$t2){
+
+    $query=$this->db->query("SELECT 
+     status.name,
+    COUNT(tblc.id) AS event_count
+FROM 
+    `tblcallevents` tblc
+LEFT JOIN status ON status.id = tblc.status_id
+WHERE 
+    tblc.user_id = '$uid'
+    AND CAST(tblc.appointment_datetime AS DATE) = '$tdate' 
+    AND cast(tblc.appointment_datetime  AS TIME) BETWEEN '$t1' and '$t2'
+GROUP BY 
+    status.id ORDER BY `tblc`.`id` ASC");
+
+    return $query->result();
+}
+public function getAlltasktype($dep_id){
+
+    $perform_by = "(
+        `perform_by`  = '$dep_id' 
+    || `perform_by_2` = '$dep_id' 
+    || `perform_by_3` = '$dep_id' 
+    || `perform_by_4` = '$dep_id'
+    || `perform_by_5` = '$dep_id'
+    )";
+    $query=$this->db->query("SELECT DISTINCT(tasktype) FROM `task_action` WHERE $perform_by");
+
+    return $query->result();
+}
+public function getAllTaskActionList($task_type_name,$dep_id){
+
+    $perform_by = "(
+        `perform_by`  = '$dep_id' 
+    || `perform_by_2` = '$dep_id' 
+    || `perform_by_3` = '$dep_id' 
+    || `perform_by_4` = '$dep_id'
+    || `perform_by_5` = '$dep_id'
+    ) AND tasktype='$task_type_name'";
+    $query=$this->db->query("SELECT * FROM `task_action` WHERE $perform_by");
+
+    return $query->result();
+}
+
+public function getTimeLineActions($tasktype,$dep_id){
+
+    $perform_by = "(
+        `perform_by`  = '$dep_id' 
+    || `perform_by_2` = '$dep_id' 
+    || `perform_by_3` = '$dep_id' 
+    || `perform_by_4` = '$dep_id'
+    || `perform_by_5` = '$dep_id'
+    ) AND tasktype='$tasktype' AND task_ignore = 0";
+
+    $query = $this->db->query("SELECT * FROM `task_action` WHERE $perform_by");
+    return $query->result();
+}
+public function getTimeLineActionsByTaskName($taskname,$dep_id){
+
+    $perform_by = "(
+        `perform_by`  = '$dep_id' 
+    || `perform_by_2` = '$dep_id' 
+    || `perform_by_3` = '$dep_id' 
+    || `perform_by_4` = '$dep_id'
+    || `perform_by_5` = '$dep_id'
+    ) AND taskname='$taskname'";
+
+    $query = $this->db->query("SELECT * FROM `task_action` WHERE $perform_by");
+    return $query->result();
+}
+
+
+// Start To Planning Task when form submit using planner page
+
+public function GetTBLTaskByTaskID($taskId){
+    $query=$this->db->query("SELECT 
+    tblcallevents.*, 
+    task_action.task_time 
+FROM 
+    tblcallevents 
+    LEFT JOIN task_action ON task_action.id = tblcallevents.task_action 
+WHERE 
+    tblcallevents.id = '$taskId'");
+    return $query->result();
+}
+public function GetTBLTaskByTaskIDs($taskIds){
+    $query=$this->db->query("SELECT 
+    tblcallevents.*, 
+    task_action.task_time 
+FROM 
+    tblcallevents 
+    LEFT JOIN task_action ON task_action.id = tblcallevents.task_action 
+WHERE 
+    tblcallevents.id IN ($taskIds)");
+    return $query->result();
+}
+
+public function userworkfrom(){
+    $query=$this->db->query("SELECT * FROM `userworkfrom`");
+    return $query->result();
+}
+public function GetActivePlannerFilter(){
+    $query=$this->db->query("SELECT * FROM `planner_filter` WHERE filter_status = 1 ORDER BY filter_order ASC");
+    return $query->result();
+}
+
+
+public function GetTodaysTotalTaskActions($uid,$tdate){
+    $query=$this->db->query("SELECT
+   task_action.tasktype,
+   COUNT(tblcallevents.id) as task_count
+FROM
+    tblcallevents
+LEFT JOIN task_action on task_action.id = tblcallevents.task_action
+WHERE
+    tblcallevents.plan = '1' AND tblcallevents.user_id = '$uid' AND CAST(tblcallevents.appointment_datetime AS DATE) = '$tdate' AND tblcallevents.autotask = 0 GROUP BY task_action.tasktype");
+    return $query->result();
+}
+public function GetTodaysTotalAutoTaskActions($uid,$adate,$t1,$t2){
+    $query=$this->db->query("SELECT
+   task_action.tasktype,
+   COUNT(tblcallevents.id) as task_count
+FROM
+    tblcallevents
+LEFT JOIN task_action on task_action.id = tblcallevents.task_action
+WHERE
+    tblcallevents.plan = '1' 
+    AND tblcallevents.user_id = '$uid' 
+    AND tblcallevents.autotask = 1 
+    AND CAST(tblcallevents.appointment_datetime AS DATE) = '$adate' 
+    AND cast(tblcallevents.appointment_datetime  AS TIME) BETWEEN '$t1' and '$t2'
+    GROUP BY task_action.tasktype");
+    return $query->result();
+}
+public function GetTodaysTotalAutoTaskStatus($uid,$adate,$t1,$t2){
+    $query=$this->db->query("SELECT
+   status.name,
+   COUNT(tblcallevents.id) as task_count
+FROM
+    tblcallevents
+LEFT JOIN status on status.id = tblcallevents.status_id
+WHERE
+    tblcallevents.plan = '1' 
+    AND tblcallevents.user_id = '$uid' 
+    AND tblcallevents.autotask = 1 
+    AND CAST(tblcallevents.appointment_datetime AS DATE) = '$adate' 
+    AND cast(tblcallevents.appointment_datetime  AS TIME) BETWEEN '$t1' and '$t2'
+    GROUP BY status.id");
+    return $query->result();
+}
+
+
+public function GetTodaysTotalTaskStatus($uid,$tdate){
+    $query=$this->db->query("SELECT
+   status.name,
+   COUNT(tblcallevents.id) as task_count
+FROM
+    tblcallevents
+LEFT JOIN status on status.id = tblcallevents.status_id
+WHERE
+    tblcallevents.plan = '1' AND tblcallevents.user_id = '$uid' AND CAST(tblcallevents.appointment_datetime AS DATE) = '$tdate' AND tblcallevents.autotask = 0 GROUP BY status.id");
+    return $query->result();
+}
+public function GetProjectCodeByPiIDS($uid){
+
+   $uData  =  $this->get_user_byid($uid);
+   $dep_id = $uData[0]->dep_id;
+
+   if($dep_id == 2){
+        $filter = "WHERE pi_id = '$uid'";
+   }else if($dep_id == 4){
+        $filter = "WHERE ins_id = '$uid'";
+   }else if($dep_id == 11){
+        $filter = "WHERE zh_id = '$uid'";
+   }else if($dep_id == 20){
+        $filter = "WHERE pro_id = '$uid'";
+   }else{
+    $filter = "";
+   }
+
+    $query=$this->db->query("SELECT DISTINCT project_code FROM `spd` $filter");
+    return $query->result();
+}
+public function GetSPDUsingProjectCodeAndUID($uid,$projectCode){
+    $uData  =  $this->get_user_byid($uid);
+    $dep_id = $uData[0]->dep_id;
+ 
+    if($dep_id == 2){
+         $filter = "AND pi_id = '$uid'";
+    }else if($dep_id == 4){
+         $filter = "AND ins_id = '$uid'";
+    }else if($dep_id == 11){
+         $filter = "AND zh_id = '$uid'";
+    }else if($dep_id == 20){
+         $filter = "AND pro_id = '$uid'";
+    }else{
+     $filter = "";
+    }
+    $query=$this->db->query("SELECT * FROM `spd` WHERE project_code = '$projectCode' $filter");
+    return $query->result();
+}
+public function GetAllSPDByUserID($uid){
+    $uData  =  $this->get_user_byid($uid);
+    $dep_id = $uData[0]->dep_id;
+ 
+    if($dep_id == 2){
+        $filter = "WHERE pi_id = '$uid'";
+   }else if($dep_id == 4){
+        $filter = "WHERE ins_id = '$uid'";
+   }else if($dep_id == 11){
+        $filter = "WHERE zh_id = '$uid'";
+   }else if($dep_id == 20){
+        $filter = "WHERE pro_id = '$uid'";
+   }else{
+    $filter = "";
+   }
+
+    $query=$this->db->query("SELECT * FROM `spd` $filter");
+    return $query->result();
+}
+
+public function get_school_detail_by_status_id($id,$uid){
+
+    $uData  =  $this->get_user_byid($uid);
+    $dep_id = $uData[0]->dep_id;
+ 
+    if($dep_id == 2){
+         $filter = "AND pi_id = '$uid'";
+    }else if($dep_id == 4){
+         $filter = "AND ins_id = '$uid'";
+    }else if($dep_id == 11){
+         $filter = "AND zh_id = '$uid'";
+    }else if($dep_id == 20){
+         $filter = "AND pro_id = '$uid'";
+    }else{
+     $filter = "";
+    }
+
+    $query=$this->db->query("SELECT * FROM `spd` WHERE status ='$id' $filter");
+    return $query->result();
+}
+public function get_school_detail_by_sregion_id($id,$uid){
+
+    $uData  =  $this->get_user_byid($uid);
+    $dep_id = $uData[0]->dep_id;
+ 
+    if($dep_id == 2){
+         $filter = "AND pi_id = '$uid'";
+    }else if($dep_id == 4){
+         $filter = "AND ins_id = '$uid'";
+    }else if($dep_id == 11){
+         $filter = "AND zh_id = '$uid'";
+    }else if($dep_id == 20){
+         $filter = "AND pro_id = '$uid'";
+    }else{
+     $filter = "";
+    }
+
+    $query=$this->db->query("SELECT * FROM `spd` WHERE sregion ='$id' $filter");
+    return $query->result();
+}
+public function get_school_detail_by_szone_id($id,$uid){
+
+    $uData  =  $this->get_user_byid($uid);
+    $dep_id = $uData[0]->dep_id;
+ 
+    if($dep_id == 2){
+         $filter = "AND pi_id = '$uid'";
+    }else if($dep_id == 4){
+         $filter = "AND ins_id = '$uid'";
+    }else if($dep_id == 11){
+         $filter = "AND zh_id = '$uid'";
+    }else if($dep_id == 20){
+         $filter = "AND pro_id = '$uid'";
+    }else{
+     $filter = "";
+    }
+
+    $query=$this->db->query("SELECT * FROM `spd` WHERE szone ='$id' $filter");
+    return $query->result();
+}
+
+
+public function get_task_action_list($task_type_name,$uid){
+
+    $uData  =  $this->get_user_byid($uid);
+    $dep_id = $uData[0]->dep_id;
+ 
+    $perform_by = "(
+        `perform_by`  = '$dep_id' 
+    || `perform_by_2` = '$dep_id' 
+    || `perform_by_3` = '$dep_id' 
+    || `perform_by_4` = '$dep_id'
+    || `perform_by_5` = '$dep_id'
+    ) AND tasktype='$task_type_name'";
+
+    $query=$this->db->query("SELECT * FROM `task_action` WHERE $perform_by");
+    return $query->result();
+}
+
+public function get_spd_by_task_action_list($task_type_id,$uid){
+    $uData  =  $this->get_user_byid($uid);
+    $dep_id = $uData[0]->dep_id;
+ 
+    if($dep_id == 2){
+         $filter = "AND spd.pi_id = '$uid'";
+    }else if($dep_id == 4){
+         $filter = "AND spd.ins_id = '$uid'";
+    }else if($dep_id == 11){
+         $filter = "AND spd.zh_id = '$uid'";
+    }else if($dep_id == 20){
+         $filter = "AND spd.pro_id = '$uid'";
+    }else{
+     $filter = "";
+    }
+
+    $query = $this->db->query("SELECT
+        spd.id as sid,
+        spd.sname
+        FROM
+            tblcallevents
+        LEFT JOIN task_action on task_action.id = tblcallevents.task_action
+        LEFT JOIN spd ON spd.id = tblcallevents.sid
+        WHERE
+            tblcallevents.plan = '1' 
+            AND tblcallevents.user_id = '$uid' 
+            AND tblcallevents.task_action IN($task_type_id) $filter GROUP BY spd.id");
+    return $query->result();
+}
+
+
+
+public function GetState(){
+    $query=$this->db->query("SELECT * FROM `in_state`");
+    return $query->result();
+}
+public function GetCity(){
+    $query=$this->db->query("SELECT * FROM `in_city`");
+    return $query->result();
+}
+public function GetDistrict(){
+    $query=$this->db->query("SELECT * FROM `in_district`");
+    return $query->result();
+}
+public function GetAllRegions(){
+    $query=$this->db->query("SELECT * FROM `region`");
+    return $query->result();
+}
+
+
+public function CompressAndReUploadImageWhenIsExists($file_path, $upload_path) {
+    // Check if the file exists
+if (!file_exists($file_path)) {
+    return "File does not exist.";
+}
+
+// Get image info
+$image_info = getimagesize($file_path);
+$mime = $image_info['mime'];
+
+// Load the image based on its MIME type
+switch ($mime) {
+    case 'image/jpeg':
+        $image = imagecreatefromjpeg($file_path);
+        break;
+    case 'image/png':
+        $image = imagecreatefrompng($file_path);
+        break;
+    case 'image/gif':
+        $image = imagecreatefromgif($file_path);
+        break;
+    default:
+        return "Unsupported image type.";
+}
+
+// Set compression quality (0 - 100 for JPEG, 0 - 9 for PNG)
+$quality = 50; // Adjust as needed
+
+// Delete the existing file
+if (file_exists($file_path)) {
+    unlink($file_path); // Deletes the file
+}
+
+// Save the compressed image with the same filename
+$output_path = $upload_path . basename($file_path);
+
+switch ($mime) {
+    case 'image/jpeg':
+        imagejpeg($image, $output_path, $quality);
+        break;
+    case 'image/png':
+        // Convert quality to 0-9 range for PNG
+        $png_quality = (int)((100 - $quality) / 10);
+        imagepng($image, $output_path, $png_quality);
+        break;
+    case 'image/gif':
+        // GIFs do not support quality adjustment
+        imagegif($image, $output_path);
+        break;
+}
+
+// Free up memory
+imagedestroy($image);
+
+return "Image compressed, existing file deleted, and uploaded successfully to: " . $output_path;
+}
+
+
+
+
+public function CreateNewTaskUsingPlanner($project_code,$task_action,$sid,$user_id,$assigned_by,$fwd_date,$appointment_datetime,$autotask,$status_id,$tptime,$selectby,$filter_by,$task_assigned_date,$aftertask,$comments)
+{
+    $data = array(
+        'project_code'          => $project_code,
+        'task_action'           => $task_action,
+        'sid'                   => $sid,
+        'user_id'               => $user_id,
+        'assigned_by'           => $assigned_by,
+        'fwd_date'              => $fwd_date,
+        'appointment_datetime'  => $appointment_datetime,
+        'autotask'              => $autotask,
+        'plan'                  => 1,
+        'status_id'             => $status_id,
+        'tptime'                => $tptime,
+        'selectby'              => $selectby,
+        'filter_by'             => $filter_by,
+        'task_assigned_date'    => $task_assigned_date,
+        'aftertask'             => $aftertask,
+        'comments'              => $comments
+    );
+
+    $this->db->insert('tblcallevents',$data);
+    $insert_id =  $this->db->insert_id();
+    
+    if ($insert_id) {
+
+         // Insert in Log 
+        $sname              =  $this->get_school_detailbyid($sid)[0]->sname;
+        $task_action_data   =  $this->getTaskAction($task_action);
+        $tasktype           = $task_action_data[0]->tasktype;
+        $taskname           = $task_action_data[0]->taskname;
+        $log_data = [
+            'user_id'       => $user_id,
+            'to_user_id'    => $user_id,
+            'type'          => "Task Plan Using a Planner for a $tasktype",
+            'message'       => "$sname - $tasktype - $taskname - Task planned successfully for this date: $fwd_date, and the filter used for planning this task: $selectby."
+        ];
+        $this->db->insert('user_log', $log_data);
+        return $insert_id;
+    } else {
+        return 0;
+    }
+}
+
+
+public function GetTodaysNotiifications($uid,$cdate){
+
+    $query=$this->db->query("SELECT * FROM `user_log` WHERE (user_id = '$uid' OR to_user_id = '$uid') AND cast(created_at as date) = '$cdate' AND checked = 0 ORDER BY id DESC");
+
+    // $query=$this->db->query("SELECT * FROM `user_log` WHERE (user_id = '$uid' OR to_user_id = '$uid') AND checked = 0 ORDER BY id DESC");
+
+    return $query->result();
+}
+
+public function get_PendingTaskForTodayNext2Days($uid,$nextDay2){
+    $query=$this->db->query("SELECT
+    *
+FROM
+    tblcallevents
+WHERE
+    user_id = '$uid' 
+    AND task_action != '' 
+    AND task_status = 0 
+    AND plan = 1 AND DATE(appointment_datetime) = '$nextDay2' 
+    AND appointment_datetime != '0000-00-00 00:00:00'");
+    return $query->result();
+}
+
+public function get_PendingTaskForTodayNext2DaysTaskTypes($uid,$nextDay2){
+    $query=$this->db->query("SELECT
+   task_action.tasktype,
+   COUNT(tblcallevents.id) as task_count
+FROM
+    tblcallevents
+LEFT JOIN task_action on task_action.id = tblcallevents.task_action
+WHERE
+    tblcallevents.plan = '1' 
+    AND tblcallevents.user_id = '$uid' 
+    AND CAST(tblcallevents.appointment_datetime AS DATE) = '$nextDay2' AND tblcallevents.task_status = 0 
+    GROUP BY task_action.tasktype");
+    return $query->result();
+}
+
+public function getNext2DaysPendingTaskTypeList($uid,$task_action_name,$nextDay2){
+    $query=$this->db->query("SELECT
+	tblcallevents.id as task_id,
+    tblcallevents.project_code,
+    tblcallevents.appointment_datetime,
+    tblcallevents.initiate_datetime,
+    tblcallevents.updated_datetime,
+    tblcallevents.selectby,
+    tblcallevents.task_assigned_date,
+    tblcallevents.comments,
+    tblcallevents.target_date,
+    tblcallevents.targetstatus,
+    tblcallevents.task_status,
+    ta.id as task_action_id,
+    ta.tasktype,
+    ta.taskname,
+    COALESCE(spdr.sname, spd.sname) AS sname
+FROM
+    tblcallevents
+LEFT JOIN task_action ta on ta.id = tblcallevents.task_action
+LEFT JOIN spd on spd.id = tblcallevents.sid
+LEFT JOIN spd_request spdr on spdr.id = tblcallevents.rsid
+WHERE
+    user_id = '$uid' 
+    AND task_action != '' 
+    AND task_status = 0 
+    AND plan = 1 
+    AND DATE(appointment_datetime) = '$nextDay2' 
+    AND appointment_datetime != '0000-00-00 00:00:00' 
+    AND ta.tasktype = '$task_action_name'");
+    return $query->result();
+}
+
+
+
+public function checkforHolidayManageCount($uid,$adate){
+    $checkavholydats = $this->db->query("SELECT * FROM `manage_leave` WHERE uid = $uid AND planner_date ='$adate' AND status = 1");
+    $checkavholydatsData = $checkavholydats->result();
+    $checkavholydatsDatacnt = sizeof($checkavholydatsData);
+    return $checkavholydatsDatacnt;
+}
+
+
+public function getTBLTaskDetailsByTaskID($taskId){
+    $query=$this->db->query("SELECT
+tblcallevents.*,
+task_action.tasktype,
+task_action.taskname,
+COALESCE(spd.sname, spdr.sname) AS sname,
+status.name as school_status
+FROM
+tblcallevents 
+LEFT JOIN task_action ON task_action.id = tblcallevents.task_action
+LEFT JOIN spd ON spd.id = tblcallevents.sid
+LEFT JOIN spd_request spdr ON spdr.id = tblcallevents.rsid
+LEFT JOIN status ON status.id = tblcallevents.status_id
+WHERE
+tblcallevents.id = '$taskId'");
+return $query->result();
+}
+public function GetJoinCallByTaskID($taskId){
+    $query=$this->db->query("SELECT * FROM `joincall` WHERE task_id = '$taskId'");
+    return $query->result();
+}
+public function GetProgramTimelineJoinCallByTaskID($taskId){
+    $query=$this->db->query("SELECT * FROM `join_program_timelie_meeting` WHERE task_id = '$taskId'");
+    return $query->result();
+}
+
+public function StoreJoinCallForFactoryAndInstallationTimeLine($plandate, $uid, $pcode, $meetlink,$tbl_task_id) {
+    // Get bd_id from client_handover
+    $query  = $this->db->get_where('client_handover', ['projectcode' => $pcode]);
+    $data   = $query->row();
+  
+    if (!$data) return false; // Exit if no data found
+
+    $bdid = $data->bd_id;
+   
+    // Get admin_id from user_details in db3
+    $db3    = $this->load->database('db3', TRUE);
+    $query  = $db3->get_where('user_details', ['user_id' => $bdid]);
+    $data2  = $query->row();
+    if (!$data2) return false;
+
+    $adminid = $data2->admin_id;
+
+    
+   
+    // Get piid and insid from spd
+    $this->db->select("GROUP_CONCAT(DISTINCT pi_id) AS piid, GROUP_CONCAT(DISTINCT ins_id) AS insid");
+    $this->db->where('project_code', $pcode);
+    $query = $this->db->get('spd');
+    $data1 = $query->row();
+
+    $piid   = $data1 ? $data1->piid : null;
+    $insid  = $data1 ? $data1->insid : null;
+
+    // Insert into joincall
+    $insertData = [
+        'startt'        => date("Y-m-d H:i:s"),
+        'plant'         => $plandate,
+        'uid'           => $uid,
+        'projectcode'   => $pcode,
+        'meetlink'      => $meetlink,
+        'bdid'          => $bdid,
+        'adminid'       => $adminid,
+        'piid'          => $piid,
+        'insid'         => $insid,
+        'fmid'          => 1,
+        'purid'         => 3,
+        'accid'         => 39,
+        'task_id'       => $tbl_task_id
+    ];
+    
+    $this->db->insert('joincall', $insertData);
+    
+    return $this->db->insert_id(); // Return inserted row ID
+}
+
+
+
+public function update_task_status($task_id,$apr_status,$apr_by){
+
+    $data = array(
+        'approved_status'       => $apr_status,
+        'approved_by'           => $apr_by,
+        'approved_datetime'     => date("Y-m-d H:i:s"),
+    );
+    $this->db->where('id', $task_id);
+    $this->db->update('tblcallevents', $data);
+
+    $query          = $this->db->query("SELECT tblcallevents.*, task_action.tasktype, task_action.taskname FROM `tblcallevents` LEFT JOIN task_action ON task_action.id = tblcallevents.task_action WHERE tblcallevents.id = '$task_id'");
+    $taskData       = $query->result();
+    $taskuser_uid   = $taskData[0]->user_id;
+    $tasktype       = $taskData[0]->tasktype;
+    $taskname       = $taskData[0]->taskname;
+
+    if($apr_status == 1){
+        $apr_message = 'Approved';
+    }else if($apr_status == 2){
+        $apr_message = 'Reject';
+    }
+  
+     // Insert in Log 
+     $log_data = [
+        'user_id'       => $apr_by,
+        'to_user_id'    => $taskuser_uid,
+        'type'          => "Task $apr_message",
+        'message'       => "Task - $taskname - $apr_message Successfully"
+    ];
+    $this->db->insert('user_log', $log_data);
+}
+
+
+
+
+public function AddNewContactinSchoolData($sid, $contact_name, $designation, $contact_no, $email, $uid,$main) {
+    // Fetch SPD details
+    $spd = $this->Menu_model->get_spdbyid($sid);
+
+    if (empty($spd)) {
+        return false; // Return false if no data found
+    }
+
+    $pi     = $spd[0]->pi_id;
+    $zh     = $spd[0]->zh_id;
+    $sname  = $spd[0]->sname;
+    $pcode  = $spd[0]->project_code;
+    $msg    = $pcode . " | " . $sname . " | New Contact Added";
+
+    // Prepare notification data
+    $notifications = [
+        ['msg' => $msg, 'userid' => $pi, 'sid'  => $sid],
+        ['msg' => $msg, 'userid' => $zh, 'sid'  => $sid],
+        ['msg' => $msg, 'userid' => 1, 'sid'    => $sid]
+    ];
+
+    // Insert notifications using batch insert
+    $this->db->insert_batch('notification', $notifications);
+
+    // Insert contact using query builder
+    $data = [
+        'sid'           => $sid,
+        'contact_name'  => $contact_name,
+        'designation'   => $designation,
+        'contact_no'    => $contact_no,
+        'email'         => $email,
+        'added_by'      => $uid,
+        'added_date'    => date("Y-m-d H:i:s")
+    ];
+    
+    $this->db->insert('spd_contact', $data);
+
+
+    $log_data = [
+        'user_id'       => $uid,
+        'to_user_id'    => $uid,
+        'type'          => "Adding New Contact",
+        'message'       => $msg
+    ];
+    $this->db->insert('user_log', $log_data);
+    
+    return $this->db->insert_id(); // Return last inserted ID
+}
+
+public function GetSPDCountByRolesID($roles){
+    $query=$this->db->query("SELECT 
+    s.name,
+    s.id AS status_id,
+    COUNT(spd.id) AS total_count
+FROM 
+    status s
+LEFT JOIN spd ON s.id = spd.status 
+    AND spd.pi_id != '' 
+    AND spd.pm_apr = '1'
+GROUP BY s.id
+
+UNION ALL
+
+SELECT 
+    'Total Schools' AS name,
+    'total' AS status_id,
+    COUNT(spd.id) AS total_count
+FROM spd 
+WHERE spd.pi_id != '' 
+AND spd.pm_apr = '1'
+
+UNION ALL
+
+SELECT 
+    'Pending Schools' AS name,
+    'Pending' AS status_id,
+    COUNT(spd.id) AS total_count
+FROM spd 
+WHERE spd.pi_id != '' 
+AND spd.pm_apr = '0'
+
+ORDER BY 
+    CASE 
+        WHEN name = 'Total Schools' THEN 0   -- Ensures 'Total Schools' is first
+        WHEN name = 'Pending Schools' THEN 1 -- Ensures 'Pending Schools' is second
+        ELSE 2 
+    END, 
+    status_id ASC");
+return $query->result();
+}
+
+
+
+public function GetSPDByRolesID($roles,$types){
+
+    if($types == 'total'){
+        $filter = "AND spd.pm_apr = '1'";
+    }else if($types == 'Pending'){
+        $filter = "AND spd.pm_apr = '0'";
+    }else{
+        $filter = "AND spd.pm_apr = '1' AND spd.status = '$types'";
+    }
+
+
+    $query=$this->db->query("SELECT
+    spd.*,
+    u1.fullname as pi_name,
+    u2.fullname as insta_name,
+    u3.fullname as pro_name,
+    u4.fullname as admin_name,
+    s1.name as school_status_name
+FROM
+    `spd`
+LEFT JOIN user_detail u1 on u1.id = spd.pi_id
+LEFT JOIN user_detail u2 on u2.id = spd.ins_id
+LEFT JOIN user_detail u3 on u3.id = spd.pro_id
+LEFT JOIN user_detail u4 on u4.id = spd.admin_id
+LEFT JOIN status s1 on s1.id = spd.status
+WHERE spd.pi_id != '' $filter
+");
+return $query->result();
+}
+
+
+public function GetSPDByRolesIDUseForGraph($roles,$types){
+
+    if($types == 'total'){
+        $filter = "AND spd.pm_apr = '1'";
+    }else if($types == 'Pending'){
+        $filter = "AND spd.pm_apr = '0'";
+    }else{
+        $filter = "AND spd.pm_apr = '1' AND spd.status = '$types'";
+    }
+
+    $query=$this->db->query("SELECT
+    spd.*,
+    u1.fullname as pi_name,
+    u2.fullname as insta_name,
+    u3.fullname as pro_name,
+    u4.fullname as admin_name,
+    s1.name as school_status_name
+FROM
+    `spd`
+LEFT JOIN user_detail u1 on u1.id = spd.pi_id
+LEFT JOIN user_detail u2 on u2.id = spd.ins_id
+LEFT JOIN user_detail u3 on u3.id = spd.pro_id
+LEFT JOIN user_detail u4 on u4.id = spd.admin_id
+LEFT JOIN status s1 on s1.id = spd.status
+WHERE spd.pi_id != '' $filter
+");
+return $query->result();
+}
+
+
+
+public function GetProgramTimelineData($timline_id){
+    $query=$this->db->query("SELECT
+	tblcallevents.id as task_id,
+    tblcallevents.fwd_date,
+    tblcallevents.project_code,
+    tblcallevents.appointment_datetime,
+    tblcallevents.initiate_datetime,
+    tblcallevents.updated_datetime,
+    tblcallevents.selectby,
+    tblcallevents.task_assigned_date,
+    tblcallevents.time_line_id,
+    tblcallevents.target_date,
+    tblcallevents.pi_time_line_id,
+    tblcallevents.pi_target_date,
+    tblcallevents.comments,
+    tblcallevents.target_date,
+    tblcallevents.targetstatus,
+    tblcallevents.task_status,
+    ta.id as task_action_id,
+    ta.tasktype,
+    ta.taskname,
+    COALESCE(spdr.sname, spd.sname) AS sname,
+    u1.fullname as task_username,
+    u2.fullname as task_assigned_by,
+    s1.name as task_time_status,
+    s2.name as new_status,
+    s3.name as target_status
+FROM
+    tblcallevents
+LEFT JOIN task_action ta on ta.id = tblcallevents.task_action
+LEFT JOIN spd on spd.id = tblcallevents.sid
+LEFT JOIN spd_request spdr on spdr.id = tblcallevents.rsid
+
+LEFT JOIN user_detail u1 on u1.id = tblcallevents.user_id
+LEFT JOIN user_detail u2 on u2.id = tblcallevents.assigned_by
+
+LEFT JOIN status s1 on s1.id = tblcallevents.status_id
+LEFT JOIN status s2 on s2.id = tblcallevents.nstatus_id
+LEFT JOIN status s3 on s3.id = tblcallevents.targetstatus
+WHERE
+   tblcallevents.time_line_id = '$timline_id'");
+    return $query->result();
+}
+
+
+public function GetSchoolTimelineDataBySid($pia_timeline_id,$sid,$program_timeline_id,$uid){
+    $query=$this->db->query("SELECT
+	tblcallevents.id as task_id,
+    tblcallevents.fwd_date,
+    tblcallevents.project_code,
+    tblcallevents.appointment_datetime,
+    tblcallevents.initiate_datetime,
+    tblcallevents.updated_datetime,
+    tblcallevents.selectby,
+    tblcallevents.task_assigned_date,
+    tblcallevents.comments,
+    tblcallevents.target_date,
+    tblcallevents.pi_target_date,
+    tblcallevents.targetstatus,
+    tblcallevents.task_status,
+    ta.id as task_action_id,
+    ta.tasktype,
+    ta.taskname,
+    COALESCE(spdr.sname, spd.sname) AS sname,
+    u1.fullname as task_username,
+    u2.fullname as task_assigned_by,
+    s1.name as task_time_status,
+    s2.name as new_status,
+    s3.name as target_status
+FROM
+    tblcallevents
+LEFT JOIN task_action ta on ta.id = tblcallevents.task_action
+LEFT JOIN spd on spd.id = tblcallevents.sid
+LEFT JOIN spd_request spdr on spdr.id = tblcallevents.rsid
+
+LEFT JOIN user_detail u1 on u1.id = tblcallevents.user_id
+LEFT JOIN user_detail u2 on u2.id = tblcallevents.assigned_by
+
+LEFT JOIN status s1 on s1.id = tblcallevents.status_id
+LEFT JOIN status s2 on s2.id = tblcallevents.nstatus_id
+LEFT JOIN status s3 on s3.id = tblcallevents.targetstatus
+WHERE
+   tblcallevents.time_line_id = '$program_timeline_id'
+   AND tblcallevents.user_id  = '$uid'
+   AND tblcallevents.sid      = '$sid'
+   AND ta.tasktype            != 'Time Line'
+   ");
+    return $query->result();
+}
+
+
+public function GetStatusByID($status_id){
+    $query    =   $this->db->query("SELECT * FROM `status` WHERE id = '$status_id'");
+    return $query->result();
+}
+
+
+public function StoreSchoolTimelineData($projectcode,$sid,$uid,$bdid,$wmessage,$communication1,$communication2,$communication3,$reporttype,$fttp,$rttp,$casestudy,$diy,$blmne,$elmne,$nsp,$utilisation1,$utilisation2,$utilisation3,$outbondc1,$outbondc2,$outbondc3,$cengagement,$exstatusdt,$status,$summeractivity,$winteractivity,$onlineactivity,$webinar,$socialMediaPost1,$socialMediaPost2,$socialMediaPost3,$socialMediaPost4,$academic_year,$tbl_task_id,$ptimeline_id){
+
+    $data = [
+        'academicyear'      => $academic_year,
+        'sid'               => $sid,
+        'projectcode'       => $projectcode,
+        'uid'               => $uid,
+        'piaid'             => $bdid,
+        'bdid'              => '',
+        'wmessage'          => $wmessage,
+        'communication1'    => $communication1,
+        'communication2'    => $communication2,
+        'communication3'    => $communication3,
+        'reporttype'        => $reporttype,
+        'fttp'              => $fttp,
+        'rttp'              => $rttp,
+        'casestudy'         => $casestudy,
+        'diy'               => $diy,
+        'blmne'             => $blmne,
+        'elmne'             => $elmne,
+        'nsp'               => $nsp,
+        'utilisation1'      => $utilisation1,
+        'utilisation2'      => $utilisation2,
+        'utilisation3'      => $utilisation3,
+        'outbondc1'         => $outbondc1,
+        'outbondc2'         => $outbondc2,
+        'outbondc3'         => $outbondc3,
+        'cengagement'       => $cengagement,
+        'exstatusdt'        => $exstatusdt,
+        'status'            => $status,
+        'summeractivity'    => $summeractivity,
+        'winteractivity'    => $winteractivity,
+        'onlineactivity'    => $onlineactivity,
+        'webinar'           => $webinar,
+        'socialMediaPost1'  => $socialMediaPost1,
+        'socialMediaPost2'  => $socialMediaPost2,
+        'socialMediaPost3'  => $socialMediaPost3,
+        'socialMediaPost4'  => $socialMediaPost4,
+        'tbl_task_id'       => $tbl_task_id,
+        'ptimeline_id'      => $ptimeline_id
+    ];
+    $this->db->insert('schooltimeline_planning', $data);
+    return $this->db->insert_id(); // Return inserted row ID
+}
+
+
+public function TotalTaskBetweenTime($uid,$tdate,$time1,$time2){
+  
+    $query = $this->db->query("SELECT * FROM `tblcallevents` WHERE user_id = '$uid' AND (cast(appointment_datetime as DATE) = '$tdate' AND DATE(updated_at) = '$tdate') AND task_action != '' AND plan = 1 AND TIME(updated_at) BETWEEN '$time1' AND '$time2'");
+    // $query = $this->db->query("SELECT * FROM `tblcallevents` WHERE user_id = '$uid' AND DATE(appointmentdatetime) = '$tdate' AND actiontype_id IS NOT NULL AND actiontype_id != '' AND nextCFID = 0 AND lastCFID = 0 AND plan = 1 AND TIME(appointmentdatetime) BETWEEN '$time1' AND '$time2'");
+    return  $query->result();
+}
+
+
+
+public function getTaskAction($aid){
+    $query=$this->db->query("SELECT * FROM `task_action` WHERE id =$aid");
+    return $query->result();
+}
+public function getAllTaskActions(){
+    $query = $this->db->query("SELECT * FROM `task_action`");
+    return $query->result();
+}
+public function getAllDepartments(){
+    $query = $this->db->query("SELECT * FROM `department`");
+    return $query->result();
+}
+
+
+public function get_joincallstartedWitTaskIds($task_id){
+    $query=$this->db->query("SELECT * FROM joincall where task_id= '$task_id' AND joincall.closet is null");
+    return $query->result();
+}
+
+
+
+
+// START TASK EXCUTION BY DEEPAK
+
+public function GetTaskActionDetails($tasktype){
+    $query=$this->db->query("SELECT * FROM `main_task` WHERE `tasktype` = '$tasktype'");
+    return $query->result();
+}
+public function CheckTaskCurrentStages($tasktype,$task_action_id){
+    $query=$this->db->query("SELECT * FROM `main_task` mt WHERE mt.`tasktype` = '$tasktype' AND NOT EXISTS ( SELECT 1 FROM `task_execution_details` ted WHERE ted.`tbe_id` = '$task_action_id' AND ted.`main_task_id` = mt.`id`) AND mt.taskstatus = 1");
+    return $query->result();
+}
+
+public function CheckTaskCurrentStagesByID($id){
+    $query=$this->db->query("SELECT * FROM `main_task` WHERE `id` = '$id'");
+    return $query->result();
+}
+public function CheckAffterThisAutoTaskISExistsOrNot($aftertask_id,$task_action_id){
+    $taskDetails    = $this->GetTBLTaskDetailsByTaskId($aftertask_id);
+    $cur_task_action_id    = $taskDetails[0]->task_action;
+    $task_user_id          = $taskDetails[0]->user_id;
+    $sid                   = $taskDetails[0]->sid;
+    $rsid                  = $taskDetails[0]->rsid;
+    $cid_id                = $taskDetails[0]->cid_id;
+    $sales_cid             = $taskDetails[0]->sales_cid;
+    $project_code          = $taskDetails[0]->project_code;
+    $status_id             = $taskDetails[0]->status_id;
+    $appointment_datetime  = $taskDetails[0]->appointment_datetime;
+
+    // $query=$this->db->query("SELECT * FROM `tblcallevents` WHERE aftertask = '$aftertask_id' AND task_action = '$task_action_id'");
+
+    $query = $this->db->query("SELECT *
+            FROM tblcallevents
+            WHERE (aftertask = '$aftertask_id' AND task_action = '$task_action_id' AND sid = '$sid')
+            OR EXISTS (
+                SELECT 1
+                FROM tblcallevents
+                WHERE sid = $sid
+                    AND user_id = $task_user_id
+                    AND task_action = '$task_action_id'
+                    AND DATE(appointment_datetime) = CURDATE()
+            )");
+
+    return $query->result();
+}
+
+public function GetSchoolInformations($sid){
+    $query=$this->db->query("SELECT
+    spd.id AS SID,
+    spd.sname,
+    spd.project_code,
+    spd.clientname,
+    spd.saddress,
+    spd.sdistrict,
+    spd.tehshil,
+    spd.scity,
+    spd.sstate,
+    spd.szone,
+    spd.slocation,
+    spd.sregion,
+    spd.slanguage,
+    spd.spincode,
+    spd.sayear,
+    spd.waname,
+    spd.wanamelink,
+    spd.website,
+    spd_contact.contact_name,
+    spd_contact.designation,
+    spd_contact.contact_no,
+    spd_contact.email,
+    spd_contact.main
+FROM
+    spd
+     LEFT JOIN spd_contact ON spd_contact.sid = spd.id WHERE spd.id = '$sid'");
+    return $query->result();
+}
+
+public function insertCallEvent($data) {
+    $this->db->insert('tblcallevents', $data);
+    return $this->db->insert_id(); // returns the inserted row ID
+}
+
+
+public function upload_file_common($input_name, $upload_path = 'uploads/')
+{
+    $CI =& get_instance();
+    $CI->load->library(['upload', 'image_lib']);
+
+    // Normalize and check upload path
+    $upload_path = rtrim($upload_path, '/') . '/';
+    if (!is_dir($upload_path)) {
+        mkdir($upload_path, 0777, true);
+    }
+
+    // Get original file extension
+    $original_ext = pathinfo($_FILES[$input_name]['name'], PATHINFO_EXTENSION);
+    $original_ext = strtolower($original_ext);
+
+    // Create unique file name with original extension
+    $unique_filename = uniqid('file_', true) . '.' . $original_ext;
+
+    // Upload configuration
+    $config = [
+        'upload_path'   => $upload_path,
+        'allowed_types' => '*', // allow any file
+        'max_size'      => 0,   // no limit
+        'file_name'     => $unique_filename,
+        'remove_spaces' => true,
+        'overwrite'     => false,
+    ];
+
+    $CI->upload->initialize($config);
+
+    if (!$CI->upload->do_upload($input_name)) {
+        return [
+            'status' => false,
+            'error'  => strip_tags($CI->upload->display_errors())
+        ];
+    }
+
+    $upload_data = $CI->upload->data();
+
+    // If image, compress it
+    $image_mime = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+    if (in_array($upload_data['file_type'], $image_mime)) {
+        $compress_config = [
+            'image_library'  => 'gd2',
+            'source_image'   => $upload_data['full_path'],
+            'maintain_ratio' => true,
+            'quality'        => '70',
+            'width'          => 1280,
+            'height'         => 1280,
+        ];
+
+        $CI->image_lib->initialize($compress_config);
+        $CI->image_lib->resize();
+        $CI->image_lib->clear();
+    }
+
+    // Return result
+    
+
+
+    $file_path = $upload_path.$upload_data['orig_name'];
+    return $file_path;
+   
+    // return [
+    //     'status'        => true,
+    //     'file_name'     => $upload_data['file_name'],     // e.g. file_abc123.jpg
+    //     'extension'     => $upload_data['file_ext'],      // e.g. .jpg
+    //     'upload_path'   => $upload_data['full_path'],     // full path
+    //     'relative_path' => str_replace(FCPATH, '', $upload_data['full_path']) // relative
+    // ];
+}
+
+public function upload_multiple_files_common($input_name, $upload_path = 'uploads/')
+{
+    $CI =& get_instance();
+    $CI->load->library(['upload', 'image_lib']);
+
+    // Normalize and check upload path
+    $upload_path = rtrim($upload_path, '/') . '/';
+    if (!is_dir($upload_path)) {
+        mkdir($upload_path, 0777, true);
+    }
+
+    $files = $_FILES;
+    $file_count = count($_FILES[$input_name]['name']);
+    $file_keys = array_keys($files[$input_name]);
+
+    $results = [];
+
+    for ($i = 0; $i < $file_count; $i++) {
+        $_FILES[$input_name]['name'] = $files[$input_name]['name'][$i];
+        $_FILES[$input_name]['type'] = $files[$input_name]['type'][$i];
+        $_FILES[$input_name]['tmp_name'] = $files[$input_name]['tmp_name'][$i];
+        $_FILES[$input_name]['error'] = $files[$input_name]['error'][$i];
+        $_FILES[$input_name]['size'] = $files[$input_name]['size'][$i];
+
+        // Get original file extension
+        $original_ext = pathinfo($_FILES[$input_name]['name'], PATHINFO_EXTENSION);
+        $original_ext = strtolower($original_ext);
+
+        // Create unique file name with original extension
+        $unique_filename = uniqid('file_', true) . '.' . $original_ext;
+
+        // Upload configuration
+        $config = [
+            'upload_path'   => $upload_path,
+            'allowed_types' => '*', // allow any file
+            'max_size'      => 0,   // no limit
+            'file_name'     => $unique_filename,
+            'remove_spaces' => true,
+            'overwrite'     => false,
+        ];
+
+        $CI->upload->initialize($config);
+
+        if (!$CI->upload->do_upload($input_name)) {
+            $results[] = [
+                'status' => false,
+                'error'  => strip_tags($CI->upload->display_errors())
+            ];
+            continue;
+        }
+
+        $upload_data = $CI->upload->data();
+
+        // If image, compress it
+        $image_mime = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
+        if (in_array($upload_data['file_type'], $image_mime)) {
+            $compress_config = [
+                'image_library'  => 'gd2',
+                'source_image'   => $upload_data['full_path'],
+                'maintain_ratio' => true,
+                'quality'        => '70',
+                'width'          => 1280,
+                'height'         => 1280,
+            ];
+
+            $CI->image_lib->initialize($compress_config);
+            $CI->image_lib->resize();
+            $CI->image_lib->clear();
+        }
+
+        // Return result
+        $results[] = [
+            'status'        => true,
+            'file_name'     => $upload_data['file_name'],     // e.g. file_abc123.jpg
+            // 'extension'     => $upload_data['file_ext'],      // e.g. .jpg
+            // 'upload_path'   => $upload_data['full_path'],     // full path
+            // 'relative_path' => str_replace(FCPATH, '', $upload_data['full_path']), // relative
+            'file_path'     => $upload_path.$upload_data['orig_name'] // relative
+        ];
+    }
+
+    return $results;
+}
+
+  /*** CODE ENDED BY DEEPAK */
 }
