@@ -7066,7 +7066,6 @@ class Menu extends CI_Controller {
         $getTodaysTasks                 = $this->Menu_model->GetTodaysAllTaskByUid($uid, date('Y-m-d'));
         $data['getTodaysTaskCounts']    = $getTodaysTaskCounts;
         $data['getTodaysTasks']         = $getTodaysTasks;
-       
         if(empty($user_day) && count($user_day)<= 0){
             $this->session->set_flashdata('error_message','* Please Start Your Day');
             redirect('Menu/DayManagement');
@@ -7122,8 +7121,6 @@ class Menu extends CI_Controller {
             $depnameData                    = $this->Menu_model->get_depatment_byid($dept);
             $dep_name                       = $depnameData[0]->dep_name;
             $data['getFactoryModelList']    = $this->Menu_model->getFactoryModelList();
-        //  echo $taskId;exit;
-       //  echo $viewname;exit;
            $this->display($dep_name,$viewname,$data,$type='modal');
     }
 
