@@ -145,7 +145,6 @@ span#takeSalifyBtn {
     <input type="hidden" name="main_task_id" id="main_task_id" value="<?= $main_task_id ?>"/>
     <div class="mb-3 text-center">
       <label class="form-label text-capitalize"><?= $taskdetails ?></label>
-
       <?php
       $multiple ='';
       $upload_name = 'start_jaurney';

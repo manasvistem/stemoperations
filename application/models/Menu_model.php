@@ -6080,7 +6080,6 @@ public function GetTodaysAllTaskCountByUid($uid,$tdate,$perform){
     || `task_action`.`perform_by_4` = '$perform'
     || `task_action`.`perform_by_5` = '$perform'
     )";
-
     $query=$this->db->query("SELECT `task_action`.`tasktype`, COUNT(`tblcallevents`.`id`) AS task_count FROM `task_action` LEFT JOIN `tblcallevents` ON `tblcallevents`.`task_action` = `task_action`.`id` AND DATE(`tblcallevents`.`appointment_datetime`) = '$tdate' AND `tblcallevents`.`task_status` = 0 AND `tblcallevents`.`user_id` = '$uid' WHERE $perform_by  GROUP BY `task_action`.`tasktype` ORDER BY `task_action`.`tasktype` ASC");
     return $query->result();
 }
@@ -6123,7 +6122,6 @@ WHERE
 }
 
 public function getTaskDetails($taskId,$taskactionId){
-    
     if($taskactionId == "63"){
         $query =  $this->db->query("SELECT clusterformationapprovaldata.* 
                     FROM  clusterformationapprovaldata  
@@ -6172,12 +6170,11 @@ public function getTaskDetails($taskId,$taskactionId){
 
  public function batch_insert_task_execution($data){
     $this->db->insert_batch('task_execution_details', $data);
+    echo $this->db->last_query();
 }
 
 public function insert_task_execution($data){
-    
     $this->db->insert('task_execution_details', $data);
-   
 }
 
 //  public function task_execution_details($data){

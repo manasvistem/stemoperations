@@ -1,17 +1,15 @@
 <div class="container">
     <div class="container-fluid">
         <h4 class="text-center">Inauguration During Visit Task</h4>
-        <form name="meeting_inauguration" id="visitmeetingForm" action="<?= base_url();?>/Menu/updateVisitDuringInauguration" method="post" enctype="multipart/form-data">
+        <form name="meeting_inauguration" action="<?= base_url();?>/Menu/updateVisitInauguration" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="taskId" value="<?php echo $taskId;?>">
             <!-- First Row -->
             <div class="row">
                 <div class="col-md-12 text-center mb-3">
-                    <label><strong>Take Selfie with School</strong></label>
-                    <input type="file" class="form-control" name="filname[]" id="imgInp" accept="image/*" capture required >
-                    <input type="hidden" id="lat" name="lat">
-                    <input type="hidden" id="lng" name="lng">
+                    <label><strong>Take Selfie at school</strong></label>
+                    <input type="file" class="form-control" name="selfie" id="imgInp" accept="image/*" capture required >
                     <input type="hidden" name="address" id="address">
                     <p id="locationText" class="text-success mt-2"></p>
-        
         <!-- Hidden Fields to Store Latitude & Longitude -->
         <input type="hidden" name="latitude" id="latitude">
         <input type="hidden" name="longitude" id="longitude">
@@ -26,62 +24,59 @@
                 <!-- Left Column -->
                 <div class="col-md-6">
                     <div class="mb-3">
-                        <label><strong>Pre MSC Room Wall 1 Photo</strong></label>
-                        <input type="file" class="form-control" name="pre_inauguration_photo[]" accept="image/*" capture required>
+                        <label><strong>Clear MSC Room Photo 1</strong></label>
+                        <input type="file" class="form-control" name="class_msc_room_photo1" accept="image/*" capture required>
                     </div>
                     <div class="mb-3">
-                        <label><strong> Pre MSC Room Wall 2 Photo</strong></label>
-                        <input type="file" class="form-control" name="during_inauguration_photo[]" accept="image/*" capture required>
+                        <label><strong>Students Model Demo Video 1</strong></label>
+                        <input type="file" class="form-control" name="students_model_video1" accept="video/*" capture required>
                     </div>
                     <div class="mb-3">
-                        <label><strong>Pre MSC Room Wall 3 Photo</strong></label>
-                        <input type="file" class="form-control" name="client_feedback_video[]" accept="image/*" capture required>
+                        <label><strong>Students Model Demo Video 3</strong></label>
+                        <input type="file" class="form-control" name="students_model_video3" accept="video/*" capture required>
                     </div>
+                   
                     <div class="mb-3">
-                        <label><strong>Pre MSC Room Wall 4 Photo</strong></label>
-                        <input type="file" class="form-control" name="more_photos[]" accept="image/*" capture required>
-                    </div>
-                    <div class="mb-3">
-                        <label><strong>Select Not Working Model</strong></label>
-                        <select name="NotWorkingModel" class="form-control" multiple>
+                        <label><strong>Select Non Working Model</strong></label>
+                    <select name="NotWorkingModel[]" id="notWorkingModel" class="form-control" multiple>
                         <option value="">Select Not Working Model</option>
-                            <?php foreach($getFactoryModelList as $key=>$val)
-                            { ?>
-                            <option value="<?php echo $val['id'];?>"><?php echo $val['model_name'];?></option>
-                            <?php 
-                            }
-                            ?>
-                        </select>
-                    </div>
+                            <?php foreach ($getFactoryModelList as $val) { ?>
+                                <option value="<?php echo $val['model_name']; ?>" data-model="<?php echo $val['model_name']; ?>">
+                            <?php echo $val['model_name']; ?>
+                                </option>
+                        <?php } ?>
+                    </select>
+                    <div id="selectedModelsContainer"></div>
+                            </div>
                 </div>
 
                 <!-- Right Column -->
                 <div class="col-md-6">
                     <div class="mb-6">
-                        <label><strong>Pre Inauguration Decoration Photo-2</strong></label>
-                        <input type="file" class="form-control" name="pre_inauguration_photo[]" accept="image/*" capture required>
+                        <label><strong>Clear MSC Room Photo 2</strong></label>
+                        <input type="file" class="form-control" name="class_msc_room_photo2" accept="image/*" capture required>
                     </div>
                     <div class="mb-3">
                         
                     </div>
                     <div class="mb-3">
-                        <label><strong>Client feedback video -2</strong></label>
-                        <input type="file" class="form-control" name="client_feedback_video[]" accept="video/*" capture required>
+                        <label><strong>Students Model Demo Video 2</strong></label>
+                        <input type="file" class="form-control" name="students_model_video2" accept="video/*" capture required>
                     </div>
                     <div class="mb-3 form-check">
-                        <input class="form-check-input" type="checkbox" name="softCopyInaug[]" id="softCopyInaug">
+                        <input class="form-check-input" type="checkbox" name="softCopyInaug" id="softCopyInaug">
                         <label class="form-check-label" for="softCopyInaug"><strong>Have you got a soft copy of the inauguration banner?</strong></label>
                     </div>
                     <div class="mb-3 form-check">
-                        <input class="form-check-input" type="checkbox" name="DIYMaterial[]" id="DIYMaterial">
+                        <input class="form-check-input" type="checkbox" name="DIYMaterial" id="DIYMaterial">
                         <label class="form-check-label" for="DIYMaterial"><strong>Is DIY material arranged?</strong></label>
                     </div>
                     <div class="mb-3 form-check">
-                        <input class="form-check-input" type="checkbox" name="printInaug[]" id="printInaug">
+                        <input class="form-check-input" type="checkbox" name="printInaug" id="printInaug">
                         <label class="form-check-label" for="printInaug"><strong>Have you printed the inauguration banner?</strong></label>
                     </div>
                     <div class="mb-3 form-check">
-                        <input class="form-check-input" type="checkbox" name="DIYCertificates[]" id="DIYCertificates">
+                        <input class="form-check-input" type="checkbox" name="DIYCertificates" id="DIYCertificates">
                         <label class="form-check-label" for="DIYCertificates"><strong>Are DIY certificates printed?</strong></label>
                     </div>
                     <div class="mb-3">
@@ -95,7 +90,7 @@
             </div>
             <!-- Submit Button -->
             <div class="modal-footer" style="align:center;width:20%">
-                <input type="submit" class="btn btn-primary w-100" value="Submit">
+                <input type="submit" class="btn btn-primary w-100" value="Submit" id="submitButton">
             </div>
         </form>
     </div>
@@ -103,6 +98,89 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
+   $(document).ready(function () {
+    $('#notWorkingModel').change(function () {
+        $('#selectedModelsContainer').empty(); // Clear previous selections
+        $('#notWorkingModel option:selected').each(function () {
+            let modelId   = $(this).val();
+            let modelName = $(this).data('model');
+            if (modelId) {
+                let modelHtml = `
+                <div class="selected-model mb-2" data-id="${modelId}">
+                    <strong><span id="modelname">${modelName}</span></strong>
+                        <select class="repair-replace form-control d-inline-block w-auto ml-2" name="modelreturntype">
+                            <option value="">Select Action</option>
+                            <option value="repairpart">Repair Part</option>
+                            <option value="repairmaterial">Repair Material</option>
+                            <option value="replace">Replace</option>
+                        </select>
+                        <div class="repair-part-options d-inline-block ml-2" style="display:none;">
+                                    <select class="model-parts form-control w-auto" name="part_name_${modelName}[]" multiple>
+                                    <option value="">Loading</option>
+                                    </select>
+                                    </div>
+                                     <div class="repair-material-options d-inline-block ml-2" style="display:none;">
+                                        <select class="model-material form-control w-auto" name="material_name_${modelName}[]" multiple>
+                                        <option value="">Loading</option>
+                                        </select>
+                                        </div>
+                </div>`;
+                $('#selectedModelsContainer').append(modelHtml);
+            }
+        });
+    });
+
+    // Handle Repair/Replace selection
+    $(document).on('change', '.repair-replace', function () {
+        let selectedAction      = $(this).val();
+        let parentDiv           = $(this).closest('.selected-model');
+        $(".repair-part-options").hide();
+        if (selectedAction === 'repairpart') {
+                var selectedModel = $(this).closest('.selected-model').find('span').text();
+                loadModelParts(parentDiv.find('.model-parts'),selectedModel);
+            }
+            else if(selectedAction === 'repairmaterial'){
+                var selectedModel = $(this).closest('.selected-model').find('span').text();
+                loadModelMaterials(parentDiv.find('.model-material'),selectedModel);
+                $(this).closest('.selected-model').append();
+            }
+            else {
+                parentDiv.find('.repair-options').hide();
+            }
+    });
+
+    // Load model parts via AJAX
+    function loadModelParts(selectElement,selectedModel) {
+        $.ajax({
+            url: '<?php echo base_url()?>Menu/getModelPartList/', // Update with your actual controller method
+            type: 'POST',
+            dataType: 'json',
+            data : { model_name: selectedModel },
+            success: function (data) {
+                selectElement.empty().append('<option value="">Select Part</option>');
+                    $.each(data, function (key, value) {
+                    selectElement.append('<option value="' + value.part_name + '">' + value.part_name + '</option>');
+                    });
+            }
+        });
+    }
+
+    function loadModelMaterials(selectElement,selectedModel) {
+        $.ajax({
+            url: '<?php echo base_url()?>Menu/getModelMaterialList/', // Update with your actual controller method
+            type: 'POST',
+            dataType: 'json',
+            data : { model_name: selectedModel },
+            success: function (data) {
+                selectElement.empty().append('<option value="" >Select Material</option>');
+                    $.each(data, function (key, value) {
+                    selectElement.append('<option value="' + value.material_name + '">' + value.material_name + '</option>');
+                    });
+            }
+        });
+    }
+});
+
       $(document).ready(function() {
           $('#submitButton').click(function(event) {
               var fileInput = $('#imgInp');
@@ -138,7 +216,8 @@
 
     });
 </script>
-<script type='text/javascript'>$(document).ready(function () {
+<script type='text/javascript'>
+$(document).ready(function () {
     var timerInterval;
     var seconds = 0;
     var isRunning = false;
@@ -150,6 +229,7 @@
             $(this).prop("disabled", true);
            // $(this).text("Stop Task").removeClass("btn-success").addClass("btn-danger");
             $("#timer").show();
+
             timerInterval = setInterval(function () {
                 seconds++;
                 var hrs = Math.floor(seconds / 3600);
@@ -174,33 +254,6 @@
 });
 </script>
 <script type="text/javascript">
-    $(document).ready(function() {
-        $("#installationForm").submit(function (e) {
-          //  alert($(this).attr("action"));
-            e.preventDefault(); // Prevent default form submission
-                $.ajax({
-                    url: $(this).attr("action"), // Get action URL from form
-                    type: "POST",
-                    data: $(this).serialize(), // Serialize form data
-                    success: function (response) {
-                        if (response.status == 'success') {
-                            alert("Task updated successfully!");
-                        //  $("#status").val("Updated"); // Update hidden field
-                        // $("#dynamicStatus").text("Task Status: Updated"); // Update text
-                            $("#modalCenter").hide();
-                            setTimeout(function () {
-                                location.reload(); // Reload the page to return to main view
-                            }, 500);
-                            } else {
-                                alert("Error updating task. Try again.");
-                            }
-                    },
-                    error: function () {
-                        //error occurred
-                    }
-                });
-    });
-    });
    $(document).ready(function () {
     $("#imgInp").click(function () {
         if (navigator.geolocation) {
@@ -226,6 +279,7 @@
                         } else {
                             $("#locationText").html("📍 Location Captured: " + lat + ", " + lon);
                         }
+                        
                     });
                 },
                 function (error) {
@@ -237,4 +291,6 @@
         }
     });
 });
+
+
 </script>
