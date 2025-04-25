@@ -1,71 +1,104 @@
 <div class="container">
     <div class="container-fluid">
-        <h4 class="text-center">Inauguration During Visit Task</h4>
-        <form name="meeting_inauguration" action="<?= base_url();?>/Menu/updateVisitInauguration" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="taskId" value="<?php echo $taskId;?>">
-            <!-- First Row -->
+        <h4 class="text-center mb-4">Inauguration During Visit Task</h4>
+        <form name="meeting_inauguration" action="<?= base_url();?>/Menu/updateDuringVisitInauguration" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="taskId" value="<?= $taskId; ?>">
             <div class="row">
+                <!-- Selfie Input -->
                 <div class="col-md-12 text-center mb-3">
-                    <label><strong>Take Selfie at school</strong></label>
-                    <input type="file" class="form-control" name="selfie" id="imgInp" accept="image/*" capture required >
+                    <label><strong>Take Selfie at School</strong></label>
+                    <input type="file" class="form-control" name="selfie" id="imgInp" accept="image/*" capture required>
                     <input type="hidden" name="address" id="address">
+                    <input type="hidden" name="latitude" id="latitude">
+                    <input type="hidden" name="longitude" id="longitude">
                     <p id="locationText" class="text-success mt-2"></p>
-        <!-- Hidden Fields to Store Latitude & Longitude -->
-        <input type="hidden" name="latitude" id="latitude">
-        <input type="hidden" name="longitude" id="longitude">
                 </div>
-                <div class="col-md-12 text-center mb-3">
+
+                <!-- Start Task Button -->
+                <div class="col-md-12 text-center mb-4">
                     <button type="button" class="btn btn-success" id="startTask">Start Task</button>
                     <span id="timer" class="text-danger" style="font-size: 18px; margin-left: 10px; display: none;">00:00:00</span>
                     <input type="hidden" name="elapsed_time" id="elapsedTime">
                 </div>
-            <!-- Two-Column Layout -->
+            </div>
+
+            <!-- Inauguration Section -->
             <div class="row" id="visitDuringInauguration" style="display:none;">
                 <!-- Left Column -->
                 <div class="col-md-6">
                     <div class="mb-3">
-                        <label><strong>Pre Inaugurtion Decoration Photo-1</strong></label>
+                        <label><strong>Pre Inauguration Decoration Photo-1</strong></label>
                         <input type="file" class="form-control" name="pre_inauguration_deco_photo1" accept="image/*" capture required>
                     </div>
                     <div class="mb-3">
-                        <label><strong>Pre Inaugurtion Decoration Photo-2 </strong></label>
+                        <label><strong>Pre Inauguration Decoration Photo-2</strong></label>
                         <input type="file" class="form-control" name="pre_inauguration_deco_photo2" accept="image/*" capture required>
                     </div>
                     <div class="mb-3">
-                        <label><strong>During Inauguration Photo -1</strong></label>
+                        <label><strong>During Inauguration Photo-1</strong></label>
                         <input type="file" class="form-control" name="during_inauguration_photo1" accept="image/*" capture required>
                     </div>
-                   
+
+                    <!-- Guest Details -->
+                    <div class="mb-3">
+                        <label><strong>Add Guest Details</strong></label>
+                        <button type="button" class="btn btn-secondary btn-sm" id="addGuestBtn">Add</button>
+                        <div id="guestDetailsForm" style="display: none;" class="mt-3">
+                            <div class="row">
+                                <div class="col-md-4 mb-2">
+                                    <input type="text" name="guest_name[]" class="form-control" placeholder="Guest Name">
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <input type="text" name="guest_name[]" class="form-control" placeholder="Company Name">
+                                </div>
+                                <div class="col-md-4 mb-2">
+                                    <input type="text" name="guest_name[]" class="form-control" placeholder="Designation">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Right Column -->
                 <div class="col-md-6">
-                    <div class="mb-6">
-                        <label><strong>Client Feedback Video -1</strong></label>
-                        <input type="file" class="form-control" name="client_feedback_video1" accept="image/*" capture required>
+                    <div class="mb-3">
+                        <label><strong>Client Feedback Video-1</strong></label>
+                        <input type="file" class="form-control" name="client_feedback_video1" accept="video/*" capture required>
                     </div>
                     <div class="mb-3">
-                        <label><strong>Client Feedback Video -2</strong></label>
+                        <label><strong>Client Feedback Video-2</strong></label>
                         <input type="file" class="form-control" name="client_feedback_video2" accept="video/*" capture required>
                     </div>
                     <div class="mb-3">
                         <label><strong>Add More Photos</strong></label>
-                        <input type="file" class="form-control" name="add_more_photos[]" accept="images/*" capture required>
+                        <input type="file" class="form-control" name="add_more_photos[]" accept="image/*" capture required>
                     </div>
-                   
+
+                    <!-- Call with RM -->
                     <div class="mb-3">
-                        <label><strong>Completed MY Task Image</strong></label>
-                        <input type="file" class="form-control" name="completed_my_task" accept="image/*" capture required>
+                        <label><strong>Call with Reporting Manager</strong></label>
+                        <div class="d-flex align-items-center">
+                            <a href="tel:" class="btn btn-outline-primary me-2">📞 Call</a>
+                            <input type="text" name="call_with_rm" class="form-control" placeholder="Remark for the call">
+                        </div>
+                    </div>
+
+                    <!-- Final Selfie -->
+                    <div class="mb-3">
+                        <label><strong>Completed My Task (Final Selfie)</strong></label>
+                        <input type="file" class="form-control" name="complete_task_selfie" accept="image/*" capture required>
                     </div>
                 </div>
             </div>
+
             <!-- Submit Button -->
-            <div class="modal-footer" style="align:center;width:20%">
-                <input type="submit" class="btn btn-primary w-100" value="Submit" id="submitButton">
+            <div class="text-center mt-4">
+                <input type="submit" class="btn btn-primary w-25" value="Submit" id="submitButton">
             </div>
         </form>
     </div>
 </div>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
@@ -263,5 +296,8 @@ $(document).ready(function () {
     });
 });
 
+$('#addGuestBtn').on('click', function () {
+    $('#guestDetailsForm').toggle();
+});
 
 </script>

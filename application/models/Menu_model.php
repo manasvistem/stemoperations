@@ -7401,8 +7401,6 @@ public function getSchoolsWithZones($pro_id){
   }
   /** CODE BY DEEPAK */
 
-
-
   public function get_OLDPendingTask($uid){
     $query=$this->db->query("SELECT * FROM tblcallevents WHERE user_id = '$uid' AND task_action != '' AND task_status = 0 and plan =1 AND DATE(appointment_datetime) < CURDATE() AND appointment_datetime != '0000-00-00 00:00:00'");
     // $query=$this->db->query("SELECT * FROM tblcallevents WHERE assignedto_id = '$uid' AND actiontype_id != '' AND nextCFID = 0 and autotask=1 and plan =1 AND DATE(appointmentdatetime) < CURDATE()");
@@ -8947,9 +8945,15 @@ public function upload_multiple_files_common($input_name, $upload_path = 'upload
             'file_path'     => $upload_path.$upload_data['orig_name'] // relative
         ];
     }
-
     return $results;
 }
 
   /*** CODE ENDED BY DEEPAK */
+
+
+  public function getParentTaskId($currenttaskid){
+    $query  = $this->db->query("SELECT aftertask FROM tblcallevents WHERE id =".$currenttaskid." ");
+   $taskIdresult =  $query->row_array;
+    return $taskIdresult['aftertask'];
+  }
 }

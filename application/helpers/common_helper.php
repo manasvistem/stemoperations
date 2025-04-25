@@ -108,4 +108,13 @@ if(!function_exists('getRMcontact')){
         return $DataSet;
     }
 }
+
+if(!function_exists('getParentTaskId')){
+    function getParentTaskId($taskId){
+        $CI = &get_instance();
+        $CI->load->model('Menu_model');
+        $DataSet = $CI->Menu_model->getParentTaskId($taskId);
+        return $DataSet;
+    }
+}
 ?>

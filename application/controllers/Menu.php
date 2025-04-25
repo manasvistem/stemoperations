@@ -7120,7 +7120,7 @@ class Menu extends CI_Controller {
             $depnameData                    = $this->Menu_model->get_depatment_byid($dept);
             $dep_name                       = $depnameData[0]->dep_name;
             $data['getFactoryModelList']    = $this->Menu_model->getFactoryModelList();
-           echo $viewname; exit;
+            //echo $viewname; exit;
            $this->display($dep_name,$viewname,$data,$type='modal');
     }
 
@@ -7826,7 +7826,6 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7842,7 +7841,6 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7853,7 +7851,7 @@ public function updateTask($tasktypeid=''){
         $client=$this->Menu_model->get_pcbypiid($uid);
         $spd = $this->Menu_model->get_mspd();
         $state=$this->Menu_model->get_state();
-        $this->load->view($dep_name.'/PlanReportWriting', ['state'=>$state,'notify'=>$notify,'region'=>$dr,'dep'=>$dt, 'data'=>$data, 'client'=>$client, 'spd'=>$spd, 'user'=>$user,'year'=>$year]);
+        $this->display($dep_name,'PlanReportWriting', ['state'=>$state,'notify'=>$notify,'region'=>$dr,'dep'=>$dt, 'data'=>$data, 'client'=>$client, 'spd'=>$spd, 'user'=>$user,'year'=>$year],$type='');
     }
     public function StartSummerCamp(){
         $user = $this->session->userdata('user');
@@ -11654,7 +11652,10 @@ $i++;
        $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
        $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
        redirect('Menu/Dashboard');
-}public function updateVisitInauguration(){
+}
+
+
+public function updateDuringVisitInauguration(){
     $posted_data                = $_POST;
     $taskname                   = $_POST['taskType'];
     $tasktypeid                 = $_POST['tasktypeid'];
@@ -11674,12 +11675,15 @@ $i++;
       $file_array_keys      =  array_flip($file_array_keys);
       foreach($file_array_keys as $k=>$v){
           switch($k){
-              case "selfie" :                    $file_array_keys[$k]["main_task_id"]=  $main_task_id = "713";break;
-              case "class_msc_room_photo1" :     $file_array_keys[$k]["main_task_id"]=  $main_task_id = "711";break;
-              case "class_msc_room_photo2" :     $file_array_keys[$k]["main_task_id"] = $main_task_id = "712";break;
-              case 'students_model_video1':      $file_array_keys[$k]["main_task_id"] = $main_Task_id = '715';break;
-              case 'students_model_video2':      $file_array_keys[$k]["main_task_id"] = $main_Task_id = '716';break;
-              case 'students_model_video3':      $file_array_keys[$k]["main_task_id"] = $main_Task_id = '717';break;
+              case "selfie" :                           $file_array_keys[$k]["main_task_id"]=  $main_task_id = "630";break;
+              case "pre_inauguration_deco_photo1" :     $file_array_keys[$k]["main_task_id"]=  $main_task_id = "631";break;
+              case "pre_inauguration_deco_photo2" :     $file_array_keys[$k]["main_task_id"] = $main_task_id = "632";break;
+              case 'during_inauguration_photo1'   :     $file_array_keys[$k]["main_task_id"] = $main_Task_id = '633';break;
+              case 'client_feedback_video1'       :     $file_array_keys[$k]["main_task_id"] = $main_Task_id = '634';break;
+              case 'client_feedback_video2'       :     $file_array_keys[$k]["main_task_id"] = $main_Task_id = '635';break;
+              case 'add_more_photos'              :     $file_array_keys[$k]["main_task_id"] = $main_Task_id = '636';break;
+              case 'complete_task_selfie'         :     $file_array_keys[$k]["main_task_id"] = $main_Task_id = '639';break;
+             // add_more_photos
           }
           $file_array_keys1[$k]['main_task_id'] = $main_task_id;
       }
@@ -11691,48 +11695,21 @@ $i++;
       $nonworkingmodeldata['type']           = 'Replace';
       $currentDate                           = date('Y-m-d');
       $uploaded_files                        = $_FILES;
-      $nonworkingmodellist                   = $posted_data['NotWorkingModel'];
 
-    foreach($nonworkingmodellist as $key=>$val){        
-        // insert non working model in factory tables
-      foreach($posted_data as $k=>$v){
-                    if($k == 'part_name_'.$val ){
-                        foreach($v as $value){
-                            $nonworkingmodeldata['part_name']     = $value;
-                            $nonworkingmodeldata['model_name']    = $val;
-                            $nonworkingmodeldata['user_id']       = $_SESSION['user']['id'];
-                            $nonworkingmodeldata['task_id']       = $taskId;
-                            $nonworkingmodeldata['task_type_id']  = $taskTypeId;
-                            $nonworkingmodeldata['type']          = 'Repair';
-                            $this->Menu_model->insertNonWorkingModelData($nonworkingmodeldata);
-                        }
-                    }
-                    else if($k == 'material_name_'.$val){   
-                        foreach($v as $value){
-                            $nonworkingmodeldata['material_name'] = $value;
-                            $nonworkingmodeldata['model_name']    = $val;
-                            $nonworkingmodeldata['user_id']       = $_SESSION['user']['id'];
-                            $nonworkingmodeldata['task_id']       = $taskId;
-                            $nonworkingmodeldata['task_type_id']  = $taskTypeId;
-                            $nonworkingmodeldata['type']          = 'Repair';
-                           $this->Menu_model->insertNonWorkingModelData($nonworkingmodeldata);
-                        }
-                    }
-             }
-    }
+   
     unset($posted_data['taskId'], $posted_data['taskType'], $posted_data['tasktypeid']);
 
     if(isset($_FILES)){
         foreach($_FILES as $filekey=>$fileval){
-        $uploadPath                       = "uploads/Inauguration/pre_visit/".date('Y-m')."/";
-        $status                           = $this->createDirectoryIfNotExists($uploadPath, $permissions = 0755);
-        $file_data['attachment_link']     = $this->uploadFile($_FILES[$filekey],$uploadPath);
-        $file_data['task_id']             = $taskId;
-        $file_data['user_id']             = $_SESSION['user']['id'];
-        $file_data['created_at']          = date('Y-m-d h:i:s');
-        $file_data['main_task_id']        = $file_array_keys1[$filekey]['main_task_id'];
-        $tbe_attachement_id               = $this->Menu_model->insertTasksWithAttachements($file_data);
-       // $taskInsertArr1[]                 = ['tbe_attachment_id'=>$tbe_attachement_id];
+            $uploadPath                       = "uploads/Inauguration/during_visit/".date('Y-m')."/";
+            $status                           = $this->createDirectoryIfNotExists($uploadPath, $permissions = 0755);
+            $file_data['attachment_link']     = $this->uploadFile($_FILES[$filekey],$uploadPath);
+            $file_data['task_id']             = $taskId;
+            $file_data['user_id']             = $_SESSION['user']['id'];
+            $file_data['created_at']          = date('Y-m-d h:i:s');
+            $file_data['main_task_id']        = $file_array_keys1[$filekey]['main_task_id'];
+            $tbe_attachement_id               = $this->Menu_model->insertTasksWithAttachements($file_data);
+        // $taskInsertArr1[]                  = ['tbe_attachment_id'=>$tbe_attachement_id];
         }
     }
     
@@ -11741,42 +11718,56 @@ foreach($file_array_keys as $file_key=>$file_values){
 if($file_key == 'selfie'){
     $taskInsertArr1[]=[
         'task_response' => "yes",
-        'main_Task_id'  => "713",
+        'main_Task_id'  => "630",
         'remark'        => ""
     ] + $commonColumns;
 }
-else if($file_key == 'class_msc_room_photo1'){
+else if($file_key == 'pre_inauguration_deco_photo1'){
     $taskInsertArr1[]=[
         'task_response' => "yes",
-        'main_Task_id'  => "711",
+        'main_Task_id'  => "631",
         'remark'        => ""
     ] + $commonColumns;
 }
-else if($file_key == 'class_msc_room_photo2'){
+else if($file_key == 'pre_inauguration_deco_photo2'){
     $taskInsertArr1[]=[
         'task_response' => "yes",
-        'main_Task_id'  => "712",
+        'main_Task_id'  => "632",
         'remark'        => ""
     ] + $commonColumns;
 }
-else if($file_key == 'students_model_video1'){
+else if($file_key == 'during_inauguration_photo1'){
     $taskInsertArr1[]=[
         'task_response' => "yes",
-        'main_Task_id'  => "715",
+        'main_Task_id'  => "633",
         'remark'        => ""
     ] + $commonColumns;
 }
-else if($file_key == 'students_model_video2'){
+else if($file_key == 'client_feedback_video1'){
     $taskInsertArr1[]=[
         'task_response' => "yes",
-        'main_Task_id'  => "716",
+        'main_Task_id'  => "634",
         'remark'        => ""
     ] + $commonColumns;
 }
-else if($file_key == 'students_model_video3'){
+else if($file_key == 'client_feedback_video2'){
     $taskInsertArr1[]=[
         'task_response' => "yes",
-        'main_Task_id'  => "717",
+        'main_Task_id'  => "635",
+        'remark'        => ""
+    ] + $commonColumns;
+}
+else if($file_key == 'add_more_photos'){
+    $taskInsertArr1[]=[
+        'task_response' => "yes",
+        'main_Task_id'  => "636",
+        'remark'        => ""
+    ] + $commonColumns;
+}
+else if($file_key == 'complete_task_selfie'){
+    $taskInsertArr1[]=[
+        'task_response' => "yes",
+        'main_Task_id'  => "639",
         'remark'        => ""
     ] + $commonColumns;
 }
@@ -11788,13 +11779,10 @@ $i++;
             // Assign main_Task_id based on the key
             if($taskperformedby == '2'){
             switch ($k){
-                case 'NotWorkingModel':         $main_Task_id = '718';   break;
-                case 'softCopyInaug':           $main_Task_id = '719';   break;
-                case 'printInaug':              $main_Task_id = '720';   break;
-                case 'DIYMaterial':             $main_Task_id = '721';   break;
-                case 'DIYCertificates':         $main_Task_id = '722';   break;
+                case 'guest_name':         $main_Task_id = '637';   break;
+                case 'call_with_rm':       $main_Task_id = '638';   break;
                 default:
-                continue 2; // Skip unknown keys
+                continue 2; // Skip unknown key
             }
            }
            if(is_array($val) || count($val)>1){
@@ -11814,8 +11802,6 @@ $i++;
     $current_date =  date('Y-m-d h:i:s');
     if (!empty($taskInsertArr1)){
         $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
-        // $attachmentData = 'task_id'=>$taskId 'attachment_link'=>,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date;
-        //   $this->Menu_model->insertTasksWithAttachements(['task_id'=>$taskId ,'attachment_link'=>$attachment_link,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date]);
     }
        $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
        $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
@@ -11832,7 +11818,7 @@ public function visitDuringInauguarationTask($taskId){
      $data['taskId']                 = $taskId;
      $data['taskType']               = $taskType;
      $data['getFactoryModelList']    = $this->Menu_model->getFactoryModelList();
-     $this->display($dep_name,"visitDuringInaugurationView",$data,$type="");
+     $this->display($dep_name,"visitDuringInaugurationTaskView",$data,$type="");
 }
 
 public function visitPreInauguarationTask($taskId){
@@ -11845,7 +11831,7 @@ public function visitPreInauguarationTask($taskId){
     $data['taskId']                 = $taskId;
     $data['taskType']               = $taskType;
     $data['getFactoryModelList']    = $this->Menu_model->getFactoryModelList();
-    $this->display($dep_name,"visitPreInauguarationTaskView",$data,$type="");
+    $this->display($dep_name,"visitPreInaugurationTaskView",$data,$type="");
 }
 
 public function visitDuringInstallationTask($taskId){
@@ -13447,7 +13433,6 @@ if ($datetime1 < $datetime2) {
         $this->session->set_flashdata('error_message','Total '. $pendingautotaskcmpcnt . ' Pending Auto Task, First Complete Your Pending Autotask Before Going Task Planner Page');
         redirect('Menu/Dashboard2');
     }
-    
     $oldplanbutnotinited = $this->Menu_model->get_all_old_spd_planbutnotinited($uid);
     $oldplanbutnotinitedcnt = sizeof($oldplanbutnotinited);
     if($oldplanbutnotinitedcnt > 0){
@@ -13455,7 +13440,6 @@ if ($datetime1 < $datetime2) {
         // redirect("Menu/TaskPlanner2/".$adate);
     }   
     $this->CheckPlannerTimeisReadyorNot($uid,$adate);
- 
     $planbutnotinitedcnt = sizeof($planbutnotinited);
     $getreqData  =  $this->db->query("SELECT * FROM `task_plan_for_today` WHERE user_id =$uid and date='$adate'");
     $getreqData =  $getreqData->result();
@@ -13468,8 +13452,15 @@ if ($datetime1 < $datetime2) {
     $getPendingTimeTask  =  $this->db->query("SELECT * FROM `tblcallevents` WHERE user_id = $uid  AND (task_status = 0 AND plan = 1 AND autotask = 1)");
     $getPendingTimeTask =  $getPendingTimeTask->result();
     $timecount = 0;
+    if(isset($taskmin->actiontype_id)){
+        $actionTypeId =$taskmin->actiontype_id;
+    }
+    else{
+        $actionTypeId = '0';
+    }
+
     foreach ($getPendingTimeTask as $taskmin){
-        $taskactiontime = $this->Menu_model->getTaskAction($taskmin->actiontype_id);
+        $taskactiontime = $this->Menu_model->getTaskAction($actionTypeId);
         $timecount += $taskactiontime[0]->yest;
     }
     $hours = floor($timecount / 60);
@@ -13477,8 +13468,8 @@ if ($datetime1 < $datetime2) {
     $mesaage = $hours ." Hours ".$minutes." Minutes Pending For Task Work";
 
 
-$getplandateindata  =  $this->db->query("SELECT * FROM `autotask_time` where user_id='$uid' AND date ='$adate'");
-$getplandateindata =  $getplandateindata->result();
+    $getplandateindata  =  $this->db->query("SELECT * FROM `autotask_time` where user_id='$uid' AND date ='$adate'");
+    $getplandateindata =  $getplandateindata->result();
 
     if(!empty($user)){
         $this->display($dep_name,'TaskPlanner2',['uid'=>$uid,'user'=>$user,'dep_id'=>$dep_id,'planbutnotinitedcnt'=>$planbutnotinitedcnt,'getplandt'=>$getplandateindata,'pendingtask'=>$pcount, 'mesaage'=>$mesaage,'adate'=>$adate,'tptime'=>$tptime,'getAutoTaskTime'=>$getAutoTaskTime,'getreqData'=>$getreqData,'oldPendTask'=>$oldplanbutnotinited,'type_id'=>$uyid],$type='');
@@ -14893,9 +14884,6 @@ public function set_phtimeline(){
 
 
 // End to Set Set School Timeline
-
-
-
 
 
 public function updateSchoolIdentificationView(){
@@ -22826,19 +22814,17 @@ public function AnnualReportSubmit(){
 // Closed Annual Report
 // START New Client Report
 public function NewClientReportSubmit(){
-
     $user           = $this->session->userdata('user');
     $data['user']   = $user;
     $uid            = $user['id'];
     $id             =  $user['dep_id'];
+
     $this->load->model('Menu_model');
     $this->load->library('session');
 
     $taskId                 = $this->input->post('taskId');
     $main_task_id           = $this->input->post('main_task_id');
     $stage_message          = $this->input->post('stage_message');
-
-
     $currentStagesDatas         = $this->Menu_model->CheckTaskCurrentStagesByID($main_task_id);
     $currentStagesData          = $currentStagesDatas[0];
     $currentStages_taskname     = $currentStagesData->taskname;
@@ -22858,9 +22844,8 @@ public function NewClientReportSubmit(){
                 );
         
     $this->db->insert('tblcallevents_attachments', $data_attachment);
-    $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
-    $final_remark = 'Successs;';
-
+    $attachment_id  = $this->db->insert_id();  // ← Get the inserted ID
+    $final_remark   = 'Successs;';
         $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
         $taskname       = $taskDetails[0]->taskname;
         $sname          = $taskDetails[0]->sname;
@@ -22897,11 +22882,8 @@ public function NewClientReportSubmit(){
             'message'    => "$currentStages_taskname - $currentStages_taskdetails - Complete  Successfully !!"
         ];
         $this->db->insert('user_log', $log_data);
-
         $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
-
     redirect('Menu/Dashboard');
- 
 }
 
 // Closed New Client Report
@@ -22980,9 +22962,17 @@ public function CustomizedReportsSubmit(){
         $this->db->insert('user_log', $log_data);
 
         $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
-
     redirect('Menu/Dashboard');
  
+}
+public function findParentTaskId($currTaskId){
+    if(!empty($currTaskId)){
+      $parenttaskId =  $this->Menu_model->getParentTaskId($currTaskId);
+      return $parenttaskId;
+    }
+    else{
+        redirect('Menu/Dashboard');
+    }
 }
 
 // Closed Customized Reports Submit

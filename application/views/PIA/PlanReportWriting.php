@@ -91,7 +91,6 @@
                         <option>State Report Writing</option>
                     </select>
                   </div>
-                  
                   <div class="form-group">
                     <label>Select Client</label>
                     <select class="custom-select rounded-0" name="pcode" id="pcode" >
@@ -106,7 +105,6 @@
                     <label>School Name</label>
                     <select class="custom-select rounded-0" name="spd_id" id="spd_id"></select>
                 </div>
-                  
                   <div class="form-group">
                     <!--
                     <input type="text" list="state" name="statename" id="statename"  class="form-control">
