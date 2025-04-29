@@ -8947,13 +8947,21 @@ public function upload_multiple_files_common($input_name, $upload_path = 'upload
     }
     return $results;
 }
-
   /*** CODE ENDED BY DEEPAK */
-
 
   public function getParentTaskId($currenttaskid){
     $query  = $this->db->query("SELECT aftertask FROM tblcallevents WHERE id =".$currenttaskid." ");
    $taskIdresult =  $query->row_array;
     return $taskIdresult['aftertask'];
+  }
+
+  public function getTeachersByTask($taskId){
+   $query        =  $this->db->query("SELECT spd_contact.id,spd_contact.contact_name 
+                                    FROM tblcallevents LEFT JOIN spd_contact
+                                    ON spd_contact.id = tblcallevents.sid 
+                                    WHERE tblcallevents.id ='".$taskId."'");
+                                 //   echo $this->db->last_query();exit;
+    $resulteacherList =  $query->result_array();
+    return $resulteacherList;
   }
 }

@@ -9,8 +9,9 @@
         <label class="form-label">Start Your Journey</label>
             <div class="form-check form-check-inline">
                 <a href="<?php echo base_url()?>Menu/visitDuringIdentification/<?php echo $taskId;?>" target="_blank" class="btn btn-primary" id="startyourjourney">
-                    <i class="bi bi-play-fill"></i> Start
+                    <i class="bi bi-play-fill"></i> Start 
                 </a>
+                <input type="hidden" value="" name="start_time">
             </div>
     </div>
     <?php
@@ -140,41 +141,16 @@
             $("#faq_maint").hide();
         }
       });
-    //  if(action == 'yes' && purpose == "yes"){
-    //         $("#faq_maint").show();
-    // }
-/*
-$("#maintenanceForm").submit(function (e) {
- e.preventDefault(); // Prevent default form submission
-    $.ajax({
-        url: $(this).attr("action"), // Get action URL from form
-        type: "POST",
-        data: $(this).serialize(), // Serialize form data
-        dataType: "json",
-        success: function (response) {
-            if (response.status == 'success') {
-                alert("Task updated successfully!");
-              //  $("#status").val("Updated"); // Update hidden field
-               // $("#dynamicStatus").text("Task Status: Updated"); // Update text
-                $("#modalCenter").hide();
-                setTimeout(function () {
-            location.reload(); // Reload the page to return to main view
-        }, 500);
-            } else {
-                alert("Error updating task. Try again.");
-            }
-        },
-        error: function () {
-            //error occurred
 
-        }
-    });
-  
-});  */
+$("#startyourjourney").on("click", function(e) {
+        e.preventDefault(); // prevent the default link behavior
+        let startTime = new Date().getTime();
+        $('input[name="start_time"]').val(startTime); // store in hidden input if needed
+        let baseUrl = $(this).attr('href'); // get the base href
+        let fullUrl = baseUrl + '/' + encodeURIComponent(startTime); // append query param
+        window.open(fullUrl, '_blank');
+});
 
-$("#startyourjourney").click(function(){
-
-})
 })
 </script>
 

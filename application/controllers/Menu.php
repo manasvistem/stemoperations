@@ -1215,7 +1215,6 @@ class Menu extends CI_Controller {
         $data['user_day_start_from']        = isset($user_day_start_from->userworkfrom) ? $user_day_start_from->userworkfrom :"" ;
         $data['userworkfrom_val']           = isset($user_day_start_from->TYPE) ? $user_day_start_from->TYPE :"" ;
         $data['dep_name']                   = $dep_name;
-
         if($yestdatacnt == 1){ 
             $this->display($dep_name,'close_day_page',$data,$type='');
         }
@@ -1266,20 +1265,20 @@ class Menu extends CI_Controller {
     }
     public function CreateJoinCallHI(){
         date_default_timezone_set("Asia/Calcutta");
-        $tdate=date('Y-m-d H:i:s');
-        $user = $this->session->userdata('user');
-        $data['user'] = $user;$uid= $user['id'];
-        $uid= $user['id'];
-        $id =  $user['dep_id'];
-        
-        $dt=$this->Menu_model->get_depatment_byid($id);
-        $dep_name = $dt[0]->dep_name;
+        $tdate          = date('Y-m-d H:i:s');
+        $user           = $this->session->userdata('user');
+        $data['user']   = $user;$uid= $user['id'];
+        $uid            = $user['id'];
+        $id             =  $user['dep_id'];
+        $dt             = $this->Menu_model->get_depatment_byid($id);
+        $dep_name       = $dt[0]->dep_name;
         if(!empty($user)){
-            $this->load->view($dep_name.'/CreateJoinCallHI.php',['uid'=>$uid,'user'=>$user]);
+            $this->display($dep_name,'CreateJoinCallHI',['uid'=>$uid,'user'=>$user],$type='');
         }else{
             redirect('Menu/main');
         }
     }
+
     public function SelseOTReview(){
         date_default_timezone_set("Asia/Calcutta");
         $tdate=date('Y-m-d H:i:s');
@@ -1291,7 +1290,7 @@ class Menu extends CI_Controller {
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
         if(!empty($user)){
-            $this->load->view($dep_name.'/SelseOTReview.php',['uid'=>$uid,'user'=>$user]);
+            $this->display($dep_name,'/SelseOTReview.php',['uid'=>$uid,'user'=>$user],$type='');
         }else{
             redirect('Menu/main');
         }
@@ -1307,7 +1306,7 @@ class Menu extends CI_Controller {
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
         if(!empty($user)){
-            $this->load->view($dep_name.'/ProgramReview.php',['uid'=>$uid,'user'=>$user]);
+            $this->display($dep_name,'ProgramReview.php',['uid'=>$uid,'user'=>$user],$type='');
         }else{
             redirect('Menu/main');
         }
@@ -1323,7 +1322,7 @@ class Menu extends CI_Controller {
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
         if(!empty($user)){
-            $this->load->view($dep_name.'/PIAReview.php',['uid'=>$uid,'user'=>$user]);
+            $this->display($dep_name,'PIAReview.php',['uid'=>$uid,'user'=>$user],$type='');
         }else{
             redirect('Menu/main');
         }
@@ -1339,7 +1338,7 @@ class Menu extends CI_Controller {
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
         if(!empty($user)){
-            $this->load->view($dep_name.'/AllReviewac.php',['uid'=>$uid,'user'=>$user]);
+            $this->display($dep_name,'AllReviewac.php',['uid'=>$uid,'user'=>$user],$type='');
         }else{
             redirect('Menu/main');
         }
@@ -7084,7 +7083,8 @@ class Menu extends CI_Controller {
             $data['dep_name']   = $data['dt'][0]->dep_name;
             $dep_name           = $data['dep_name'];
             $data['utype']      = $data['dt'][0]->id;
-           
+          //  dd($getTeachers);
+
            if(!empty($user)){
                 if($data['dep_name'] == "ProgramManager"){
                   //  $data['bdrequest']  =   $this->display($dep_name,'bdrequest_data',$data,$type='');
@@ -7120,7 +7120,7 @@ class Menu extends CI_Controller {
             $depnameData                    = $this->Menu_model->get_depatment_byid($dept);
             $dep_name                       = $depnameData[0]->dep_name;
             $data['getFactoryModelList']    = $this->Menu_model->getFactoryModelList();
-            //echo $viewname; exit;
+        // echo $viewname; exit;
            $this->display($dep_name,$viewname,$data,$type='modal');
     }
 
@@ -7166,9 +7166,9 @@ class Menu extends CI_Controller {
         }
     }
 
-    public function PreInaugurationVisitUpdate(){
-//dd($_POST);
-    }
+//     public function PreInaugurationVisitUpdate(){
+// dd($_POST);
+//     }
 
     public function PreInaugurationCallUpdate(){
         $post_data                  = $_POST;
@@ -7224,7 +7224,7 @@ class Menu extends CI_Controller {
            $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
         redirect('Menu/Dashboard');
     }
-
+/*
 public function updateTask($tasktypeid=''){
     $post_data          = $_POST;
     $taskname           = $_POST['taskType'];
@@ -7279,8 +7279,8 @@ public function updateTask($tasktypeid=''){
               $updateWithAttachemnts            = $this->Menu_model->insertTasksWithAttachements($post_data);
           }
       }
-  }
-  
+  } */
+
   public function uploadFile($data,$uploadPath){
         $_FILES['file']['name']      = $data['name'];
         $_FILES['file']['type']      = $data['type'];
@@ -7308,10 +7308,10 @@ public function updateTask($tasktypeid=''){
         }
   }
   
-  public function loadTaskViewPage($viewname,$data){
-     $viewData = $this->load->view($viewname,$data);
-     return $viewData;
-  }
+//   public function loadTaskViewPage($viewname,$data){
+//      $viewData = $this->load->view($viewname,$data);
+//      return $viewData;
+//   }
   
   public function display($dept_name,$viewname,$data,$type){
         if($type !='modal'){
@@ -15017,7 +15017,7 @@ public function updateSchoolVisitIdentification(){
    redirect('Menu/Dashboard');
    /** */
 }
-public function visitDuringIdentification($taskId){
+public function visitDuringIdentification($taskId,$currTime){
     $user              = $this->session->userdata('user');
     $uid               = $user['user_id'];
     $uyid              = $user['type_id'];
@@ -15026,6 +15026,7 @@ public function visitDuringIdentification($taskId){
     $dep_name          = $dt[0]->dep_name;
     $data['taskId']                 = $taskId;
     $data['taskType']               = $taskType;
+    $data['currTime']               = $currTime;
     $this->display($dep_name,"visitDuringIdentificationView",$data,$type="");
 }
 
@@ -22733,41 +22734,35 @@ public function HalfYearlyReportSubmit(){
 // Closed Half Yearly Report
 // START Annual Report
 public function AnnualReportSubmit(){
-
     $user           = $this->session->userdata('user');
     $data['user']   = $user;
     $uid            = $user['id'];
-    $id             =  $user['dep_id'];
+    $id             = $user['dep_id'];
+
     $this->load->model('Menu_model');
     $this->load->library('session');
-
     $taskId                 = $this->input->post('taskId');
     $main_task_id           = $this->input->post('main_task_id');
     $stage_message          = $this->input->post('stage_message');
-
-
     $currentStagesDatas         = $this->Menu_model->CheckTaskCurrentStagesByID($main_task_id);
     $currentStagesData          = $currentStagesDatas[0];
     $currentStages_taskname     = $currentStagesData->taskname;
     $currentStages_taskdetails  = $currentStagesData->taskdetails;
     $currentStages_stage        = $currentStagesData->taskaction;
-
     $uploadPath = "uploads/AnnualReport/".date("Y").'/'.date('m');
-
-        $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
+    $file_path = $this->Menu_model->upload_file_common('start_jaurney',$uploadPath);
     
-                $data_attachment = array(
-                    'task_id'           => $taskId,
-                    'main_task_id'      => $main_task_id,
-                    'attachment_link'   => $file_path,
-                    'user_id'           => $uid,
-                    'status'            => 1
-                );
+        $data_attachment = array(
+            'task_id'           => $taskId,
+            'main_task_id'      => $main_task_id,
+            'attachment_link'   => $file_path,
+            'user_id'           => $uid,
+            'status'            => 1
+        );
         
     $this->db->insert('tblcallevents_attachments', $data_attachment);
     $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
-    $final_remark = 'Successs;';
-
+    $final_remark  = 'Successs;';
         $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
         $taskname       = $taskDetails[0]->taskname;
         $sname          = $taskDetails[0]->sname;
@@ -22797,16 +22792,13 @@ public function AnnualReportSubmit(){
         );
         $this->db->where('id', $taskId);
         $this->db->update('tblcallevents', $data);
-
         $log_data = [
             'user_id'    => $uid,
             'type'       => $currentStages_taskname,
             'message'    => "$currentStages_taskname - $currentStages_taskdetails - Complete  Successfully !!"
         ];
         $this->db->insert('user_log', $log_data);
-
         $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
-
     redirect('Menu/Dashboard');
  
 }

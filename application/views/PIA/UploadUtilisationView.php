@@ -15,10 +15,9 @@
                     <label for="utilisationUpload" class="form-label">Upload Utilisation</label>
                     <input type="file" class="form-control" id="utilisationUpload" name="utilisationImage" accept="image/*" required>
                 </div>
-
                 <!-- Model Multi-Select -->
                 <div class="row g-4">
-    <?php for ($class = 1; $class <= 10; $class++) { ?>
+    <?php for ($class = 5; $class <= 10; $class++) { ?>
         <div class="col-md-6">
             <label for="modelSelect_<?php echo $class; ?>" class="form-label">Class <?php echo $class; ?> - Select Models</label>
             <select class="form-select model-select" id="modelSelect_<?php echo $class; ?>" name="models[<?php echo $class; ?>][]" multiple="multiple">
@@ -31,10 +30,18 @@
     <?php } ?>
 </div>
                 <!-- Teacher Dropdown -->
-                <div class="col-md-6">
+            <div class="col-md-6"><?php $getTeachers =getTeachersByTask($taskId); ?>
                     <label for="teacherSelect" class="form-label">Select Teacher</label>
                     <select class="form-select" id="teacherSelect" name="teacher">
                         <option value="">-- Select --</option>
+                        <?php 
+                        if(isset($getTeachers)){
+                        foreach($getTeachers as $key=>$val){
+                            ?>
+                            <option value="<?php echo $key;?>"><?php echo $val['contact_name']?></option>
+                            <?php
+                        }
+                    }?>
                         <!-- Add more teachers as needed -->
                     </select>
                 </div>
@@ -54,7 +61,6 @@
                         <option value="Other">Other</option>
                     </select>
                 </div>
-
                 <!-- Conditional Other Remark Textarea -->
                 <div class="col-md-6" id="otherRemarkBox" style="display:none;">
                     <label for="otherRemark" class="form-label">Other Remark</label>
@@ -97,9 +103,7 @@
                     });
                 }
             });
-
     // Existing Select2 + Other Remark logic
-    
 });
 
     </script>

@@ -113,6 +113,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
     $(document).ready(function() {
+        console.log($("#start_time").val());
     // Function to check total students match
     function validateStudentCount() {
         let totalStudents = parseInt($("#total_students").val()) || 0;

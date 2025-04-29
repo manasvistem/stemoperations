@@ -117,4 +117,12 @@ if(!function_exists('getParentTaskId')){
         return $DataSet;
     }
 }
+    if(!function_exists('getTeachersByTask')){
+        function getTeachersByTask($taskId){
+            $CI = &get_instance();
+            $CI->load->model('Menu_model');
+            $DataSet = $CI->Menu_model->getTeachersByTask($taskId);
+            return $DataSet;
+        }
+}
 ?>

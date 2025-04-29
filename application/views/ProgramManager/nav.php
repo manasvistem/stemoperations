@@ -124,14 +124,11 @@
                 <img class="img-fluid" style="width: 200px;" src="https://stemlearning.in/wp-content/uploads/2020/07/stem-new-logo-2-1.png" alt="">
               </span>
             </a>
-
             <a href="<?=base_url() ?>Menu/javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
               <i class="bx bx-chevron-left bx-sm d-flex align-items-center justify-content-center"></i>
             </a>
           </div>
-
           <div class="menu-inner-shadow"></div>
-
           <ul class="menu-inner py-1">
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Request</span></li>
               <li class="menu-item">
