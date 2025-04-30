@@ -11,6 +11,7 @@
         <a href="<?php echo base_url()?>/Menu/visitDuringMaintenance/<?php echo $taskId;?>" target="_blank" class="btn btn-primary" id="startyourjourney">
            <i class="bi bi-play-fill"></i> Start Your Journey
         </a>
+        <input type="hidden" value="" name="start_time">
         </div>
       </div>
       <!-- <div class="mb-3" id="purpose">

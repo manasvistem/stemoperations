@@ -12,6 +12,7 @@
     <h4 class="text-center">During FTTP Visit Task</h4>
     <form name="fttpVisitForm" action="<?= base_url();?>Menu/UpdateFTTPDuringVisit" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="taskId" value="<?php echo $taskId; ?>"/>
+        <input type="hidden" name="starttime" value="<?php echo $starttime; ?>"/>
         <!-- <input type="hidden" name="taskType" value="<?php echo $taskType; ?>"/>
         <input type="hidden" name="tasktypeid" value="<?php echo $tasktypeid; ?>"/>   -->
         <!-- Image Upload Fields -->
@@ -180,7 +181,6 @@ $(document).ready(function () {
                     (hrs < 10 ? "0" : "") + hrs + ":" +
                     (mins < 10 ? "0" : "") + mins + ":" +
                     (secs < 10 ? "0" : "") + secs;
-
                 $("#timer").text(formattedTime);
                 $("#elapsedTime").val(seconds); // Store elapsed time in hidden field
             }, 1000);

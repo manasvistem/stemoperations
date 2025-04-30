@@ -8,6 +8,8 @@
                 <a href="<?php echo base_url()?>Menu/visitDuringBaselineME/<?php echo $taskId;?>" target="_blank" class="btn btn-primary" id="startyourjourney">
                     <i class="bi bi-play-fill"></i> Start
                 </a>
+                <input type="hidden" value="" name="start_time">
+
             </div>
     </div>
     <?php

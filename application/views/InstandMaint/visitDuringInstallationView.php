@@ -5,6 +5,7 @@
             <input type="hidden" name="taskId" value="<?php echo $taskId; ?>"/>
             <input type="hidden" name="taskType" value="<?php echo $taskType; ?>"/>
             <input type="hidden" name="tasktypeid" value="<?php echo $tasktypeid; ?>"/>    
+            <input type="hidden" name="starttime" value="<?php echo $starttime; ?>"/>  
         <!-- Image Upload Fields -->
             <div class="row">
                 <div class="col-md-12 text-center mb-3">

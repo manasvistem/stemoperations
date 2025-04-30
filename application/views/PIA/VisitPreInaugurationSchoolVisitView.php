@@ -10,6 +10,8 @@
                 <a href="<?php echo base_url()?>/Menu/visitPreInauguarationTask/<?php echo $taskId;?>" class="btn btn-primary" id="startyourjourney">
                 <i class="bi bi-play-fill"></i> Start Your Journey
                 </a>
+                <input type="hidden" value="" name="start_time">
+
                 </div>
             </div>
             </div>

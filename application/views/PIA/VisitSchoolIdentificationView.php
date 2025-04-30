@@ -4,13 +4,13 @@
         <input type="hidden" name="taskId" value="<?php echo $taskId; ?>"/>
         <input type="hidden" name="taskType" value="<?php echo $taskType; ?>"/>
         <input type="hidden" name="tasktypeid" value="<?php echo $tasktypeid; ?>"/>
+        <input type="hidden" name="starttime" value="<?php echo $starttime; ?>">
         <input type="hidden" name="status" id="status" value="">
     <div class="mb-3">
         <label class="form-label">Start Your Journey</label>
             <div class="form-check form-check-inline">
-                <a href="<?php echo base_url()?>Menu/visitDuringIdentification/<?php echo $taskId;?>" target="_blank" class="btn btn-primary" id="startyourjourney">
-                    <i class="bi bi-play-fill"></i> Start 
-                </a>
+                <a href="<?php echo base_url()?>Menu/visitDuringIdentification/<?php echo $taskId;?>" class="btn btn-primary" id="startyourjourney">
+                <i class="bi bi-play-fill"></i> Start  </a>
                 <input type="hidden" value="" name="start_time">
             </div>
     </div>
@@ -29,7 +29,6 @@
         }*/
          ?>
     </div>
-    
     </form>
   </div>
 </div>
@@ -141,15 +140,6 @@
             $("#faq_maint").hide();
         }
       });
-
-$("#startyourjourney").on("click", function(e) {
-        e.preventDefault(); // prevent the default link behavior
-        let startTime = new Date().getTime();
-        $('input[name="start_time"]').val(startTime); // store in hidden input if needed
-        let baseUrl = $(this).attr('href'); // get the base href
-        let fullUrl = baseUrl + '/' + encodeURIComponent(startTime); // append query param
-        window.open(fullUrl, '_blank');
-});
 
 })
 </script>

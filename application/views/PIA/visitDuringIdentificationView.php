@@ -32,7 +32,8 @@
         <form name="installationForm" action="<?= base_url();?>Menu/updateVisitDuringIdentification"  method="POST" >
             <input type="hidden" name="taskId" value="<?php echo $taskId; ?>"/>
             <input type="hidden" name="taskType" value="<?php echo $taskType; ?>"/>
-            <input type="hidden" name="tasktypeid" value="<?php echo $tasktypeid; ?>"/>    
+            <input type="hidden" name="tasktypeid" value="<?php echo $tasktypeid; ?>"/>  
+            <input type="hidden" name="starttime" value="<?php echo $starttime;?>"/>  
         <!-- Image Upload Fields -->
             <div class="row">
                 <div class="col-md-12 text-center mb-3">
@@ -119,12 +120,10 @@
         let totalStudents = parseInt($("#total_students").val()) || 0;
         let boys = parseInt($("#boys").val()) || 0;
         let girls = parseInt($("#girls").val()) || 0;
-
         if (totalStudents !== boys + girls) {
             alert("Total students should match the sum of boys and girls!");
         }
     }
-
     $("#total_students, #boys, #girls").on("input", validateStudentCount);
 });
       $(document).ready(function() {
@@ -132,7 +131,6 @@
         let totalTeachers = $(this).val();
         let teacherContainer = $("#teacher_fields");
         teacherContainer.empty(); // Clear previous fields
-
         for (let i = 1; i <= totalTeachers; i++) {
             teacherContainer.append(
                 `<div class="form-group">

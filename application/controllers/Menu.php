@@ -7120,7 +7120,7 @@ class Menu extends CI_Controller {
             $depnameData                    = $this->Menu_model->get_depatment_byid($dept);
             $dep_name                       = $depnameData[0]->dep_name;
             $data['getFactoryModelList']    = $this->Menu_model->getFactoryModelList();
-        // echo $viewname; exit;
+          //  echo $viewname; exit;
            $this->display($dep_name,$viewname,$data,$type='modal');
     }
 
@@ -11834,7 +11834,7 @@ public function visitPreInauguarationTask($taskId){
     $this->display($dep_name,"visitPreInaugurationTaskView",$data,$type="");
 }
 
-public function visitDuringInstallationTask($taskId){
+public function visitDuringInstallationTask($taskId,$starttime){
     $user                           = $this->session->userdata('user');
     $uid                            = $user['user_id'];
     $uyid                           = $user['type_id'];
@@ -11846,6 +11846,7 @@ public function visitDuringInstallationTask($taskId){
     $data['taskType']               = $taskInfo['tasktype'];
     $data['taskname']               = $taskInfo['taskname'];
     $data['tasktypeid']             = $taskInfo['taskTypId'];
+    $data['starttime']              = $_POST['starttime'];
     $data['getFactoryModelList']    = $this->Menu_model->getFactoryModelList();
     $this->display($dep_name,"visitDuringInstallationView",$data,$type="");
 }
@@ -14644,6 +14645,7 @@ public function CheckTimeLineJoinOrNot(){
     if($task_action == 119){
         $beforetaskData =  $this->Menu_model->GetJoinCallByTaskID($taskId);
         $beforetaskDatacnt  =  sizeof($beforetaskData);
+      //  echo  $beforetaskDatacnt;exit;
         if($beforetaskDatacnt > 0){
             $this->session->set_flashdata('error_message'," * Please complete factory and installation timeline setting");
             echo 1;
@@ -14688,7 +14690,6 @@ public function JoinCallForFactoryAndInstallationTimeLine(){
     $joinCallId = $this->Menu_model->StoreJoinCallForFactoryAndInstallationTimeLine($plandate,$uid,$pcode,$meetlink,$tbl_task_id);
 
     if($joinCallId) {
-
         // Insert in Log 
         $log_data = [
             'user_id'       => $uid,
@@ -14697,7 +14698,6 @@ public function JoinCallForFactoryAndInstallationTimeLine(){
             'message'       => "$pcode - Join call for factory and installation timeline initiated successfully. Now, start setting the target for the timeline."
         ];
         $this->db->insert('user_log', $log_data);
-
         $this->session->set_flashdata('success_message'," * Join call for factory and installation timeline initiated successfully. Now, start setting the target for the timeline.");
         redirect('Menu/StartJoinCallForFactoryAndInstallationTimeLine/'.$tbl_task_id);
 
@@ -14776,11 +14776,12 @@ public function StartJoinCallForFactoryAndInstallationTimeLine($task_id){
     $getAllDepartments      =  $this->Menu_model->getAllDepartments();
    
     if(!empty($user)){
-        $this->load->view($dep_name.'/StartJoinCallForFactoryAndInstallationTimeLine', ['user'=>$user,'uid'=>$uid,'uData'=>$uData,'getAllTaskActions'=>$getAllTaskActions,'getAllDepartments'=>$getAllDepartments,'task_id'=>$task_id]);
+        $this->display($dep_name,'StartJoinCallForFactoryAndInstallationTimeLine', ['user'=>$user,'uid'=>$uid,'uData'=>$uData,'getAllTaskActions'=>$getAllTaskActions,'getAllDepartments'=>$getAllDepartments,'task_id'=>$task_id],$type='');
     }else{
         redirect('Menu/main');
     }
 }
+
 
 public function StartProgramTimeLine($task_id){
     $user           = $this->session->userdata('user');
@@ -15017,7 +15018,7 @@ public function updateSchoolVisitIdentification(){
    redirect('Menu/Dashboard');
    /** */
 }
-public function visitDuringIdentification($taskId,$currTime){
+public function visitDuringIdentification($taskId,$starttime){
     $user              = $this->session->userdata('user');
     $uid               = $user['user_id'];
     $uyid              = $user['type_id'];
@@ -15026,7 +15027,7 @@ public function visitDuringIdentification($taskId,$currTime){
     $dep_name          = $dt[0]->dep_name;
     $data['taskId']                 = $taskId;
     $data['taskType']               = $taskType;
-    $data['currTime']               = $currTime;
+    $data['starttime']               = $starttime;
     $this->display($dep_name,"visitDuringIdentificationView",$data,$type="");
 }
 
@@ -15035,6 +15036,9 @@ public function updateVisitDuringIdentification(){
     $user               = $_SESSION['user'];
     $taskperformedby    = $user['dep_id'];
     $taskId             = $posted_data['taskId'];
+    $starttime          = $posted_data['starttime'];
+    $seconds            = (int)($starttime / 1000);
+    $startDateTime      = date('Y-m-d H:i:s', $seconds);
     $commonColumns      = [
                             'performed_by' => $_SESSION['user']['id'],
                             'updated_at'   => date("Y-m-d H:i:s"),
@@ -15048,7 +15052,6 @@ public function updateVisitDuringIdentification(){
         // Assign main_Task_id based on the key
         if($taskperformedby == '2'){
         switch ($k){
-         // case 'startYourjourney':                          $main_Task_id = '725'; break;
             case 'selfie':                          $main_Task_id = '726'; break;
             case 'sname':                           $main_Task_id = '727'; break;
             case 'language':                        $main_Task_id = '728'; break;
@@ -15081,15 +15084,24 @@ public function updateVisitDuringIdentification(){
         ] + $commonColumns;
     }
 }
-//dd($taskInsertArr1);
-  $attachment_link = '';
+  $attachment_link  = '';
+  $existingTaskArray[] = [
+    'task_response' => $startDateTime,
+    'main_Task_id' => 725,
+    'remark' => '',
+    'performed_by' => 5,
+    'updated_at' => date('Y-m-d H:i:s'),
+    'status' => 'active',
+    'tbe_id' => $taskId,
+];
+
+  $finalArray       = array_merge($existingTaskArray, $taskInsertArr1);
 // Insert only if there's data
    $current_date =  date('Y-m-d h:i:s');
-   if (!empty($taskInsertArr1)){
-       $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
-    // $attachmentData = 'task_id'=>$taskId 'attachment_link'=>,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date;
-  //  $this->Menu_model->insertTasksWithAttachements(['task_id'=>$taskId ,'attachment_link'=>$attachment_link,'remark'=>$remark,'user_id'=>$userid,'created_at'=>$current_date]);
-}
+   if (!empty($finalArray)){
+       $this->Menu_model->batch_insert_task_execution($finalArray);
+    }
+
    $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
    $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
     redirect('Menu/Dashboard');
@@ -15165,6 +15177,9 @@ public function UpdateFTTPDuringVisit(){
     $user               = $_SESSION['user'];
     $taskperformedby    = $user['dep_id'];
     $taskId             = $posted_data['taskId'];
+    $starttime          =$posted_data['starttime'];
+    $seconds            = (int)($starttime / 1000);
+    $startDateTime      = date('Y-m-d H:i:s', $seconds);
     $commonColumns      = [
                             'performed_by' => $_SESSION['user']['id'],
                             'updated_at'   => date("Y-m-d H:i:s"),
@@ -15173,7 +15188,7 @@ public function UpdateFTTPDuringVisit(){
                          ];
         $file_array_keys      =  array_keys($_FILES);
         $file_array_keys      =  array_flip($file_array_keys);
-
+        
         foreach($file_array_keys as $k=>$v){
             switch($k){
                 case "selfie" :             $main_task_id = "227";break;
@@ -15305,9 +15320,21 @@ foreach($file_array_keys as $file_key=>$file_values){
                 $this->Menu_model->update_tbe_attachmentid($main_Task_id,$taskId);
             }
         } 
-        if (!empty($taskInsertArr1)){
-            $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+        $existingTaskArray[] = [
+            'task_response' => $startDateTime,
+            'main_Task_id'  => 226,
+            'remark'        => '',
+            'performed_by'  => 5,
+            'updated_at'    => date('Y-m-d H:i:s'),
+            'status'        => 'active',
+            'tbe_id'        => $taskId,
+        ];
+        $finalArray       = array_merge($existingTaskArray, $taskInsertArr1);
+
+        if (!empty($finalArray)){
+            $this->Menu_model->batch_insert_task_execution($finalArray);
         }
+
         $current_date               = date('Y-m-d h:i:s');
         $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
         $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
@@ -20257,14 +20284,12 @@ public function OnlineActivityreportSubmit(){
 
 // START Webinar
 public function WebinarActivitySubmit(){
-
     $user           = $this->session->userdata('user');
     $data['user']   = $user;
     $uid            = $user['id'];
     $id             =  $user['dep_id'];
     $this->load->model('Menu_model');
     $this->load->library('session');
-
     $taskId                 = $this->input->post('taskId');
     $main_task_id           = $this->input->post('main_task_id');
     $stage_message          = $this->input->post('stage_message');
@@ -20291,7 +20316,7 @@ public function WebinarActivitySubmit(){
                 'performed_by'      => $uid,
                 'status'            => 1
             );
-    
+
             $this->db->insert('task_execution_details', $data_task_execution);
             $task_execution_id = $this->db->insert_id();  // ← Get the inserted ID
 
@@ -20376,10 +20401,7 @@ public function WebinarActivitySubmit(){
             'message'    => "$currentStages_taskname - $currentStages_taskdetails - complete  Successfully !!"
         ];
         $this->db->insert('user_log', $log_data);
-
-
         $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
-
     }
 
     redirect('Menu/Dashboard');
@@ -21802,7 +21824,6 @@ public function OfflineDemoFeedbackSubmit(){
 
 // START Online Demo
 public function OnlineDemoSubmit(){
-
     $user           = $this->session->userdata('user');
     $data['user']   = $user;
     $uid            = $user['id'];
@@ -21883,10 +21904,7 @@ public function OnlineDemoSubmit(){
         $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails -$currentStages_stage - Complete  Successfully !!");
 
     }else if($stage_message == 'Yes'){
-     
-
         $final_remark          = $this->input->post('final_remark');
-
         $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
         $taskname       = $taskDetails[0]->taskname;
         $sname          = $taskDetails[0]->sname;
@@ -21952,14 +21970,9 @@ public function OnlineDemoSubmit(){
             'message'    => "$currentStages_taskname - $currentStages_taskdetails - complete  Successfully !!"
         ];
         $this->db->insert('user_log', $log_data);
-
-
         $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
-
     }
-
     redirect('Menu/Dashboard');
- 
 }
 
 // Closed Online Demo
@@ -22149,7 +22162,6 @@ public function SocialMediaPostSubmit(){
         $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
 
     }
-
     redirect('Menu/Dashboard');
  
 }
@@ -22881,14 +22893,12 @@ public function NewClientReportSubmit(){
 // Closed New Client Report
 // START Customized Reports Submit
 public function CustomizedReportsSubmit(){
-
     $user           = $this->session->userdata('user');
     $data['user']   = $user;
     $uid            = $user['id'];
     $id             =  $user['dep_id'];
     $this->load->model('Menu_model');
     $this->load->library('session');
-
     $taskId                 = $this->input->post('taskId');
     $main_task_id           = $this->input->post('main_task_id');
     $stage_message          = $this->input->post('stage_message');
@@ -22915,7 +22925,6 @@ public function CustomizedReportsSubmit(){
     $this->db->insert('tblcallevents_attachments', $data_attachment);
     $attachment_id = $this->db->insert_id();  // ← Get the inserted ID
     $final_remark = 'Successs;';
-
         $taskDetails    = $this->Menu_model->GetTBLTaskDetailsByTaskId($taskId);
         $taskname       = $taskDetails[0]->taskname;
         $sname          = $taskDetails[0]->sname;
@@ -22955,8 +22964,8 @@ public function CustomizedReportsSubmit(){
 
         $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
     redirect('Menu/Dashboard');
- 
 }
+
 public function findParentTaskId($currTaskId){
     if(!empty($currTaskId)){
       $parenttaskId =  $this->Menu_model->getParentTaskId($currTaskId);
@@ -22966,8 +22975,24 @@ public function findParentTaskId($currTaskId){
         redirect('Menu/Dashboard');
     }
 }
-
 // Closed Customized Reports Submit
+public function createBarcode(){
+    $data['ProjectCode'] = $this->input->post('projectCode'); 
+    $data['SchoolCount'] = $this->input->post('school_count');
+    $iid                 = rand(1000, 9999); // or pull from DB if you have project id
+    $statusMessage       = '';
+
+    // Generate project barcode
+    $project_pbarcode = str_pad($iid, 4, "0", STR_PAD_LEFT) . str_pad(0, 4, "0", STR_PAD_LEFT) . str_pad(0, 4, "0", STR_PAD_LEFT);
+   
+    // Insert school barcodes
+    for($i = 1; $i <= $school_count; $i++){       
+        $school_sbarcode            = str_pad($iid, 4, "0", STR_PAD_LEFT) . str_pad($i, 4, "0", STR_PAD_LEFT) . str_pad(0, 4, "0", STR_PAD_LEFT);        
+        $data['SchoolBarcode']      = $school_sbarcode; 
+      $statusMessage                = $this->Menu_model->insertProjectSchoolBarCode($data);
+   }
+  echo $statusMessage;
+}
 
 
 }

@@ -8950,8 +8950,8 @@ public function upload_multiple_files_common($input_name, $upload_path = 'upload
   /*** CODE ENDED BY DEEPAK */
 
   public function getParentTaskId($currenttaskid){
-    $query  = $this->db->query("SELECT aftertask FROM tblcallevents WHERE id =".$currenttaskid." ");
-   $taskIdresult =  $query->row_array;
+    $query        = $this->db->query("SELECT aftertask FROM tblcallevents WHERE id =".$currenttaskid." ");
+    $taskIdresult =  $query->row_array;
     return $taskIdresult['aftertask'];
   }
 
@@ -8960,8 +8960,29 @@ public function upload_multiple_files_common($input_name, $upload_path = 'upload
                                     FROM tblcallevents LEFT JOIN spd_contact
                                     ON spd_contact.id = tblcallevents.sid 
                                     WHERE tblcallevents.id ='".$taskId."'");
-                                 //   echo $this->db->last_query();exit;
+                                 //  echo $this->db->last_query();exit;
     $resulteacherList =  $query->result_array();
     return $resulteacherList;
   }
+  public function insertProjectSchoolBarCode($data){
+    $this->db->where('ProjectCode', $data['ProjectCode']);
+    $this->db->or_where('SchoolBarcode', $data['SchoolBarcode']);
+    $query = $this->db->get('projectschoolbarcode');
+        if ($query->num_rows() == 0) {
+            // Both are unique, proceed to insert
+            $sql = "INSERT INTO projectschoolbarcode 
+                (ProjectCode, SchoolCount, SchoolName, ProjectBarcode, SchoolBarcode) 
+                VALUES (?, ?, ?, ?, ?)";
+            $this->db->query($sql, [
+                $data['ProjectCode'],
+                $data['SchoolCount'],
+                $data['SchoolName'],
+                $data['ProjectBarcode'],
+                $data['SchoolBarcode']
+            ]);
+            echo "Record inserted successfully.";
+        } else {
+            echo "Error: Project code or School barcode already exists.";
+        }
+    }
 }

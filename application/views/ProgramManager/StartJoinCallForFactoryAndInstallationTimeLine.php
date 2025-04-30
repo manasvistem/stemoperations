@@ -1,4 +1,3 @@
-<?php $this->load->view('nav'); ?>
 <style>
   .card {
   padding:10px;
@@ -139,9 +138,19 @@
                 <label class="form-label"><b>Remark</b></label>
                 <textarea class="form-control" name="remark" placeholder="Remark..." required></textarea>
               </div>
+              <div class="mb-4">
+                <label class="form-label"><b><I>A Unique Barcode for Project and School will get created from this page</I></b></label>
+                <input type="button" class="btn btn-warning btn-sm" name="create_project_code" value="Create ProjectCode"/>
+                <span id="errorMsg"></span>
+              </div>
+
+              <br>
+              <input type="hidden" id="project_code" value="PRJ123">
+              <input type="hidden" id="school_count" value="5">
               <input type="hidden" class="form-control" name="rrd">
               <input type="hidden" class="form-control" name="task_id" value="<?=$revst[0]->task_id;?>">
               <input type="hidden" class="form-control" name="join_call_id" value="<?=$revst[0]->id;?>">
+
               <input type="submit" class="form-control btn btn-success">
               </div>
             </form>
@@ -153,9 +162,30 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
-  $(document).ready(function() {
-  
-  });
-  
+  $('#create_project_code').click(function() {
+    let project_code = $('#project_code').val();
+    let school_count = $('#school_count').val();
+    
+    if (project_code && school_count) {
+        $.ajax({
+            url: 'Menu/createBarcode',
+            method: 'POST',
+            data: {
+                project_code: project_code,
+                school_count: school_count
+            },
+            success: function(response) {
+              $("#errorMsg").html(response);
+                alert(response); // show success message
+            },
+            error: function() {
+                alert('Error creating barcodes.');
+            }
+        });
+      }
+      else 
+      {
+              alert('Project Code or School Count missing!');
+      }
+});
 </script>
-<?php $this->load->view('footer'); ?>

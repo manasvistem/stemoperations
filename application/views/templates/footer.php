@@ -105,6 +105,14 @@
                       'copy', 'excelFlash', 'excel', 'pdf', 'print'
                   ]
               } );
+          $("#startyourjourney").on("click", function(e) {
+              e.preventDefault(); // prevent the default link behavior
+              let startTime = new Date().getTime();
+              $('input[name="start_time"]').val(startTime); // store in hidden input if needed
+              let baseUrl = $(this).attr('href'); // get the base href
+              let fullUrl = baseUrl + '/' + encodeURIComponent(startTime); // append query param
+              window.open(fullUrl);
+          });
       } );
     </script>
   </body>

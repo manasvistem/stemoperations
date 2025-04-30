@@ -110,6 +110,8 @@
                           $i=1;
                           foreach($getTodaysTasks as $sctasklist){
                             $task_id              = $sctasklist->task_id;
+                            $type_of_task         = $sctasklist->tasktype;
+
                             $appointment_datetime = $sctasklist->appointment_datetime;
                             $sname                = $sctasklist->sname;
                             $tasktype             = $sctasklist->tasktype;
@@ -120,6 +122,8 @@
                             $target_date          = $sctasklist->target_date;
                             $expected_date        = $sctasklist->expected_date;
                             $fwd_date             = $sctasklist->fwd_date;
+
+
                           if($slct_type_of_task === $tasktype){ 
                             ?>
                           <a data-task_id="<?=$task_id;?>" class="list-group-item list-group-item-action flex-column align-items-start active mb-1 taskperformaction" >
@@ -431,6 +435,7 @@
               </div>
               <!-- /.card -->
             </div>
+            <?php $this->load->view('TaskPopUp'); ?> 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
   
@@ -480,12 +485,73 @@
     // alert($(this).val());
     // return false;
     $("#modalCenterTitle").html();
-    $('.taskperformaction').on('click', function() {
+        $('.taskperformaction').on('click', function() {
         var taskId      = $(this).data('task_id'); // Retrieve the 'task_id' data
         var tasktype    = $("#tasktype_"+taskId).val();
         var tasktype_id = $("#tasktype_id_"+taskId).val();
-        //alert(taskId+"=="+tasktype+"=="+tasktype_id);return false;
-        $.ajax({
+        $('#please_wait_'+taskId).text("* Please Wait...");
+
+
+
+            // Fetch New Timeline Settings
+            $.ajax({
+            url: '<?=base_url();?>Menu/FetchTaskDetailsUsingTaskID',
+            type: "POST",
+            data: { taskId: taskId },
+            cache: false,
+            success: function (result) {
+              
+              $('#please_wait_'+taskId).text("");
+              var resultArray   = JSON.parse(result);
+              var project_code  = resultArray[0].project_code;
+              var task_action   = resultArray[0].task_action;
+              var tasktype      = resultArray[0].tasktype;
+              var tasktname     = resultArray[0].tasktname;
+              var appointment_datetime  = resultArray[0].appointment_datetime;
+              var initiate_datetime     = resultArray[0].initiate_datetime;
+              var updated_datetime      = resultArray[0].updated_datetime;
+              var autotask      = resultArray[0].autotask;
+              var exdate        = resultArray[0].exdate;
+              var comments      = resultArray[0].comments;
+              var aftertask     = resultArray[0].aftertask;
+    
+              if(parseInt(task_action)== 119){
+              
+              $.ajax({
+                  url: '<?=base_url();?>Menu/CheckTimeLineJoinOrNot',
+                  type: "POST",
+                  data: { taskId: taskId,task_action:task_action},
+                  cache: false,
+                  success: function (result) {
+                   
+                    if(result == 1){
+                        window.location.href = "<?=base_url()?>Menu/StartJoinCallForFactoryAndInstallationTimeLine/"+taskId;
+                    }else{
+                      $('#modalCenterTimeLine').modal('show');
+                      $('#time_line_task_id').val(taskId);
+                      $('#time_line_project_code').html("<option>"+project_code+"</option>");
+                    }
+                  }
+              });
+              }else if(task_action == 120){
+                $.ajax({
+                  url: '<?=base_url();?>Menu/CheckTimeLineJoinOrNot',
+                  type: "POST",
+                  data: { taskId: taskId,task_action:task_action},
+                  cache: false,
+                  success: function (result) {
+                    if(result == 1){
+                        window.location.href = "<?=base_url()?>Menu/StartProgramTimeLine/"+taskId;
+                    }else{
+                      $('#modalCenterProgramTimeLine').modal('show');
+                      $('#program_time_line_task_id').val(taskId);
+                      $('#program_time_line_project_code').html("<option>"+project_code+"</option>");
+                    }
+                  }
+              });
+              }else{
+
+                $.ajax({
                          url: '<?=base_url();?>Menu/taskExecution/',
                         type: "POST",
                         data: {
@@ -500,9 +566,18 @@
                           $("#taskModal").html(response);
                         }
                 });
+              }
+            }
+        });
+
+
+
+
+
+    });
        // $('#maintenanceModal').modal('show');
        // $('#modalCenterTitle').text("Task ID IS = "+taskId);
     });
-});
+
 </script>
 <?php // $this->load->view('footer'); ?>
