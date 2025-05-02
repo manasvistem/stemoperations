@@ -1,4 +1,6 @@
 <?php
+use Picqer\Barcode\BarcodeGeneratorPNG;
+
 date_default_timezone_set("Asia/Calcutta");
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Menu extends CI_Controller {
@@ -14763,20 +14765,27 @@ public function StartJoinCallForFactoryAndInstallationTimeLine($task_id){
     $user           = $this->session->userdata('user');
     $data['user']   = $user;$uid= $user['id'];
     $uid            = $user['id'];
-    $id             =  $user['dep_id'];
-
+    $id             = $user['dep_id'];
     $this->load->model('Menu_model');
 
-    $notify         = $this->Menu_model->get_notifybyid($uid);
-    $dt             = $this->Menu_model->get_depatment_byid($id);
-    $dep_name       = $dt[0]->dep_name;
-
-    $uData                  =  $this->Menu_model->get_user_byid($uid);
-    $getAllTaskActions      =  $this->Menu_model->getAllTaskActions();
-    $getAllDepartments      =  $this->Menu_model->getAllDepartments();
-   
+    $notify                 = $this->Menu_model->get_notifybyid($uid);
+    $dt                     = $this->Menu_model->get_depatment_byid($id);
+    $dep_name               = $dt[0]->dep_name;
+    $uData                  = $this->Menu_model->get_user_byid($uid);
+    $getAllTaskActions      = $this->Menu_model->getAllTaskActions();
+    $getAllDepartments      = $this->Menu_model->getAllDepartments();
+    $projectData            = $this->Menu_model->getProjectDetailsByTaskId($task_id);
+    $data                   =  [
+                                'user'=>$user,
+                                'uid'=>$uid,
+                                'uData'=>$uData,
+                                'getAllTaskActions'=>$getAllTaskActions,
+                                'getAllDepartments'=>$getAllDepartments,
+                                'task_id'=>$task_id,
+                                'projectData' =>$projectData
+                             ];
     if(!empty($user)){
-        $this->display($dep_name,'StartJoinCallForFactoryAndInstallationTimeLine', ['user'=>$user,'uid'=>$uid,'uData'=>$uData,'getAllTaskActions'=>$getAllTaskActions,'getAllDepartments'=>$getAllDepartments,'task_id'=>$task_id],$type='');
+        $this->display($dep_name,'StartJoinCallForFactoryAndInstallationTimeLine', $data,$type='');
     }else{
         redirect('Menu/main');
     }
@@ -14834,11 +14843,9 @@ public function set_phtimeline(){
     $user           = $this->session->userdata('user');
     $data['user']   = $user;$uid= $user['id'];
     $uid            = $user['id'];
-    $id             =  $user['dep_id'];
-
+    $id             = $user['dep_id'];
     $this->load->model('Menu_model');
     $this->load->library('session');
-
     $pcode   = $this->input->post('pcode');
     $dud     = $this->input->post('dud');
     $dad     = $this->input->post('dad');
@@ -14851,7 +14858,14 @@ public function set_phtimeline(){
     $rrd     = $this->input->post('rrd');
     $remark  = $this->input->post('remark');
     $task_id = $this->input->post('task_id');
+    $pcode   = $this->input->post('project_code');
+    $dud     = $this->input->post('dud');
     $join_call_id = $this->input->post('join_call_id');
+    $project_code = $this->input->post('project_code');
+    $school_count = $this->input->post('school_count');
+
+  //  dd($_POST);
+    $test         = $this->createBarcode($project_code,$school_count);
 
     $join_call_id = $this->Menu_model->set_ph_timeline($pcode,$dud,$dad,$pd,$pbpd,$pad,$disd,$insd,$insrd,$rrd,$remark,$task_id,$join_call_id);
     if ($join_call_id) {
@@ -14871,8 +14885,8 @@ public function set_phtimeline(){
             'type'          => 'factory and installation timeline complete',
             'message'       => "$pcode - factory and installation timeline setting SuccessFully !"
         ];
-        $this->db->insert('user_log', $log_data);
 
+        $this->db->insert('user_log', $log_data);
         $this->session->set_flashdata('success_message'," * factory and installation timeline setting SuccessFully !");
         redirect('Menu/Dashboard');
     } else {
@@ -19031,7 +19045,6 @@ public function projectReport(){
     $dt                  = $this->Menu_model->get_depatment_byid($taskperformedby);
     $dep_name            = $dt[0]->dep_name;
     $data['projectData'] = $this->Menu_model->getProjectDetails();
-   // dd($data['projectData']);
     $this->display($dep_name,'projectReportView',$data,$type='');
 }
 
@@ -22976,22 +22989,46 @@ public function findParentTaskId($currTaskId){
     }
 }
 // Closed Customized Reports Submit
-public function createBarcode(){
-    $data['ProjectCode'] = $this->input->post('projectCode'); 
-    $data['SchoolCount'] = $this->input->post('school_count');
-    $iid                 = rand(1000, 9999); // or pull from DB if you have project id
-    $statusMessage       = '';
-
+public function createBarcode($project_code,$school_count){
+    $data['ProjectCode'] = $project_code;
+    $data['SchoolCount'] = $school_count;
+    $iid                  = rand(1000, 9999);
+    $statusMessage        = "";
     // Generate project barcode
-    $project_pbarcode = str_pad($iid, 4, "0", STR_PAD_LEFT) . str_pad(0, 4, "0", STR_PAD_LEFT) . str_pad(0, 4, "0", STR_PAD_LEFT);
-   
+    $project_pbarcode       = str_pad($iid, 4, "0", STR_PAD_LEFT) . str_pad(0, 4, "0", STR_PAD_LEFT) . str_pad(0, 4, "0", STR_PAD_LEFT);
+    $data['ProjectBarcode'] = $project_pbarcode;
     // Insert school barcodes
-    for($i = 1; $i <= $school_count; $i++){       
+    for($i = 1; $i <= $school_count; $i++){      
+        $schoolName         = $this->Menu_model->getSchoolCountinProject($project_code); 
+        $data['SchoolName'] = $schoolName[0]->sname;
         $school_sbarcode            = str_pad($iid, 4, "0", STR_PAD_LEFT) . str_pad($i, 4, "0", STR_PAD_LEFT) . str_pad(0, 4, "0", STR_PAD_LEFT);        
         $data['SchoolBarcode']      = $school_sbarcode; 
-      $statusMessage                = $this->Menu_model->insertProjectSchoolBarCode($data);
+        $statusMessage              = $this->Menu_model->insertProjectSchoolBarCode($data);
    }
-  echo $statusMessage;
+
+    return $statusMessage;
+}
+
+public function show_barcodes()
+{
+    $user           = $this->session->userdata('user');
+        $data['user']   = $user;$uid= $user['id'];
+        $id             = $user['dep_id'];
+        $notify         = $this->Menu_model->get_notifybyid($uid);
+        $dt             = $this->Menu_model->get_depatment_byid($id);
+        $dep_name       = $dt[0]->dep_name;
+      //  $this->display($dep_name,'CMSCCC',['notify'=>$notify,'user'=>$user,'uid'=>$uid],$type='');
+    $data['barcodes'] = $this->Menu_model->get_all_barcodes();
+    dd($data);  
+    $this->display($dep_name,'barcode_view', $data,$type='');
+}
+
+// Generates barcode image (used in <img src="...">)
+public function generate_barcode($code)
+{
+    $generator = new BarcodeGeneratorPNG();
+    header('Content-Type: image/png');
+    echo $generator->getBarcode($code, $generator::TYPE_CODE_128, 2, 60);
 }
 
 

@@ -42,8 +42,9 @@
       </div>
       <hr>
       <?php 
+    
         $revst = $this->Menu_model->get_joincallstartedWitTaskIds($task_id);
-      
+
         if($revst){
         $pid = $revst[0]->id;
         }else{
@@ -65,8 +66,9 @@
               <p class="info"><b>Project Code :</b> <span class="highlight"><?=$pcode = $revst[0]->projectcode;?></span></p>
         <hr>
         <?php 
-            $pdetail = $this->Menu_model->get_myprogramdetail($pcode); 
+            $pdetail    = $this->Menu_model->get_myprogramdetail($pcode); 
             $clientbypc = $this->Menu_model->get_clientbypc($pcode);
+           // dd($clientbypc);
         ?>
         <p class="info"><b>Handover Date :</b> <?=$clientbypc[0]->sdatet?></p>
         <p class="info"><b>Client Name :</b> <?=$clientbypc[0]->client_name?></p>
@@ -140,18 +142,17 @@
               </div>
               <div class="mb-4">
                 <label class="form-label"><b><I>A Unique Barcode for Project and School will get created from this page</I></b></label>
-                <input type="button" class="btn btn-warning btn-sm" name="create_project_code" value="Create ProjectCode"/>
+                <input type="button" class="btn btn-warning btn-sm" name="create_barcode" id="create_barcode" value="Create Barcode"/>
                 <span id="errorMsg"></span>
               </div>
-
               <br>
-              <input type="hidden" id="project_code" value="PRJ123">
-              <input type="hidden" id="school_count" value="5">
+              <input type="hidden" id="project_code" name="project_code" value="<?php echo $projectData['projectcode'];?>">
+              <input type="hidden" id="school_count" name="school_count" value="<?php echo $projectData['noofschool'];?>">
+
               <input type="hidden" class="form-control" name="rrd">
               <input type="hidden" class="form-control" name="task_id" value="<?=$revst[0]->task_id;?>">
               <input type="hidden" class="form-control" name="join_call_id" value="<?=$revst[0]->id;?>">
-
-              <input type="submit" class="form-control btn btn-success">
+              <input type="submit" class="form-control btn btn-success" value="submitProgramTimeLineData">
               </div>
             </form>
           </div>
@@ -162,21 +163,22 @@
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script>
-  $('#create_project_code').click(function() {
+  $('#create_barcode').click(function() {
     let project_code = $('#project_code').val();
     let school_count = $('#school_count').val();
-    
     if (project_code && school_count) {
         $.ajax({
             url: 'Menu/createBarcode',
             method: 'POST',
             data: {
-                project_code: project_code,
+                project_code : project_code,
                 school_count: school_count
             },
-            success: function(response) {
+              dataType: 'text',
+              success: function(response) {
+              //   alert(response);
               $("#errorMsg").html(response);
-                alert(response); // show success message
+              alert('Barcode created: ' + response);
             },
             error: function() {
                 alert('Error creating barcodes.');

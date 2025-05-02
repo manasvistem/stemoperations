@@ -7193,7 +7193,7 @@ public function StoreProgramTimelineData($projectcode,$uid,$bdid,$wmessage,$comm
     return $this->db->insert_id(); // Return inserted row ID
 }
 
-public function set_ph_timeline($pcode, $dud, $dad, $pd, $pbpd, $pad, $disd, $insd, $insrd, $rrd, $remark,$task_id,$join_call_id,$delivery_date,$transit_process,$pre_install_call) {
+public function set_ph_timeline($pcode, $dud, $dad, $pd, $pbpd, $pad, $disd, $insd, $insrd, $rrd, $remark,$task_id,$join_call_id,$delivery_date='',$transit_process='',$pre_install_call='') {
     $cdate = date('Y-m-d H:i:s');
     // Prepare data for update
     $updateData = [
@@ -7428,11 +7428,6 @@ WHERE
 GROUP BY  ta.tasktype");
     return $query->result();
 }
-
-
-
-
-
 
 public function getTodaysPendingTaskType($uid){
     $query=$this->db->query("SELECT
@@ -8965,10 +8960,12 @@ public function upload_multiple_files_common($input_name, $upload_path = 'upload
     return $resulteacherList;
   }
   public function insertProjectSchoolBarCode($data){
-    $this->db->where('ProjectCode', $data['ProjectCode']);
+   
+    $this->db->where('ProjectBarcode', $data['ProjectBarcode']);
     $this->db->or_where('SchoolBarcode', $data['SchoolBarcode']);
-    $query = $this->db->get('projectschoolbarcode');
-        if ($query->num_rows() == 0) {
+    $ProjectBarcodequery = $this->db->get('projectschoolbarcode');
+
+        if ($ProjectBarcodequery->num_rows() == 0) {
             // Both are unique, proceed to insert
             $sql = "INSERT INTO projectschoolbarcode 
                 (ProjectCode, SchoolCount, SchoolName, ProjectBarcode, SchoolBarcode) 
@@ -8980,9 +8977,23 @@ public function upload_multiple_files_common($input_name, $upload_path = 'upload
                 $data['ProjectBarcode'],
                 $data['SchoolBarcode']
             ]);
-            echo "Record inserted successfully.";
+          // echo $this->db->last_query();exit;
+            return True;
         } else {
-            echo "Error: Project code or School barcode already exists.";
+            return false;
         }
     }
+
+public function getProjectDetailsByTaskId($taskId){
+    $query  = $this->db->query("SELECT ch.projectcode,ch.projectcode_id,ch.noofschool,spd.sname FROM client_handover ch
+                                LEFT JOIN spd ON ch.projectcode=spd.project_code
+                                LEFT JOIN tblcallevents tbe ON spd.id = tbe.sid
+                                WHERE tbe.id='".$taskId."'");
+                                
+    $result = $query->row_array();
+    return $result;
+}
+public function get_all_barcodes() {
+    return $this->db->get('projectschoolbarcode')->result_array();
+}
 }

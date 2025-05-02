@@ -153,7 +153,7 @@ span#takeSalifyBtn {
       if ($main_task_id == 747 || $main_task_id == 748 || $main_task_id == 749 || $main_task_id == 750 || $main_task_id == 751 || $main_task_id == 752) {
         if ($main_task_id == 747) {
           $uploadBtn_message = "⬆️ Submit";
-          $takeSalify = "📷 Take Salify";
+          $takeSalify = "📷 Take Selfie";
           $capture = 'capture="environment"';
         } else if ($main_task_id == 748) {
           $uploadBtn_message = "⬆️ Upload";
@@ -170,7 +170,7 @@ span#takeSalifyBtn {
             $takeSalify = "📷 Call with Reporting Manager (Upload ScreenShot)";
           }else if ($main_task_id == 752) {
             $uploadBtn_message = "⬆️ Completed My Task";
-            $takeSalify = "📷 Take Salify";
+            $takeSalify = "📷 Take Selfie";
             $capture = 'capture="environment"';
           }
       ?>
