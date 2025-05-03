@@ -46,9 +46,9 @@
         $revst = $this->Menu_model->get_joincallstartedWitTaskIds($task_id);
 
         if($revst){
-        $pid = $revst[0]->id;
+           $pid = $revst[0]->id;
         }else{
-        $pid = 0;
+           $pid = 0;
         }
         
         ?>
@@ -142,17 +142,16 @@
               </div>
               <div class="mb-4">
                 <label class="form-label"><b><I>A Unique Barcode for Project and School will get created from this page</I></b></label>
-                <input type="button" class="btn btn-warning btn-sm" name="create_barcode" id="create_barcode" value="Create Barcode"/>
+                <!-- <input type="button" class="btn btn-warning btn-sm" name="create_barcode" id="create_barcode" value="Create Barcode"/> -->
                 <span id="errorMsg"></span>
               </div>
               <br>
               <input type="hidden" id="project_code" name="project_code" value="<?php echo $projectData['projectcode'];?>">
               <input type="hidden" id="school_count" name="school_count" value="<?php echo $projectData['noofschool'];?>">
-
               <input type="hidden" class="form-control" name="rrd">
               <input type="hidden" class="form-control" name="task_id" value="<?=$revst[0]->task_id;?>">
               <input type="hidden" class="form-control" name="join_call_id" value="<?=$revst[0]->id;?>">
-              <input type="submit" class="form-control btn btn-success" value="submitProgramTimeLineData">
+              <input type="submit" class="form-control btn btn-success" value="Submit">
               </div>
             </form>
           </div>
@@ -176,7 +175,6 @@
             },
               dataType: 'text',
               success: function(response) {
-              //   alert(response);
               $("#errorMsg").html(response);
               alert('Barcode created: ' + response);
             },

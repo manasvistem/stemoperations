@@ -7066,6 +7066,7 @@ class Menu extends CI_Controller {
         $getTodaysTasks                 = $this->Menu_model->GetTodaysAllTaskByUid($uid, date('Y-m-d'));
         $data['getTodaysTaskCounts']    = $getTodaysTaskCounts;
         $data['getTodaysTasks']         = $getTodaysTasks;
+       // dd($data);
         if(empty($user_day) && count($user_day)<= 0){
             $this->session->set_flashdata('error_message','* Please Start Your Day');
             redirect('Menu/DayManagement');
@@ -14670,7 +14671,6 @@ public function CheckTimeLineJoinOrNot(){
 
 // Start Task For timeline Planninf
 public function JoinCallForFactoryAndInstallationTimeLine(){
-
     $user           = $this->session->userdata('user');
     $data['user']   = $user;$uid= $user['id'];
     $uid            = $user['id'];
@@ -14767,7 +14767,6 @@ public function StartJoinCallForFactoryAndInstallationTimeLine($task_id){
     $uid            = $user['id'];
     $id             = $user['dep_id'];
     $this->load->model('Menu_model');
-
     $notify                 = $this->Menu_model->get_notifybyid($uid);
     $dt                     = $this->Menu_model->get_depatment_byid($id);
     $dep_name               = $dt[0]->dep_name;
@@ -14797,10 +14796,8 @@ public function StartProgramTimeLine($task_id){
     $data['user']   = $user;$uid= $user['id'];
     $uid            = $user['id'];
     $id             =  $user['dep_id'];
-
     $this->load->model('Menu_model');
     $this->load->library('session');
-
     $notify         = $this->Menu_model->get_notifybyid($uid);
     $dt             = $this->Menu_model->get_depatment_byid($id);
     $dep_name       = $dt[0]->dep_name;
@@ -14811,7 +14808,6 @@ public function StartProgramTimeLine($task_id){
 
     $taskData               =  $this->Menu_model->getTBLTaskDetailsByTaskID($task_id);
     if(!empty($user)){
-
         if(sizeof($taskData) > 0){
             $project_code   = $taskData[0]->project_code;
             $spdData        =  $this->Menu_model->getSPDDataByPCode($project_code);
@@ -22992,34 +22988,33 @@ public function findParentTaskId($currTaskId){
 public function createBarcode($project_code,$school_count){
     $data['ProjectCode'] = $project_code;
     $data['SchoolCount'] = $school_count;
-    $iid                  = rand(1000, 9999);
-    $statusMessage        = "";
+    $iid                 = rand(1000, 9999);
+    $statusMessage       = "";
+
     // Generate project barcode
     $project_pbarcode       = str_pad($iid, 4, "0", STR_PAD_LEFT) . str_pad(0, 4, "0", STR_PAD_LEFT) . str_pad(0, 4, "0", STR_PAD_LEFT);
     $data['ProjectBarcode'] = $project_pbarcode;
     // Insert school barcodes
     for($i = 1; $i <= $school_count; $i++){      
-        $schoolName         = $this->Menu_model->getSchoolCountinProject($project_code); 
-        $data['SchoolName'] = $schoolName[0]->sname;
+        $schoolName                 = $this->Menu_model->getSchoolCountinProject($project_code); 
+        $data['SchoolName']         = $schoolName[0]->sname;
         $school_sbarcode            = str_pad($iid, 4, "0", STR_PAD_LEFT) . str_pad($i, 4, "0", STR_PAD_LEFT) . str_pad(0, 4, "0", STR_PAD_LEFT);        
         $data['SchoolBarcode']      = $school_sbarcode; 
-        $statusMessage              = $this->Menu_model->insertProjectSchoolBarCode($data);
-   }
-
-    return $statusMessage;
+        $this->Menu_model->insertProjectSchoolBarCode($data);
+    }
+    return True;
 }
 
 public function show_barcodes()
-{
-    $user           = $this->session->userdata('user');
-        $data['user']   = $user;$uid= $user['id'];
-        $id             = $user['dep_id'];
-        $notify         = $this->Menu_model->get_notifybyid($uid);
-        $dt             = $this->Menu_model->get_depatment_byid($id);
-        $dep_name       = $dt[0]->dep_name;
-      //  $this->display($dep_name,'CMSCCC',['notify'=>$notify,'user'=>$user,'uid'=>$uid],$type='');
-    $data['barcodes'] = $this->Menu_model->get_all_barcodes();
-    dd($data);  
+{       
+        $user             = $this->session->userdata('user');
+        $data['user']     = $user;
+        $uid              = $user['id'];
+        $id               = $user['dep_id'];
+        $notify           = $this->Menu_model->get_notifybyid($uid);
+        $dt               = $this->Menu_model->get_depatment_byid($id);
+        $dep_name         = $dt[0]->dep_name;
+        $data['barcodes'] = $this->Menu_model->get_all_barcodes();
     $this->display($dep_name,'barcode_view', $data,$type='');
 }
 
@@ -23030,8 +23025,6 @@ public function generate_barcode($code)
     header('Content-Type: image/png');
     echo $generator->getBarcode($code, $generator::TYPE_CODE_128, 2, 60);
 }
-
-
 }
 
 

@@ -8674,17 +8674,11 @@ public function StoreSchoolTimelineData($projectcode,$sid,$uid,$bdid,$wmessage,$
     $this->db->insert('schooltimeline_planning', $data);
     return $this->db->insert_id(); // Return inserted row ID
 }
-
-
 public function TotalTaskBetweenTime($uid,$tdate,$time1,$time2){
-  
     $query = $this->db->query("SELECT * FROM `tblcallevents` WHERE user_id = '$uid' AND (cast(appointment_datetime as DATE) = '$tdate' AND DATE(updated_at) = '$tdate') AND task_action != '' AND plan = 1 AND TIME(updated_at) BETWEEN '$time1' AND '$time2'");
     // $query = $this->db->query("SELECT * FROM `tblcallevents` WHERE user_id = '$uid' AND DATE(appointmentdatetime) = '$tdate' AND actiontype_id IS NOT NULL AND actiontype_id != '' AND nextCFID = 0 AND lastCFID = 0 AND plan = 1 AND TIME(appointmentdatetime) BETWEEN '$time1' AND '$time2'");
     return  $query->result();
 }
-
-
-
 public function getTaskAction($aid){
     $query=$this->db->query("SELECT * FROM `task_action` WHERE id =$aid");
     return $query->result();
@@ -8697,18 +8691,13 @@ public function getAllDepartments(){
     $query = $this->db->query("SELECT * FROM `department`");
     return $query->result();
 }
-
-
 public function get_joincallstartedWitTaskIds($task_id){
     $query=$this->db->query("SELECT * FROM joincall where task_id= '$task_id' AND joincall.closet is null");
+  //  echo $this->db->last_query();exit;
     return $query->result();
 }
 
-
-
-
 // START TASK EXCUTION BY DEEPAK
-
 public function GetTaskActionDetails($tasktype){
     $query=$this->db->query("SELECT * FROM `main_task` WHERE `tasktype` = '$tasktype'");
     return $query->result();
@@ -8960,15 +8949,13 @@ public function upload_multiple_files_common($input_name, $upload_path = 'upload
     return $resulteacherList;
   }
   public function insertProjectSchoolBarCode($data){
-   
     $this->db->where('ProjectBarcode', $data['ProjectBarcode']);
     $this->db->or_where('SchoolBarcode', $data['SchoolBarcode']);
     $ProjectBarcodequery = $this->db->get('projectschoolbarcode');
-
+    
         if ($ProjectBarcodequery->num_rows() == 0) {
             // Both are unique, proceed to insert
-            $sql = "INSERT INTO projectschoolbarcode 
-                (ProjectCode, SchoolCount, SchoolName, ProjectBarcode, SchoolBarcode) 
+            $sql = "INSERT INTO projectschoolbarcode (ProjectCode, SchoolCount, SchoolName, ProjectBarcode, SchoolBarcode) 
                 VALUES (?, ?, ?, ?, ?)";
             $this->db->query($sql, [
                 $data['ProjectCode'],
@@ -8977,23 +8964,33 @@ public function upload_multiple_files_common($input_name, $upload_path = 'upload
                 $data['ProjectBarcode'],
                 $data['SchoolBarcode']
             ]);
-          // echo $this->db->last_query();exit;
+            /** INSERT into factory table - unique_model */
+            $db2    = $this->load->database('db2', TRUE);
+            $sql2   = "INSERT INTO unique_model (op_projectbarcode,op_schoolbarcode,op_projectcode,op_schoolname) 
+                        VALUES (?, ?, ?, ?, ?)";
+        $db2->query($sql2, [$data['ProjectBarcode'],$data['SchoolBarcode'],$data['ProjectCode'],$data['SchoolName']]);
             return True;
         } else {
             return false;
         }
-    }
+}
 
 public function getProjectDetailsByTaskId($taskId){
     $query  = $this->db->query("SELECT ch.projectcode,ch.projectcode_id,ch.noofschool,spd.sname FROM client_handover ch
                                 LEFT JOIN spd ON ch.projectcode=spd.project_code
                                 LEFT JOIN tblcallevents tbe ON spd.id = tbe.sid
                                 WHERE tbe.id='".$taskId."'");
-                                
     $result = $query->row_array();
     return $result;
 }
+
 public function get_all_barcodes() {
-    return $this->db->get('projectschoolbarcode')->result_array();
+    $query  = $this->db->query('SELECT * FROM projectschoolbarcode GROUP BY ProjectCode ');
+    $result = $query->result_array();
+    foreach($result as $key=>$val){
+        $projectCodeArr[$val['ProjectCode']][] =  $val;
+    }
+    return $projectCodeArr;
 }
+
 }
