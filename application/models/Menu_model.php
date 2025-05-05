@@ -8853,7 +8853,6 @@ public function upload_multiple_files_common($input_name, $upload_path = 'upload
 {
     $CI =& get_instance();
     $CI->load->library(['upload', 'image_lib']);
-
     // Normalize and check upload path
     $upload_path = rtrim($upload_path, '/') . '/';
     if (!is_dir($upload_path)) {
@@ -8872,7 +8871,6 @@ public function upload_multiple_files_common($input_name, $upload_path = 'upload
         $_FILES[$input_name]['tmp_name'] = $files[$input_name]['tmp_name'][$i];
         $_FILES[$input_name]['error'] = $files[$input_name]['error'][$i];
         $_FILES[$input_name]['size'] = $files[$input_name]['size'][$i];
-
         // Get original file extension
         $original_ext = pathinfo($_FILES[$input_name]['name'], PATHINFO_EXTENSION);
         $original_ext = strtolower($original_ext);
@@ -8899,9 +8897,7 @@ public function upload_multiple_files_common($input_name, $upload_path = 'upload
             ];
             continue;
         }
-
         $upload_data = $CI->upload->data();
-
         // If image, compress it
         $image_mime = ['image/jpeg', 'image/png', 'image/gif', 'image/webp'];
         if (in_array($upload_data['file_type'], $image_mime)) {
@@ -8913,7 +8909,6 @@ public function upload_multiple_files_common($input_name, $upload_path = 'upload
                 'width'          => 1280,
                 'height'         => 1280,
             ];
-
             $CI->image_lib->initialize($compress_config);
             $CI->image_lib->resize();
             $CI->image_lib->clear();
@@ -8983,14 +8978,23 @@ public function getProjectDetailsByTaskId($taskId){
     $result = $query->row_array();
     return $result;
 }
-
-public function get_all_barcodes() {
+public function get_all_barcodes(){
     $query  = $this->db->query('SELECT * FROM projectschoolbarcode GROUP BY ProjectCode ');
     $result = $query->result_array();
     foreach($result as $key=>$val){
         $projectCodeArr[$val['ProjectCode']][] =  $val;
     }
     return $projectCodeArr;
+}
+
+public function getDetailsByBarcode($barcode,$barcodeType)
+{
+    $db3    = $this->load->database('db2', TRUE);
+    $query  = $db3->query(" SELECT m.model_name,m.material FROM model m 
+                            LEFT JOIN unique_model u_m ON u_m.
+                            WHERE `".$barcodeType."` LIKE '".$barcode."' ");
+    $result = $query->result();
+    return $result;
 }
 
 }

@@ -95,7 +95,6 @@
                 $firstPane = true; // Track first tab content
                 foreach ($getTodaysTaskCounts as $getTodaysTaskCount){
                     $slct_type_of_task = $getTodaysTaskCount->tasktype;
-                    //echo  $getTodaysTaskCount->tasktype."<br>";
                     $formatted_string = preg_replace("/[ \/'-]+/", "_", $getTodaysTaskCount->tasktype);
                 ?>
               <div class="tab-pane fade <?= $firstPane ? 'show active' : '' ?>" 
@@ -111,7 +110,6 @@
                           foreach($getTodaysTasks as $sctasklist){
                             $task_id              = $sctasklist->task_id;
                             $type_of_task         = $sctasklist->tasktype;
-
                             $appointment_datetime = $sctasklist->appointment_datetime;
                             $sname                = $sctasklist->sname;
                             $tasktype             = $sctasklist->tasktype;
@@ -122,8 +120,6 @@
                             $target_date          = $sctasklist->target_date;
                             $expected_date        = $sctasklist->expected_date;
                             $fwd_date             = $sctasklist->fwd_date;
-
-
                           if($slct_type_of_task === $tasktype){ 
                             ?>
                           <a data-task_id="<?=$task_id;?>" class="list-group-item list-group-item-action flex-column align-items-start active mb-1 taskperformaction" >

@@ -56,6 +56,15 @@
                     
                     <label><strong>Unboxing Models Photo/Video</strong></label>
                     <input type="file" class="form-control" name="unboxing_models" accept="image/*,video/*" >
+                  
+                    <label for="barcodeInput"><strong>Select Barcode Type:</strong></label>
+                    <input type="radio" id="barcodeType" name="barcodeType" value="fg_barcode" ><label for="barcodeInput">FG Barcode</strong></label><br>
+                    <input type="radio" id="barcodeType" name="barcodeType" value="ibbarcode" ><label for="barcodeInput"><strong>Inner Barcode</strong></label>
+
+                    <div id="barcodeResult" class="mt-3"></div>
+                    <label for="barcodeInput"><strong>Scan Barcode:</strong></label>
+                    <input type="text" id="barcodeInput" class="form-control" placeholder="Scan barcode here" autofocus>
+                    <div id="barcodeResult" class="mt-3"></div>
                 </div>
             
             <!-- Model Counting by Barcode Scanning -->
@@ -295,6 +304,32 @@ $(document).ready(function () {
             clearInterval(timerInterval);
             $(this).text("Start Task").removeClass("btn-danger").addClass("btn-success");
         }
+    });
+});
+
+</script>
+<script>
+$(document).ready(function () {
+    $('#barcodeInput').on('keypress', function (e) {
+         if (e.which === 13) { // Enter key triggers barcode check
+            let barcode     = $(this).val().trim();
+            let barcodeType = $("#barcodeType").val().trim();
+            if (barcode !== ''){
+                $.ajax({
+                    url: '<?= base_url('Menu/checkBarcode'); ?>',
+                    method: 'POST',
+                    data: { barcode: barcode ,barcodeType:barcodeType},
+                    success: function (res) {
+                        alert(res);
+                        $('#barcodeResult').html(res);
+                      //  $('#barcodeInput').val('').focus();
+                    },
+                    error: function () {
+                        $('#barcodeResult').html('<div class="text-danger">Error checking barcode</div>');
+                    }
+                });
+            }
+         }
     });
 });
 </script>

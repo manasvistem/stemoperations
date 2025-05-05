@@ -11849,7 +11849,8 @@ public function visitDuringInstallationTask($taskId,$starttime){
     $data['taskType']               = $taskInfo['tasktype'];
     $data['taskname']               = $taskInfo['taskname'];
     $data['tasktypeid']             = $taskInfo['taskTypId'];
-    $data['starttime']              = $_POST['starttime'];
+    $data['starttime']              = $starttime;
+   // dd($data);
     $data['getFactoryModelList']    = $this->Menu_model->getFactoryModelList();
     $this->display($dep_name,"visitDuringInstallationView",$data,$type="");
 }
@@ -11887,9 +11888,11 @@ public function updateVisitDuringInstallation(){
     $nonworkingmodeldata['type']           = 'Replace';
     $currentDate                           = date('Y-m-d');
     $uploaded_files                        = $_FILES;
+    $starttime                             = $posted_data['starttime'];
+    $seconds                               = (int)($starttime / 1000);
+    $startDateTime                         = date('Y-m-d H:i:s', $seconds);
     //$file_array_key                      = array_keys($uploaded_files);
     $nonworkingmodellist                   = $posted_data['NotWorkingModel'];
-    
     foreach($nonworkingmodellist as $key=>$val){        
         // insert non working model in factory tables
       foreach($posted_data as $k=>$v){
@@ -11924,7 +11927,6 @@ public function updateVisitDuringInstallation(){
         $this->uploadFile($values,$uploadPath);
     }
   }
-
     unset($posted_data['taskId'], $posted_data['taskType'], $posted_data['tasktypeid']);
 
  foreach ($posted_data as $k => $val) {
@@ -22970,9 +22972,8 @@ public function CustomizedReportsSubmit(){
             'message'    => "$currentStages_taskname - $currentStages_taskdetails - Complete  Successfully !!"
         ];
         $this->db->insert('user_log', $log_data);
-
         $this->session->set_flashdata('success_message',"$currentStages_taskname - $currentStages_taskdetails - Task Complete  Successfully !!");
-    redirect('Menu/Dashboard');
+        redirect('Menu/Dashboard');
 }
 
 public function findParentTaskId($currTaskId){
@@ -22990,7 +22991,6 @@ public function createBarcode($project_code,$school_count){
     $data['SchoolCount'] = $school_count;
     $iid                 = rand(1000, 9999);
     $statusMessage       = "";
-
     // Generate project barcode
     $project_pbarcode       = str_pad($iid, 4, "0", STR_PAD_LEFT) . str_pad(0, 4, "0", STR_PAD_LEFT) . str_pad(0, 4, "0", STR_PAD_LEFT);
     $data['ProjectBarcode'] = $project_pbarcode;
@@ -23025,6 +23025,24 @@ public function generate_barcode($code)
     header('Content-Type: image/png');
     echo $generator->getBarcode($code, $generator::TYPE_CODE_128, 2, 60);
 }
+public function checkBarcode()
+{
+    $barcode        = $this->input->post('barcode');
+    $barcodeType    = $this->input->post('barcodeType');
+    // Fetch from DB (example)
+    $result = $this->Menu_model->getDetailsByBarcode($barcode,$barcodeType);
+    if ($result){
+        // Load a view partial or return a formatted HTML snippet
+        echo "<div class='card p-2'>
+                <strong>Model Name:</strong> $result->model_name<br>
+                <strong>Material:</strong> $result->material<br>
+              </div>";
+    }
+    else{
+        echo "<div class='text-danger'>Barcode not found</div>";
+    }
+}
+
 }
 
 

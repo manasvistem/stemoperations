@@ -1,5 +1,4 @@
-<style>
-        .container {
+<style> .container {
             max-width: 600px;
             margin: auto;
             padding: 20px;
@@ -61,10 +60,8 @@
                     <label><strong>Can we have a Number of the Peon?</strong></label>
                     <input type="number" class="form-control" name="number" >
                     <label for="total_teachers"><strong>Total Teachers:</strong></label>
-
                     <input type="number" class="form-control" name="teachers" id="total_teachers" min="1" required>
                     <div id="teacher_fields"></div>
-
                     <label><strong>Total Students</strong></label>
                     <input type="number" class="form-control" name="total_students" >
                     <label><strong>Boys</strong></label>
