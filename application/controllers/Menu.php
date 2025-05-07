@@ -10966,7 +10966,6 @@ public function updateProjectSid(){
     $data['user'] = $user;
     $uid        = $user['id'];
     $id         =  $user['dep_id'];
-    
     $notify     =   $this->Menu_model->get_notifybyid($uid);
     $dt         =   $this->Menu_model->get_depatment_byid($id);
     $dep_name   =   $dt[0]->dep_name;
@@ -23042,6 +23041,16 @@ public function checkBarcode()
         echo "<div class='text-danger'>Barcode not found</div>";
     }
 }
+public function assignPIAProject(){
+    $user = $_SESSION();
+    $this->display($dep_name,'assignPIAProject',$data,$type='');
+}
+
+public function addNewSchool(){
+    $user = $_SESSION();
+    $this->display($dep_name,'addNewSchool',$data,$type='');
+}
+
 
 }
 
