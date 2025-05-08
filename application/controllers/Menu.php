@@ -23041,16 +23041,63 @@ public function checkBarcode()
         echo "<div class='text-danger'>Barcode not found</div>";
     }
 }
+
 public function assignPIAProject(){
-    $user = $_SESSION();
+    $user                  = $this->session->userdata('user');
+    $data['user']          = $user;
+    $uid                   = $user['id'];
+    $id                    = $user['dep_id'];
+    $dt                    = $this->Menu_model->get_depatment_byid($id);
+    $dep_name              = $dt[0]->dep_name;
+    $data['user']          = $user;
+    $data['projectCodes']  = $this->Menu_model->getProjectCodeList();
+ // $data['schoolList']    = $this->Menu_model->getSchoolList();
+    $data['PIAList']       = $this->Menu_model->getPIAList();
     $this->display($dep_name,'assignPIAProject',$data,$type='');
 }
 
-public function addNewSchool(){
-    $user = $_SESSION();
-    $this->display($dep_name,'addNewSchool',$data,$type='');
+public function getProjectSChools(){
+    $project_code  =  $this->input->post('project_code');
+   // $project_code  =  "ASSM GAS-19-20-S-2";
+    $schoolList    =  $this->Menu_model->getProjectSChools($project_code);
+   // echo $this->db->last_query();exit;
+ echo json_encode($schoolList);
 }
 
+public function getProjectSChoolPIA(){
+    $sid         =  $this->input->post('sid');
+    $currentPIA  = $this->Menu_model->getProjectSChoolPIA($sid);
+    echo json_encode($currentPIA);
+}
+
+public function updateNewPIAtoSChool(){
+    $user                 = $this->session->userdata('user');
+    
+    $uid                  = $user['id'];
+    $id                   = $user['dep_id'];
+    $dt                   = $this->Menu_model->get_depatment_byid($id);
+    $dep_name             = $dt[0]->dep_name;
+    $data['project_code'] = $this->input->post('project_code');
+    $data['sid']          = $this->input->post('schoollist');
+    $data['current_pia']  = $this->input->post('current_pia');
+    $data['new_pia']      = $this->input->post('new_pia');
+    $data['updated_by']   = $uid;
+    $this->Menu_model->updateNewPIA($data);
+    $this->session->set_flashdata('success_message','PIA have been Reassigned Successfully');
+    redirect("Menu/Dashboard");
+}
+
+public function addNewSchool(){
+    $user             = $this->session->userdata('user');
+    $data['user']     = $user;
+    $uid              = $user['id'];
+    $id               = $user['dep_id'];
+    $dt               = $this->Menu_model->get_depatment_byid($id);
+    $dep_name         = $dt[0]->dep_name;
+    $data['projectCodes']  = $this->Menu_model->getProjectCodeList();
+    $data['PIAList']       = $this->Menu_model->getPIAList();
+    $this->display($dep_name,'addNewSchoolView',$data,$type='');
+}
 
 }
 

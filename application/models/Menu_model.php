@@ -8997,4 +8997,39 @@ public function getDetailsByBarcode($barcode,$barcodeType)
     return $result;
 }
 
+public function getProjectCodeList(){
+    $query =$this->db->query("SELECT projectcode,projectcode_id FROM client_handover");
+    return $query->result_array();
 }
+
+public function getPIAList(){
+    $query =$this->db->query("SELECT * FROM user_detail WHERE dep_id = '2' AND status = 'active'");
+    return $query->result_array();
+}
+
+public function getProjectSChools($project_code){
+    $query = $this->db->query(" SELECT spd.id,sname
+                               FROM spd 
+                               WHERE spd.project_code = '".$project_code."'");
+    return $query->result_array();
+}
+
+public function getProjectSChoolPIA($sid){
+    $query = $this->db->query("SELECT ud.fullname as pia_name,spd.pi_id
+                               FROM spd 
+                               LEFT JOIN user_detail ud ON ud.id = spd.pi_id WHERE spd.id= '".$sid."' ");
+    return $query->row_array();
+}
+
+public function updateNewPIA($data){
+     $this->db->query("UPDATE spd SET pi_id = '".$data['pi_id']."' WHERE sid =".$data['sid']." ");
+    $this->db->insert('project_pia_reassign',$data);
+    echo $this->db->last_query();exit;
+    return TRUE;
+}
+
+
+
+}
+
+
