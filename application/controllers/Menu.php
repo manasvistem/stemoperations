@@ -23072,7 +23072,6 @@ public function getProjectSChoolPIA(){
 
 public function updateNewPIAtoSChool(){
     $user                 = $this->session->userdata('user');
-    
     $uid                  = $user['id'];
     $id                   = $user['dep_id'];
     $dt                   = $this->Menu_model->get_depatment_byid($id);
@@ -23094,9 +23093,22 @@ public function addNewSchool(){
     $id               = $user['dep_id'];
     $dt               = $this->Menu_model->get_depatment_byid($id);
     $dep_name         = $dt[0]->dep_name;
-    $data['projectCodes']  = $this->Menu_model->getProjectCodeList();
+
+    $data['projectDetails']  = $this->Menu_model->getProjectCodeList();
+    dd($data);
     $data['PIAList']       = $this->Menu_model->getPIAList();
     $this->display($dep_name,'addNewSchoolView',$data,$type='');
+}
+public function getProjectDetails()
+{
+    $project_code = $this->input->post('project_code');
+    $project_data = $this->Menu_model->getProjectByCode($project_code); // Fetch row as array
+    echo json_encode($project_data);
+}
+public function getProjectByCode($code)
+{
+    $this->db->where('projectcode', $code);
+    return $this->db->get('your_project_table')->row_array();
 }
 
 }

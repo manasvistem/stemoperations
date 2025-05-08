@@ -8998,7 +8998,7 @@ public function getDetailsByBarcode($barcode,$barcodeType)
 }
 
 public function getProjectCodeList(){
-    $query =$this->db->query("SELECT projectcode,projectcode_id FROM client_handover");
+    $query =$this->db->query("SELECT * FROM client_handover");
     return $query->result_array();
 }
 

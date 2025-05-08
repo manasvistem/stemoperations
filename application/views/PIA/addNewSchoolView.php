@@ -18,7 +18,10 @@
               <label for="project_code" class="form-label">Project Code</label>
               <select id="project_code" name="project_code" class="form-select">
                 <option value="">Select Project Code</option>
-                <!-- Populate options dynamically -->
+                <?php foreach($projectCodes as $key=>$val){ ?>
+                    <option value="<?php echo $val['projectcode_id'];?>"><?php echo $val['projectcode'];?></option>
+                    <!-- Populate options dynamically -->
+                 <?php } ?>
               </select>
             </div>
             <div class="col-md-4">
@@ -27,11 +30,23 @@
                 <option value="">Select Client</option>
               </select>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
+              <label for="saddress" class="form-label">PIA Name</label>
+              <?php //dd($PIAList); ?>
+              <select id="project_code" name="project_code" class="form-select">
+                <option value="">Select PIA</option>
+                <?php foreach($PIAList as $key=>$val){ ?>
+                    <option value="<?php echo $val['id'];?>"><?php echo $val['fullname'];?></option>
+                    <!-- Populate options dynamically -->
+                 <?php } ?>
+              </select>
+              <input type="hidden" id="pia_name" name="pia_name" value="" class="form-control">
+            </div>
+            <div class="col-md-4">
               <label for="sname" class="form-label">School Name</label>
               <input type="text" id="sname" name="sname" class="form-control">
             </div>
-            <div class="col-md-6">
+            <div class="col-md-4">
               <label for="saddress" class="form-label">Address</label>
               <textarea id="saddress" name="saddress" class="form-control" rows="2"></textarea>
             </div>
@@ -160,3 +175,35 @@
     </div>
   </form>
 </div>
+<script>
+$(document).ready(function() {
+    $('#project_code').change(function() {
+        let selectedCode = $(this).val();
+
+        if (selectedCode !== '') {
+            $.ajax({
+                url: '<?= base_url("menu/getProjectDetails") ?>',
+                method: 'POST',
+                data: { project_code: selectedCode },
+                dataType: 'json',
+                success: function(response) {
+                    console.log(response); // Debug
+
+                    $('#clientname').val(response.client_name);
+                    $('#sayear').val(response.project_year);
+                    $('#expected_installation_date').val(response.expected_installation_date);
+                    $('#pstatus').val(response.pstatus);
+                    $('#status').val(response.status);
+                    $('#rremark').val(response.remark);
+                    $('#sdate').val(response.sdatet.split(' ')[0]); // Convert datetime to date
+
+                    // Add others as needed
+                },
+                error: function(xhr) {
+                    alert("Error fetching project details.");
+                }
+            });
+        }
+    });
+});
+</script>
