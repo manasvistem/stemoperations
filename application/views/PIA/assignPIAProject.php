@@ -52,7 +52,6 @@
                 <?php } ?>
               </select>
             </div>
-
             <div class="text-center">
               <button type="submit" class="btn btn-success px-4 py-2 rounded-pill">Submit</button>
             </div>

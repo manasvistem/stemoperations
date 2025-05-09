@@ -6599,7 +6599,7 @@ public function getUserDayStartDetails($uid,$tdate){
 }
 public function get_indian_languages(){
     $query =  $this->db->query("SELECT language_name FROM indian_languages");
-    return $query->row_array();
+    return $query->result_array();
 }
 
 public function update_tbe_attachmentid($main_task_id,$task_id){
@@ -9028,7 +9028,28 @@ public function updateNewPIA($data){
     return TRUE;
 }
 
+public function getProjectByCode($code)
+{
+    $this->db->where('projectcode_id', $code);
+    return $this->db->get('client_handover')->row_array();
+}
 
+public function  getdistrictlist(){
+   $query = $this->db->query("SELECT * FROM district");
+   return $query->result_array();
+}
+public function getstates(){
+   $query = $this->db->query("SELECT * FROM state");
+   return $query->result_array();
+}
+public function getcities(){
+    $query = $this->db->query("SELECT * FROM city");
+    return $query->result_array();
+}
+public function gettehsils(){
+    $query = $this->db->query("SELECT * FROM tehshil");
+    return $query->result_array();
+}
 
 }
 

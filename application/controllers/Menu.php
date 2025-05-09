@@ -7795,7 +7795,7 @@ public function updateTask($tasktypeid=''){
         $du=$this->Menu_model->get_user();
         $client=$this->Menu_model->get_pcbypiid($uid);
         $spd = $this->Menu_model->get_mspd();
-        $this->load->view($dep_name.'/AcademicCalendar', ['piastate'=>$piastate,'notify'=>$notify,'region'=>$dr,'dep'=>$dt, 'data'=>$data, 'client'=>$client, 'spd'=>$spd, 'user'=>$user,'year'=>$year]);
+        $this->display($dep_name,'AcademicCalendar', ['piastate'=>$piastate,'notify'=>$notify,'region'=>$dr,'dep'=>$dt, 'data'=>$data, 'client'=>$client, 'spd'=>$spd, 'user'=>$user,'year'=>$year],$type='');
     }
     public function ShowAcademicCalendar(){
         $user = $this->session->userdata('user');
@@ -7807,7 +7807,7 @@ public function updateTask($tasktypeid=''){
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
         $academiccalendar=$this->Menu_model->get_academiccalendar();
-        $this->load->view($dep_name.'/ShowAcademicCalendar', ['notify'=>$notify,'user'=>$user,'academiccalendar'=>$academiccalendar]);
+        $this->display($dep_name,'ShowAcademicCalendar', ['notify'=>$notify,'user'=>$user,'academiccalendar'=>$academiccalendar],$type='');
     }
     public function CreateInstallation(){
         $user = $this->session->userdata('user');
@@ -23058,9 +23058,7 @@ public function assignPIAProject(){
 
 public function getProjectSChools(){
     $project_code  =  $this->input->post('project_code');
-   // $project_code  =  "ASSM GAS-19-20-S-2";
     $schoolList    =  $this->Menu_model->getProjectSChools($project_code);
-   // echo $this->db->last_query();exit;
  echo json_encode($schoolList);
 }
 
@@ -23093,22 +23091,28 @@ public function addNewSchool(){
     $id               = $user['dep_id'];
     $dt               = $this->Menu_model->get_depatment_byid($id);
     $dep_name         = $dt[0]->dep_name;
-
     $data['projectDetails']  = $this->Menu_model->getProjectCodeList();
-    dd($data);
-    $data['PIAList']       = $this->Menu_model->getPIAList();
+    $data['PIAList']         = $this->Menu_model->getPIAList();
+    $data['districts']        = $this->Menu_model->getdistrictlist();
+    $data['states']          = $this->Menu_model->getstates();
+    $data['cities']          = $this->Menu_model->getcities();
+    $data['tehsils']         = $this->Menu_model->gettehsils();
+    $data['regions']         = $this->Menu_model->GetAllRegions();
+    $data['languages']       = $this->Menu_model->get_indian_languages();
     $this->display($dep_name,'addNewSchoolView',$data,$type='');
 }
+
 public function getProjectDetails()
 {
     $project_code = $this->input->post('project_code');
     $project_data = $this->Menu_model->getProjectByCode($project_code); // Fetch row as array
     echo json_encode($project_data);
 }
-public function getProjectByCode($code)
-{
-    $this->db->where('projectcode', $code);
-    return $this->db->get('your_project_table')->row_array();
+
+public function submitAddNewschool(){
+    dd($_POST);
+    $this->Menu_model->submitAddNewschool($data);
+    redirect("Menu/Dashboard"); 
 }
 
 }
