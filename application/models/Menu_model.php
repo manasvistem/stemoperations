@@ -9035,20 +9035,24 @@ public function getProjectByCode($code)
 }
 
 public function  getdistrictlist(){
-   $query = $this->db->query("SELECT * FROM district");
+   $query = $this->db->query("SELECT * FROM district ORDER BY districtn ASC ");
    return $query->result_array();
 }
 public function getstates(){
-   $query = $this->db->query("SELECT * FROM state");
+   $query = $this->db->query("SELECT * FROM state order by statename ASC");
    return $query->result_array();
 }
 public function getcities(){
-    $query = $this->db->query("SELECT * FROM city");
+    $query = $this->db->query("SELECT * FROM city order by cityname ASC ");
     return $query->result_array();
 }
 public function gettehsils(){
-    $query = $this->db->query("SELECT * FROM tehshil");
+    $query = $this->db->query("SELECT * FROM tehshil ORDER BY tehshiln");
     return $query->result_array();
+}
+public function submitAddNewschool($data){
+    $this->db->insert('spd',$data);
+   
 }
 
 }

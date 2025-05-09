@@ -1,5 +1,13 @@
 <!-- Assuming Bootstrap CSS and external header are already included -->
 <div class="container my-5">
+<?php if ($this->session->flashdata('success_message')): ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                  <strong> <?php echo $this->session->flashdata('success_message'); ?></strong>
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <?php endif; ?>
   <form action="<?php echo base_url()?>Menu/submitAddNewschool" method="POST">
     <div class="card shadow rounded-4">
       <div class="card-header bg-primary text-white text-center rounded-top-4">
@@ -27,7 +35,7 @@
             </div>
             <div class="col-md-4">
               <label for="clientname" class="form-label">Client Name</label>
-              <input type="text" class="form-control" value="" name="clientname" id="clientname" >
+              <input type="text" class="form-control" value="" name="clientname" id="clientname" disabled>
               <!-- <select id="clientname" name="clientname" class="form-select">
                 <option value="">Select Client</option>
               </select> -->
@@ -35,22 +43,21 @@
             <div class="col-md-4">
               <label for="saddress" class="form-label">PIA Name</label>
               <?php //dd($PIAList); ?>
-              <select id="pia_list" name="pia_list" class="form-select">
+              <select id="pia_list" name="pi_id" class="form-select" required>
                 <option value="">Select PIA</option>
                 <?php foreach($PIAList as $key=>$val){ ?>
                     <option value="<?php echo $val['id'];?>"><?php echo $val['fullname'];?></option>
                     <!-- Populate options dynamically -->
                  <?php } ?>
               </select>
-              <input type="hidden" id="pia_name" name="pia_name" value="" class="form-control">
             </div>
             <div class="col-md-4">
               <label for="sname" class="form-label">School Name</label>
-              <input type="text" id="sname" name="sname" class="form-control">
+              <input type="text" id="sname" name="sname" class="form-control" required>
             </div>
             <div class="col-md-4">
               <label for="saddress" class="form-label">Address</label>
-              <textarea id="saddress" name="saddress" class="form-control" rows="2"></textarea>
+              <textarea id="saddress" name="saddress" class="form-control" rows="2" required></textarea>
             </div>
           </div>
         </div>
@@ -59,9 +66,20 @@
         <div class="mb-4">
           <h5 class="text-secondary border-bottom pb-2">Location & Details</h5>
           <div class="row g-3">
+          <div class="col-md-3">
+              <label for="sstate" class="form-label">State</label>
+              <select id="sstate" name="sstate" class="form-select" required>
+              <option value="">Select State</option>
+                    <?php foreach($states as $statek=>$stateval) {
+                         ?>
+                         <option value="<?php echo $stateval['id'];?>"><?php echo $stateval['statename'];?></option>
+                         <?php  
+                     }?>
+              </select>
+            </div>
             <div class="col-md-3">
               <label for="sdistrict" class="form-label">District</label>
-                 <select id="sdistrict" name="sdistrict" class="form-select">
+                 <select id="sdistrict" name="sdistrict" class="form-select" required>
                     <option value="">Select District</option>
                     <?php foreach($districts as $diskey=>$disval) {
                          ?>
@@ -72,7 +90,7 @@
             </div>
             <div class="col-md-3">
               <label for="tehshil" class="form-label">Tehsil</label>
-              <select id="tehshil" name="tehshil" class="form-select">
+              <select id="tehshil" name="tehshil" class="form-select" required>
               <option value="">Select Tehsil</option>
                     <?php foreach($tehsils as $tehkey=>$tehval){
                          ?>
@@ -83,7 +101,7 @@
             </div>
             <div class="col-md-3">
               <label for="scity" class="form-label">City</label>
-              <select id="scity" name="scity" class="form-select">
+              <select id="scity" name="scity" class="form-select" required>
 
               <option value="">Select City</option>
                     <?php foreach($cities as $cityk=>$cityval) {
@@ -93,20 +111,10 @@
                      }?>
               </select>
             </div>
-            <div class="col-md-3">
-              <label for="sstate" class="form-label">State</label>
-              <select id="sstate" name="sstate" class="form-select">
-              <option value="">Select State</option>
-                    <?php foreach($states as $statek=>$stateval) {
-                         ?>
-                         <option value="<?php echo $stateval['id'];?>"><?php echo $stateval['statename'];?></option>
-                         <?php  
-                     }?>
-              </select>
-            </div>
+           
             <div class="col-md-3">
               <label for="sregion" class="form-label">Region</label>
-              <select id="sregion" name="sregion" class="form-select">
+              <select id="sregion" name="sregion" class="form-select" required>
                    <option value="">Select Region</option>
                     <?php foreach($regions as $regionk=>$regionval) {
                          ?>
@@ -117,7 +125,7 @@
             </div>
             <div class="col-md-3">
               <label for="slanguage" class="form-label">Language</label>
-              <select id="slanguage" name="slanguage[]" class="form-select" multiple>
+              <select id="slanguage" name="slanguage[]" class="form-select" multiple required>
               <option value="">Select Language</option>
                 <?php foreach($languages as $languagesk=>$languagesval) {
                          ?>
@@ -128,7 +136,7 @@
             </div>
             <div class="col-md-3">
               <label for="spincode" class="form-label">Pincode</label>
-              <input type="text" id="spincode" name="spincode" class="form-control">
+              <input type="text" inputmode="numeric" pattern="\d*"  id="spincode" name="spincode" class="form-control" maxlength="6">
             </div>
             <div class="col-md-3">
               <label for="snoyear" class="form-label">No. of Years</label>
@@ -142,24 +150,8 @@
         </div>
         <!-- Layout 3: Academic & Additional Info -->
         <div class="mb-4">
-          <h5 class="text-secondary border-bottom pb-2">Academic & Status</h5>
+          <h5 class="text-secondary border-bottom pb-2">Academic</h5>
           <div class="row g-3">
-            <div class="col-md-3">
-              <label for="waname" class="form-label">WA Name</label>
-              <input type="text" id="waname" name="waname" class="form-control">
-            </div>
-            <div class="col-md-3">
-              <label for="wanamelink" class="form-label">WA Name Link</label>
-              <input type="text" id="wanamelink" name="wanamelink" class="form-control">
-            </div>
-            <div class="col-md-3">
-              <label for="status" class="form-label">Status</label>
-              <input type="text" id="status" name="status" class="form-control">
-            </div>
-            <div class="col-md-3">
-              <label for="pstatus" class="form-label">PStatus</label>
-              <input type="text" id="pstatus" name="pstatus" class="form-control">
-            </div>
             <div class="col-md-3">
               <label for="std" class="form-label">STD</label>
               <input type="text" id="std" name="std" class="form-control">
@@ -187,10 +179,6 @@
             <div class="col-md-3">
               <label for="website" class="form-label">Website</label>
               <input type="text" id="website" name="website" class="form-control">
-            </div>
-            <div class="col-md-3">
-              <label for="pi_id" class="form-label">PI ID</label>
-              <input type="text" id="pi_id" name="pi_id" class="form-control">
             </div>
             <div class="col-md-6">
               <label for="rremark" class="form-label">Remarks</label>

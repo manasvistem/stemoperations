@@ -23081,7 +23081,7 @@ public function updateNewPIAtoSChool(){
     $data['updated_by']   = $uid;
     $this->Menu_model->updateNewPIA($data);
     $this->session->set_flashdata('success_message','PIA have been Reassigned Successfully');
-    redirect("Menu/Dashboard");
+    redirect("Menu/assignPIAProject");
 }
 
 public function addNewSchool(){
@@ -23110,9 +23110,19 @@ public function getProjectDetails()
 }
 
 public function submitAddNewschool(){
-    dd($_POST);
-    $this->Menu_model->submitAddNewschool($data);
-    redirect("Menu/Dashboard"); 
+   $posted_data = $_POST;
+   foreach($posted_data as $key=>$val){
+   
+       if($key =='slanguage'){
+
+           $val = implode('==',$val);
+        }
+        $posted_data[$key] = $val;
+   }
+  // dd($posted_data);
+    $this->Menu_model->submitAddNewschool($posted_data);
+    $this->session->set_flashdata('success_message','New School Added Successfully');
+    redirect("Menu/addNewSchool"); 
 }
 
 }
