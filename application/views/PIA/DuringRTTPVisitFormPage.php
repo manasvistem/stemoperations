@@ -12,8 +12,8 @@
     <h4 class="text-center">During RTTP Visit Task</h4>
     <form name="fttpVisitForm" action="<?= base_url();?>Menu/UpdateRTTPDuringVisit" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="taskId" value="<?php echo $taskId; ?>"/>
-        <!-- <input type="hidden" name="taskType" value="<?php echo $taskType; ?>"/>
-        <input type="hidden" name="tasktypeid" value="<?php echo $tasktypeid; ?>"/>   -->
+        <input type="hidden" name="start_journey" value="<?php echo $start_journey; ?>"/>
+       
         <!-- Image Upload Fields -->
         <div class="row">
             <div class="col-md-12 text-center mb-3">
@@ -29,7 +29,7 @@
         <div class="form-group d-flex align-items-center">
             <button type="button" id="startTaskBtn" class="btn btn-primary mr-3">Start My Task</button>
             <span id="startTimeText" class="text-success font-weight-bold" style="display:none;"></span>
-            <input type="hidden" id="startTime" name="start_time">
+            <input type="hidden" id="startTime" name="start_time" value="<?php echo date('Y-m-d h:i:s');?>">
         </div>
         <!-- File Uploads for Sessions -->
         <div class="row">
@@ -69,12 +69,16 @@
             </div>
             <div class="col-md-6">
                 <div class="mb-3">
-                    <label class="form-label"><strong>Final Session Upload</strong></label>
-                    <input type="file" class="form-control" name="final_session_file" accept="image/*">
+                    <label class="form-label"><strong>Final Session Image Upload</strong></label>
+                    <input type="file" class="form-control" name="final_session_image" accept="image/*">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label"><strong>Final Session Video Upload</strong></label>
+                    <input type="file" class="form-control" name="final_session_video" accept="video/*">
                 </div>
                 <div class="mb-3">
                     <label class="form-label"><strong>School Letter of RTTP Completion</strong></label>
-                    <input type="file" class="form-control" name="attendance_sheet" accept="image/*">
+                    <input type="file" class="form-control" name="school_rttp_completetion_letter" accept="image/*">
                 </div>
                 <div class="mb-3">
                     <label class="form-label"><strong>Teacher Attendance Sheet</strong></label>
@@ -230,24 +234,21 @@ $(document).ready(function () {
         if (btn.innerText === "Start My Task") {
             const startTime = new Date();
             hiddenInput.value = startTime.toISOString();
-            
             // Set start time label and update every second
             timerInterval = setInterval(() => {
                 const currentTime = new Date();
                 const elapsed = new Date(currentTime - startTime); // elapsed time
-
                 const h = String(elapsed.getUTCHours()).padStart(2, '0');
                 const m = String(elapsed.getUTCMinutes()).padStart(2, '0');
                 const s = String(elapsed.getUTCSeconds()).padStart(2, '0');
-
                 startTimeText.textContent = `Running Time: ${h}:${m}:${s}`;
                 startTimeText.style.display = "inline";
             }, 1000);
 
             // Change button to Stop and style
-            btn.innerText = "Stop";
-            btn.classList.remove("btn-primary");
-            btn.classList.add("btn-danger");
+           // btn.innerText = "Stop";
+         //   btn.classList.remove("btn-primary");
+          //  btn.classList.add("btn-danger");
 
         } else {
             // Stop clicked - clear interval and optionally disable

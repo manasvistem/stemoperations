@@ -7,12 +7,6 @@
                 <h1 class="m-0">Academic Calender</h1>
               </div>
               <!-- /.col -->
-              <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                  <h4>HI! <?php echo $username=$user['fullname']; $uid=$user['id']; $rid=$user['region_id'];?> ( <?php $id = $user['dep_id']; $did=$this->Menu_model->get_dep_byid($id); echo $did[0]->dep_name;?> )</h4>
-                </ol>
-              </div>
-              <!-- /.col -->
             </div>
             <!-- /.row -->
           </div>

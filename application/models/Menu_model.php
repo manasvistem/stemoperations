@@ -6604,7 +6604,7 @@ public function get_indian_languages(){
 
 public function update_tbe_attachmentid($main_task_id,$task_id){
     $query = $this->db->query("UPDATE task_execution_details SET tbe_attachement_id = '(SELECT id FROM tblcallevents_attachments WHERE main_task_id ='".$main_task_id."' AND task_id = '".$task_id."' LIMIT 1)' LIMIT 1");
-    //echo $this->db->last_query();exit;
+  //  echo $this->db->last_query();echo "<br>";
     return TRUE;
 }
 

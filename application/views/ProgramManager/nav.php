@@ -161,6 +161,18 @@
                 <div class="text-truncate" data-i18n="MyDayDetail">Day Management</div>
               </a>
             </li>
+             <li class="menu-item">
+              <a href="<?=base_url() ?>Menu/addNewSchool" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Add New School</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="<?=base_url() ?>Menu/assignPIAProject" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Myprofile">Assign PIA</div>
+              </a>
+            </li>
             <li class="menu-item">
             <a href="<?=base_url() ?>Menu/YesterDayDaysCloseRequest"
                 target="_blank"

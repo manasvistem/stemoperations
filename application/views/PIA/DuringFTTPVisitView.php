@@ -8,7 +8,7 @@
       <div class="mb-3">
         <label class="form-label">Start Your Journey  : <?php echo date('d-m-y h:i:s');?></label>
         <div class="form-check form-check-inline">
-        <a href="<?php echo base_url()?>Menu/duringFTTPVisitPage/<?php echo $taskId;?>" target="_blank" class="btn btn-primary" id="startyourjourney">
+        <a href="<?php echo base_url()?>Menu/duringFTTPVisitPage/<?php echo $taskId;?>/<?php echo date('d-m-y h:i:s');?>" target="_blank" class="btn btn-primary" id="startyourjourney">
            <i class="bi bi-play-fill"></i> Start 
         </a>
         <input type="hidden" name="starttime" value="<?php echo $starttime; ?>"/>

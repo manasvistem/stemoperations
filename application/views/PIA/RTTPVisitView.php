@@ -8,10 +8,10 @@
       <div class="mb-3">
         <label class="form-label">Start Your Journey  : <?php echo date('d-m-y h:i:s');?></label>
         <div class="form-check form-check-inline">
-        <a href="<?php echo base_url()?>Menu/duringRTTPVisitPage/<?php echo $taskId;?>" target="_blank" class="btn btn-primary" id="startyourjourney">
+        <a href="<?php echo base_url()?>Menu/duringRTTPVisitPage/<?php echo $taskId;?>/<?php echo date('Y-m-d h:i:s');?>" target="_blank" class="btn btn-primary" id="startyourjourney">
            <i class="bi bi-play-fill"></i> Start 
         </a>
-        <input type="hidden" value="" name="start_time">
+        <input type="hidden" value="" name="start_journey">
 
         </div>
       </div>

@@ -15352,7 +15352,7 @@ foreach($file_array_keys as $file_key=>$file_values){
         redirect('Menu/Dashboard');
 }
 
-public function duringFTTPVisitPage($taskId){
+public function duringFTTPVisitPage($taskId,$starttime){
     $user               = $this->session->userdata('user');
     $uid                = $user['user_id'];
     $uyid               = $user['type_id'];
@@ -15360,6 +15360,7 @@ public function duringFTTPVisitPage($taskId){
     $dt                 = $this->Menu_model->get_depatment_byid($dep_id);
     $dep_name           = $dt[0]->dep_name;
     $data['taskId']     = $taskId;
+    $data['starttime'] = $starttime;
     $this->display($dep_name,"DuringFTTPVisitFormPage",$data,$type="");
 }
 
@@ -17877,8 +17878,66 @@ public function updateBaselineMEreview(){
 }
 public function updateRTTPCall(){
     $posted_data = $_POST;
+   
+      /** Insert Into task_execution_details  */
+      $user               = $_SESSION['user'];
+      $taskperformedby    = $user['dep_id'];
+      $taskId             = $posted_data['taskId'];
+      $starttime          = $posted_data['starttime'];
+      $seconds            = (int)($starttime / 1000);
+      $startDateTime      = date('Y-m-d H:i:s', $seconds);
+      $commonColumns      = [
+                              'performed_by' => $_SESSION['user']['id'],
+                              'updated_at'   => date("Y-m-d H:i:s"),
+                              'status'       => 'active',
+                              'tbe_id'       => $taskId
+                           ];
+        $taskInsertArr1 = array();
+          
+          foreach($posted_data as $k=>$val){
+            if ($val != '' && !empty($val)){
+                // Assign main_Task_id based on the key
+                if($taskperformedby == '2'){
+              switch($k){
+                  case "action_completed" :             $main_task_id = "268";break;
+                  case "purpose_completed" :            $main_task_id = "269";break;
+                  case "rttp_date" :                    $main_task_id = "270";break;
+                  case "rttp_time" :                    $main_task_id = "271";break;
+                  case "student_queries" :              $main_task_id = "272";break;
+                  case "teachers_using_exhibits" :      $main_task_id = "273";break;
+                  case "teachers_best_practice" :      $main_task_id = "274";break;
+                  case "acknowledge_or_share" :         $main_task_id = "275";break;
+                  case "msc_assist_revision" :          $main_task_id = "276";break;
+                  case "msc_complement_elearning" :     $main_task_id = "277";break;
+                  case "peer_learning" :                $main_task_id = "278";break;
+                  case "diy_schedule" :                 $main_task_id = "279";break;
+                  case "diy_time" :                     $main_task_id = "280";break;
+                  case "students_materials" :           $main_task_id = "281";break;
+                  case "remark" :                       $main_task_id = "282";break;
+              }
+            }
+  
+              // Store data in array
+                  $taskInsertArr1[] = [
+                      'task_response' => $val,
+                      'main_Task_id'  => $main_Task_id,
+                      'remark'        => $remark
+                  ] + $commonColumns;
+                  $this->Menu_model->update_tbe_attachmentid($main_Task_id,$taskId);
+            }
+        }
+  
+          if (!empty($taskInsertArr1)){
+              $this->Menu_model->batch_insert_task_execution($finalArray);
+          }
+  
+          $current_date               = date('Y-m-d h:i:s');
+          $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+          $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+          redirect('Menu/Dashboard');
+
 }
-public function duringRTTPVisitPage($taskId){
+public function duringRTTPVisitPage($taskId,$start_journey){
     $user               = $this->session->userdata('user');
     $uid                = $user['user_id'];
     $uyid               = $user['type_id'];
@@ -17886,7 +17945,8 @@ public function duringRTTPVisitPage($taskId){
     $dt                 = $this->Menu_model->get_depatment_byid($dep_id);
     $dep_name           = $dt[0]->dep_name;
     $data['taskId']     = $taskId;
-    $this->display($dep_name,"DuringRTTPVisitFormPage",$data,$type="");
+    $data['start_journey']  = $start_journey;
+    $this->display($dep_name,"duringRTTPVisitFormPage",$data,$type="");
 }
 public function updateDuringRTTPVisitPage(){
     $posted_data = $_POST;
@@ -18045,7 +18105,7 @@ foreach($file_array_keys as $file_key=>$file_values){
    
 }
 public function UpdateRTTPDuringVisit(){
-    $posted_data = $_POST;
+  
     /** Insert Into task_execution_details  */
     $posted_data        = $_POST;
     $user               = $_SESSION['user'];
@@ -18061,17 +18121,19 @@ public function UpdateRTTPDuringVisit(){
     $file_array_keys      =  array_flip($file_array_keys);
         foreach($file_array_keys as $k=>$v){
             switch($k){
-                case "selfie"             :     $main_task_id = "284";  break;
+                case "selfie"             :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "284";break;
                 case "session_1_file"     :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "286";break;
-                case "session_2_file"     :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "288";break;
-                case "session_3_file"     :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "289";break;
-                case "session_4_file"     :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "290";break;
-                case "final_session_file" :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "291";break;
+                case "session_2_file"     :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "287";break;
+                case "session_3_file"     :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "288";break;
+                case "session_4_file"     :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "289";break;
+                case "final_session_image" :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "290";break;
+                case "final_session_video" :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "291";break;
+
                 case "teacher_review_1"   :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "292";break;
-                case "teacher_review_2"   :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "293";break;
-                case "teacher_review_3"   :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "294";break;
-                case "non_working_model"  :     $file_array_keys[$k]["main_task_id"]   = $main_task_id  = "295";break;
-                case "completion_letter"  :     $file_array_keys[$k]["main_task_id"]    = $main_task_id =  "296";break;
+                case "teacher_review_2"   :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "292";break;
+                case "teacher_review_3"   :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "293";break;
+                case "non_working_model"  :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "295";break;
+                case "school_rttp_completion_letter": $file_array_keys[$k]["main_task_id"] = $main_task_id = "296";break;
                 case "attendance_sheet"   :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "297";break;
                 case "completed_selfie"   :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "299";break;
                 case "additional_media"   :     $file_array_keys[$k]["main_task_id"]    = $main_task_id = "300";break;
@@ -18093,90 +18155,110 @@ public function UpdateRTTPDuringVisit(){
             }
         }
 $i=0;
-foreach($file_array_keys as $file_key=>$file_values){
+
+//dd($file_array_keys1);
+
+foreach($file_array_keys1 as $file_key=>$file_values){
+    if($file_key == 'selfie'){
+        $taskInsertArr1[]=[
+            'task_response' => "yes",
+            'main_Task_id'  => "284",
+            'remark'        => ""
+        ] + $commonColumns;
+    }
     if($file_key == 'session_1_file'){
         $taskInsertArr1[]=[
             'task_response' => "yes",
-            'main_Task_id'  => $file_values,
+            'main_Task_id'  => "286",
             'remark'        => ""
         ] + $commonColumns;
     }
     else if($file_key == 'session_2_file'){
         $taskInsertArr1[]=[
             'task_response' => "yes",
-            'main_Task_id'  => $file_values,
+            'main_Task_id'  => "287",
             'remark'        => ""
         ] + $commonColumns;
     }
     else if($file_key == 'session_3_file'){
         $taskInsertArr1[]=[
             'task_response' => "yes",
-            'main_Task_id'  => $file_values,
+            'main_Task_id'  => "288",
             'remark'        => ""
         ] + $commonColumns;
     }
     else if($file_key == 'session_4_file'){
         $taskInsertArr1[]=[
             'task_response' => "yes",
-            'main_Task_id'  => $file_values,
+            'main_Task_id'  => "289",
             'remark'        => ""
         ] + $commonColumns;
     }
-    else if($file_key == 'session_5_file'){
+    else if($file_key == 'final_session_image'){
         $taskInsertArr1[]=[
             'task_response' => "yes",
-            'main_Task_id'  => $file_values,
+            'main_Task_id'  => "290",
+            'remark'        => ""
+        ] + $commonColumns;
+    }
+    else if($file_key == 'final_session_video'){
+        $taskInsertArr1[]=[
+            'task_response' => "yes",
+            'main_Task_id'  => "291",
+            'remark'        => ""
+        ] + $commonColumns;
+    }
+    else if($file_key == 'school_rttp_completion_letter'){
+        $taskInsertArr1[]=[
+            'task_response' => "yes",
+            'main_Task_id'  => "296",
             'remark'        => ""
         ] + $commonColumns;
     }
     else if($file_key == 'attendance_sheet'){
         $taskInsertArr1[]=[
             'task_response' => "yes",
-            'main_Task_id'  => $file_values,
-            'remark'        => ""
-        ] + $commonColumns;
-    }
-    else if($file_key == 'completion_letter'){
-        $taskInsertArr1[]=[
-            'task_response' => "yes",
-            'main_Task_id'  => $file_values,
+            'main_Task_id'  => "297",
             'remark'        => ""
         ] + $commonColumns;
     }
     else if($file_key == 'completed_selfie'){
         $taskInsertArr1[]=[
             'task_response' => "yes",
-            'main_Task_id'  => $file_values,
+            'main_Task_id'  => "299",
             'remark'        => ""
         ] + $commonColumns;
     }
     else if($file_key == 'additional_media'){
         $taskInsertArr1[]=[
             'task_response' => "yes",
-            'main_Task_id'  => $file_values,
+            'main_Task_id'  => "300",
             'remark'        => ""
         ] + $commonColumns;
     }
     $i++;
 }
+
     /** Insert into task_execution tasks */
         foreach($posted_data as $k => $val){
             if($val != '' && !empty($val)){
                 // Assign main_Task_id based on the key
                 if($taskperformedby == '2'){
-                    switch ($k){
-                        case 'selfie':  $main_Task_id = '227'; 
+                    switch($k){
+                        case 'start_journey':  
+                                        $main_Task_id = '283'; 
                                         break;
-                        case 'sname':   $main_Task_id = '228'; 
+                        CASE 'start_time':   
+                                        $main_Task_id = '285'; 
                                         break;
                         case 'teacher_review_1':                  
-                                        $main_Task_id = '234'; 
+                                        $main_Task_id = '292'; 
                                         break;
                         case 'teacher_review_2':                
-                                        $main_Task_id = '235'; 
+                                        $main_Task_id = '293'; 
                                         break;
                         case 'teacher_review_3':
-                                        $main_Task_id = '236'; 
+                                        $main_Task_id = '294'; 
                                         break;
                         default:
                         continue 2; // Skip unknown keys
@@ -18194,12 +18276,93 @@ foreach($file_array_keys as $file_key=>$file_values){
                 $this->Menu_model->update_tbe_attachmentid($main_Task_id,$taskId);
             }
         } 
+
+      // dd($taskInsertArr1);
         if (!empty($taskInsertArr1)){
             $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
         }
         $current_date               = date('Y-m-d h:i:s');
         $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
         $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+        redirect('Menu/Dashboard');
+}
+
+public function UpdatePostRTTPVisit(){
+    $posted_data = $_POST;
+    /** Insert Into task_execution_details  */
+    $posted_data        = $_POST;
+    $user               = $_SESSION['user'];
+    $taskperformedby    = $user['dep_id'];
+    $taskId             = $posted_data['taskId'];
+    $commonColumns      = [
+                            'performed_by' => $_SESSION['user']['id'],
+                            'updated_at'   => date("Y-m-d H:i:s"),
+                            'status'       => 'active',
+                            'tbe_id'       => $taskId
+                          ];
+                          
+        /** Insert into task_execution tasks */
+        foreach($posted_data as $k => $val){
+            if($val != '' && !empty($val)){
+                // Assign main_Task_id based on the key
+                if($taskperformedby == '2'){
+                    switch ($k){
+                        case 'actionCompleted':  $main_Task_id = '301'; 
+                            break;
+                        case 'purposeCompleted':  $main_Task_id = '302'; 
+                            break;
+                        case 'q1_report_48hrs':  $main_Task_id = '303'; 
+                            break;
+                        case 'q2_new_teachers_whatsapp':  $main_Task_id = '304'; 
+                            break;
+                        case 'q3_msc_maintenance':   $main_Task_id = '305'; 
+                            break;
+                        case 'q4_teacher_preparedness':  $main_Task_id = '306'; 
+                            break;
+                        case 'q5_utilization_explained':$main_Task_id = '307'; 
+                            break;
+                        case 'q6_students_using_msc':  $main_Task_id = '308'; 
+                            break;
+                        case 'q7_peer_learning':   $main_Task_id = '309'; 
+                            break;
+                        case 'q8_model_utilization':  $main_Task_id = '310'; 
+                            break;
+                        case 'q9_student_performance': $main_Task_id = '311'; 
+                            break;
+                        case 'q10_cross_products':$main_Task_id = '312'; 
+                            break;
+                        case 'q11_justlearning_registration':   $main_Task_id = '313'; 
+                            break;
+                        case 'q12_projects_with_assistance':  $main_Task_id = '314'; 
+                            break;
+                        case 'q13_social_media_active': $main_Task_id = '315'; 
+                            break;
+                        case 'teacher_details':  $main_Task_id = '316'; 
+                            break;
+                        default:
+                        continue 2; // Skip unknown keys
+                    }
+                }
+                if(count($val)>1){
+                    $val = implode('**',$val);
+                }
+                // Store data in array
+                $taskInsertArr1[] = [
+                    'task_response' => $val,
+                    'main_Task_id'  => $main_Task_id,
+                    'remark'        => $remark
+                ] + $commonColumns;
+              //  $this->Menu_model->update_tbe_attachmentid($main_Task_id,$taskId);
+            }
+        } 
+      //  dd($taskInsertArr1);
+        if (!empty($taskInsertArr1)){
+            $this->Menu_model->batch_insert_task_execution($taskInsertArr1);
+        }
+        $current_date               = date('Y-m-d h:i:s');
+        $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
+        $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+      //  exit;
         redirect('Menu/Dashboard');
 }
 public function UpdateRTTPreport(){
