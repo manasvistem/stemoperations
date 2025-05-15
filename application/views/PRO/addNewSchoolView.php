@@ -67,34 +67,12 @@
           <h5 class="text-secondary border-bottom pb-2">Location & Details</h5>
           <div class="row g-3">
           <div class="col-md-3">
-              <label for="sregion" class="form-label">Region</label>
-              <select id="sregion" name="sregion" class="form-select" required>
-                   <option value="">Select Region</option>
-                    <?php foreach($regions as $regionk=>$regionval) {
-                         ?>
-                         <option value="<?php echo $regionval->id;?>"><?php echo $regionval->name;?></option>
-                         <?php  
-                     }?>
-              </select>
-            </div>
-          <div class="col-md-3">
               <label for="sstate" class="form-label">State</label>
               <select id="sstate" name="sstate" class="form-select" required>
               <option value="">Select State</option>
                     <?php foreach($states as $statek=>$stateval) {
                          ?>
-                         <option value="<?php echo $stateval['statename'];?>"><?php echo $stateval['statename'];?></option>
-                         <?php  
-                     }?>
-              </select>
-            </div>
-            <div class="col-md-3">
-              <label for="scity" class="form-label">City</label>
-              <select id="scity" name="scity" class="form-select" required>
-              <option value="">Select City</option>
-                    <?php foreach($cities as $cityk=>$cityval) {
-                         ?>
-                         <option value="<?php echo $cityval['cityname'];?>"><?php echo $cityval['cityname'];?></option>
+                         <option value="<?php echo $stateval['id'];?>"><?php echo $stateval['statename'];?></option>
                          <?php  
                      }?>
               </select>
@@ -105,26 +83,46 @@
                     <option value="">Select District</option>
                     <?php foreach($districts as $diskey=>$disval) {
                          ?>
-                         <option value="<?php echo $disval['districtn'];?>"><?php echo $disval['districtn'];?></option>
+                         <option value="<?php echo $disval['id'];?>"><?php echo $disval['districtn'];?></option>
                          <?php  
                      }?>
                   </select>
             </div>
             <div class="col-md-3">
               <label for="tehshil" class="form-label">Tehsil</label>
-              <input type="text" name="tehshil" value="" class="form-control" required/>
-              <!-- <select id="tehshil" name="tehshil" class="form-select" required>
+              <select id="tehshil" name="tehshil" class="form-select" required>
               <option value="">Select Tehsil</option>
-                    <?php /* foreach($tehsils as $tehkey=>$tehval){
+                    <?php foreach($tehsils as $tehkey=>$tehval){
                          ?>
                          <option value="<?php echo $tehval['id'];?>"><?php echo $tehval['tehshiln'];?></option>
                          <?php  
-                     } */?>
-              </select> -->
+                     }?>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label for="scity" class="form-label">City</label>
+              <select id="scity" name="scity" class="form-select" required>
+
+              <option value="">Select City</option>
+                    <?php foreach($cities as $cityk=>$cityval) {
+                         ?>
+                         <option value="<?php echo $cityval['id'];?>"><?php echo $cityval['cityname'];?></option>
+                         <?php  
+                     }?>
+              </select>
             </div>
            
-           
-           
+            <div class="col-md-3">
+              <label for="sregion" class="form-label">Region</label>
+              <select id="sregion" name="sregion" class="form-select" required>
+                   <option value="">Select Region</option>
+                    <?php foreach($regions as $regionk=>$regionval) {
+                         ?>
+                         <option value="<?php echo $regionval->id;?>"><?php echo $regionval->name;?></option>
+                         <?php  
+                     }?>
+              </select>
+            </div>
             <div class="col-md-3">
               <label for="slanguage" class="form-label">Language</label>
               <select id="slanguage" name="slanguage[]" class="form-select" multiple required>
@@ -228,30 +226,3 @@
     // You can call your AJAX or update logic here
   }
 </script>
-<script>
-$(document).ready(function(){
-    $('#sregion').on('change', function(){
-        var regionId = $(this).val();
-        if(regionId !== '') {
-            $.ajax({
-                url: '<?= base_url("Menu/getStateList") ?>', // Change `yourcontroller` to actual controller name
-                type: 'POST',
-                data: {sregion: regionId},
-                dataType: 'json',
-                success: function(data) {
-                    $('#sstate').html('<option value="">Select State</option>');
-                    $.each(data, function(key, value) {
-                        $('#sstate').append('<option value="' + value.id + '">' + value.statename + '</option>');
-                    });
-                },
-                error: function() {
-                    alert('Failed to fetch states');
-                }
-            });
-        } else {
-            $('#sstate').html('<option value="">Select State</option>');
-        }
-    });
-});
-</script>
-

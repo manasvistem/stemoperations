@@ -2390,7 +2390,7 @@ LEFT JOIN
         return $query->result();
     }
     public function get_region(){
-        $query=$this->db->query("select * from region");
+        $query=$this->db->query("select * from region where id != 1");
         return $query->result();
     }
     public function get_regionbyid($rid){
@@ -9030,7 +9030,7 @@ public function updateNewPIA($data){
 
 public function getProjectByCode($code)
 {
-    $this->db->where('projectcode_id', $code);
+    $this->db->where('projectcode', $code);
     return $this->db->get('client_handover')->row_array();
 }
 
@@ -9042,6 +9042,10 @@ public function getstates(){
    $query = $this->db->query("SELECT * FROM state order by statename ASC");
    return $query->result_array();
 }
+public function getstatelist($regionid){
+    $query = $this->db->query(" SELECT * FROM state WHERE region_id = '".$regionid."' order by statename ASC ");
+    return $query->result_array();
+ }
 public function getcities(){
     $query = $this->db->query("SELECT * FROM city order by cityname ASC ");
     return $query->result_array();
@@ -9052,7 +9056,21 @@ public function gettehsils(){
 }
 public function submitAddNewschool($data){
     $this->db->insert('spd',$data);
-   
+    return true;
+  // echo $this->db->last_query();exit;
+}
+public function updateSchoolData($data){
+    $this->db->update('spd',$data);
+    $this->db->insert('spd_history_logs',$data);
+    return true;
+}
+public function getSPDList(){
+    $query = $this->db->query("SELECT * FROM spd ");
+    return $query->result_array();
+}
+public function getSPDdata($sid){
+    $query = $this->db->query(" SELECT * FROM spd WHERE id = '".$sid."'");
+    return $query->row_array();
 }
 
 }

@@ -8,7 +8,7 @@
                   </button>
                 </div>
                 <?php endif; ?>
-  <form action="<?php echo base_url()?>Menu/submitAddNewschool" method="POST">
+  <form action="<?php echo base_url()?>Menu/updateSchoolData" method="POST">
     <div class="card shadow rounded-4">
       <div class="card-header bg-primary text-white text-center rounded-top-4">
         <h4 class="mb-0">School Entry Form</h4>
@@ -20,22 +20,28 @@
           <div class="row g-3">
             <div class="col-md-4">
               <label for="sdate" class="form-label">Date</label>
-              <input type="date" id="sdate" name="sdate" class="form-control" value="<?= date('Y-m-d'); ?>">
+              <input type="date" id="sdate" name="sdate" class="form-control" value="<?= $spddata['sdate'] ?>">
             </div>
             <div class="col-md-4">
-               
               <label for="projectcode" class="form-label">Project Code</label>
               <select id="project_code" name="project_code" class="form-select" onchange="loadData()">
                 <option value="">Select Project Code</option>
-                <?php foreach($projectDetails as $key=>$val){ ?>
-                    <option value="<?php echo $val['projectcode'];?>"><?php echo $val['projectcode'];?></option>
+                <?php foreach($projectDetails as $key=>$val){ 
+                    if($val['projectcode'] == $spddata['project_code']) {
+                        $selected ="selected";
+                    }
+                    else{
+                        $selected = "";
+                    }
+                    ?>
+                    <option value="<?php echo $val['projectcode'];?>" <?=$selected?>><?php echo $val['projectcode'];?></option>
                     <!-- Populate options dynamically -->
                  <?php } ?>
               </select>
             </div>
             <div class="col-md-4">
               <label for="clientname" class="form-label">Client Name</label>
-              <input type="text" class="form-control" value="" name="clientname" id="clientname" disabled>
+              <input type="text" class="form-control" value="<?php echo $spddata['clientname'];?>" name="clientname" id="clientname" disabled>
               <!-- <select id="clientname" name="clientname" class="form-select">
                 <option value="">Select Client</option>
               </select> -->
@@ -45,19 +51,26 @@
               <?php //dd($PIAList); ?>
               <select id="pia_list" name="pi_id" class="form-select" required>
                 <option value="">Select PIA</option>
-                <?php foreach($PIAList as $key=>$val){ ?>
-                    <option value="<?php echo $val['id'];?>"><?php echo $val['fullname'];?></option>
+                <?php foreach($PIAList as $key=>$val){
+                    if($val['id'] =  $spddata['pi_id']){
+                        $selected = "selected";
+                    }
+                    else{
+                        $selected = "";
+                    }
+                    ?>
+                    <option value="<?php echo $val['id'];?>" <?=$selected;?>><?php echo $val['fullname'];?></option>
                     <!-- Populate options dynamically -->
                  <?php } ?>
               </select>
             </div>
             <div class="col-md-4">
               <label for="sname" class="form-label">School Name</label>
-              <input type="text" id="sname" name="sname" class="form-control" required>
+              <input type="text" id="sname" name="sname" class="form-control" value="<?php echo $sname;?>" required>
             </div>
             <div class="col-md-4">
               <label for="saddress" class="form-label">Address</label>
-              <textarea id="saddress" name="saddress" class="form-control" rows="2" required></textarea>
+              <textarea id="saddress" name="saddress" class="form-control" rows="2" required><?php echo $saddress;?></textarea>
             </div>
           </div>
         </div>
@@ -83,7 +96,7 @@
               <option value="">Select State</option>
                     <?php foreach($states as $statek=>$stateval) {
                          ?>
-                         <option value="<?php echo $stateval['statename'];?>"><?php echo $stateval['statename'];?></option>
+                         <option value="<?php echo $stateval['id'];?>"><?php echo $stateval['statename'];?></option>
                          <?php  
                      }?>
               </select>
@@ -94,7 +107,7 @@
               <option value="">Select City</option>
                     <?php foreach($cities as $cityk=>$cityval) {
                          ?>
-                         <option value="<?php echo $cityval['cityname'];?>"><?php echo $cityval['cityname'];?></option>
+                         <option value="<?php echo $cityval['id'];?>"><?php echo $cityval['cityname'];?></option>
                          <?php  
                      }?>
               </select>
@@ -105,7 +118,7 @@
                     <option value="">Select District</option>
                     <?php foreach($districts as $diskey=>$disval) {
                          ?>
-                         <option value="<?php echo $disval['districtn'];?>"><?php echo $disval['districtn'];?></option>
+                         <option value="<?php echo $disval['id'];?>"><?php echo $disval['districtn'];?></option>
                          <?php  
                      }?>
                   </select>

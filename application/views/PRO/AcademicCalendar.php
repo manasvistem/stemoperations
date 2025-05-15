@@ -66,16 +66,17 @@
                       <div class="form-group">
                         <label>State</label>
                         <select class="custom-select rounded-0 form-control" name="state" >
-                          <option value=""> Select  State</option>
                           <?php foreach($piastate as $pstate){?>
-                          <option value="<?php echo $pstate['statename']; ?>"><?php echo $pstate['statename']; ?></option>
+                          <option><?=$pstate->sstate?></option>
                           <?php } ?>
                         </select>
                       </div>
                       <div class="form-group">
                         <label>Select Holiday</label>
                           <select class="custom-select form-control rounded-0" name="type" >
+                          
                           <?php 
+                          
                           foreach($getAllAcadCalender as $atype){
                             
                            $exists =  array_key_exists($atype->type, $arrapprove);
@@ -120,7 +121,10 @@
                     </thead>
                     <tbody>
                       <?php 
+                       
                         $i=1;
+
+                      
                               foreach($uAcedata as $data){ ?>
                       <tr>
                         <td><?= $i ?></td>
@@ -137,6 +141,7 @@
                             }else if($data->aprovebypm ==1 && $data->rejectbypm ==0){
                             echo "<span class='ApprovedStatus approved'>Approved</span>";
                           }
+                          
                           ?></td>
                       </tr>
                       <?php $i++; } ?>

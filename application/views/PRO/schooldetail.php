@@ -263,14 +263,14 @@ foreach($slog as $sl){
                                       ?>
                                     <tr>
                                         <td><?=$i?></td>
-                                        <td><?=$plan[0]->sdatet?></td>
+                                        <td><?=$plan[0]->sdatet?><?=$tid?></td>
                                         <td><?=$plan[0]->donet?></td>
                                         <td><?=$sname?></td>
                                         <td><?=$sl->task_type?></td>
                                         <td><?=$task[0]->task_subtype?></td>
                                         <td><?=$user[0]->fullname?></td>
                                         <td><?=$sl->remark?></td>
-                                        <td><?php if($task[0]->checklist!=''){?><a href="<?=base_url();?>Menu/DownloadChecklist/<?=$sid?>/<?=$tid?>"><i class="fa fa-database" aria-hidden="true"></i></a><?php }?></td>
+                                        <td><?php if($task[0]->checklist!=''){?><a href="../DownloadChecklist?sid=<?=$sid?>"><i class="fa fa-database" aria-hidden="true"></i></a><?php }?></td>
                                         <td><?php if($task[0]->task_type=='Utilisation'){?><a href="../ZipDownload/<?=$tid?>"><i class="fa fa-file-archive-o" aria-hidden="true"></i></a><?php }?></td>
                                         <td><?php if($task[0]->task_type=='Report'){?><a href="<?=base_url();?><?=$report[0]->filepath?>"><i class="fa fa-file-pdf-o" aria-hidden="true"></i><?php }?>
                                         </td>

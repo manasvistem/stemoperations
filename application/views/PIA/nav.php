@@ -149,6 +149,14 @@
                 <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
               </a>
             </li>
+            <li class="menu-item">
+              <a href="<?=base_url() ?>Menu/<?=base_url() ?>Menu/addNewSchool"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="addNewSchool">Add New School</div>
+              </a>
+            </li>
             <!-- <li class="menu-item">
               <a href="<?=base_url() ?>Menu/MyNextDayPlan/<?=date('Y-m-d');?>"
                

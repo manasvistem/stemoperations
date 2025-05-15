@@ -7684,7 +7684,6 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $spd=$this->Menu_model->get_spdbyid($sid);
@@ -7699,7 +7698,6 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7709,7 +7707,6 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7723,7 +7720,6 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7747,14 +7743,12 @@ public function updateTask($tasktypeid=''){
         $du         =$this->Menu_model->get_user();
         $client     =$this->Menu_model->get_pcbypiid($uid);
         $spd        = $this->Menu_model->get_mspd();
-
         $this->display($dep_name,'createtask', ['notify'=>$notify,'region'=>$dr,'dep'=>$dt, 'data'=>$data, 'client'=>$client, 'spd'=>$spd, 'user'=>$user,'year'=>$year],$type='');
     }
     public function TaskPlanning(){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        
         $notify=$this->Menu_model->get_notifybyid($uid);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
@@ -7776,7 +7770,6 @@ public function updateTask($tasktypeid=''){
         $data['notify'] = $notify;
         $data['mdata'] = $this->Menu_model->get_tpdetail($uid);
         $data['cname'] = $this->Menu_model->get_mscccbypia($uid);
-        
         $this->display($dep_name,'AddTempPerson',$data,$type);
     }
 
@@ -7784,18 +7777,22 @@ public function updateTask($tasktypeid=''){
         $user = $this->session->userdata('user');
         $data['user'] = $user;$uid= $user['id'];
         $id =  $user['dep_id'];
-        
+        $regionid = $user['region_id'];
+       
         $notify=$this->Menu_model->get_notifybyid($uid);
-        $piastate=$this->Menu_model->get_piastate($uid);
+        $piastate=$this->Menu_model->get_academiccalendar($uid);
+      //dd($piastate);
         $dt=$this->Menu_model->get_depatment_byid($id);
         $dep_name = $dt[0]->dep_name;
         $year=$this->Menu_model->all_year();
         $dr=$this->Menu_model->get_region();
+        $statelist = $this->Menu_model->getstatelist($regionid);
+
         $dt=$this->Menu_model->get_depatment();
         $du=$this->Menu_model->get_user();
         $client=$this->Menu_model->get_pcbypiid($uid);
         $spd = $this->Menu_model->get_mspd();
-        $this->display($dep_name,'AcademicCalendar', ['piastate'=>$piastate,'notify'=>$notify,'region'=>$dr,'dep'=>$dt, 'data'=>$data, 'client'=>$client, 'spd'=>$spd, 'user'=>$user,'year'=>$year],$type='');
+        $this->display($dep_name,'AcademicCalendar', ['piastate'=>$statelist,'notify'=>$notify,'region'=>$dr,'dep'=>$dt, 'data'=>$data, 'client'=>$client, 'spd'=>$spd, 'user'=>$user,'year'=>$year],$type='');
     }
     public function ShowAcademicCalendar(){
         $user = $this->session->userdata('user');
@@ -15180,6 +15177,7 @@ public function updatePreInterventionEnquiryFTTP(){
 }
    $updatetblcalleventsData    = ['initiate_datetime'=>$posted_data['elapsed_time'],'updated_datetime'=>date('Y-m-d h:i:s'),'task_status'=>1];
    $updateQuery                = $this->Menu_model->updateTasksById($taskId,$updatetblcalleventsData);
+   redirect('Menu/Dashboard');
 }
 
 public function UpdateFTTPDuringVisit(){
@@ -23264,6 +23262,13 @@ public function addNewSchool(){
     $data['languages']       = $this->Menu_model->get_indian_languages();
     $this->display($dep_name,'addNewSchoolView',$data,$type='');
 }
+public function getStateList()
+{
+   $regionId   = $this->input->post('sregion');
+    $statelist = $this->Menu_model->getstatelist($regionId); // Fetch row as array
+    echo json_encode($statelist);
+}
+
 
 public function getProjectDetails()
 {
@@ -23275,18 +23280,49 @@ public function getProjectDetails()
 public function submitAddNewschool(){
    $posted_data = $_POST;
    foreach($posted_data as $key=>$val){
-   
        if($key =='slanguage'){
-
            $val = implode('==',$val);
         }
         $posted_data[$key] = $val;
    }
-  // dd($posted_data);
     $this->Menu_model->submitAddNewschool($posted_data);
     $this->session->set_flashdata('success_message','New School Added Successfully');
     redirect("Menu/addNewSchool"); 
 }
+
+
+public function editSchoolDetails($sid){
+    $user             = $this->session->userdata('user');
+    $data['user']     = $user;
+    $uid              = $user['id'];
+    $id               = $user['dep_id'];
+    $dt               = $this->Menu_model->get_depatment_byid($id);
+    $dep_name         = $dt[0]->dep_name;
+    $data['projectDetails']  = $this->Menu_model->getProjectCodeList();
+    $data['PIAList']         = $this->Menu_model->getPIAList();
+    $data['districts']        = $this->Menu_model->getdistrictlist();
+    $data['states']          = $this->Menu_model->getstates();
+    $data['cities']          = $this->Menu_model->getcities();
+    $data['tehsils']         = $this->Menu_model->gettehsils();
+    $data['regions']         = $this->Menu_model->GetAllRegions();
+    $data['languages']       = $this->Menu_model->get_indian_languages();
+    $data['spddata']        = $this->Menu_model->getSPDdata($sid);
+    //dd($data);
+    $this->display($dep_name,'editSchoolView',$data,$type='');
+}
+public function updateSchoolData(){
+    $posted_data = $_POST;
+   foreach($posted_data as $key=>$val){
+       if($key =='slanguage'){
+           $val = implode('==',$val);
+        }
+        $posted_data[$key] = $val;
+   }
+    $this->Menu_model->updateSchoolData($posted_data);
+    $this->session->set_flashdata('success_message','School Data Updated Successfully');
+    redirect("Menu/addNewSchool"); 
+}
+
 
 }
 
