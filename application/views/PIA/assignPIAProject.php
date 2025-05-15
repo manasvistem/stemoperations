@@ -90,7 +90,7 @@ function getCurrentPIA(sid) {
     dataType: 'json',
     data: { sid: sid },
     success: function (response) {
-      $('#current_pia').html(response.pia_name);?
+      $('#current_pia').html(response.pia_name);
       $('#current_pia_id').html(response.pia_id);
 
     },
